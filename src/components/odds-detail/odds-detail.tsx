@@ -68,23 +68,9 @@ export default function OddsDetail({}) {
   const [odds, setOdds] = useState(initialOdds);
   const [latestOdds, setLatestOdds] = useState(initialOdds);
   const [openItems, setOpenItems] = useState(["item-1", "item-2", "item-3"]);
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const [dialogPosition, setDialogPosition] = useState({ top: "50%", left: "50%" });
 
   const handleValueChange = (value: string[]) => {
     setOpenItems(value);
-  };
-
-  const handleOpenDialog = (event: any) => {
-    const rect = event.currentTarget.getBoundingClientRect();
-    const top = rect.top + rect.height / 2;
-    const left = rect.left + rect.width / 2;
-    setDialogPosition({ top: `${top}px`, left: `${left}px` });
-    setIsDialogOpen(true);
-  };
-
-  const handleCloseDialog = () => {
-    setIsDialogOpen(false);
   };
 
   useEffect(() => {
