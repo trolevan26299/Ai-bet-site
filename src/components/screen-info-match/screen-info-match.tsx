@@ -45,9 +45,9 @@ export default function ScreenInfoMatch({}) {
               <p className="font-bold text-green-500">27’ Hiệp 1</p>
             </div>
             <div className="flex justify-center items-center pt-3">
-              <p className="py-0.5 px-2 border-2 border-gray-300 rounded-sm font-bold">0</p>
+              <p className="py-0.5 px-2 border-2 border-gray-300 rounded-sm font-bold text-white">0</p>
               <p className="px-3">:</p>
-              <p className="py-0.5 px-2 border-2 border-gray-300 rounded-sm font-bold">0</p>
+              <p className="py-0.5 px-2 border-2 border-gray-300 rounded-sm font-bold text-white">0</p>
             </div>
           </div>
         ) : (
