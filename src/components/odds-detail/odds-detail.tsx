@@ -102,10 +102,10 @@ export default function OddsDetail({}) {
                   {match.map((team, teamIndex) => (
                     <div className="bg-slate-700 text-primary-foreground p-2 h-8 rounded-md text-xs" key={teamIndex}>
                       <div className="grid grid-cols-3">
-                        <div className="col-span-2 text-gray-300">
+                        <div className="col-span-2 text-gray-300 font-bold">
                           {team.rate_odds >= 0 ? `(${team.rate_odds})` : team.rate_odds} {team.name}
                         </div>
-                        <div className="text-end flex items-center justify-end">
+                        <div className="text-end flex items-center justify-end font-bold">
                           {team.value > latestOdds[index].detail[matchIndex][teamIndex].value && (
                             <span style={{ color: "green" }}>
                               <ArrowUpIcon />
@@ -118,14 +118,14 @@ export default function OddsDetail({}) {
                           )}
                           <span
                             className="w-6"
-                            style={{
-                              color:
-                                team.value === latestOdds[index].detail[matchIndex][teamIndex].value
-                                  ? "inherit"
-                                  : team.value > latestOdds[index].detail[matchIndex][teamIndex].value
-                                  ? "green"
-                                  : "red",
-                            }}
+                            // style={{
+                            //   color:
+                            //     team.value === latestOdds[index].detail[matchIndex][teamIndex].value
+                            //       ? "inherit"
+                            //       : team.value > latestOdds[index].detail[matchIndex][teamIndex].value
+                            //       ? "green"
+                            //       : "red",
+                            // }}
                           >
                             {team.value}
                           </span>
