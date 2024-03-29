@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 
 import "./globals.css";
 import { MotionLazy } from "@/components/animate/motion-lazy";
+import { TelegramProvider } from "@/context/telegram.provider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,7 +20,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <MotionLazy>{children}</MotionLazy>
+        <TelegramProvider>
+          <MotionLazy>{children}</MotionLazy>
+        </TelegramProvider>
       </body>
     </html>
   );
