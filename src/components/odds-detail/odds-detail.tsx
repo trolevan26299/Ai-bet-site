@@ -105,7 +105,7 @@ export default function OddsDetail({}) {
                         <div className="col-span-2 text-gray-300 font-bold">
                           {team.rate_odds >= 0 ? `(${team.rate_odds})` : team.rate_odds} {team.name}
                         </div>
-                        <div className="text-end flex items-center justify-end font-bold">
+                        <div className="text-end flex items-center justify-end font-bold  pr-0.5">
                           {team.value > latestOdds[index].detail[matchIndex][teamIndex].value && (
                             <span style={{ color: "green" }}>
                               <ArrowUpIcon />
@@ -117,7 +117,7 @@ export default function OddsDetail({}) {
                             </span>
                           )}
                           <span
-                            className="w-6"
+                            className="w-8"
                             // style={{
                             //   color:
                             //     team.value === latestOdds[index].detail[matchIndex][teamIndex].value
