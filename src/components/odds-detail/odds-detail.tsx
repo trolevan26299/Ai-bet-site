@@ -75,7 +75,7 @@ export default function OddsDetail({}) {
     setOpenItems(value);
   };
 
-  const handleOpenDialog = (event) => {
+  const handleOpenDialog = (event: any) => {
     const rect = event.currentTarget.getBoundingClientRect();
     const top = rect.top + rect.height / 2;
     const left = rect.left + rect.width / 2;
