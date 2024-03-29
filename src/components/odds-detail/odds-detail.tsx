@@ -103,11 +103,7 @@ export default function OddsDetail({}) {
                 {oddsGroup.detail.map((match, matchIndex) => (
                   <React.Fragment key={matchIndex}>
                     {match.map((team, teamIndex) => (
-                      <div
-                        className="bg-slate-700 text-primary-foreground p-2 h-8 rounded-md text-xs"
-                        key={teamIndex}
-                        onClick={handleOpenDialog}
-                      >
+                      <div className="bg-slate-700 text-primary-foreground p-2 h-8 rounded-md text-xs" key={teamIndex}>
                         <div className="grid grid-cols-3">
                           <div className="col-span-2 text-gray-300 font-bold">
                             {team.rate_odds >= 0 ? `(${team.rate_odds})` : team.rate_odds} {team.name}
