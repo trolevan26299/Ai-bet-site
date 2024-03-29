@@ -85,7 +85,7 @@ export default function OddsDetail({}) {
           ),
         }));
       });
-    }, 10000);
+    }, 3000);
 
     return () => clearInterval(intervalId);
   }, []);
