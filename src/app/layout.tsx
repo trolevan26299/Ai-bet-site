@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-
+import { Theme } from "@radix-ui/themes";
 import "./globals.css";
+import "@radix-ui/themes/styles.css";
 import { MotionLazy } from "@/components/animate/motion-lazy";
 import { TelegramProvider } from "@/context/telegram.provider";
 
@@ -21,7 +22,9 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <TelegramProvider>
-          <MotionLazy>{children}</MotionLazy>
+          <Theme>
+            <MotionLazy>{children}</MotionLazy>
+          </Theme>
         </TelegramProvider>
       </body>
     </html>
