@@ -8,10 +8,9 @@ type Props = {
 export default function MainLayout({ children }: Props) {
   const pathname = usePathname();
 
-  const isHome = pathname === "/";
   return (
     <div className="flex flex-col  bg-slate-800 h-full min-h-screen">
-      <main className={`flex-grow ${!isHome ? "pt-8 md:pt-10" : "p-2"}`}>{children}</main>
+      <main className="flex-grow p-2">{children}</main>
     </div>
   );
 }

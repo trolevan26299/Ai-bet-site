@@ -3,8 +3,9 @@
 import { fetchNewOddsValue } from "@/utils/fetchNewOddsRandom";
 import { ArrowDownIcon, ArrowUpIcon } from "@radix-ui/react-icons";
 import React, { useEffect, useState } from "react";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../ui/accordion";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../../ui/accordion";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Dialog } from "@/components/ui/dialog";
 
 const initialOdds = [
   {
@@ -90,40 +91,42 @@ export default function OddsDetail({}) {
 
   return (
     <>
-      <Tabs defaultValue="1">
-        <TabsList className="w-full bg-none">
-          <TabsTrigger value="1">Tất cả kèo</TabsTrigger>
-          <TabsTrigger value="2">Kèo cược chấp</TabsTrigger>
-          <TabsTrigger value="3">Kèo tài xỉu</TabsTrigger>
-        </TabsList>
+      <Dialog>
+        <Tabs defaultValue="1">
+          <TabsList className="w-full bg-none">
+            <TabsTrigger value="1">Tất cả kèo</TabsTrigger>
+            <TabsTrigger value="2">Kèo cược chấp</TabsTrigger>
+            <TabsTrigger value="3">Kèo tài xỉu</TabsTrigger>
+          </TabsList>
 
-        <TabsContent value="1">
-          <RenderAccordion
-            odds={odds}
-            openItems={openItems}
-            latestOdds={latestOdds}
-            onValueChange={handleValueChange}
-          />
-        </TabsContent>
+          <TabsContent value="1">
+            <RenderAccordion
+              odds={odds}
+              openItems={openItems}
+              latestOdds={latestOdds}
+              onValueChange={handleValueChange}
+            />
+          </TabsContent>
 
-        <TabsContent value="2">
-          <RenderAccordion
-            odds={[odds[0], odds[2]]}
-            latestOdds={latestOdds}
-            openItems={openItems}
-            onValueChange={handleValueChange}
-          />
-        </TabsContent>
+          <TabsContent value="2">
+            <RenderAccordion
+              odds={[odds[0], odds[2]]}
+              latestOdds={latestOdds}
+              openItems={openItems}
+              onValueChange={handleValueChange}
+            />
+          </TabsContent>
 
-        <TabsContent value="3">
-          <RenderAccordion
-            odds={[odds[1]]}
-            latestOdds={latestOdds}
-            openItems={openItems}
-            onValueChange={handleValueChange}
-          />
-        </TabsContent>
-      </Tabs>
+          <TabsContent value="3">
+            <RenderAccordion
+              odds={[odds[1]]}
+              latestOdds={latestOdds}
+              openItems={openItems}
+              onValueChange={handleValueChange}
+            />
+          </TabsContent>
+        </Tabs>
+      </Dialog>
     </>
   );
 }
