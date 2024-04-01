@@ -18,64 +18,93 @@ import {
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { fetchOddsData } from "@/api/odds";
 
-const initialOdds = [
-  {
-    name_Odds: "Kèo cược chấp - Toàn trận",
-    detail: [
-      [
-        { name: "SSC Napoli", rate_odds: -0.5, value: -0.98 },
-        { name: "Atalanta", rate_odds: 0.5, value: 0.73 },
-      ],
-      [
-        { name: "SSC Napoli", rate_odds: 0, value: -0.69 },
-        { name: "Atalanta", rate_odds: 0, value: 0.98 },
-      ],
-      [
-        { name: "SSC Napoli", rate_odds: -1.5, value: -0.7 },
-        { name: "Atalanta", rate_odds: 1.5, value: 0.3 },
-      ],
-    ],
-  },
-  {
-    name_Odds: "Kèo tài xỉu - Toàn trận",
-    detail: [
-      [
-        { name: "Tài", rate_odds: 0.5, value: 0.17 },
-        { name: "Xỉu", rate_odds: 0.5, value: 0.17 },
-      ],
-      [
-        { name: "Tài", rate_odds: 1, value: 0.17 },
-        { name: "Xỉu", rate_odds: 1, value: 0.17 },
-      ],
-      [
-        { name: "Tài", rate_odds: 1.5, value: 0.17 },
-        { name: "Xỉu", rate_odds: 1.5, value: 0.17 },
-      ],
-    ],
-  },
-  {
-    name_Odds: "Kèo cược chấp - Hiệp 1",
-    detail: [
-      [
-        { name: "SSC Napoli", rate_odds: -0.5, value: -0.98 },
-        { name: "Atalanta", rate_odds: 0.5, value: 0.73 },
-      ],
-      [
-        { name: "SSC Napoli", rate_odds: 0, value: -0.69 },
-        { name: "Atalanta", rate_odds: 0, value: 0.98 },
-      ],
-      [
-        { name: "SSC Napoli", rate_odds: -1.5, value: -0.7 },
-        { name: "Atalanta", rate_odds: 1.5, value: 0.3 },
-      ],
-    ],
-  },
-];
+interface ITeamDetail {
+  name: string;
+  rate_odds: number;
+  value: number;
+}
+
+const transformData = (data: any) => {
+  return data
+    .map((item: any) => {
+      const keoChinhToanTran = item.bets.spreads.find((bet: any) => bet.number === 0 && bet.altLineId === 0);
+      const keoChinhHiep1 = item.bets.spreads.find((bet: any) => bet.number === 1 && bet.altLineId === 0);
+      const keoChinhTaiXiu = item.bets.totals.find((bet: any) => bet.altLineId === 0);
+
+      console.log(keoChinhToanTran, keoChinhHiep1);
+      const spreadsToanTran = item.bets.spreads
+        .filter(
+          (bet: any) =>
+            bet.number === 0 &&
+            (bet.hdp === keoChinhToanTran.hdp - 0.25 || bet.altLineId === 0 || bet.hdp === keoChinhToanTran.hdp + 0.25) // bỏ dòng này lấy ra tất cả
+        )
+        .slice(0, 3);
+
+      const spreadsHiep1 = item.bets.spreads
+        .filter(
+          (bet: any) =>
+            bet.number === 1 &&
+            (bet.hdp === keoChinhHiep1.hdp - 0.25 || bet.altLineId === 0 || bet.hdp === keoChinhHiep1.hdp + 0.25) // bỏ dòng này lấy ra tất cả
+        )
+        .slice(0, 3);
+
+      const spreadsTaiXiu = item.bets.totals
+        .filter(
+          (bet: any) =>
+            bet.points === keoChinhTaiXiu.points - 0.25 ||
+            bet.altLineId === 0 ||
+            bet.points === keoChinhTaiXiu.points + 0.25 // bỏ dòng này lấy ra tất cả
+        )
+        .slice(0, 3);
+
+      return [
+        {
+          name_Odds: "Kèo cược chấp - Toàn trận",
+          detail: spreadsToanTran.map((spread: any) => [
+            {
+              name: item.home,
+              rate_odds: spread.hdp,
+              value: spread.home,
+            },
+            {
+              name: item.away,
+              rate_odds: spread.hdp === 0 ? 0 : spread.hdp >= 0 ? -spread.hdp : Math.abs(spread.hdp),
+              value: spread.away,
+            },
+          ]),
+        },
+        {
+          name_Odds: "Kèo cược chấp - Hiệp 1",
+          detail: spreadsHiep1.map((spread: any) => [
+            {
+              name: item.home,
+              rate_odds: spread.hdp,
+              value: spread.home,
+            },
+            {
+              name: item.away,
+              rate_odds: spread.hdp === 0 ? 0 : spread.hdp >= 0 ? -spread.hdp : Math.abs(spread.hdp),
+              value: spread.away,
+            },
+          ]),
+        },
+        {
+          name_Odds: "Kèo tài xỉu - Toàn trận",
+          detail: spreadsTaiXiu.map((total: any) => [
+            { name: "Tài", rate_odds: total.points, value: total.over },
+            { name: "Xỉu", rate_odds: total.points, value: total.under },
+          ]),
+        },
+      ];
+    })
+    .flat();
+};
 
 export default function OddsDetail({}) {
-  const [odds, setOdds] = useState(initialOdds);
-  const [latestOdds, setLatestOdds] = useState(initialOdds);
+  const [odds, setOdds] = useState([]);
+  const [latestOdds, setLatestOdds] = useState<any>();
   const [openItems, setOpenItems] = useState(["item-1", "item-2", "item-3"]);
 
   const handleValueChange = (value: string[]) => {
@@ -83,24 +112,18 @@ export default function OddsDetail({}) {
   };
 
   useEffect(() => {
-    const intervalId = setInterval(() => {
-      setOdds((currentOdds) => {
-        setLatestOdds(currentOdds);
-        return currentOdds.map((group) => ({
-          ...group,
-          detail: group.detail.map((match) =>
-            match.map((team) => ({
-              ...team,
-              value: fetchNewOddsValue(team.value),
-            }))
-          ),
-        }));
-      });
-    }, 3000);
+    const fetchAndSetOdds = async () => {
+      const newData = await fetchOddsData();
+      const transformedData = transformData(newData);
+      setOdds(transformedData);
+      setLatestOdds((currentOdds: any) => [...transformedData]);
+    };
+
+    fetchAndSetOdds();
+    const intervalId = setInterval(fetchAndSetOdds, 3000);
 
     return () => clearInterval(intervalId);
   }, []);
-
   return (
     <>
       <Tabs defaultValue="1">
@@ -121,7 +144,7 @@ export default function OddsDetail({}) {
 
         <TabsContent value="2">
           <RenderAccordion
-            odds={[odds[0], odds[2]]}
+            odds={[odds[0], odds[1]]}
             latestOdds={latestOdds}
             openItems={openItems}
             onValueChange={handleValueChange}
@@ -130,7 +153,7 @@ export default function OddsDetail({}) {
 
         <TabsContent value="3">
           <RenderAccordion
-            odds={[odds[1]]}
+            odds={[odds[2]]}
             latestOdds={latestOdds}
             openItems={openItems}
             onValueChange={handleValueChange}
@@ -152,6 +175,10 @@ function RenderAccordion({
   onValueChange: any;
   latestOdds: any;
 }) {
+  const [selectedTeam, setSelectedTeam] = useState<ITeamDetail | null>(null);
+  const handleSelectTeam = (team: any) => {
+    setSelectedTeam(team);
+  };
   return (
     <Dialog>
       <Accordion type="multiple" value={openItems} onValueChange={onValueChange} className="w-full">
@@ -167,13 +194,14 @@ function RenderAccordion({
                         <div
                           className="bg-slate-700 text-primary-foreground p-2 h-8 rounded-md text-xs"
                           key={teamIndex}
+                          onClick={() => handleSelectTeam(team)}
                         >
-                          <div className="grid grid-cols-3">
+                          <div className="grid grid-cols-3 w-full">
                             <div className="col-span-2 text-gray-300 font-bold">
                               {team.rate_odds >= 0 ? `(${team.rate_odds})` : team.rate_odds} {team.name}
                             </div>
-                            <div className="text-end flex items-center justify-end font-bold  pr-0.5">
-                              {team.value > latestOdds[index].detail[matchIndex][teamIndex].value && (
+                            <div className="text-end flex items-center justify-end font-bold ">
+                              {/* {team.value > latestOdds[index].detail[matchIndex][teamIndex].value && (
                                 <span style={{ color: "green" }}>
                                   <ArrowUpIcon />
                                 </span>
@@ -182,8 +210,8 @@ function RenderAccordion({
                                 <span style={{ color: "red" }}>
                                   <ArrowDownIcon />
                                 </span>
-                              )}
-                              <span className="w-8">{team.value}</span>
+                              )} */}
+                              <span className="w-10">{team.value}</span>
                             </div>
                           </div>
                         </div>
@@ -195,27 +223,34 @@ function RenderAccordion({
             </AccordionContent>
           </AccordionItem>
         ))}
-        <DialogContent className="w-4/6">
+        <DialogContent className="w-4/6 rounded-lg">
           <DialogHeader>
-            <DialogTitle>Edit profile</DialogTitle>
-            <DialogDescription>Make changes to your profile here. Click save when re done.</DialogDescription>
+            <DialogTitle className="text-left">Thông tin kèo đã chọn</DialogTitle>
           </DialogHeader>
           <div className="grid gap-4 py-4">
-            <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="name" className="text-right">
-                Name
-              </Label>
-              <Input id="name" value="Pedro Duarte" className="col-span-3" />
+            <div className="grid grid-cols-5 items-center gap-4 ">
+              <Label className="text-left col-span-2 ">Cược vào</Label>
+              <p>:</p>
+              <p>{selectedTeam?.name}</p>
             </div>
-            <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="username" className="text-right">
-                Username
-              </Label>
-              <Input id="username" value="@peduarte" className="col-span-3" />
+            <div className="grid grid-cols-5 items-center gap-4">
+              <Label className="text-left col-span-2">Kèo</Label>
+              <p>:</p>
+              <p>{selectedTeam?.rate_odds}</p>
+            </div>
+            <div className="grid grid-cols-5 items-center gap-4">
+              <Label className="text-left col-span-2">Tỷ lệ cược</Label>
+              <p>:</p>
+              <p>{selectedTeam?.value}</p>
             </div>
           </div>
-          <DialogFooter>
-            <Button type="submit">Save changes</Button>
+          <DialogFooter className="grid grid-cols-2 space-x-2">
+            <Button type="reset" variant="destructive" className="col-span-1">
+              Hủy
+            </Button>
+            <Button type="submit" variant="default" className="col-span-1">
+              Xác nhận
+            </Button>
           </DialogFooter>
         </DialogContent>
       </Accordion>
