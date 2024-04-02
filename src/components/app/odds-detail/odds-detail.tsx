@@ -104,6 +104,13 @@ export default function OddsDetail({}) {
   const [latestOdds, setLatestOdds] = useState<any>();
   const [openItems, setOpenItems] = useState(["item-1", "item-2", "item-3"]);
 
+  const backgroundImageStyle = {
+    backgroundImage: "url(assets/button_tab.jpg)",
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    backgroundRepeat: "no-repeat",
+  };
+
   const handleValueChange = (value: string[]) => {
     setOpenItems(value);
   };
@@ -124,16 +131,12 @@ export default function OddsDetail({}) {
   return (
     <>
       <Tabs defaultValue="1" className="w-full">
-        <TabsList className="w-full bg-none">
-          <TabsTrigger value="1" className="w-[30%]">
+        <TabsList className="w-full gap-3">
+          <TabsTrigger value="1" style={openItems.includes("1") ? backgroundImageStyle : {}}>
             Tất cả kèo
           </TabsTrigger>
-          <TabsTrigger value="2" className="w-[30%]">
-            Kèo cược chấp
-          </TabsTrigger>
-          <TabsTrigger value="3" className="w-[30%]">
-            Kèo tài xỉu
-          </TabsTrigger>
+          <TabsTrigger value="2">Kèo cược chấp</TabsTrigger>
+          <TabsTrigger value="3">Kèo tài xỉu</TabsTrigger>
         </TabsList>
 
         <TabsContent value="1">
@@ -282,10 +285,9 @@ function RenderAccordion({
           </div>
           <DrawerFooter>
             <Button
-              className="h-11 flex flex-col justify-center rounded-full border "
+              className="h-11 flex flex-col justify-center rounded-full border bg-cover bg-center"
               style={{
-                backgroundColor: "rgba(255, 255, 255, 0.1)", // 50% opacity white background
-                border: "solid 1px rgba(255, 255, 255, 0.5)",
+                backgroundImage: "url(assets/button_confirm.jpg)",
               }}
             >
               Xác nhận
