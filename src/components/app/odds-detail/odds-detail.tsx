@@ -192,7 +192,7 @@ function RenderAccordion({
             <AccordionTrigger className="text-base">{oddsGroup.name_Odds}</AccordionTrigger>
             <AccordionContent>
               <DrawerTrigger asChild>
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-2 gap-[6px]">
                   {oddsGroup.detail.map((match: any, matchIndex: any) => (
                     <React.Fragment key={matchIndex}>
                       {match.map((team: any, teamIndex: any) => (
