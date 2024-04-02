@@ -197,10 +197,11 @@ function RenderAccordion({
                     <React.Fragment key={matchIndex}>
                       {match.map((team: any, teamIndex: any) => (
                         <div
-                          className="  text-primary-foreground p-2 h-10 rounded-md text-xs relative"
+                          className="  text-primary-foreground p-2 h-10  text-xs relative "
                           style={{
                             backgroundColor: "rgba(255, 255, 255, 0.1)",
                             border: "solid 1px rgba(255, 255, 255, 0.1)",
+                            borderRadius: "10px",
                           }}
                           key={teamIndex}
                           onClick={() => handleSelectTeam(team, oddsGroup.name_Odds)}
