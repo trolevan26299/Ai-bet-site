@@ -200,7 +200,7 @@ function RenderAccordion({
                           className="  text-primary-foreground p-2 h-10 rounded-md text-xs relative"
                           style={{
                             backgroundColor: "rgba(255, 255, 255, 0.1)",
-                            // border: "solid 1px rgba(255, 255, 255, 0.5)",
+                            border: "solid 1px rgba(255, 255, 255, 0.2)",
                           }}
                           key={teamIndex}
                           onClick={() => handleSelectTeam(team, oddsGroup.name_Odds)}
