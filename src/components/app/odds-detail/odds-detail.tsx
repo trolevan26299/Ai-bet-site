@@ -123,11 +123,17 @@ export default function OddsDetail({}) {
   }, []);
   return (
     <>
-      <Tabs defaultValue="1">
+      <Tabs defaultValue="1" className="w-full">
         <TabsList className="w-full bg-none">
-          <TabsTrigger value="1">Tất cả kèo</TabsTrigger>
-          <TabsTrigger value="2">Kèo cược chấp</TabsTrigger>
-          <TabsTrigger value="3">Kèo tài xỉu</TabsTrigger>
+          <TabsTrigger value="1" className="w-[30%]">
+            Tất cả kèo
+          </TabsTrigger>
+          <TabsTrigger value="2" className="w-[30%]">
+            Kèo cược chấp
+          </TabsTrigger>
+          <TabsTrigger value="3" className="w-[30%]">
+            Kèo tài xỉu
+          </TabsTrigger>
         </TabsList>
 
         <TabsContent value="1">
