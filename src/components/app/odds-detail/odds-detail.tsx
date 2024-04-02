@@ -263,7 +263,7 @@ function RenderAccordion({
                   {/* <Icon icon="bxs:down-arrow" className="text-text-red" /> */}
                 </div>
               </div>
-              <div className="flex flex-row gap-2 w-full  text-text-red pt-4">
+              <div className="flex flex-row gap-2 w-full  text-yellow-400 pt-4">
                 <Icon icon="icon-park-solid:attention" className=" w-5" />
                 <p className="text-[12px] w-full ">Tỷ lệ cược đã thay đổi từ 0.99 thành 0.95</p>
               </div>
@@ -273,7 +273,7 @@ function RenderAccordion({
             <Button
               className="h-11 flex flex-col justify-center bg-indigo-900   rounded-full"
               style={{
-                border: "solid 1px rgba(255, 255, 255, 0.5)",
+                border: "solid 1px rgba(13, 0, 245, 0.4)",
               }}
             >
               Xác nhận
