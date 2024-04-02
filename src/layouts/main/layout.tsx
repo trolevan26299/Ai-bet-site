@@ -9,7 +9,7 @@ export default function MainLayout({ children }: Props) {
   const pathname = usePathname();
 
   return (
-    <div className="flex flex-col  bg-slate-800 h-full min-h-screen">
+    <div className="flex flex-col bg-backgroundColor-main h-full min-h-screen">
       <main className="flex-grow p-2">{children}</main>
     </div>
   );

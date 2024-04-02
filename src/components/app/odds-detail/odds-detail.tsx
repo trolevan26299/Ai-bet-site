@@ -183,7 +183,7 @@ function RenderAccordion({
       <Accordion type="multiple" value={openItems} onValueChange={onValueChange} className="w-full">
         {odds.map((oddsGroup: any, index: number) => (
           <AccordionItem value={`item-${index + 1}`} key={index}>
-            <AccordionTrigger>{oddsGroup.name_Odds}</AccordionTrigger>
+            <AccordionTrigger className="text-base">{oddsGroup.name_Odds}</AccordionTrigger>
             <AccordionContent>
               <DrawerTrigger asChild>
                 <div className="grid grid-cols-2 gap-4">
@@ -199,10 +199,10 @@ function RenderAccordion({
                           <div className="absolute rotate-[-45deg] right-0 bottom-1 transform translate-y-1/2 w-0 h-0 border-l-6 border-l-transparent border-r-6 border-r-transparent border-t-6 border-t-red-500"></div>
 
                           <div className="grid grid-cols-3 w-full h-full items-center">
-                            <div className="col-span-2 text-gray-300 font-bold">
+                            <div className="col-span-2 text-gray-300  text-sm font-medium text-text-noActive">
                               {team.rate_odds >= 0 ? `(${team.rate_odds})` : team.rate_odds} {team.name}
                             </div>
-                            <div className="text-end flex items-center justify-end font-bold ">
+                            <div className="text-end flex items-center justify-end text-sm font-medium text-text-red ">
                               {/* {team.value > latestOdds[index].detail[matchIndex][teamIndex].value && (
                                 <span style={{ color: "green" }}>
                                   <ArrowUpIcon />
@@ -213,7 +213,11 @@ function RenderAccordion({
                                   <ArrowDownIcon />
                                 </span>
                               )} */}
-                              <span className="w-10">{team.value}</span>
+                              {team.value && (
+                                <span className={`${team.value >= 0 ? "text-text-green w-12" : "text-text-red w-12"} `}>
+                                  {team.value}
+                                </span>
+                              )}
                             </div>
                           </div>
                         </div>
@@ -261,26 +265,9 @@ function RenderAccordion({
               </div>
               <div className="flex flex-row gap-2 w-full  text-text-red pt-4">
                 <Icon icon="icon-park-solid:attention" className=" w-5" />
-                <p className="text-[12px] w-full ">
-                  Tỷ lệ cược đã thay đổi từ 0.99 thành 0.95 .Bạn có muốn tiếp tục đặt cược ?
-                </p>
+                <p className="text-[12px] w-full ">Tỷ lệ cược đã thay đổi từ 0.99 thành 0.95</p>
               </div>
             </div>
-            {/* <div className="grid grid-cols-5 items-center gap-4 ">
-              <Label className="text-left col-span-2 ">Cược vào</Label>
-              <p>:</p>
-              <p>{selectedTeam?.name}</p>
-            </div>
-            <div className="grid grid-cols-5 items-center gap-4">
-              <Label className="text-left col-span-2">Kèo</Label>
-              <p>:</p>
-              <p>{selectedTeam?.rate_odds}</p>
-            </div>
-            <div className="grid grid-cols-5 items-center gap-4">
-              <Label className="text-left col-span-2">Tỷ lệ cược</Label>
-              <p>:</p>
-              <p>{selectedTeam?.value}</p>
-            </div> */}
           </div>
           <DrawerFooter>
             <Button
@@ -291,6 +278,7 @@ function RenderAccordion({
             >
               Xác nhận
             </Button>
+
             <DrawerClose>
               <Button
                 variant="link"
