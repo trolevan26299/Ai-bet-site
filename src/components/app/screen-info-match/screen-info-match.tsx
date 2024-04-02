@@ -33,7 +33,7 @@ export default function ScreenInfoMatch({}) {
 
       <div className="absolute inset-0 grid grid-cols-10 items-start justify-center px-4 pt-2">
         <div className="col-span-10 text-gray-300  flex flex-row items-center">
-          <Icon icon="twemoji:soccer-ball" />
+          <Icon icon="ph:soccer-ball-fill" width="20" />
           <p className="pl-2 text-sm">{dataScreenInfo[0]?.league_name}</p>
         </div>
         <div className="flex flex-col items-start col-span-3">

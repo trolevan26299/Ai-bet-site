@@ -13,7 +13,37 @@ const config = {
       },
     },
     extend: {
+      rotate: {
+        "30": "30deg",
+        "60": "60deg",
+        "90": "90deg",
+        "120": "120deg",
+        "130": "130deg",
+        "180": "180deg",
+        "270": "270deg",
+      },
+      borderWidth: {
+        "2": "2px",
+        "4": "4px",
+        "6": "6px",
+        "8": "8px",
+        "10": "10px",
+        "12": "12px",
+      },
       colors: {
+        text: {
+          DEFAULT: "#111827",
+          light: "#f9fafb",
+          green: "#34C759",
+          red: "#ff453a",
+          noActive: "rgba(235, 235, 245, 0.6)",
+        },
+        backgroundColor: {
+          main: "rgba(33,30,65,1)",
+          dark: "#1a202c",
+          light: "#edf2f7",
+          custom1: "#ffeedd",
+        },
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",

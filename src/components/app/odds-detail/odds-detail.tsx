@@ -1,24 +1,21 @@
 "use client";
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { fetchNewOddsValue } from "@/utils/fetchNewOddsRandom";
-import { ArrowDownIcon, ArrowUpIcon } from "@radix-ui/react-icons";
 import React, { useEffect, useState } from "react";
-
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../../ui/accordion";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
+import { Icon } from "@iconify/react";
 import { fetchOddsData } from "@/api/odds";
+import { Button } from "@/components/ui/button";
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "@/components/ui/drawer";
+import { Label } from "@/components/ui/label";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../../ui/accordion";
 
 interface ITeamDetail {
   name: string;
@@ -176,27 +173,32 @@ function RenderAccordion({
   latestOdds: any;
 }) {
   const [selectedTeam, setSelectedTeam] = useState<ITeamDetail | null>(null);
-  const handleSelectTeam = (team: any) => {
+  const [oddsName, setOddsName] = useState<String>("");
+  const handleSelectTeam = (team: any, oddsName: string) => {
     setSelectedTeam(team);
+    setOddsName(oddsName);
   };
   return (
-    <Dialog>
+    <Drawer>
       <Accordion type="multiple" value={openItems} onValueChange={onValueChange} className="w-full">
         {odds.map((oddsGroup: any, index: number) => (
           <AccordionItem value={`item-${index + 1}`} key={index}>
             <AccordionTrigger>{oddsGroup.name_Odds}</AccordionTrigger>
             <AccordionContent>
-              <DialogTrigger asChild>
+              <DrawerTrigger asChild>
                 <div className="grid grid-cols-2 gap-4">
                   {oddsGroup.detail.map((match: any, matchIndex: any) => (
                     <React.Fragment key={matchIndex}>
                       {match.map((team: any, teamIndex: any) => (
                         <div
-                          className="bg-slate-700 text-primary-foreground p-2 h-8 rounded-md text-xs"
+                          className="bg-slate-700 text-primary-foreground p-2 h-10 rounded-md text-xs relative"
                           key={teamIndex}
-                          onClick={() => handleSelectTeam(team)}
+                          onClick={() => handleSelectTeam(team, oddsGroup.name_Odds)}
                         >
-                          <div className="grid grid-cols-3 w-full">
+                          <div className="absolute rotate-45 right-0 top-0 transform translate-y-1/2 w-0 h-0 border-l-6 border-l-transparent border-r-6 border-r-transparent border-b-6 border-b-green-500"></div>
+                          <div className="absolute rotate-[-45deg] right-0 bottom-1 transform translate-y-1/2 w-0 h-0 border-l-6 border-l-transparent border-r-6 border-r-transparent border-t-6 border-t-red-500"></div>
+
+                          <div className="grid grid-cols-3 w-full h-full items-center">
                             <div className="col-span-2 text-gray-300 font-bold">
                               {team.rate_odds >= 0 ? `(${team.rate_odds})` : team.rate_odds} {team.name}
                             </div>
@@ -219,16 +221,52 @@ function RenderAccordion({
                     </React.Fragment>
                   ))}
                 </div>
-              </DialogTrigger>
+              </DrawerTrigger>
             </AccordionContent>
           </AccordionItem>
         ))}
-        <DialogContent className="w-4/6 rounded-lg">
-          <DialogHeader>
-            <DialogTitle className="text-left">Thông tin kèo đã chọn</DialogTitle>
-          </DialogHeader>
-          <div className="grid gap-4 py-4">
-            <div className="grid grid-cols-5 items-center gap-4 ">
+        <DrawerContent className="bg-backgroundColor-main rounded-t-3xl">
+          <DrawerHeader>
+            <DrawerTitle className="text-[20px] text-left text-text-light">Thông tin kèo đã chọn</DrawerTitle>
+          </DrawerHeader>
+          <div className=" py-4 px-4 mt-[-10px]">
+            <div className="col-span-10 text-gray-300  flex flex-row items-center">
+              <Icon icon="ph:soccer-ball-fill" width="20px" height="20px" />
+              <p className="pl-2 text-base">{oddsName}</p>
+            </div>
+            <div className="w-full pt-4">
+              <div className="flex flex-row justify-start gap-2 text-[16px]">
+                <p className="text-text-noActive w-32">Cược vào :</p>
+                <p className="text-text-light">{selectedTeam?.name}</p>
+              </div>
+              <div className="flex flex-row justify-start gap-2 text-[16px]">
+                <p className="text-text-noActive w-32">Kèo :</p>
+                <p className="text-text-light">{selectedTeam?.rate_odds}</p>
+              </div>
+              <div className="flex flex-row justify-start gap-2 text-[16px]">
+                <p className="text-text-noActive w-32">Tỷ lệ cược :</p>
+                <div className="flex flex-row items-center gap-2">
+                  {selectedTeam && (
+                    <p
+                      className={`${
+                        selectedTeam && selectedTeam?.value >= 0 ? "text-text-green" : "text-text-red"
+                      } text-text-light text-lg font-bold`}
+                    >
+                      {selectedTeam?.value}
+                    </p>
+                  )}
+                  <Icon icon="bxs:up-arrow" className="text-text-green" />
+                  {/* <Icon icon="bxs:down-arrow" className="text-text-red" /> */}
+                </div>
+              </div>
+              <div className="flex flex-row gap-2 w-full  text-text-red pt-4">
+                <Icon icon="icon-park-solid:attention" className=" w-5" />
+                <p className="text-[12px] w-full ">
+                  Tỷ lệ cược đã thay đổi từ 0.99 thành 0.95 .Bạn có muốn tiếp tục đặt cược ?
+                </p>
+              </div>
+            </div>
+            {/* <div className="grid grid-cols-5 items-center gap-4 ">
               <Label className="text-left col-span-2 ">Cược vào</Label>
               <p>:</p>
               <p>{selectedTeam?.name}</p>
@@ -242,18 +280,31 @@ function RenderAccordion({
               <Label className="text-left col-span-2">Tỷ lệ cược</Label>
               <p>:</p>
               <p>{selectedTeam?.value}</p>
-            </div>
+            </div> */}
           </div>
-          <DialogFooter className="grid grid-cols-2 space-x-2">
-            <Button type="reset" variant="destructive" className="col-span-1">
-              Hủy
-            </Button>
-            <Button type="submit" variant="default" className="col-span-1">
+          <DrawerFooter>
+            <Button
+              className="h-11 flex flex-col justify-center bg-indigo-900   rounded-full"
+              style={{
+                border: "solid 1px rgba(255, 255, 255, 0.5)",
+              }}
+            >
               Xác nhận
             </Button>
-          </DialogFooter>
-        </DialogContent>
+            <DrawerClose>
+              <Button
+                variant="link"
+                className="w-full rounded-full text-text-light"
+                style={{
+                  border: "solid 1px rgba(255, 255, 255, 0.5)",
+                }}
+              >
+                Hủy
+              </Button>
+            </DrawerClose>
+          </DrawerFooter>
+        </DrawerContent>
       </Accordion>
-    </Dialog>
+    </Drawer>
   );
 }
