@@ -39,7 +39,7 @@ const config = {
           noActive: "rgba(235, 235, 245, 0.6)",
         },
         backgroundColor: {
-          main: "#181729",
+          main: "#12202e",
           dark: "#1a202c",
           light: "#edf2f7",
           custom1: "#ffeedd",

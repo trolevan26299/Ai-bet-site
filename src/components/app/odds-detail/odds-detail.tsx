@@ -197,12 +197,16 @@ function RenderAccordion({
                     <React.Fragment key={matchIndex}>
                       {match.map((team: any, teamIndex: any) => (
                         <div
-                          className="bg-slate-700 text-primary-foreground p-2 h-10 rounded-md text-xs relative"
+                          className="  text-primary-foreground p-2 h-10 rounded-md text-xs relative"
+                          style={{
+                            backgroundColor: "rgba(255, 255, 255, 0.1)",
+                            // border: "solid 1px rgba(255, 255, 255, 0.5)",
+                          }}
                           key={teamIndex}
                           onClick={() => handleSelectTeam(team, oddsGroup.name_Odds)}
                         >
                           <div className="absolute rotate-45 right-0 top-0 transform translate-y-1/2 w-0 h-0 border-l-6 border-l-transparent border-r-6 border-r-transparent border-b-6 border-b-green-500"></div>
-                          <div className="absolute rotate-[-45deg] right-0 bottom-1 transform translate-y-1/2 w-0 h-0 border-l-6 border-l-transparent border-r-6 border-r-transparent border-t-6 border-t-red-500"></div>
+                          {/* <div className="absolute rotate-[-45deg] right-0 bottom-1 transform translate-y-1/2 w-0 h-0 border-l-6 border-l-transparent border-r-6 border-r-transparent border-t-6 border-t-red-500"></div> */}
 
                           <div className="grid grid-cols-3 w-full h-full items-center">
                             <div className="col-span-2 text-gray-300  text-sm font-medium text-text-noActive">
@@ -277,9 +281,10 @@ function RenderAccordion({
           </div>
           <DrawerFooter>
             <Button
-              className="h-11 flex flex-col justify-center bg-indigo-900   rounded-full"
+              className="h-11 flex flex-col justify-center rounded-full border "
               style={{
-                border: "solid 1px rgba(13, 0, 245, 0.4)",
+                backgroundColor: "rgba(255, 255, 255, 0.1)", // 50% opacity white background
+                border: "solid 1px rgba(255, 255, 255, 0.5)",
               }}
             >
               Xác nhận
