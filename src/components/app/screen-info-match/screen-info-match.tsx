@@ -22,14 +22,8 @@ export default function ScreenInfoMatch({}) {
   }, []);
 
   return (
-    <div className="relative ">
-      <img
-        src="https://images.foxtv.com/static.livenowfox.com/www.livenowfox.com/content/uploads/2024/02/932/470/GettyImages-453347919.jpg?ve=1&tl=1"
-        alt="Stadium"
-        className="w-full h-auto "
-      />
-
-      <div className="absolute inset-0 bg-black bg-opacity-55"></div>
+    <div className="relative pb-2">
+      <img src="assets/bg_team.jpg" alt="Stadium" className="w-full h-auto" />
 
       <div className="absolute inset-0 grid grid-cols-10 items-start justify-center px-4 pt-2">
         <div className="col-span-10 text-gray-300  flex flex-row items-center">
