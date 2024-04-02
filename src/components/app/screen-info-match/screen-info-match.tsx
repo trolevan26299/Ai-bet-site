@@ -23,7 +23,7 @@ export default function ScreenInfoMatch({}) {
 
   return (
     <div className="relative pb-2">
-      <img src="assets/bg_team.jpg" alt="Stadium" className="w-full h-auto" />
+      <img src="/assets/bg_team.jpg" alt="Stadium" className="w-full h-auto" />
 
       <div className="absolute inset-0 grid grid-cols-10 items-start justify-center px-4 pt-2">
         <div className="col-span-10 text-gray-300  flex flex-row items-center">
@@ -33,7 +33,7 @@ export default function ScreenInfoMatch({}) {
         <div className="flex flex-col items-start col-span-3">
           {dataScreenInfo.length > 0 && (
             <img
-              src={`assets/team_logo/${dataScreenInfo[0].league_name}/${dataScreenInfo[0].team[0]}.png`}
+              src={`/assets/team_logo/${dataScreenInfo[0].league_name}/${dataScreenInfo[0].team[0]}.png`}
               alt="team home Logo"
               className="h-12 w-12"
             />
@@ -73,7 +73,7 @@ export default function ScreenInfoMatch({}) {
         <div className="flex flex-col items-end col-span-3">
           {dataScreenInfo.length > 0 && (
             <img
-              src={`assets/team_logo/${dataScreenInfo[0].league_name}/${dataScreenInfo[0].team[1]}.png`}
+              src={`/assets/team_logo/${dataScreenInfo[0].league_name}/${dataScreenInfo[0].team[1]}.png`}
               alt="team home Logo"
               className="h-12 w-12"
             />
