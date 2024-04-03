@@ -130,7 +130,7 @@ export default function OddsDetail({}) {
   return (
     <>
       <Tabs defaultValue="1" className="w-full">
-        <TabsList className="w-full gap-3 justify-around">
+        <TabsList className="w-full gap-3 justify-between">
           <TabsTrigger value="1" style={openItems.includes("1") ? backgroundImageStyle : {}}>
             Tất cả kèo
           </TabsTrigger>
