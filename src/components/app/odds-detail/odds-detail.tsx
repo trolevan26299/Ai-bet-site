@@ -199,10 +199,10 @@ function RenderAccordion({
                     <React.Fragment key={matchIndex}>
                       {match.map((team: any, teamIndex: any) => (
                         <div
-                          className="  text-primary-foreground p-2 h-10  text-xs relative bg-cyan-950 "
+                          className="  text-primary-foreground p-2 h-10  text-xs relative bg-[#28374a] "
                           style={{
                             // backgroundColor: "rgba(255, 255, 255, 0.1)",
-                            border: "solid 1px rgba(255, 255, 255, 0.1)",
+                            // border: "solid 1px rgba(255, 255, 255, 0.1)",
                             borderRadius: "10px",
                           }}
                           key={teamIndex}
@@ -284,9 +284,10 @@ function RenderAccordion({
           </div>
           <DrawerFooter>
             <Button
-              className="h-11 flex flex-col justify-center rounded-full border bg-cover bg-center"
+              className="h-11 flex flex-col justify-center rounded-full"
               style={{
-                backgroundImage: "url(assets/button_confirm.jpg)",
+                backgroundColor: "#28374a",
+                border: "solid 1px #41576f",
               }}
             >
               Xác nhận
@@ -297,7 +298,7 @@ function RenderAccordion({
                 variant="link"
                 className="w-full rounded-full text-text-light"
                 style={{
-                  border: "solid 1px rgba(255, 255, 255, 0.5)",
+                  border: "solid 1px #41576f",
                 }}
               >
                 Hủy
