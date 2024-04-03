@@ -285,19 +285,19 @@ function RenderAccordion({
           </div>
           <DrawerFooter>
             <Button
-              className="h-11 flex flex-col justify-center rounded-full"
+              className="h-11 flex flex-col justify-center rounded-full font-medium"
               style={{
-                backgroundColor: "#28374a",
-                border: "solid 1px #41576f",
+                backgroundColor: "#006EF8",
+                // border: "solid 1px #41576f",
               }}
             >
-              Xác nhận
+              Đặt cược
             </Button>
 
             <DrawerClose>
               <Button
                 variant="link"
-                className="w-full rounded-full text-text-light"
+                className="w-full rounded-full text-text-light font-medium"
                 style={{
                   border: "solid 1px #41576f",
                 }}
