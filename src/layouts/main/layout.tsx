@@ -10,7 +10,7 @@ export default function MainLayout({ children }: Props) {
 
   return (
     <div className="flex flex-col bg-backgroundColor-main h-full min-h-screen">
-      <main className="flex-grow p-2">{children}</main>
+      <main className="flex-grow p-4">{children}</main>
     </div>
   );
 }

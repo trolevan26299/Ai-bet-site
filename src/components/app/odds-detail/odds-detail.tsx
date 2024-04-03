@@ -203,6 +203,7 @@ function RenderAccordion({
                           style={{
                             // backgroundColor: "rgba(255, 255, 255, 0.1)",
                             // border: "solid 1px rgba(255, 255, 255, 0.1)",
+
                             borderRadius: "10px",
                           }}
                           key={teamIndex}
