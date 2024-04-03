@@ -102,7 +102,7 @@ export default function OddsDetail({}) {
   const [odds, setOdds] = useState([]);
   const [latestOdds, setLatestOdds] = useState<any>();
   const [openItems, setOpenItems] = useState(["item-1", "item-2", "item-3"]);
-
+  const [live, setLive] = useState(false);
   const backgroundImageStyle = {
     backgroundImage: "url(assets/button_tab.jpg)",
     backgroundSize: "cover",
@@ -117,8 +117,10 @@ export default function OddsDetail({}) {
   useEffect(() => {
     const fetchAndSetOdds = async () => {
       const newData = await fetchOddsData();
+      console.log("newData", newData);
       const transformedData = transformData(newData);
       setOdds(transformedData);
+      setLive(newData[0].liveStatus);
       setLatestOdds((currentOdds: any) => [...transformedData]);
     };
 
@@ -141,6 +143,7 @@ export default function OddsDetail({}) {
         <TabsContent value="1">
           <RenderAccordion
             odds={odds}
+            live={live}
             openItems={openItems}
             latestOdds={latestOdds}
             onValueChange={handleValueChange}
@@ -150,6 +153,7 @@ export default function OddsDetail({}) {
         <TabsContent value="2">
           <RenderAccordion
             odds={[odds[0], odds[1]]}
+            live={live}
             latestOdds={latestOdds}
             openItems={openItems}
             onValueChange={handleValueChange}
@@ -159,6 +163,7 @@ export default function OddsDetail({}) {
         <TabsContent value="3">
           <RenderAccordion
             odds={[odds[2]]}
+            live={live}
             latestOdds={latestOdds}
             openItems={openItems}
             onValueChange={handleValueChange}
@@ -171,15 +176,18 @@ export default function OddsDetail({}) {
 
 function RenderAccordion({
   odds,
+  live,
   openItems,
   onValueChange,
   latestOdds,
 }: {
   odds: any;
+  live: boolean;
   openItems: any;
   onValueChange: any;
   latestOdds: any;
 }) {
+  console.log("odds", odds);
   const [selectedTeam, setSelectedTeam] = useState<ITeamDetail | null>(null);
   const [oddsName, setOddsName] = useState<String>("");
   const handleSelectTeam = (team: any, oddsName: string) => {
@@ -243,13 +251,16 @@ function RenderAccordion({
             </AccordionContent>
           </AccordionItem>
         ))}
-        <DrawerContent className="bg-backgroundColor-main rounded-t-3xl">
+        <DrawerContent className="bg-backgroundColor-main rounded-t-3xl ">
           <DrawerHeader>
             <DrawerTitle className="text-[20px] text-left text-text-light">Thông tin kèo đã chọn</DrawerTitle>
           </DrawerHeader>
           <div className=" py-4 px-4 mt-[-10px]">
             <div className="col-span-10 text-gray-300  flex flex-row items-center">
               <Icon icon="ph:soccer-ball-fill" width="20px" height="20px" />
+              {live && (
+                <Icon icon="fluent:live-20-filled" className="ml-2" width={20} height={20} color="rgba(255,69,58,1)" />
+              )}
               <p className="pl-2 text-base">{oddsName}</p>
             </div>
             <div className="w-full pt-4">
