@@ -33,7 +33,9 @@ export default function ScreenInfoMatch({}) {
         <div className="flex flex-col items-start col-span-3">
           {dataScreenInfo.length > 0 && (
             <img
-              src={`/assets/team_logo/${dataScreenInfo[0].league_name}/${dataScreenInfo[0].team[0]}.png`}
+              src={`/assets/team_logo/${dataScreenInfo[0].league_name.replace(/\s+/g, "").toLowerCase()}/${
+                dataScreenInfo[0].team[0]
+              }.png`}
               alt="team home Logo"
               className="h-12 w-12"
             />
@@ -73,7 +75,9 @@ export default function ScreenInfoMatch({}) {
         <div className="flex flex-col items-end col-span-3">
           {dataScreenInfo.length > 0 && (
             <img
-              src={`/assets/team_logo/${dataScreenInfo[0].league_name}/${dataScreenInfo[0].team[1]}.png`}
+              src={`assets/team_logo/${dataScreenInfo[0].league_name.replace(/\s+/g, "").toLowerCase()}/${
+                dataScreenInfo[0].team[1]
+              }.png`}
               alt="team home Logo"
               className="h-12 w-12"
             />
