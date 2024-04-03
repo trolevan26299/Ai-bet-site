@@ -13,8 +13,9 @@ import {
 } from "@/components/ui/drawer";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Icon } from "@iconify/react";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../../ui/accordion";
+import { IBetDetail, IMatchData, IOdds, IOddsDetail } from "@/types/odds.types";
 
 interface ITeamDetail {
   name: string;
@@ -22,76 +23,91 @@ interface ITeamDetail {
   value: number;
 }
 
-const transformData = (data: any) => {
+const transformData = (data: IMatchData[]) => {
   return data
-    .map((item: any) => {
-      const keoChinhToanTran = item.bets.spreads.find((bet: any) => bet.number === 0 && bet.altLineId === 0);
-      const keoChinhHiep1 = item.bets.spreads.find((bet: any) => bet.number === 1 && bet.altLineId === 0);
-      const keoChinhTaiXiu = item.bets.totals.find((bet: any) => bet.altLineId === 0);
+    .map((item: IMatchData) => {
+      const keoChinhToanTran = item.bets.spreads.find((bet: IBetDetail) => bet.number === 0 && bet.altLineId === 0);
+      const keoChinhHiep1 = item.bets.spreads.find((bet: IBetDetail) => bet.number === 1 && bet.altLineId === 0);
+      const keoChinhTaiXiu = item.bets.totals.find((bet: IBetDetail) => bet.altLineId === 0);
 
-      console.log(keoChinhToanTran, keoChinhHiep1);
-      const spreadsToanTran = item.bets.spreads
-        .filter(
-          (bet: any) =>
-            bet.number === 0 &&
-            (bet.hdp === keoChinhToanTran.hdp - 0.25 || bet.altLineId === 0 || bet.hdp === keoChinhToanTran.hdp + 0.25) // bỏ dòng này lấy ra tất cả
-        )
-        .slice(0, 3);
+      const spreadsToanTran =
+        keoChinhToanTran &&
+        item.bets.spreads
+          .filter(
+            (bet: IBetDetail) =>
+              bet.number === 0 &&
+              (bet.hdp === (keoChinhToanTran?.hdp || 0) - 0.25 ||
+                bet.altLineId === 0 ||
+                bet.hdp === (keoChinhToanTran.hdp || 0) + 0.25) // bỏ dòng này lấy ra tất cả
+          )
+          .slice(0, 3);
 
-      const spreadsHiep1 = item.bets.spreads
-        .filter(
-          (bet: any) =>
-            bet.number === 1 &&
-            (bet.hdp === keoChinhHiep1.hdp - 0.25 || bet.altLineId === 0 || bet.hdp === keoChinhHiep1.hdp + 0.25) // bỏ dòng này lấy ra tất cả
-        )
-        .slice(0, 3);
+      const spreadsHiep1 =
+        keoChinhHiep1 &&
+        item.bets.spreads
+          .filter(
+            (bet: IBetDetail) =>
+              bet.number === 1 &&
+              (bet.hdp === (keoChinhHiep1.hdp || 0) - 0.25 ||
+                bet.altLineId === 0 ||
+                bet.hdp === (keoChinhHiep1.hdp || 0) + 0.25) // bỏ dòng này lấy ra tất cả
+          )
+          .slice(0, 3);
 
-      const spreadsTaiXiu = item.bets.totals
-        .filter(
-          (bet: any) =>
-            bet.points === keoChinhTaiXiu.points - 0.25 ||
-            bet.altLineId === 0 ||
-            bet.points === keoChinhTaiXiu.points + 0.25 // bỏ dòng này lấy ra tất cả
-        )
-        .slice(0, 3);
+      const spreadsTaiXiu =
+        keoChinhTaiXiu &&
+        item.bets.totals
+          .filter(
+            (bet: IBetDetail) =>
+              bet.points === (keoChinhTaiXiu.points || 0) - 0.25 ||
+              bet.altLineId === 0 ||
+              bet.points === (keoChinhTaiXiu.points || 0) + 0.25 // bỏ dòng này lấy ra tất cả
+          )
+          .slice(0, 3);
 
       return [
         {
           name_Odds: "Kèo cược chấp - Toàn trận",
-          detail: spreadsToanTran.map((spread: any) => [
-            {
-              name: item.home,
-              rate_odds: spread.hdp,
-              value: spread.home,
-            },
-            {
-              name: item.away,
-              rate_odds: spread.hdp === 0 ? 0 : spread.hdp >= 0 ? -spread.hdp : Math.abs(spread.hdp),
-              value: spread.away,
-            },
-          ]),
+          detail:
+            spreadsToanTran &&
+            spreadsToanTran.map((spread: IBetDetail) => [
+              {
+                name: item.home,
+                rate_odds: spread.hdp,
+                value: spread.home,
+              },
+              {
+                name: item.away,
+                rate_odds: spread.hdp === 0 ? 0 : spread.hdp ?? 0 >= 0 ? -(spread.hdp ?? 0) : Math.abs(spread.hdp ?? 0),
+                value: spread.away,
+              },
+            ]),
         },
         {
           name_Odds: "Kèo cược chấp - Hiệp 1",
-          detail: spreadsHiep1.map((spread: any) => [
-            {
-              name: item.home,
-              rate_odds: spread.hdp,
-              value: spread.home,
-            },
-            {
-              name: item.away,
-              rate_odds: spread.hdp === 0 ? 0 : spread.hdp >= 0 ? -spread.hdp : Math.abs(spread.hdp),
-              value: spread.away,
-            },
-          ]),
+          detail:
+            spreadsHiep1 &&
+            spreadsHiep1.map((spread: IBetDetail) => [
+              {
+                name: item.home,
+                rate_odds: spread.hdp,
+                value: spread.home,
+              },
+              {
+                name: item.away,
+                rate_odds: spread.hdp === 0 ? 0 : spread.hdp ?? 0 >= 0 ? -(spread.hdp ?? 0) : Math.abs(spread.hdp ?? 0),
+                value: spread.away,
+              },
+            ]),
         },
         {
           name_Odds: "Kèo tài xỉu - Toàn trận",
-          detail: spreadsTaiXiu.map((total: any) => [
-            { name: "Tài", rate_odds: total.points, value: total.over },
-            { name: "Xỉu", rate_odds: total.points, value: total.under },
-          ]),
+          detail:
+            spreadsTaiXiu &&
+            spreadsTaiXiu.map((total: IBetDetail) => [
+              { name: "Tài", rate_odds: total.points, value: total.over },
+              { name: "Xỉu", rate_odds: total.points, value: total.under },
+            ]),
         },
       ];
     })
@@ -99,33 +115,32 @@ const transformData = (data: any) => {
 };
 
 export default function OddsDetail({}) {
-  const [odds, setOdds] = useState([]);
-  const [latestOdds, setLatestOdds] = useState<any>();
+  const [odds, setOdds] = useState<IOddsDetail[]>([]);
+  const [latestOdds, setLatestOdds] = useState<IOddsDetail[]>([]);
   const [openItems, setOpenItems] = useState(["item-1", "item-2", "item-3"]);
   const [live, setLive] = useState(false);
-  const backgroundImageStyle = {
-    backgroundImage: "url(assets/button_tab.jpg)",
-    backgroundSize: "cover",
-    backgroundPosition: "center",
-    backgroundRepeat: "no-repeat",
-  };
+  console.log("odd", odds);
+  console.log("latest", latestOdds);
 
   const handleValueChange = (value: string[]) => {
     setOpenItems(value);
   };
-
   useEffect(() => {
+    let previousOdds: any[] = [];
+
     const fetchAndSetOdds = async () => {
       const newData = await fetchOddsData();
-      console.log("newData", newData);
       const transformedData = transformData(newData);
-      setOdds(transformedData);
+
+      setOdds(previousOdds);
+      previousOdds = [...transformedData];
+
+      setLatestOdds(transformedData as unknown as IOddsDetail[]);
       setLive(newData[0].liveStatus);
-      setLatestOdds((currentOdds: any) => [...transformedData]);
     };
 
     fetchAndSetOdds();
-    const intervalId = setInterval(fetchAndSetOdds, 3000);
+    const intervalId = setInterval(fetchAndSetOdds, 5000);
 
     return () => clearInterval(intervalId);
   }, []);
@@ -133,9 +148,7 @@ export default function OddsDetail({}) {
     <>
       <Tabs defaultValue="1" className="w-full">
         <TabsList className="w-full gap-3 justify-between">
-          <TabsTrigger value="1" style={openItems.includes("1") ? backgroundImageStyle : {}}>
-            Tất cả kèo
-          </TabsTrigger>
+          <TabsTrigger value="1">Tất cả kèo</TabsTrigger>
           <TabsTrigger value="2">Kèo cược chấp</TabsTrigger>
           <TabsTrigger value="3">Kèo tài xỉu</TabsTrigger>
         </TabsList>
@@ -181,44 +194,67 @@ function RenderAccordion({
   onValueChange,
   latestOdds,
 }: {
-  odds: any;
+  odds: IOddsDetail[];
   live: boolean;
-  openItems: any;
-  onValueChange: any;
-  latestOdds: any;
+  openItems: string[];
+  onValueChange: (value: string[]) => void;
+  latestOdds: IOddsDetail[];
 }) {
-  console.log("odds", odds);
   const [selectedTeam, setSelectedTeam] = useState<ITeamDetail | null>(null);
   const [oddsName, setOddsName] = useState<String>("");
-  const handleSelectTeam = (team: any, oddsName: string) => {
+  const [showGreenDiv, setShowGreenDiv] = useState(false);
+  const [showRedDiv, setShowRedDiv] = useState(false);
+
+  const handleSelectTeam = (team: IOdds, oddsName: string) => {
     setSelectedTeam(team);
     setOddsName(oddsName);
   };
+
+  useEffect(() => {
+    if (latestOdds.length > 0 && odds.length > 0) {
+      latestOdds.forEach((latestOdd, index) => {
+        latestOdd.detail.forEach((latestDetail, detailIndex) => {
+          if (latestDetail.value > odds[index].detail[detailIndex].value) {
+            setShowGreenDiv(true);
+            setShowRedDiv(false);
+          } else if (latestDetail.value < odds[index].detail[detailIndex].value) {
+            setShowGreenDiv(false);
+            setShowRedDiv(true);
+          } else {
+            setShowGreenDiv(false);
+            setShowRedDiv(false);
+          }
+        });
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [odds]);
+
   return (
     <Drawer>
       <Accordion type="multiple" value={openItems} onValueChange={onValueChange} className="w-full">
-        {odds.map((oddsGroup: any, index: number) => (
+        {odds.map((oddsGroup: IOddsDetail, index: number) => (
           <AccordionItem value={`item-${index + 1}`} key={index}>
             <AccordionTrigger className="text-base">{oddsGroup.name_Odds}</AccordionTrigger>
             <AccordionContent>
               <DrawerTrigger asChild>
                 <div className="grid grid-cols-2 gap-[6px]">
-                  {oddsGroup.detail.map((match: any, matchIndex: any) => (
+                  {oddsGroup.detail.map((match: any, matchIndex: number) => (
                     <React.Fragment key={matchIndex}>
-                      {match.map((team: any, teamIndex: any) => (
+                      {match.map((team: IOdds, teamIndex: number) => (
                         <div
-                          className="  text-primary-foreground p-2 h-10  text-xs relative bg-[#28374a] "
-                          style={{
-                            // backgroundColor: "rgba(255, 255, 255, 0.1)",
-                            // border: "solid 1px rgba(255, 255, 255, 0.1)",
-
-                            borderRadius: "10px",
-                          }}
+                          className="  text-primary-foreground p-2 h-10  text-xs relative bg-[#28374a] rounded-[10px]"
                           key={teamIndex}
                           onClick={() => handleSelectTeam(team, oddsGroup.name_Odds)}
                         >
-                          <div className="absolute rotate-45 right-0 top-0 transform translate-y-1/2 w-0 h-0 border-l-6 border-l-transparent border-r-6 border-r-transparent border-b-6 border-b-green-500"></div>
-                          {/* <div className="absolute rotate-[-45deg] right-0 bottom-1 transform translate-y-1/2 w-0 h-0 border-l-6 border-l-transparent border-r-6 border-r-transparent border-t-6 border-t-red-500"></div> */}
+                          <div
+                            className="absolute rotate-45 right-0 top-0 transform translate-y-1/2 w-0 h-0 border-l-6 border-l-transparent border-r-6 border-r-transparent border-b-6 border-b-green-500"
+                            style={{ display: showGreenDiv ? "block" : "none" }}
+                          ></div>
+                          <div
+                            className="absolute rotate-[-45deg] right-0 bottom-1 transform translate-y-1/2 w-0 h-0 border-l-6 border-l-transparent border-r-6 border-r-transparent border-t-6 border-t-red-500"
+                            style={{ display: showRedDiv ? "block" : "none" }}
+                          ></div>
 
                           <div className="grid grid-cols-3 w-full h-full items-center">
                             <div className="col-span-2 text-gray-300  text-sm font-medium text-text-noActive">
@@ -279,13 +315,13 @@ function RenderAccordion({
                     <p
                       className={`${
                         selectedTeam && selectedTeam?.value >= 0 ? "text-text-green" : "text-text-red"
-                      } text-text-light text-lg font-bold`}
+                      } text-lg font-bold`}
                     >
                       {selectedTeam?.value}
                     </p>
                   )}
                   <Icon icon="bxs:up-arrow" className="text-text-green" />
-                  {/* <Icon icon="bxs:down-arrow" className="text-text-red" /> */}
+                  <Icon icon="bxs:down-arrow" className="text-text-red" />
                 </div>
               </div>
               <div className="flex flex-row gap-2 w-full  text-yellow-400 pt-4">
@@ -299,7 +335,6 @@ function RenderAccordion({
               className="h-11 flex flex-col justify-center rounded-full font-medium"
               style={{
                 backgroundColor: "#006EF8",
-                // border: "solid 1px #41576f",
               }}
             >
               Đặt cược

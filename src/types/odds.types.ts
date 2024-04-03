@@ -4,6 +4,9 @@ export type IBetDetail = {
   home?: number;
   away?: number;
   max?: number;
+  points?: number;
+  over?: number;
+  under?: number;
   lineId: number;
   eventId: number;
   number: number;
@@ -38,4 +41,14 @@ export type IMatchData = {
   awayRedCards?: number;
   homeRedCards?: number;
   bets: IBet;
+};
+
+export type IOdds = {
+  name: string;
+  rate_odds: number;
+  value: number;
+};
+export type IOddsDetail = {
+  name_Odds: string;
+  detail: IOdds[];
 };
