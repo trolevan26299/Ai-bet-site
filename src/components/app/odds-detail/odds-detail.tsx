@@ -126,6 +126,9 @@ export default function OddsDetail({}) {
   const handleValueChange = (value: string[]) => {
     setOpenItems(value);
   };
+  const updateOddsStatus = (newOddsStatus: OddsStatusType) => {
+    setOddsStatus(newOddsStatus);
+  };
   // useEffect chỉ để fetch và set dữ liệu lần đầu tiên
   useEffect(() => {
     async function fetchAndSetInitialOdds() {
@@ -190,6 +193,7 @@ export default function OddsDetail({}) {
             openItems={openItems}
             oddsStatus={oddsStatus}
             onValueChange={handleValueChange}
+            updateOddsStatus={updateOddsStatus}
           />
         </TabsContent>
 
@@ -200,6 +204,7 @@ export default function OddsDetail({}) {
             openItems={openItems}
             oddsStatus={oddsStatus}
             onValueChange={handleValueChange}
+            updateOddsStatus={updateOddsStatus}
           />
         </TabsContent>
 
@@ -210,6 +215,7 @@ export default function OddsDetail({}) {
             openItems={openItems}
             oddsStatus={oddsStatus}
             onValueChange={handleValueChange}
+            updateOddsStatus={updateOddsStatus}
           />
         </TabsContent>
       </Tabs>
@@ -223,12 +229,14 @@ function RenderAccordion({
   openItems,
   onValueChange,
   oddsStatus,
+  updateOddsStatus,
 }: {
   odds: IOddsDetail[];
   live: boolean;
   openItems: string[];
   onValueChange: (value: string[]) => void;
   oddsStatus: OddsStatusType;
+  updateOddsStatus: (newOddsStatus: OddsStatusType) => void;
 }) {
   const [selectedTeam, setSelectedTeam] = useState<ITeamDetail | null>(null);
   const [oddsName, setOddsName] = useState<String>("");
@@ -259,13 +267,13 @@ function RenderAccordion({
                             className="absolute rotate-[45deg] right-0 top-[0.5px] transform translate-y-1/2 w-0 h-0 border-l-6 border-l-transparent border-r-6 border-r-transparent border-b-[8px] border-b-green-500"
                             style={{ display: oddsStatus[statusKey] === "green" ? "block" : "none" }}
                             animate={{ opacity: [0, 1, 0], rotate: [35] }}
-                            transition={{ duration: 0.8, repeat: Infinity }}
+                            transition={{ duration: 0.5, repeat: Infinity }}
                           ></m.div>
                           <m.div
                             className="absolute rotate-[-45deg] right-0 bottom-1 transform translate-y-1/2 w-0 h-0 border-l-6 border-l-transparent border-r-6 border-r-transparent border-t-[8px] border-t-red-500"
                             style={{ display: oddsStatus[statusKey] === "red" ? "block" : "none" }}
                             animate={{ opacity: [0, 1, 0], rotate: [-45] }}
-                            transition={{ duration: 0.8, repeat: Infinity }}
+                            transition={{ duration: 0.5, repeat: Infinity }}
                           ></m.div>
 
                           <div className="grid grid-cols-3 w-full h-full items-center">
