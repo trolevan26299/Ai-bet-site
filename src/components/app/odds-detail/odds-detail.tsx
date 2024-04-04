@@ -214,10 +214,10 @@ function RenderAccordion({
     if (latestOdds.length > 0 && odds.length > 0) {
       latestOdds.forEach((latestOdd, index) => {
         latestOdd.detail.forEach((latestDetail, detailIndex) => {
-          if (latestDetail.value > odds[index].detail[detailIndex].value) {
+          if (latestDetail.value > odds[index]?.detail[detailIndex].value) {
             setShowGreenDiv(true);
             setShowRedDiv(false);
-          } else if (latestDetail.value < odds[index].detail[detailIndex].value) {
+          } else if (latestDetail.value < odds[index]?.detail[detailIndex].value) {
             setShowGreenDiv(false);
             setShowRedDiv(true);
           } else {
@@ -235,11 +235,11 @@ function RenderAccordion({
       <Accordion type="multiple" value={openItems} onValueChange={onValueChange} className="w-full">
         {odds.map((oddsGroup: IOddsDetail, index: number) => (
           <AccordionItem value={`item-${index + 1}`} key={index}>
-            <AccordionTrigger className="text-base">{oddsGroup.name_Odds}</AccordionTrigger>
+            <AccordionTrigger className="text-base">{oddsGroup?.name_Odds}</AccordionTrigger>
             <AccordionContent>
               <DrawerTrigger asChild>
                 <div className="grid grid-cols-2 gap-[6px]">
-                  {oddsGroup.detail.map((match: any, matchIndex: number) => (
+                  {oddsGroup?.detail.map((match: any, matchIndex: number) => (
                     <React.Fragment key={matchIndex}>
                       {match.map((team: IOdds, teamIndex: number) => (
                         <div
@@ -297,7 +297,7 @@ function RenderAccordion({
               {live && (
                 <Icon icon="fluent:live-20-filled" className="ml-2" width={20} height={20} color="rgba(255,69,58,1)" />
               )}
-              <p className="pl-2 text-base">{oddsName}</p>
+              <p className="pl-2 text-base text-[#fafafa]">{oddsName}</p>
             </div>
             <div className="w-full pt-4">
               <div className="flex flex-row justify-start gap-2 text-[16px]">
