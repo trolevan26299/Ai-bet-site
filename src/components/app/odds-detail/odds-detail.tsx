@@ -22,6 +22,7 @@ interface ITeamDetail {
   rate_odds: number;
   value: number;
 }
+type OddsStatusType = Record<string, "green" | "red" | "none">;
 
 const transformData = (data: IMatchData[]) => {
   return data
@@ -119,31 +120,40 @@ export default function OddsDetail({}) {
   const [latestOdds, setLatestOdds] = useState<IOddsDetail[]>([]);
   const [openItems, setOpenItems] = useState(["item-1", "item-2", "item-3"]);
   const [live, setLive] = useState(false);
-  console.log("odd", odds);
-  console.log("latest", latestOdds);
 
   const handleValueChange = (value: string[]) => {
     setOpenItems(value);
   };
+  // useEffect chỉ để fetch và set dữ liệu lần đầu tiên
   useEffect(() => {
-    let previousOdds: any[] = [];
+    async function fetchAndSetInitialOdds() {
+      console.log("Fetching initial odds data...");
+      const newData = await fetchOddsData();
+      const transformedData = transformData(newData);
+      setOdds(transformedData as unknown as IOddsDetail[]);
+      setLatestOdds(transformedData as unknown as IOddsDetail[]);
+      setLive(newData[0].liveStatus);
+    }
 
-    const fetchAndSetOdds = async () => {
+    fetchAndSetInitialOdds();
+  }, []);
+
+  // useEffect để fetch và cập nhật dữ liệu sau mỗi 5 giây, bắt đầu sau lần render đầu tiên
+  useEffect(() => {
+    async function fetchAndUpdateOdds() {
+      console.log("Updating odds data...");
       const newData = await fetchOddsData();
       const transformedData = transformData(newData);
 
-      setOdds(previousOdds);
-      previousOdds = [...transformedData];
-
+      setOdds(latestOdds);
       setLatestOdds(transformedData as unknown as IOddsDetail[]);
       setLive(newData[0].liveStatus);
-    };
+    }
 
-    fetchAndSetOdds();
-    const intervalId = setInterval(fetchAndSetOdds, 5000);
-
+    const intervalId = setInterval(fetchAndUpdateOdds, 5000);
     return () => clearInterval(intervalId);
-  }, []);
+  }, [latestOdds]);
+
   return (
     <>
       <Tabs defaultValue="1" className="w-full">
@@ -167,7 +177,7 @@ export default function OddsDetail({}) {
           <RenderAccordion
             odds={[odds[0], odds[1]]}
             live={live}
-            latestOdds={latestOdds}
+            latestOdds={[latestOdds[0], latestOdds[1]]}
             openItems={openItems}
             onValueChange={handleValueChange}
           />
@@ -177,7 +187,7 @@ export default function OddsDetail({}) {
           <RenderAccordion
             odds={[odds[2]]}
             live={live}
-            latestOdds={latestOdds}
+            latestOdds={[latestOdds[2]]}
             openItems={openItems}
             onValueChange={handleValueChange}
           />
@@ -202,8 +212,7 @@ function RenderAccordion({
 }) {
   const [selectedTeam, setSelectedTeam] = useState<ITeamDetail | null>(null);
   const [oddsName, setOddsName] = useState<String>("");
-  const [showGreenDiv, setShowGreenDiv] = useState(false);
-  const [showRedDiv, setShowRedDiv] = useState(false);
+  const [oddsStatus, setOddsStatus] = useState<OddsStatusType>({});
 
   const handleSelectTeam = (team: IOdds, oddsName: string) => {
     setSelectedTeam(team);
@@ -211,24 +220,30 @@ function RenderAccordion({
   };
 
   useEffect(() => {
+    const newOddsStatus: OddsStatusType = {};
     if (latestOdds.length > 0 && odds.length > 0) {
       latestOdds.forEach((latestOdd, index) => {
         latestOdd.detail.forEach((latestDetail, detailIndex) => {
-          if (latestDetail.value > odds[index]?.detail[detailIndex].value) {
-            setShowGreenDiv(true);
-            setShowRedDiv(false);
-          } else if (latestDetail.value < odds[index]?.detail[detailIndex].value) {
-            setShowGreenDiv(false);
-            setShowRedDiv(true);
-          } else {
-            setShowGreenDiv(false);
-            setShowRedDiv(false);
-          }
+          latestDetail.forEach((latestOddDetail, oddDetailIndex) => {
+            const key = `${index}-${detailIndex}-${oddDetailIndex}`;
+            const oldValue = odds[index]?.detail[detailIndex][oddDetailIndex]?.value;
+            const newValue = latestOddDetail.value;
+
+            if (newValue > oldValue) {
+              newOddsStatus[key] = "green";
+            } else if (newValue < oldValue) {
+              newOddsStatus[key] = "red";
+            } else {
+              newOddsStatus[key] = "none";
+            }
+          });
         });
       });
+
+      setOddsStatus(newOddsStatus);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [odds]);
+  }, [latestOdds]);
 
   return (
     <Drawer>
@@ -239,21 +254,25 @@ function RenderAccordion({
             <AccordionContent>
               <DrawerTrigger asChild>
                 <div className="grid grid-cols-2 gap-[6px]">
-                  {oddsGroup?.detail.map((match: any, matchIndex: number) => (
-                    <React.Fragment key={matchIndex}>
-                      {match.map((team: IOdds, teamIndex: number) => (
+                  {oddsGroup?.detail.map((match: any, matchIndex: number) => {
+                    return match.map((team: IOdds, teamIndex: number) => {
+                      const statusKey = `${index}-${matchIndex}-${teamIndex}`;
+                      const isGreen = oddsStatus[statusKey] === "green";
+                      const isRed = oddsStatus[statusKey] === "red";
+
+                      return (
                         <div
-                          className="  text-primary-foreground p-2 h-10  text-xs relative bg-[#28374a] rounded-[10px]"
+                          className="text-primary-foreground p-2 h-10 text-xs relative bg-[#28374a] rounded-[10px]"
                           key={teamIndex}
                           onClick={() => handleSelectTeam(team, oddsGroup.name_Odds)}
                         >
                           <div
                             className="absolute rotate-45 right-0 top-0 transform translate-y-1/2 w-0 h-0 border-l-6 border-l-transparent border-r-6 border-r-transparent border-b-6 border-b-green-500"
-                            style={{ display: showGreenDiv ? "block" : "none" }}
+                            style={{ display: isGreen ? "block" : "none" }}
                           ></div>
                           <div
                             className="absolute rotate-[-45deg] right-0 bottom-1 transform translate-y-1/2 w-0 h-0 border-l-6 border-l-transparent border-r-6 border-r-transparent border-t-6 border-t-red-500"
-                            style={{ display: showRedDiv ? "block" : "none" }}
+                            style={{ display: isRed ? "block" : "none" }}
                           ></div>
 
                           <div className="grid grid-cols-3 w-full h-full items-center">
@@ -261,16 +280,6 @@ function RenderAccordion({
                               {team.rate_odds >= 0 ? `(${team.rate_odds})` : team.rate_odds} {team.name}
                             </div>
                             <div className="text-end flex items-center justify-end text-sm font-medium text-text-red ">
-                              {/* {team.value > latestOdds[index].detail[matchIndex][teamIndex].value && (
-                                <span style={{ color: "green" }}>
-                                  <ArrowUpIcon />
-                                </span>
-                              )}
-                              {team.value < latestOdds[index].detail[matchIndex][teamIndex].value && (
-                                <span style={{ color: "red" }}>
-                                  <ArrowDownIcon />
-                                </span>
-                              )} */}
                               {team.value && (
                                 <span className={`${team.value >= 0 ? "text-text-green w-12" : "text-text-red w-12"} `}>
                                   {team.value}
@@ -279,9 +288,9 @@ function RenderAccordion({
                             </div>
                           </div>
                         </div>
-                      ))}
-                    </React.Fragment>
-                  ))}
+                      );
+                    });
+                  })}
                 </div>
               </DrawerTrigger>
             </AccordionContent>

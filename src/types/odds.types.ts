@@ -50,5 +50,5 @@ export type IOdds = {
 };
 export type IOddsDetail = {
   name_Odds: string;
-  detail: IOdds[];
+  detail: IOdds[][];
 };
