@@ -256,16 +256,16 @@ function RenderAccordion({
                           onClick={() => handleSelectTeam(team, oddsGroup.name_Odds)}
                         >
                           <m.div
-                            className="absolute rotate-[45deg] right-0 top-0 transform translate-y-1/2 w-0 h-0 border-l-6 border-l-transparent border-r-6 border-r-transparent border-b-[7px] border-b-green-500"
+                            className="absolute rotate-[45deg] right-0 top-[0.5px] transform translate-y-1/2 w-0 h-0 border-l-6 border-l-transparent border-r-6 border-r-transparent border-b-[7px] border-b-green-500"
                             style={{ display: oddsStatus[statusKey] === "green" ? "block" : "none" }}
-                            animate={{ scale: [0.6, 1.1, 0.6], opacity: [0.5, 1, 0.5], rotate: [40] }}
-                            transition={{ duration: 1, repeat: Infinity }}
+                            animate={{ opacity: [0, 1, 0], rotate: [35] }}
+                            transition={{ duration: 0.8, repeat: Infinity }}
                           ></m.div>
                           <m.div
                             className="absolute rotate-[-45deg] right-0 bottom-1 transform translate-y-1/2 w-0 h-0 border-l-6 border-l-transparent border-r-6 border-r-transparent border-t-[7px] border-t-red-500"
                             style={{ display: oddsStatus[statusKey] === "red" ? "block" : "none" }}
-                            animate={{ scale: [0.6, 1.1, 0.6], opacity: [0.5, 1, 0.5], rotate: [-45] }}
-                            transition={{ duration: 1, repeat: Infinity }}
+                            animate={{ opacity: [0, 1, 0], rotate: [-45] }}
+                            transition={{ duration: 0.8, repeat: Infinity }}
                           ></m.div>
 
                           <div className="grid grid-cols-3 w-full h-full items-center">
