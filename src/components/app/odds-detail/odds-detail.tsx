@@ -12,10 +12,11 @@ import {
   DrawerTrigger,
 } from "@/components/ui/drawer";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Icon } from "@iconify/react";
-import React, { useEffect, useRef, useState } from "react";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../../ui/accordion";
 import { IBetDetail, IMatchData, IOdds, IOddsDetail } from "@/types/odds.types";
+import { Icon } from "@iconify/react";
+import { useEffect, useState } from "react";
+import { m } from "framer-motion";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../../ui/accordion";
 
 interface ITeamDetail {
   name: string;
@@ -170,6 +171,7 @@ export default function OddsDetail({}) {
 
     const intervalId = setInterval(fetchAndUpdateOdds, 5000);
     return () => clearInterval(intervalId);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [latestOdds]);
 
   return (
@@ -186,7 +188,6 @@ export default function OddsDetail({}) {
             odds={odds}
             live={live}
             openItems={openItems}
-            latestOdds={latestOdds}
             oddsStatus={oddsStatus}
             onValueChange={handleValueChange}
           />
@@ -196,7 +197,6 @@ export default function OddsDetail({}) {
           <RenderAccordion
             odds={[odds[0], odds[1]]}
             live={live}
-            latestOdds={[latestOdds[0], latestOdds[1]]}
             openItems={openItems}
             oddsStatus={oddsStatus}
             onValueChange={handleValueChange}
@@ -207,7 +207,6 @@ export default function OddsDetail({}) {
           <RenderAccordion
             odds={[odds[2]]}
             live={live}
-            latestOdds={[latestOdds[2]]}
             openItems={openItems}
             oddsStatus={oddsStatus}
             onValueChange={handleValueChange}
@@ -223,14 +222,12 @@ function RenderAccordion({
   live,
   openItems,
   onValueChange,
-  latestOdds,
   oddsStatus,
 }: {
   odds: IOddsDetail[];
   live: boolean;
   openItems: string[];
   onValueChange: (value: string[]) => void;
-  latestOdds: IOddsDetail[];
   oddsStatus: OddsStatusType;
 }) {
   const [selectedTeam, setSelectedTeam] = useState<ITeamDetail | null>(null);
@@ -240,33 +237,6 @@ function RenderAccordion({
     setSelectedTeam(team);
     setOddsName(oddsName);
   };
-
-  // useEffect(() => {
-  //   const newOddsStatus: OddsStatusType = {};
-  //   if (latestOdds.length > 0 && odds.length > 0) {
-  //     latestOdds.forEach((latestOdd, index) => {
-  //       latestOdd.detail.forEach((latestDetail, detailIndex) => {
-  //         latestDetail.forEach((latestOddDetail, oddDetailIndex) => {
-  //           const key = `${index}-${detailIndex}-${oddDetailIndex}`;
-  //           const oldValue = odds[index]?.detail[detailIndex][oddDetailIndex]?.value;
-  //           const newValue = latestOddDetail.value;
-
-  //           if (newValue > oldValue) {
-  //             newOddsStatus[key] = "green";
-  //           } else if (newValue < oldValue) {
-  //             newOddsStatus[key] = "red";
-  //           } else {
-  //             newOddsStatus[key] = "none";
-  //           }
-  //         });
-  //       });
-  //     });
-
-  //     setOddsStatus(newOddsStatus);
-  //   }
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [latestOdds]);
-
   return (
     <Drawer>
       <Accordion type="multiple" value={openItems} onValueChange={onValueChange} className="w-full">
@@ -285,14 +255,18 @@ function RenderAccordion({
                           key={teamIndex}
                           onClick={() => handleSelectTeam(team, oddsGroup.name_Odds)}
                         >
-                          <div
-                            className="absolute rotate-45 right-0 top-0 transform translate-y-1/2 w-0 h-0 border-l-6 border-l-transparent border-r-6 border-r-transparent border-b-6 border-b-green-500"
+                          <m.div
+                            className="absolute rotate-[45deg] right-0 top-0 transform translate-y-1/2 w-0 h-0 border-l-6 border-l-transparent border-r-6 border-r-transparent border-b-[7px] border-b-green-500"
                             style={{ display: oddsStatus[statusKey] === "green" ? "block" : "none" }}
-                          ></div>
-                          <div
-                            className="absolute rotate-[-45deg] right-0 bottom-1 transform translate-y-1/2 w-0 h-0 border-l-6 border-l-transparent border-r-6 border-r-transparent border-t-6 border-t-red-500"
+                            animate={{ scale: [0.6, 1.1, 0.6], opacity: [0.5, 1, 0.5], rotate: [40] }}
+                            transition={{ duration: 1, repeat: Infinity }}
+                          ></m.div>
+                          <m.div
+                            className="absolute rotate-[-45deg] right-0 bottom-1 transform translate-y-1/2 w-0 h-0 border-l-6 border-l-transparent border-r-6 border-r-transparent border-t-[7px] border-t-red-500"
                             style={{ display: oddsStatus[statusKey] === "red" ? "block" : "none" }}
-                          ></div>
+                            animate={{ scale: [0.6, 1.1, 0.6], opacity: [0.5, 1, 0.5], rotate: [-45] }}
+                            transition={{ duration: 1, repeat: Infinity }}
+                          ></m.div>
 
                           <div className="grid grid-cols-3 w-full h-full items-center">
                             <div className="col-span-2 text-gray-300  text-sm font-medium text-text-noActive">
