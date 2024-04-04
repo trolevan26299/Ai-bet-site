@@ -264,7 +264,7 @@ function RenderAccordion({
                           onClick={() => handleSelectTeam(team, oddsGroup.name_Odds)}
                         >
                           <m.div
-                            className="absolute rotate-[45deg] right-0 top-[0.5px] transform translate-y-1/2 w-0 h-0 border-l-6 border-l-transparent border-r-6 border-r-transparent border-b-[8px] border-b-green-500"
+                            className="absolute rotate-[45deg] right-0 top-[2px] transform translate-y-1/2 w-0 h-0 border-l-6 border-l-transparent border-r-6 border-r-transparent border-b-[8px] border-b-green-500"
                             style={{ display: oddsStatus[statusKey] === "green" ? "block" : "none" }}
                             animate={{ opacity: [0, 1, 0], rotate: [35] }}
                             transition={{ duration: 0.5, repeat: Infinity }}
