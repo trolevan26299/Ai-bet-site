@@ -238,6 +238,8 @@ function RenderAccordion({
   const [oddsName, setOddsName] = useState<String>("");
   const [keyItemSelect, setKeyItemSelect] = useState<number[]>([]);
   const [isInitialized, setIsInitialized] = useState(false);
+  const [showGreenAnimation, setShowGreenAnimation] = useState(false);
+  const [showRedAnimation, setShowRedAnimation] = useState(false);
 
   const handleSelectTeam = (statusKey: string, team: IOdds, oddsName: string) => {
     const keyArray = statusKey.split("-").map(Number);
@@ -245,6 +247,21 @@ function RenderAccordion({
     setSelectedTeam(team);
     setOddsName(oddsName);
   };
+  console.log("oldStatus", oddsStatus);
+  useEffect(() => {
+    if (oddsStatus[`${keyItemSelect[0]}-${keyItemSelect[1]}-${keyItemSelect[2]}`] === "green") {
+      setShowGreenAnimation(true);
+      setTimeout(() => {
+        setShowGreenAnimation(false);
+      }, 1500);
+    } else if (oddsStatus[`${keyItemSelect[0]}-${keyItemSelect[1]}-${keyItemSelect[2]}`] === "red") {
+      setShowRedAnimation(true);
+      setTimeout(() => {
+        setShowRedAnimation(false);
+      }, 1500);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [oddsStatus]);
 
   useEffect(() => {
     if (odds[keyItemSelect[0]]?.detail[keyItemSelect[1]][keyItemSelect[2]]?.value !== selectedTeam?.value) {
@@ -288,6 +305,7 @@ function RenderAccordion({
                             animate={{ opacity: [0, 1, 0], rotate: [35] }}
                             transition={{ duration: 0.5, repeat: Infinity }}
                           ></m.div>
+
                           <m.div
                             className="absolute rotate-[-45deg] right-0 bottom-1 transform translate-y-1/2 w-0 h-0 border-l-6 border-l-transparent border-r-6 border-r-transparent border-t-[6px] border-t-red-500"
                             style={{ display: oddsStatus[statusKey] === "red" ? "block" : "none" }}
@@ -354,21 +372,19 @@ function RenderAccordion({
                   >
                     {!valueSelectNew ? selectedTeam?.value : valueSelectNew}
                   </p>
-                  {valueSelectNew &&
-                    selectedTeam &&
-                    (valueSelectNew > selectedTeam?.value ? (
-                      <m.div
-                        className=" w-0 h-0 border-l-8 border-l-transparent border-r-8 border-r-transparent border-b-[9px] border-b-green-500"
-                        animate={{ opacity: [0, 1, 0], rotate: [0] }}
-                        transition={{ duration: 0.5, repeat: Infinity }}
-                      ></m.div>
-                    ) : (
-                      <m.div
-                        className="transform translate-y-1/2 w-0 h-0 border-l-8 border-l-transparent border-r-8 border-r-transparent border-t-[8px] border-t-red-500"
-                        animate={{ opacity: [0, 1, 0], rotate: [0] }}
-                        transition={{ duration: 0.5, repeat: Infinity }}
-                      ></m.div>
-                    ))}
+                  {showGreenAnimation ? (
+                    <m.div
+                      className="w-0 h-0 border-l-8 border-l-transparent border-r-8 border-r-transparent border-b-[9px] border-b-green-500"
+                      animate={{ opacity: [0, 1, 0], rotate: [0] }}
+                      transition={{ duration: 0.5, repeat: Infinity }}
+                    ></m.div>
+                  ) : showRedAnimation ? (
+                    <m.div
+                      className="transform translate-y-1/2 w-0 h-0 border-l-8 border-l-transparent border-r-8 border-r-transparent border-t-[8px] border-t-red-500"
+                      animate={{ opacity: [0, 1, 0], rotate: [0] }}
+                      transition={{ duration: 0.5, repeat: Infinity }}
+                    ></m.div>
+                  ) : null}
                 </div>
               </div>
               {selectedTeam && valueSelectNew && (
