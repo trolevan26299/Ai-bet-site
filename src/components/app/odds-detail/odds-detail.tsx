@@ -295,16 +295,16 @@ function RenderAccordion({
                             transition={{ duration: 0.5, repeat: Infinity }}
                           ></m.div>
 
-                          <div className="grid grid-cols-10 w-full h-full items-center">
+                          <div className="grid grid-cols-12 w-full h-full items-center">
                             <div
                               style={{
                                 maskImage: "linear-gradient(90deg, rgba(0, 0, 0, 1) 80%, rgba(0, 0, 0, 0) 100%)",
                               }}
-                              className="col-span-8 text-gray-300  text-sm font-medium text-text-noActive overflow-hidden whitespace-nowrap"
+                              className="col-span-9 text-gray-300  text-sm font-medium text-text-noActive overflow-hidden whitespace-nowrap"
                             >
                               {team.rate_odds >= 0 ? `(${team.rate_odds})` : team.rate_odds} {team.name}
                             </div>
-                            <div className=" col-span-2 text-end flex items-center justify-end text-sm font-medium text-text-red ">
+                            <div className=" col-span-3 text-end flex items-center justify-end text-sm font-medium text-text-red ">
                               {team.value && (
                                 <span className={`${team.value >= 0 ? "text-text-green w-12" : "text-text-red w-12"} `}>
                                   {team.value}
