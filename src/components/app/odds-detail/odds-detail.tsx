@@ -17,6 +17,7 @@ import { Icon } from "@iconify/react";
 import { use, useEffect, useState } from "react";
 import { m } from "framer-motion";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../../ui/accordion";
+import { set } from "date-fns";
 
 interface ITeamDetail {
   name: string;
@@ -240,21 +241,29 @@ function RenderAccordion({
   const [isInitialized, setIsInitialized] = useState(false);
   const [showGreenAnimation, setShowGreenAnimation] = useState(false);
   const [showRedAnimation, setShowRedAnimation] = useState(false);
+  const [showBlink, setShowBlink] = useState(false);
+  const [statusKey, setStatusKey] = useState<string>("");
 
   const handleSelectTeam = (statusKey: string, team: IOdds, oddsName: string) => {
     const keyArray = statusKey.split("-").map(Number);
     setKeyItemSelect(keyArray);
+    setStatusKey(statusKey);
     setSelectedTeam(team);
     setOddsName(oddsName);
   };
   console.log("oldStatus", oddsStatus);
   useEffect(() => {
-    if (oddsStatus[`${keyItemSelect[0]}-${keyItemSelect[1]}-${keyItemSelect[2]}`] === "green") {
+    setShowBlink(true);
+    setTimeout(() => {
+      setShowBlink(false);
+    }, 1500);
+
+    if (oddsStatus[statusKey] === "green") {
       setShowGreenAnimation(true);
       setTimeout(() => {
         setShowGreenAnimation(false);
       }, 1500);
-    } else if (oddsStatus[`${keyItemSelect[0]}-${keyItemSelect[1]}-${keyItemSelect[2]}`] === "red") {
+    } else if (oddsStatus[statusKey] === "red") {
       setShowRedAnimation(true);
       setTimeout(() => {
         setShowRedAnimation(false);
@@ -275,7 +284,7 @@ function RenderAccordion({
   if (!isInitialized) {
     return null;
   }
-  console.log("keyItemSelect", odds[keyItemSelect[0]]?.detail[keyItemSelect[1]][keyItemSelect[2]]?.value);
+
   return (
     <Drawer
       onClose={() => {
@@ -299,19 +308,23 @@ function RenderAccordion({
                           key={teamIndex}
                           onClick={() => handleSelectTeam(statusKey, team, oddsGroup.name_Odds)}
                         >
-                          <m.div
-                            className="absolute rotate-[45deg] right-0 top-[2px] transform translate-y-1/2 w-0 h-0 border-l-6 border-l-transparent border-r-6 border-r-transparent border-b-[6px] border-b-green-500"
-                            style={{ display: oddsStatus[statusKey] === "green" ? "block" : "none" }}
-                            animate={{ opacity: [0, 1, 0], rotate: [35] }}
-                            transition={{ duration: 0.5, repeat: Infinity }}
-                          ></m.div>
+                          {showBlink && (
+                            <>
+                              <m.div
+                                className="absolute rotate-[45deg] right-0 top-[2px] transform translate-y-1/2 w-0 h-0 border-l-6 border-l-transparent border-r-6 border-r-transparent border-b-[6px] border-b-green-500"
+                                style={{ display: oddsStatus[statusKey] === "green" ? "block" : "none" }}
+                                animate={{ opacity: [0, 1, 0], rotate: [35] }}
+                                transition={{ duration: 0.5, repeat: Infinity }}
+                              ></m.div>
 
-                          <m.div
-                            className="absolute rotate-[-45deg] right-0 bottom-1 transform translate-y-1/2 w-0 h-0 border-l-6 border-l-transparent border-r-6 border-r-transparent border-t-[6px] border-t-red-500"
-                            style={{ display: oddsStatus[statusKey] === "red" ? "block" : "none" }}
-                            animate={{ opacity: [0, 1, 0], rotate: [-45] }}
-                            transition={{ duration: 0.5, repeat: Infinity }}
-                          ></m.div>
+                              <m.div
+                                className="absolute rotate-[-45deg] right-0 bottom-1 transform translate-y-1/2 w-0 h-0 border-l-6 border-l-transparent border-r-6 border-r-transparent border-t-[6px] border-t-red-500"
+                                style={{ display: oddsStatus[statusKey] === "red" ? "block" : "none" }}
+                                animate={{ opacity: [0, 1, 0], rotate: [-45] }}
+                                transition={{ duration: 0.5, repeat: Infinity }}
+                              ></m.div>
+                            </>
+                          )}
 
                           <div className="grid grid-cols-12 w-full h-full items-center">
                             <div
