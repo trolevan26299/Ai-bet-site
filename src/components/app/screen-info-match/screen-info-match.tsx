@@ -4,6 +4,7 @@
 
 import { fetchOddsData } from "@/api/odds";
 import { IMatchData } from "@/types/odds.types";
+import { convertToGMT7 } from "@/utils/time";
 import { Icon } from "@iconify/react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
@@ -11,7 +12,6 @@ import { useEffect, useState } from "react";
 export default function ScreenInfoMatch({}) {
   const [dataScreenInfo, setDataScreenInfo] = useState<IMatchData[]>([]);
 
-  console.log("dataScreenInfo", dataScreenInfo);
   useEffect(() => {
     const fetchData = async () => {
       const response: IMatchData[] = await fetchOddsData();
@@ -74,9 +74,15 @@ export default function ScreenInfoMatch({}) {
             </div>
           </div>
         ) : (
-          <div className="col-span-6 flex flex-col items-center justify-center text-gray-300 mt-6">
-            <span className="text-sm text-[rgba(255,230,101,1)] font-[600]">Ngày mai</span>
-            <span className="text-sm text-[#fafafa] font-[600]">18:30</span>
+          <div className="col-span-6 flex flex-col items-center justify-center text-gray-300 mt-6 gap-3">
+            {dataScreenInfo[0]?.starts && (
+              <span className="text-sm text-[rgba(255,230,101,1)] font-[600]">
+                {convertToGMT7(dataScreenInfo[0]?.starts, "date")}
+              </span>
+            )}
+            <span className="text-sm text-[#fafafa] font-[600]">
+              {convertToGMT7(dataScreenInfo[0]?.starts, "time")}
+            </span>
           </div>
         )}
 

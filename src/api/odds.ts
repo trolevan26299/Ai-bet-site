@@ -23,8 +23,8 @@ export const fetchOddsData = async () => {
   let data = [
     {
       id: 1587358326,
-      starts: "2024-03-31T18:00:00Z",
-      home: "Lorient",
+      starts: "2024-04-05T18:00:00Z",
+      home: "Lorient  asd ádad",
       away: "Brest",
       rotNum: "3101",
       liveStatus: true,

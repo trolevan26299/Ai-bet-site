@@ -172,7 +172,7 @@ export default function OddsDetail({}) {
       setOddsStatus(newOddsStatus);
     }
 
-    const intervalId = setInterval(fetchAndUpdateOdds, 5000);
+    const intervalId = setInterval(fetchAndUpdateOdds, 20000);
     return () => clearInterval(intervalId);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [latestOdds]);
@@ -189,7 +189,6 @@ export default function OddsDetail({}) {
         <TabsContent value="1">
           <RenderAccordion
             odds={odds}
-            latestOdds={latestOdds}
             live={live}
             openItems={openItems}
             oddsStatus={oddsStatus}
@@ -200,7 +199,6 @@ export default function OddsDetail({}) {
         <TabsContent value="2">
           <RenderAccordion
             odds={[odds[0], odds[1]]}
-            latestOdds={[latestOdds[0], latestOdds[1]]}
             live={live}
             openItems={openItems}
             oddsStatus={oddsStatus}
@@ -211,7 +209,6 @@ export default function OddsDetail({}) {
         <TabsContent value="3">
           <RenderAccordion
             odds={[odds[2]]}
-            latestOdds={[latestOdds[2]]}
             live={live}
             openItems={openItems}
             oddsStatus={oddsStatus}
@@ -229,14 +226,12 @@ function RenderAccordion({
   openItems,
   onValueChange,
   oddsStatus,
-  latestOdds,
 }: {
   odds: IOddsDetail[];
   live: boolean;
   openItems: string[];
   onValueChange: (value: string[]) => void;
   oddsStatus: OddsStatusType;
-  latestOdds: IOddsDetail[];
 }) {
   const [selectedTeam, setSelectedTeam] = useState<ITeamDetail | null>(null);
   const [valueSelectNew, setValueSelectNew] = useState<number | undefined>(undefined);
@@ -300,11 +295,16 @@ function RenderAccordion({
                             transition={{ duration: 0.5, repeat: Infinity }}
                           ></m.div>
 
-                          <div className="grid grid-cols-3 w-full h-full items-center">
-                            <div className="col-span-2 text-gray-300  text-sm font-medium text-text-noActive">
+                          <div className="grid grid-cols-8 w-full h-full items-center">
+                            <div
+                              style={{
+                                maskImage: "linear-gradient(90deg, rgba(0, 0, 0, 1) 80%, rgba(0, 0, 0, 0) 100%)",
+                              }}
+                              className="col-span-6 text-gray-300  text-sm font-medium text-text-noActive overflow-hidden whitespace-nowrap"
+                            >
                               {team.rate_odds >= 0 ? `(${team.rate_odds})` : team.rate_odds} {team.name}
                             </div>
-                            <div className="text-end flex items-center justify-end text-sm font-medium text-text-red ">
+                            <div className=" col-span-2 text-end flex items-center justify-end text-sm font-medium text-text-red ">
                               {team.value && (
                                 <span className={`${team.value >= 0 ? "text-text-green w-12" : "text-text-red w-12"} `}>
                                   {team.value}
