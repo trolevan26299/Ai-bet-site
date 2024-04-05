@@ -363,12 +363,12 @@ function RenderAccordion({
                     ))}
                 </div>
               </div>
-              <div className="flex flex-row gap-2 w-full  text-yellow-400 pt-4">
-                <Icon icon="icon-park-solid:attention" className=" w-5" />
-                {selectedTeam && valueSelectNew && (
+              {selectedTeam && valueSelectNew && (
+                <div className="flex flex-row gap-2 w-full  text-yellow-400 pt-4">
+                  <Icon icon="icon-park-solid:attention" className=" w-5" />
                   <p className="text-[12px] w-full ">{`Tỷ lệ cược đã thay đổi từ ${selectedTeam.value} thành ${valueSelectNew}`}</p>
-                )}
-              </div>
+                </div>
+              )}
             </div>
           </div>
           <DrawerFooter>
