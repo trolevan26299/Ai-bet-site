@@ -172,7 +172,7 @@ export default function OddsDetail({}) {
       setOddsStatus(newOddsStatus);
     }
 
-    const intervalId = setInterval(fetchAndUpdateOdds, 20000);
+    const intervalId = setInterval(fetchAndUpdateOdds, 5000);
     return () => clearInterval(intervalId);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [latestOdds]);

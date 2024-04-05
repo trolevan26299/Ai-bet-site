@@ -46,7 +46,7 @@ export default function ScreenInfoMatch({}) {
         {dataScreenInfo[0]?.liveStatus ? (
           <div className="col-span-6 flex flex-col items-center justify-center text-gray-300">
             <div className="flex flex-row items-center gap-1 pr-1">
-              <Icon icon="fluent:live-20-filled" width={25} height={25} color="rgba(255,69,58,1)" />
+              <Icon icon="fluent:live-20-filled" width={25} height={23} color="rgba(255,69,58,1)" />
               <p className="font-[600] text-sm text-[rgba(255,230,101,1)] ">{`${dataScreenInfo[0].liveMinute}’ Hiệp ${dataScreenInfo[0].liveScope}`}</p>
             </div>
             <div className="flex justify-center items-center pt-3">
@@ -100,8 +100,8 @@ export default function ScreenInfoMatch({}) {
           )}
         </div>
         <div className="flex flex-row justify-between col-span-12 mt-[-25px]">
-          <span className="text-[#fff] py-3 text-sm font-[600] ml-1 w-[48%] flex-wrap">{dataScreenInfo[0]?.home}</span>
-          <span className="text-[#fff] py-3 text-sm font-[600] mr-1 w-[48%] flex flex-row justify-end flex-wrap">
+          <span className="text-[#fff] py-3 text-sm font-[600] ml-0 w-[48%] flex-wrap">{dataScreenInfo[0]?.home}</span>
+          <span className="text-[#fff] py-3 text-sm font-[600] mr-0 w-[48%] flex flex-row justify-end flex-wrap">
             {dataScreenInfo[0]?.away}
           </span>
         </div>
