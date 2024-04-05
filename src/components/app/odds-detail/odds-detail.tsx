@@ -357,9 +357,17 @@ function RenderAccordion({
                   {valueSelectNew &&
                     selectedTeam &&
                     (valueSelectNew > selectedTeam?.value ? (
-                      <Icon icon="bxs:up-arrow" className="text-text-green" />
+                      <m.div
+                        className=" w-0 h-0 border-l-8 border-l-transparent border-r-8 border-r-transparent border-b-[9px] border-b-green-500"
+                        animate={{ opacity: [0, 1, 0], rotate: [0] }}
+                        transition={{ duration: 0.5, repeat: Infinity }}
+                      ></m.div>
                     ) : (
-                      <Icon icon="bxs:down-arrow" className="text-text-red" />
+                      <m.div
+                        className="transform translate-y-1/2 w-0 h-0 border-l-8 border-l-transparent border-r-8 border-r-transparent border-t-[8px] border-t-red-500"
+                        animate={{ opacity: [0, 1, 0], rotate: [0] }}
+                        transition={{ duration: 0.5, repeat: Infinity }}
+                      ></m.div>
                     ))}
                 </div>
               </div>
