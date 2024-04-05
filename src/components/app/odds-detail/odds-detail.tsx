@@ -14,7 +14,7 @@ import {
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { IBetDetail, IMatchData, IOdds, IOddsDetail } from "@/types/odds.types";
 import { Icon } from "@iconify/react";
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 import { m } from "framer-motion";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../../ui/accordion";
 
@@ -189,33 +189,33 @@ export default function OddsDetail({}) {
         <TabsContent value="1">
           <RenderAccordion
             odds={odds}
+            latestOdds={latestOdds}
             live={live}
             openItems={openItems}
             oddsStatus={oddsStatus}
             onValueChange={handleValueChange}
-            updateOddsStatus={updateOddsStatus}
           />
         </TabsContent>
 
         <TabsContent value="2">
           <RenderAccordion
             odds={[odds[0], odds[1]]}
+            latestOdds={[latestOdds[0], latestOdds[1]]}
             live={live}
             openItems={openItems}
             oddsStatus={oddsStatus}
             onValueChange={handleValueChange}
-            updateOddsStatus={updateOddsStatus}
           />
         </TabsContent>
 
         <TabsContent value="3">
           <RenderAccordion
             odds={[odds[2]]}
+            latestOdds={[latestOdds[2]]}
             live={live}
             openItems={openItems}
             oddsStatus={oddsStatus}
             onValueChange={handleValueChange}
-            updateOddsStatus={updateOddsStatus}
           />
         </TabsContent>
       </Tabs>
@@ -229,24 +229,48 @@ function RenderAccordion({
   openItems,
   onValueChange,
   oddsStatus,
-  updateOddsStatus,
+  latestOdds,
 }: {
   odds: IOddsDetail[];
   live: boolean;
   openItems: string[];
   onValueChange: (value: string[]) => void;
   oddsStatus: OddsStatusType;
-  updateOddsStatus: (newOddsStatus: OddsStatusType) => void;
+  latestOdds: IOddsDetail[];
 }) {
   const [selectedTeam, setSelectedTeam] = useState<ITeamDetail | null>(null);
+  const [valueSelectNew, setValueSelectNew] = useState<number | undefined>(undefined);
   const [oddsName, setOddsName] = useState<String>("");
+  const [keyItemSelect, setKeyItemSelect] = useState<number[]>([]);
+  const [isInitialized, setIsInitialized] = useState(false);
 
-  const handleSelectTeam = (team: IOdds, oddsName: string) => {
+  const handleSelectTeam = (statusKey: string, team: IOdds, oddsName: string) => {
+    const keyArray = statusKey.split("-").map(Number);
+    setKeyItemSelect(keyArray);
     setSelectedTeam(team);
     setOddsName(oddsName);
   };
+
+  useEffect(() => {
+    if (odds[keyItemSelect[0]]?.detail[keyItemSelect[1]][keyItemSelect[2]]?.value !== selectedTeam?.value) {
+      setValueSelectNew(odds[keyItemSelect[0]]?.detail[keyItemSelect[1]][keyItemSelect[2]]?.value);
+    }
+    if (!isInitialized) {
+      setIsInitialized(true);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [odds, isInitialized]);
+  if (!isInitialized) {
+    return null;
+  }
+  console.log("keyItemSelect", odds[keyItemSelect[0]]?.detail[keyItemSelect[1]][keyItemSelect[2]]?.value);
   return (
-    <Drawer>
+    <Drawer
+      onClose={() => {
+        setSelectedTeam(null);
+        setValueSelectNew(undefined);
+      }}
+    >
       <Accordion type="multiple" value={openItems} onValueChange={onValueChange} className="w-full">
         {odds.map((oddsGroup: IOddsDetail, index: number) => (
           <AccordionItem value={`item-${index + 1}`} key={index}>
@@ -261,7 +285,7 @@ function RenderAccordion({
                         <div
                           className="text-primary-foreground p-2 h-10 text-xs relative bg-[#28374a] rounded-[10px]"
                           key={teamIndex}
-                          onClick={() => handleSelectTeam(team, oddsGroup.name_Odds)}
+                          onClick={() => handleSelectTeam(statusKey, team, oddsGroup.name_Odds)}
                         >
                           <m.div
                             className="absolute rotate-[45deg] right-0 top-[2px] transform translate-y-1/2 w-0 h-0 border-l-6 border-l-transparent border-r-6 border-r-transparent border-b-[8px] border-b-green-500"
@@ -305,7 +329,7 @@ function RenderAccordion({
             <div className="col-span-10 text-gray-300  flex flex-row items-center">
               <Icon icon="ph:soccer-ball-fill" width="20px" height="20px" />
               {live && (
-                <Icon icon="fluent:live-20-filled" className="ml-2" width={20} height={20} color="rgba(255,69,58,1)" />
+                <Icon icon="fluent:live-20-filled" className="ml-1" width={20} height={20} color="rgba(255,69,58,1)" />
               )}
               <p className="pl-2 text-base text-[#fafafa]">{oddsName}</p>
             </div>
@@ -321,17 +345,22 @@ function RenderAccordion({
               <div className="flex flex-row justify-start gap-2 text-[16px]">
                 <p className="text-text-noActive w-32">Tỷ lệ cược :</p>
                 <div className="flex flex-row items-center gap-2">
-                  {selectedTeam && (
-                    <p
-                      className={`${
-                        selectedTeam && selectedTeam?.value >= 0 ? "text-text-green" : "text-text-red"
-                      } text-lg font-bold`}
-                    >
-                      {selectedTeam?.value}
-                    </p>
-                  )}
-                  <Icon icon="bxs:up-arrow" className="text-text-green" />
-                  <Icon icon="bxs:down-arrow" className="text-text-red" />
+                  <p
+                    className={`${
+                      odds[keyItemSelect[0]]?.detail[keyItemSelect[1]][keyItemSelect[2]]?.value >= 0
+                        ? "text-text-green"
+                        : "text-text-red"
+                    } text-lg font-bold`}
+                  >
+                    {!valueSelectNew ? selectedTeam?.value : valueSelectNew}
+                  </p>
+                  {valueSelectNew &&
+                    selectedTeam &&
+                    (valueSelectNew > selectedTeam?.value ? (
+                      <Icon icon="bxs:up-arrow" className="text-text-green" />
+                    ) : (
+                      <Icon icon="bxs:down-arrow" className="text-text-red" />
+                    ))}
                 </div>
               </div>
               <div className="flex flex-row gap-2 w-full  text-yellow-400 pt-4">
