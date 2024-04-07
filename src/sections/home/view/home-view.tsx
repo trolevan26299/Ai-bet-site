@@ -94,10 +94,10 @@ export default function HomeView() {
       {loading ? (
         <SplashScreen />
       ) : (
-        <>
+        <div className="p-3">
           <ScreenInfoMatch dataScreenInfo={dataScreenInfo} />
           <OddsDetail odds={odds} live={live} oddsStatus={oddsStatus} />
-        </>
+        </div>
       )}
     </MainLayout>
   );

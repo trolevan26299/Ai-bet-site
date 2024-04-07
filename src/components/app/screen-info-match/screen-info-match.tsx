@@ -65,11 +65,11 @@ export default function ScreenInfoMatch({ dataScreenInfo }: { dataScreenInfo: IM
           <div className="col-span-6 flex flex-col items-center justify-center text-gray-300 mt-6 gap-3">
             {dataScreenInfo[0]?.starts && (
               <span className="text-sm text-[rgba(255,230,101,1)] font-[600]">
-                {convertToGMT7(dataScreenInfo[0]?.starts, "date") || 0}
+                {convertToGMT7(dataScreenInfo[0]?.starts, "date")}
               </span>
             )}
             <span className="text-sm text-[#fafafa] font-[600]">
-              {convertToGMT7(dataScreenInfo[0]?.starts, "time") || 0}
+              {convertToGMT7(dataScreenInfo[0]?.starts, "time")}
             </span>
           </div>
         )}
