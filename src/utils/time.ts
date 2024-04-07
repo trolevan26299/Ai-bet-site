@@ -10,7 +10,6 @@ export const convertToGMT7 = (dateTimeString: string, type: string) => {
 
   const oneDay = 24 * 60 * 60 * 1000;
   const diffDays = Math.floor((GMT7DateTime.getTime() - currentDateGMT7.getTime()) / oneDay);
-  console.log(diffDays);
 
   if (type === "date") {
     if (diffDays === 1 || (diffDays === 0 && GMT7DateTime.getUTCHours() === 0)) {

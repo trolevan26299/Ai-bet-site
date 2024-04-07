@@ -318,6 +318,7 @@ export const fetchOddsData = async () => {
       },
     },
   ];
+  // const rs= axios
   let updatedData = updateHomeValue(data);
   return updatedData;
 };

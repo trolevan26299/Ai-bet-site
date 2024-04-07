@@ -1,6 +1,5 @@
 "use client";
 
-import { fetchOddsData } from "@/api/odds";
 import { Button } from "@/components/ui/button";
 import {
   Drawer,
@@ -12,171 +11,32 @@ import {
   DrawerTrigger,
 } from "@/components/ui/drawer";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { IBetDetail, IMatchData, IOdds, IOddsDetail } from "@/types/odds.types";
+import { IOdds, IOddsDetail, OddsStatusType } from "@/types/odds.types";
 import { Icon } from "@iconify/react";
-import { use, useEffect, useState } from "react";
 import { m } from "framer-motion";
+import { useEffect, useState } from "react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../../ui/accordion";
-import { set } from "date-fns";
 
 interface ITeamDetail {
   name: string;
   rate_odds: number;
   value: number;
 }
-type OddsStatusType = Record<string, "green" | "red" | "none">;
 
-const transformData = (data: IMatchData[]) => {
-  return data
-    .map((item: IMatchData) => {
-      const keoChinhToanTran = item.bets.spreads.find((bet: IBetDetail) => bet.number === 0 && bet.altLineId === 0);
-      const keoChinhHiep1 = item.bets.spreads.find((bet: IBetDetail) => bet.number === 1 && bet.altLineId === 0);
-      const keoChinhTaiXiu = item.bets.totals.find((bet: IBetDetail) => bet.altLineId === 0);
-
-      const spreadsToanTran =
-        keoChinhToanTran &&
-        item.bets.spreads
-          .filter(
-            (bet: IBetDetail) =>
-              bet.number === 0 &&
-              (bet.hdp === (keoChinhToanTran?.hdp || 0) - 0.25 ||
-                bet.altLineId === 0 ||
-                bet.hdp === (keoChinhToanTran.hdp || 0) + 0.25) // bỏ dòng này lấy ra tất cả
-          )
-          .slice(0, 3);
-
-      const spreadsHiep1 =
-        keoChinhHiep1 &&
-        item.bets.spreads
-          .filter(
-            (bet: IBetDetail) =>
-              bet.number === 1 &&
-              (bet.hdp === (keoChinhHiep1.hdp || 0) - 0.25 ||
-                bet.altLineId === 0 ||
-                bet.hdp === (keoChinhHiep1.hdp || 0) + 0.25) // bỏ dòng này lấy ra tất cả
-          )
-          .slice(0, 3);
-
-      const spreadsTaiXiu =
-        keoChinhTaiXiu &&
-        item.bets.totals
-          .filter(
-            (bet: IBetDetail) =>
-              bet.points === (keoChinhTaiXiu.points || 0) - 0.25 ||
-              bet.altLineId === 0 ||
-              bet.points === (keoChinhTaiXiu.points || 0) + 0.25 // bỏ dòng này lấy ra tất cả
-          )
-          .slice(0, 3);
-
-      return [
-        {
-          name_Odds: "Kèo cược chấp - Toàn trận",
-          detail:
-            spreadsToanTran &&
-            spreadsToanTran.map((spread: IBetDetail) => [
-              {
-                name: item.home,
-                rate_odds: spread.hdp,
-                value: spread.home,
-              },
-              {
-                name: item.away,
-                rate_odds: spread.hdp === 0 ? 0 : spread.hdp ?? 0 >= 0 ? -(spread.hdp ?? 0) : Math.abs(spread.hdp ?? 0),
-                value: spread.away,
-              },
-            ]),
-        },
-        {
-          name_Odds: "Kèo cược chấp - Hiệp 1",
-          detail:
-            spreadsHiep1 &&
-            spreadsHiep1.map((spread: IBetDetail) => [
-              {
-                name: item.home,
-                rate_odds: spread.hdp,
-                value: spread.home,
-              },
-              {
-                name: item.away,
-                rate_odds: spread.hdp === 0 ? 0 : spread.hdp ?? 0 >= 0 ? -(spread.hdp ?? 0) : Math.abs(spread.hdp ?? 0),
-                value: spread.away,
-              },
-            ]),
-        },
-        {
-          name_Odds: "Kèo tài xỉu - Toàn trận",
-          detail:
-            spreadsTaiXiu &&
-            spreadsTaiXiu.map((total: IBetDetail) => [
-              { name: "Tài", rate_odds: total.points, value: total.over },
-              { name: "Xỉu", rate_odds: total.points, value: total.under },
-            ]),
-        },
-      ];
-    })
-    .flat();
-};
-
-export default function OddsDetail({}) {
-  const [odds, setOdds] = useState<IOddsDetail[]>([]);
-  const [latestOdds, setLatestOdds] = useState<IOddsDetail[]>([]);
+export default function OddsDetail({
+  odds,
+  live,
+  oddsStatus,
+}: {
+  odds: IOddsDetail[];
+  live: boolean;
+  oddsStatus: OddsStatusType;
+}) {
   const [openItems, setOpenItems] = useState(["item-1", "item-2", "item-3"]);
-  const [live, setLive] = useState(false);
-  const [oddsStatus, setOddsStatus] = useState<OddsStatusType>({});
 
   const handleValueChange = (value: string[]) => {
     setOpenItems(value);
   };
-  const updateOddsStatus = (newOddsStatus: OddsStatusType) => {
-    setOddsStatus(newOddsStatus);
-  };
-  // useEffect chỉ để fetch và set dữ liệu lần đầu tiên
-  useEffect(() => {
-    async function fetchAndSetInitialOdds() {
-      const newData = await fetchOddsData();
-      const transformedData = transformData(newData);
-      setOdds(transformedData as unknown as IOddsDetail[]);
-      setLatestOdds(transformedData as unknown as IOddsDetail[]);
-      setLive(newData[0].liveStatus);
-    }
-
-    fetchAndSetInitialOdds();
-  }, []);
-
-  // useEffect để fetch và cập nhật dữ liệu sau mỗi 5 giây, bắt đầu sau lần render đầu tiên
-  useEffect(() => {
-    async function fetchAndUpdateOdds() {
-      const newData = await fetchOddsData();
-      const transformedData = transformData(newData);
-
-      const newOddsStatus: OddsStatusType = {};
-      latestOdds.forEach((latestOdd, index) => {
-        latestOdd.detail.forEach((latestDetail, detailIndex) => {
-          latestDetail.forEach((latestOddDetail, oddDetailIndex) => {
-            const key = `${index}-${detailIndex}-${oddDetailIndex}`;
-            const oldValue = odds[index]?.detail[detailIndex][oddDetailIndex]?.value;
-            const newValue = latestOddDetail.value;
-            if (newValue > oldValue) {
-              newOddsStatus[key] = "green";
-            } else if (newValue < oldValue) {
-              newOddsStatus[key] = "red";
-            } else {
-              newOddsStatus[key] = "none";
-            }
-          });
-        });
-      });
-
-      setOdds(latestOdds);
-      setLatestOdds(transformedData as unknown as IOddsDetail[]);
-      setLive(newData[0].liveStatus);
-      setOddsStatus(newOddsStatus);
-    }
-
-    const intervalId = setInterval(fetchAndUpdateOdds, 5000);
-    return () => clearInterval(intervalId);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [latestOdds]);
 
   return (
     <>
@@ -239,10 +99,12 @@ function RenderAccordion({
   const [oddsName, setOddsName] = useState<String>("");
   const [keyItemSelect, setKeyItemSelect] = useState<number[]>([]);
   const [isInitialized, setIsInitialized] = useState(false);
-  const [showGreenAnimation, setShowGreenAnimation] = useState(false);
-  const [showRedAnimation, setShowRedAnimation] = useState(false);
-  const [showBlink, setShowBlink] = useState(false);
   const [statusKey, setStatusKey] = useState<string>("");
+  const [animationState, setAnimationState] = useState({
+    showGreen: false,
+    showRed: false,
+    showBlink: false,
+  });
 
   const handleSelectTeam = (statusKey: string, team: IOdds, oddsName: string) => {
     const keyArray = statusKey.split("-").map(Number);
@@ -251,22 +113,21 @@ function RenderAccordion({
     setSelectedTeam(team);
     setOddsName(oddsName);
   };
-  console.log("oldStatus", oddsStatus);
   useEffect(() => {
-    setShowBlink(true);
+    setAnimationState((prevState) => ({ ...prevState, showBlink: true }));
     setTimeout(() => {
-      setShowBlink(false);
+      setAnimationState((prevState) => ({ ...prevState, showBlink: false }));
     }, 1500);
 
     if (oddsStatus[statusKey] === "green") {
-      setShowGreenAnimation(true);
+      setAnimationState((prevState) => ({ ...prevState, showGreen: true }));
       setTimeout(() => {
-        setShowGreenAnimation(false);
+        setAnimationState((prevState) => ({ ...prevState, showGreen: false }));
       }, 1500);
     } else if (oddsStatus[statusKey] === "red") {
-      setShowRedAnimation(true);
+      setAnimationState((prevState) => ({ ...prevState, showRed: true }));
       setTimeout(() => {
-        setShowRedAnimation(false);
+        setAnimationState((prevState) => ({ ...prevState, showRed: false }));
       }, 1500);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -308,7 +169,7 @@ function RenderAccordion({
                           key={teamIndex}
                           onClick={() => handleSelectTeam(statusKey, team, oddsGroup.name_Odds)}
                         >
-                          {showBlink && (
+                          {animationState.showBlink && (
                             <>
                               <m.div
                                 className="absolute rotate-[45deg] right-0 top-[2px] transform translate-y-1/2 w-0 h-0 border-l-6 border-l-transparent border-r-6 border-r-transparent border-b-[6px] border-b-green-500"
@@ -385,13 +246,13 @@ function RenderAccordion({
                   >
                     {!valueSelectNew ? selectedTeam?.value : valueSelectNew}
                   </p>
-                  {showGreenAnimation ? (
+                  {animationState.showGreen ? (
                     <m.div
                       className="w-0 h-0 border-l-8 border-l-transparent border-r-8 border-r-transparent border-b-[9px] border-b-green-500"
                       animate={{ opacity: [0, 1, 0], rotate: [0] }}
                       transition={{ duration: 0.5, repeat: Infinity }}
                     ></m.div>
-                  ) : showRedAnimation ? (
+                  ) : animationState.showRed ? (
                     <m.div
                       className="transform translate-y-1/2 w-0 h-0 border-l-8 border-l-transparent border-r-8 border-r-transparent border-t-[8px] border-t-red-500"
                       animate={{ opacity: [0, 1, 0], rotate: [0] }}
@@ -400,12 +261,14 @@ function RenderAccordion({
                   ) : null}
                 </div>
               </div>
-              {selectedTeam && valueSelectNew && (
-                <div className="flex flex-row gap-2 w-full  text-yellow-400 pt-4">
-                  <Icon icon="icon-park-solid:attention" className=" w-5" />
-                  <p className="text-[12px] w-full ">{`Tỷ lệ cược đã thay đổi từ ${selectedTeam.value} thành ${valueSelectNew}`}</p>
-                </div>
-              )}
+              <div className="flex flex-row gap-2 w-full  text-yellow-400 pt-4 h-5">
+                {selectedTeam && valueSelectNew && (
+                  <>
+                    <Icon icon="icon-park-solid:attention" className=" w-5" />
+                    <p className="text-[12px] w-full ">{`Tỷ lệ cược đã thay đổi từ ${selectedTeam.value} thành ${valueSelectNew}`}</p>
+                  </>
+                )}
+              </div>
             </div>
           </div>
           <DrawerFooter>

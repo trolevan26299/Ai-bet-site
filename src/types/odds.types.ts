@@ -52,3 +52,5 @@ export type IOddsDetail = {
   name_Odds: string;
   detail: IOdds[][];
 };
+
+export type OddsStatusType = Record<string, "green" | "red" | "none">;

@@ -2,25 +2,12 @@
 
 "use client";
 
-import { fetchOddsData } from "@/api/odds";
 import { IMatchData } from "@/types/odds.types";
 import { convertToGMT7 } from "@/utils/time";
 import { Icon } from "@iconify/react";
 import Image from "next/image";
-import { useEffect, useState } from "react";
 
-export default function ScreenInfoMatch({}) {
-  const [dataScreenInfo, setDataScreenInfo] = useState<IMatchData[]>([]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const response: IMatchData[] = await fetchOddsData();
-      setDataScreenInfo(response);
-    };
-
-    fetchData();
-  }, []);
-
+export default function ScreenInfoMatch({ dataScreenInfo }: { dataScreenInfo: IMatchData[] }) {
   return (
     <div className="relative pb-2 ">
       <img src="/assets/bg_team.jpg" alt="Stadium" className="w-full h-auto" />
