@@ -44,6 +44,7 @@ export default function HomeView() {
     }
 
     fetchAndSetInitialOdds();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   useEffect(() => {
     // Simulate loading time

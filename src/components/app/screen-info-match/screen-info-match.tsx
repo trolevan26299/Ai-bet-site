@@ -26,6 +26,7 @@ export default function ScreenInfoMatch({ dataScreenInfo }: { dataScreenInfo: IM
               alt="team home Logo"
               width={48}
               height={48}
+              loading="lazy"
             />
           )}
         </div>
@@ -45,14 +46,14 @@ export default function ScreenInfoMatch({ dataScreenInfo }: { dataScreenInfo: IM
                 style={{ backgroundColor: "rgba(255,255,255,0.1)", border: "1px solid rgba(255,255,255,0.4)" }}
                 className="h-10 w-11 flex items-center justify-center rounded-[10px]"
               >
-                <p className="font-[600] text-[20px] text-[#fafafa] ">{dataScreenInfo[0].homeScore}</p>
+                <p className="font-[600] text-[20px] text-[#fafafa] ">{dataScreenInfo[0]?.homeScore || 0}</p>
               </div>
               <p className="px-2 font-bold text-lg text-[#fafafa]">:</p>
               <div
                 style={{ backgroundColor: "rgba(255,255,255,0.1)", border: "1px solid rgba(255,255,255,0.4)" }}
                 className="h-10 w-11 flex items-center justify-center rounded-[10px]"
               >
-                <p className="font-[600] text-[20px] text-[#fafafa] ">{dataScreenInfo[0].awayScore}</p>
+                <p className="font-[600] text-[20px] text-[#fafafa] ">{dataScreenInfo[0].awayScore || 0}</p>
               </div>
               <div className="flex flex-row justify-center gap-1 items-center w-[35px] ml-2 text-white font-bold">
                 <div className="bg-red-600 w-2 h-3" />
@@ -64,11 +65,11 @@ export default function ScreenInfoMatch({ dataScreenInfo }: { dataScreenInfo: IM
           <div className="col-span-6 flex flex-col items-center justify-center text-gray-300 mt-6 gap-3">
             {dataScreenInfo[0]?.starts && (
               <span className="text-sm text-[rgba(255,230,101,1)] font-[600]">
-                {convertToGMT7(dataScreenInfo[0]?.starts, "date")}
+                {convertToGMT7(dataScreenInfo[0]?.starts, "date") || 0}
               </span>
             )}
             <span className="text-sm text-[#fafafa] font-[600]">
-              {convertToGMT7(dataScreenInfo[0]?.starts, "time")}
+              {convertToGMT7(dataScreenInfo[0]?.starts, "time") || 0}
             </span>
           </div>
         )}
@@ -83,6 +84,7 @@ export default function ScreenInfoMatch({ dataScreenInfo }: { dataScreenInfo: IM
               className="flex flex-row justify-start"
               width={48}
               height={48}
+              loading="lazy"
             />
           )}
         </div>

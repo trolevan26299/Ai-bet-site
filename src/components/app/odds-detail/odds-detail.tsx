@@ -284,7 +284,7 @@ function RenderAccordion({
             <DrawerClose>
               <Button
                 variant="link"
-                className="w-full rounded-full text-text-light font-medium"
+                className="w-full rounded-full text-text-light font-medium no-underline mb-2"
                 style={{
                   border: "solid 1px #41576f",
                 }}
