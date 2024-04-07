@@ -108,6 +108,7 @@ function RenderAccordion({
     showBlink: false,
   });
   const handleCloseApp = () => {
+    console.log("aaaaaaaaaa");
     telegram.webApp?.close();
   };
 
