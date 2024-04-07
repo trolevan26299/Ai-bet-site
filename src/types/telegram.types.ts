@@ -6,13 +6,6 @@ export interface ITelegramUser {
   username: string;
   language_code: string;
 }
-export interface Window {
-  Telegram: {
-    WebApp: {
-      close: () => void;
-    };
-  };
-}
 
 export interface IWebApp {
   initData: string;
@@ -21,6 +14,9 @@ export interface IWebApp {
     user: ITelegramUser;
     auth_date: string;
     hash: string;
+  };
+  WebApp: {
+    close: () => void;
   };
   version: string;
   platform: string;

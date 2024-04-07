@@ -16,6 +16,7 @@ import { Icon } from "@iconify/react";
 import { m } from "framer-motion";
 import { useEffect, useState } from "react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../../ui/accordion";
+import { TelegramContext, useTelegram } from "@/context/telegram.provider";
 
 interface ITeamDetail {
   name: string;
@@ -100,14 +101,16 @@ function RenderAccordion({
   const [keyItemSelect, setKeyItemSelect] = useState<number[]>([]);
   const [isInitialized, setIsInitialized] = useState(false);
   const [statusKey, setStatusKey] = useState<string>("");
+  const telegram = useTelegram();
   const [animationState, setAnimationState] = useState({
     showGreen: false,
     showRed: false,
     showBlink: false,
   });
   const handleCloseApp = () => {
-    window.close(); // Đóng ứng dụng web
+    telegram.webApp?.WebApp.close();
   };
+
   const handleSelectTeam = (statusKey: string, team: IOdds, oddsName: string) => {
     const keyArray = statusKey.split("-").map(Number);
     setKeyItemSelect(keyArray);
@@ -215,12 +218,12 @@ function RenderAccordion({
             </AccordionContent>
           </AccordionItem>
         ))}
-        <DrawerContent className="bg-backgroundColor-main rounded-t-3xl ">
+        <DrawerContent className="bg-backgroundColor-main  w-full">
           <DrawerHeader>
             <DrawerTitle className="text-[20px] text-left text-text-light">Thông tin kèo đã chọn</DrawerTitle>
           </DrawerHeader>
           <div className=" py-4 px-4 mt-[-10px]">
-            <div className="col-span-10 text-gray-300  flex flex-row items-center">
+            <div className="col-span-10 text-gray-300  flex flex-row items-center ">
               <Icon icon="ph:soccer-ball-fill" width="20px" height="20px" />
               {live && (
                 <Icon icon="fluent:live-20-filled" className="ml-1" width={20} height={20} color="rgba(255,69,58,1)" />
