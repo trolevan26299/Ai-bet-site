@@ -36,7 +36,7 @@ export default function ScreenInfoMatch({ dataScreenInfo }: { dataScreenInfo: IM
             <div className="flex flex-row items-center gap-1 pr-1">
               <Icon icon="fluent:live-20-filled" width={25} height={23} color="rgba(255,69,58,1)" />
               <p className="font-[600] text-sm text-[rgba(255,230,101,1)] ">
-                {`${dataScreenInfo[0].liveMinute}’  ${
+                {`${dataScreenInfo[0].liveMinute}  ${
                   dataScreenInfo[0].liveScope === "first half"
                     ? "Hiệp 1"
                     : dataScreenInfo[0].liveScope === "half time"
