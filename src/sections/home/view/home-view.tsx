@@ -61,9 +61,9 @@ export default function HomeView() {
       const transformedData = transformData(newData);
 
       const newOddsStatus: OddsStatusType = {};
-      latestOdds.forEach((latestOdd, index) => {
-        latestOdd.detail.forEach((latestDetail, detailIndex) => {
-          latestDetail.forEach((latestOddDetail, oddDetailIndex) => {
+      latestOdds?.forEach((latestOdd, index) => {
+        latestOdd.detail?.forEach((latestDetail, detailIndex) => {
+          latestDetail?.forEach((latestOddDetail, oddDetailIndex) => {
             const key = `${index}-${detailIndex}-${oddDetailIndex}`;
             const oldValue = odds[index]?.detail[detailIndex][oddDetailIndex]?.value;
             const newValue = latestOddDetail.value;
