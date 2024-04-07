@@ -85,7 +85,7 @@ export default function HomeView() {
       setOddsStatus(newOddsStatus);
     }
 
-    const intervalId = setInterval(fetchAndUpdateOdds, 15000);
+    const intervalId = setInterval(fetchAndUpdateOdds, 5000);
     return () => clearInterval(intervalId);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [latestOdds]);
