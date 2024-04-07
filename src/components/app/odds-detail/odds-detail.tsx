@@ -194,7 +194,7 @@ function RenderAccordion({
                               }}
                               className="col-span-9 text-gray-300  text-sm font-medium text-text-noActive overflow-hidden whitespace-nowrap"
                             >
-                              {team.rate_odds >= 0 ? `(${team.rate_odds})` : team.rate_odds} {team.name}
+                              {`(${team.rate_odds})`} {team.name}
                             </div>
                             <div className=" col-span-3 text-end flex items-center justify-end text-sm font-medium text-text-red ">
                               {team.value && (
@@ -283,7 +283,6 @@ function RenderAccordion({
 
             <DrawerClose>
               <Button
-                variant="link"
                 className="w-full rounded-full text-text-light font-medium no-underline mb-2"
                 style={{
                   border: "solid 1px #41576f",
