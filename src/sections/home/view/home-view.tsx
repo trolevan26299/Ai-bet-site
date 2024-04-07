@@ -8,6 +8,7 @@ import { useSearchParams } from "next/navigation";
 import { IMatchData, IOddsDetail, OddsStatusType } from "@/types/odds.types";
 import { transformData } from "@/utils/transformDataOdds";
 import { useEffect, useState } from "react";
+import { SplashScreen } from "@/components/loading-screen";
 
 export default function HomeView() {
   const searchParams = useSearchParams();
@@ -17,6 +18,7 @@ export default function HomeView() {
   const [live, setLive] = useState(false);
   const [oddsStatus, setOddsStatus] = useState<OddsStatusType>({});
   const [dataScreenInfo, setDataScreenInfo] = useState<IMatchData[]>([]);
+  const [loading, setLoading] = useState(true);
 
   const matchParam = searchParams.get("match");
   const payload = {
@@ -42,6 +44,14 @@ export default function HomeView() {
     }
 
     fetchAndSetInitialOdds();
+  }, []);
+  useEffect(() => {
+    // Simulate loading time
+    const timeout = setTimeout(() => {
+      setLoading(false);
+    }, 4000);
+
+    return () => clearTimeout(timeout);
   }, []);
   // useEffect để fetch và cập nhật dữ liệu sau mỗi 5 giây, bắt đầu sau lần render đầu tiên
   useEffect(() => {
@@ -74,14 +84,20 @@ export default function HomeView() {
       setOddsStatus(newOddsStatus);
     }
 
-    const intervalId = setInterval(fetchAndUpdateOdds, 5000);
+    const intervalId = setInterval(fetchAndUpdateOdds, 15000);
     return () => clearInterval(intervalId);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [latestOdds]);
   return (
     <MainLayout>
-      <ScreenInfoMatch dataScreenInfo={dataScreenInfo} />
-      <OddsDetail odds={odds} live={live} oddsStatus={oddsStatus} />
+      {loading ? (
+        <SplashScreen />
+      ) : (
+        <>
+          <ScreenInfoMatch dataScreenInfo={dataScreenInfo} />
+          <OddsDetail odds={odds} live={live} oddsStatus={oddsStatus} />
+        </>
+      )}
     </MainLayout>
   );
 }
