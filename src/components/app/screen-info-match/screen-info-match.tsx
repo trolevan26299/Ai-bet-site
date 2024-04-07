@@ -35,9 +35,15 @@ export default function ScreenInfoMatch({ dataScreenInfo }: { dataScreenInfo: IM
           <div className="col-span-6 flex flex-col items-center justify-center text-gray-300">
             <div className="flex flex-row items-center gap-1 pr-1">
               <Icon icon="fluent:live-20-filled" width={25} height={23} color="rgba(255,69,58,1)" />
-              <p className="font-[600] text-sm text-[rgba(255,230,101,1)] ">{`${dataScreenInfo[0].liveMinute}’ Hiệp ${
-                dataScreenInfo[0].liveScope === "first half" ? 1 : 2
-              }`}</p>
+              <p className="font-[600] text-sm text-[rgba(255,230,101,1)] ">
+                {`${dataScreenInfo[0].liveMinute}’ Hiệp ${
+                  dataScreenInfo[0].liveScope === "first half"
+                    ? 1
+                    : dataScreenInfo[0].liveScope === "half time"
+                    ? "Hết hiệp 1"
+                    : 2
+                }`}
+              </p>
             </div>
             <div className="flex justify-center items-center pt-3">
               <div className="flex flex-row justify-center gap-1 items-center w-[40px] text-white font-bold mr-2">
