@@ -113,7 +113,7 @@ function RenderAccordion({
   };
 
   const handleSelectTeam = (statusKey: string, team: IOdds, oddsName: string) => {
-    const keyArray = statusKey.split("-").map(Number);
+    const keyArray = statusKey.split("-")?.map(Number);
     setKeyItemSelect(keyArray);
     setStatusKey(statusKey);
     setSelectedTeam(team);
@@ -166,8 +166,8 @@ function RenderAccordion({
             <AccordionContent>
               <DrawerTrigger asChild>
                 <div className="grid grid-cols-2 gap-[6px]">
-                  {oddsGroup?.detail.map((match: any, matchIndex: number) => {
-                    return match.map((team: IOdds, teamIndex: number) => {
+                  {oddsGroup?.detail?.map((match: any, matchIndex: number) => {
+                    return match?.map((team: IOdds, teamIndex: number) => {
                       const statusKey = `${index}-${matchIndex}-${teamIndex}`;
                       return (
                         <div
