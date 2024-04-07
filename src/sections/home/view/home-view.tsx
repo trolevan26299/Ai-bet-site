@@ -4,21 +4,36 @@ import { fetchOddsData } from "@/api/odds";
 import OddsDetail from "@/components/app/odds-detail/odds-detail";
 import ScreenInfoMatch from "@/components/app/screen-info-match/screen-info-match";
 import MainLayout from "@/layouts/main/layout";
+import { useSearchParams } from "next/navigation";
 import { IMatchData, IOddsDetail, OddsStatusType } from "@/types/odds.types";
 import { transformData } from "@/utils/transformDataOdds";
 import { useEffect, useState } from "react";
 
 export default function HomeView() {
+  const searchParams = useSearchParams();
+
   const [odds, setOdds] = useState<IOddsDetail[]>([]);
   const [latestOdds, setLatestOdds] = useState<IOddsDetail[]>([]);
   const [live, setLive] = useState(false);
   const [oddsStatus, setOddsStatus] = useState<OddsStatusType>({});
   const [dataScreenInfo, setDataScreenInfo] = useState<IMatchData[]>([]);
 
+  const matchParam = searchParams.get("match");
+  const payload = {
+    request_id: searchParams.get("request_id"),
+    match: matchParam ? matchParam.split(",") : [],
+    time: searchParams.get("time") || "next_week",
+    league: searchParams.get("league"),
+    game_type: "",
+    game_detail: "",
+    game_scope: "",
+    filter_by: "and",
+  };
+
   // useEffect chỉ để fetch và set dữ liệu lần đầu tiên
   useEffect(() => {
     async function fetchAndSetInitialOdds() {
-      const newData: IMatchData[] = await fetchOddsData();
+      const newData: IMatchData[] = await fetchOddsData(payload);
       const transformedData = transformData(newData);
       setDataScreenInfo(newData);
       setOdds(transformedData as unknown as IOddsDetail[]);
@@ -31,7 +46,7 @@ export default function HomeView() {
   // useEffect để fetch và cập nhật dữ liệu sau mỗi 5 giây, bắt đầu sau lần render đầu tiên
   useEffect(() => {
     async function fetchAndUpdateOdds() {
-      const newData = await fetchOddsData();
+      const newData = await fetchOddsData(payload);
       const transformedData = transformData(newData);
 
       const newOddsStatus: OddsStatusType = {};

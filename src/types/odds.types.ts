@@ -54,3 +54,14 @@ export type IOddsDetail = {
 };
 
 export type OddsStatusType = Record<string, "green" | "red" | "none">;
+
+export type IPayloadFetchOddsData = {
+  request_id: string | null;
+  match: string[];
+  time: string;
+  league: string | null;
+  game_type: string;
+  game_detail: string;
+  game_scope: string;
+  filter_by: string;
+};
