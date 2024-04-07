@@ -105,7 +105,9 @@ function RenderAccordion({
     showRed: false,
     showBlink: false,
   });
-
+  const handleCloseApp = () => {
+    window.close(); // Đóng ứng dụng web
+  };
   const handleSelectTeam = (statusKey: string, team: IOdds, oddsName: string) => {
     const keyArray = statusKey.split("-").map(Number);
     setKeyItemSelect(keyArray);
@@ -274,6 +276,7 @@ function RenderAccordion({
           <DrawerFooter>
             <Button
               className="h-11 flex flex-col justify-center rounded-full font-medium"
+              onClick={handleCloseApp}
               style={{
                 backgroundColor: "#006EF8",
               }}
