@@ -15,9 +15,7 @@ export interface IWebApp {
     auth_date: string;
     hash: string;
   };
-  WebApp: {
-    close: () => void;
-  };
+  close: () => void;
   version: string;
   platform: string;
   colorScheme: string;

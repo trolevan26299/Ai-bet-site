@@ -108,7 +108,7 @@ function RenderAccordion({
     showBlink: false,
   });
   const handleCloseApp = () => {
-    telegram.webApp?.WebApp.close();
+    telegram.webApp?.close();
   };
 
   const handleSelectTeam = (statusKey: string, team: IOdds, oddsName: string) => {
