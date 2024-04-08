@@ -40,7 +40,7 @@ export default function ScreenInfoMatch({ dataScreenInfo }: { dataScreenInfo: IM
                   dataScreenInfo[0].liveScope === "first half"
                     ? "Hiệp 1"
                     : dataScreenInfo[0].liveScope === "half time"
-                    ? "Đang giải lao"
+                    ? "Nghỉ giữa hiệp"
                     : "Hiệp 2"
                 }`}
               </p>
@@ -98,7 +98,7 @@ export default function ScreenInfoMatch({ dataScreenInfo }: { dataScreenInfo: IM
         </div>
         <div className="flex flex-row justify-between col-span-12 mt-[-25px]">
           <span className="text-[#fff] py-3 text-sm font-[600] ml-0 w-[48%] flex-wrap">{dataScreenInfo[0]?.home}</span>
-          <span className="text-[#fff] py-3 text-sm font-[600] mr-0 w-[48%] flex flex-row justify-end flex-wrap">
+          <span className="text-[#fff] py-3 text-sm font-[600] mr-0 w-[48%] flex flex-row justify-end flex-wrap text-right whitespace-nowrap overflow-hidden text-overflow-ellipsis">
             {dataScreenInfo[0]?.away}
           </span>
         </div>
