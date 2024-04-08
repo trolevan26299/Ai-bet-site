@@ -1,5 +1,6 @@
 "use client";
 
+import { betConfirm } from "@/api/odds";
 import { Button } from "@/components/ui/button";
 import {
   Drawer,
@@ -11,14 +12,14 @@ import {
   DrawerTrigger,
 } from "@/components/ui/drawer";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { IBetConfirm, IMatchData, IOdds, IOddsDetail, OddsStatusType } from "@/types/odds.types";
+import { useTelegram } from "@/context/telegram.provider";
+import { IMatchData, IOdds, IOddsDetail, OddsStatusType } from "@/types/odds.types";
 import { Icon } from "@iconify/react";
+import { ReloadIcon } from "@radix-ui/react-icons";
 import { m } from "framer-motion";
+import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../../ui/accordion";
-import { TelegramContext, useTelegram } from "@/context/telegram.provider";
-import { betConfirm } from "@/api/odds";
-import { useSearchParams } from "next/navigation";
 
 export default function OddsDetail({
   odds,
@@ -111,7 +112,9 @@ function RenderAccordion({
     showRed: false,
     showBlink: false,
   });
+  const [disableBtn, setDisableBtn] = useState(false);
   const handleCloseApp = async () => {
+    setDisableBtn(true);
     const data = {
       league_name: dataScreenInfo.league_name,
       team: dataScreenInfo.team,
@@ -136,13 +139,13 @@ function RenderAccordion({
       data: JSON.stringify(data),
     };
     const response = await betConfirm(body);
+    setDisableBtn(false);
     if (response) {
       telegram?.webApp?.close();
     }
   };
 
   const handleSelectTeam = (statusKey: string, team: IOdds, oddsName: string) => {
-    console.log("--------------------------------------");
     const keyArray = statusKey.split("-")?.map(Number);
     setKeyItemSelect(keyArray);
     setStatusKey(statusKey);
@@ -320,11 +323,13 @@ function RenderAccordion({
 
             <DrawerClose>
               <Button
+                disabled={disableBtn}
                 className="w-full rounded-full text-text-light font-medium no-underline mb-2 bg-backgroundColor-main"
                 style={{
                   border: "solid 1px #41576f",
                 }}
               >
+                <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
                 Hủy
               </Button>
             </DrawerClose>
