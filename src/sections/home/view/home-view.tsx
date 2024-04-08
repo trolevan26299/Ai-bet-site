@@ -50,16 +50,6 @@ export default function HomeView() {
     fetchAndSetInitialOdds();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  // useEffect(() => {
-  //   // Simulate loading time
-  //   const timeout = setTimeout(() => {
-  //     telegram.webApp?.expand();
-  //     setLoading(false);
-  //   }, 4000);
-
-  //   return () => clearTimeout(timeout);
-  // }, []);
-  // useEffect để fetch và cập nhật dữ liệu sau mỗi 5 giây, bắt đầu sau lần render đầu tiên
   useEffect(() => {
     async function fetchAndUpdateOdds() {
       const newData = await fetchOddsData(payload);
