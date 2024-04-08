@@ -163,6 +163,10 @@ function RenderAccordion({
     const selectedOddsKey = `${keyItemSelect[0]}-${keyItemSelect[1]}-${keyItemSelect[2]}`;
     const selectedOddsStatus = oddsStatus[selectedOddsKey];
 
+    if (odds[keyItemSelect[0]]?.detail[keyItemSelect[1]][keyItemSelect[2]]?.value !== selectedTeam?.value) {
+      setValueSelectNew(odds[keyItemSelect[0]]?.detail[keyItemSelect[1]][keyItemSelect[2]]?.value);
+    }
+
     if (selectedOddsStatus === "green") {
       setAnimationState((prevState) => ({ ...prevState, showGreen: true }));
       setTimeout(() => {
@@ -177,15 +181,15 @@ function RenderAccordion({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [oddsStatus]);
 
-  useEffect(() => {
-    if (odds[keyItemSelect[0]]?.detail[keyItemSelect[1]][keyItemSelect[2]]?.value !== selectedTeam?.value) {
-      setValueSelectNew(odds[keyItemSelect[0]]?.detail[keyItemSelect[1]][keyItemSelect[2]]?.value);
-    }
-    // if (!isInitialized) {
-    //   setIsInitialized(true);
-    // }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [oddsStatus]);
+  // useEffect(() => {
+  //   if (odds[keyItemSelect[0]]?.detail[keyItemSelect[1]][keyItemSelect[2]]?.value !== selectedTeam?.value) {
+  //     setValueSelectNew(odds[keyItemSelect[0]]?.detail[keyItemSelect[1]][keyItemSelect[2]]?.value);
+  //   }
+  // if (!isInitialized) {
+  //   setIsInitialized(true);
+  // }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [oddsStatus]);
   // if (!isInitialized) {
   //   return null;
   // }
