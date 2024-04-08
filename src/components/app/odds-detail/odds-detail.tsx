@@ -313,7 +313,7 @@ function RenderAccordion({
           <DrawerFooter>
             <Button
               disabled={disableBtn}
-              className="h-11 flex flex-col justify-center rounded-full font-medium"
+              className="h-11 rounded-full font-medium text-text-light"
               onClick={handleCloseApp}
               style={{
                 backgroundColor: "#006EF8",
