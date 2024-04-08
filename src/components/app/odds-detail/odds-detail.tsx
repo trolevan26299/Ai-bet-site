@@ -147,10 +147,10 @@ function RenderAccordion({
   };
 
   const handleSelectTeam = (statusKey: string, team: IOdds, oddsName: string) => {
+    setSelectedTeam(team);
     const keyArray = statusKey.split("-")?.map(Number);
     setKeyItemSelect(keyArray);
     setStatusKey(statusKey);
-    setSelectedTeam(team);
     setOddsName(oddsName);
   };
   useEffect(() => {
@@ -181,7 +181,7 @@ function RenderAccordion({
     //   setIsInitialized(true);
     // }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [odds]);
+  }, [oddsStatus]);
   // if (!isInitialized) {
   //   return null;
   // }
