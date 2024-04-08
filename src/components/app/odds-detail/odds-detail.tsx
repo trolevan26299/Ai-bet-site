@@ -142,6 +142,7 @@ function RenderAccordion({
   };
 
   const handleSelectTeam = (statusKey: string, team: IOdds, oddsName: string) => {
+    console.log("--------------------------------------");
     const keyArray = statusKey.split("-")?.map(Number);
     setKeyItemSelect(keyArray);
     setStatusKey(statusKey);
