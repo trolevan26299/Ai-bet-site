@@ -148,6 +148,7 @@ function RenderAccordion({
 
   const handleSelectTeam = (statusKey: string, team: IOdds, oddsName: string) => {
     setSelectedTeam(team);
+    setValueSelectNew(undefined);
     const keyArray = statusKey.split("-")?.map(Number);
     setKeyItemSelect(keyArray);
     setStatusKey(statusKey);
@@ -159,12 +160,15 @@ function RenderAccordion({
       setAnimationState((prevState) => ({ ...prevState, showBlink: false }));
     }, 1500);
 
-    if (oddsStatus[statusKey] === "green") {
+    const selectedOddsKey = `${keyItemSelect[0]}-${keyItemSelect[1]}-${keyItemSelect[2]}`;
+    const selectedOddsStatus = oddsStatus[selectedOddsKey];
+
+    if (selectedOddsStatus === "green") {
       setAnimationState((prevState) => ({ ...prevState, showGreen: true }));
       setTimeout(() => {
         setAnimationState((prevState) => ({ ...prevState, showGreen: false }));
       }, 1500);
-    } else if (oddsStatus[statusKey] === "red") {
+    } else if (selectedOddsStatus === "red") {
       setAnimationState((prevState) => ({ ...prevState, showRed: true }));
       setTimeout(() => {
         setAnimationState((prevState) => ({ ...prevState, showRed: false }));
