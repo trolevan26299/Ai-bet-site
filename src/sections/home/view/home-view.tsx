@@ -44,12 +44,14 @@ export default function HomeView() {
       setOdds(transformedData as unknown as IOddsDetail[]);
       setLatestOdds(transformedData as unknown as IOddsDetail[]);
       setLive(newData[0].liveStatus);
+      telegram.webApp?.expand();
       setLoading(false);
     }
 
     fetchAndSetInitialOdds();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
   useEffect(() => {
     async function fetchAndUpdateOdds() {
       const newData = await fetchOddsData(payload);
