@@ -11,27 +11,25 @@ import {
   DrawerTrigger,
 } from "@/components/ui/drawer";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { IOdds, IOddsDetail, OddsStatusType } from "@/types/odds.types";
+import { IBetConfirm, IMatchData, IOdds, IOddsDetail, OddsStatusType } from "@/types/odds.types";
 import { Icon } from "@iconify/react";
 import { m } from "framer-motion";
 import { useEffect, useState } from "react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../../ui/accordion";
 import { TelegramContext, useTelegram } from "@/context/telegram.provider";
-
-interface ITeamDetail {
-  name: string;
-  rate_odds: number;
-  value: number;
-}
+import { betConfirm } from "@/api/odds";
+import { useSearchParams } from "next/navigation";
 
 export default function OddsDetail({
   odds,
   live,
   oddsStatus,
+  dataScreenInfo,
 }: {
   odds: IOddsDetail[];
   live: boolean;
   oddsStatus: OddsStatusType;
+  dataScreenInfo: IMatchData[];
 }) {
   const [openItems, setOpenItems] = useState(["item-1", "item-2", "item-3"]);
 
@@ -55,6 +53,7 @@ export default function OddsDetail({
             openItems={openItems}
             oddsStatus={oddsStatus}
             onValueChange={handleValueChange}
+            dataScreenInfo={dataScreenInfo[0]}
           />
         </TabsContent>
 
@@ -65,6 +64,7 @@ export default function OddsDetail({
             openItems={openItems}
             oddsStatus={oddsStatus}
             onValueChange={handleValueChange}
+            dataScreenInfo={dataScreenInfo[0]}
           />
         </TabsContent>
 
@@ -75,6 +75,7 @@ export default function OddsDetail({
             openItems={openItems}
             oddsStatus={oddsStatus}
             onValueChange={handleValueChange}
+            dataScreenInfo={dataScreenInfo[0]}
           />
         </TabsContent>
       </Tabs>
@@ -88,14 +89,17 @@ function RenderAccordion({
   openItems,
   onValueChange,
   oddsStatus,
+  dataScreenInfo,
 }: {
   odds: IOddsDetail[];
   live: boolean;
   openItems: string[];
   onValueChange: (value: string[]) => void;
   oddsStatus: OddsStatusType;
+  dataScreenInfo: IMatchData;
 }) {
-  const [selectedTeam, setSelectedTeam] = useState<ITeamDetail | null>(null);
+  const searchParams = useSearchParams();
+  const [selectedTeam, setSelectedTeam] = useState<IOdds | null>(null);
   const [valueSelectNew, setValueSelectNew] = useState<number | undefined>(undefined);
   const [oddsName, setOddsName] = useState<String>("");
   const [keyItemSelect, setKeyItemSelect] = useState<number[]>([]);
@@ -107,8 +111,34 @@ function RenderAccordion({
     showRed: false,
     showBlink: false,
   });
-  const handleCloseApp = () => {
-    telegram.webApp?.close();
+  const handleCloseApp = async () => {
+    const data = {
+      league_name: dataScreenInfo.league_name,
+      team: dataScreenInfo.team,
+      last_updated_odd: dataScreenInfo.last_updated_odd,
+      liveStatus: dataScreenInfo.liveStatus,
+      liveMinute: dataScreenInfo.liveMinute,
+      liveScope: dataScreenInfo.liveScope,
+      starts: dataScreenInfo.starts,
+      home: dataScreenInfo.home,
+      away: dataScreenInfo.away,
+      game_type: oddsName === "Kèo tài xỉu - Toàn trận" ? "over under" : "handicap",
+      game_detail: selectedTeam?.rate_odds as number,
+      game_scope: oddsName === "Kèo cược chấp - Toàn trận" ? "full time" : "first half",
+      odds: selectedTeam?.value as number,
+      game_orientation: selectedTeam?.game_orientation as string,
+      eventId: selectedTeam?.eventId as number,
+      lineId: selectedTeam?.lineId as number,
+      altLineId: selectedTeam?.altLineId as number,
+    };
+    const body = {
+      request_id: searchParams.get("request_id") || "",
+      data: JSON.stringify(data),
+    };
+    const response = await betConfirm(body);
+    if (response) {
+      telegram?.webApp?.close();
+    }
   };
 
   const handleSelectTeam = (statusKey: string, team: IOdds, oddsName: string) => {

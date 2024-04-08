@@ -12,6 +12,6 @@ export default axiosInstance;
 
 // --------------------------ENDPONTS --------------------------------------------
 export const endpoints = {
-  game: "api/game",
+  game: "bot/game",
   match: "search/match",
 };

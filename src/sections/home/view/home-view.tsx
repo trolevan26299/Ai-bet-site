@@ -96,7 +96,7 @@ export default function HomeView() {
       ) : (
         <div className="p-3">
           <ScreenInfoMatch dataScreenInfo={dataScreenInfo} />
-          <OddsDetail odds={odds} live={live} oddsStatus={oddsStatus} />
+          <OddsDetail odds={odds} live={live} oddsStatus={oddsStatus} dataScreenInfo={dataScreenInfo} />
         </div>
       )}
     </MainLayout>

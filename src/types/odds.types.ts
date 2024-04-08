@@ -47,6 +47,10 @@ export type IOdds = {
   name: string;
   rate_odds: number;
   value: number;
+  game_orientation: string;
+  eventId: number;
+  lineId: number;
+  altLineId: number;
 };
 export type IOddsDetail = {
   name_Odds: string;
@@ -64,4 +68,28 @@ export type IPayloadFetchOddsData = {
   game_detail: string;
   game_scope: string;
   filter_by: string;
+};
+
+type IDataBetConfirm = {
+  league_name: string;
+  team: string[];
+  last_updated_odd: string;
+  liveStatus: boolean;
+  liveMinute: string;
+  liveScope: string;
+  starts: string;
+  home: string;
+  away: string;
+  game_type: string;
+  game_detail: number;
+  game_scope: string;
+  odds: number;
+  game_orientation: string;
+  eventId: number;
+  lineId: number;
+  altLineId: number;
+};
+export type IBetConfirm = {
+  request_id: string;
+  data: IDataBetConfirm;
 };
