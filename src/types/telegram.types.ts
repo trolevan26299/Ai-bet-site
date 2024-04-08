@@ -16,6 +16,7 @@ export interface IWebApp {
     hash: string;
   };
   close: () => void;
+  expand: () => void;
   version: string;
   platform: string;
   colorScheme: string;

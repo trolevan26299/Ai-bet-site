@@ -9,6 +9,7 @@ import { IMatchData, IOddsDetail, OddsStatusType } from "@/types/odds.types";
 import { transformData } from "@/utils/transformDataOdds";
 import { useEffect, useState } from "react";
 import { SplashScreen } from "@/components/loading-screen";
+import { useTelegram } from "@/context/telegram.provider";
 
 export default function HomeView() {
   const searchParams = useSearchParams();
@@ -19,6 +20,7 @@ export default function HomeView() {
   const [oddsStatus, setOddsStatus] = useState<OddsStatusType>({});
   const [dataScreenInfo, setDataScreenInfo] = useState<IMatchData[]>([]);
   const [loading, setLoading] = useState(true);
+  const telegram = useTelegram();
 
   const matchParam = searchParams.get("match");
   const payload = {
@@ -49,6 +51,7 @@ export default function HomeView() {
   useEffect(() => {
     // Simulate loading time
     const timeout = setTimeout(() => {
+      telegram.webApp?.expand();
       setLoading(false);
     }, 4000);
 
