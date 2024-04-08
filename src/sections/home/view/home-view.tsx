@@ -37,26 +37,28 @@ export default function HomeView() {
   // useEffect chỉ để fetch và set dữ liệu lần đầu tiên
   useEffect(() => {
     async function fetchAndSetInitialOdds() {
+      setLoading(true);
       const newData: IMatchData[] = await fetchOddsData(payload);
       const transformedData = transformData(newData);
       setDataScreenInfo(newData);
       setOdds(transformedData as unknown as IOddsDetail[]);
       setLatestOdds(transformedData as unknown as IOddsDetail[]);
       setLive(newData[0].liveStatus);
+      setLoading(false);
     }
 
     fetchAndSetInitialOdds();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  useEffect(() => {
-    // Simulate loading time
-    const timeout = setTimeout(() => {
-      telegram.webApp?.expand();
-      setLoading(false);
-    }, 4000);
+  // useEffect(() => {
+  //   // Simulate loading time
+  //   const timeout = setTimeout(() => {
+  //     telegram.webApp?.expand();
+  //     setLoading(false);
+  //   }, 4000);
 
-    return () => clearTimeout(timeout);
-  }, []);
+  //   return () => clearTimeout(timeout);
+  // }, []);
   // useEffect để fetch và cập nhật dữ liệu sau mỗi 5 giây, bắt đầu sau lần render đầu tiên
   useEffect(() => {
     async function fetchAndUpdateOdds() {
