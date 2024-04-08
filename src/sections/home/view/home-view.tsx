@@ -61,9 +61,9 @@ export default function HomeView() {
       const transformedData = transformData(newData);
 
       const newOddsStatus: OddsStatusType = {};
-      latestOdds.forEach((latestOdd, index) => {
-        latestOdd.detail.forEach((latestDetail, detailIndex) => {
-          latestDetail.forEach((latestOddDetail, oddDetailIndex) => {
+      latestOdds?.forEach((latestOdd, index) => {
+        latestOdd.detail?.forEach((latestDetail, detailIndex) => {
+          latestDetail?.forEach((latestOddDetail, oddDetailIndex) => {
             const key = `${index}-${detailIndex}-${oddDetailIndex}`;
             const oldValue = odds[index]?.detail[detailIndex][oddDetailIndex]?.value;
             const newValue = latestOddDetail.value;
@@ -85,7 +85,7 @@ export default function HomeView() {
       setOddsStatus(newOddsStatus);
     }
 
-    const intervalId = setInterval(fetchAndUpdateOdds, 15000);
+    const intervalId = setInterval(fetchAndUpdateOdds, 5000);
     return () => clearInterval(intervalId);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [latestOdds]);
