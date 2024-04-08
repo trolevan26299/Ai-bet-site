@@ -312,24 +312,24 @@ function RenderAccordion({
           </div>
           <DrawerFooter>
             <Button
+              disabled={disableBtn}
               className="h-11 flex flex-col justify-center rounded-full font-medium"
               onClick={handleCloseApp}
               style={{
                 backgroundColor: "#006EF8",
               }}
             >
+              {disableBtn && <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />}
               Xác nhận
             </Button>
 
             <DrawerClose>
               <Button
-                disabled={disableBtn}
                 className="w-full rounded-full text-text-light font-medium no-underline mb-2 bg-backgroundColor-main"
                 style={{
                   border: "solid 1px #41576f",
                 }}
               >
-                <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
                 Hủy
               </Button>
             </DrawerClose>
