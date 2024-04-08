@@ -104,7 +104,7 @@ function RenderAccordion({
   const [valueSelectNew, setValueSelectNew] = useState<number | undefined>(undefined);
   const [oddsName, setOddsName] = useState<String>("");
   const [keyItemSelect, setKeyItemSelect] = useState<number[]>([]);
-  const [isInitialized, setIsInitialized] = useState(false);
+  // const [isInitialized, setIsInitialized] = useState(false);
   const [statusKey, setStatusKey] = useState<string>("");
   const telegram = useTelegram();
   const [animationState, setAnimationState] = useState({
@@ -113,7 +113,8 @@ function RenderAccordion({
     showBlink: false,
   });
   const [disableBtn, setDisableBtn] = useState(false);
-  const handleCloseApp = async () => {
+
+  const handleConfirmBet = async () => {
     setDisableBtn(true);
     const data = {
       league_name: dataScreenInfo.league_name,
@@ -176,14 +177,14 @@ function RenderAccordion({
     if (odds[keyItemSelect[0]]?.detail[keyItemSelect[1]][keyItemSelect[2]]?.value !== selectedTeam?.value) {
       setValueSelectNew(odds[keyItemSelect[0]]?.detail[keyItemSelect[1]][keyItemSelect[2]]?.value);
     }
-    if (!isInitialized) {
-      setIsInitialized(true);
-    }
+    // if (!isInitialized) {
+    //   setIsInitialized(true);
+    // }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [odds, isInitialized]);
-  if (!isInitialized) {
-    return null;
-  }
+  }, [odds]);
+  // if (!isInitialized) {
+  //   return null;
+  // }
 
   return (
     <Drawer
@@ -314,7 +315,7 @@ function RenderAccordion({
             <Button
               disabled={disableBtn}
               className="h-11 rounded-full font-medium text-text-light"
-              onClick={handleCloseApp}
+              onClick={handleConfirmBet}
               style={{
                 backgroundColor: "#006EF8",
               }}
