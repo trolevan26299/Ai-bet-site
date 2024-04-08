@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 import { Theme } from "@radix-ui/themes";
 import "./globals.css";
 import "@radix-ui/themes/styles.css";
-import { MotionLazy } from "@/components/animate/motion-lazy";
+// import { MotionLazy } from "@/components/animate/motion-lazy";
 import { TelegramProvider } from "@/context/telegram.provider";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -23,7 +23,9 @@ export default function RootLayout({
       <body className={inter.className}>
         <TelegramProvider>
           <Theme>
-            <MotionLazy>{children}</MotionLazy>
+            {/* <MotionLazy> */}
+            {children}
+            {/* </MotionLazy> */}
           </Theme>
         </TelegramProvider>
       </body>
