@@ -9,8 +9,8 @@ import Image from "next/image";
 
 export default function ScreenInfoMatch({ dataScreenInfo }: { dataScreenInfo: IMatchData[] }) {
   return (
-    <div className="relative pb-2 ">
-      <img src="/assets/bg_team.jpg" alt="Stadium" className="w-full h-auto" />
+    <div className="relative pb-2 min-h-[200px]">
+      <Image src="/assets/bg_team.jpg" alt="Stadium" className="w-full h-auto" loading="lazy" />
 
       <div className="absolute inset-0 grid grid-cols-12 items-start justify-center px-4 pt-2">
         <div className="col-span-12 text-gray-300  flex flex-row items-center pt-1">
