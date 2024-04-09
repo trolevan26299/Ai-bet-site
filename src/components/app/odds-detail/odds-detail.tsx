@@ -41,7 +41,7 @@ export default function OddsDetail({
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-      if (currentScrollY >= 200) {
+      if (currentScrollY >= 180) {
         setIsSticky(true);
       } else {
         setIsSticky(false);
@@ -57,7 +57,7 @@ export default function OddsDetail({
   return (
     <>
       <Tabs defaultValue="1" className="w-full">
-        <TabsList className={`w-full gap-3 justify-between ${isSticky ? "fixed top-0" : ""}`}>
+        <TabsList className={`w-full gap-3 justify-between ${isSticky ? "fixed top-0 bg-backgroundColor-main" : ""}`}>
           <TabsTrigger value="1">Tất cả kèo</TabsTrigger>
           <TabsTrigger value="2">Kèo cược chấp</TabsTrigger>
           <TabsTrigger value="3">Kèo tài xỉu </TabsTrigger>
