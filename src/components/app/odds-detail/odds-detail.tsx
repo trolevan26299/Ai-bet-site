@@ -71,7 +71,7 @@ export default function OddsDetail({
 
         <TabsContent value="3">
           <RenderAccordion
-            odds={[odds[2]]}
+            odds={[odds[2], odds[3]]}
             live={live}
             openItems={openItems}
             oddsStatus={oddsStatus}
@@ -105,7 +105,7 @@ function RenderAccordion({
   const [oddsName, setOddsName] = useState<String>("");
   const [keyItemSelect, setKeyItemSelect] = useState<number[]>([]);
   // const [isInitialized, setIsInitialized] = useState(false);
-  const [statusKey, setStatusKey] = useState<string>("");
+  // const [statusKey, setStatusKey] = useState<string>("");
   const telegram = useTelegram();
   const [animationState, setAnimationState] = useState({
     showGreen: false,
@@ -151,7 +151,7 @@ function RenderAccordion({
     setValueSelectNew(undefined);
     const keyArray = statusKey.split("-")?.map(Number);
     setKeyItemSelect(keyArray);
-    setStatusKey(statusKey);
+    // setStatusKey(statusKey);
     setOddsName(oddsName);
   };
   useEffect(() => {

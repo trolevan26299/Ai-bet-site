@@ -17,7 +17,7 @@ const HistoryItem = ({ dataDetail, type }: { dataDetail: any; type: string }) =>
           <Icon icon="ph:soccer-ball-fill" width="16" color="#fafafa" />
           {dataDetail.isLive && <Icon icon="fluent:live-20-filled" width={20} height={16} color="rgba(255,69,58,1)" />}
           <p className="text-sm text-text-main font-semibold">
-            {dataDetail.nameGame} / {dataDetail.isLive && "Trực tiếp"}
+            {dataDetail.nameGame} / {dataDetail.isLive && "Trực tiếp"} {dataDetail.game}
           </p>
         </div>
       </div>
