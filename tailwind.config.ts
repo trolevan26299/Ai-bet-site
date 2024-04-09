@@ -33,6 +33,7 @@ const config = {
       colors: {
         text: {
           DEFAULT: "#111827",
+          main: "#fafafa",
           light: "#f9fafb",
           green: "#34C759",
           red: "#ff453a",

@@ -1,4 +1,4 @@
-import { HomeView } from "@/sections/home/view";
+import { HomeView } from "@/sections/odds";
 
 export const metadata = {
   title: "Home",

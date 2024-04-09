@@ -118,6 +118,31 @@ export const transformData = (data: IMatchData[]) => {
               },
             ]),
         },
+        {
+          name_Odds: "Kèo tài xỉu - Hiệp 1",
+          detail:
+            spreadsTaiXiu &&
+            spreadsTaiXiu.map((total: IBetDetail) => [
+              {
+                name: "Tài",
+                rate_odds: total.points,
+                value: total.over,
+                game_orientation: "over",
+                eventId: total.eventId,
+                lineId: total.lineId,
+                altLineId: total.altLineId,
+              },
+              {
+                name: "Xỉu",
+                rate_odds: total.points,
+                value: total.under,
+                game_orientation: "under",
+                eventId: total.eventId,
+                lineId: total.lineId,
+                altLineId: total.altLineId,
+              },
+            ]),
+        },
       ];
     })
     .flat();

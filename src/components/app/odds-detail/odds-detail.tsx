@@ -44,7 +44,7 @@ export default function OddsDetail({
         <TabsList className="w-full gap-3 justify-between">
           <TabsTrigger value="1">Tất cả kèo</TabsTrigger>
           <TabsTrigger value="2">Kèo cược chấp</TabsTrigger>
-          <TabsTrigger value="3">Kèo tài xỉu</TabsTrigger>
+          <TabsTrigger value="3">Kèo tài xỉu </TabsTrigger>
         </TabsList>
 
         <TabsContent value="1">
@@ -128,7 +128,7 @@ function RenderAccordion({
       away: dataScreenInfo.away,
       game_type: oddsName === "Kèo tài xỉu - Toàn trận" ? "over under" : "handicap",
       game_detail: selectedTeam?.rate_odds as number,
-      game_scope: oddsName === "Kèo cược chấp - Toàn trận" ? "full time" : "first half",
+      game_scope: oddsName === "Kèo cược chấp - Toàn trận" || "Kèo tài xỉu - Toàn trận" ? "full time" : "first half",
       odds: selectedTeam?.value as number,
       game_orientation: selectedTeam?.game_orientation as string,
       eventId: selectedTeam?.eventId as number,

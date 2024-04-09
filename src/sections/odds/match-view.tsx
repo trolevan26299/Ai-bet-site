@@ -11,7 +11,7 @@ import { useEffect, useState } from "react";
 import { SplashScreen } from "@/components/loading-screen";
 import { useTelegram } from "@/context/telegram.provider";
 
-export default function HomeView() {
+export default function MatchView() {
   const searchParams = useSearchParams();
 
   const [odds, setOdds] = useState<IOddsDetail[]>([]);
