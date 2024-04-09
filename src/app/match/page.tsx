@@ -12,7 +12,6 @@ export default function Home() {
   useEffect(() => {
     if (telegram.webApp) {
       telegram.webApp.headerColor = "rgba(18,32,46,1)";
-      telegram.webApp.backgroundColor = "rgba(18,32,46,1)";
     }
   }, []);
   return <HomeView />;
