@@ -3,11 +3,15 @@
 import { Tabs, TabsContent, TabsList, TabsTriggerHistory } from "@/components/ui/tabs";
 import MainLayout from "@/layouts/main/layout";
 import { Icon } from "@iconify/react";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import HistoryOutstanding from "../history-outstanding";
 import HistoryWinLoss from "../history-winloss";
+import { useTelegram } from "@/context/telegram.provider";
+import { SplashScreen } from "@/components/loading-screen";
 
 const HistoryView = () => {
+  const telegram = useTelegram();
+  const [loading, setLoading] = useState(true);
   const historyData = [
     {
       betId: 2758686862,
@@ -115,30 +119,41 @@ const HistoryView = () => {
       starts: "12-4-2024",
     },
   ];
+  useEffect(() => {
+    telegram.webApp?.expand();
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 3000);
+    return () => clearTimeout(timer);
+  }, []);
   return (
     <MainLayout>
-      <Tabs defaultValue="1" className="w-full h-[95%]">
-        <TabsList
-          className="w-full rounded-none h-[46px] flex flex-grow justify-between fixed top-0 bg-backgroundColor-main"
-          style={{ borderBottom: "1px solid #223a76" }}
-        >
-          <TabsTriggerHistory value="1" className="flex flex-grow justify-start pl-2">
-            <Icon icon="mingcute:time-fill" className="mr-1 text-[#f7b502]" /> Cược đang chờ
-          </TabsTriggerHistory>
-          <TabsTriggerHistory value="2" className="pr-2">
-            <Icon icon="lets-icons:flag-finish" className="mr-1 text-[#ff453a]" />
-            Cược đã kết thúc
-          </TabsTriggerHistory>
-        </TabsList>
+      {loading ? (
+        <SplashScreen />
+      ) : (
+        <Tabs defaultValue="1" className="w-full h-[95%]">
+          <TabsList
+            className="w-full rounded-none h-[46px] flex flex-grow justify-between fixed top-0 bg-backgroundColor-main"
+            style={{ borderBottom: "1px solid #223a76" }}
+          >
+            <TabsTriggerHistory value="1" className="flex flex-grow justify-start pl-2">
+              <Icon icon="mingcute:time-fill" className="mr-1 text-[#f7b502]" /> Cược đang chờ
+            </TabsTriggerHistory>
+            <TabsTriggerHistory value="2" className="pr-2">
+              <Icon icon="lets-icons:flag-finish" className="mr-1 text-[#ff453a]" />
+              Cược đã kết thúc
+            </TabsTriggerHistory>
+          </TabsList>
 
-        <TabsContent value="1">
-          <HistoryOutstanding historyData={historyData.filter((item: any) => item.betList === "RUNNING")} />
-        </TabsContent>
+          <TabsContent value="1">
+            <HistoryOutstanding historyData={historyData.filter((item: any) => item.betList === "RUNNING")} />
+          </TabsContent>
 
-        <TabsContent value="2">
-          <HistoryWinLoss historyData={historyData.filter((item: any) => item.betList === "SETTLED")} />
-        </TabsContent>
-      </Tabs>
+          <TabsContent value="2">
+            <HistoryWinLoss historyData={historyData.filter((item: any) => item.betList === "SETTLED")} />
+          </TabsContent>
+        </Tabs>
+      )}
     </MainLayout>
   );
 };
