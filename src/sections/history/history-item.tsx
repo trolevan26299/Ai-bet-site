@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import React from "react";
 import { Icon } from "@iconify/react";
 
-const HistoryItem = ({ dataDetail, type }: { dataDetail: any; type: string }) => {
+const HistoryItem = ({ dataDetail, type }: { dataDetail: any; type?: string }) => {
   return (
     <div className="h-[288px] rounded-[10px] bg-[rgba(40,55,74,0.5)] p-2 w-full mt-3 font-sans">
       <div className="flex flex-row items-center justify-between  pb-1" style={{ borderBottom: "1px solid #223a76" }}>

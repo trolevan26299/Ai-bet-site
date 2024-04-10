@@ -11,21 +11,37 @@ import { addDays, format } from "date-fns";
 import { DateRange } from "react-day-picker";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
+import { locale } from "@/utils/configCenlendarToVN";
 
 const HistoryWinLoss = ({ historyData }: { historyData: any[] }) => {
   const [date, setDate] = React.useState<DateRange | undefined>({
-    from: new Date(2022, 0, 20),
-    to: addDays(new Date(2022, 0, 20), 20),
+    from: new Date(),
+    // to: addDays(new Date(2022, 0, 20), 20),
   });
+  const setRange = (days: number) => {
+    const from = new Date();
+    const to = addDays(from, -days);
+    setDate({ from, to });
+  };
   return (
     <div className="mt-12 px-3">
       <Tabs defaultValue="1" className="w-full">
         <TabsList className="scrollable-tabs w-full rounded-none h-[46px] flex flex-grow justify-between  bg-backgroundColor-main overflow-x-scroll scroll-smooth">
-          <TabsTriggerDate value="1">Hôm nay</TabsTriggerDate>
-          <TabsTriggerDate value="2">Hôm qua</TabsTriggerDate>
-          <TabsTriggerDate value="3">7 ngày trước </TabsTriggerDate>
-          <TabsTriggerDate value="4">14 ngày trước</TabsTriggerDate>
-          <TabsTriggerDate value="5">30 ngày trước</TabsTriggerDate>
+          <TabsTriggerDate value="1" onClick={() => setDate({ from: new Date() })}>
+            Hôm nay
+          </TabsTriggerDate>
+          <TabsTriggerDate value="2" onClick={() => setRange(1)}>
+            Hôm qua
+          </TabsTriggerDate>
+          <TabsTriggerDate value="3" onClick={() => setRange(7)}>
+            7 ngày trước
+          </TabsTriggerDate>
+          <TabsTriggerDate value="4" onClick={() => setRange(14)}>
+            14 ngày trước
+          </TabsTriggerDate>
+          <TabsTriggerDate value="5" onClick={() => setRange(30)}>
+            30 ngày trước
+          </TabsTriggerDate>
         </TabsList>
       </Tabs>
       <div className="grid gap-2 w-full">
@@ -42,48 +58,65 @@ const HistoryWinLoss = ({ historyData }: { historyData: any[] }) => {
               {date?.from ? (
                 date.to ? (
                   <>
-                    {format(date.from, "dd LLL, y")} - {format(date.to, "dd LLL, y")}
+                    {format(date.from, "dd/MM/y")} - {format(date.to, "dd/MM/y")}
                   </>
                 ) : (
-                  format(date.from, "LLL dd, y")
+                  format(date.from, "dd/MM/y")
                 )
               ) : (
-                <span>Pick a date</span>
+                <span>Vui lòng chọn ngày</span>
               )}
-              <CalendarIcon className="mr-2 h-4 w-4" />
+              <CalendarIcon className="mr-2 h-5 w-5" />
             </Button>
           </PopoverTrigger>
-          <PopoverContent className="p-0 w-full bg-[#28374a] text-text-main" align="center">
+          <PopoverContent className="p-0 w-full" align="center">
             <Calendar
-              className="w-full"
+              className="w-full rounded-2xl"
               initialFocus
               mode="range"
               defaultMonth={date?.from}
               selected={date}
               onSelect={setDate}
               numberOfMonths={1}
+              locale={locale}
             />
           </PopoverContent>
         </Popover>
       </div>
-      {/* <div className="flex flex-grow items-center text-text-main w-full">
-          <div className="flex flex-grow items-center justify-start">
+      <div className="flex flex-row gap-2  w-full  text-[#ffe665] pt-1 h-5 item-start">
+        <Icon icon="icon-park-solid:attention" className="w-5 mt-1" />
+        <p className="text-[12px] w-full ">Bạn chỉ có thể xem dữ liệu từ 30 ngày trước, dựa trên múi giờ GMT-04:00.</p>
+      </div>
+      <div className="flex flex-col justify-start items-start text-[#fafafa] pt-7">
+        <div className="flex flex-grow justify-between items-center w-full">
+          <div className="flex flex-grow items-center justify-start w-1/2">
             <p className="text-sm font-normal pr-1">Tổng cược :</p>
             <p className="text-base font-medium">5.00</p>
           </div>
           <div className="flex flex-grow items-center justify-end">
+            <p className="text-sm font-normal pr-1">Thắng/Thua :</p>
+            <p className="text-base font-medium text-[#ff453a]">-1.5</p>
+          </div>
+        </div>
+        <div className="flex flex-grow justify-between items-center w-full">
+          <div className="flex flex-grow items-center justify-start  w-1/2">
             <p className="text-sm font-normal pr-1">Tổng vé :</p>
             <p className="text-base font-medium">5</p>
           </div>
-        </div> */}
+          <div className="flex flex-grow items-center justify-end">
+            <p className="text-sm font-normal pr-1">Tổng hoa hồng :</p>
+            <p className="text-base font-medium">1.2</p>
+          </div>
+        </div>
+      </div>
 
-      {/* <div className="px-3 h-full">
-        <div className="mt-[100px] pb-3">
+      <div className="h-full">
+        <div className="pb-3">
           {historyData.map((item: any) => {
-            return <HistoryItem key={item.betId} dataDetail={item} type="outstanding" />;
+            return <HistoryItem key={item.betId} dataDetail={item} />;
           })}
         </div>
-      </div> */}
+      </div>
     </div>
   );
 };
