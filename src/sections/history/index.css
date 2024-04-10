@@ -1,0 +1,10 @@
+/* styles.css */
+.scrollable-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollable-tabs {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  overflow-x: scroll;
+}

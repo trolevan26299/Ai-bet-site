@@ -49,6 +49,21 @@ const TabsTriggerHistory = React.forwardRef<
 ));
 TabsTriggerHistory.displayName = TabsPrimitive.Trigger.displayName;
 
+const TabsTriggerDate = React.forwardRef<
+  React.ElementRef<typeof TabsPrimitive.Trigger>,
+  React.ComponentPropsWithoutRef<typeof TabsPrimitive.Trigger>
+>(({ className, ...props }, ref) => (
+  <TabsPrimitive.Trigger
+    ref={ref}
+    className={cn(
+      "inline-flex w-35 items-center justify-center whitespace-nowrap rounded-3xl px-4 py-1.5 text-sm font-medium  transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50  data-[state=active]:text-foreground data-[state=active]:shadow-sm data-[state=active]:text-[#fafafa] data-[state=active]:bg-[#006ef8]",
+      className
+    )}
+    {...props}
+  />
+));
+TabsTriggerDate.displayName = TabsPrimitive.Trigger.displayName;
+
 const TabsContent = React.forwardRef<
   React.ElementRef<typeof TabsPrimitive.Content>,
   React.ComponentPropsWithoutRef<typeof TabsPrimitive.Content>
@@ -64,4 +79,4 @@ const TabsContent = React.forwardRef<
 ));
 TabsContent.displayName = TabsPrimitive.Content.displayName;
 
-export { Tabs, TabsList, TabsTrigger, TabsContent, TabsTriggerHistory };
+export { Tabs, TabsList, TabsTrigger, TabsContent, TabsTriggerHistory, TabsTriggerDate };
