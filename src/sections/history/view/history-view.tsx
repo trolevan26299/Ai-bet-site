@@ -120,11 +120,13 @@ const HistoryView = () => {
     },
   ];
   useEffect(() => {
-    telegram.webApp?.expand();
     const timer = setTimeout(() => {
       setLoading(false);
     }, 3000);
     return () => clearTimeout(timer);
+  }, []);
+  useEffect(() => {
+    telegram.webApp?.expand();
   }, []);
   return (
     <MainLayout>
