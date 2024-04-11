@@ -9,6 +9,7 @@ import { useEffect } from "react";
 // };
 export default function History() {
   const telegram = useTelegram();
+  console.log("telegram", telegram);
   useEffect(() => {
     if (telegram.webApp) {
       telegram.webApp.headerColor = "rgba(18,32,46,1)";
