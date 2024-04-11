@@ -11,6 +11,7 @@ import { SplashScreen } from "@/components/loading-screen";
 
 const HistoryView = () => {
   const telegram = useTelegram();
+  console.log("telegram----------------------:", telegram);
   const [loading, setLoading] = useState(true);
   const historyData = [
     {
@@ -127,6 +128,7 @@ const HistoryView = () => {
   }, []);
   useEffect(() => {
     telegram.webApp?.expand();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <MainLayout>

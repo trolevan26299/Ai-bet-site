@@ -8,13 +8,5 @@ import { useEffect } from "react";
 //   title: "Home",
 // };
 export default function History() {
-  const telegram = useTelegram();
-  console.log("telegram", telegram);
-  useEffect(() => {
-    if (telegram.webApp) {
-      telegram.webApp.headerColor = "rgba(18,32,46,1)";
-      console.log("telegram.webApp", telegram.webApp);
-    }
-  }, []);
   return <HistoryView />;
 }
