@@ -10,6 +10,7 @@ const HistoryOutstanding = ({ historyData }: { historyData: any[] }) => {
   const telegram = useTelegram();
 
   const [historyOutStanding, setHistoryOutStanding] = React.useState<IHistoryBet[]>([]);
+  console.log("historyOutStanding", historyOutStanding);
   const fetchBetHistory = async (user_id: number) => {
     const params = {
       betList: "RUNNING",
@@ -49,7 +50,7 @@ const HistoryOutstanding = ({ historyData }: { historyData: any[] }) => {
           </div>
           <div className="flex flex-grow items-center justify-end">
             <p className="text-sm font-normal pr-1">Tổng vé :</p>
-            <p className="text-base font-medium">5</p>
+            <p className="text-base font-medium">{historyOutStanding.length}</p>
           </div>
         </div>
       </div>
