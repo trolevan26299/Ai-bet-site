@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import HistoryItem from "./history-item";
+import axios from "axios";
 
 const HistoryOutstanding = ({ historyData }: { historyData: any[] }) => {
   // hàm dùng để lấy ra dữ liệu lịch sử cược outstanding của tài khoản
@@ -10,17 +11,17 @@ const HistoryOutstanding = ({ historyData }: { historyData: any[] }) => {
     const authToken = btoa(`${username}:${password}`);
 
     try {
-      const response = await fetch(url, {
+      const response = await axios.get(url, {
         headers: {
           Authorization: `Basic ${authToken}`,
         },
       });
 
-      if (!response.ok) {
-        throw new Error("Request failed with status " + response.status);
+      if (!response) {
+        throw new Error("Request failed with status ");
       }
 
-      const data = await response.json();
+      const data = await response;
       // Handle your data here
       console.log(data);
     } catch (error) {
