@@ -89,7 +89,7 @@ export default function MatchView() {
   return (
     <MainLayout>
       {loading ? (
-        <div className="h-97vh">
+        <div className="h-[97vh]">
           <SplashScreen />
         </div>
       ) : (
