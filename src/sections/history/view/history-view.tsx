@@ -131,13 +131,13 @@ const HistoryView = () => {
 
   useEffect(() => {
     // Hàm này sẽ kiểm tra localStorage để tìm username và password
-    const checkUserInfo = async (userId: number) => {
+    const checkUserInfo = async (user_id: number) => {
       const storedUsername = localStorage.getItem("username");
       const storedPassword = localStorage.getItem("password");
 
       if (!storedUsername || !storedPassword) {
         try {
-          const response = await getUserInfo({ userId });
+          const response = await getUserInfo({ user_id });
           console.log("response", response);
           if (!response.ok) {
             throw new Error("Không thể lấy thông tin từ server");
