@@ -131,30 +131,30 @@ const HistoryView = () => {
   }, []);
 
   // hàm check xem đã có username và password trong localStorage chưa, nếu chưa thì lấy từ server và lưu vào localsStorage
-  useEffect(() => {
-    const checkUserInfo = async (user_id: number) => {
-      const storedUsername = localStorage.getItem("username");
-      const storedPassword = localStorage.getItem("password");
+  // useEffect(() => {
+  //   const checkUserInfo = async (user_id: number) => {
+  //     const storedUsername = localStorage.getItem("username");
+  //     const storedPassword = localStorage.getItem("password");
 
-      if (!storedUsername || !storedPassword) {
-        try {
-          const response: IUserInfo = await getUserInfo({ user_id });
-          console.log("response", response);
-          if (!response) {
-            throw new Error("Không thể lấy thông tin từ server");
-          }
+  //     if (!storedUsername || !storedPassword) {
+  //       try {
+  //         const response: IUserInfo = await getUserInfo({ user_id });
+  //         console.log("response", response);
+  //         if (!response) {
+  //           throw new Error("Không thể lấy thông tin từ server");
+  //         }
 
-          localStorage.setItem("username", response.username);
-          localStorage.setItem("password", response.password);
-        } catch (error) {
-          console.error("Có lỗi xảy ra khi lấy thông tin user:", error);
-        }
-      }
-    };
-    if (telegram?.user?.id) {
-      checkUserInfo(telegram.user.id);
-    }
-  }, [telegram?.user?.id]);
+  //         localStorage.setItem("username", response.username);
+  //         localStorage.setItem("password", response.password);
+  //       } catch (error) {
+  //         console.error("Có lỗi xảy ra khi lấy thông tin user:", error);
+  //       }
+  //     }
+  //   };
+  //   if (telegram?.user?.id) {
+  //     checkUserInfo(telegram.user.id);
+  //   }
+  // }, [telegram?.user?.id]);
 
   useEffect(() => {
     telegram.webApp?.expand();
@@ -179,7 +179,10 @@ const HistoryView = () => {
           </TabsList>
 
           <TabsContent value="1">
-            <HistoryOutstanding historyData={historyData.filter((item: any) => item.betList === "RUNNING")} />
+            <HistoryOutstanding
+              user_id={telegram?.user?.id && telegram?.user?.id}
+              historyData={historyData.filter((item: any) => item.betList === "RUNNING")}
+            />
           </TabsContent>
 
           <TabsContent value="2">

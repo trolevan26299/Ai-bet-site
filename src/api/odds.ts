@@ -1,5 +1,5 @@
 import { IBetConfirm, IPayloadFetchOddsData } from "@/types/odds.types";
-import axiosInstance, { endpoints } from "@/utils/axios";
+import { endpoints, axiosInstance } from "@/utils/axios";
 
 export const fetchOddsData = async (payload: IPayloadFetchOddsData) => {
   const response = await axiosInstance.post(endpoints.match, payload);
