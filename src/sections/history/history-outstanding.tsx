@@ -7,7 +7,7 @@ import { HOST_API_P88 } from "@/config-global";
 import { IHistoryBet } from "@/types/history.type";
 import { SplashScreen } from "@/components/loading-screen";
 
-const HistoryOutstanding = ({ historyData }: { historyData: any[] }) => {
+const HistoryOutstanding = () => {
   const telegram = useTelegram();
   const [loading, setLoading] = useState(true);
   const [historyOutStanding, setHistoryOutStanding] = useState<IHistoryBet[]>([]);
@@ -65,7 +65,7 @@ const HistoryOutstanding = ({ historyData }: { historyData: any[] }) => {
           </div>
           <div className="px-3 h-full">
             <div className="mt-[100px] pb-3">
-              {historyData.map((item: any) => {
+              {historyOutStanding.map((item: any) => {
                 return <HistoryItem key={item.betId} dataDetail={item} type="outstanding" />;
               })}
             </div>

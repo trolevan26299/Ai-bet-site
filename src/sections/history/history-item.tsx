@@ -1,16 +1,17 @@
 import { Button } from "@/components/ui/button";
 import React from "react";
 import { Icon } from "@iconify/react";
+import { IHistoryBet } from "@/types/history.type";
 
-const HistoryItem = ({ dataDetail, type }: { dataDetail: any; type?: string }) => {
+const HistoryItem = ({ dataDetail, type }: { dataDetail: IHistoryBet; type?: string }) => {
   return (
     <div className="h-[288px] rounded-[10px] bg-[rgba(40,55,74,0.5)] p-2 w-full mt-3 font-sans">
       <div className="flex flex-row items-center justify-between  pb-1" style={{ borderBottom: "1px solid #223a76" }}>
         <div className="tracking-wide">
           <p className="text-sm text-text-main">ID:{dataDetail.betId} </p>
-          <span className="text-xs text-[rgba(235,235,245,0.6)] ">{dataDetail.time}</span>
+          <span className="text-xs text-[rgba(235,235,245,0.6)] ">{dataDetail.placedAt}</span>
         </div>
-        <Button className="rounded-full w-[103px] bg-[#f7b502] h-7">Đang chạy</Button>
+        <Button className="rounded-full w-[103px] bg-[#f7b502] h-7">{type ? "Đang chạy" : "Winlose"}</Button>
       </div>
       <div style={{ borderBottom: "1px solid #223a76" }} className="pb-3">
         <div className="pb-1 ">
@@ -20,7 +21,7 @@ const HistoryItem = ({ dataDetail, type }: { dataDetail: any; type?: string }) =
               <Icon icon="fluent:live-20-filled" width={20} height={18} color="rgba(255,69,58,1)" className="mr-1" />
             )}
             <p className="text-sm text-text-main font-semibold ">
-              {dataDetail.nameGame} / {dataDetail.isLive && "Trực tiếp"}{" "}
+              {dataDetail.sportId === 29 ? "Bóng đá" : "Game"} / {dataDetail.isLive && "Trực tiếp"}{" "}
               {dataDetail.game_scope === "full time" ? "Toàn trận" : "Hiệp 1"} -{" "}
               {dataDetail.game_type === "handicap" ? "Cược chấp" : "Tài xỉu"}
             </p>
