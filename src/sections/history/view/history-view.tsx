@@ -136,7 +136,7 @@ const HistoryView = () => {
 
       if (!storedUsername || !storedPassword) {
         try {
-          const userId = telegram?.webApp?.initDataUnsafe?.user?.id;
+          const userId = telegram?.user?.id;
           if (!userId) {
             throw new Error("User ID không tồn tại trong dữ liệu init của Telegram");
           }
