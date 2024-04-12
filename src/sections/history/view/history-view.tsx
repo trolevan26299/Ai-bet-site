@@ -1,15 +1,12 @@
 "use client";
 
 import { Tabs, TabsContent, TabsList, TabsTriggerHistory } from "@/components/ui/tabs";
+import { useTelegram } from "@/context/telegram.provider";
 import MainLayout from "@/layouts/main/layout";
 import { Icon } from "@iconify/react";
-import React, { useEffect, useState } from "react";
+import { useEffect } from "react";
 import HistoryOutstanding from "../history-outstanding";
 import HistoryWinLoss from "../history-winloss";
-import { useTelegram } from "@/context/telegram.provider";
-import { SplashScreen } from "@/components/loading-screen";
-import { getUserInfo } from "@/api/history";
-import { IUserInfo } from "@/types/history.type";
 
 const HistoryView = () => {
   const telegram = useTelegram();

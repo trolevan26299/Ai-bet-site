@@ -6,11 +6,13 @@ import { useTelegram } from "@/context/telegram.provider";
 import { HOST_API_P88 } from "@/config-global";
 import { IHistoryBet } from "@/types/history.type";
 import { SplashScreen } from "@/components/loading-screen";
+import Image from "next/image";
 
 const HistoryOutstanding = () => {
   const telegram = useTelegram();
   const [loading, setLoading] = useState(true);
   const [historyOutStanding, setHistoryOutStanding] = useState<IHistoryBet[]>([]);
+  const totalBetMoney = historyOutStanding.reduce((total, item) => total + item.risk, 0);
   console.log("historyOutStanding", historyOutStanding);
   const fetchBetHistory = async (user_id: number) => {
     const params = {
@@ -55,7 +57,7 @@ const HistoryOutstanding = () => {
             <div className="flex flex-grow items-center text-text-main w-full">
               <div className="flex flex-grow items-center justify-start">
                 <p className="text-sm font-normal pr-1">Tổng cược :</p>
-                <p className="text-base font-medium">5.00</p>
+                <p className="text-base font-medium">{totalBetMoney}</p>
               </div>
               <div className="flex flex-grow items-center justify-end">
                 <p className="text-sm font-normal pr-1">Tổng vé :</p>
@@ -64,11 +66,17 @@ const HistoryOutstanding = () => {
             </div>
           </div>
           <div className="px-3 h-full">
-            <div className="mt-[100px] pb-3">
-              {historyOutStanding.map((item: any) => {
-                return <HistoryItem key={item.betId} dataDetail={item} type="outstanding" />;
-              })}
-            </div>
+            {historyOutStanding.length === 0 ? (
+              <div className="w-full h-full">
+                <Image src="/assets/no-content.png" alt="no-content" className="w-auto h-auto" />
+              </div>
+            ) : (
+              <div className="mt-[100px] pb-3">
+                {historyOutStanding.map((item: any) => {
+                  return <HistoryItem key={item.betId} dataDetail={item} type="outstanding" />;
+                })}
+              </div>
+            )}
           </div>
         </div>
       )}
