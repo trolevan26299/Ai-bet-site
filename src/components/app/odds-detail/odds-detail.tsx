@@ -124,8 +124,7 @@ function RenderAccordion({
   const [valueSelectNew, setValueSelectNew] = useState<number | undefined>(undefined);
   const [oddsName, setOddsName] = useState<String>("");
   const [keyItemSelect, setKeyItemSelect] = useState<number[]>([]);
-  // const [isInitialized, setIsInitialized] = useState(false);
-  // const [statusKey, setStatusKey] = useState<string>("");
+
   const telegram = useTelegram();
   const [animationState, setAnimationState] = useState({
     showGreen: false,
@@ -133,7 +132,7 @@ function RenderAccordion({
     showBlink: false,
   });
   const [disableBtn, setDisableBtn] = useState(false);
-
+  console.log("oddName", oddsName);
   const handleConfirmBet = async () => {
     setDisableBtn(true);
     const data = {
