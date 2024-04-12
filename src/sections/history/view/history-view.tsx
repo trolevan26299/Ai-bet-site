@@ -8,6 +8,7 @@ import HistoryOutstanding from "../history-outstanding";
 import HistoryWinLoss from "../history-winloss";
 import { useTelegram } from "@/context/telegram.provider";
 import { SplashScreen } from "@/components/loading-screen";
+import { getUserInfo } from "@/api/history";
 
 const HistoryView = () => {
   const telegram = useTelegram();
@@ -138,13 +139,7 @@ const HistoryView = () => {
           if (!userId) {
             throw new Error("User ID không tồn tại trong dữ liệu init của Telegram");
           }
-          const response = await fetch("/user/getUserInfo", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ userId }),
-          });
+          const response = await getUserInfo({ userId });
 
           if (!response.ok) {
             throw new Error("Không thể lấy thông tin từ server");
