@@ -67,9 +67,9 @@ const HistoryOutstanding = () => {
           </div>
           <div className="px-3 h-full">
             {historyOutStanding.length === 0 ? (
-              <div className="h-full  flex flex-col justify-center items-center">
+              <div className="h-[100%]  flex flex-col justify-center items-center">
                 <Image src="/assets/no-content.png" alt="no-content" className="w-[165px] h-[170px] mr-5" />
-                <p className="pt-4 text-base text-[rgba(235, 235, 245, 0.6)]">Không có vé cược nào</p>
+                <p className="pt-4 text-base text-[rgba(235, 235, 245, 0.6)] font-semibold">Không có vé cược nào</p>
               </div>
             ) : (
               <div className="mt-[100px] pb-3">
