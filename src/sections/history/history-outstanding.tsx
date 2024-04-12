@@ -27,13 +27,15 @@ const HistoryOutstanding = ({ historyData }: { historyData: any[] }) => {
         user_id,
       });
       console.log("response", response);
-      setHistoryOutStanding(response.data.straightBets);
       setLoading(false);
-      if (!response.status) {
-        throw new Error("Request failed with status ");
+      if (!response.data || response.data.error) {
+        throw new Error("Request failed");
       }
+      setHistoryOutStanding(response.data.straightBets || []);
     } catch (error) {
       console.error("Error fetching bet history:", error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -42,7 +44,7 @@ const HistoryOutstanding = ({ historyData }: { historyData: any[] }) => {
       fetchBetHistory(telegram?.user?.id);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [telegram?.user?.id]);
   return (
     <>
       {loading ? (
