@@ -179,10 +179,7 @@ const HistoryView = () => {
           </TabsList>
 
           <TabsContent value="1">
-            <HistoryOutstanding
-              user_id={telegram?.user?.id && telegram?.user?.id}
-              historyData={historyData.filter((item: any) => item.betList === "RUNNING")}
-            />
+            <HistoryOutstanding historyData={historyData.filter((item: any) => item.betList === "RUNNING")} />
           </TabsContent>
 
           <TabsContent value="2">
