@@ -9,7 +9,7 @@ import { SplashScreen } from "@/components/loading-screen";
 
 const HistoryOutstanding = ({ historyData }: { historyData: any[] }) => {
   const telegram = useTelegram();
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [historyOutStanding, setHistoryOutStanding] = useState<IHistoryBet[]>([]);
   console.log("historyOutStanding", historyOutStanding);
   const fetchBetHistory = async (user_id: number) => {
