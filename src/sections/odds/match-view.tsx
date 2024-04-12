@@ -53,45 +53,37 @@ export default function MatchView() {
   }, []);
 
   useEffect(() => {
-    let timeoutId: NodeJS.Timeout;
     async function fetchAndUpdateOdds() {
-      try {
-        const newData = await fetchOddsData(payload);
-        const transformedData = transformData(newData);
+      const newData = await fetchOddsData(payload);
+      const transformedData = transformData(newData);
 
-        const newOddsStatus: OddsStatusType = {};
-        latestOdds?.forEach((latestOdd, index) => {
-          latestOdd.detail?.forEach((latestDetail, detailIndex) => {
-            latestDetail?.forEach((latestOddDetail, oddDetailIndex) => {
-              const key = `${index}-${detailIndex}-${oddDetailIndex}`;
-              const oldValue = odds[index]?.detail[detailIndex][oddDetailIndex]?.value;
-              const newValue = latestOddDetail.value;
-              if (newValue > oldValue) {
-                newOddsStatus[key] = "green";
-              } else if (newValue < oldValue) {
-                newOddsStatus[key] = "red";
-              } else {
-                newOddsStatus[key] = "none";
-              }
-            });
+      const newOddsStatus: OddsStatusType = {};
+      latestOdds?.forEach((latestOdd, index) => {
+        latestOdd.detail?.forEach((latestDetail, detailIndex) => {
+          latestDetail?.forEach((latestOddDetail, oddDetailIndex) => {
+            const key = `${index}-${detailIndex}-${oddDetailIndex}`;
+            const oldValue = odds[index]?.detail[detailIndex][oddDetailIndex]?.value;
+            const newValue = latestOddDetail.value;
+            if (newValue > oldValue) {
+              newOddsStatus[key] = "green";
+            } else if (newValue < oldValue) {
+              newOddsStatus[key] = "red";
+            } else {
+              newOddsStatus[key] = "none";
+            }
           });
         });
+      });
 
-        setOdds(latestOdds);
-        setDataScreenInfo(newData);
-        setLatestOdds(transformedData as unknown as IOddsDetail[]);
-        setLive(newData[0].liveStatus);
-        setOddsStatus(newOddsStatus);
-      } catch (error) {
-        console.error("Failed to fetch and update odds:", error);
-      } finally {
-        // Schedule the next call
-        timeoutId = setTimeout(fetchAndUpdateOdds, 5000);
-      }
+      setOdds(latestOdds);
+      setDataScreenInfo(newData);
+      setLatestOdds(transformedData as unknown as IOddsDetail[]);
+      setLive(newData[0].liveStatus);
+      setOddsStatus(newOddsStatus);
     }
-    fetchAndUpdateOdds(); // Initial call to start the sequence
 
-    return () => clearTimeout(timeoutId);
+    const intervalId = setInterval(fetchAndUpdateOdds, 5000);
+    return () => clearInterval(intervalId);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [latestOdds]);
   return (
