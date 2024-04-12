@@ -137,18 +137,20 @@ const HistoryView = () => {
       if (!storedUsername || !storedPassword) {
         try {
           const userId = telegram?.user?.id;
-          if (!userId) {
-            throw new Error("User ID không tồn tại trong dữ liệu init của Telegram");
-          }
-          const response = await getUserInfo({ userId });
+          if (userId) {
+            if (!userId) {
+              throw new Error("User ID không tồn tại trong dữ liệu init của Telegram");
+            }
+            const response = await getUserInfo({ userId });
 
-          if (!response.ok) {
-            throw new Error("Không thể lấy thông tin từ server");
-          }
+            if (!response.ok) {
+              throw new Error("Không thể lấy thông tin từ server");
+            }
 
-          const data = await response.json();
-          localStorage.setItem("username", data.username);
-          localStorage.setItem("password", data.password);
+            const data = await response.json();
+            localStorage.setItem("username", data.username);
+            localStorage.setItem("password", data.password);
+          }
         } catch (error) {
           console.error("Có lỗi xảy ra khi lấy thông tin user:", error);
         }
