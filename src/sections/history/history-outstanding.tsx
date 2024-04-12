@@ -8,17 +8,11 @@ const HistoryOutstanding = ({ historyData }: { historyData: any[] }) => {
     console.log("username", username);
     console.log("password", password);
     const url = "https://api.p88.bet/v3/bets?betList=RUNNING&fromDate=2024-04-10T04:00:00Z&toDate=2024-04-30T03:59:59Z";
-    // const authToken = btoa(`${username}:${password}`);
-    const authToken = btoa("kenry:111qqq@Q");
-
     try {
       const response = await axios.get(url, {
-        // headers: {
-        //   Authorization: `Basic ${authToken}`,
-        // },
         auth: {
-          username: "kenry",
-          password: "111qqq@Q",
+          username,
+          password,
         },
       });
 
