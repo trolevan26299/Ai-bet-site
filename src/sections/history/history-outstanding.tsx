@@ -3,33 +3,26 @@ import HistoryItem from "./history-item";
 import axios from "axios";
 import { axiosInstance } from "@/utils/axios";
 import { useTelegram } from "@/context/telegram.provider";
+import { HOST_API_P88 } from "@/config-global";
 
-const HistoryOutstanding = ({ historyData, user_id }: { historyData: any[]; user_id?: number }) => {
+const HistoryOutstanding = ({ historyData }: { historyData: any[] }) => {
   const telegram = useTelegram();
-  // hàm dùng để lấy ra dữ liệu lịch sử cược outstanding của tài khoản
-  const fetchBetHistory = async (username: string, password: string) => {
-    const url = "https://api.p88.bet/v3/bets?betList=RUNNING&fromDate=2024-04-10T04:00:00Z&toDate=2024-04-30T03:59:59Z";
-    const authToken = btoa(`${username}:${password}`);
+  const fetchBetHistory = async (user_id: number) => {
     const params = {
       betList: "RUNNING",
       fromDate: "2024-04-10T04:00:00Z",
       toDate: "2024-04-25T03:59:59Z",
     };
+    const url = `${HOST_API_P88}?betList=RUNNING&fromDate=${params.fromDate}&toDate=${params.toDate}`;
     try {
-      if (telegram?.user?.id) {
-        const response = await axiosInstance.post("proxy/call_api", {
-          url,
-          method: "GET",
-          user_id: telegram?.user?.id,
-        });
+      const response = await axiosInstance.post("proxy/call_api", {
+        url,
+        method: "GET",
+        user_id,
+      });
 
-        if (!response) {
-          throw new Error("Request failed with status ");
-        }
-
-        console.log("response", response);
-        // Handle your data here
-        // console.log(data);
+      if (!response.status) {
+        throw new Error("Request failed with status ");
       }
     } catch (error) {
       console.error("Error fetching bet history:", error);
@@ -37,11 +30,8 @@ const HistoryOutstanding = ({ historyData, user_id }: { historyData: any[]; user
   };
 
   useEffect(() => {
-    const username = localStorage.getItem("username");
-    const password = localStorage.getItem("password");
-
-    if (username && password) {
-      fetchBetHistory(username, password);
+    if (telegram?.user?.id) {
+      fetchBetHistory(telegram?.user?.id);
     }
   }, []);
   return (
