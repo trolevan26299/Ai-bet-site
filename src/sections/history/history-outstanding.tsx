@@ -4,9 +4,12 @@ import axios from "axios";
 import { axiosInstance } from "@/utils/axios";
 import { useTelegram } from "@/context/telegram.provider";
 import { HOST_API_P88 } from "@/config-global";
+import { IHistoryBet } from "@/types/history.type";
 
 const HistoryOutstanding = ({ historyData }: { historyData: any[] }) => {
   const telegram = useTelegram();
+
+  const [historyOutStanding, setHistoryOutStanding] = React.useState<IHistoryBet[]>([]);
   const fetchBetHistory = async (user_id: number) => {
     const params = {
       betList: "RUNNING",
@@ -20,7 +23,8 @@ const HistoryOutstanding = ({ historyData }: { historyData: any[] }) => {
         method: "GET",
         user_id,
       });
-
+      console.log("response", response);
+      setHistoryOutStanding(response.data.straightBets);
       if (!response.status) {
         throw new Error("Request failed with status ");
       }
@@ -33,6 +37,7 @@ const HistoryOutstanding = ({ historyData }: { historyData: any[] }) => {
     if (telegram?.user?.id) {
       fetchBetHistory(telegram?.user?.id);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <>
