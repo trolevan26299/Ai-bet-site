@@ -89,7 +89,9 @@ export default function MatchView() {
   return (
     <MainLayout>
       {loading ? (
-        <SplashScreen />
+        <div className="h-97vh">
+          <SplashScreen />
+        </div>
       ) : (
         <div className="p-3">
           <ScreenInfoMatch dataScreenInfo={dataScreenInfo} />
