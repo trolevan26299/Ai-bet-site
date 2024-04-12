@@ -168,7 +168,7 @@ const HistoryView = () => {
         </TabsList>
 
         <TabsContent value="1">
-          <HistoryOutstanding historyData={historyData.filter((item: any) => item.betList === "RUNNING")} />
+          <HistoryOutstanding />
         </TabsContent>
 
         <TabsContent value="2">
