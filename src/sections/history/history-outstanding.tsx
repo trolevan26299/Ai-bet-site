@@ -50,7 +50,9 @@ const HistoryOutstanding = () => {
   return (
     <>
       {loading ? (
-        <SplashScreen />
+        <div className="h-[95vh]">
+          <SplashScreen />
+        </div>
       ) : (
         <div>
           <div className="fixed top-[46px] h-12 w-full flex flex-grow items-center bg-backgroundColor-main px-3">
