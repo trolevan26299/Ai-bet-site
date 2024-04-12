@@ -40,7 +40,7 @@ const HistoryItem = ({ dataDetail, type }: { dataDetail: IHistoryBet; type?: str
           <div className=" mt-3">
             <div className="flex flex-grow items-start justify-start">
               <p className="text-text-noActive text-sm w-[84px]">Cược :</p>
-              <p className="text-text-main text-sm font-semibold">5.00</p>
+              <p className="text-text-main text-sm font-semibold">{dataDetail.risk}</p>
             </div>
             <div className="flex flex-grow items-start justify-start">
               <p className="text-text-noActive text-sm w-[84px]">Mạo hiểm :</p>
@@ -53,13 +53,13 @@ const HistoryItem = ({ dataDetail, type }: { dataDetail: IHistoryBet; type?: str
           </div>
         </div>
       </div>
-      {/* <div className="flex flex-col items-start justify-start gap-1">
-        <p className="text-base text-[#34c759] font-medium pt-2">{dataDetail.league_name}</p>
+      <div className="flex flex-col items-start justify-start gap-1">
+        <p className="text-base text-[#34c759] font-medium pt-2">{dataDetail.leagueName}</p>
         <p className="text-sm text-[rgba(235,235,245,0.6)] font-normal">
           {dataDetail.team1} - vs - {dataDetail.team2}
         </p>
-        <p className="text-text-main font-normal text-sm">{dataDetail.starts}</p>
-      </div> */}
+        <p className="text-text-main font-normal text-sm">{dataDetail.eventStartTime}</p>
+      </div>
     </div>
   );
 };
