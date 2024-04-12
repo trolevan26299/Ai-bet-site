@@ -13,7 +13,6 @@ const HistoryOutstanding = ({ historyData }: { historyData: any[] }) => {
   const [historyOutStanding, setHistoryOutStanding] = useState<IHistoryBet[]>([]);
   console.log("historyOutStanding", historyOutStanding);
   const fetchBetHistory = async (user_id: number) => {
-    setLoading(true);
     const params = {
       betList: "RUNNING",
       fromDate: "2024-04-10T04:00:00Z",
@@ -21,6 +20,7 @@ const HistoryOutstanding = ({ historyData }: { historyData: any[] }) => {
     };
     const url = `${HOST_API_P88}?betList=RUNNING&fromDate=${params.fromDate}&toDate=${params.toDate}`;
     try {
+      setLoading(true);
       const response = await axiosInstance.post("proxy/call_api", {
         url,
         method: "GET",
