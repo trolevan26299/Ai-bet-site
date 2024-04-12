@@ -40,7 +40,7 @@ const HistoryItem = ({ dataDetail, type }: { dataDetail: IHistoryBet; type?: str
               {dataDetail.game_detail}
             </p> */}
             <p className="text-text-main">@</p>
-            <p className="text-[#ffe665]">{dataDetail.odds}</p>
+            {/* <p className="text-[#ffe665]">{dataDetail.odds}</p> */}
             <p className="text-text-main">({dataDetail.oddsFormat})</p>
           </div>
           <div className=" mt-3">
