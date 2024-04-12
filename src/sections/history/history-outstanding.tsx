@@ -13,8 +13,12 @@ const HistoryOutstanding = ({ historyData }: { historyData: any[] }) => {
 
     try {
       const response = await axios.get(url, {
-        headers: {
-          Authorization: `Basic ${authToken}`,
+        // headers: {
+        //   Authorization: `Basic ${authToken}`,
+        // },
+        auth: {
+          username: "kenry",
+          password: "111qqq@Q",
         },
       });
 
