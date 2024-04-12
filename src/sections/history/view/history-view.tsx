@@ -11,7 +11,6 @@ import { SplashScreen } from "@/components/loading-screen";
 
 const HistoryView = () => {
   const telegram = useTelegram();
-  console.log("telegram----------------------:", telegram);
   const [loading, setLoading] = useState(true);
   const historyData = [
     {
@@ -120,15 +119,48 @@ const HistoryView = () => {
       starts: "12-4-2024",
     },
   ];
+
   useEffect(() => {
     const timer = setTimeout(() => {
       setLoading(false);
     }, 3000);
     return () => clearTimeout(timer);
   }, []);
+
   useEffect(() => {
+    const checkUserInfo = async () => {
+      const storedUsername = localStorage.getItem("username");
+      const storedPassword = localStorage.getItem("password");
+
+      if (!storedUsername || !storedPassword) {
+        try {
+          const userId = telegram?.webApp?.initDataUnsafe?.user?.id;
+          if (!userId) {
+            throw new Error("User ID không tồn tại trong dữ liệu init của Telegram");
+          }
+          const response = await fetch("/user/getUserInfo", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ userId }),
+          });
+
+          if (!response.ok) {
+            throw new Error("Không thể lấy thông tin từ server");
+          }
+
+          const data = await response.json();
+          localStorage.setItem("username", data.username);
+          localStorage.setItem("password", data.password);
+        } catch (error) {
+          console.error("Có lỗi xảy ra khi lấy thông tin user:", error);
+        }
+      }
+    };
+
+    checkUserInfo();
     telegram.webApp?.expand();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <MainLayout>
