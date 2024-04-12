@@ -13,6 +13,7 @@ export type IHistoryBet = {
   betType: string;
   win: number;
   risk: number;
+  side?: string;
   winLoss: null;
   oddsFormat: string;
   customerCommission: number;
@@ -23,7 +24,7 @@ export type IHistoryBet = {
   eventId: number;
   handicap: number;
   price: number;
-  teamName: string;
+  teamName?: string;
   team1: string;
   team2: string;
   periodNumber: number;

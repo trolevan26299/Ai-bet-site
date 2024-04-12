@@ -22,25 +22,19 @@ const HistoryItem = ({ dataDetail, type }: { dataDetail: IHistoryBet; type?: str
             )}
             <p className="text-sm text-text-main font-semibold ">
               {dataDetail.sportId === 29 ? "Bóng đá" : "Game"} / {dataDetail.isLive && "Trực tiếp"}{" "}
-              {/* {dataDetail.game_scope === "full time" ? "Toàn trận" : "Hiệp 1"} -{" "}
-              {dataDetail.game_type === "handicap" ? "Cược chấp" : "Tài xỉu"} */}
+              {dataDetail.periodNumber === 0 ? "Toàn trận" : "Hiệp 1"} -{" "}
+              {dataDetail.betType === "TOTAL_POINTS" ? "Tài xỉu" : "Cược chấp"}
             </p>
           </div>
         </div>
         <div className="flex flex-col justify-center items-start pl-7">
           <div className="flex flex-row justify-start items-center text-sm gap-1">
-            {/* <p className="text-text-main">
-              {dataDetail.game_orientation === "over"
-                ? "Tài"
-                : dataDetail.game_orientation === "under"
-                ? "Xỉu"
-                : dataDetail.game_orientation}
+            <p className="text-text-main">
+              {dataDetail.betType === "SPREAD" ? dataDetail.teamName : dataDetail.side === "OVER" ? "Tài" : "Xỉu"}
             </p>
-            <p className={`${dataDetail.game_detail >= 0 ? "text-[#34c759]" : "text-[#ff453a]"}`}>
-              {dataDetail.game_detail}
-            </p> */}
+            <p className={`${dataDetail.handicap >= 0 ? "text-[#34c759]" : "text-[#ff453a]"}`}>{dataDetail.handicap}</p>
             <p className="text-text-main">@</p>
-            {/* <p className="text-[#ffe665]">{dataDetail.odds}</p> */}
+            <p className="text-[#ffe665]">{dataDetail.price}</p>
             <p className="text-text-main">({dataDetail.oddsFormat})</p>
           </div>
           <div className=" mt-3">
