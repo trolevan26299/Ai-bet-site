@@ -22,14 +22,14 @@ const HistoryItem = ({ dataDetail, type }: { dataDetail: IHistoryBet; type?: str
             )}
             <p className="text-sm text-text-main font-semibold ">
               {dataDetail.sportId === 29 ? "Bóng đá" : "Game"} / {dataDetail.isLive && "Trực tiếp"}{" "}
-              {dataDetail.game_scope === "full time" ? "Toàn trận" : "Hiệp 1"} -{" "}
-              {dataDetail.game_type === "handicap" ? "Cược chấp" : "Tài xỉu"}
+              {/* {dataDetail.game_scope === "full time" ? "Toàn trận" : "Hiệp 1"} -{" "}
+              {dataDetail.game_type === "handicap" ? "Cược chấp" : "Tài xỉu"} */}
             </p>
           </div>
         </div>
         <div className="flex flex-col justify-center items-start pl-7">
           <div className="flex flex-row justify-start items-center text-sm gap-1">
-            <p className="text-text-main">
+            {/* <p className="text-text-main">
               {dataDetail.game_orientation === "over"
                 ? "Tài"
                 : dataDetail.game_orientation === "under"
@@ -38,7 +38,7 @@ const HistoryItem = ({ dataDetail, type }: { dataDetail: IHistoryBet; type?: str
             </p>
             <p className={`${dataDetail.game_detail >= 0 ? "text-[#34c759]" : "text-[#ff453a]"}`}>
               {dataDetail.game_detail}
-            </p>
+            </p> */}
             <p className="text-text-main">@</p>
             <p className="text-[#ffe665]">{dataDetail.odds}</p>
             <p className="text-text-main">({dataDetail.oddsFormat})</p>
@@ -59,13 +59,13 @@ const HistoryItem = ({ dataDetail, type }: { dataDetail: IHistoryBet; type?: str
           </div>
         </div>
       </div>
-      <div className="flex flex-col items-start justify-start gap-1">
+      {/* <div className="flex flex-col items-start justify-start gap-1">
         <p className="text-base text-[#34c759] font-medium pt-2">{dataDetail.league_name}</p>
         <p className="text-sm text-[rgba(235,235,245,0.6)] font-normal">
           {dataDetail.team1} - vs - {dataDetail.team2}
         </p>
         <p className="text-text-main font-normal text-sm">{dataDetail.starts}</p>
-      </div>
+      </div> */}
     </div>
   );
 };
