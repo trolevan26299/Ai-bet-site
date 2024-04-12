@@ -1,7 +1,39 @@
-import React from "react";
+import React, { useEffect } from "react";
 import HistoryItem from "./history-item";
 
 const HistoryOutstanding = ({ historyData }: { historyData: any[] }) => {
+  // hàm dùng để lấy ra dữ liệu lịch sử cược outstanding của tài khoản
+  const fetchBetHistory = async (username: string, password: string) => {
+    const url = "https://api.p88.bet/v3/bets?betList=RUNNING&fromDate=2024-04-10T04:00:00Z&toDate=2024-04-30T03:59:59Z";
+    const authToken = btoa(`${username}:${password}`);
+
+    try {
+      const response = await fetch(url, {
+        headers: {
+          Authorization: `Basic ${authToken}`,
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error("Request failed with status " + response.status);
+      }
+
+      const data = await response.json();
+      // Handle your data here
+      console.log(data);
+    } catch (error) {
+      console.error("Error fetching bet history:", error);
+    }
+  };
+
+  useEffect(() => {
+    const username = localStorage.getItem("username");
+    const password = localStorage.getItem("password");
+
+    if (username && password) {
+      fetchBetHistory(username, password);
+    }
+  }, []);
   return (
     <>
       <div className="fixed top-[46px] h-12 w-full flex flex-grow items-center bg-backgroundColor-main px-3">

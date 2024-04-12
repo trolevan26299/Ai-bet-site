@@ -130,8 +130,8 @@ const HistoryView = () => {
     return () => clearTimeout(timer);
   }, []);
 
+  // hàm check xem đã có username và password trong localStorage chưa, nếu chưa thì lấy từ server và lưu vào localsStorage
   useEffect(() => {
-    // Hàm này sẽ kiểm tra localStorage để tìm username và password
     const checkUserInfo = async (user_id: number) => {
       const storedUsername = localStorage.getItem("username");
       const storedPassword = localStorage.getItem("password");
@@ -155,6 +155,7 @@ const HistoryView = () => {
       checkUserInfo(telegram.user.id);
     }
   }, [telegram?.user?.id]);
+
   useEffect(() => {
     telegram.webApp?.expand();
   }, []);
