@@ -9,6 +9,7 @@ import HistoryWinLoss from "../history-winloss";
 import { useTelegram } from "@/context/telegram.provider";
 import { SplashScreen } from "@/components/loading-screen";
 import { getUserInfo } from "@/api/history";
+import { IUserInfo } from "@/types/history.type";
 
 const HistoryView = () => {
   const telegram = useTelegram();
@@ -137,16 +138,14 @@ const HistoryView = () => {
 
       if (!storedUsername || !storedPassword) {
         try {
-          const response = await getUserInfo({ user_id });
+          const response: IUserInfo = await getUserInfo({ user_id });
           console.log("response", response);
-          if (!response.ok) {
+          if (!response) {
             throw new Error("Không thể lấy thông tin từ server");
           }
 
-          const data = await response.json();
-          console.log("data", data);
-          localStorage.setItem("username", data.username);
-          localStorage.setItem("password", data.password);
+          localStorage.setItem("username", response.username);
+          localStorage.setItem("password", response.password);
         } catch (error) {
           console.error("Có lỗi xảy ra khi lấy thông tin user:", error);
         }
