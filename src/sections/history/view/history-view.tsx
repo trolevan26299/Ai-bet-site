@@ -120,7 +120,7 @@ const HistoryView = () => {
       starts: "12-4-2024",
     },
   ];
-  console.log("telegram", telegram);
+  console.log("telegram", telegram?.user?.id);
 
   useEffect(() => {
     const timer = setTimeout(() => {
