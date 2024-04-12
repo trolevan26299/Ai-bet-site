@@ -130,36 +130,32 @@ const HistoryView = () => {
   }, []);
 
   useEffect(() => {
-    const checkUserInfo = async () => {
+    // Hàm này sẽ kiểm tra localStorage để tìm username và password
+    const checkUserInfo = async (userId: number) => {
       const storedUsername = localStorage.getItem("username");
       const storedPassword = localStorage.getItem("password");
 
       if (!storedUsername || !storedPassword) {
         try {
-          const userId = telegram?.user?.id;
-
-          if (userId) {
-            const response = await getUserInfo({ userId });
-
-            if (!response.ok) {
-              throw new Error("Không thể lấy thông tin từ server");
-            }
-
-            const data = await response.json();
-            console.log("data", data);
-            localStorage.setItem("username", data.username);
-            localStorage.setItem("password", data.password);
+          const response = await getUserInfo({ userId });
+          console.log("response", response);
+          if (!response.ok) {
+            throw new Error("Không thể lấy thông tin từ server");
           }
-          if (!userId) {
-            throw new Error("User ID không tồn tại trong dữ liệu init của Telegram");
-          }
+
+          const data = await response.json();
+          localStorage.setItem("username", data.username);
+          localStorage.setItem("password", data.password);
         } catch (error) {
           console.error("Có lỗi xảy ra khi lấy thông tin user:", error);
         }
       }
     };
-
-    checkUserInfo();
+    if (telegram?.user?.id) {
+      checkUserInfo(telegram.user.id);
+    }
+  }, [telegram?.user?.id]);
+  useEffect(() => {
     telegram.webApp?.expand();
   }, []);
   return (
