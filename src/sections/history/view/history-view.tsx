@@ -144,6 +144,7 @@ const HistoryView = () => {
           }
 
           const data = await response.json();
+          console.log("data", data);
           localStorage.setItem("username", data.username);
           localStorage.setItem("password", data.password);
         } catch (error) {
