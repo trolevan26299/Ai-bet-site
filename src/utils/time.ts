@@ -27,7 +27,7 @@ export const convertToGMT7 = (dateTimeString: string, type: string) => {
   }
 };
 
-export const utcToUtc7 = (utcDateString: string) => {
+export const utcToUtc7Format = (utcDateString: string) => {
   const date = new Date(utcDateString);
   // const newDate = addHours(date, 7);
   return format(date, "dd/MM/yy HH:mm:ss");
