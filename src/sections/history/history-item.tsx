@@ -12,7 +12,7 @@ const HistoryItem = ({ dataDetail, type }: { dataDetail: IHistoryBet; type?: str
           <p className="text-sm text-text-main">ID:{dataDetail.betId} </p>
           <span className="text-xs text-[rgba(235,235,245,0.6)] ">{utcToUtc7(dataDetail.placedAt)}</span>
         </div>
-        <Button className="rounded-full w-[103px] bg-[#f7b502] h-7">{type ? "Đang chạy" : "Winlose"}</Button>
+        <div className="rounded-full w-[103px] bg-[#f7b502] h-7">{type ? "Đang chạy" : "Winlose"}</div>
       </div>
       <div style={{ borderBottom: "1px solid #223a76" }} className="pb-3">
         <div className="pb-1 ">
