@@ -27,7 +27,6 @@ export const convertToGMT7 = (dateTimeString: string, type: string) => {
   // }
   const dateTime = new Date(dateTimeString);
   const currentDate = new Date();
-  currentDate.setHours(currentDate.getHours() + 7); // Chuyển về múi giờ GMT+7
   console.log("dateTime", dateTime);
   console.log("currentDate", currentDate);
   console.log("dateTimeString", dateTimeString);
