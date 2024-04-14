@@ -44,8 +44,6 @@ export const convertToGMT7 = (dateTimeString: string, type: string) => {
   if (type === "date") {
     if (isSameDay) {
       return "Hôm nay";
-    } else if (dateTime > currentDate) {
-      return "Ngày mai";
     } else {
       const options: Intl.DateTimeFormatOptions = { year: "numeric", month: "2-digit", day: "2-digit" };
       return dateTime.toLocaleDateString("vi-VN", options);
