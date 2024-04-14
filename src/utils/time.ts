@@ -22,7 +22,7 @@ export const convertToGMT7 = (dateTimeString: string, type: string) => {
     const minutes = dateTime.getMinutes();
     const formattedHours = hours < 10 ? "0" + hours : hours;
     const formattedMinutes = minutes < 10 ? "0" + minutes : minutes;
-    return `${formattedHours}:${formattedMinutes}`;
+    return `${formattedHours} : ${formattedMinutes}`;
   } else {
     return "Invalid type";
   }
