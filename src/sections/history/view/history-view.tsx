@@ -153,7 +153,7 @@ const HistoryView = () => {
   return (
     <MainLayout>
       <Tabs defaultValue="1" className="w-full h-[95%]">
-        <TabsList className={`tabsList ${selectedTab === "1" ? "borderLeft" : "borderRight"}`}>
+        <TabsList className={`tabsList bg-backgroundColor-main ${selectedTab === "1" ? "borderLeft" : "borderRight"}`}>
           <TabsTriggerHistory
             value="1"
             className="flex flex-grow justify-start pl-2"

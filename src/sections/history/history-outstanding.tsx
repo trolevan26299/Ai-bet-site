@@ -83,7 +83,7 @@ const HistoryOutstanding = () => {
                 <p className="pt-4 text-base text-slate-500 font-semibold">Không có vé cược nào</p>
               </div>
             ) : (
-              <div className="mt-[50px] pb-3">
+              <div className="mt-[95px] pb-3">
                 {historyOutStanding.map((item: any) => {
                   return <HistoryItem key={item.betId} dataDetail={item} type="outstanding" />;
                 })}
