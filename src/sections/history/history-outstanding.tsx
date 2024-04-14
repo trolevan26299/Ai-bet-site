@@ -20,10 +20,24 @@ const HistoryOutstanding = () => {
     const fromDate = new Date(utcCurrentDate.getTime() - 7 * 60 * 60 * 1000); // Trừ đi 7 giờ
     const toDate = new Date(fromDate.getTime() - 29 * 24 * 60 * 60 * 1000); // Lùi lại 29 ngày
 
+    const formatDateTime = (dateTime) => {
+      const year = dateTime.getFullYear();
+      const month = String(dateTime.getMonth() + 1).padStart(2, "0");
+      const day = String(dateTime.getDate()).padStart(2, "0");
+      const hours = String(dateTime.getHours()).padStart(2, "0");
+      const minutes = String(dateTime.getMinutes()).padStart(2, "0");
+      const seconds = String(dateTime.getSeconds()).padStart(2, "0");
+
+      return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}Z`;
+    };
+
+    const formattedFromDate = formatDateTime(fromDate);
+    const formattedToDate = formatDateTime(toDate);
+
     const params = {
       betList: "RUNNING",
-      fromDate: fromDate,
-      toDate: toDate,
+      fromDate: formattedFromDate,
+      toDate: formattedToDate,
     };
     const url = `${HOST_API_P88}?betList=RUNNING&fromDate=${params.fromDate}&toDate=${params.toDate}`;
     try {
