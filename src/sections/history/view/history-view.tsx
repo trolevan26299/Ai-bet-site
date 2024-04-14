@@ -4,7 +4,8 @@ import { Tabs, TabsContent, TabsList, TabsTriggerHistory } from "@/components/ui
 import { useTelegram } from "@/context/telegram.provider";
 import MainLayout from "@/layouts/main/layout";
 import { Icon } from "@iconify/react";
-import { useEffect } from "react";
+import "../index.css";
+import { useEffect, useState } from "react";
 import HistoryOutstanding from "../history-outstanding";
 import HistoryWinLoss from "../history-winloss";
 
@@ -144,20 +145,23 @@ const HistoryView = () => {
   //   }
   // }, [telegram?.user?.id]);
 
+  const [selectedTab, setSelectedTab] = useState("1");
+
   useEffect(() => {
     telegram.webApp?.expand();
   }, []);
   return (
     <MainLayout>
       <Tabs defaultValue="1" className="w-full h-[95%]">
-        <TabsList
-          className="w-full rounded-none h-[46px] flex flex-grow justify-between fixed top-0 bg-backgroundColor-main"
-          style={{ borderBottom: "1px solid #223a76" }}
-        >
-          <TabsTriggerHistory value="1" className="flex flex-grow justify-start pl-2">
+        <TabsList className={`tabsList ${selectedTab === "1" ? "borderLeft" : "borderRight"}`}>
+          <TabsTriggerHistory
+            value="1"
+            className="flex flex-grow justify-start pl-2"
+            onClick={() => setSelectedTab("1")}
+          >
             <Icon icon="mingcute:time-fill" className="mr-1 text-[#f7b502]" /> Cược đang chờ
           </TabsTriggerHistory>
-          <TabsTriggerHistory value="2" className="pr-2">
+          <TabsTriggerHistory value="2" className="pr-2" onClick={() => setSelectedTab("2")}>
             <Icon icon="lets-icons:flag-finish" className="mr-1 text-[#ff453a]" />
             Cược đã kết thúc
           </TabsTriggerHistory>
