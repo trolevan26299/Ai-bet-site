@@ -30,6 +30,10 @@ export const convertToGMT7 = (dateTimeString: string, type: string) => {
   console.log("dateTime", dateTime);
   console.log("currentDate", currentDate);
   console.log("dateTimeString", dateTimeString);
+  console.log("dateTime.getDate()", dateTime.getDate());
+  console.log("currentDate.getDate()", currentDate.getDate());
+  console.log("dateTime.getMonth()", dateTime.getMonth());
+  console.log(" currentDate.getMonth()", currentDate.getMonth());
   const isSameDay =
     dateTime.getDate() === currentDate.getDate() &&
     dateTime.getMonth() === currentDate.getMonth() &&
@@ -47,7 +51,7 @@ export const convertToGMT7 = (dateTimeString: string, type: string) => {
   } else if (type === "time") {
     const hours = dateTime.getHours();
     const minutes = dateTime.getMinutes();
-    return `${hours < 10 ? "0" + hours : hours}:${minutes < 10 ? "0" + minutes : minutes}`;
+    return `${hours || 0} : ${minutes < 10 ? "0" + minutes || 0 : minutes || 0}`;
   } else {
     return "Invalid type";
   }
