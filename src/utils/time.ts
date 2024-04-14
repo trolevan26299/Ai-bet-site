@@ -1,3 +1,5 @@
+import { addHours, format } from "date-fns";
+
 export const convertToGMT7 = (dateTimeString: string, type: string) => {
   const dateTime = new Date(dateTimeString);
 
@@ -23,4 +25,10 @@ export const convertToGMT7 = (dateTimeString: string, type: string) => {
   } else {
     return "Invalid type";
   }
+};
+
+export const utcToUtc7 = (utcDateString: string) => {
+  const date = new Date(utcDateString);
+  const newDate = addHours(date, 7);
+  return format(newDate, "dd/MM/yy HH:mm:ss");
 };

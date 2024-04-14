@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import React from "react";
 import { Icon } from "@iconify/react";
 import { IHistoryBet } from "@/types/history.type";
+import { utcToUtc7 } from "@/utils/time";
 
 const HistoryItem = ({ dataDetail, type }: { dataDetail: IHistoryBet; type?: string }) => {
   return (
@@ -9,7 +10,7 @@ const HistoryItem = ({ dataDetail, type }: { dataDetail: IHistoryBet; type?: str
       <div className="flex flex-row items-center justify-between  pb-1" style={{ borderBottom: "1px solid #223a76" }}>
         <div className="tracking-wide">
           <p className="text-sm text-text-main">ID:{dataDetail.betId} </p>
-          <span className="text-xs text-[rgba(235,235,245,0.6)] ">{dataDetail.placedAt}</span>
+          <span className="text-xs text-[rgba(235,235,245,0.6)] ">{utcToUtc7(dataDetail.placedAt)}</span>
         </div>
         <Button className="rounded-full w-[103px] bg-[#f7b502] h-7">{type ? "Đang chạy" : "Winlose"}</Button>
       </div>
@@ -58,7 +59,7 @@ const HistoryItem = ({ dataDetail, type }: { dataDetail: IHistoryBet; type?: str
         <p className="text-sm text-[rgba(235,235,245,0.6)] font-normal">
           {dataDetail.team1} - vs - {dataDetail.team2}
         </p>
-        <p className="text-text-main font-normal text-sm">{dataDetail.eventStartTime}</p>
+        <p className="text-text-main font-normal text-sm">{utcToUtc7(dataDetail.eventStartTime)}</p>
       </div>
     </div>
   );

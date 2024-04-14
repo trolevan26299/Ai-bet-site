@@ -13,7 +13,6 @@ const HistoryOutstanding = () => {
   const [loading, setLoading] = useState(true);
   const [historyOutStanding, setHistoryOutStanding] = useState<IHistoryBet[]>([]);
   const totalBetMoney = historyOutStanding.reduce((total, item) => total + item.risk, 0);
-  console.log("historyOutStanding", historyOutStanding);
   const fetchBetHistory = async (user_id: number) => {
     const params = {
       betList: "RUNNING",
