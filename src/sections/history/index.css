@@ -27,7 +27,7 @@
   position: absolute;
   bottom: 0;
   height: 4px;
-  width: 50%;
+  width: 40%;
   background: linear-gradient(to right, #f7b502 0%, #ff453a 100%);
   border-radius: 2px 2px 0 0;
   transition: all 0.3s;
