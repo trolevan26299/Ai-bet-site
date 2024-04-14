@@ -31,15 +31,13 @@ const HistoryOutstanding = () => {
       return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}Z`;
     };
 
-    const formattedFromDate = formatDateTime(fromDate);
-    const formattedToDate = formatDateTime(toDate);
+    const formattedFromDate = formatDateTime(toDate);
+    const formattedToDate = formatDateTime(fromDate);
 
     const params = {
       betList: "RUNNING",
-      // fromDate: formattedFromDate,
-      // toDate: formattedToDate,
-      fromDate: "2024-04-10T04:00:00Z",
-      toDate: "2024-04-25T03:59:59Z",
+      fromDate: formattedFromDate,
+      toDate: formattedToDate,
     };
     const url = `${HOST_API_P88}?betList=RUNNING&fromDate=${params.fromDate}&toDate=${params.toDate}`;
     try {
