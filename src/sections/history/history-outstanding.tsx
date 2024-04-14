@@ -36,8 +36,10 @@ const HistoryOutstanding = () => {
 
     const params = {
       betList: "RUNNING",
-      fromDate: formattedFromDate,
-      toDate: formattedToDate,
+      // fromDate: formattedFromDate,
+      // toDate: formattedToDate,
+      fromDate: "2024-04-10T04:00:00Z",
+      toDate: "2024-04-25T03:59:59Z",
     };
     const url = `${HOST_API_P88}?betList=RUNNING&fromDate=${params.fromDate}&toDate=${params.toDate}`;
     try {
