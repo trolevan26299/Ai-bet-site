@@ -34,7 +34,7 @@
 }
 
 .borderLeft::after {
-  left: 32px;
+  left: 31px;
   background: #60d1ff;
 }
 .borderRight::after {
