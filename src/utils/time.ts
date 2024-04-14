@@ -25,7 +25,9 @@ export const convertToGMT7 = (dateTimeString: string, type: string) => {
   // } else {
   //   return "Invalid type";
   // }
+  const offset = 7;
   const dateTime = new Date(dateTimeString);
+  dateTime.setHours(dateTime.getHours() - offset);
   const currentDate = new Date();
   console.log("dateTime", dateTime);
   console.log("currentDate", currentDate);
