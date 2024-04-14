@@ -100,13 +100,10 @@ const HistoryWinLoss = () => {
           <div className="grid gap-2 w-full">
             <Popover>
               <PopoverTrigger asChild>
-                <Button
+                <button
                   id="date"
-                  variant={"outline"}
-                  className={cn(
-                    "w-full flex  justify-between text-left rounded-full border-none bg-[#28374a] text-text-main text-sm font-medium",
-                    !date && "text-muted-foreground"
-                  )}
+                  className={`w-full flex  justify-between text-left rounded-full border-none bg-[#28374a] text-text-main text-sm font-medium",
+                    ${!date && "text-muted-foreground"}`}
                 >
                   {date?.from ? (
                     date.to ? (
@@ -120,7 +117,7 @@ const HistoryWinLoss = () => {
                     <span>Vui lòng chọn ngày</span>
                   )}
                   <CalendarIcon className="mr-2 h-5 w-5" />
-                </Button>
+                </button>
               </PopoverTrigger>
               <PopoverContent className="p-0 w-full" align="center">
                 <Calendar
