@@ -39,15 +39,14 @@ export default function MatchView() {
     async function fetchAndSetInitialOdds() {
       setLoading(true);
       const newData: IMatchData[] = await fetchOddsData(payload);
-      if (newData && newData.length === 0) {
-        const transformedData = transformData(newData);
-        setDataScreenInfo(newData);
-        setOdds(transformedData as unknown as IOddsDetail[]);
-        setLatestOdds(transformedData as unknown as IOddsDetail[]);
-        setLive(newData[0].liveStatus);
-        telegram.webApp?.expand();
-        setLoading(false);
-      }
+
+      const transformedData = transformData(newData);
+      setDataScreenInfo(newData);
+      setOdds(transformedData as unknown as IOddsDetail[]);
+      setLatestOdds(transformedData as unknown as IOddsDetail[]);
+      setLive(newData[0].liveStatus);
+      telegram.webApp?.expand();
+      setLoading(false);
     }
 
     fetchAndSetInitialOdds();
