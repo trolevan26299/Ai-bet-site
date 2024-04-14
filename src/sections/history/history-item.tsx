@@ -12,7 +12,7 @@ const HistoryItem = ({ dataDetail, type }: { dataDetail: IHistoryBet; type?: str
           <p className="text-sm text-text-main">ID:{dataDetail.betId} </p>
           <span className="text-xs text-[rgba(235,235,245,0.6)] ">{utcToUtc7Format(dataDetail.placedAt)}</span>
         </div>
-        <div className="rounded-full w-[103px] bg-[#f7b502] h-7 text-center text-[#fafafa] text-sm">
+        <div className="rounded-full w-[103px] bg-[#f7b502] h-7 flex flex-grow justify-center items-center text-[#fafafa] text-sm font-medium">
           {type ? "Đang chạy" : "Winlose"}
         </div>
       </div>
