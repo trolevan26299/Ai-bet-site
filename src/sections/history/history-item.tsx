@@ -20,7 +20,7 @@ const HistoryItem = ({ dataDetail, type }: { dataDetail: IHistoryBet; type?: str
         <div className="pb-1 ">
           <div className="flex flex-row pt-3 items-center">
             <Icon icon="ph:soccer-ball-fill" width="24" color="#fafafa" className="mr-1" />
-            {dataDetail.isLive && (
+            {dataDetail.isLive === "TRUE" && (
               <Icon icon="fluent:live-20-filled" width={20} height={18} color="rgba(255,69,58,1)" className="mr-1" />
             )}
             <p className="text-sm text-text-main font-semibold ">
