@@ -39,13 +39,15 @@ export default function MatchView() {
     async function fetchAndSetInitialOdds() {
       setLoading(true);
       const newData: IMatchData[] = await fetchOddsData(payload);
-      const transformedData = transformData(newData);
-      setDataScreenInfo(newData);
-      setOdds(transformedData as unknown as IOddsDetail[]);
-      setLatestOdds(transformedData as unknown as IOddsDetail[]);
-      setLive(newData[0].liveStatus);
-      telegram.webApp?.expand();
-      setLoading(false);
+      if (newData && newData.length === 0) {
+        const transformedData = transformData(newData);
+        setDataScreenInfo(newData);
+        setOdds(transformedData as unknown as IOddsDetail[]);
+        setLatestOdds(transformedData as unknown as IOddsDetail[]);
+        setLive(newData[0].liveStatus);
+        telegram.webApp?.expand();
+        setLoading(false);
+      }
     }
 
     fetchAndSetInitialOdds();
@@ -55,7 +57,6 @@ export default function MatchView() {
   useEffect(() => {
     async function fetchAndUpdateOdds() {
       const newData = await fetchOddsData(payload);
-      const transformedData = transformData(newData);
 
       const newOddsStatus: OddsStatusType = {};
       latestOdds?.forEach((latestOdd, index) => {
@@ -76,6 +77,7 @@ export default function MatchView() {
       });
 
       if (newData && newData.length > 0) {
+        const transformedData = transformData(newData);
         setOdds(latestOdds);
         setDataScreenInfo(newData);
         setLatestOdds(transformedData as unknown as IOddsDetail[]);
