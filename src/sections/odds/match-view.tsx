@@ -16,7 +16,6 @@ export default function MatchView() {
 
   const [odds, setOdds] = useState<IOddsDetail[]>([]);
   const [latestOdds, setLatestOdds] = useState<IOddsDetail[]>([]);
-  const [live, setLive] = useState(false);
   const [oddsStatus, setOddsStatus] = useState<OddsStatusType>({});
   const [dataScreenInfo, setDataScreenInfo] = useState<IMatchData[]>([]);
   const [loading, setLoading] = useState(true);
@@ -44,7 +43,6 @@ export default function MatchView() {
       setDataScreenInfo(newData);
       setOdds(transformedData as unknown as IOddsDetail[]);
       setLatestOdds(transformedData as unknown as IOddsDetail[]);
-      setLive(newData[0].liveStatus);
       telegram.webApp?.expand();
       setLoading(false);
     }
@@ -80,7 +78,6 @@ export default function MatchView() {
         setOdds(latestOdds);
         setDataScreenInfo(newData);
         setLatestOdds(transformedData as unknown as IOddsDetail[]);
-        setLive(newData[0].liveStatus);
         setOddsStatus(newOddsStatus);
       } else {
         console.log("No new data received or data fetch failed");
@@ -98,7 +95,7 @@ export default function MatchView() {
       ) : (
         <div className="p-3">
           <ScreenInfoMatch dataScreenInfo={dataScreenInfo} />
-          <OddsDetail odds={odds} live={live} oddsStatus={oddsStatus} dataScreenInfo={dataScreenInfo} />
+          <OddsDetail odds={odds} oddsStatus={oddsStatus} dataScreenInfo={dataScreenInfo} />
         </div>
       )}
     </MainLayout>

@@ -23,12 +23,10 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "..
 
 export default function OddsDetail({
   odds,
-  live,
   oddsStatus,
   dataScreenInfo,
 }: {
   odds: IOddsDetail[];
-  live: boolean;
   oddsStatus: OddsStatusType;
   dataScreenInfo: IMatchData[];
 }) {
@@ -70,7 +68,6 @@ export default function OddsDetail({
         <TabsContent value="1">
           <RenderAccordion
             odds={odds}
-            live={live}
             openItems={openItems}
             oddsStatus={oddsStatus}
             onValueChange={handleValueChange}
@@ -81,7 +78,6 @@ export default function OddsDetail({
         <TabsContent value="2">
           <RenderAccordion
             odds={[odds[0], odds[1]]}
-            live={live}
             openItems={openItems}
             oddsStatus={oddsStatus}
             onValueChange={handleValueChange}
@@ -92,7 +88,6 @@ export default function OddsDetail({
         <TabsContent value="3">
           <RenderAccordion
             odds={[odds[2], odds[3]]}
-            live={live}
             openItems={openItems}
             oddsStatus={oddsStatus}
             onValueChange={handleValueChange}
@@ -106,14 +101,12 @@ export default function OddsDetail({
 
 function RenderAccordion({
   odds,
-  live,
   openItems,
   onValueChange,
   oddsStatus,
   dataScreenInfo,
 }: {
   odds: IOddsDetail[];
-  live: boolean;
   openItems: string[];
   onValueChange: (value: string[]) => void;
   oddsStatus: OddsStatusType;
@@ -200,19 +193,6 @@ function RenderAccordion({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [oddsStatus]);
 
-  // useEffect(() => {
-  //   if (odds[keyItemSelect[0]]?.detail[keyItemSelect[1]][keyItemSelect[2]]?.value !== selectedTeam?.value) {
-  //     setValueSelectNew(odds[keyItemSelect[0]]?.detail[keyItemSelect[1]][keyItemSelect[2]]?.value);
-  //   }
-  // if (!isInitialized) {
-  //   setIsInitialized(true);
-  // }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [oddsStatus]);
-  // if (!isInitialized) {
-  //   return null;
-  // }
-
   return (
     <Drawer
       onClose={() => {
@@ -287,7 +267,7 @@ function RenderAccordion({
           <div className=" py-4 px-4 mt-[-10px]">
             <div className="col-span-10 text-gray-300  flex flex-row items-center ">
               <Icon icon="ph:soccer-ball-fill" width="20px" height="20px" />
-              {live && (
+              {dataScreenInfo.liveStatus && (
                 <Icon icon="fluent:live-20-filled" className="ml-1" width={20} height={20} color="rgba(255,69,58,1)" />
               )}
               <p className="pl-2 text-base text-[#fafafa]">{oddsName}</p>
