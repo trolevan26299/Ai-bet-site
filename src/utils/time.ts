@@ -1,41 +1,10 @@
 import { addHours, format } from "date-fns";
 
 export const convertToGMT7 = (dateTimeString: string, type: string) => {
-  // const dateTime = new Date(dateTimeString);
-
-  // if (type === "date") {
-  //   const currentDate = new Date();
-
-  //   const oneDay = 24 * 60 * 60 * 1000;
-  //   const diffDays = Math.floor((dateTime.getTime() - currentDate.getTime()) / oneDay);
-
-  //   if (diffDays === 1 || (diffDays === 0 && dateTime.getUTCHours() === 0)) {
-  //     return "Ngày mai";
-  //   } else if (diffDays === 0) {
-  //     return "Hôm nay";
-  //   } else {
-  //     const options: Intl.DateTimeFormatOptions = { year: "numeric", month: "2-digit", day: "2-digit" };
-  //     return dateTime.toLocaleDateString("vi-VN", options);
-  //   }
-  // } else if (type === "time") {
-  //   const hours = dateTime.getUTCHours();
-  //   const minutes = dateTime.getMinutes();
-
-  //   return `${hours || 0} : ${minutes < 10 ? "0" + minutes || 0 : minutes || 0}`;
-  // } else {
-  //   return "Invalid type";
-  // }
   const offset = 7;
   const dateTime = new Date(dateTimeString);
   dateTime.setHours(dateTime.getHours() - offset);
   const currentDate = new Date();
-  console.log("dateTime", dateTime);
-  console.log("currentDate", currentDate);
-  console.log("dateTimeString", dateTimeString);
-  console.log("dateTime.getDate()", dateTime.getDate());
-  console.log("currentDate.getDate()", currentDate.getDate());
-  console.log("dateTime.getMonth()", dateTime.getMonth());
-  console.log(" currentDate.getMonth()", currentDate.getMonth());
   const isSameDay =
     dateTime.getDate() === currentDate.getDate() &&
     dateTime.getMonth() === currentDate.getMonth() &&
@@ -51,7 +20,9 @@ export const convertToGMT7 = (dateTimeString: string, type: string) => {
   } else if (type === "time") {
     const hours = dateTime.getHours();
     const minutes = dateTime.getMinutes();
-    return `${hours || 0} : ${minutes < 10 ? "0" + minutes || 0 : minutes || 0}`;
+    const formattedHours = hours < 10 ? "0" + hours : hours;
+    const formattedMinutes = minutes < 10 ? "0" + minutes : minutes;
+    return `${formattedHours}:${formattedMinutes}`;
   } else {
     return "Invalid type";
   }
