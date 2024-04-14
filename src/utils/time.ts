@@ -29,14 +29,16 @@ export const convertToGMT7 = (dateTimeString: string, type: string) => {
   const currentDate = new Date();
   currentDate.setHours(currentDate.getHours() + 7); // Chuyển về múi giờ GMT+7
 
-  if (type === "date") {
-    const oneDay = 24 * 60 * 60 * 1000;
-    const diffDays = (dateTime.getTime() - currentDate.getTime()) / oneDay;
+  const isSameDay =
+    dateTime.getDate() === currentDate.getDate() &&
+    dateTime.getMonth() === currentDate.getMonth() &&
+    dateTime.getFullYear() === currentDate.getFullYear();
 
-    if (diffDays === 1 || (diffDays === 0 && dateTime.getUTCHours() === 0)) {
-      return "Ngày mai";
-    } else if (diffDays === 0) {
+  if (type === "date") {
+    if (isSameDay) {
       return "Hôm nay";
+    } else if (dateTime > currentDate) {
+      return "Ngày mai";
     } else {
       const options: Intl.DateTimeFormatOptions = { year: "numeric", month: "2-digit", day: "2-digit" };
       return dateTime.toLocaleDateString("vi-VN", options);
