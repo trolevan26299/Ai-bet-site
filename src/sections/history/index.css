@@ -36,9 +36,11 @@
 
 .borderLeft::after {
   left: 10px;
+  background-image: #60d1ff;
   border-top-right-radius: 0;
 }
 .borderRight::after {
   right: 10px;
+  background-image: #60d1ff;
   border-top-left-radius: 0;
 }
