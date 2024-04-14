@@ -20,7 +20,7 @@ const HistoryOutstanding = () => {
     const fromDate = new Date(utcCurrentDate.getTime() - 7 * 60 * 60 * 1000); // Trừ đi 7 giờ
     const toDate = new Date(fromDate.getTime() - 29 * 24 * 60 * 60 * 1000); // Lùi lại 29 ngày
 
-    const formatDateTime = (dateTime) => {
+    const formatDateTime = (dateTime: Date) => {
       const year = dateTime.getFullYear();
       const month = String(dateTime.getMonth() + 1).padStart(2, "0");
       const day = String(dateTime.getDate()).padStart(2, "0");
