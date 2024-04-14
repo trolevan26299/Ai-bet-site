@@ -14,19 +14,16 @@ const HistoryOutstanding = () => {
   const [historyOutStanding, setHistoryOutStanding] = useState<IHistoryBet[]>([]);
   const totalBetMoney = historyOutStanding.reduce((total, item) => total + item.risk, 0);
   const fetchBetHistory = async (user_id: number) => {
-    const now = new Date(); // Gets the current date and time
-    now.setHours(now.getHours() - 7); // Adjusts for UTC from UTC+7
+    const currentDate = new Date();
+    const utcCurrentDate = new Date(currentDate.getTime() - currentDate.getTimezoneOffset() * 60000); // Chuyển về UTC0
 
-    const fromDate = new Date(now);
-    const toDate = new Date(fromDate);
-    toDate.setDate(toDate.getDate() - 29); // Sets toDate to 29 days before fromDate
+    const fromDate = new Date(utcCurrentDate.getTime() - 7 * 60 * 60 * 1000); // Trừ đi 7 giờ
+    const toDate = new Date(fromDate.getTime() - 29 * 24 * 60 * 60 * 1000); // Lùi lại 29 ngày
 
-    const formattedFromDate = fromDate.toISOString();
-    const formattedToDate = toDate.toISOString();
     const params = {
       betList: "RUNNING",
-      fromDate: formattedFromDate,
-      toDate: formattedToDate,
+      fromDate: fromDate,
+      toDate: toDate,
     };
     const url = `${HOST_API_P88}?betList=RUNNING&fromDate=${params.fromDate}&toDate=${params.toDate}`;
     try {
