@@ -20,7 +20,7 @@
   background-color: var(--backgroundColor-main);
   border-bottom: 1px solid #223a76;
   border-radius: 0;
-  position: relative; /* Để pseudo-element hoạt động */
+  /* position: relative; */
 }
 
 .tabsList::after {
