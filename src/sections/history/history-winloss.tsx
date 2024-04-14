@@ -32,12 +32,7 @@ const HistoryWinLoss = () => {
     const formattedFromDate = formatDateTime(toDate);
     const formattedToDate = formatDateTime(fromDate);
 
-    const params = {
-      betList: "RUNNING",
-      fromDate: formattedFromDate,
-      toDate: formattedToDate,
-    };
-    const url = `${HOST_API_P88}?betList=SETTLED&fromDate=${params.fromDate}&toDate=${params.toDate}`;
+    const url = `${HOST_API_P88}?betList=SETTLED&fromDate=${formattedFromDate}&toDate=${formattedToDate}`;
     try {
       setLoading(true);
       const response = await axiosInstance.post("proxy/call_api", {
@@ -61,9 +56,11 @@ const HistoryWinLoss = () => {
   useEffect(() => {
     if (telegram?.user?.id) {
       fetchBetHistory(telegram?.user?.id);
+      telegram.webApp?.expand();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [telegram?.user?.id]);
+
   const [date, setDate] = useState<DateRange | undefined>({
     from: new Date(),
     // to: addDays(new Date(2022, 0, 20), 20),

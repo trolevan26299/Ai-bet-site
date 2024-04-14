@@ -1,22 +1,15 @@
 "use client";
 
 import { Tabs, TabsContent, TabsList, TabsTriggerHistory } from "@/components/ui/tabs";
-import { useTelegram } from "@/context/telegram.provider";
 import MainLayout from "@/layouts/main/layout";
 import { Icon } from "@iconify/react";
-import "../index.css";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import HistoryOutstanding from "../history-outstanding";
 import HistoryWinLoss from "../history-winloss";
+import "../index.css";
 
 const HistoryView = () => {
-  const telegram = useTelegram();
   const [selectedTab, setSelectedTab] = useState("1");
-
-  useEffect(() => {
-    telegram.webApp?.expand();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
   return (
     <MainLayout>
       <Tabs defaultValue="1" className="w-full h-[95%]">
