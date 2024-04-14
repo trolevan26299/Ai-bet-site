@@ -25,20 +25,21 @@
 .tabsList::after {
   content: "";
   position: absolute;
-  bottom: -1px; /* Đặt ngay dưới border của TabsList */
-  height: 2px; /* Độ dày của border mới */
-  width: 50%; /* Chiều dài của border mới */
-  background-color: #ff453a; /* Màu mặc định */
+  bottom: 0;
+  height: 4px;
+  width: 50%;
+  background: linear-gradient(to right, #f7b502 0%, #ff453a 100%);
+  border-radius: 2px 2px 0 0;
   transition: all 0.3s;
 }
 
-/* Sử dụng JS để thêm class này vào TabsList khi tab tương ứng được chọn */
 .borderLeft::after {
   left: 0;
-  background-color: #f7b502; /* Màu khi tab 'Cược đang chờ' được chọn */
+  background: linear-gradient(to right, #f7b502 0%, #f7b502 50%, transparent 100%);
+  border-top-right-radius: 0;
 }
-
 .borderRight::after {
   right: 0;
-  background-color: #ff453a; /* Màu khi tab 'Cược đã kết thúc' được chọn */
+  background: linear-gradient(to left, #ff453a 0%, #ff453a 50%, transparent 100%);
+  border-top-left-radius: 0;
 }
