@@ -31,7 +31,7 @@ export const convertToGMT7 = (dateTimeString: string, type: string) => {
 
   if (type === "date") {
     const oneDay = 24 * 60 * 60 * 1000;
-    const diffDays = Math.floor((dateTime.getTime() - currentDate.getTime()) / oneDay);
+    const diffDays = (dateTime.getTime() - currentDate.getTime()) / oneDay;
 
     if (diffDays === 1 || (diffDays === 0 && dateTime.getUTCHours() === 0)) {
       return "Ngày mai";
