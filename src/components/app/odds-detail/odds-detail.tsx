@@ -132,7 +132,6 @@ function RenderAccordion({
     showBlink: false,
   });
   const [disableBtn, setDisableBtn] = useState(false);
-  console.log("oddName", oddsName);
   const handleConfirmBet = async () => {
     setDisableBtn(true);
     const data = {

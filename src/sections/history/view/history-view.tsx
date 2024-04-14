@@ -117,7 +117,6 @@ const HistoryView = () => {
       starts: "12-4-2024",
     },
   ];
-  console.log("telegram", telegram?.user?.id);
 
   // hàm check xem đã có username và password trong localStorage chưa, nếu chưa thì lấy từ server và lưu vào localsStorage
   // useEffect(() => {

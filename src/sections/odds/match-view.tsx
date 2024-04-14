@@ -75,11 +75,15 @@ export default function MatchView() {
         });
       });
 
-      setOdds(latestOdds);
-      setDataScreenInfo(newData);
-      setLatestOdds(transformedData as unknown as IOddsDetail[]);
-      setLive(newData[0].liveStatus);
-      setOddsStatus(newOddsStatus);
+      if (newData && newData.length > 0) {
+        setOdds(latestOdds);
+        setDataScreenInfo(newData);
+        setLatestOdds(transformedData as unknown as IOddsDetail[]);
+        setLive(newData[0].liveStatus);
+        setOddsStatus(newOddsStatus);
+      } else {
+        console.log("No new data received or data fetch failed");
+      }
     }
 
     const intervalId = setInterval(fetchAndUpdateOdds, 5000);
