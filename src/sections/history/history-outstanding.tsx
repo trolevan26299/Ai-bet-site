@@ -53,9 +53,11 @@ const HistoryOutstanding = () => {
   useEffect(() => {
     if (telegram?.user?.id) {
       fetchBetHistory(telegram?.user?.id);
+      telegram.webApp?.expand();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [telegram?.user?.id]);
+
   return (
     <>
       {loading ? (
