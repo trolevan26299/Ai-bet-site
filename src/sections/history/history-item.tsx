@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import React from "react";
 import { Icon } from "@iconify/react";
 import { IHistoryBet } from "@/types/history.type";
-import { utcToUtc7, utcToUtc7Format } from "@/utils/time";
+import { utcToUtc7Format } from "@/utils/time";
 
 const HistoryItem = ({ dataDetail, type }: { dataDetail: IHistoryBet; type?: string }) => {
   return (
