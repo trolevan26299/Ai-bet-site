@@ -28,19 +28,16 @@
   bottom: 0;
   height: 4px;
   width: 40%;
-  background-blend-mode: color-dodge;
-  background-image: #60d1ff;
+  background: #60d1ff;
   border-radius: 2px 2px 0 0;
   transition: all 0.3s;
 }
 
 .borderLeft::after {
   left: 10px;
-  background-image: #60d1ff;
-  border-top-right-radius: 0;
+  background: #60d1ff;
 }
 .borderRight::after {
   right: 10px;
-  background-image: #60d1ff;
-  border-top-left-radius: 0;
+  background: #60d1ff;
 }
