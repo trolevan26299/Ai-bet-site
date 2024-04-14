@@ -102,7 +102,7 @@ const HistoryWinLoss = () => {
               <PopoverTrigger asChild>
                 <button
                   id="date"
-                  className={`w-full flex  justify-between text-left rounded-full border-none bg-[#28374a] text-text-main text-sm font-medium",
+                  className={`w-full flex  justify-between items-center h-8 px-[10px] text-left rounded-full border-none bg-[#28374a] text-text-main text-sm font-medium",
                     ${!date && "text-muted-foreground"}`}
                 >
                   {date?.from ? (
