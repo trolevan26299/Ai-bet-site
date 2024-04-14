@@ -172,7 +172,7 @@ const HistoryView = () => {
         </TabsContent>
 
         <TabsContent value="2">
-          <HistoryWinLoss historyData={historyData.filter((item: any) => item.betList === "SETTLED")} />
+          <HistoryWinLoss />
         </TabsContent>
       </Tabs>
     </MainLayout>
