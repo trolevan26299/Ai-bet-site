@@ -80,7 +80,7 @@ const HistoryWinLoss = () => {
           <SplashScreen />
         </div>
       ) : (
-        <div className="mt-12 px-3">
+        <div className="px-3">
           <Tabs defaultValue="1" className="w-full">
             <TabsList className="scrollable-tabs w-full rounded-none h-[46px] flex flex-grow justify-between  bg-backgroundColor-main overflow-x-scroll scroll-smooth">
               <TabsTriggerDate value="1" onClick={() => setDate({ from: new Date() })}>
