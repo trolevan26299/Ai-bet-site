@@ -15,6 +15,7 @@ import { useEffect, useState } from "react";
 import { DateRange } from "react-day-picker";
 import HistoryItem from "./history-item";
 import "./index.css";
+import Image from "next/image";
 
 const HistoryWinLoss = () => {
   const telegram = useTelegram();
@@ -86,7 +87,7 @@ const HistoryWinLoss = () => {
           <SplashScreen />
         </div>
       ) : (
-        <div className="px-3 mt-[45px]">
+        <div className="px-3 mt-[45px] h-full">
           <Tabs defaultValue="1" className="w-full">
             <TabsList className="scrollable-tabs px-0 w-full rounded-none h-[46px] flex flex-grow justify-between  bg-backgroundColor-main overflow-x-scroll scroll-smooth">
               <TabsTriggerDate value="1" onClick={() => setDate({ from: new Date() })}>
@@ -178,11 +179,24 @@ const HistoryWinLoss = () => {
           </div>
 
           <div className="h-full">
-            <div className="pb-3">
-              {historyWinLose.map((item: any) => {
-                return <HistoryItem key={item.betId} dataDetail={item} />;
-              })}
-            </div>
+            {historyWinLose.length === 0 ? (
+              <div className="h-full  flex flex-col justify-center items-center mt-[30%]">
+                <Image
+                  src="/assets/no-content.png"
+                  alt="no-content"
+                  width={165}
+                  height={170}
+                  className=" h-[170px] mr-5"
+                />
+                <p className="pt-4 text-base text-slate-500 font-semibold">Không có vé cược nào</p>
+              </div>
+            ) : (
+              <div className="pb-3">
+                {historyWinLose.map((item: any) => {
+                  return <HistoryItem key={item.betId} dataDetail={item} />;
+                })}
+              </div>
+            )}
           </div>
         </div>
       )}
