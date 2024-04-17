@@ -3,17 +3,23 @@ import React from "react";
 import { Icon } from "@iconify/react";
 import { IHistoryBet } from "@/types/history.type";
 import { utcToUtc7Format } from "@/utils/time";
+import { getBackgroundByBetStatus, getValueByBetStatus } from "@/utils/renderInfoByBetStatus";
 
 const HistoryItem = ({ dataDetail, type }: { dataDetail: IHistoryBet; type?: string }) => {
   return (
-    <div className="h-[288px] rounded-[10px] bg-[rgba(40,55,74,0.5)] p-2 w-full mt-3 font-sans">
+    <div className={`h-[${type ? "288px" : "300px"}] rounded-[10px] bg-[rgba(40,55,74,0.5)] p-2 w-full mt-3 font-sans`}>
       <div className="flex flex-row items-center justify-between  pb-1" style={{ borderBottom: "1px solid #223a76" }}>
         <div className="tracking-wide">
           <p className="text-sm text-text-main">ID:{dataDetail.betId} </p>
           <span className="text-xs text-[rgba(235,235,245,0.6)] ">{utcToUtc7Format(dataDetail.placedAt)}</span>
         </div>
-        <div className="rounded-full w-[103px] bg-[#f7b502] h-7 flex flex-row justify-center items-center text-[#fafafa] text-sm font-medium ">
-          {type ? "Đang chạy" : "Winlose"}
+        <div
+          className={`rounded-full w-[103px] ${getBackgroundByBetStatus(
+            "winlose",
+            dataDetail.betStatus
+          )} bg-[#f7b502] h-7 flex flex-row justify-center items-center text-[#fafafa] text-sm font-medium `}
+        >
+          {type ? "Đang chạy" : getValueByBetStatus("winlose", dataDetail.betStatus)}
         </div>
       </div>
       <div style={{ borderBottom: "1px solid #223a76" }} className="pb-3">
@@ -53,6 +59,12 @@ const HistoryItem = ({ dataDetail, type }: { dataDetail: IHistoryBet; type?: str
               <p className="text-text-noActive text-sm w-[84px]">Thắng :</p>
               <p className="text-text-main text-sm font-semibold">{dataDetail.win}</p>
             </div>
+            {!type && (
+              <div className="flex flex-grow items-start justify-start">
+                <p className="text-text-noActive text-sm w-[84px]">Hoa hồng :</p>
+                <p className="text-text-main text-sm font-semibold">{dataDetail.customerCommission}</p>
+              </div>
+            )}
           </div>
         </div>
       </div>

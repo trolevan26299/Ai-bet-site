@@ -51,6 +51,11 @@ const HistoryWinLoss = () => {
     }
   };
 
+  // tổng cược
+  const totalBetMoney = historyWinLose.reduce((total, item) => total + item.risk, 0);
+  const totalCommission = historyWinLose.reduce((total, item) => total + item.customerCommission, 0);
+  const totalWinLoss = historyWinLose.reduce((total, item) => total + (item?.winLoss || 0), 0);
+
   // useEffect(() => {
   //   if (telegram?.user?.id) {
   //     fetchBetHistory(telegram?.user?.id);
@@ -147,21 +152,27 @@ const HistoryWinLoss = () => {
             <div className="flex flex-grow justify-between items-center w-full">
               <div className="flex flex-grow items-center justify-start w-1/2">
                 <p className="text-sm font-normal pr-1">Tổng cược :</p>
-                <p className="text-base font-medium">5.00</p>
+                <p className="text-base font-medium">{totalBetMoney}</p>
               </div>
               <div className="flex flex-grow items-center justify-end">
                 <p className="text-sm font-normal pr-1">Thắng/Thua :</p>
-                <p className="text-base font-medium text-[#ff453a]">-1.5</p>
+                <p
+                  className={`text-base font-medium ${
+                    totalWinLoss > 0 ? "text-[#34c759]" : totalWinLoss < 0 ? "text-[#ff453a]" : "text-[#fff]"
+                  }`}
+                >
+                  {totalWinLoss}
+                </p>
               </div>
             </div>
             <div className="flex flex-grow justify-between items-center w-full">
               <div className="flex flex-grow items-center justify-start  w-1/2">
                 <p className="text-sm font-normal pr-1">Tổng vé :</p>
-                <p className="text-base font-medium">5</p>
+                <p className="text-base font-medium">{historyWinLose.length}</p>
               </div>
               <div className="flex flex-grow items-center justify-end">
                 <p className="text-sm font-normal pr-1">Tổng hoa hồng :</p>
-                <p className="text-base font-medium">1.2</p>
+                <p className="text-base font-medium">{totalCommission}</p>
               </div>
             </div>
           </div>

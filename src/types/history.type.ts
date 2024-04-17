@@ -14,7 +14,7 @@ export type IHistoryBet = {
   win: number;
   risk: number;
   side?: string;
-  winLoss: null;
+
   oddsFormat: string;
   customerCommission: number;
   updateSequence: number;
@@ -31,4 +31,5 @@ export type IHistoryBet = {
   isLive: string;
   eventStartTime: string;
   resultingUnit: string;
+  winLoss?: number;
 };
