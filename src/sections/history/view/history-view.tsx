@@ -7,12 +7,15 @@ import { useState } from "react";
 import HistoryOutstanding from "../history-outstanding";
 import HistoryWinLoss from "../history-winloss";
 import "../index.css";
+import { useSearchParams } from "next/navigation";
 
 const HistoryView = () => {
-  const [selectedTab, setSelectedTab] = useState("1");
+  const searchParams = useSearchParams();
+  const tabParam = searchParams.get("tab");
+  const [selectedTab, setSelectedTab] = useState(tabParam === "winloss" ? "2" : "1");
   return (
     <MainLayout>
-      <Tabs defaultValue="1" className="w-full h-[95%]">
+      <Tabs defaultValue={tabParam === "winloss" ? "2" : "1"} className="w-full h-[95%]">
         <TabsList className={`tabsList bg-backgroundColor-main ${selectedTab === "1" ? "borderLeft" : "borderRight"}`}>
           <TabsTriggerHistory
             value="1"
