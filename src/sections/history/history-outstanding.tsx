@@ -59,7 +59,7 @@ const HistoryOutstanding = () => {
           <SplashScreen />
         </div>
       ) : (
-        <div>
+        <div className="h-full">
           <div className="fixed top-[46px] h-12 w-full flex flex-grow items-center bg-backgroundColor-main px-3">
             <div className="flex flex-grow items-center text-text-main w-full">
               <div className="flex flex-grow items-center justify-start">
