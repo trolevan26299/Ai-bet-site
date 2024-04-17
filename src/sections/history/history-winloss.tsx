@@ -1,25 +1,24 @@
-import { Button } from "@/components/ui/button";
+import { SplashScreen } from "@/components/loading-screen";
 import { Calendar } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Tabs, TabsList, TabsTriggerDate } from "@/components/ui/tabs";
-import { cn } from "@/lib/utils";
+import { HOST_API_P88 } from "@/config-global";
+import { useTelegram } from "@/context/telegram.provider";
+import { IHistoryBet } from "@/types/history.type";
+import { axiosInstance } from "@/utils/axios";
 import { locale } from "@/utils/configCenlendarToVN";
+import { formatDateTime } from "@/utils/time";
 import { Icon } from "@iconify/react";
 import { CalendarIcon } from "@radix-ui/react-icons";
 import { addDays, format } from "date-fns";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { DateRange } from "react-day-picker";
 import HistoryItem from "./history-item";
 import "./index.css";
-import { IHistoryBet } from "@/types/history.type";
-import { formatDateTime } from "@/utils/time";
-import { HOST_API_P88 } from "@/config-global";
-import { axiosInstance } from "@/utils/axios";
-import { SplashScreen } from "@/components/loading-screen";
-import { useTelegram } from "@/context/telegram.provider";
 
 const HistoryWinLoss = () => {
   const telegram = useTelegram();
+  console.log("telegram?.user?.id:", telegram?.user?.id);
   const [historyWinLose, setHistoryWinLose] = useState<IHistoryBet[]>([]);
   const [loading, setLoading] = useState(true);
   const fetchBetHistory = async (user_id: number) => {
@@ -40,7 +39,6 @@ const HistoryWinLoss = () => {
         method: "GET",
         user_id,
       });
-      console.log("response", response);
       setLoading(false);
       if (!response.data || response.data.error) {
         throw new Error("Request failed");
