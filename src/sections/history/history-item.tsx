@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import React from "react";
 import { Icon } from "@iconify/react";
 import { IHistoryBet } from "@/types/history.type";
-import { utcToUtc7Format } from "@/utils/time";
+import { utcToUtc7Format, utcToUtc7FormatNoSecond } from "@/utils/time";
 import { getBackgroundByBetStatus, getValueByBetStatus } from "@/utils/renderInfoByBetStatus";
 
 const HistoryItem = ({ dataDetail, type }: { dataDetail: IHistoryBet; type?: string }) => {
@@ -73,7 +73,18 @@ const HistoryItem = ({ dataDetail, type }: { dataDetail: IHistoryBet; type?: str
         <p className="text-sm text-[rgba(235,235,245,0.6)] font-normal">
           {dataDetail.team1} - vs - {dataDetail.team2}
         </p>
-        <p className="text-text-main font-normal text-sm">{utcToUtc7Format(dataDetail.eventStartTime)}</p>
+        <p className="text-text-main font-normal text-sm">
+          {utcToUtc7FormatNoSecond(dataDetail.eventStartTime)}{" "}
+          {!type && (
+            <span>
+              {dataDetail.periodNumber === 0 ? " - Cả trận :" : " - Nửa trận :"}{" "}
+              <span className={`${dataDetail.periodNumber === 0 ? "text-[#4181ff]" : "text-[#ffe665]"}`}>
+                [{dataDetail.periodNumber === 0 ? dataDetail.ftTeam1Score : dataDetail.pTeam1Score}-
+                {dataDetail.periodNumber === 0 ? dataDetail.ftTeam2Score : dataDetail.pTeam2Score}]
+              </span>
+            </span>
+          )}
+        </p>
       </div>
     </div>
   );

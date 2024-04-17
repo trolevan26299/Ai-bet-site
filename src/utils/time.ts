@@ -32,6 +32,10 @@ export const utcToUtc7Format = (utcDateString: string) => {
   const date = new Date(utcDateString);
   return format(date, "dd/MM/yy HH:mm:ss");
 };
+export const utcToUtc7FormatNoSecond = (utcDateString: string) => {
+  const date = new Date(utcDateString);
+  return format(date, "dd/MM/yy HH:mm");
+};
 
 export const formatDateTime = (dateTime: Date) => {
   const year = dateTime.getFullYear();
