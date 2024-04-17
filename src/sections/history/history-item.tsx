@@ -30,7 +30,7 @@ const HistoryItem = ({ dataDetail, type }: { dataDetail: IHistoryBet; type?: str
               <Icon icon="fluent:live-20-filled" width={20} height={18} color="rgba(255,69,58,1)" className="mr-1" />
             )}
             <p className="text-sm text-text-main font-semibold ">
-              {dataDetail.sportId === 29 ? "Bóng đá" : "Game"} / {dataDetail.isLive && "Trực tiếp"}{" "}
+              {dataDetail.sportId === 29 ? "Bóng đá" : "Game"} / {dataDetail.isLive === "TRUE" ? "Trực tiếp" : ""}{" "}
               {dataDetail.periodNumber === 0 ? "Toàn trận" : "Hiệp 1"} -{" "}
               {dataDetail.betType === "TOTAL_POINTS" ? "Tài xỉu" : "Cược chấp"}
             </p>
@@ -55,10 +55,24 @@ const HistoryItem = ({ dataDetail, type }: { dataDetail: IHistoryBet; type?: str
               <p className="text-text-noActive text-sm w-[84px]">Mạo hiểm :</p>
               <p className="text-text-main text-sm font-semibold">{dataDetail.risk}</p>
             </div>
-            <div className="flex flex-grow items-start justify-start">
-              <p className="text-text-noActive text-sm w-[84px]">Thắng :</p>
-              <p className="text-text-main text-sm font-semibold">{dataDetail.win}</p>
-            </div>
+            {type ? (
+              <div className="flex flex-grow items-start justify-start">
+                <p className="text-text-noActive text-sm w-[84px]">Thắng :</p>
+                <p className="text-text-main text-sm font-semibold">{dataDetail.win}</p>
+              </div>
+            ) : (
+              <div className="flex flex-grow items-start justify-start">
+                <p className="text-text-noActive text-sm w-[84px]">Thắng/Thua :</p>
+                <p
+                  className={`text-text-main text-sm font-semibold ${
+                    dataDetail?.winLoss || 0 > 0 ? "#34c759" : "#ff453a"
+                  }`}
+                >
+                  {dataDetail.winLoss}
+                </p>
+              </div>
+            )}
+
             {!type && (
               <div className="flex flex-grow items-start justify-start">
                 <p className="text-text-noActive text-sm w-[84px]">Hoa hồng :</p>
