@@ -18,7 +18,7 @@ import "./index.css";
 
 const HistoryWinLoss = () => {
   const telegram = useTelegram();
-  console.log("telegram?.user?.id:", telegram?.user?.id);
+
   const [historyWinLose, setHistoryWinLose] = useState<IHistoryBet[]>([]);
   const [loading, setLoading] = useState(true);
   const fetchBetHistory = async (user_id: number) => {
@@ -51,13 +51,19 @@ const HistoryWinLoss = () => {
     }
   };
 
+  // useEffect(() => {
+  //   if (telegram?.user?.id) {
+  //     fetchBetHistory(telegram?.user?.id);
+  //     telegram.webApp?.expand();
+  //   }
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [telegram?.user?.id]);
   useEffect(() => {
-    if (telegram?.user?.id) {
-      fetchBetHistory(telegram?.user?.id);
-      telegram.webApp?.expand();
-    }
+    fetchBetHistory(6359530967);
+    telegram.webApp?.expand();
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [telegram?.user?.id]);
+  }, []);
 
   const [date, setDate] = useState<DateRange | undefined>({
     from: new Date(),
@@ -117,7 +123,7 @@ const HistoryWinLoss = () => {
                   <CalendarIcon className="mr-2 h-5 w-5" />
                 </button>
               </PopoverTrigger>
-              <PopoverContent className="p-0 w-full" align="center">
+              <PopoverContent className="p-0 w-full bg-[rgba(40,55,74,1)] " align="center">
                 <Calendar
                   className="w-full rounded-2xl"
                   initialFocus
