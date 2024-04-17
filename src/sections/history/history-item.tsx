@@ -65,7 +65,7 @@ const HistoryItem = ({ dataDetail, type }: { dataDetail: IHistoryBet; type?: str
                 <p className="text-text-noActive text-sm w-[84px]">Thắng/Thua :</p>
                 <p
                   className={`text-text-main text-sm font-semibold ${
-                    dataDetail?.winLoss || 0 > 0 ? "#34c759" : "#ff453a"
+                    dataDetail?.winLoss || 0 > 0 ? "text-[#34c759]" : "text-[#ff453a]"
                   }`}
                 >
                   {dataDetail.winLoss}
