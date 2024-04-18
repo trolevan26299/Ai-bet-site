@@ -11,6 +11,7 @@ import { useEffect, useState } from "react";
 import { SplashScreen } from "@/components/loading-screen";
 import { useTelegram } from "@/context/telegram.provider";
 import Image from "next/image";
+import { ColumnSpacingIcon } from "@radix-ui/react-icons";
 
 export default function MatchView() {
   const searchParams = useSearchParams();
@@ -40,6 +41,7 @@ export default function MatchView() {
     async function fetchAndSetInitialOdds() {
       setLoading(true);
       const newData = await fetchOddsData(payload);
+      console.log("newData:", newData);
       if (newData) {
         if (newData.length === 0) {
           const transformedData = transformData(newData);
@@ -50,6 +52,7 @@ export default function MatchView() {
           setLoading(false);
         } else {
           setEndBet(true);
+          setLoading(false);
         }
       }
     }
