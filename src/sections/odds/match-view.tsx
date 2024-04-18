@@ -11,7 +11,6 @@ import { useEffect, useState } from "react";
 import { SplashScreen } from "@/components/loading-screen";
 import { useTelegram } from "@/context/telegram.provider";
 import Image from "next/image";
-import { ColumnSpacingIcon } from "@radix-ui/react-icons";
 
 export default function MatchView() {
   const searchParams = useSearchParams();
@@ -40,20 +39,18 @@ export default function MatchView() {
   useEffect(() => {
     async function fetchAndSetInitialOdds() {
       setLoading(true);
-      const newData = await fetchOddsData(payload);
-      console.log("newData:", newData);
-      if (newData) {
-        if (newData.length === 0) {
-          const transformedData = transformData(newData);
-          setDataScreenInfo(newData);
-          setOdds(transformedData as unknown as IOddsDetail[]);
-          setLatestOdds(transformedData as unknown as IOddsDetail[]);
-          telegram.webApp?.expand();
-          setLoading(false);
-        } else {
-          setEndBet(true);
-          setLoading(false);
-        }
+      try {
+        const newData = await fetchOddsData(payload);
+        const transformedData = transformData(newData);
+        setDataScreenInfo(newData);
+        setOdds(transformedData as unknown as IOddsDetail[]);
+        setLatestOdds(transformedData as unknown as IOddsDetail[]);
+        telegram.webApp?.expand();
+        setLoading(false);
+      } catch (error) {
+        console.log("error:", error);
+        setLoading(false);
+        setEndBet(true);
       }
     }
 
