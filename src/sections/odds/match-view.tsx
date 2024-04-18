@@ -103,7 +103,7 @@ export default function MatchView() {
       {loading ? (
         <SplashScreen />
       ) : endBet ? (
-        <div className="h-[97vh] w-full flex flex-grow justify-center items-center">
+        <div className="h-[97vh] w-full flex flex-col justify-center items-center">
           <Image src="/assets/ball.png" alt="no-content" className="w-[165px] h-[170px] mr-5" />
           <p className="pt-4 text-base text-slate-500 font-semibold">Trận đấu không tồn tại hoặc đã kết thúc</p>
         </div>
