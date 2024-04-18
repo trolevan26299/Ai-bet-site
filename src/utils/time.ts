@@ -47,3 +47,13 @@ export const formatDateTime = (dateTime: Date) => {
 
   return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}Z`;
 };
+export const formatRangeTime = (dateTime: Date, type: string) => {
+  const year = dateTime.getFullYear();
+  const month = String(dateTime.getMonth() + 1).padStart(2, "0");
+  const day = String(dateTime.getDate()).padStart(2, "0");
+  const hours = type === "from" ? "00" : "23";
+  const minutes = type === "from" ? "00" : "59";
+  const seconds = type === "from" ? "00" : "59";
+
+  return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}Z`;
+};

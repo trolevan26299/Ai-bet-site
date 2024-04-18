@@ -7,30 +7,40 @@ import { useTelegram } from "@/context/telegram.provider";
 import { IHistoryBet } from "@/types/history.type";
 import { axiosInstance } from "@/utils/axios";
 import { locale } from "@/utils/configCenlendarToVN";
-import { formatDateTime } from "@/utils/time";
+import { formatRangeTime } from "@/utils/time";
 import { Icon } from "@iconify/react";
 import { CalendarIcon } from "@radix-ui/react-icons";
+import * as PopoverRD from "@radix-ui/react-popover";
 import { addDays, format } from "date-fns";
+import Image from "next/image";
 import { useEffect, useState } from "react";
 import { DateRange } from "react-day-picker";
 import HistoryItem from "./history-item";
 import "./index.css";
-import Image from "next/image";
 
 const HistoryWinLoss = () => {
   const telegram = useTelegram();
 
   const [historyWinLose, setHistoryWinLose] = useState<IHistoryBet[]>([]);
   const [loading, setLoading] = useState(true);
+
+  const [date, setDate] = useState<DateRange | undefined>({
+    from: new Date(),
+    // to: addDays(new Date(), 7),
+  });
+  const [selectedDate, setSelectedDate] = useState<DateRange | undefined>(date);
   const fetchBetHistory = async (user_id: number) => {
-    const currentDate = new Date();
+    // logic fo from Date
+    const currentDate = date?.from || new Date();
     const utcCurrentDate = new Date(currentDate.getTime() - currentDate.getTimezoneOffset() * 60000); // Chuyển về UTC0
+    const fromDate = new Date(utcCurrentDate.getTime() - 11 * 60 * 60 * 1000); // Trừ đi 7 giờ
 
-    const fromDate = new Date(utcCurrentDate.getTime() - 7 * 60 * 60 * 1000); // Trừ đi 7 giờ
-    const toDate = new Date(fromDate.getTime() - 29 * 24 * 60 * 60 * 1000); // Lùi lại 29 ngày
+    const toDate = date?.to || currentDate; // Lùi lại 29 ngày
+    const utcToDate = new Date(toDate.getTime() - toDate.getTimezoneOffset() * 60000);
+    const toDay = new Date(utcToDate.getTime() - 11 * 60 * 60 * 1000);
 
-    const formattedFromDate = formatDateTime(toDate);
-    const formattedToDate = formatDateTime(fromDate);
+    const formattedFromDate = formatRangeTime(fromDate, "from");
+    const formattedToDate = formatRangeTime(toDay, "today");
 
     const url = `${HOST_API_P88}?betList=SETTLED&fromDate=${formattedFromDate}&toDate=${formattedToDate}`;
     try {
@@ -57,30 +67,29 @@ const HistoryWinLoss = () => {
   const totalCommission = historyWinLose.reduce((total, item) => total + item.customerCommission, 0);
   const totalWinLoss = historyWinLose.reduce((total, item) => total + (item?.winLoss || 0), 0);
 
-  useEffect(() => {
-    if (telegram?.user?.id) {
-      fetchBetHistory(telegram?.user?.id);
-      telegram.webApp?.expand();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [telegram?.user?.id]);
   // useEffect(() => {
-  //   fetchBetHistory(6359530967);
-  //   telegram.webApp?.expand();
-
+  //   if (telegram?.user?.id) {
+  //     fetchBetHistory(telegram?.user?.id);
+  //     telegram.webApp?.expand();
+  //   }
   //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, []);
+  // }, [telegram?.user?.id]);
+  useEffect(() => {
+    fetchBetHistory(6359530967);
+    telegram.webApp?.expand();
 
-  const [date, setDate] = useState<DateRange | undefined>({
-    from: new Date(),
-    // to: addDays(new Date(2022, 0, 20), 20),
-  });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [date]);
 
   console.log("date", date);
   const setRange = (days: number) => {
-    const from = new Date();
-    const to = addDays(from, -days);
+    const from = addDays(new Date(), -days);
+    const to = new Date();
     setDate({ from, to });
+  };
+
+  const handleSaveDateCalendar = () => {
+    setDate(selectedDate);
   };
   return (
     <>
@@ -136,12 +145,19 @@ const HistoryWinLoss = () => {
                   className="w-full rounded-2xl"
                   initialFocus
                   mode="range"
-                  defaultMonth={date?.from}
-                  selected={date}
-                  onSelect={setDate}
+                  defaultMonth={selectedDate?.from}
+                  selected={selectedDate}
+                  onSelect={setSelectedDate}
                   numberOfMonths={1}
                   locale={locale}
                 />
+                <div className="flex flex-row justify-end items-center mr-7 gap-7 pb-2 text-sm">
+                  <PopoverRD.Close>
+                    <button className=" text-[#006ef8] font-semibold" onClick={handleSaveDateCalendar}>
+                      Xác nhận
+                    </button>
+                  </PopoverRD.Close>
+                </div>
               </PopoverContent>
             </Popover>
           </div>
