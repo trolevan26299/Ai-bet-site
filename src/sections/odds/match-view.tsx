@@ -47,10 +47,13 @@ export default function MatchView() {
         setLatestOdds(transformedData as unknown as IOddsDetail[]);
         telegram.webApp?.expand();
         setLoading(false);
-      } catch (error) {
-        console.log("error:", error);
-        setLoading(false);
-        setEndBet(true);
+      } catch (error: any) {
+        if (error.message === "Invalid match!") {
+          setLoading(false);
+          setEndBet(true);
+        } else {
+          console.log(error);
+        }
       }
     }
 
