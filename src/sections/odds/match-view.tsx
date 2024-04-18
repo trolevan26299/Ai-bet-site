@@ -10,6 +10,7 @@ import { transformData } from "@/utils/transformDataOdds";
 import { useEffect, useState } from "react";
 import { SplashScreen } from "@/components/loading-screen";
 import { useTelegram } from "@/context/telegram.provider";
+import Image from "next/image";
 
 export default function MatchView() {
   const searchParams = useSearchParams();
@@ -19,6 +20,7 @@ export default function MatchView() {
   const [oddsStatus, setOddsStatus] = useState<OddsStatusType>({});
   const [dataScreenInfo, setDataScreenInfo] = useState<IMatchData[]>([]);
   const [loading, setLoading] = useState(true);
+  const [endBet, setEndBet] = useState(false);
   const telegram = useTelegram();
 
   const matchParam = searchParams.get("match");
@@ -37,14 +39,19 @@ export default function MatchView() {
   useEffect(() => {
     async function fetchAndSetInitialOdds() {
       setLoading(true);
-      const newData: IMatchData[] = await fetchOddsData(payload);
-
-      const transformedData = transformData(newData);
-      setDataScreenInfo(newData);
-      setOdds(transformedData as unknown as IOddsDetail[]);
-      setLatestOdds(transformedData as unknown as IOddsDetail[]);
-      telegram.webApp?.expand();
-      setLoading(false);
+      const newData = await fetchOddsData(payload);
+      if (newData) {
+        if (newData.length === 0) {
+          const transformedData = transformData(newData);
+          setDataScreenInfo(newData);
+          setOdds(transformedData as unknown as IOddsDetail[]);
+          setLatestOdds(transformedData as unknown as IOddsDetail[]);
+          telegram.webApp?.expand();
+          setLoading(false);
+        } else {
+          setEndBet(true);
+        }
+      }
     }
 
     fetchAndSetInitialOdds();
@@ -92,6 +99,11 @@ export default function MatchView() {
     <MainLayout>
       {loading ? (
         <SplashScreen />
+      ) : endBet ? (
+        <div className="h-[97vh] w-full flex flex-grow justify-center items-center">
+          <Image src="/assets/ball.png" alt="no-content" className="w-[165px] h-[170px] mr-5" />
+          <p className="pt-4 text-base text-slate-500 font-semibold">Trận đấu không tồn tại hoặc đã kết thúc</p>
+        </div>
       ) : (
         <div className="p-3">
           <ScreenInfoMatch dataScreenInfo={dataScreenInfo} />
