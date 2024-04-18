@@ -41,7 +41,18 @@ const HistoryItem = ({ dataDetail, type }: { dataDetail: IHistoryBet; type?: str
             <p className="text-text-main">
               {dataDetail.betType === "SPREAD" ? dataDetail.teamName : dataDetail.side === "OVER" ? "Tài" : "Xỉu"}
             </p>
-            <p className={`${dataDetail.handicap >= 0 ? "text-[#34c759]" : "text-[#ff453a]"}`}>{dataDetail.handicap}</p>
+            <p
+              className={`${
+                dataDetail.handicap > 0
+                  ? "text-[#34c759]"
+                  : dataDetail.handicap < 0
+                  ? "text-[#ff453a]"
+                  : "text-text-main"
+              }`}
+            >
+              {dataDetail.handicap > 0 ? "+" : ""}
+              {dataDetail.handicap}
+            </p>
             <p className="text-text-main">@</p>
             <p className="text-[#ffe665]">{dataDetail.price}</p>
             <p className="text-text-main">({dataDetail.oddsFormat})</p>
@@ -64,11 +75,17 @@ const HistoryItem = ({ dataDetail, type }: { dataDetail: IHistoryBet; type?: str
               <div className="flex flex-grow items-start justify-start">
                 <p className="text-text-noActive text-sm w-[84px]">Thắng/Thua :</p>
                 <p
-                  className={` text-sm font-semibold ${
-                    dataDetail?.winLoss || 0 > 0 ? "text-[#34c759]" : "text-[#ff453a]"
+                  className={`text-sm font-semibold ${
+                    dataDetail && dataDetail.winLoss !== undefined
+                      ? dataDetail.winLoss > 0
+                        ? "text-[#34c759]"
+                        : dataDetail.winLoss < 0
+                        ? "text-[#ff453a]"
+                        : "text-text-main"
+                      : "text-text-main"
                   }`}
                 >
-                  {dataDetail.winLoss}
+                  {dataDetail && dataDetail.winLoss !== undefined ? dataDetail.winLoss : ""}
                 </p>
               </div>
             )}
