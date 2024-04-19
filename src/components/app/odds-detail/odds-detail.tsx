@@ -36,6 +36,9 @@ export default function OddsDetail({
     setOpenItems(value);
   };
 
+  console.log("odss1111111111111111111111111111111111111", odds);
+  console.log("oddsStatus2222222222222222222222222222222", oddsStatus);
+  console.log;
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
