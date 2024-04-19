@@ -75,7 +75,7 @@ const HistoryWinLoss = () => {
       telegram.webApp?.expand();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [telegram?.user?.id]);
+  }, [telegram?.user?.id, date]);
   // useEffect(() => {
   //   fetchBetHistory(6359530967);
   //   telegram.webApp?.expand();
