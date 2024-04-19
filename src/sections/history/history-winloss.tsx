@@ -26,9 +26,11 @@ const HistoryWinLoss = () => {
 
   const [date, setDate] = useState<DateRange | undefined>({
     from: new Date(),
-    // to: addDays(new Date(), 7),
   });
   const [selectedDate, setSelectedDate] = useState<DateRange | undefined>(date);
+
+  // tab onclick time
+  const [tab, setTabs] = useState("0");
   const fetchBetHistory = async (user_id: number) => {
     // logic fo from Date
     const currentDate = date?.from || new Date();
@@ -67,19 +69,19 @@ const HistoryWinLoss = () => {
   const totalCommission = historyWinLose.reduce((total, item) => total + item.customerCommission, 0);
   const totalWinLoss = historyWinLose.reduce((total, item) => total + (item?.winLoss || 0), 0);
 
-  useEffect(() => {
-    if (telegram?.user?.id) {
-      fetchBetHistory(telegram?.user?.id);
-      telegram.webApp?.expand();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [telegram?.user?.id]);
   // useEffect(() => {
-  //   fetchBetHistory(6359530967);
-  //   telegram.webApp?.expand();
-
+  //   if (telegram?.user?.id) {
+  //     fetchBetHistory(telegram?.user?.id);
+  //     telegram.webApp?.expand();
+  //   }
   //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [date]);
+  // }, [telegram?.user?.id]);
+  useEffect(() => {
+    fetchBetHistory(6359530967);
+    telegram.webApp?.expand();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [date]);
 
   console.log("date", date);
   const setRange = (days: number) => {
@@ -87,7 +89,15 @@ const HistoryWinLoss = () => {
     const to = new Date();
     setDate({ from, to });
   };
-
+  const handleTabClick = (days: number) => {
+    if (days === 0) {
+      setDate({ from: new Date() });
+      setTabs(days.toString());
+    } else if (days !== 0) {
+      setTabs(days.toString());
+      setRange(days);
+    }
+  };
   const handleSaveDateCalendar = () => {
     setDate(selectedDate);
   };
@@ -99,23 +109,19 @@ const HistoryWinLoss = () => {
         </div>
       ) : (
         <div className="px-3 mt-[45px] h-full">
-          <Tabs defaultValue="1" className="w-full">
+          <Tabs defaultValue={tab} value={tab} className="w-full">
             <TabsList className="scrollable-tabs px-0 w-full rounded-none h-[46px] flex flex-grow justify-between  bg-backgroundColor-main overflow-x-scroll scroll-smooth">
-              <TabsTriggerDate value="1" onClick={() => setDate({ from: new Date() })}>
-                Hôm nay
-              </TabsTriggerDate>
-              <TabsTriggerDate value="2" onClick={() => setRange(1)}>
-                Hôm qua
-              </TabsTriggerDate>
-              <TabsTriggerDate value="3" onClick={() => setRange(7)}>
-                7 ngày trước
-              </TabsTriggerDate>
-              <TabsTriggerDate value="4" onClick={() => setRange(14)}>
-                14 ngày trước
-              </TabsTriggerDate>
-              <TabsTriggerDate value="5" onClick={() => setRange(30)}>
-                30 ngày trước
-              </TabsTriggerDate>
+              {[
+                { label: "Hôm nay", days: 0 },
+                { label: "Hôm qua", days: 1 },
+                { label: "7 ngày trước", days: 7 },
+                { label: "14 ngày trước", days: 14 },
+                { label: "30 ngày trước", days: 30 },
+              ].map((item, index) => (
+                <TabsTriggerDate key={index} value={item.days.toString()} onClick={() => handleTabClick(item.days)}>
+                  {item.label}
+                </TabsTriggerDate>
+              ))}
             </TabsList>
           </Tabs>
           <div className="grid gap-2 w-full">
