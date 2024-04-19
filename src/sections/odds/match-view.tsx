@@ -19,9 +19,12 @@ export default function MatchView() {
   const [latestOdds, setLatestOdds] = useState<IOddsDetail[]>([]);
   const [oddsStatus, setOddsStatus] = useState<OddsStatusType>({});
   const [dataScreenInfo, setDataScreenInfo] = useState<IMatchData[]>([]);
+  const [dataUser, setDataUser] = useState<any>();
   const [loading, setLoading] = useState(true);
   const [endBet, setEndBet] = useState(false);
   const telegram = useTelegram();
+
+  console.log("dataUser", dataUser);
 
   const matchParam = searchParams.get("match");
   const payload = {
@@ -55,6 +58,21 @@ export default function MatchView() {
           console.log(error);
         }
       }
+    }
+
+    fetchAndSetInitialOdds();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  useEffect(() => {
+    async function fetchAndSetInitialOdds() {
+      const res = await fetch("/api/user", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      setDataUser(await res.json());
     }
 
     fetchAndSetInitialOdds();

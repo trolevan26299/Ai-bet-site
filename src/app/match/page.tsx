@@ -1,5 +1,3 @@
-"use client";
-
 import { MatchView } from "@/sections/odds";
 
 export default function Home() {
@@ -9,5 +7,6 @@ export default function Home() {
   //     telegram.webApp.headerColor = "rgba(18,32,46,1)";
   //   }
   // }, []);
+
   return <MatchView />;
 }
