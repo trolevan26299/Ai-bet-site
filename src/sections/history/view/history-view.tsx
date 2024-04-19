@@ -11,7 +11,7 @@ import { useSearchParams } from "next/navigation";
 
 const HistoryView = () => {
   const searchParams = useSearchParams();
-  const tabParam = searchParams.get("tab");
+  const tabParam = searchParams.get("tab") || "";
   const [selectedTab, setSelectedTab] = useState(tabParam === "winloss" ? "2" : "1");
   return (
     <MainLayout>
