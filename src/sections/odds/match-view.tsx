@@ -42,7 +42,6 @@ export default function MatchView() {
       setLoading(true);
       try {
         const res = await axios.post("/api/odds", payload);
-        console.log("============>res.data<===================", res.data);
         const transformedData = transformData(res.data);
         setDataScreenInfo(res.data);
         setOdds(transformedData as unknown as IOddsDetail[]);
@@ -64,8 +63,7 @@ export default function MatchView() {
 
   useEffect(() => {
     async function fetchAndUpdateOdds() {
-      const newData = await fetchOddsData(payload);
-
+      const newData = await axios.post("/api/odds", payload);
       const newOddsStatus: OddsStatusType = {};
       latestOdds?.forEach((latestOdd, index) => {
         latestOdd.detail?.forEach((latestDetail, detailIndex) => {
@@ -84,10 +82,10 @@ export default function MatchView() {
         });
       });
 
-      if (newData && newData.length > 0) {
-        const transformedData = transformData(newData);
+      if (newData && newData.data.length > 0) {
+        const transformedData = transformData(newData.data);
         setOdds(latestOdds);
-        setDataScreenInfo(newData);
+        setDataScreenInfo(newData.data);
         setLatestOdds(transformedData as unknown as IOddsDetail[]);
         setOddsStatus(newOddsStatus);
       } else {

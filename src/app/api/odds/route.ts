@@ -5,7 +5,6 @@ import { NextResponse } from "next/server";
 
 export async function POST(req: Request, res: NextApiResponse) {
   const body = await req.json();
-  console.log("============>body<===================", body);
   try {
     const response = await axiosInstance.post(endpoints.match, body);
     return NextResponse.json(response.data);
