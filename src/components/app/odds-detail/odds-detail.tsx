@@ -157,7 +157,7 @@ function RenderAccordion({
     console.log("response.data", response.data);
     setDisableBtn(false);
     if (response) {
-      telegram?.webApp?.close();
+      // telegram?.webApp?.close();
     }
   };
 
