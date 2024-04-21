@@ -64,15 +64,42 @@ export default function MatchView() {
   useEffect(() => {
     async function fetchAndSetInitialOdds() {
       try {
-        const res = await fetch("https://5648-103-119-154-221.ngrok-free.app/search/match", {
+        const res = await fetch("/api/odds", {
           method: "POST",
-          body: JSON.stringify(payload),
+          body: JSON.stringify({
+            title: "foo",
+            body: "bar",
+            userId: 1,
+          }),
           headers: {
-            "Content-Type": "application/json",
+            "Content-type": "application/json; charset=UTF-8",
+          },
+        });
+
+        if (res.ok) {
+          console.log("res GET METHOD:", await res.json());
+        } else {
+          console.log("Oops! Something is wrong.");
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    fetchAndSetInitialOdds();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  useEffect(() => {
+    async function fetchAndSetInitialOdds() {
+      try {
+        const res = await fetch("/api/odds", {
+          method: "GET",
+          headers: {
+            "Content-type": "application/json; charset=UTF-8",
           },
         });
         if (res.ok) {
-          console.log("res===========================:", res);
+          console.log("res POST METHOD:", await res.json());
         } else {
           console.log("Oops! Something is wrong.");
         }
