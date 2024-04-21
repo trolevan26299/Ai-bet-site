@@ -73,7 +73,7 @@ export default function MatchView() {
           },
         });
 
-        console.log("newData", res);
+        console.log("newData", res.json());
         // if (res.ok) {
         //   const transformedData = transformData(res);
         //   setDataScreenInfo(res);

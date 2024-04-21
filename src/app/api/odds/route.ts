@@ -13,7 +13,7 @@ export async function GET() {
 
 export async function POST(request: Request) {
   try {
-    const res = await axiosInstance.post(endpoints.match, request.body);
+    const res = await axios.post(`https://5648-103-119-154-221.ngrok-free.app/${endpoints.match}`, request.body);
     return NextResponse.json(res.data);
   } catch (error: any) {
     return NextResponse.json({ message: error.message });
