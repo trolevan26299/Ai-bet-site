@@ -37,17 +37,54 @@ export default function MatchView() {
   };
 
   // useEffect chỉ để fetch và set dữ liệu lần đầu tiên
+  // useEffect(() => {
+  //   async function fetchAndSetInitialOdds() {
+  //     setLoading(true);
+  //     try {
+  //       const newData = await fetchOddsData(payload);
+  //       const transformedData = transformData(newData);
+  //       setDataScreenInfo(newData);
+  //       setOdds(transformedData as unknown as IOddsDetail[]);
+  //       setLatestOdds(transformedData as unknown as IOddsDetail[]);
+  //       telegram.webApp?.expand();
+  //       setLoading(false);
+  //     } catch (error: any) {
+  //       if (error.message === "Invalid match!") {
+  //         setLoading(false);
+  //         setEndBet(true);
+  //       } else {
+  //         console.log(error);
+  //       }
+  //     }
+  //   }
+
+  //   fetchAndSetInitialOdds();
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, []);
   useEffect(() => {
     async function fetchAndSetInitialOdds() {
       setLoading(true);
       try {
-        const newData = await fetchOddsData(payload);
-        const transformedData = transformData(newData);
-        setDataScreenInfo(newData);
-        setOdds(transformedData as unknown as IOddsDetail[]);
-        setLatestOdds(transformedData as unknown as IOddsDetail[]);
-        telegram.webApp?.expand();
-        setLoading(false);
+        const res = await fetch("/api/odds", {
+          method: "POST",
+          body: JSON.stringify(payload),
+          headers: {
+            "Content-type": "application/json; charset=UTF-8",
+          },
+        });
+        const newData = await res.json();
+        console.log("newData", newData);
+        if (res.ok) {
+          const transformedData = transformData(newData);
+          setDataScreenInfo(newData);
+          setOdds(transformedData as unknown as IOddsDetail[]);
+          setLatestOdds(transformedData as unknown as IOddsDetail[]);
+          telegram.webApp?.expand();
+          setLoading(false);
+        } else {
+          setLoading(false);
+          console.log("Oops! Something is wrong.");
+        }
       } catch (error: any) {
         if (error.message === "Invalid match!") {
           setLoading(false);
@@ -61,47 +98,23 @@ export default function MatchView() {
     fetchAndSetInitialOdds();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  useEffect(() => {
-    async function fetchAndSetInitialOdds() {
-      try {
-        const res = await fetch("/api/odds", {
-          method: "POST",
-          body: JSON.stringify(payload),
-          headers: {
-            "Content-type": "application/json; charset=UTF-8",
-          },
-        });
+  // useEffect(() => {
+  //   async function fetchAndSetInitialOdds() {
+  //     try {
+  //       const res = await fetch("/api/odds");
+  //       if (res.ok) {
+  //         console.log("res GET METHOD:", await res.json());
+  //       } else {
+  //         console.log("Oops! Something is wrong.");
+  //       }
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   }
 
-        if (res.ok) {
-          console.log("res POST METHOD:", await res.json());
-        } else {
-          console.log("Oops! Something is wrong.");
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    }
-
-    fetchAndSetInitialOdds();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-  useEffect(() => {
-    async function fetchAndSetInitialOdds() {
-      try {
-        const res = await fetch("/api/odds");
-        if (res.ok) {
-          console.log("res GET METHOD:", await res.json());
-        } else {
-          console.log("Oops! Something is wrong.");
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    }
-
-    fetchAndSetInitialOdds();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  //   fetchAndSetInitialOdds();
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, []);
 
   useEffect(() => {
     async function fetchAndUpdateOdds() {
