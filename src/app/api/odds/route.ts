@@ -5,3 +5,9 @@ export async function GET() {
     message: "======================================fsdfsdfsdfsdfsdf",
   });
 }
+export async function POST(request: Request) {
+  const data = await request.json();
+  return NextResponse.json({
+    data,
+  });
+}

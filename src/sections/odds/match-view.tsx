@@ -24,8 +24,6 @@ export default function MatchView() {
   const [endBet, setEndBet] = useState(false);
   const telegram = useTelegram();
 
-  console.log("dataUser", dataUser);
-
   const matchParam = searchParams.get("match");
   const payload = {
     request_id: searchParams.get("request_id"),
@@ -65,14 +63,22 @@ export default function MatchView() {
   }, []);
   useEffect(() => {
     async function fetchAndSetInitialOdds() {
-      const res = await fetch("/api/user", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-
-      setDataUser(await res.json());
+      try {
+        const res = await fetch("https://5648-103-119-154-221.ngrok-free.app/search/match", {
+          method: "POST",
+          body: JSON.stringify(payload),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        if (res.ok) {
+          console.log("res===========================:", res);
+        } else {
+          console.log("Oops! Something is wrong.");
+        }
+      } catch (error) {
+        console.log(error);
+      }
     }
 
     fetchAndSetInitialOdds();
