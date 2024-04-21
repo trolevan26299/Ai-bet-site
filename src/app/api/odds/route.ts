@@ -11,9 +11,9 @@ import { NextResponse } from "next/server";
 //   }
 // }
 
-export async function POST(req: NextApiRequest, res: NextApiResponse) {
+export async function POST(req: Request) {
   try {
-    const response = await axios.post("https://5648-103-119-154-221.ngrok-free.app/search/match", JSON.parse(req.body));
+    const response = await axios.post("https://5648-103-119-154-221.ngrok-free.app/search/match", req.body);
     console.log("reqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq:", req);
     console.log("response:", response);
     return NextResponse.json(response);
