@@ -72,33 +72,29 @@ export default function MatchView() {
             "Content-type": "application/json; charset=UTF-8",
           },
         });
-        console.log("res:", res);
-        console.log("res.json():", await res.json());
+
         const newData = await res.json();
-        if (res.ok) {
-          const transformedData = transformData(newData);
-          setDataScreenInfo(newData);
-          setOdds(transformedData as unknown as IOddsDetail[]);
-          setLatestOdds(transformedData as unknown as IOddsDetail[]);
-          telegram.webApp?.expand();
-          setLoading(false);
-        } else {
-          setLoading(false);
-          console.log("Oops! Something is wrong.");
-        }
+        console.log("res:", res);
+        console.log("res.json():", newData);
+        const transformedData = transformData(newData);
+        setDataScreenInfo(newData);
+        setOdds(transformedData as unknown as IOddsDetail[]);
+        setLatestOdds(transformedData as unknown as IOddsDetail[]);
+        telegram.webApp?.expand();
       } catch (error: any) {
+        console.error("Error fetching initial odds:", error);
         if (error.message === "Invalid match!") {
-          setLoading(false);
           setEndBet(true);
-        } else {
-          console.log(error);
         }
+      } finally {
+        setLoading(false);
       }
     }
 
     fetchAndSetInitialOdds();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
   // useEffect(() => {
   //   async function fetchAndSetInitialOdds() {
   //     try {

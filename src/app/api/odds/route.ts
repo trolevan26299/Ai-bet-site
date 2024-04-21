@@ -1,5 +1,5 @@
 import axios from "axios";
-import { NextApiRequest } from "next";
+import { NextApiRequest, NextApiResponse } from "next";
 import { NextResponse } from "next/server";
 
 export async function GET() {
@@ -11,11 +11,12 @@ export async function GET() {
   }
 }
 
-export async function POST(req: NextApiRequest) {
+export async function POST(req: NextApiRequest, res: NextApiResponse) {
   try {
-    const res = await axios.post("https://5648-103-119-154-221.ngrok-free.app/search/match", req.body);
+    const response = await axios.post("https://5648-103-119-154-221.ngrok-free.app/search/match", JSON.parse(req.body));
     console.log("reqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq:", req);
-    return NextResponse.json(res.data);
+    console.log("response:", response);
+    return res.status(200).json(response.data);
   } catch (error: any) {
     console.log("reqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq:", error);
     return NextResponse.json({ message: error.message });
