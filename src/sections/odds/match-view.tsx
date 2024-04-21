@@ -66,18 +66,14 @@ export default function MatchView() {
       try {
         const res = await fetch("/api/odds", {
           method: "POST",
-          body: JSON.stringify({
-            title: "foo",
-            body: "bar",
-            userId: 1,
-          }),
+          body: JSON.stringify(payload),
           headers: {
             "Content-type": "application/json; charset=UTF-8",
           },
         });
 
         if (res.ok) {
-          console.log("res GET METHOD:", await res.json());
+          console.log("res POST METHOD:", await res.json());
         } else {
           console.log("Oops! Something is wrong.");
         }
@@ -92,14 +88,9 @@ export default function MatchView() {
   useEffect(() => {
     async function fetchAndSetInitialOdds() {
       try {
-        const res = await fetch("/api/odds", {
-          method: "GET",
-          headers: {
-            "Content-type": "application/json; charset=UTF-8",
-          },
-        });
+        const res = await fetch("/api/odds");
         if (res.ok) {
-          console.log("res POST METHOD:", await res.json());
+          console.log("res GET METHOD:", await res.json());
         } else {
           console.log("Oops! Something is wrong.");
         }
