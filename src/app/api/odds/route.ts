@@ -1,3 +1,4 @@
+import { axiosInstance, endpoints } from "@/utils/axios";
 import axios from "axios";
 import { NextResponse } from "next/server";
 
@@ -12,7 +13,7 @@ export async function GET() {
 
 export async function POST(request: Request) {
   try {
-    const res = await axios.post("https://jsonplaceholder.typicode.com/posts", request.body);
+    const res = await axiosInstance.post(endpoints.match, request.body);
     return NextResponse.json(res.data);
   } catch (error: any) {
     return NextResponse.json({ message: error.message });
