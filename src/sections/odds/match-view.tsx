@@ -11,6 +11,7 @@ import { useEffect, useState } from "react";
 import { SplashScreen } from "@/components/loading-screen";
 import { useTelegram } from "@/context/telegram.provider";
 import Image from "next/image";
+import axios from "axios";
 
 export default function MatchView() {
   const searchParams = useSearchParams();
@@ -65,19 +66,12 @@ export default function MatchView() {
     async function fetchAndSetInitialOdds() {
       setLoading(true);
       try {
-        const res = await fetch("/api/odds", {
-          method: "POST",
-          body: JSON.stringify(payload),
-          headers: {
-            "Content-type": "application/json; charset=UTF-8",
-          },
-        });
+        const res = await axios.post("/api/odds", payload);
 
-        const newData = await res.json();
         console.log("res:", res);
-        console.log("res.json():", newData);
-        const transformedData = transformData(newData);
-        setDataScreenInfo(newData);
+        console.log("res.json():", res);
+        const transformedData = transformData(res.data);
+        setDataScreenInfo(res.data);
         setOdds(transformedData as unknown as IOddsDetail[]);
         setLatestOdds(transformedData as unknown as IOddsDetail[]);
         telegram.webApp?.expand();
@@ -98,9 +92,9 @@ export default function MatchView() {
   // useEffect(() => {
   //   async function fetchAndSetInitialOdds() {
   //     try {
-  //       const res = await fetch("/api/odds");
-  //       if (res.ok) {
-  //         console.log("res GET METHOD:", await res.json());
+  //       const res = await axios.get("/api/odds");
+  //       if (res) {
+  //         console.log("res GET METHOD:", res);
   //       } else {
   //         console.log("Oops! Something is wrong.");
   //       }
