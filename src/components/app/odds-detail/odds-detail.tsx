@@ -152,12 +152,11 @@ function RenderAccordion({
       request_id: searchParams.get("request_id") || "",
       data: JSON.stringify(data),
     };
-    // const response = await betConfirm(body);
     const response = await axios.post("api/game", body);
-    console.log("response.data", response.data);
+
     setDisableBtn(false);
-    if (response) {
-      // telegram?.webApp?.close();
+    if (response?.data?.ok) {
+      telegram?.webApp?.close();
     }
   };
 

@@ -12,10 +12,10 @@ import { useSearchParams } from "next/navigation";
 const HistoryView = () => {
   const searchParams = useSearchParams();
   const tabParam = searchParams.get("tab") || "";
-  const [selectedTab, setSelectedTab] = useState(tabParam === "winloss" ? "2" : "1");
+  const [selectedTab, setSelectedTab] = useState(tabParam === "winlose" ? "2" : "1");
   return (
     <MainLayout>
-      <Tabs defaultValue={tabParam === "winloss" ? "2" : "1"} className="w-full h-[95%]">
+      <Tabs defaultValue={tabParam === "winlose" ? "2" : "1"} className="w-full h-[95%]">
         <TabsList className={`tabsList bg-backgroundColor-main ${selectedTab === "1" ? "borderLeft" : "borderRight"}`}>
           <TabsTriggerHistory
             value="1"
