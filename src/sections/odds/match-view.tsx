@@ -72,19 +72,19 @@ export default function MatchView() {
             "Content-type": "application/json; charset=UTF-8",
           },
         });
-        const newData = await res.json();
-        console.log("newData", newData);
-        if (res.ok) {
-          const transformedData = transformData(newData);
-          setDataScreenInfo(newData);
-          setOdds(transformedData as unknown as IOddsDetail[]);
-          setLatestOdds(transformedData as unknown as IOddsDetail[]);
-          telegram.webApp?.expand();
-          setLoading(false);
-        } else {
-          setLoading(false);
-          console.log("Oops! Something is wrong.");
-        }
+
+        console.log("newData", res);
+        // if (res.ok) {
+        //   const transformedData = transformData(res);
+        //   setDataScreenInfo(res);
+        //   setOdds(transformedData as unknown as IOddsDetail[]);
+        //   setLatestOdds(transformedData as unknown as IOddsDetail[]);
+        //   telegram.webApp?.expand();
+        //   setLoading(false);
+        // } else {
+        //   setLoading(false);
+        //   console.log("Oops! Something is wrong.");
+        // }
       } catch (error: any) {
         if (error.message === "Invalid match!") {
           setLoading(false);
