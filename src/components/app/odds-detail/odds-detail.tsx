@@ -20,6 +20,7 @@ import { m } from "framer-motion";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../../ui/accordion";
+import axios from "axios";
 
 export default function OddsDetail({
   odds,
@@ -151,7 +152,9 @@ function RenderAccordion({
       request_id: searchParams.get("request_id") || "",
       data: JSON.stringify(data),
     };
-    const response = await betConfirm(body);
+    // const response = await betConfirm(body);
+    const response = await axios.post("api/game", body);
+    console.log("response.data", response.data);
     setDisableBtn(false);
     if (response) {
       telegram?.webApp?.close();
