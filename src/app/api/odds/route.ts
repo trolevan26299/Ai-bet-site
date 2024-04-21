@@ -1,5 +1,5 @@
-import { axiosInstance, endpoints } from "@/utils/axios";
 import axios from "axios";
+import { NextApiRequest } from "next";
 import { NextResponse } from "next/server";
 
 export async function GET() {
@@ -11,9 +11,10 @@ export async function GET() {
   }
 }
 
-export async function POST(request: Request) {
+export async function POST(req: NextApiRequest) {
+  console.log("reqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq:", req);
   try {
-    const res = await axios.post(`https://5648-103-119-154-221.ngrok-free.app/${endpoints.match}`, request.body);
+    const res = await axios.post("https://5648-103-119-154-221.ngrok-free.app/search/match", req.body);
     return NextResponse.json(res.data);
   } catch (error: any) {
     return NextResponse.json({ message: error.message });
