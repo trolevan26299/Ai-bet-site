@@ -37,39 +37,12 @@ export default function MatchView() {
     filter_by: "and",
   };
 
-  // useEffect chỉ để fetch và set dữ liệu lần đầu tiên
-  // useEffect(() => {
-  //   async function fetchAndSetInitialOdds() {
-  //     setLoading(true);
-  //     try {
-  //       const newData = await fetchOddsData(payload);
-  //       const transformedData = transformData(newData);
-  //       setDataScreenInfo(newData);
-  //       setOdds(transformedData as unknown as IOddsDetail[]);
-  //       setLatestOdds(transformedData as unknown as IOddsDetail[]);
-  //       telegram.webApp?.expand();
-  //       setLoading(false);
-  //     } catch (error: any) {
-  //       if (error.message === "Invalid match!") {
-  //         setLoading(false);
-  //         setEndBet(true);
-  //       } else {
-  //         console.log(error);
-  //       }
-  //     }
-  //   }
-
-  //   fetchAndSetInitialOdds();
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, []);
   useEffect(() => {
     async function fetchAndSetInitialOdds() {
       setLoading(true);
       try {
         const res = await axios.post("/api/odds", payload);
-
-        console.log("res:", res);
-        console.log("res.json():", res);
+        console.log("============>res.data<===================", res.data);
         const transformedData = transformData(res.data);
         setDataScreenInfo(res.data);
         setOdds(transformedData as unknown as IOddsDetail[]);
@@ -88,24 +61,6 @@ export default function MatchView() {
     fetchAndSetInitialOdds();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  // useEffect(() => {
-  //   async function fetchAndSetInitialOdds() {
-  //     try {
-  //       const res = await axios.get("/api/odds");
-  //       if (res) {
-  //         console.log("res GET METHOD:", res);
-  //       } else {
-  //         console.log("Oops! Something is wrong.");
-  //       }
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   }
-
-  //   fetchAndSetInitialOdds();
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, []);
 
   useEffect(() => {
     async function fetchAndUpdateOdds() {

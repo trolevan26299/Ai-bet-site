@@ -36,9 +36,6 @@ export default function OddsDetail({
     setOpenItems(value);
   };
 
-  console.log("odss1111111111111111111111111111111111111", odds);
-  console.log("oddsStatus2222222222222222222222222222222", oddsStatus);
-  console.log;
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
@@ -270,7 +267,7 @@ function RenderAccordion({
           <div className=" py-4 px-4 mt-[-10px]">
             <div className="col-span-10 text-gray-300  flex flex-row items-center ">
               <Icon icon="ph:soccer-ball-fill" width="20px" height="20px" />
-              {dataScreenInfo.liveStatus && (
+              {dataScreenInfo?.liveStatus && (
                 <Icon icon="fluent:live-20-filled" className="ml-1" width={20} height={20} color="rgba(255,69,58,1)" />
               )}
               <p className="pl-2 text-base text-[#fafafa]">{oddsName}</p>
