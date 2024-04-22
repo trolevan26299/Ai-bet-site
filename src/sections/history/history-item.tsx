@@ -59,16 +59,16 @@ const HistoryItem = ({ dataDetail, type }: { dataDetail: IHistoryBet; type?: str
           <div className=" mt-3">
             <div className="flex flex-grow items-start justify-start">
               <p className="text-text-noActive text-sm w-[84px]">Cược :</p>
-              <p className="text-text-main text-sm font-semibold">{stake}</p>
+              <p className="text-text-main text-sm font-semibold">{stake.toFixed(2)}</p>
             </div>
             <div className="flex flex-grow items-start justify-start">
               <p className="text-text-noActive text-sm w-[84px]">Mạo hiểm :</p>
-              <p className="text-text-main text-sm font-semibold">{dataDetail.risk}</p>
+              <p className="text-text-main text-sm font-semibold">{dataDetail.risk.toFixed(2)}</p>
             </div>
             {type ? (
               <div className="flex flex-grow items-start justify-start">
                 <p className="text-text-noActive text-sm w-[84px]">Thắng :</p>
-                <p className="text-text-main text-sm font-semibold">{dataDetail.win}</p>
+                <p className="text-text-main text-sm font-semibold">{dataDetail.win.toFixed(2)}</p>
               </div>
             ) : (
               <div className="flex flex-grow items-start justify-start">
@@ -84,7 +84,7 @@ const HistoryItem = ({ dataDetail, type }: { dataDetail: IHistoryBet; type?: str
                       : "text-text-main"
                   }`}
                 >
-                  {dataDetail && dataDetail.winLoss !== undefined ? dataDetail.winLoss : ""}
+                  {dataDetail && dataDetail.winLoss !== undefined ? dataDetail.winLoss.toFixed(2) : ""}
                 </p>
               </div>
             )}
@@ -92,7 +92,7 @@ const HistoryItem = ({ dataDetail, type }: { dataDetail: IHistoryBet; type?: str
             {!type && (
               <div className="flex flex-grow items-start justify-start">
                 <p className="text-text-noActive text-sm w-[84px]">Hoa hồng :</p>
-                <p className="text-text-main text-sm font-semibold">{dataDetail.customerCommission}</p>
+                <p className="text-text-main text-sm font-semibold">{dataDetail.customerCommission.toFixed(2)}</p>
               </div>
             )}
           </div>
