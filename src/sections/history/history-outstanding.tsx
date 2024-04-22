@@ -16,7 +16,13 @@ const HistoryOutstanding = () => {
   const toDateParam = searchParams.get("to_date");
   const [loading, setLoading] = useState(true);
   const [historyOutStanding, setHistoryOutStanding] = useState<IHistoryBet[]>([]);
-  const totalBetMoney = historyOutStanding.reduce((total, item) => total + item.risk, 0);
+
+  // tổng cược
+  const totalBetMoney = historyOutStanding.reduce((total, item) => {
+    const stake = item.price > 0 ? item.risk : item.risk / -item.price;
+    return total + stake;
+  }, 0);
+
   const fetchBetHistory = async (user_id: number) => {
     const currentDate = new Date();
     const utcCurrentDate = new Date(currentDate.getTime() - currentDate.getTimezoneOffset() * 60000); // Chuyển về UTC0
