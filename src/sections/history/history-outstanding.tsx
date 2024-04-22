@@ -26,7 +26,7 @@ const HistoryOutstanding = () => {
     const url = `${HOST_API_P88}?betList=RUNNING&fromDate=${formattedFromDate}&toDate=${formattedToDate}`;
     try {
       setLoading(true);
-      const response = await axiosInstance.post("proxy/call_api", {
+      const response = await axios.post("api/history", {
         url,
         method: "GET",
         user_id,

@@ -5,12 +5,12 @@ import { Tabs, TabsList, TabsTriggerDate } from "@/components/ui/tabs";
 import { HOST_API_P88 } from "@/config-global";
 import { useTelegram } from "@/context/telegram.provider";
 import { IHistoryBet } from "@/types/history.type";
-import { axiosInstance } from "@/utils/axios";
 import { locale } from "@/utils/configCenlendarToVN";
 import { formatRangeTime } from "@/utils/time";
 import { Icon } from "@iconify/react";
 import { CalendarIcon } from "@radix-ui/react-icons";
 import * as PopoverRD from "@radix-ui/react-popover";
+import axios from "axios";
 import { addDays, format } from "date-fns";
 import Image from "next/image";
 import { useEffect, useState } from "react";
@@ -47,7 +47,7 @@ const HistoryWinLoss = () => {
     const url = `${HOST_API_P88}?betList=SETTLED&fromDate=${formattedFromDate}&toDate=${formattedToDate}`;
     try {
       setLoading(true);
-      const response = await axiosInstance.post("proxy/call_api", {
+      const response = await axios.post("api/history", {
         url,
         method: "GET",
         user_id,
@@ -83,7 +83,6 @@ const HistoryWinLoss = () => {
   //   // eslint-disable-next-line react-hooks/exhaustive-deps
   // }, [date]);
 
-  console.log("date", date);
   const setRange = (days: number) => {
     const from = addDays(new Date(), -days);
     const to = new Date();

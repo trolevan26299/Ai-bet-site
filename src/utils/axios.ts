@@ -15,5 +15,5 @@ export { axiosInstance };
 export const endpoints = {
   game: "bot/game",
   match: "search/match",
-  history: "user/getUserInfo",
+  history: "proxy/call_api",
 };
