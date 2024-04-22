@@ -1,13 +1,11 @@
-import React, { useEffect, useState } from "react";
-import HistoryItem from "./history-item";
-import axios from "axios";
-import { axiosInstance } from "@/utils/axios";
-import { useTelegram } from "@/context/telegram.provider";
-import { HOST_API_P88 } from "@/config-global";
-import { IHistoryBet } from "@/types/history.type";
 import { SplashScreen } from "@/components/loading-screen";
-import Image from "next/image";
+import { useTelegram } from "@/context/telegram.provider";
+import { IHistoryBet } from "@/types/history.type";
 import { formatDateTime } from "@/utils/time";
+import axios from "axios";
+import Image from "next/image";
+import { useEffect, useState } from "react";
+import HistoryItem from "./history-item";
 
 const HistoryOutstanding = () => {
   const telegram = useTelegram();

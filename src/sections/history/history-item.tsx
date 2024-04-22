@@ -6,7 +6,7 @@ import { utcToUtc7Format, utcToUtc7FormatNoSecond } from "@/utils/time";
 import { getBackgroundByBetStatus, getValueByBetStatus } from "@/utils/renderInfoByBetStatus";
 
 const HistoryItem = ({ dataDetail, type }: { dataDetail: IHistoryBet; type?: string }) => {
-  // const stake = dataDetail.oddsFormat > 0 ? dataDetail.risk : dataDetail.risk / dataDetail.oddsFormat;
+  const stake = dataDetail.price > 0 ? dataDetail.risk : dataDetail.risk / dataDetail.price;
   return (
     <div className={`h-[${type ? "288px" : "300px"}] rounded-[10px] bg-[rgba(40,55,74,0.5)] p-2 w-full mt-3 font-sans`}>
       <div className="flex flex-row items-center justify-between  pb-1" style={{ borderBottom: "1px solid #223a76" }}>
@@ -61,7 +61,7 @@ const HistoryItem = ({ dataDetail, type }: { dataDetail: IHistoryBet; type?: str
           <div className=" mt-3">
             <div className="flex flex-grow items-start justify-start">
               <p className="text-text-noActive text-sm w-[84px]">Cược :</p>
-              <p className="text-text-main text-sm font-semibold">{dataDetail.risk}</p>
+              <p className="text-text-main text-sm font-semibold">{stake}</p>
             </div>
             <div className="flex flex-grow items-start justify-start">
               <p className="text-text-noActive text-sm w-[84px]">Mạo hiểm :</p>
