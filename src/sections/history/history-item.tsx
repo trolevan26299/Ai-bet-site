@@ -1,9 +1,7 @@
-import { Button } from "@/components/ui/button";
-import React from "react";
-import { Icon } from "@iconify/react";
 import { IHistoryBet } from "@/types/history.type";
-import { utcToUtc7Format, utcToUtc7FormatNoSecond } from "@/utils/time";
 import { getBackgroundByBetStatus, getValueByBetStatus } from "@/utils/renderInfoByBetStatus";
+import { utcToUtc7Format, utcToUtc7FormatNoSecond } from "@/utils/time";
+import { Icon } from "@iconify/react";
 
 const HistoryItem = ({ dataDetail, type }: { dataDetail: IHistoryBet; type?: string }) => {
   const stake = dataDetail.price > 0 ? dataDetail.risk : dataDetail.risk / -dataDetail.price;

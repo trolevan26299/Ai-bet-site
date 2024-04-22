@@ -175,7 +175,7 @@ const HistoryWinLoss = () => {
             <div className="flex flex-grow justify-between items-center w-full">
               <div className="flex flex-grow items-center justify-start w-1/2">
                 <p className="text-sm font-normal pr-1">Tổng cược :</p>
-                <p className="text-base font-medium">{totalBetMoney}</p>
+                <p className="text-base font-medium">{totalBetMoney.toFixed(2)}</p>
               </div>
               <div className="flex flex-grow items-center justify-end">
                 <p className="text-sm font-normal pr-1">Thắng/Thua :</p>
@@ -184,7 +184,7 @@ const HistoryWinLoss = () => {
                     totalWinLoss > 0 ? "text-[#34c759]" : totalWinLoss < 0 ? "text-[#ff453a]" : "text-[#fff]"
                   }`}
                 >
-                  {totalWinLoss}
+                  {totalWinLoss.toFixed(2)}
                 </p>
               </div>
             </div>
@@ -195,7 +195,7 @@ const HistoryWinLoss = () => {
               </div>
               <div className="flex flex-grow items-center justify-end">
                 <p className="text-sm font-normal pr-1">Tổng hoa hồng :</p>
-                <p className="text-base font-medium">{totalCommission}</p>
+                <p className="text-base font-medium">{totalCommission.toFixed(2)}</p>
               </div>
             </div>
           </div>

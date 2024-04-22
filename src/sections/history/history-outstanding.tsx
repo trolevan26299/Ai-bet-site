@@ -62,7 +62,7 @@ const HistoryOutstanding = () => {
             <div className="flex flex-grow items-center text-text-main w-full">
               <div className="flex flex-grow items-center justify-start">
                 <p className="text-sm font-normal pr-1">Tổng cược :</p>
-                <p className="text-base font-medium">{totalBetMoney}</p>
+                <p className="text-base font-medium">{totalBetMoney.toFixed(2)}</p>
               </div>
               <div className="flex flex-grow items-center justify-end">
                 <p className="text-sm font-normal pr-1">Tổng vé :</p>
