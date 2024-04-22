@@ -2,7 +2,6 @@ import { SplashScreen } from "@/components/loading-screen";
 import { Calendar } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Tabs, TabsList, TabsTriggerDate } from "@/components/ui/tabs";
-import { HOST_API_P88 } from "@/config-global";
 import { useTelegram } from "@/context/telegram.provider";
 import { IHistoryBet } from "@/types/history.type";
 import { locale } from "@/utils/configCenlendarToVN";
@@ -44,7 +43,7 @@ const HistoryWinLoss = () => {
     const formattedFromDate = formatRangeTime(fromDate, "from");
     const formattedToDate = formatRangeTime(toDay, "today");
 
-    const url = `${HOST_API_P88}?betList=SETTLED&fromDate=${formattedFromDate}&toDate=${formattedToDate}`;
+    const url = `?betList=SETTLED&fromDate=${formattedFromDate}&toDate=${formattedToDate}`;
     try {
       setLoading(true);
       const response = await axios.post("/api/history", {
