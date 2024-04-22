@@ -6,7 +6,7 @@ import { utcToUtc7Format, utcToUtc7FormatNoSecond } from "@/utils/time";
 import { getBackgroundByBetStatus, getValueByBetStatus } from "@/utils/renderInfoByBetStatus";
 
 const HistoryItem = ({ dataDetail, type }: { dataDetail: IHistoryBet; type?: string }) => {
-  const stake = dataDetail.price > 0 ? dataDetail.risk : dataDetail.risk / dataDetail.price;
+  const stake = dataDetail.price > 0 ? dataDetail.risk : dataDetail.risk / -dataDetail.price;
   return (
     <div className={`h-[${type ? "288px" : "300px"}] rounded-[10px] bg-[rgba(40,55,74,0.5)] p-2 w-full mt-3 font-sans`}>
       <div className="flex flex-row items-center justify-between  pb-1" style={{ borderBottom: "1px solid #223a76" }}>
