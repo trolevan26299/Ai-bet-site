@@ -68,19 +68,19 @@ const HistoryWinLoss = () => {
   const totalCommission = historyWinLose.reduce((total, item) => total + item.customerCommission, 0);
   const totalWinLoss = historyWinLose.reduce((total, item) => total + (item?.winLoss || 0), 0);
 
-  // useEffect(() => {
-  //   if (telegram?.user?.id) {
-  //     fetchBetHistory(telegram?.user?.id);
-  //     telegram.webApp?.expand();
-  //   }
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [telegram?.user?.id, date]);
   useEffect(() => {
-    fetchBetHistory(6359530967);
-    telegram.webApp?.expand();
-
+    if (telegram?.user?.id) {
+      fetchBetHistory(telegram?.user?.id);
+      telegram.webApp?.expand();
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [date]);
+  }, [telegram?.user?.id, date]);
+  // useEffect(() => {
+  //   fetchBetHistory(6359530967);
+  //   telegram.webApp?.expand();
+
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [date]);
 
   const setRange = (days: number) => {
     const from = addDays(new Date(), -days);
