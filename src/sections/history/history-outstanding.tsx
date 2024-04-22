@@ -6,7 +6,7 @@ import axios from "axios";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import HistoryItem from "./history-item";
-import { formatNumber } from "@/utils/formatNumber";
+import { formatNumber, formatNumberAndFloor } from "@/utils/formatNumber";
 import { useSearchParams } from "next/navigation";
 
 const HistoryOutstanding = () => {
@@ -75,7 +75,7 @@ const HistoryOutstanding = () => {
             <div className="flex flex-grow items-center text-text-main w-full">
               <div className="flex flex-grow items-center justify-start">
                 <p className="text-sm font-normal pr-1">Tổng cược :</p>
-                <p className="text-base font-medium">{formatNumber(totalBetMoney)}</p>
+                <p className="text-base font-medium">{formatNumberAndFloor(totalBetMoney)}</p>
               </div>
               <div className="flex flex-grow items-center justify-end">
                 <p className="text-sm font-normal pr-1">Tổng vé :</p>

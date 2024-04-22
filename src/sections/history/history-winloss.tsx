@@ -10,7 +10,8 @@ import { Icon } from "@iconify/react";
 import { CalendarIcon } from "@radix-ui/react-icons";
 import * as PopoverRD from "@radix-ui/react-popover";
 import axios from "axios";
-import { addDays, format } from "date-fns";
+import { addDays, format, startOfWeek, endOfWeek, addWeeks, addHours, set } from "date-fns";
+
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { DateRange } from "react-day-picker";
@@ -31,24 +32,36 @@ const HistoryWinLoss = () => {
   const [date, setDate] = useState<DateRange | undefined>({
     from: new Date(),
   });
+  console.log("--------------date:", date);
   const [selectedDate, setSelectedDate] = useState<DateRange | undefined>(date);
 
-  // tab onclick time
+  // // tab onclick time
+  // const handleSetTabTime = (time: string) => {
+  //   if (time === "today") {
+  //     return "0";
+  //   } else if (time === "yesterday") {
+  //     return "1";
+  //   }else if (time === "7days") {
+  //     return "7";
+  // };
+
   const [tab, setTabs] = useState("0");
   const fetchBetHistory = async (user_id: number) => {
     // logic fo from Date
     const currentDate = date?.from || new Date();
     const utcCurrentDate = new Date(currentDate.getTime() - currentDate.getTimezoneOffset() * 60000); // Chuyển về UTC0
-    const fromDate = new Date(utcCurrentDate.getTime() - 11 * 60 * 60 * 1000); // Trừ đi 7 giờ
+    const fromDate = addHours(utcCurrentDate, -4); // chuyển sang utc -4
 
-    const toDate = date?.to || currentDate; // Lùi lại 29 ngày
+    const toDate = date?.to || currentDate;
     const utcToDate = new Date(toDate.getTime() - toDate.getTimezoneOffset() * 60000);
-    const toDay = new Date(utcToDate.getTime() - 11 * 60 * 60 * 1000);
+    const toDay = addHours(utcToDate, -4); // chuyển sang utc -4
 
     const formattedFromDate = formatRangeTime(fromDate, "from");
     const formattedToDate = formatRangeTime(toDay, "today");
 
-    const url = `?betList=SETTLED&fromDate=${formattedFromDate}&toDate=${formattedToDate}`;
+    const url = `?betList=SETTLED&fromDate=${fromDateParam || formattedFromDate}&toDate=${
+      toDateParam || formattedToDate
+    }`;
     try {
       setLoading(true);
       const response = await axios.post("/api/history", {
@@ -80,37 +93,66 @@ const HistoryWinLoss = () => {
   // tổng thắng thua
   const totalWinLoss = historyWinLose.reduce((total, item) => total + (item?.winLoss || 0), 0);
 
-  useEffect(() => {
-    if (telegram?.user?.id) {
-      fetchBetHistory(telegram?.user?.id);
-      telegram.webApp?.expand();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [telegram?.user?.id, date]);
-  // useEffect(() => {
-  //   fetchBetHistory(6359530967);
-  //   telegram.webApp?.expand();
-
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [date]);
-
   const setRange = (days: number) => {
     const from = addDays(new Date(), -days);
     const to = new Date();
     setDate({ from, to });
   };
   const handleTabClick = (days: number) => {
-    if (days === 0) {
-      setDate({ from: new Date() });
-      setTabs(days.toString());
-    } else if (days !== 0) {
+    const currentDate = new Date();
+    if (days !== 0 && days !== 7 && days !== -7) {
       setTabs(days.toString());
       setRange(days);
+    } else {
+      setTabs(days.toString());
+      if (days === 0) {
+        setDate({ from: new Date() });
+      } else if (days === 7) {
+        const from = set(addDays(startOfWeek(currentDate), 1), {
+          hours: currentDate.getHours(),
+          minutes: currentDate.getMinutes(),
+          seconds: currentDate.getSeconds(),
+        });
+        const to = set(addDays(endOfWeek(currentDate), 1), {
+          hours: currentDate.getHours(),
+          minutes: currentDate.getMinutes(),
+          seconds: currentDate.getSeconds(),
+        });
+
+        setDate({ from, to });
+      } else if (days === -7) {
+        const from = set(addDays(startOfWeek(addWeeks(currentDate, -1)), 1), {
+          hours: currentDate.getHours(),
+          minutes: currentDate.getMinutes(),
+          seconds: currentDate.getSeconds(),
+        });
+        const to = set(addDays(endOfWeek(addWeeks(currentDate, -1)), 1), {
+          hours: currentDate.getHours(),
+          minutes: currentDate.getMinutes(),
+          seconds: currentDate.getSeconds(),
+        });
+
+        setDate({ from, to });
+      }
     }
   };
   const handleSaveDateCalendar = () => {
     setDate(selectedDate);
   };
+
+  // useEffect(() => {
+  //   if (telegram?.user?.id) {
+  //     fetchBetHistory(telegram?.user?.id);
+  //     telegram.webApp?.expand();
+  //   }
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [telegram?.user?.id, date]);
+  useEffect(() => {
+    fetchBetHistory(6359530967);
+    telegram.webApp?.expand();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [date]);
   return (
     <>
       {loading ? (
@@ -124,7 +166,8 @@ const HistoryWinLoss = () => {
               {[
                 { label: "Hôm nay", days: 0 },
                 { label: "Hôm qua", days: 1 },
-                { label: "7 ngày trước", days: 7 },
+                { label: "Tuần này", days: 7 },
+                { label: "Tuần trước", days: -7 },
                 { label: "14 ngày trước", days: 14 },
                 { label: "30 ngày trước", days: 30 },
               ].map((item, index) => (
