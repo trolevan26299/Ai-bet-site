@@ -47,7 +47,7 @@ const HistoryWinLoss = () => {
     const url = `${HOST_API_P88}?betList=SETTLED&fromDate=${formattedFromDate}&toDate=${formattedToDate}`;
     try {
       setLoading(true);
-      const response = await axios.post("api/history", {
+      const response = await axios.post("/api/history", {
         url,
         method: "GET",
         user_id,
