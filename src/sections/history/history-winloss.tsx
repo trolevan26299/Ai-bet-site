@@ -16,10 +16,14 @@ import { useEffect, useState } from "react";
 import { DateRange } from "react-day-picker";
 import HistoryItem from "./history-item";
 import "./index.css";
-import { formatNumber } from "../../utils/formatNumber";
+import { formatNumber, formatNumberAndFloor } from "../../utils/formatNumber";
+import { useSearchParams } from "next/navigation";
 
 const HistoryWinLoss = () => {
   const telegram = useTelegram();
+  const searchParams = useSearchParams();
+  const fromDateParam = searchParams.get("from_date");
+  const toDateParam = searchParams.get("to_date");
 
   const [historyWinLose, setHistoryWinLose] = useState<IHistoryBet[]>([]);
   const [loading, setLoading] = useState(true);
@@ -65,8 +69,15 @@ const HistoryWinLoss = () => {
   };
 
   // tổng cược
-  const totalBetMoney = historyWinLose.reduce((total, item) => total + item.risk, 0);
+  const totalBetMoney = historyWinLose.reduce((total, item) => {
+    const stake = item.price > 0 ? item.risk : item.risk / -item.price;
+    return total + stake;
+  }, 0);
+
+  // tổng hoa hồng
   const totalCommission = historyWinLose.reduce((total, item) => total + item.customerCommission, 0);
+
+  // tổng thắng thua
   const totalWinLoss = historyWinLose.reduce((total, item) => total + (item?.winLoss || 0), 0);
 
   useEffect(() => {
@@ -176,7 +187,7 @@ const HistoryWinLoss = () => {
             <div className="flex flex-grow justify-between items-center w-full">
               <div className="flex flex-grow items-center justify-start w-1/2">
                 <p className="text-sm font-normal pr-1">Tổng cược :</p>
-                <p className="text-base font-medium">{formatNumber(totalBetMoney)}</p>
+                <p className="text-base font-medium">{formatNumberAndFloor(totalBetMoney)}</p>
               </div>
               <div className="flex flex-grow items-center justify-end">
                 <p className="text-sm font-normal pr-1">Thắng/Thua :</p>

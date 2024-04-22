@@ -7,9 +7,13 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import HistoryItem from "./history-item";
 import { formatNumber } from "@/utils/formatNumber";
+import { useSearchParams } from "next/navigation";
 
 const HistoryOutstanding = () => {
   const telegram = useTelegram();
+  const searchParams = useSearchParams();
+  const fromDateParam = searchParams.get("from_date");
+  const toDateParam = searchParams.get("to_date");
   const [loading, setLoading] = useState(true);
   const [historyOutStanding, setHistoryOutStanding] = useState<IHistoryBet[]>([]);
   const totalBetMoney = historyOutStanding.reduce((total, item) => total + item.risk, 0);
@@ -22,7 +26,9 @@ const HistoryOutstanding = () => {
 
     const formattedFromDate = formatDateTime(toDate);
     const formattedToDate = formatDateTime(fromDate);
-    const url = `?betList=RUNNING&fromDate=${formattedFromDate}&toDate=${formattedToDate}`;
+    const url = `?betList=RUNNING&fromDate=${fromDateParam || formattedFromDate}&toDate=${
+      toDateParam || formattedToDate
+    }`;
     try {
       setLoading(true);
       const response = await axios.post("api/history", {

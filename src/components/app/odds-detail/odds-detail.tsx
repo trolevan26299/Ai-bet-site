@@ -15,11 +15,11 @@ import { useTelegram } from "@/context/telegram.provider";
 import { IMatchData, IOdds, IOddsDetail, OddsStatusType } from "@/types/odds.types";
 import { Icon } from "@iconify/react";
 import { ReloadIcon } from "@radix-ui/react-icons";
+import axios from "axios";
 import { m } from "framer-motion";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../../ui/accordion";
-import axios from "axios";
 
 export default function OddsDetail({
   odds,
