@@ -1,6 +1,5 @@
 "use client";
 
-import { betConfirm } from "@/api/odds";
 import { Button } from "@/components/ui/button";
 import {
   Drawer,
