@@ -1,17 +1,16 @@
 "use client";
 
-import { fetchOddsData } from "@/api/odds";
 import OddsDetail from "@/components/app/odds-detail/odds-detail";
 import ScreenInfoMatch from "@/components/app/screen-info-match/screen-info-match";
-import MainLayout from "@/layouts/main/layout";
-import { useSearchParams } from "next/navigation";
-import { IMatchData, IOddsDetail, OddsStatusType } from "@/types/odds.types";
-import { transformData } from "@/utils/transformDataOdds";
-import { useEffect, useState } from "react";
 import { SplashScreen } from "@/components/loading-screen";
 import { useTelegram } from "@/context/telegram.provider";
-import Image from "next/image";
+import MainLayout from "@/layouts/main/layout";
+import { IMatchData, IOddsDetail, OddsStatusType } from "@/types/odds.types";
+import { transformData } from "@/utils/transformDataOdds";
 import axios from "axios";
+import Image from "next/image";
+import { useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
 
 export default function MatchView() {
   const searchParams = useSearchParams();
