@@ -16,6 +16,7 @@ import { useEffect, useState } from "react";
 import { DateRange } from "react-day-picker";
 import HistoryItem from "./history-item";
 import "./index.css";
+import { formatNumber } from "../../utils/formatNumber";
 
 const HistoryWinLoss = () => {
   const telegram = useTelegram();
@@ -175,7 +176,7 @@ const HistoryWinLoss = () => {
             <div className="flex flex-grow justify-between items-center w-full">
               <div className="flex flex-grow items-center justify-start w-1/2">
                 <p className="text-sm font-normal pr-1">Tổng cược :</p>
-                <p className="text-base font-medium">{totalBetMoney.toFixed(2)}</p>
+                <p className="text-base font-medium">{formatNumber(totalBetMoney)}</p>
               </div>
               <div className="flex flex-grow items-center justify-end">
                 <p className="text-sm font-normal pr-1">Thắng/Thua :</p>
@@ -184,7 +185,7 @@ const HistoryWinLoss = () => {
                     totalWinLoss > 0 ? "text-[#34c759]" : totalWinLoss < 0 ? "text-[#ff453a]" : "text-[#fff]"
                   }`}
                 >
-                  {totalWinLoss.toFixed(2)}
+                  {formatNumber(totalWinLoss)}
                 </p>
               </div>
             </div>
@@ -195,7 +196,7 @@ const HistoryWinLoss = () => {
               </div>
               <div className="flex flex-grow items-center justify-end">
                 <p className="text-sm font-normal pr-1">Tổng hoa hồng :</p>
-                <p className="text-base font-medium">{totalCommission.toFixed(2)}</p>
+                <p className="text-base font-medium">{formatNumber(totalCommission)}</p>
               </div>
             </div>
           </div>

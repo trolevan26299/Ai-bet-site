@@ -6,6 +6,7 @@ import axios from "axios";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import HistoryItem from "./history-item";
+import { formatNumber } from "@/utils/formatNumber";
 
 const HistoryOutstanding = () => {
   const telegram = useTelegram();
@@ -62,7 +63,7 @@ const HistoryOutstanding = () => {
             <div className="flex flex-grow items-center text-text-main w-full">
               <div className="flex flex-grow items-center justify-start">
                 <p className="text-sm font-normal pr-1">Tổng cược :</p>
-                <p className="text-base font-medium">{totalBetMoney.toFixed(2)}</p>
+                <p className="text-base font-medium">{formatNumber(totalBetMoney)}</p>
               </div>
               <div className="flex flex-grow items-center justify-end">
                 <p className="text-sm font-normal pr-1">Tổng vé :</p>
