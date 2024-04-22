@@ -23,7 +23,7 @@ const HistoryOutstanding = () => {
 
     const formattedFromDate = formatDateTime(toDate);
     const formattedToDate = formatDateTime(fromDate);
-    const url = `${HOST_API_P88}?betList=RUNNING&fromDate=${formattedFromDate}&toDate=${formattedToDate}`;
+    const url = `?betList=RUNNING&fromDate=${formattedFromDate}&toDate=${formattedToDate}`;
     try {
       setLoading(true);
       const response = await axios.post("api/history", {
