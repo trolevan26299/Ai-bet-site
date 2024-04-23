@@ -19,6 +19,7 @@ import HistoryItem from "./history-item";
 import "./index.css";
 import { formatNumber, formatNumberAndFloor } from "../../utils/formatNumber";
 import { useSearchParams } from "next/navigation";
+import { currentTimeUtcMinus4 } from "@/utils/currentTimeUTC-4";
 
 const HistoryWinLoss = () => {
   const telegram = useTelegram();
@@ -49,7 +50,7 @@ const HistoryWinLoss = () => {
       return "14";
     }
   };
-
+  // console.log("time UTC -4:", currentTimeUtcMinus4);
   const [tab, setTabs] = useState(timeParam ? handleSetTabTime(timeParam) : "0");
   const fetchBetHistory = async (user_id: number) => {
     // logic fo from Date
