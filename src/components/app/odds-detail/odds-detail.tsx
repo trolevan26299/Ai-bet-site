@@ -118,6 +118,7 @@ function RenderAccordion({
   const [oddsName, setOddsName] = useState<String>("");
   const [keyItemSelect, setKeyItemSelect] = useState<number[]>([]);
 
+  console.log("odd Name:", oddsName);
   const telegram = useTelegram();
   const [animationState, setAnimationState] = useState({
     showGreen: false,
