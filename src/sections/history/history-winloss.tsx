@@ -10,8 +10,7 @@ import { Icon } from "@iconify/react";
 import { CalendarIcon } from "@radix-ui/react-icons";
 import * as PopoverRD from "@radix-ui/react-popover";
 import axios from "axios";
-import { addDays, addWeeks, endOfDay, endOfWeek, format, set, startOfDay, startOfWeek } from "date-fns";
-
+import { addDays, addWeeks, endOfWeek, format, startOfDay, startOfWeek } from "date-fns";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -30,9 +29,13 @@ const HistoryWinLoss = () => {
   const [historyWinLose, setHistoryWinLose] = useState<IHistoryBet[]>([]);
   const [loading, setLoading] = useState(true);
 
-  const [date, setDate] = useState<DateRange | undefined>({
-    from: getCurrentUtcTimeUTCMinus4(),
-  });
+  const [date, setDate] = useState<DateRange | undefined>(
+    fromDateParam && toDateParam
+      ? { from: new Date(fromDateParam), to: new Date(toDateParam) }
+      : {
+          from: getCurrentUtcTimeUTCMinus4(),
+        }
+  );
 
   const [selectedDate, setSelectedDate] = useState<DateRange | undefined>(date);
 
