@@ -12,7 +12,7 @@ import * as PopoverRD from "@radix-ui/react-popover";
 import axios from "axios";
 import { addDays, addWeeks, endOfWeek, format, startOfDay, startOfWeek } from "date-fns";
 import Image from "next/image";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { DateRange } from "react-day-picker";
 import { getCurrentUtcTimeUTCMinus4 } from "../../utils/currentTimeUTC-4";
@@ -29,7 +29,7 @@ const HistoryWinLoss = () => {
   const timeParam = searchParams.get("time");
   const [historyWinLose, setHistoryWinLose] = useState<IHistoryBet[]>([]);
   const [loading, setLoading] = useState(true);
-
+  console.log("usePathname", usePathname());
   console.log("fromDateParam", fromDateParam);
   console.log("toDateParam", toDateParam);
   console.log("tabParam", tabParam);
