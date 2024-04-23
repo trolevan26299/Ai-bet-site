@@ -56,9 +56,9 @@ export default function OddsDetail({
     <>
       <Tabs defaultValue="1" className="w-full">
         <TabsList
-          className={`w-full gap-3 justify-between ${
-            isSticky ? "fixed top-0 bg-backgroundColor-main rounded-none z-30" : ""
-          }`}
+        // className={`w-full gap-3 justify-between ${
+        //   isSticky ? "fixed top-0 bg-backgroundColor-main rounded-none z-30" : ""
+        // }`}
         >
           <TabsTrigger value="1">Tất cả kèo</TabsTrigger>
           <TabsTrigger value="2">Kèo cược chấp</TabsTrigger>
@@ -263,7 +263,7 @@ function RenderAccordion({
             </AccordionContent>
           </AccordionItem>
         ))}
-        <DrawerContent className="bg-backgroundColor-main  w-full z-50 h-[500px]">
+        <DrawerContent className="bg-backgroundColor-main  w-full z-50 ">
           <DrawerHeader>
             <DrawerTitle className="text-[20px] text-left text-text-light">Thông tin kèo đã chọn</DrawerTitle>
           </DrawerHeader>
