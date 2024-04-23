@@ -1444,6 +1444,11 @@ data-view-byte-offset@^1.0.0:
     es-errors "^1.3.0"
     is-data-view "^1.0.1"
 
+date-fns-tz@^3.1.3:
+  version "3.1.3"
+  resolved "https://registry.yarnpkg.com/date-fns-tz/-/date-fns-tz-3.1.3.tgz#643dfc7157008a3873cd717973e4074bb802f962"
+  integrity sha512-ZfbMu+nbzW0mEzC8VZrLiSWvUIaI3aRHeq33mTe7Y38UctKukgqPR4nTDwcwS4d64Gf8GghnVsroBuMY3eiTeA==
+
 date-fns@^3.6.0:
   version "3.6.0"
   resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-3.6.0.tgz#f20ca4fe94f8b754951b24240676e8618c0206bf"
@@ -2642,13 +2647,6 @@ minimist@^1.2.0, minimist@^1.2.6:
   resolved "https://registry.yarnpkg.com/minipass/-/minipass-7.0.4.tgz#dbce03740f50a4786ba994c1fb908844d27b038c"
   integrity sha512-jYofLM5Dam9279rdkWzqHozUo4ybjdZmCsDHePy5V/PbBcVMiSZR97gmAy45aqi8CK1lG2ECd356FU86avfwUQ==
 
-moment-timezone-all@^0.5.5:
-  version "0.5.5"
-  resolved "https://registry.yarnpkg.com/moment-timezone-all/-/moment-timezone-all-0.5.5.tgz#30465254a5de02a77853c318191e10141c80b3ac"
-  integrity sha512-8alcjM7o0UgjsD8w5Iysk7/7Fnd2hp0MZYC56B6DgHHrv3VyN8Z2uXObIKn41HXmjrg+58hYCwzjtPbHTrIkeQ==
-  dependencies:
-    moment ">= 2.6.0"
-
 moment-timezone@^0.5.45:
   version "0.5.45"
   resolved "https://registry.yarnpkg.com/moment-timezone/-/moment-timezone-0.5.45.tgz#cb685acd56bac10e69d93c536366eb65aa6bcf5c"
@@ -2656,7 +2654,7 @@ moment-timezone@^0.5.45:
   dependencies:
     moment "^2.29.4"
 
-"moment@>= 2.6.0", moment@^2.29.4:
+moment@^2.29.4:
   version "2.30.1"
   resolved "https://registry.yarnpkg.com/moment/-/moment-2.30.1.tgz#f8c91c07b7a786e30c59926df530b4eac96974ae"
   integrity sha512-uEmtNhbDOrWPFS+hdjFCBfy9f2YoyzRpwcl+DqpC6taX21FzsTLQVbMV/W7PzNSX6x/bhC1zA3c2UQ5NzH6how==

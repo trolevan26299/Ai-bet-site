@@ -10,16 +10,16 @@ import { Icon } from "@iconify/react";
 import { CalendarIcon } from "@radix-ui/react-icons";
 import * as PopoverRD from "@radix-ui/react-popover";
 import axios from "axios";
-import { addDays, format, startOfWeek, endOfWeek, addWeeks, addHours, set } from "date-fns";
+import { addDays, addWeeks, endOfDay, endOfWeek, format, set, startOfDay, startOfWeek } from "date-fns";
 
 import Image from "next/image";
+import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { DateRange } from "react-day-picker";
+import { getCurrentUtcTimeUTCMinus4 } from "../../utils/currentTimeUTC-4";
+import { formatNumber, formatNumberAndFloor } from "../../utils/formatNumber";
 import HistoryItem from "./history-item";
 import "./index.css";
-import { formatNumber, formatNumberAndFloor } from "../../utils/formatNumber";
-import { useSearchParams } from "next/navigation";
-import { currentTimeUtcMinus4 } from "@/utils/currentTimeUTC-4";
 
 const HistoryWinLoss = () => {
   const telegram = useTelegram();
@@ -31,7 +31,7 @@ const HistoryWinLoss = () => {
   const [loading, setLoading] = useState(true);
 
   const [date, setDate] = useState<DateRange | undefined>({
-    from: new Date(),
+    from: getCurrentUtcTimeUTCMinus4(),
   });
 
   const [selectedDate, setSelectedDate] = useState<DateRange | undefined>(date);
@@ -50,18 +50,11 @@ const HistoryWinLoss = () => {
       return "14";
     }
   };
-  // console.log("time UTC -4:", currentTimeUtcMinus4);
+
   const [tab, setTabs] = useState(timeParam ? handleSetTabTime(timeParam) : "0");
   const fetchBetHistory = async (user_id: number) => {
-    // logic fo from Date
-    const currentDate = date?.from || new Date();
-    const utcCurrentDate = new Date(currentDate.getTime() - currentDate.getTimezoneOffset() * 60000); // Chuyển về UTC0
-    const fromDate = addHours(utcCurrentDate, -4); // chuyển sang utc -4
-
-    const toDate = date?.to || currentDate;
-    const utcToDate = new Date(toDate.getTime() - toDate.getTimezoneOffset() * 60000);
-    const toDay = addHours(utcToDate, -4); // chuyển sang utc -4
-
+    const fromDate = date?.from || getCurrentUtcTimeUTCMinus4();
+    const toDay = date?.to || fromDate;
     const formattedFromDate = formatRangeTime(fromDate, "from");
     const formattedToDate = formatRangeTime(toDay, "today");
 
@@ -92,52 +85,35 @@ const HistoryWinLoss = () => {
     const stake = item.price > 0 ? item.risk : item.risk / -item.price;
     return total + stake;
   }, 0);
-
   // tổng hoa hồng
   const totalCommission = historyWinLose.reduce((total, item) => total + item.customerCommission, 0);
-
   // tổng thắng thua
   const totalWinLoss = historyWinLose.reduce((total, item) => total + (item?.winLoss || 0), 0);
 
   const setRange = (days: number) => {
-    const from = addDays(new Date(), -days);
-    const to = new Date();
+    const from = addDays(getCurrentUtcTimeUTCMinus4(), -days);
+    const to = getCurrentUtcTimeUTCMinus4();
     setDate({ from, to });
   };
   const handleTabClick = (days: number) => {
-    const currentDate = new Date();
-    if (days !== 0 && days !== 7 && days !== -7) {
+    const currentDate = getCurrentUtcTimeUTCMinus4();
+    if (days !== 0 && days !== 7 && days !== -7 && days !== 1) {
       setTabs(days.toString());
       setRange(days);
     } else {
       setTabs(days.toString());
       if (days === 0) {
-        setDate({ from: new Date() });
+        setDate({ from: currentDate });
+      } else if (days === 1) {
+        const from = startOfDay(addDays(currentDate, -1));
+        setDate({ from });
       } else if (days === 7) {
-        const from = set(addDays(startOfWeek(currentDate), 1), {
-          hours: currentDate.getHours(),
-          minutes: currentDate.getMinutes(),
-          seconds: currentDate.getSeconds(),
-        });
-        const to = set(addDays(endOfWeek(currentDate), 1), {
-          hours: currentDate.getHours(),
-          minutes: currentDate.getMinutes(),
-          seconds: currentDate.getSeconds(),
-        });
-
+        const from = addDays(startOfWeek(currentDate), 1);
+        const to = addDays(endOfWeek(currentDate), 1);
         setDate({ from, to });
       } else if (days === -7) {
-        const from = set(addDays(startOfWeek(addWeeks(currentDate, -1)), 1), {
-          hours: currentDate.getHours(),
-          minutes: currentDate.getMinutes(),
-          seconds: currentDate.getSeconds(),
-        });
-        const to = set(addDays(endOfWeek(addWeeks(currentDate, -1)), 1), {
-          hours: currentDate.getHours(),
-          minutes: currentDate.getMinutes(),
-          seconds: currentDate.getSeconds(),
-        });
-
+        const from = addDays(startOfWeek(addWeeks(currentDate, -1)), 1);
+        const to = addDays(endOfWeek(addWeeks(currentDate, -1)), 1);
         setDate({ from, to });
       }
     }
@@ -146,19 +122,19 @@ const HistoryWinLoss = () => {
     setDate(selectedDate);
   };
 
-  // useEffect(() => {
-  //   if (telegram?.user?.id) {
-  //     fetchBetHistory(telegram?.user?.id);
-  //     telegram.webApp?.expand();
-  //   }
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [telegram?.user?.id, date]);
   useEffect(() => {
-    fetchBetHistory(6359530967);
-    telegram.webApp?.expand();
-
+    if (telegram?.user?.id) {
+      fetchBetHistory(telegram?.user?.id);
+      telegram.webApp?.expand();
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [date]);
+  }, [telegram?.user?.id, date]);
+  // useEffect(() => {
+  //   fetchBetHistory(6359530967);
+  //   telegram.webApp?.expand();
+
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [date]);
   return (
     <>
       {loading ? (
