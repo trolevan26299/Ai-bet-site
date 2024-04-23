@@ -56,9 +56,9 @@ export default function OddsDetail({
     <>
       <Tabs defaultValue="1" className="w-full">
         <TabsList
-        // className={`w-full gap-3 justify-between ${
-        //   isSticky ? "fixed top-0 bg-backgroundColor-main rounded-none z-30" : ""
-        // }`}
+          className={`w-full gap-3 justify-between ${
+            isSticky ? "fixed top-0 bg-backgroundColor-main rounded-none z-30" : ""
+          }`}
         >
           <TabsTrigger value="1">Tất cả kèo</TabsTrigger>
           <TabsTrigger value="2">Kèo cược chấp</TabsTrigger>
@@ -118,7 +118,6 @@ function RenderAccordion({
   const [oddsName, setOddsName] = useState<String>("");
   const [keyItemSelect, setKeyItemSelect] = useState<number[]>([]);
 
-  console.log("odd Name:", oddsName);
   const telegram = useTelegram();
   const [animationState, setAnimationState] = useState({
     showGreen: false,
@@ -263,7 +262,7 @@ function RenderAccordion({
             </AccordionContent>
           </AccordionItem>
         ))}
-        <DrawerContent className="bg-backgroundColor-main  w-full z-50 ">
+        <DrawerContent className="bg-backgroundColor-main  w-full">
           <DrawerHeader>
             <DrawerTitle className="text-[20px] text-left text-text-light">Thông tin kèo đã chọn</DrawerTitle>
           </DrawerHeader>
