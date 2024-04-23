@@ -23,6 +23,7 @@ import "./index.css";
 const HistoryWinLoss = () => {
   const telegram = useTelegram();
   const searchParams = useSearchParams();
+  const tabParam = searchParams.get("tab");
   const fromDateParam = searchParams.get("from_date");
   const toDateParam = searchParams.get("to_date");
   const timeParam = searchParams.get("time");
@@ -31,6 +32,7 @@ const HistoryWinLoss = () => {
 
   console.log("fromDateParam", fromDateParam);
   console.log("toDateParam", toDateParam);
+  console.log("tabParam", tabParam);
   const [date, setDate] = useState<DateRange | undefined>(
     fromDateParam && toDateParam
       ? { from: new Date(fromDateParam), to: new Date(toDateParam) }
