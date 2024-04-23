@@ -23,16 +23,11 @@ import "./index.css";
 const HistoryWinLoss = () => {
   const telegram = useTelegram();
   const searchParams = useSearchParams();
-  const tabParam = searchParams.get("tab");
   const fromDateParam = searchParams.get("from_date");
   const toDateParam = searchParams.get("to_date");
   const timeParam = searchParams.get("time");
   const [historyWinLose, setHistoryWinLose] = useState<IHistoryBet[]>([]);
   const [loading, setLoading] = useState(true);
-  console.log("usePathname", usePathname());
-  console.log("fromDateParam", fromDateParam);
-  console.log("toDateParam", toDateParam);
-  console.log("tabParam", tabParam);
   const [date, setDate] = useState<DateRange | undefined>(
     fromDateParam && toDateParam
       ? { from: new Date(fromDateParam), to: new Date(toDateParam) }
@@ -59,7 +54,9 @@ const HistoryWinLoss = () => {
     }
   };
 
-  const [tab, setTabs] = useState(timeParam ? handleSetTabTime(timeParam) : "0");
+  const [tab, setTabs] = useState(
+    timeParam ? handleSetTabTime(timeParam) : fromDateParam && !timeParam ? undefined : "0"
+  );
   const fetchBetHistory = async (user_id: number) => {
     const fromDate = date?.from || getCurrentUtcTimeUTCMinus4();
     const toDay = date?.to || fromDate;
