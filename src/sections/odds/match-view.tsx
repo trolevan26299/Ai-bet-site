@@ -19,7 +19,6 @@ export default function MatchView() {
   const [latestOdds, setLatestOdds] = useState<IOddsDetail[]>([]);
   const [oddsStatus, setOddsStatus] = useState<OddsStatusType>({});
   const [dataScreenInfo, setDataScreenInfo] = useState<IMatchData[]>([]);
-  const [dataUser, setDataUser] = useState<any>();
   const [loading, setLoading] = useState(true);
   const [endBet, setEndBet] = useState(false);
   const telegram = useTelegram();

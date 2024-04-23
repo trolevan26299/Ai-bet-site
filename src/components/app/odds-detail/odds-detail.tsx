@@ -137,7 +137,8 @@ function RenderAccordion({
       starts: dataScreenInfo.starts,
       home: dataScreenInfo.home,
       away: dataScreenInfo.away,
-      game_type: oddsName === "Kèo tài xỉu - Toàn trận" ? "over under" : "handicap",
+      game_type:
+        oddsName === "Kèo tài xỉu - Toàn trận" || oddsName === "Kèo tài xỉu - Hiệp 1" ? "over under" : "handicap",
       game_detail: selectedTeam?.rate_odds as number,
       game_scope:
         oddsName === "Kèo cược chấp - Toàn trận" || oddsName === "Kèo tài xỉu - Toàn trận" ? "full time" : "first half",

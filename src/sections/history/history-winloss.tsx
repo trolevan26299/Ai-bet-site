@@ -25,27 +25,32 @@ const HistoryWinLoss = () => {
   const searchParams = useSearchParams();
   const fromDateParam = searchParams.get("from_date");
   const toDateParam = searchParams.get("to_date");
-
+  const timeParam = searchParams.get("time");
   const [historyWinLose, setHistoryWinLose] = useState<IHistoryBet[]>([]);
   const [loading, setLoading] = useState(true);
 
   const [date, setDate] = useState<DateRange | undefined>({
     from: new Date(),
   });
-  console.log("--------------date:", date);
+
   const [selectedDate, setSelectedDate] = useState<DateRange | undefined>(date);
 
-  // // tab onclick time
-  // const handleSetTabTime = (time: string) => {
-  //   if (time === "today") {
-  //     return "0";
-  //   } else if (time === "yesterday") {
-  //     return "1";
-  //   }else if (time === "7days") {
-  //     return "7";
-  // };
+  // tab onclick time
+  const handleSetTabTime = (time: string) => {
+    if (time === "today") {
+      return "0";
+    } else if (time === "yesterday") {
+      return "1";
+    } else if (time === "this_week") {
+      return "7";
+    } else if (time === "last_week") {
+      return "-7";
+    } else if (time === "l_14_days") {
+      return "14";
+    }
+  };
 
-  const [tab, setTabs] = useState("0");
+  const [tab, setTabs] = useState(timeParam ? handleSetTabTime(timeParam) : "0");
   const fetchBetHistory = async (user_id: number) => {
     // logic fo from Date
     const currentDate = date?.from || new Date();
