@@ -29,6 +29,8 @@ const HistoryWinLoss = () => {
   const [historyWinLose, setHistoryWinLose] = useState<IHistoryBet[]>([]);
   const [loading, setLoading] = useState(true);
 
+  console.log("fromDateParam", fromDateParam);
+  console.log("toDateParam", toDateParam);
   const [date, setDate] = useState<DateRange | undefined>(
     fromDateParam && toDateParam
       ? { from: new Date(fromDateParam), to: new Date(toDateParam) }
@@ -36,6 +38,7 @@ const HistoryWinLoss = () => {
           from: getCurrentUtcTimeUTCMinus4(),
         }
   );
+  console.log("date", date);
 
   const [selectedDate, setSelectedDate] = useState<DateRange | undefined>(date);
 
