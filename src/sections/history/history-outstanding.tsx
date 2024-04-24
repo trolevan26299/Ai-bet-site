@@ -8,6 +8,7 @@ import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import HistoryItem from "./history-item";
+import { getCurrentUtcTimeUTCMinus4 } from "@/utils/currentTimeUTC-4";
 
 const HistoryOutstanding = () => {
   const telegram = useTelegram();
@@ -54,7 +55,7 @@ const HistoryOutstanding = () => {
       setLoading(false);
     }
   };
-
+  console.log("================================", getCurrentUtcTimeUTCMinus4());
   useEffect(() => {
     if (telegram?.user?.id) {
       fetchBetHistory(telegram?.user?.id);
@@ -62,6 +63,12 @@ const HistoryOutstanding = () => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [telegram?.user?.id]);
+  // useEffect(() => {
+  //   fetchBetHistory(6359530967);
+  //   telegram.webApp?.expand();
+
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, []);
 
   return (
     <>
