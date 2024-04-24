@@ -1,13 +1,13 @@
 import { SplashScreen } from "@/components/loading-screen";
 import { useTelegram } from "@/context/telegram.provider";
 import { IHistoryBet } from "@/types/history.type";
+import { formatNumberAndFloor } from "@/utils/formatNumber";
 import { formatDateTime } from "@/utils/time";
 import axios from "axios";
 import Image from "next/image";
+import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import HistoryItem from "./history-item";
-import { formatNumber, formatNumberAndFloor } from "@/utils/formatNumber";
-import { useSearchParams } from "next/navigation";
 
 const HistoryOutstanding = () => {
   const telegram = useTelegram();
