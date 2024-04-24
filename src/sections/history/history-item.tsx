@@ -16,10 +16,10 @@ const HistoryItem = ({ dataDetail, type }: { dataDetail: IHistoryBet; type?: str
         <div
           className={`rounded-full w-[103px] ${getBackgroundByBetStatus(
             "winlose",
-            dataDetail.betStatus
+            dataDetail.betStatus2
           )} bg-[#f7b502] h-7 flex flex-row justify-center items-center text-[#fafafa] text-sm font-medium `}
         >
-          {type ? "Đang chạy" : getValueByBetStatus("winlose", dataDetail.betStatus)}
+          {type ? "Đang chạy" : getValueByBetStatus("winlose", dataDetail.betStatus2)}
         </div>
       </div>
       <div style={{ borderBottom: "1px solid #223a76" }} className="pb-3">

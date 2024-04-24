@@ -35,9 +35,6 @@ const HistoryWinLoss = () => {
           from: getCurrentUtcTimeUTCMinus4(),
         }
   );
-  console.log("fromDateParam", fromDateParam);
-  console.log("toDateParam", toDateParam);
-  console.log("date", date);
 
   const [selectedDate, setSelectedDate] = useState<DateRange | undefined>(date);
 
