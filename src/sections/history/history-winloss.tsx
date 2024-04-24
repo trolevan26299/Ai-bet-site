@@ -64,9 +64,7 @@ const HistoryWinLoss = () => {
     const formattedFromDate = formatRangeTime(fromDate, "from");
     const formattedToDate = formatRangeTime(toDay, "today");
 
-    const url = `?betList=SETTLED&fromDate=${fromDateParam || formattedFromDate}&toDate=${
-      toDateParam || formattedToDate
-    }`;
+    const url = `?betList=SETTLED&fromDate=${formattedFromDate}&toDate=${formattedToDate}`;
     try {
       setLoading(true);
       const response = await axios.post("/api/history", {
