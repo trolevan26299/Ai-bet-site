@@ -51,7 +51,7 @@ export const formatRangeTime = (dateTime: Date, type: string) => {
   const year = dateTime.getFullYear();
   const month = String(dateTime.getMonth() + 1).padStart(2, "0");
   const day = String(dateTime.getDate()).padStart(2, "0");
-  const hours = type === "from" ? "00" : "23";
+  const hours = type === "from" ? "04" : "03";
   const minutes = type === "from" ? "00" : "59";
   const seconds = type === "from" ? "00" : "59";
 
