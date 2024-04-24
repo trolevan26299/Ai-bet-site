@@ -55,7 +55,7 @@ const HistoryOutstanding = () => {
       setLoading(false);
     }
   };
-  console.log("================================", getCurrentUtcTimeUTCMinus4());
+
   useEffect(() => {
     if (telegram?.user?.id) {
       fetchBetHistory(telegram?.user?.id);
