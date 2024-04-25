@@ -28,7 +28,7 @@ const HistoryWinLoss = () => {
   const timeParam = searchParams.get("time");
   const [historyWinLose, setHistoryWinLose] = useState<IHistoryBet[]>([]);
   const [loading, setLoading] = useState(true);
-  const [selectTime, setSelectTime] = useState<Boolean>(true);
+  const [selectTime, setSelectTime] = useState<Boolean>(fromDateParam ? false : true);
   const [date, setDate] = useState<DateRange | undefined>(
     fromDateParam && toDateParam
       ? { from: new Date(fromDateParam), to: new Date(toDateParam) }
@@ -59,6 +59,7 @@ const HistoryWinLoss = () => {
   const [tab, setTabs] = useState(
     timeParam ? handleSetTabTime(timeParam) : fromDateParam && !timeParam ? undefined : "0"
   );
+  console.log("selectTime", selectTime);
   const fetchBetHistory = async (user_id: number) => {
     const fromDate = date?.from || getCurrentUtcTimeUTCMinus4();
     const toDay = date?.to || fromDate;
@@ -141,12 +142,7 @@ const HistoryWinLoss = () => {
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [date]);
-  useEffect(() => {
-    if (fromDateParam || toDateParam) {
-      setSelectTime(false);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+
   return (
     <>
       {loading ? (
