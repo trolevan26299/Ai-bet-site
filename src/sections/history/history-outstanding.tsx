@@ -8,7 +8,6 @@ import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import HistoryItem from "./history-item";
-import { getCurrentUtcTimeUTCMinus4 } from "@/utils/currentTimeUTC-4";
 
 const HistoryOutstanding = () => {
   const telegram = useTelegram();
@@ -93,7 +92,7 @@ const HistoryOutstanding = () => {
           <div className="px-3 h-full">
             {historyOutStanding.length === 0 ? (
               <div className="h-[100%] mt-[50%]  flex flex-col justify-center items-center">
-                <Image src="/assets/no-content.png" alt="no-content" className="w-[165px] h-[170px] mr-5" />
+                <Image src="/assets/no-content.png" alt="no-content" width={165} height={170} className=" mr-5" />
                 <p className="pt-4 text-base text-slate-500 font-semibold">Không có vé cược nào</p>
               </div>
             ) : (

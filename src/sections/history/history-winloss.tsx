@@ -10,7 +10,7 @@ import { Icon } from "@iconify/react";
 import { CalendarIcon } from "@radix-ui/react-icons";
 import * as PopoverRD from "@radix-ui/react-popover";
 import axios from "axios";
-import { addDays, addWeeks, endOfWeek, format, startOfDay, startOfWeek } from "date-fns";
+import { addDays, addWeeks, endOfWeek, format, set, startOfDay, startOfWeek } from "date-fns";
 import Image from "next/image";
 import { useSearchParams, usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -28,6 +28,7 @@ const HistoryWinLoss = () => {
   const timeParam = searchParams.get("time");
   const [historyWinLose, setHistoryWinLose] = useState<IHistoryBet[]>([]);
   const [loading, setLoading] = useState(true);
+  const [selectTime, setSelectTime] = useState<Boolean>(true);
   const [date, setDate] = useState<DateRange | undefined>(
     fromDateParam && toDateParam
       ? { from: new Date(fromDateParam), to: new Date(toDateParam) }
@@ -61,8 +62,8 @@ const HistoryWinLoss = () => {
   const fetchBetHistory = async (user_id: number) => {
     const fromDate = date?.from || getCurrentUtcTimeUTCMinus4();
     const toDay = date?.to || fromDate;
-    const formattedFromDate = formatRangeTime(fromDate, "from");
-    const formattedToDate = formatRangeTime(toDay, "today");
+    const formattedFromDate = selectTime ? formatRangeTime(fromDate, "from") : fromDateParam;
+    const formattedToDate = selectTime ? formatRangeTime(toDay, "today") : toDateParam;
 
     const url = `?betList=SETTLED&fromDate=${formattedFromDate}&toDate=${formattedToDate}`;
     try {
@@ -100,6 +101,7 @@ const HistoryWinLoss = () => {
     setDate({ from, to });
   };
   const handleTabClick = (days: number) => {
+    setSelectTime(true);
     const currentDate = getCurrentUtcTimeUTCMinus4();
     if (days !== 0 && days !== 7 && days !== -7 && days !== 1) {
       setTabs(days.toString());
@@ -139,6 +141,12 @@ const HistoryWinLoss = () => {
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [date]);
+  useEffect(() => {
+    if (fromDateParam || toDateParam) {
+      setSelectTime(false);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   return (
     <>
       {loading ? (
