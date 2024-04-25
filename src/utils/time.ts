@@ -1,4 +1,4 @@
-import { addDays, addHours, format } from "date-fns";
+import { addDays, format } from "date-fns";
 
 export const convertToGMT7 = (dateTimeString: string, type: string) => {
   const offset = 7;
