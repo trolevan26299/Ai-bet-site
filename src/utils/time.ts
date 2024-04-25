@@ -47,11 +47,18 @@ export const formatDateTime = (dateTime: Date) => {
 
   return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}Z`;
 };
-export const formatRangeTime = (dateTime: Date, type: string) => {
+export const formatRangeTime = (dateTime: Date, type: string, typeSelectTime: number) => {
+  // Lấy giờ hiện tại
+  const currentHour = new Date().getHours();
+  // Nếu giờ hiện tại chưa qua 11 giờ trưa, giảm ngày đi 1
+  if (currentHour < 11 && (typeSelectTime === 0 || typeSelectTime === 1)) {
+    dateTime = addDays(dateTime, -1);
+  }
+
   // Kiểm tra nếu type là 'today', thêm 1 ngày vào dateTime
   const newDate = type === "today" ? addDays(dateTime, 1) : dateTime;
-  const year = dateTime.getFullYear();
-  const month = String(dateTime.getMonth() + 1).padStart(2, "0");
+  const year = newDate.getFullYear();
+  const month = String(newDate.getMonth() + 1).padStart(2, "0");
   const day = String(newDate.getDate()).padStart(2, "0");
   const hours = type === "from" ? "04" : "03";
   const minutes = type === "from" ? "00" : "59";

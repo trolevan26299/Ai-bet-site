@@ -28,6 +28,7 @@ const HistoryWinLoss = () => {
   const timeParam = searchParams.get("time");
   const [historyWinLose, setHistoryWinLose] = useState<IHistoryBet[]>([]);
   const [loading, setLoading] = useState(true);
+  const [typeSelectTime, setTypeSelectTime] = useState<number>(0);
   const [selectTime, setSelectTime] = useState<Boolean>(fromDateParam ? false : true);
   const [date, setDate] = useState<DateRange | undefined>(
     fromDateParam && toDateParam
@@ -40,7 +41,6 @@ const HistoryWinLoss = () => {
   const [selectedDate, setSelectedDate] = useState<DateRange | undefined>(date);
   console.log("fromDateParam", fromDateParam);
   console.log("toDateParam", toDateParam);
-  console.log("date", date);
   // tab onclick time
   const handleSetTabTime = (time: string) => {
     if (time === "today") {
@@ -63,8 +63,8 @@ const HistoryWinLoss = () => {
   const fetchBetHistory = async (user_id: number) => {
     const fromDate = date?.from || getCurrentUtcTimeUTCMinus4();
     const toDay = date?.to || fromDate;
-    const formattedFromDate = selectTime ? formatRangeTime(fromDate, "from") : fromDateParam;
-    const formattedToDate = selectTime ? formatRangeTime(toDay, "today") : toDateParam;
+    const formattedFromDate = selectTime ? formatRangeTime(fromDate, "from", typeSelectTime) : fromDateParam;
+    const formattedToDate = selectTime ? formatRangeTime(toDay, "today", typeSelectTime) : toDateParam;
 
     const url = `?betList=SETTLED&fromDate=${formattedFromDate}&toDate=${formattedToDate}`;
     try {
@@ -102,6 +102,7 @@ const HistoryWinLoss = () => {
     setDate({ from, to });
   };
   const handleTabClick = (days: number) => {
+    setTypeSelectTime(days);
     setSelectTime(true);
     const currentDate = getCurrentUtcTimeUTCMinus4();
     if (days !== 0 && days !== 7 && days !== -7 && days !== 1) {
@@ -127,6 +128,7 @@ const HistoryWinLoss = () => {
   };
   const handleSaveDateCalendar = () => {
     setDate(selectedDate);
+    setTabs(undefined);
   };
 
   // useEffect(() => {
