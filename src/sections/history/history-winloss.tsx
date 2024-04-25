@@ -39,8 +39,6 @@ const HistoryWinLoss = () => {
   );
 
   const [selectedDate, setSelectedDate] = useState<DateRange | undefined>(date);
-  console.log("fromDateParam", fromDateParam);
-  console.log("toDateParam", toDateParam);
   // tab onclick time
   const handleSetTabTime = (time: string) => {
     if (time === "today") {
