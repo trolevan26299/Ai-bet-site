@@ -10,7 +10,7 @@ import { Icon } from "@iconify/react";
 import { CalendarIcon } from "@radix-ui/react-icons";
 import * as PopoverRD from "@radix-ui/react-popover";
 import axios from "axios";
-import { addDays, addWeeks, endOfWeek, format, set, startOfDay, startOfWeek } from "date-fns";
+import { addDays, addWeeks, endOfWeek, format, set, startOfDay, startOfWeek, subDays } from "date-fns";
 import Image from "next/image";
 import { useSearchParams, usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -129,6 +129,7 @@ const HistoryWinLoss = () => {
   const handleSaveDateCalendar = () => {
     setDate(selectedDate);
     setTabs(undefined);
+    setSelectTime(true);
   };
 
   // useEffect(() => {
@@ -180,7 +181,7 @@ const HistoryWinLoss = () => {
                   {date?.from ? (
                     date.to ? (
                       <>
-                        {format(date.from, "dd/MM/y")} - {format(date.to, "dd/MM/y")}
+                        {format(date.from, "dd/MM/y")} - {format(selectTime ? date.to : subDays(date.to, 1), "dd/MM/y")}
                       </>
                     ) : (
                       format(date.from, "dd/MM/y")
