@@ -57,7 +57,7 @@ const HistoryWinLoss = () => {
   const [tab, setTabs] = useState(
     timeParam ? handleSetTabTime(timeParam) : fromDateParam && !timeParam ? undefined : "0"
   );
-  console.log("selectTime", selectTime);
+
   const fetchBetHistory = async (user_id: number) => {
     const fromDate = date?.from || getCurrentUtcTimeUTCMinus4();
     const toDay = date?.to || fromDate;
