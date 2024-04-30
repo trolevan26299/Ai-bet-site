@@ -31,26 +31,9 @@ export default function OddsDetail({
   dataScreenInfo: IMatchData[];
 }) {
   const [openItems, setOpenItems] = useState(["item-1", "item-2", "item-3", "item-4"]);
-  const [isSticky, setIsSticky] = useState(false);
   const handleValueChange = (value: string[]) => {
     setOpenItems(value);
   };
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-      if (currentScrollY >= 180) {
-        setIsSticky(true);
-      } else {
-        setIsSticky(false);
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
 
   return (
     <>
