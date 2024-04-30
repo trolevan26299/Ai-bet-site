@@ -91,7 +91,7 @@ export default function MatchView() {
       }
     }
 
-    const intervalId = setInterval(fetchAndUpdateOdds, 5000);
+    const intervalId = setInterval(fetchAndUpdateOdds, 10000);
     return () => clearInterval(intervalId);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [latestOdds]);
