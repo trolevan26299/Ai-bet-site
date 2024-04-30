@@ -14,7 +14,7 @@ const HistoryItem = ({ dataDetail, type }: { dataDetail: IHistoryBet; type?: str
           <span className="text-xs text-[rgba(235,235,245,0.6)] ">{utcToUtc7Format(dataDetail.placedAt)}</span>
         </div>
         <div
-          className={`rounded-full w-[103px] ${getBackgroundByBetStatus(
+          className={`rounded-full min-w-28 px-2 ${getBackgroundByBetStatus(
             "winlose",
             dataDetail.betStatus2
           )}  h-7 flex flex-row justify-center items-center text-[#fafafa] text-sm font-medium `}

@@ -141,19 +141,19 @@ const HistoryWinLoss = () => {
     }
   };
 
-  useEffect(() => {
-    if (telegram?.user?.id) {
-      fetchBetHistory(telegram?.user?.id);
-      telegram.webApp?.expand();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [telegram?.user?.id, date]);
   // useEffect(() => {
-  //   fetchBetHistory(6359530967);
-  //   telegram.webApp?.expand();
-
+  //   if (telegram?.user?.id) {
+  //     fetchBetHistory(telegram?.user?.id);
+  //     telegram.webApp?.expand();
+  //   }
   //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [date]);
+  // }, [telegram?.user?.id, date]);
+  useEffect(() => {
+    fetchBetHistory(6359530967);
+    telegram.webApp?.expand();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [date]);
 
   return (
     <>
@@ -171,7 +171,7 @@ const HistoryWinLoss = () => {
                 { label: "Tuần này", days: 7 },
                 { label: "Tuần trước", days: -7 },
                 { label: "14 ngày trước", days: 14 },
-                { label: "30 ngày trước", days: 30 },
+                { label: "30 ngày trước", days: 29 },
               ].map((item, index) => (
                 <TabsTriggerDate key={index} value={item.days.toString()} onClick={() => handleTabClick(item.days)}>
                   {item.label}
