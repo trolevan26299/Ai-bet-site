@@ -46,8 +46,8 @@ export default function MatchView() {
         setLatestOdds(transformedData as unknown as IOddsDetail[]);
         telegram.webApp?.expand();
       } catch (error: any) {
-        console.error("Error fetching initial odds:", error);
         setEndBet(true);
+        console.error("Error fetching initial odds:", error);
       } finally {
         setLoading(false);
       }
