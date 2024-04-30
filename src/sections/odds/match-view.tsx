@@ -47,9 +47,7 @@ export default function MatchView() {
         telegram.webApp?.expand();
       } catch (error: any) {
         console.error("Error fetching initial odds:", error);
-        if (error.message === "Invalid match!") {
-          setEndBet(true);
-        }
+        setEndBet(true);
       } finally {
         setLoading(false);
       }
