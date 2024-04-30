@@ -12,14 +12,22 @@ export const getBackgroundByBetStatus = (type: string, value: string) => {
   }
 };
 
-export const getValueByBetStatus = (type: string, value: string) => {
+export const getValueByBetStatus = (type: string, value: string): string => {
   if (type === "winlose") {
-    if (value === "WON") {
-      return "Thắng";
-    } else if (value === "LOST") {
-      return "Thua";
-    } else {
-      return value;
-    }
+    const statusMap: { [key: string]: string } = {
+      WON: "Thắng",
+      LOST: "Thua",
+      CANCELLED: "Hủy",
+      REFUNDED: "Hoàn tiền",
+      NOT_ACCEPTED: "Không chấp nhận",
+      ACCEPTED: "Đã chấp nhận",
+      PENDING_ACCEPTANCE: "Đang đợi chấp nhận",
+      REJECTED: "Từ chối",
+      HALF_WON_HALF_PUSHED: "Thắng nửa",
+      HALF_LOST_HALF_PUSHED: "Thua nửa",
+    };
+
+    return statusMap[value] || value;
   }
+  return value;
 };
