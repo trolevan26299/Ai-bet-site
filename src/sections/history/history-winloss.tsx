@@ -129,8 +129,7 @@ const HistoryWinLoss = () => {
       }
     }
   };
-  console.log("tab", tab);
-  console.log("currentHour", currentHour);
+
   const handleSaveDateCalendar = () => {
     if (selectedDate?.from) {
       const newFromDate = currentHour < 11 ? addDays(selectedDate?.from, 1) : selectedDate?.from;
@@ -142,19 +141,19 @@ const HistoryWinLoss = () => {
     }
   };
 
-  // useEffect(() => {
-  //   if (telegram?.user?.id) {
-  //     fetchBetHistory(telegram?.user?.id);
-  //     telegram.webApp?.expand();
-  //   }
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [telegram?.user?.id, date]);
   useEffect(() => {
-    fetchBetHistory(6359530967);
-    telegram.webApp?.expand();
-
+    if (telegram?.user?.id) {
+      fetchBetHistory(telegram?.user?.id);
+      telegram.webApp?.expand();
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [date]);
+  }, [telegram?.user?.id, date]);
+  // useEffect(() => {
+  //   fetchBetHistory(6359530967);
+  //   telegram.webApp?.expand();
+
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [date]);
 
   return (
     <>
