@@ -37,6 +37,11 @@ const HistoryWinLoss = () => {
           from: getCurrentUtcTimeUTCMinus4(),
         }
   );
+  console.log("date:", date);
+
+  // giờ hiện tại,tại máy người dùng
+  const currentDate = new Date();
+  const currentHour = currentDate.getHours();
 
   const [selectedDate, setSelectedDate] = useState<DateRange | undefined>(date);
   // tab onclick time
@@ -124,25 +129,32 @@ const HistoryWinLoss = () => {
       }
     }
   };
+  console.log("tab", tab);
+  console.log("currentHour", currentHour);
   const handleSaveDateCalendar = () => {
-    setDate(selectedDate);
-    setTabs(undefined);
-    setSelectTime(true);
+    if (selectedDate?.from) {
+      const newFromDate = currentHour < 11 ? addDays(selectedDate?.from, 1) : selectedDate?.from;
+      const newToDate =
+        currentHour < 11 ? (selectedDate?.to ? addDays(selectedDate.to, 1) : undefined) : selectedDate.to;
+      setDate({ from: newFromDate, to: newToDate });
+      setTabs(undefined);
+      setSelectTime(true);
+    }
   };
 
-  useEffect(() => {
-    if (telegram?.user?.id) {
-      fetchBetHistory(telegram?.user?.id);
-      telegram.webApp?.expand();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [telegram?.user?.id, date]);
   // useEffect(() => {
-  //   fetchBetHistory(6359530967);
-  //   telegram.webApp?.expand();
-
+  //   if (telegram?.user?.id) {
+  //     fetchBetHistory(telegram?.user?.id);
+  //     telegram.webApp?.expand();
+  //   }
   //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [date]);
+  // }, [telegram?.user?.id, date]);
+  useEffect(() => {
+    fetchBetHistory(6359530967);
+    telegram.webApp?.expand();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [date]);
 
   return (
     <>
@@ -182,7 +194,10 @@ const HistoryWinLoss = () => {
                         {format(date.from, "dd/MM/y")} - {format(selectTime ? date.to : subDays(date.to, 1), "dd/MM/y")}
                       </>
                     ) : (
-                      format(date.from, "dd/MM/y")
+                      format(
+                        currentHour >= 11 || (tab === undefined && !toDateParam) ? date.from : subDays(date.from, 1),
+                        "dd/MM/y"
+                      )
                     )
                   ) : (
                     <span>Vui lòng chọn ngày</span>
