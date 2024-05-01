@@ -91,25 +91,12 @@
     --ring: 212.7 26.8% 83.9%;
   }
 }
-html,
-body {
-  width: 100%;
-  height: 100%;
-  overflow: hidden; /* Ngăn chặn cuộn ngoài kích thước thực tế */
-  position: relative;
-  margin: 0;
-  padding: 0;
-  background-color: #fff; /* Đặt màu nền tùy ý */
-  height: -webkit-fill-available;
-}
 
 @layer base {
   * {
     @apply border-border;
-    height: -webkit-fill-available;
   }
   body {
     @apply bg-background text-foreground;
-    height: -webkit-fill-available;
   }
 }
