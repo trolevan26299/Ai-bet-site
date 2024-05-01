@@ -31,7 +31,6 @@ const DrawerContent = React.forwardRef<
   <DrawerPortal>
     <DrawerOverlay />
     <DrawerPrimitive.Content
-      style={{ height: `${window.innerHeight}px`, bottom: "0px", overflowY: "auto" }}
       ref={ref}
       className={cn("fixed inset-x-0 bottom-0 z-50 mt-24 flex h-auto flex-col rounded-t-3xl  bg-background", className)}
       {...props}
