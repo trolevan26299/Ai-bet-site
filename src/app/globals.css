@@ -3,9 +3,6 @@
 @tailwind utilities;
 
 @layer base {
-  html {
-    min-height: calc(100% + env(safe-area-inset-top));
-  }
   :root {
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
@@ -70,6 +67,9 @@
 }
 
 @layer base {
+  html {
+    min-height: calc(100% + 50px);
+  }
   * {
     @apply border-border;
   }
