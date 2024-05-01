@@ -107,30 +107,10 @@ export default function MatchView() {
           </span>
         </div>
       ) : (
-        <Drawer
-        // onClose={() => {
-        //   setSelectedTeam(null);
-        //   setValueSelectNew(undefined);
-        // }}
-        >
-          <div className="p-3 pb-6">
-            <ScreenInfoMatch dataScreenInfo={dataScreenInfo} />
-            <OddsDetail odds={odds} oddsStatus={oddsStatus} dataScreenInfo={dataScreenInfo} />
-          </div>
-          <DrawerContent>
-            <button>sfsdfsdf</button>
-            <button>sfsdfsdf</button>
-            <button>sfsdfsdf</button>
-            <button>sfsdfsdf</button>
-            <button>sfsdfsdf</button>
-            <button>sfsdfsdf</button>
-            <button>sfsdfsdf</button>
-            <button>sfsdfsdf</button>
-            <button>sfsdfsdf</button>
-            <button>sfsdfsdf</button>
-            <button>sfsdfsdf</button>
-          </DrawerContent>
-        </Drawer>
+        <div className="p-3 pb-6">
+          <ScreenInfoMatch dataScreenInfo={dataScreenInfo} />
+          <OddsDetail odds={odds} oddsStatus={oddsStatus} dataScreenInfo={dataScreenInfo} />
+        </div>
       )}
     </MainLayout>
   );
