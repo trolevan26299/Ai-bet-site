@@ -12,7 +12,7 @@ export default function ScreenInfoMatch({ dataScreenInfo }: { dataScreenInfo: IM
   const [imageErrorHome, setImageErrorHome] = useState(false);
   const [imageErrorAway, setImageErrorAway] = useState(false);
   return (
-    <div className="relative pb-2 min-h-[200px]">
+    <div className="relative pb-2 h-200px">
       <img src="/assets/bg_team.jpg" alt="Stadium" className="w-full h-auto" />
 
       <div className="absolute inset-0 grid grid-cols-12 items-start justify-center px-4 pt-2">
