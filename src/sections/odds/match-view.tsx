@@ -3,6 +3,7 @@
 import OddsDetail from "@/components/app/odds-detail/odds-detail";
 import ScreenInfoMatch from "@/components/app/screen-info-match/screen-info-match";
 import { SplashScreen } from "@/components/loading-screen";
+import { Drawer, DrawerContent } from "@/components/ui/drawer";
 import { useTelegram } from "@/context/telegram.provider";
 import MainLayout from "@/layouts/main/layout";
 import { IMatchData, IOddsDetail, OddsStatusType } from "@/types/odds.types";
@@ -106,10 +107,30 @@ export default function MatchView() {
           </span>
         </div>
       ) : (
-        <div className="p-3 pb-6">
-          <ScreenInfoMatch dataScreenInfo={dataScreenInfo} />
-          <OddsDetail odds={odds} oddsStatus={oddsStatus} dataScreenInfo={dataScreenInfo} />
-        </div>
+        <Drawer
+        // onClose={() => {
+        //   setSelectedTeam(null);
+        //   setValueSelectNew(undefined);
+        // }}
+        >
+          <div className="p-3 pb-6">
+            <ScreenInfoMatch dataScreenInfo={dataScreenInfo} />
+            <OddsDetail odds={odds} oddsStatus={oddsStatus} dataScreenInfo={dataScreenInfo} />
+          </div>
+          <DrawerContent>
+            <button>sfsdfsdf</button>
+            <button>sfsdfsdf</button>
+            <button>sfsdfsdf</button>
+            <button>sfsdfsdf</button>
+            <button>sfsdfsdf</button>
+            <button>sfsdfsdf</button>
+            <button>sfsdfsdf</button>
+            <button>sfsdfsdf</button>
+            <button>sfsdfsdf</button>
+            <button>sfsdfsdf</button>
+            <button>sfsdfsdf</button>
+          </DrawerContent>
+        </Drawer>
       )}
     </MainLayout>
   );

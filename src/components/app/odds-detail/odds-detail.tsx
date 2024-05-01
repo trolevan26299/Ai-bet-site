@@ -239,7 +239,7 @@ function RenderAccordion({
           </AccordionItem>
         ))}
       </>
-      <Drawer
+      {/* <Drawer
         onClose={() => {
           setSelectedTeam(null);
           setValueSelectNew(undefined);
@@ -328,7 +328,7 @@ function RenderAccordion({
             </DrawerClose>
           </DrawerFooter>
         </DrawerContent>
-      </Drawer>
+      </Drawer> */}
     </Accordion>
   );
 }
