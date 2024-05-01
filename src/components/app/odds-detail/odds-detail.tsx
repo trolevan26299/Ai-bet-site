@@ -36,7 +36,7 @@ export default function OddsDetail({
   };
 
   return (
-    <>
+    <div className="h-full overflow-auto">
       <Tabs defaultValue="1" className="w-full">
         <TabsList className={`w-full gap-3 justify-between`}>
           <TabsTrigger value="1">Tất cả kèo</TabsTrigger>
@@ -78,7 +78,7 @@ export default function OddsDetail({
           />
         </TabsContent>
       </Tabs>
-    </>
+    </div>
   );
 }
 

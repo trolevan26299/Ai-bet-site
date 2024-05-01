@@ -106,7 +106,7 @@ export default function MatchView() {
           </span>
         </div>
       ) : (
-        <div>
+        <div className="p-3 pb-6 h-screen">
           <ScreenInfoMatch dataScreenInfo={dataScreenInfo} />
           <OddsDetail odds={odds} oddsStatus={oddsStatus} dataScreenInfo={dataScreenInfo} />
         </div>
