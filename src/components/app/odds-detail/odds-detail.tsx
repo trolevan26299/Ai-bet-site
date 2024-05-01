@@ -56,7 +56,10 @@ export default function OddsDetail({
 
         <TabsContent value="2">
           <RenderAccordion
-            odds={[odds[0], odds[1]]}
+            // odds={[odds[0], odds[1]]}
+            odds={odds.filter(
+              (item) => item.name_Odds === "Kèo cược chấp - Toàn trận" || item.name_Odds === "Kèo cược chấp - Hiệp 1"
+            )}
             openItems={openItems}
             oddsStatus={oddsStatus}
             onValueChange={handleValueChange}
@@ -66,7 +69,9 @@ export default function OddsDetail({
 
         <TabsContent value="3">
           <RenderAccordion
-            odds={[odds[2], odds[3]]}
+            odds={odds.filter(
+              (item) => item.name_Odds === "Kèo tài xỉu - Toàn trận" || item.name_Odds === "Kèo tài xỉu - Hiệp 1"
+            )}
             openItems={openItems}
             oddsStatus={oddsStatus}
             onValueChange={handleValueChange}
