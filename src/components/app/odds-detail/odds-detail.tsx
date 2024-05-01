@@ -176,7 +176,7 @@ function RenderAccordion({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [oddsStatus]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     document.documentElement.style.scrollBehavior = "auto";
     return () => {
       document.documentElement.style.scrollBehavior = "smooth";
