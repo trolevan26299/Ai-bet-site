@@ -176,6 +176,13 @@ function RenderAccordion({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [oddsStatus]);
 
+  React.useEffect(() => {
+    document.documentElement.style.scrollBehavior = "auto";
+    return () => {
+      document.documentElement.style.scrollBehavior = "smooth";
+    };
+  }, []);
+
   return (
     <Drawer
       onClose={() => {
@@ -248,7 +255,7 @@ function RenderAccordion({
           ))}
         </>
 
-        <DrawerContent className="bg-backgroundColor-main  w-full mb-20">
+        <DrawerContent className="bg-backgroundColor-main  w-full ">
           <DrawerHeader>
             <DrawerTitle className="text-[20px] text-left text-text-light">Thông tin kèo đã chọn</DrawerTitle>
           </DrawerHeader>
