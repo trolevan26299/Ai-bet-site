@@ -24,6 +24,22 @@ const DrawerOverlay = React.forwardRef<
 ));
 DrawerOverlay.displayName = DrawerPrimitive.Overlay.displayName;
 
+// const DrawerContent = React.forwardRef<
+//   React.ElementRef<typeof DrawerPrimitive.Content>,
+//   React.ComponentPropsWithoutRef<typeof DrawerPrimitive.Content>
+// >(({ className, children, ...props }, ref) => (
+//   <DrawerPortal>
+//     <DrawerOverlay />
+//     <DrawerPrimitive.Content
+//       ref={ref}
+//       className={cn("fixed inset-x-0 bottom-0 z-50 mt-24 flex h-auto flex-col rounded-t-3xl  bg-background", className)}
+//       {...props}
+//     >
+//       <div className="mx-auto mt-4 h-1 w-[100px] rounded-full bg-muted" />
+//       {children}
+//     </DrawerPrimitive.Content>
+//   </DrawerPortal>
+// ));
 const DrawerContent = React.forwardRef<
   React.ElementRef<typeof DrawerPrimitive.Content>,
   React.ComponentPropsWithoutRef<typeof DrawerPrimitive.Content>
@@ -32,7 +48,11 @@ const DrawerContent = React.forwardRef<
     <DrawerOverlay />
     <DrawerPrimitive.Content
       ref={ref}
-      className={cn("fixed inset-x-0 bottom-0 z-50 mt-24 flex h-auto flex-col rounded-t-3xl  bg-background", className)}
+      className={cn(
+        "fixed inset-y-0 left-0 z-50 mt-24 flex w-full max-w-xs flex-col rounded-r-3xl bg-background",
+        className
+      )}
+      style={{ marginBottom: "30px" }} // Thêm style ở đây để cách bên dưới 30px
       {...props}
     >
       <div className="mx-auto mt-4 h-1 w-[100px] rounded-full bg-muted" />
@@ -40,6 +60,7 @@ const DrawerContent = React.forwardRef<
     </DrawerPrimitive.Content>
   </DrawerPortal>
 ));
+DrawerContent.displayName = "DrawerContent";
 DrawerContent.displayName = "DrawerContent";
 
 const DrawerHeader = ({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) => (
