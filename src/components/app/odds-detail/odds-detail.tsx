@@ -36,7 +36,7 @@ export default function OddsDetail({
   };
 
   return (
-    <Tabs defaultValue="1" className="w-full overflow-auto" style={{ height: "calc(100% - 200px)" }}>
+    <Tabs defaultValue="1" className="w-full h-full">
       <TabsList className={`w-full gap-3 justify-between`}>
         <TabsTrigger value="1">Tất cả kèo</TabsTrigger>
         <TabsTrigger value="2">Kèo cược chấp</TabsTrigger>

@@ -27,19 +27,40 @@ DrawerOverlay.displayName = DrawerPrimitive.Overlay.displayName;
 const DrawerContent = React.forwardRef<
   React.ElementRef<typeof DrawerPrimitive.Content>,
   React.ComponentPropsWithoutRef<typeof DrawerPrimitive.Content>
->(({ className, children, ...props }, ref) => (
-  <DrawerPortal>
-    <DrawerOverlay />
-    <DrawerPrimitive.Content
-      ref={ref}
-      className={cn("fixed inset-x-0 bottom-0 z-50 mt-24 flex h-auto flex-col rounded-t-3xl  bg-background", className)}
-      {...props}
-    >
-      <div className="mx-auto mt-4 h-1 w-[100px] rounded-full bg-muted" />
-      {children}
-    </DrawerPrimitive.Content>
-  </DrawerPortal>
-));
+>(({ className, children, ...props }, ref) => {
+  const [bottomMargin, setBottomMargin] = React.useState(0);
+
+  const updateDrawerPosition = () => {
+    // Đặt giá trị marginBottom dựa trên viewport height để tránh thanh cuộn
+    const vh = window.innerHeight * 0.01;
+    setBottomMargin(vh * 10); // Ví dụ: đặt marginBottom bằng 10% chiều cao viewport
+  };
+
+  React.useEffect(() => {
+    window.addEventListener("resize", updateDrawerPosition);
+    updateDrawerPosition();
+
+    return () => {
+      window.removeEventListener("resize", updateDrawerPosition);
+    };
+  }, []);
+
+  return (
+    <DrawerPortal>
+      <DrawerOverlay />
+      <DrawerPrimitive.Content
+        ref={ref}
+        className={cn("fixed inset-x-0 bottom-0 z-50 flex h-auto flex-col rounded-t-3xl bg-background", className)}
+        style={{ marginBottom: `${bottomMargin}px` }}
+        {...props}
+      >
+        <div className="mx-auto mt-4 h-1 w-[100px] rounded-full bg-muted" />
+        {children}
+      </DrawerPrimitive.Content>
+    </DrawerPortal>
+  );
+});
+
 DrawerContent.displayName = "DrawerContent";
 
 const DrawerHeader = ({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) => (
