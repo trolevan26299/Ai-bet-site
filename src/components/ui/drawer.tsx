@@ -32,8 +32,8 @@ const DrawerContent = React.forwardRef<
     <DrawerOverlay />
     <DrawerPrimitive.Content
       ref={ref}
-      className={cn("fixed inset-x-0 top-0 z-50 flex h-auto flex-col rounded-b-3xl bg-background", className)}
-      style={{ marginTop: "100px", height: "calc(100% - 100px)" }} // Thiết lập khoảng cách từ trên xuống và chiều cao
+      className={cn("fixed inset-y-0 left-0 z-50 flex w-full max-w-xs flex-col bg-background", className)}
+      style={{ marginBottom: "30px", height: "calc(100% - 30px)" }} // Đặt marginBottom và tính toán lại chiều cao
       {...props}
     >
       <div className="mx-auto mt-4 h-1 w-[100px] rounded-full bg-muted" />
