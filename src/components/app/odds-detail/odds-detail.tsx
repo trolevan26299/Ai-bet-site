@@ -247,7 +247,8 @@ function RenderAccordion({
             </AccordionItem>
           ))}
         </>
-        <DrawerContent className="bg-backgroundColor-main  w-full">
+
+        <DrawerContent className="bg-backgroundColor-main  w-full" style={{ height: "-webkit-fill-available" }}>
           <DrawerHeader>
             <DrawerTitle className="text-[20px] text-left text-text-light">Thông tin kèo đã chọn</DrawerTitle>
           </DrawerHeader>
