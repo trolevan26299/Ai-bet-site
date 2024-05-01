@@ -94,7 +94,7 @@ export default function ScreenInfoMatch({ dataScreenInfo }: { dataScreenInfo: IM
         <div className={`flex flex-col items-end col-span-3  ${dataScreenInfo[0]?.liveStatus ? "mt-7" : "mt-4"}`}>
           {dataScreenInfo.length > 0 && (
             <>
-              {imageErrorHome ? (
+              {imageErrorAway ? (
                 <Icon
                   className="flex flex-row justify-start"
                   icon="ion:shirt"
