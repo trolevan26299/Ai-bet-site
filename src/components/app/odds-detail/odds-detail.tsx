@@ -36,49 +36,47 @@ export default function OddsDetail({
   };
 
   return (
-    <div className="h-full overflow-auto">
-      <Tabs defaultValue="1" className="w-full">
-        <TabsList className={`w-full gap-3 justify-between`}>
-          <TabsTrigger value="1">Tất cả kèo</TabsTrigger>
-          <TabsTrigger value="2">Kèo cược chấp</TabsTrigger>
-          <TabsTrigger value="3">Kèo tài xỉu </TabsTrigger>
-        </TabsList>
+    <Tabs defaultValue="1" className="w-full">
+      <TabsList className={`w-full gap-3 justify-between`}>
+        <TabsTrigger value="1">Tất cả kèo</TabsTrigger>
+        <TabsTrigger value="2">Kèo cược chấp</TabsTrigger>
+        <TabsTrigger value="3">Kèo tài xỉu </TabsTrigger>
+      </TabsList>
 
-        <TabsContent value="1">
-          <RenderAccordion
-            odds={odds}
-            openItems={openItems}
-            oddsStatus={oddsStatus}
-            onValueChange={handleValueChange}
-            dataScreenInfo={dataScreenInfo[0]}
-          />
-        </TabsContent>
+      <TabsContent value="1">
+        <RenderAccordion
+          odds={odds}
+          openItems={openItems}
+          oddsStatus={oddsStatus}
+          onValueChange={handleValueChange}
+          dataScreenInfo={dataScreenInfo[0]}
+        />
+      </TabsContent>
 
-        <TabsContent value="2">
-          <RenderAccordion
-            odds={odds.filter(
-              (item) => item.name_Odds === "Kèo cược chấp - Toàn trận" || item.name_Odds === "Kèo cược chấp - Hiệp 1"
-            )}
-            openItems={openItems}
-            oddsStatus={oddsStatus}
-            onValueChange={handleValueChange}
-            dataScreenInfo={dataScreenInfo[0]}
-          />
-        </TabsContent>
+      <TabsContent value="2">
+        <RenderAccordion
+          odds={odds.filter(
+            (item) => item.name_Odds === "Kèo cược chấp - Toàn trận" || item.name_Odds === "Kèo cược chấp - Hiệp 1"
+          )}
+          openItems={openItems}
+          oddsStatus={oddsStatus}
+          onValueChange={handleValueChange}
+          dataScreenInfo={dataScreenInfo[0]}
+        />
+      </TabsContent>
 
-        <TabsContent value="3">
-          <RenderAccordion
-            odds={odds.filter(
-              (item) => item.name_Odds === "Kèo tài xỉu - Toàn trận" || item.name_Odds === "Kèo tài xỉu - Hiệp 1"
-            )}
-            openItems={openItems}
-            oddsStatus={oddsStatus}
-            onValueChange={handleValueChange}
-            dataScreenInfo={dataScreenInfo[0]}
-          />
-        </TabsContent>
-      </Tabs>
-    </div>
+      <TabsContent value="3">
+        <RenderAccordion
+          odds={odds.filter(
+            (item) => item.name_Odds === "Kèo tài xỉu - Toàn trận" || item.name_Odds === "Kèo tài xỉu - Hiệp 1"
+          )}
+          openItems={openItems}
+          oddsStatus={oddsStatus}
+          onValueChange={handleValueChange}
+          dataScreenInfo={dataScreenInfo[0]}
+        />
+      </TabsContent>
+    </Tabs>
   );
 }
 
@@ -249,7 +247,7 @@ function RenderAccordion({
             </AccordionItem>
           ))}
         </>
-        <DrawerContent className="bg-backgroundColor-main  w-full">
+        <DrawerContent className="bg-backgroundColor-main  w-full  fixed bottom-0 left-0 right-0 max-h-[90dvh]">
           <DrawerHeader>
             <DrawerTitle className="text-[20px] text-left text-text-light">Thông tin kèo đã chọn</DrawerTitle>
           </DrawerHeader>
