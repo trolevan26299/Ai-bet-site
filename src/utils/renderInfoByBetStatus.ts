@@ -1,8 +1,8 @@
 export const getBackgroundByBetStatus = (type: string, value: string) => {
   if ((type = "winlose")) {
-    if (value === "WON") {
+    if (value === "WON" || value === "HALF_WON_HALF_PUSHED") {
       return "bg-[#34c759]";
-    } else if (value === "LOST") {
+    } else if (value === "LOST" || value === "HALF_LOST_HALF_PUSHED") {
       return "bg-[#ff453a]";
     } else {
       return "bg-[#f7b502]";
