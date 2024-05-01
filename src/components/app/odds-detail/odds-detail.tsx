@@ -247,7 +247,7 @@ function RenderAccordion({
             </AccordionItem>
           ))}
         </>
-        <DrawerContent className="bg-backgroundColor-main  w-full  fixed bottom-0 left-0 right-0 max-h-[90dvh]">
+        <DrawerContent className="bg-backgroundColor-main  w-full  fixed bottom-0 left-0 right-0 max-h-[30vh]">
           <DrawerHeader>
             <DrawerTitle className="text-[20px] text-left text-text-light">Thông tin kèo đã chọn</DrawerTitle>
           </DrawerHeader>
