@@ -32,8 +32,15 @@ const DrawerContent = React.forwardRef<
     <DrawerOverlay />
     <DrawerPrimitive.Content
       ref={ref}
-      className={cn("fixed inset-y-0 left-0 z-50 flex w-full max-w-xs flex-col bg-background", className)}
-      style={{ marginBottom: "30px", height: "calc(100% - 30px)" }} // Đặt marginBottom và tính toán lại chiều cao
+      className={cn("fixed z-50 flex flex-col bg-background", className)}
+      style={{
+        top: "50%", // Vị trí giữa màn hình theo chiều dọc
+        left: "50%", // Vị trí giữa màn hình theo chiều ngang
+        transform: "translate(-50%, -50%)", // Điều chỉnh để nó hiển thị đúng giữa màn hình
+        width: "90%", // Chiều rộng của Drawer, có thể điều chỉnh theo ý muốn
+        maxHeight: "80%", // Giới hạn chiều cao tối đa của Drawer
+        overflowY: "auto", // Cho phép cuộn nội dung bên trong nếu quá dài
+      }}
       {...props}
     >
       <div className="mx-auto mt-4 h-1 w-[100px] rounded-full bg-muted" />
