@@ -137,7 +137,7 @@ function RenderAccordion({
     };
     const response = await axios.post("api/game", body);
     console.log("response data oke:", response);
-    setDisableBtn(false);
+    // setDisableBtn(false);
     // if (response?.data?.ok) {
     //   telegram?.webApp?.close();
     // }
