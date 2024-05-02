@@ -11,31 +11,33 @@ export const transformData = (data: IMatchData[], numberLines: number) => {
       const keoChinhTaiXiuHiep1 = item.bets.totals.find((bet: IBetDetail) => bet.number === 1 && bet.altLineId === 0);
 
       const filterSpreads = (bet: any, centerHdp: any) => {
-        if (numberLines === 0) return bet.number === 0;
         let range = Math.floor(numberLines / 2) * 0.25;
         return bet.number === 0 && bet.hdp >= centerHdp - range && bet.hdp <= centerHdp + range;
       };
 
       const spreadsToanTran = keoChinhToanTran
-        ? item.bets.spreads.filter((bet: IBetDetail) => filterSpreads(bet, keoChinhToanTran.hdp))
+        ? item.bets.spreads.filter((bet: IBetDetail) => filterSpreads(bet, keoChinhToanTran.hdp)).slice(0, numberLines)
         : [];
 
       const spreadsHiep1 = keoChinhHiep1
-        ? item.bets.spreads.filter((bet: IBetDetail) => filterSpreads(bet, keoChinhHiep1.hdp))
+        ? item.bets.spreads.filter((bet: IBetDetail) => filterSpreads(bet, keoChinhHiep1.hdp)).slice(0, numberLines)
         : [];
 
       const filterTotals = (bet: any, centerPoints: any) => {
-        if (numberLines === 0) return bet.number === 0; // Return all lines for numberLines = 0
         let range = Math.floor(numberLines / 2) * 0.25;
         return bet.number === 0 && bet.points >= centerPoints - range && bet.points <= centerPoints + range;
       };
 
       const totalTaiXiuToanTran = keoChinhTaiXiuToanTran
-        ? item.bets.totals.filter((bet: IBetDetail) => filterTotals(bet, keoChinhTaiXiuToanTran.points))
+        ? item.bets.totals
+            .filter((bet: IBetDetail) => filterTotals(bet, keoChinhTaiXiuToanTran.points))
+            .slice(0, numberLines)
         : [];
 
       const totalTaiXiuHiep1 = keoChinhTaiXiuHiep1
-        ? item.bets.totals.filter((bet: IBetDetail) => filterTotals(bet, keoChinhTaiXiuHiep1.points))
+        ? item.bets.totals
+            .filter((bet: IBetDetail) => filterTotals(bet, keoChinhTaiXiuHiep1.points))
+            .slice(0, numberLines)
         : [];
 
       const result = [];
