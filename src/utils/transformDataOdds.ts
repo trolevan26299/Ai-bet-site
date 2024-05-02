@@ -10,6 +10,7 @@ export const transformData = (data: IMatchData[], numberLines: number) => {
       );
       const keoChinhTaiXiuHiep1 = item.bets.totals.find((bet: IBetDetail) => bet.number === 1 && bet.altLineId === 0);
 
+      console.log("keoChinhTaiXiuHiep1", keoChinhTaiXiuHiep1);
       const filterSpreads = (bet: any, centerHdp: any) => {
         let range = Math.floor(numberLines / 2) * 0.25;
         return bet.number === 0 && bet.hdp >= centerHdp - range && bet.hdp <= centerHdp + range;
@@ -22,7 +23,6 @@ export const transformData = (data: IMatchData[], numberLines: number) => {
       const spreadsHiep1 = keoChinhHiep1
         ? item.bets.spreads.filter((bet: IBetDetail) => filterSpreads(bet, keoChinhHiep1.hdp)).slice(0, numberLines)
         : [];
-      console.log("spreadsHiep1", spreadsHiep1);
 
       const filterTotals = (bet: any, centerPoints: any) => {
         let range = Math.floor(numberLines / 2) * 0.25;
