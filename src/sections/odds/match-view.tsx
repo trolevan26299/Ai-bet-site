@@ -42,7 +42,7 @@ export default function MatchView() {
       setLoading(true);
       try {
         const res = await axios.post("/api/odds", payload);
-        const transformedData = transformData(res.data, Number(lineParam) || 1);
+        const transformedData = transformData(res.data, Number(lineParam) || 5);
         setDataScreenInfo(res.data);
         setOdds(transformedData as unknown as IOddsDetail[]);
         setLatestOdds(transformedData as unknown as IOddsDetail[]);
