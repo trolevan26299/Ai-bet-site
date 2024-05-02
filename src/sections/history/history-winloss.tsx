@@ -90,8 +90,8 @@ const HistoryWinLoss = () => {
 
   // tổng cược
   const totalBetMoney = historyWinLose.reduce((total, item) => {
-    const stake = item.price > 0 ? item.risk : item.risk / -item.price;
-    return total + stake;
+    // const stake = item.price > 0 ? item.risk : item.risk / -item.price;
+    return total + item.risk;
   }, 0);
   // tổng hoa hồng
   const totalCommission = historyWinLose.reduce((total, item) => total + item.customerCommission, 0);
@@ -233,7 +233,7 @@ const HistoryWinLoss = () => {
           <div className="flex flex-col justify-start items-start text-[#fafafa] pt-7">
             <div className="flex flex-grow justify-between items-center w-full">
               <div className="flex flex-grow items-center justify-start w-1/2">
-                <p className="text-sm font-normal pr-1">Tổng cược :</p>
+                <p className="text-sm font-normal pr-1">Tổng điểm :</p>
                 <p className="text-base font-medium">{formatNumberAndFloor(totalBetMoney)}</p>
               </div>
               <div className="flex flex-grow items-center justify-end">

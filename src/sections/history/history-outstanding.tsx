@@ -19,8 +19,7 @@ const HistoryOutstanding = () => {
 
   // tổng cược
   const totalBetMoney = historyOutStanding.reduce((total, item) => {
-    const stake = item.price > 0 ? item.risk : item.risk / -item.price;
-    return total + stake;
+    return total + item.risk;
   }, 0);
 
   const fetchBetHistory = async (user_id: number) => {
@@ -80,7 +79,7 @@ const HistoryOutstanding = () => {
           <div className="fixed top-[46px] h-12 w-full flex flex-grow items-center bg-backgroundColor-main px-3">
             <div className="flex flex-grow items-center text-text-main w-full">
               <div className="flex flex-grow items-center justify-start">
-                <p className="text-sm font-normal pr-1">Tổng cược :</p>
+                <p className="text-sm font-normal pr-1">Tổng điểm :</p>
                 <p className="text-base font-medium">{formatNumberAndFloor(totalBetMoney)}</p>
               </div>
               <div className="flex flex-grow items-center justify-end">
