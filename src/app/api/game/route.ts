@@ -7,7 +7,7 @@ export async function POST(req: Request, res: NextApiResponse) {
   try {
     const response = await axiosInstance.post(endpoints.game, body);
     // return NextResponse.json(response.data);
-    return NextResponse.json(response);
+    return NextResponse.json(response.data);
   } catch (error: any) {
     return NextResponse.json({ message: error.message });
   }
