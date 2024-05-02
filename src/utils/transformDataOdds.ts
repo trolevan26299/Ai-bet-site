@@ -11,6 +11,7 @@ export const transformData = (data: IMatchData[], numberLines = 0) => {
       const keoChinhTaiXiuHiep1 = item.bets.totals.find((bet: IBetDetail) => bet.number === 1 && bet.altLineId === 0);
 
       const filterSpreads = (bet: any, centerHdp: any) => {
+        if (numberLines === 0) return bet.number === 0;
         let range = Math.floor(numberLines / 2) * 0.25;
         return bet.number === 0 && bet.hdp >= centerHdp - range && bet.hdp <= centerHdp + range;
       };
