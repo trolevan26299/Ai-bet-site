@@ -138,9 +138,9 @@ function RenderAccordion({
     const response = await axios.post("api/game", body);
     console.log("response data oke:", response);
     setDisableBtn(false);
-    if (response?.data?.ok) {
-      telegram?.webApp?.close();
-    }
+    // if (response?.data?.ok) {
+    //   telegram?.webApp?.close();
+    // }
   };
 
   const handleSelectTeam = (statusKey: string, team: IOdds, oddsName: string) => {
