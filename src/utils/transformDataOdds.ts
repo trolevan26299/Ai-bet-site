@@ -1,6 +1,6 @@
 import { IBetDetail, IMatchData } from "@/types/odds.types";
 
-export const transformData = (data: IMatchData[], numberLines: number) => {
+export const transformData = (data: IMatchData[], line: number) => {
   return data
     ?.map((item: IMatchData) => {
       const keoChinhToanTran = item.bets.spreads.find((bet: IBetDetail) => bet.number === 0 && bet.altLineId === 0);
@@ -10,37 +10,36 @@ export const transformData = (data: IMatchData[], numberLines: number) => {
       );
       const keoChinhTaiXiuHiep1 = item.bets.totals.find((bet: IBetDetail) => bet.number === 1 && bet.altLineId === 0);
 
-      console.log("keoChinhTaiXiuHiep1", keoChinhTaiXiuHiep1);
-      const filterSpreads = (bet: any, centerHdp: any) => {
-        let range = Math.floor(numberLines / 2) * 0.25;
-        return bet.number === 0 && bet.hdp >= centerHdp - range && bet.hdp <= centerHdp + range;
+      // Hàm helper để lấy ra kèo cược dựa vào số lượng hàng yêu cầu
+      const filterBets = (
+        bets: IBetDetail[],
+        mainBet: IBetDetail | undefined,
+        num: number,
+        betType: "spreads" | "totals"
+      ) => {
+        if (!mainBet || num === 0) return bets; // Trả về tất cả các kèo nếu num là 0
+        const range = (num - 1) / 2; // Tính toán khoảng cách từ kèo chính
+
+        return bets
+          .filter((bet: IBetDetail) => {
+            // Xác định kèo dựa trên loại kèo chính
+            const mainValue = betType === "spreads" ? mainBet.hdp : mainBet.points;
+            const betValue = betType === "spreads" ? bet.hdp : bet.points;
+
+            return (
+              bet.number === mainBet.number && // Kiểm tra số của kèo
+              ((mainValue !== undefined && betValue !== undefined && Math.abs(betValue - mainValue) <= range * 0.25) ||
+                bet.altLineId === 0)
+            ); // So sánh khoảng cách và lấy kèo chính
+          })
+          .slice(0, num); // Giới hạn số lượng kèo trả về
       };
 
-      const spreadsToanTran = keoChinhToanTran
-        ? item.bets.spreads.filter((bet: IBetDetail) => filterSpreads(bet, keoChinhToanTran.hdp)).slice(0, numberLines)
-        : [];
+      const spreadsToanTran = filterBets(item.bets.spreads, keoChinhToanTran, line, "spreads");
+      const spreadsHiep1 = filterBets(item.bets.spreads, keoChinhHiep1, line, "spreads");
+      const totalTaiXiuToanTran = filterBets(item.bets.totals, keoChinhTaiXiuToanTran, line, "totals");
+      const totalTaiXiuHiep1 = filterBets(item.bets.totals, keoChinhTaiXiuHiep1, line, "totals");
 
-      const spreadsHiep1 = keoChinhHiep1
-        ? item.bets.spreads.filter((bet: IBetDetail) => filterSpreads(bet, keoChinhHiep1.hdp)).slice(0, numberLines)
-        : [];
-
-      const filterTotals = (bet: any, centerPoints: any) => {
-        let range = Math.floor(numberLines / 2) * 0.25;
-        return bet.number === 0 && bet.points >= centerPoints - range && bet.points <= centerPoints + range;
-      };
-
-      const totalTaiXiuToanTran = keoChinhTaiXiuToanTran
-        ? item.bets.totals
-            .filter((bet: IBetDetail) => filterTotals(bet, keoChinhTaiXiuToanTran.points))
-            .slice(0, numberLines)
-        : [];
-
-      const totalTaiXiuHiep1 = keoChinhTaiXiuHiep1
-        ? item.bets.totals
-            .filter((bet: IBetDetail) => filterTotals(bet, keoChinhTaiXiuHiep1.points))
-            .slice(0, numberLines)
-        : [];
-      console.log("totalTaiXiuHiep1", totalTaiXiuHiep1);
       const result = [];
 
       if (spreadsToanTran && spreadsToanTran.length > 0) {
