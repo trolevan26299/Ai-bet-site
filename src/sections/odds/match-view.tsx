@@ -47,8 +47,10 @@ export default function MatchView() {
         setLatestOdds(transformedData as unknown as IOddsDetail[]);
         telegram.webApp?.expand();
       } catch (error: any) {
-        setEndBet(true);
-        console.error("Error fetching initial odds:", error);
+        if (error.message === "Invalid match!" || error.message === "Request or user not found!") {
+          setEndBet(true);
+        }
+        console.log("error:", error);
       } finally {
         setLoading(false);
       }
@@ -101,7 +103,8 @@ export default function MatchView() {
       ) : endBet ? (
         <div className="h-[97vh] w-full flex flex-col justify-center items-center">
           <Image src="/assets/ball.png" alt="no-content" className="w-[165px] h-[170px] mr-5" />
-          <p className="pt-4 text-base text-slate-500 font-semibold">Trận đấu không tồn tại hoặc đã kết thúc</p>
+          <p className="pt-4 text-base text-slate-500 font-semibold">Đã xảy ra lỗi</p>
+          <p className="pt-2 text-base text-slate-500 font-semibold">Trận đấu có thể không tồn tại hoặc đã kết thúc</p>
           <span className="pt-2 text-sm text-slate-500 font-semibold">
             Vui lòng quay lại Telegram và xem các sự kiện khác
           </span>
