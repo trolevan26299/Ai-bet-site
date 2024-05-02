@@ -83,7 +83,7 @@ export default function MatchView() {
       });
 
       if (newData && newData.data.length > 0) {
-        const transformedData = transformData(newData.data, Number(lineParam) || 3);
+        const transformedData = transformData(newData.data, Number(lineParam) || 5);
         setOdds(latestOdds);
         setDataScreenInfo(newData.data);
         setLatestOdds(transformedData as unknown as IOddsDetail[]);
