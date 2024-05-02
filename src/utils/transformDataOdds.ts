@@ -1,6 +1,6 @@
 import { IBetDetail, IMatchData } from "@/types/odds.types";
 
-export const transformData = (data: IMatchData[], numberLines = 0) => {
+export const transformData = (data: IMatchData[], numberLines: number) => {
   return data
     ?.map((item: IMatchData) => {
       const keoChinhToanTran = item.bets.spreads.find((bet: IBetDetail) => bet.number === 0 && bet.altLineId === 0);

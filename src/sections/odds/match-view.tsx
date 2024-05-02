@@ -25,6 +25,7 @@ export default function MatchView() {
   const telegram = useTelegram();
 
   const matchParam = searchParams.get("match");
+  const lineParam = searchParams.get("line");
   const payload = {
     request_id: searchParams.get("request_id"),
     match: matchParam ? matchParam.split(",") : [],
@@ -41,7 +42,7 @@ export default function MatchView() {
       setLoading(true);
       try {
         const res = await axios.post("/api/odds", payload);
-        const transformedData = transformData(res.data);
+        const transformedData = transformData(res.data, Number(lineParam) || 3);
         setDataScreenInfo(res.data);
         setOdds(transformedData as unknown as IOddsDetail[]);
         setLatestOdds(transformedData as unknown as IOddsDetail[]);
@@ -82,7 +83,7 @@ export default function MatchView() {
       });
 
       if (newData && newData.data.length > 0) {
-        const transformedData = transformData(newData.data);
+        const transformedData = transformData(newData.data, Number(lineParam) || 3);
         setOdds(latestOdds);
         setDataScreenInfo(newData.data);
         setLatestOdds(transformedData as unknown as IOddsDetail[]);
