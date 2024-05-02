@@ -135,12 +135,13 @@ function RenderAccordion({
       request_id: searchParams.get("request_id") || "",
       data: JSON.stringify(data),
     };
+    setDisableBtn(false);
     const response = await axios.post("api/game", body);
     console.log("response data oke:", response.data);
-    // setDisableBtn(false);
-    // if (response?.data?.ok) {
-    //   telegram?.webApp?.close();
-    // }
+    if ("ok" in response.data) {
+      setDisableBtn(true);
+      telegram?.webApp?.close();
+    }
   };
 
   const handleSelectTeam = (statusKey: string, team: IOdds, oddsName: string) => {
