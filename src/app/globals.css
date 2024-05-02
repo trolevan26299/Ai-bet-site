@@ -67,9 +67,6 @@
 }
 
 @layer base {
-  html {
-    min-height: calc(100% + 50px);
-  }
   * {
     @apply border-border;
   }
