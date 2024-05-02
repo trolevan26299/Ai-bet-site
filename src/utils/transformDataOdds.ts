@@ -22,6 +22,7 @@ export const transformData = (data: IMatchData[], numberLines: number) => {
       const spreadsHiep1 = keoChinhHiep1
         ? item.bets.spreads.filter((bet: IBetDetail) => filterSpreads(bet, keoChinhHiep1.hdp)).slice(0, numberLines)
         : [];
+      console.log("spreadsHiep1", spreadsHiep1);
 
       const filterTotals = (bet: any, centerPoints: any) => {
         let range = Math.floor(numberLines / 2) * 0.25;
@@ -39,7 +40,7 @@ export const transformData = (data: IMatchData[], numberLines: number) => {
             .filter((bet: IBetDetail) => filterTotals(bet, keoChinhTaiXiuHiep1.points))
             .slice(0, numberLines)
         : [];
-
+      console.log("totalTaiXiuHiep1", totalTaiXiuHiep1);
       const result = [];
 
       if (spreadsToanTran && spreadsToanTran.length > 0) {
