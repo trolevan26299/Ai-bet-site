@@ -135,8 +135,8 @@ function RenderAccordion({
       request_id: searchParams.get("request_id") || "",
       data: JSON.stringify(data),
     };
-    setDisableBtn(false);
     const response = await axios.post("api/game", body);
+    setDisableBtn(false);
     console.log("response data oke:", response.data);
     if ("ok" in response.data) {
       setDisableBtn(true);
