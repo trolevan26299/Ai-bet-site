@@ -3,7 +3,6 @@
 import OddsDetail from "@/components/app/odds-detail/odds-detail";
 import ScreenInfoMatch from "@/components/app/screen-info-match/screen-info-match";
 import { SplashScreen } from "@/components/loading-screen";
-import { Drawer, DrawerContent } from "@/components/ui/drawer";
 import { useTelegram } from "@/context/telegram.provider";
 import MainLayout from "@/layouts/main/layout";
 import { IMatchData, IOddsDetail, OddsStatusType } from "@/types/odds.types";

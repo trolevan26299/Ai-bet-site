@@ -21,6 +21,8 @@ export type IHistoryBet = {
   leagueId: number;
   leagueName: string;
   eventId: number;
+  team1Score: number | null;
+  team2Score: number | null;
   handicap: number;
   price: number;
   teamName?: string;
