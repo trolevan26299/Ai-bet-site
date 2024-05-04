@@ -120,9 +120,6 @@ const HistoryItem = ({ dataDetail, type }: { dataDetail: IHistoryBet; type?: str
               </span>
             </span>
           )}
-        </p>
-        <p className="text-text-main font-normal text-sm">
-          {utcToUtc7FormatNoSecond(dataDetail.eventStartTime)}{" "}
           {!type && dataDetail.ftTeam1Score !== undefined && dataDetail.ftTeam2Score !== undefined && (
             <span>
               - Cả trận{" "}
