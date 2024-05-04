@@ -54,7 +54,7 @@ const HistoryItem = ({ dataDetail, type }: { dataDetail: IHistoryBet; type?: str
               {dataDetail.handicap}
             </p>
             {dataDetail.team1Score && dataDetail.team2Score && (
-              <p className="text-text-main">[{dataDetail.team1Score - dataDetail.team2Score}]</p>
+              <p className="text-text-main">{`[${dataDetail.team1Score} - ${dataDetail.team2Score}]`} </p>
             )}
             <p className="text-text-main">@</p>
             <p className="text-[#ffe665]">{dataDetail.price}</p>
