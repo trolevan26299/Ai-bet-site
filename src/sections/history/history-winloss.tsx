@@ -16,7 +16,7 @@ import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { DateRange } from "react-day-picker";
 import { getCurrentUtcTimeUTCMinus4 } from "../../utils/currentTimeUTC-4";
-import { formatNumber, formatNumberAndFloor } from "../../utils/formatNumber";
+import { formatNumber, formatNumberToFixed2 } from "../../utils/formatNumber";
 import HistoryItem from "./history-item";
 import "./index.css";
 
@@ -241,7 +241,7 @@ const HistoryWinLoss = () => {
             <div className="flex flex-grow justify-between items-center w-full">
               <div className="flex flex-grow items-center justify-start w-1/2">
                 <p className="text-sm font-normal pr-1">Tổng điểm :</p>
-                <p className="text-base font-medium">{totalBetMoney.toFixed(2)}</p>
+                <p className="text-base font-medium">{formatNumberToFixed2(totalBetMoney)}</p>
               </div>
               <div className="flex flex-grow items-center justify-end">
                 <p className="text-sm font-normal pr-1">Thắng/Thua :</p>

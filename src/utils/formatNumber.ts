@@ -15,3 +15,13 @@ export const formatNumberAndFloor = (num: number) => {
   }
   return roundedNum.toString();
 };
+
+export const formatNumberToFixed2 = (num: number) => {
+  const flooredNum = Math.floor(num * 100) / 100; // Loại bỏ phần dư sau hai chữ số thập phân mà không làm tròn
+
+  if (Math.floor(flooredNum) !== flooredNum) {
+    // Kiểm tra nếu số không phải là số nguyên
+    return flooredNum.toFixed(2); // Giữ nguyên hai chữ số thập phân
+  }
+  return flooredNum.toString(); // Chỉ trả về phần nguyên nếu là số nguyên
+};
