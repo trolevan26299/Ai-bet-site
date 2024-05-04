@@ -88,11 +88,18 @@ const HistoryWinLoss = () => {
     }
   };
 
-  // tổng cược
-  const totalBetMoney = historyWinLose.reduce((total, item) => {
-    // const stake = item.price > 0 ? item.risk : item.risk / -item.price;
-    return total + item.risk;
+  // Tính tổng cược
+  const validStatuses = ["WON", "LOST", "HALF_WON_HALF_PUSHED", "HALF_LOST_HALF_PUSHED"];
+  const filteredHistory = historyWinLose.filter((item) => validStatuses.includes(item.betStatus2));
+  const totalBetMoney = filteredHistory.reduce((total, item) => {
+    let riskAmount = item.risk;
+    if (item.betStatus2 === "HALF_WON_HALF_PUSHED" || item.betStatus2 === "HALF_LOST_HALF_PUSHED") {
+      riskAmount /= 2;
+    }
+
+    return total + riskAmount;
   }, 0);
+
   // tổng hoa hồng
   const totalCommission = historyWinLose.reduce((total, item) => total + item.customerCommission, 0);
   // tổng thắng thua
