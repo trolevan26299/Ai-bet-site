@@ -55,7 +55,7 @@ const HistoryItem = ({ dataDetail, type }: { dataDetail: IHistoryBet; type?: str
               {dataDetail.handicap}
             </p>
             {dataDetail.team1Score !== undefined && dataDetail.team2Score !== undefined && (
-              <p className="text-text-main">
+              <p className="text-[#4181ff] text-xs">
                 {`[${dataDetail.team1Score?.toString()} - ${dataDetail.team2Score?.toString()}]`}{" "}
               </p>
             )}
@@ -112,12 +112,22 @@ const HistoryItem = ({ dataDetail, type }: { dataDetail: IHistoryBet; type?: str
         </p>
         <p className="text-text-main font-normal text-sm">
           {utcToUtc7FormatNoSecond(dataDetail.eventStartTime)}{" "}
-          {!type && (
+          {!type && dataDetail.pTeam1Score !== undefined && dataDetail.pTeam2Score !== undefined && (
             <span>
-              {dataDetail.periodNumber === 0 ? " - Cả trận :" : " - Nửa trận :"}{" "}
-              <span className={`${dataDetail.periodNumber === 0 ? "text-[#4181ff]" : "text-[#ffe665]"}`}>
-                [{dataDetail.periodNumber === 0 ? dataDetail.ftTeam1Score : dataDetail.pTeam1Score}-
-                {dataDetail.periodNumber === 0 ? dataDetail.ftTeam2Score : dataDetail.pTeam2Score}]
+              - 1H{" "}
+              <span className="text-[#ffe665]">
+                [{dataDetail.pTeam1Score}-{dataDetail.pTeam2Score}]
+              </span>
+            </span>
+          )}
+        </p>
+        <p className="text-text-main font-normal text-sm">
+          {utcToUtc7FormatNoSecond(dataDetail.eventStartTime)}{" "}
+          {!type && dataDetail.ftTeam1Score !== undefined && dataDetail.ftTeam2Score !== undefined && (
+            <span>
+              - Cả trận{" "}
+              <span className="text-[#4181ff]">
+                [{dataDetail.ftTeam1Score}-{dataDetail.ftTeam2Score}]
               </span>
             </span>
           )}
