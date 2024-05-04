@@ -3,6 +3,7 @@ import { formatNumber, formatNumberAndFloor } from "@/utils/formatNumber";
 import { getBackgroundByBetStatus, getValueByBetStatus } from "@/utils/renderInfoByBetStatus";
 import { utcToUtc7Format, utcToUtc7FormatNoSecond } from "@/utils/time";
 import { Icon } from "@iconify/react";
+import { formatBet } from "../../utils/formatBet";
 
 const HistoryItem = ({ dataDetail, type }: { dataDetail: IHistoryBet; type?: string }) => {
   const stake = dataDetail.price > 0 ? dataDetail.risk : dataDetail.risk / -dataDetail.price;
@@ -60,7 +61,7 @@ const HistoryItem = ({ dataDetail, type }: { dataDetail: IHistoryBet; type?: str
             )}
             <p className="text-text-main">@</p>
             <p className="text-[#ffe665]">{dataDetail.price}</p>
-            <p className="text-text-main">({dataDetail.oddsFormat})</p>
+            <p className="text-text-main">{`(${formatBet(dataDetail.oddsFormat)})`}</p>
           </div>
           <div className=" mt-3">
             <div className="flex flex-grow items-start justify-start">
