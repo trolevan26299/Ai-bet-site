@@ -38,8 +38,8 @@ const HistoryItem = ({ dataDetail, type }: { dataDetail: IHistoryBet; type?: str
           </div>
         </div>
         <div className="flex flex-col justify-center items-start pl-7">
-          <div className="flex flex-row justify-start items-center text-sm gap-1">
-            <p className="text-text-main">
+          <div className="flex flex-row justify-start items-center text-sm gap-1 w-full">
+            <p className="text-text-main" style={{ maxWidth: "40%" }}>
               {dataDetail.betType === "SPREAD" ? dataDetail.teamName : dataDetail.side === "OVER" ? "Tài" : "Xỉu"}
             </p>
             <p
