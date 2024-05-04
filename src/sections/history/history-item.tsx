@@ -55,13 +55,13 @@ const HistoryItem = ({ dataDetail, type }: { dataDetail: IHistoryBet; type?: str
               {dataDetail.handicap}
             </p>
             {dataDetail.team1Score !== undefined && dataDetail.team2Score !== undefined && (
-              <p className="text-[#4181ff] text-xs">
+              <p className="text-text-main">
                 {`[${dataDetail.team1Score?.toString()} - ${dataDetail.team2Score?.toString()}]`}{" "}
               </p>
             )}
             <p className="text-text-main">@</p>
             <p className="text-[#ffe665]">{dataDetail.price}</p>
-            <p className="text-text-main">{`(${formatBet(dataDetail.oddsFormat)})`}</p>
+            <p className="text-[#4181ff] text-xs">{`(${formatBet(dataDetail.oddsFormat)})`}</p>
           </div>
           <div className=" mt-3">
             <div className="flex flex-grow items-start justify-start">
