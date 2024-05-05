@@ -80,7 +80,10 @@ const HistoryWinLoss = () => {
       if (!response.data || response.data.error) {
         throw new Error("Request failed");
       }
-      setHistoryWinLose(response.data.straightBets || []);
+      const filteredBets = response.data.straightBets
+        ? response.data.straightBets.filter((bet: any) => bet.betStatus !== "NOT_ACCEPTED")
+        : [];
+      setHistoryWinLose(filteredBets);
     } catch (error) {
       console.error("Error fetching bet history:", error);
     } finally {

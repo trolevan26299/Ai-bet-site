@@ -17,7 +17,7 @@ export const transformData = (data: IMatchData[], line: number) => {
         num: number,
         betType: "spreads" | "totals"
       ) => {
-        if (!mainBet || num === 0) return bets; // Trả về tất cả các kèo nếu num là 0
+        if (!mainBet || num == 0) return bets; // Trả về tất cả các kèo nếu num là 0
         const range = (num - 1) / 2; // Tính toán khoảng cách từ kèo chính
 
         return bets

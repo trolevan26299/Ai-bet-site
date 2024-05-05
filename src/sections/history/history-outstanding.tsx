@@ -46,7 +46,11 @@ const HistoryOutstanding = () => {
       if (!response.data || response.data.error) {
         throw new Error("Request failed");
       }
-      setHistoryOutStanding(response.data.straightBets || []);
+      // Lọc ra các vé cược không có betStatus là "NOT_ACCEPTED"
+      const filteredBets = response.data.straightBets
+        ? response.data.straightBets.filter((bet: any) => bet.betStatus !== "NOT_ACCEPTED")
+        : [];
+      setHistoryOutStanding(filteredBets);
     } catch (error) {
       console.error("Error fetching bet history:", error);
     } finally {

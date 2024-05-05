@@ -4,37 +4,8 @@ import { getBackgroundByBetStatus, getValueByBetStatus } from "@/utils/renderInf
 import { utcToUtc7Format, utcToUtc7FormatNoSecond } from "@/utils/time";
 import { Icon } from "@iconify/react";
 import { formatBet } from "../../utils/formatBet";
-import { useEffect } from "react";
-import axios from "axios";
 
 const HistoryItem = ({ dataDetail, type }: { dataDetail: IHistoryBet; type?: string }) => {
-  const fetchBetReject = async (uniqueRequestIds: string, user_id: number) => {
-    const url = `/settled?uniqueRequestIds=${uniqueRequestIds}`;
-    try {
-      const response = await axios.post("api/history", {
-        url,
-        method: "GET",
-        user_id,
-      });
-      console.log("response", response);
-
-      if (!response.data || response.data.error) {
-        throw new Error("Request failed");
-      }
-    } catch (error) {
-      console.error("Error fetching bet history:", error);
-    } finally {
-      console.log("done");
-    }
-  };
-  useEffect(() => {
-    if (dataDetail.betStatus === "NOT_ACCEPTED") {
-      fetchBetReject(dataDetail.uniqueRequestId, 6359530967);
-    }
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dataDetail]);
-
   const stake = dataDetail.price > 0 ? dataDetail.risk : dataDetail.risk / -dataDetail.price;
   return (
     <div className={`h-[${type ? "288px" : "300px"}] rounded-[10px] bg-[rgba(40,55,74,0.5)] p-2 w-full mt-3 font-sans`}>
