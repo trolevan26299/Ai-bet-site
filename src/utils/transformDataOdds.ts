@@ -1,6 +1,6 @@
 import { IBetDetail, IMatchData } from "@/types/odds.types";
 
-export const transformData = (data: IMatchData[], line: number) => {
+export const transformData = (data: IMatchData[], line: string) => {
   return data
     ?.map((item: IMatchData) => {
       const keoChinhToanTran = item.bets.spreads.find((bet: IBetDetail) => bet.number === 0 && bet.altLineId === 0);
@@ -36,10 +36,10 @@ export const transformData = (data: IMatchData[], line: number) => {
           .slice(0, num); // Giới hạn số lượng kèo trả về
       };
 
-      const spreadsToanTran = filterBets(item.bets.spreads, keoChinhToanTran, line, "spreads");
-      const spreadsHiep1 = filterBets(item.bets.spreads, keoChinhHiep1, line, "spreads");
-      const totalTaiXiuToanTran = filterBets(item.bets.totals, keoChinhTaiXiuToanTran, line, "totals");
-      const totalTaiXiuHiep1 = filterBets(item.bets.totals, keoChinhTaiXiuHiep1, line, "totals");
+      const spreadsToanTran = filterBets(item.bets.spreads, keoChinhToanTran, Number(line), "spreads");
+      const spreadsHiep1 = filterBets(item.bets.spreads, keoChinhHiep1, Number(line), "spreads");
+      const totalTaiXiuToanTran = filterBets(item.bets.totals, keoChinhTaiXiuToanTran, Number(line), "totals");
+      const totalTaiXiuHiep1 = filterBets(item.bets.totals, keoChinhTaiXiuHiep1, Number(line), "totals");
 
       const result = [];
 
