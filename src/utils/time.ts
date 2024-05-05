@@ -29,12 +29,16 @@ export const convertToGMT7 = (dateTimeString: string, type: string) => {
 };
 
 export const utcToUtc7Format = (utcDateString: string) => {
-  const date = new Date(utcDateString);
-  return format(date, "dd/MM/yy HH:mm:ss");
+  if (utcDateString) {
+    const date = new Date(utcDateString);
+    return format(date, "dd/MM/yy HH:mm:ss");
+  }
 };
 export const utcToUtc7FormatNoSecond = (utcDateString: string) => {
-  const date = new Date(utcDateString);
-  return format(date, "dd/MM/yy HH:mm");
+  if (utcDateString) {
+    const date = new Date(utcDateString);
+    return format(date, "dd/MM/yy HH:mm");
+  }
 };
 
 export const formatDateTime = (dateTime: Date) => {

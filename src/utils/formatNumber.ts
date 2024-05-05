@@ -1,9 +1,11 @@
 export const formatNumber = (num: number) => {
-  if (Math.floor(num) !== num) {
-    // Check if it's not an integer
-    return num.toFixed(2).replace(/\.?0+$/, "");
+  if (num) {
+    if (Math.floor(num) !== num) {
+      // Check if it's not an integer
+      return num.toFixed(2).replace(/\.?0+$/, "");
+    }
+    return num.toString();
   }
-  return num.toString();
 };
 
 export const formatNumberAndFloor = (num: number) => {

@@ -4,6 +4,8 @@ import axios from "axios";
 const axiosInstance = axios.create({ baseURL: HOST_API });
 axiosInstance.defaults.headers.common["Accept"] = "application/json, text/plain, */*";
 axiosInstance.defaults.headers.common["Content-Type"] = "application/json";
+axiosInstance.defaults.headers.common["Cache-Control"] = "no-cache, no-store, must-revalidate";
+axiosInstance.defaults.headers.common["Pragma"] = "no-cache";
 
 axiosInstance.interceptors.response.use(
   (res) => res,

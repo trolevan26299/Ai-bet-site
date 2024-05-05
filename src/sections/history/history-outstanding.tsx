@@ -54,19 +54,19 @@ const HistoryOutstanding = () => {
     }
   };
 
-  useEffect(() => {
-    if (telegram?.user?.id) {
-      fetchBetHistory(telegram?.user?.id);
-      telegram.webApp?.expand();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [telegram?.user?.id]);
   // useEffect(() => {
-  //   fetchBetHistory(6359530967);
-  //   telegram.webApp?.expand();
-
+  //   if (telegram?.user?.id) {
+  //     fetchBetHistory(telegram?.user?.id);
+  //     telegram.webApp?.expand();
+  //   }
   //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, []);
+  // }, [telegram?.user?.id]);
+  useEffect(() => {
+    fetchBetHistory(6359530967);
+    telegram.webApp?.expand();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <>
