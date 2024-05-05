@@ -202,6 +202,13 @@ function RenderAccordion({
                           key={teamIndex}
                           onClick={() => handleSelectTeam(statusKey, team, oddsGroup.name_Odds)}
                         >
+                          {team.altLineId === 0 && (
+                            <div className="absolute top-1 left-1">
+                              <svg width="16" height="16" fill="yellow" viewBox="0 0 24 24">
+                                <polygon points="12 2 15 9 22 9 17 14 19 21 12 17 5 21 7 14 2 9 9 9" />
+                              </svg>
+                            </div>
+                          )}
                           {animationState.showBlink && (
                             <>
                               <m.div
