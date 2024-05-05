@@ -204,7 +204,7 @@ function RenderAccordion({
                         >
                           {team.altLineId === 0 && (
                             <div className="absolute top-[2px] left-[2px]">
-                              <svg width="10" height="10" fill="yellow" viewBox="0 0 24 24">
+                              <svg width="10" height="10" fill="#ffc13b" viewBox="0 0 24 24">
                                 <polygon points="12 2 15 9 22 9 17 14 19 21 12 17 5 21 7 14 2 9 9 9" />
                               </svg>
                             </div>
