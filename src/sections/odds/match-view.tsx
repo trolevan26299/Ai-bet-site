@@ -25,7 +25,7 @@ export default function MatchView() {
 
   const matchParam = searchParams.get("match");
   const lineParam = searchParams.get("line");
-  console.log("lineParam", Number(lineParam));
+  console.log("lineParam", lineParam);
   const payload = {
     request_id: searchParams.get("request_id"),
     match: matchParam ? matchParam.split(",") : [],
