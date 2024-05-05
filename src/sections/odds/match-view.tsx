@@ -25,7 +25,7 @@ export default function MatchView() {
 
   const matchParam = searchParams.get("match");
   const lineParam = searchParams.get("line");
-  console.log("lineParam", lineParam);
+  console.log("lineParam", Number(lineParam));
   const payload = {
     request_id: searchParams.get("request_id"),
     match: matchParam ? matchParam.split(",") : [],
@@ -42,7 +42,7 @@ export default function MatchView() {
       setLoading(true);
       try {
         const res = await axios.post("/api/odds", payload);
-        const transformedData = transformData(res.data, Number(lineParam) || 3);
+        const transformedData = transformData(res.data, Number(lineParam) ?? 0);
         setDataScreenInfo(res.data);
         setOdds(transformedData as unknown as IOddsDetail[]);
         setLatestOdds(transformedData as unknown as IOddsDetail[]);
@@ -83,7 +83,7 @@ export default function MatchView() {
       });
 
       if (newData && newData.data.length > 0) {
-        const transformedData = transformData(newData.data, Number(lineParam) || 3);
+        const transformedData = transformData(newData.data, Number(lineParam) ?? 0);
         setOdds(latestOdds);
         setDataScreenInfo(newData.data);
         setLatestOdds(transformedData as unknown as IOddsDetail[]);
