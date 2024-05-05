@@ -117,6 +117,8 @@ const HistoryWinLoss = () => {
     setTypeSelectTime(days);
     setSelectTime(true);
     const currentDate = getCurrentUtcTimeUTCMinus4();
+    console.log("currentDate", currentDate);
+
     if (days !== 0 && days !== 7 && days !== -7 && days !== 1) {
       setTabs(days.toString());
       setRange(days);
@@ -128,12 +130,12 @@ const HistoryWinLoss = () => {
         const from = startOfDay(addDays(currentDate, -1));
         setDate({ from });
       } else if (days === 7) {
-        const from = addDays(startOfWeek(currentDate), 1);
-        const to = addDays(endOfWeek(currentDate), 1);
+        const from = startOfWeek(currentDate, { weekStartsOn: 1 });
+        const to = endOfWeek(currentDate, { weekStartsOn: 1 });
         setDate({ from, to });
       } else if (days === -7) {
-        const from = addDays(startOfWeek(addWeeks(currentDate, -1)), 1);
-        const to = addDays(endOfWeek(addWeeks(currentDate, -1)), 1);
+        const from = startOfWeek(addWeeks(currentDate, -1), { weekStartsOn: 1 });
+        const to = endOfWeek(addWeeks(currentDate, -1), { weekStartsOn: 1 });
         setDate({ from, to });
       }
     }
@@ -150,19 +152,19 @@ const HistoryWinLoss = () => {
     }
   };
 
-  useEffect(() => {
-    if (telegram?.user?.id) {
-      fetchBetHistory(telegram?.user?.id);
-      telegram.webApp?.expand();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [telegram?.user?.id, date]);
   // useEffect(() => {
-  //   fetchBetHistory(6359530967);
-  //   telegram.webApp?.expand();
-
+  //   if (telegram?.user?.id) {
+  //     fetchBetHistory(telegram?.user?.id);
+  //     telegram.webApp?.expand();
+  //   }
   //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [date]);
+  // }, [telegram?.user?.id, date]);
+  useEffect(() => {
+    fetchBetHistory(6359530967);
+    telegram.webApp?.expand();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [date]);
 
   return (
     <>
