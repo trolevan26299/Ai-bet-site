@@ -43,6 +43,10 @@ const HistoryWinLoss = () => {
   const currentHour = currentDate.getHours();
 
   const [selectedDate, setSelectedDate] = useState<DateRange | undefined>(date);
+
+  useEffect(() => {
+    setSelectedDate(date);
+  }, [date]);
   // tab onclick time
   const handleSetTabTime = (time: string) => {
     if (time === "today") {
@@ -117,7 +121,6 @@ const HistoryWinLoss = () => {
     setTypeSelectTime(days);
     setSelectTime(true);
     const currentDate = getCurrentUtcTimeUTCMinus4();
-    console.log("currentDate", currentDate);
 
     if (days !== 0 && days !== 7 && days !== -7 && days !== 1) {
       setTabs(days.toString());
