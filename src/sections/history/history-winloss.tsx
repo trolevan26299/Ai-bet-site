@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { SplashScreen } from "@/components/loading-screen";
 import { Calendar } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
@@ -29,6 +30,7 @@ const HistoryWinLoss = () => {
   const [historyWinLose, setHistoryWinLose] = useState<IHistoryBet[]>([]);
   const [loading, setLoading] = useState(true);
   const [typeSelectTime, setTypeSelectTime] = useState<number>(0);
+  const [firstLoadDay, setFirstLoadDay] = useState(true);
   const [selectTime, setSelectTime] = useState<Boolean>(fromDateParam ? false : true);
   const [date, setDate] = useState<DateRange | undefined>(
     fromDateParam && toDateParam
@@ -41,11 +43,20 @@ const HistoryWinLoss = () => {
   // giờ hiện tại,tại máy người dùng
   const currentDate = new Date();
   const currentHour = currentDate.getHours();
-
+  console.log("firstLoadDay:", firstLoadDay);
+  console.log("toDateParam:", toDateParam);
   const [selectedDate, setSelectedDate] = useState<DateRange | undefined>(date);
+  useEffect(() => {
+    console.log("có vào đây");
+    if (firstLoadDay && toDateParam) {
+      setSelectedDate({ from: date?.from, to: addDays(date?.to as any, -1) });
+    }
+  }, [firstLoadDay]);
 
   useEffect(() => {
-    setSelectedDate(date);
+    if (selectTime) {
+      setSelectedDate(date);
+    }
   }, [date]);
   // tab onclick time
   const handleSetTabTime = (time: string) => {
@@ -65,6 +76,7 @@ const HistoryWinLoss = () => {
   const [tab, setTabs] = useState(
     timeParam ? handleSetTabTime(timeParam) : fromDateParam && !timeParam ? undefined : "0"
   );
+  console.log("tab", tab);
 
   const fetchBetHistory = async (user_id: number) => {
     const fromDate = date?.from || getCurrentUtcTimeUTCMinus4();
@@ -120,8 +132,8 @@ const HistoryWinLoss = () => {
   const handleTabClick = (days: number) => {
     setTypeSelectTime(days);
     setSelectTime(true);
+    setFirstLoadDay(false);
     const currentDate = getCurrentUtcTimeUTCMinus4();
-
     if (days !== 0 && days !== 7 && days !== -7 && days !== 1) {
       setTabs(days.toString());
       setRange(days);
@@ -152,6 +164,7 @@ const HistoryWinLoss = () => {
       setDate({ from: newFromDate, to: newToDate });
       setTabs(undefined);
       setSelectTime(true);
+      setFirstLoadDay(false);
     }
   };
 
