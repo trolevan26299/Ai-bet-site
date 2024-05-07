@@ -48,7 +48,9 @@ const HistoryOutstanding = () => {
       }
       // Lọc ra các vé cược không có betStatus là "NOT_ACCEPTED"
       const filteredBets = response.data.straightBets
-        ? response.data.straightBets.filter((bet: any) => bet.betStatus !== "NOT_ACCEPTED")
+        ? response.data.straightBets.filter(
+            (bet: any) => bet.betStatus !== "NOT_ACCEPTED" || bet.betStatus !== "PENDING_ACCEPTANCE"
+          )
         : [];
       setHistoryOutStanding(filteredBets);
     } catch (error) {
