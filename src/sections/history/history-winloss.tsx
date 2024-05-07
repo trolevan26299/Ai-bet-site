@@ -120,6 +120,10 @@ const HistoryWinLoss = () => {
     console.log("currentDate", currentDate);
 
     if (days !== 0 && days !== 7 && days !== -7 && days !== 1) {
+      if (days === 14 && timeParam) {
+        setTabs(days.toString());
+        setRange(13);
+      }
       setTabs(days.toString());
       setRange(days);
     } else {
