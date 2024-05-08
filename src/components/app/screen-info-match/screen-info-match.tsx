@@ -27,10 +27,17 @@ export default function ScreenInfoMatch({ dataScreenInfo }: { dataScreenInfo: IM
               {imageErrorHome ? (
                 <Icon icon="ion:shirt" style={{ color: "#1669d4" }} width={48} height={48} />
               ) : (
+                // <Image
+                //   src={`/assets/team_logo/${dataScreenInfo[0].league_name.replace(/\s+/g, "").toLowerCase()}/${
+                //     dataScreenInfo[0].team[0]
+                //   }.png`}
+                //   alt="team home Logo"
+                //   width={48}
+                //   height={48}
+                //   onError={() => setImageErrorHome(true)}
+                // />
                 <Image
-                  src={`/assets/team_logo/${dataScreenInfo[0].league_name.replace(/\s+/g, "").toLowerCase()}/${
-                    dataScreenInfo[0].team[0]
-                  }.png`}
+                  src="https://res.cloudinary.com/dwvxkqm99/image/upload/v1/team_logos/arsenal"
                   alt="team home Logo"
                   width={48}
                   height={48}
