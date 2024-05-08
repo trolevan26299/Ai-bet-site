@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { Image } from "cloudinary-react";
 import { Icon } from "@iconify/react";
+import { NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME } from "@/config-global";
 
 const TeamLogo = ({ teamName, typeError }) => {
   const [imgError, setImgError] = useState(false);
@@ -20,7 +21,7 @@ const TeamLogo = ({ teamName, typeError }) => {
   return (
     <Image
       alt="team home Logo"
-      cloudName="dwvxkqm99"
+      cloudName={NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}
       publicId={`team_logos/${teamName}`}
       width="48"
       height="48"
