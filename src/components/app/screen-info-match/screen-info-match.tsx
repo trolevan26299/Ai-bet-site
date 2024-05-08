@@ -34,7 +34,7 @@ export default function ScreenInfoMatch({ dataScreenInfo }: { dataScreenInfo: IM
             //   height={48}
             //   onError={() => setImageErrorHome(true)}
             // />
-            <TeamLogo teamName="arsenal" typeError="home" />
+            <TeamLogo teamName={dataScreenInfo[0].team[0]} typeError="home" />
             //   )}
             // </>
           )}
@@ -113,7 +113,7 @@ export default function ScreenInfoMatch({ dataScreenInfo }: { dataScreenInfo: IM
             //   height={48}
             //   onError={() => setImageErrorAway(true)}
             // />
-            <TeamLogo teamName="arsenal" typeError="away" />
+            <TeamLogo teamName={dataScreenInfo[0].team[1]} typeError="away" />
             //   )}
             // </>
           )}

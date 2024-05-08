@@ -22,7 +22,7 @@ const TeamLogo = ({ teamName, typeError }) => {
     <Image
       alt="team home Logo"
       cloudName={NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}
-      publicId={`team_logos/${teamName}`}
+      publicId={`team_logo_aib/${teamName}`}
       width="48"
       height="48"
       onError={handleError}
