@@ -10,8 +10,6 @@ import { useState } from "react";
 import TeamLogo from "../../cloudinary/teamlogo";
 
 export default function ScreenInfoMatch({ dataScreenInfo }: { dataScreenInfo: IMatchData[] }) {
-  const [imageErrorHome, setImageErrorHome] = useState(false);
-  const [imageErrorAway, setImageErrorAway] = useState(false);
   return (
     <div className="relative pb-2 min-h-[200px]">
       <img src="/assets/bg_team.jpg" alt="Stadium" className="w-full h-auto" />
@@ -23,29 +21,22 @@ export default function ScreenInfoMatch({ dataScreenInfo }: { dataScreenInfo: IM
         </div>
         <div className={`flex flex-col items-start col-span-3  ${dataScreenInfo[0]?.liveStatus ? "mt-7" : "mt-4"}`}>
           {dataScreenInfo.length > 0 && (
-            <>
-              {imageErrorHome ? (
-                <Icon icon="ion:shirt" style={{ color: "#1669d4" }} width={48} height={48} />
-              ) : (
-                // <Image
-                //   src={`/assets/team_logo/${dataScreenInfo[0].league_name.replace(/\s+/g, "").toLowerCase()}/${
-                //     dataScreenInfo[0].team[0]
-                //   }.png`}
-                //   alt="team home Logo"
-                //   width={48}
-                //   height={48}
-                //   onError={() => setImageErrorHome(true)}
-                // />
-                // <Image
-                //   src="https://res.cloudinary.com/dwvxkqm99/image/upload/v1/team_logos/arsenal"
-                //   alt="team home Logo"
-                //   width={48}
-                //   height={48}
-                //   onError={() => setImageErrorHome(true)}
-                // />
-                <TeamLogo teamName="arsenall" />
-              )}
-            </>
+            // <>
+            //   {imageErrorHome ? (
+            //     <Icon icon="ion:shirt" style={{ color: "#1669d4" }} width={48} height={48} />
+            //   ) : (
+            // <Image
+            //   src={`/assets/team_logo/${dataScreenInfo[0].league_name.replace(/\s+/g, "").toLowerCase()}/${
+            //     dataScreenInfo[0].team[0]
+            //   }.png`}
+            //   alt="team home Logo"
+            //   width={48}
+            //   height={48}
+            //   onError={() => setImageErrorHome(true)}
+            // />
+            <TeamLogo teamName="arsenal" typeError="home" />
+            //   )}
+            // </>
           )}
         </div>
 
@@ -102,28 +93,29 @@ export default function ScreenInfoMatch({ dataScreenInfo }: { dataScreenInfo: IM
 
         <div className={`flex flex-col items-end col-span-3  ${dataScreenInfo[0]?.liveStatus ? "mt-7" : "mt-4"}`}>
           {dataScreenInfo.length > 0 && (
-            <>
-              {imageErrorAway ? (
-                <Icon
-                  className="flex flex-row justify-start"
-                  icon="ion:shirt"
-                  style={{ color: "#d9dd0e" }}
-                  width={48}
-                  height={48}
-                />
-              ) : (
-                <Image
-                  src={`/assets/team_logo/${dataScreenInfo[0].league_name.replace(/\s+/g, "").toLowerCase()}/${
-                    dataScreenInfo[0].team[1]
-                  }.png`}
-                  alt="team home Logo"
-                  className="flex flex-row justify-start"
-                  width={48}
-                  height={48}
-                  onError={() => setImageErrorAway(true)}
-                />
-              )}
-            </>
+            // <>
+            //   {imageErrorAway ? (
+            //     <Icon
+            //       className="flex flex-row justify-start"
+            //       icon="ion:shirt"
+            //       style={{ color: "#d9dd0e" }}
+            //       width={48}
+            //       height={48}
+            //     />
+            //   ) : (
+            // <Image
+            //   src={`/assets/team_logo/${dataScreenInfo[0].league_name.replace(/\s+/g, "").toLowerCase()}/${
+            //     dataScreenInfo[0].team[1]
+            //   }.png`}
+            //   alt="team home Logo"
+            //   className="flex flex-row justify-start"
+            //   width={48}
+            //   height={48}
+            //   onError={() => setImageErrorAway(true)}
+            // />
+            <TeamLogo teamName="arsenal" typeError="away" />
+            //   )}
+            // </>
           )}
         </div>
         <div className="flex flex-row justify-between col-span-12 mt-[-25px]">
