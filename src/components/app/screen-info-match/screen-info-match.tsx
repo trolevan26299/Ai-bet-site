@@ -7,6 +7,7 @@ import { convertToGMT7 } from "@/utils/time";
 import { Icon } from "@iconify/react";
 import Image from "next/image";
 import { useState } from "react";
+import TeamLogo from "../../cloudinary/teamlogo";
 
 export default function ScreenInfoMatch({ dataScreenInfo }: { dataScreenInfo: IMatchData[] }) {
   const [imageErrorHome, setImageErrorHome] = useState(false);
@@ -38,6 +39,7 @@ export default function ScreenInfoMatch({ dataScreenInfo }: { dataScreenInfo: IM
               )}
             </>
           )}
+          <TeamLogo teamName="arsenal.png" />
         </div>
 
         {dataScreenInfo[0]?.liveStatus ? (

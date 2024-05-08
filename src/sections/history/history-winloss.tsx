@@ -43,11 +43,9 @@ const HistoryWinLoss = () => {
   // giờ hiện tại,tại máy người dùng
   const currentDate = new Date();
   const currentHour = currentDate.getHours();
-  console.log("firstLoadDay:", firstLoadDay);
-  console.log("toDateParam:", toDateParam);
+
   const [selectedDate, setSelectedDate] = useState<DateRange | undefined>(date);
   useEffect(() => {
-    console.log("có vào đây");
     if (firstLoadDay && toDateParam) {
       setSelectedDate({ from: date?.from, to: addDays(date?.to as any, -1) });
     }
@@ -76,7 +74,6 @@ const HistoryWinLoss = () => {
   const [tab, setTabs] = useState(
     timeParam ? handleSetTabTime(timeParam) : fromDateParam && !timeParam ? undefined : "0"
   );
-  console.log("tab", tab);
 
   const fetchBetHistory = async (user_id: number) => {
     const fromDate = date?.from || getCurrentUtcTimeUTCMinus4();
