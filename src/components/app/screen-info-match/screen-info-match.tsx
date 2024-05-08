@@ -36,17 +36,17 @@ export default function ScreenInfoMatch({ dataScreenInfo }: { dataScreenInfo: IM
                 //   height={48}
                 //   onError={() => setImageErrorHome(true)}
                 // />
-                <Image
-                  src="https://res.cloudinary.com/dwvxkqm99/image/upload/v1/team_logos/arsenal"
-                  alt="team home Logo"
-                  width={48}
-                  height={48}
-                  onError={() => setImageErrorHome(true)}
-                />
+                // <Image
+                //   src="https://res.cloudinary.com/dwvxkqm99/image/upload/v1/team_logos/arsenal"
+                //   alt="team home Logo"
+                //   width={48}
+                //   height={48}
+                //   onError={() => setImageErrorHome(true)}
+                // />
+                <TeamLogo teamName="arsenal.png" />
               )}
             </>
           )}
-          <TeamLogo teamName="arsenal.png" />
         </div>
 
         {dataScreenInfo[0]?.liveStatus ? (
