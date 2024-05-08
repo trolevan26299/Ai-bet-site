@@ -43,7 +43,7 @@ export default function ScreenInfoMatch({ dataScreenInfo }: { dataScreenInfo: IM
                 //   height={48}
                 //   onError={() => setImageErrorHome(true)}
                 // />
-                <TeamLogo teamName="arsenal.png" />
+                <TeamLogo teamName="arsenall" />
               )}
             </>
           )}
