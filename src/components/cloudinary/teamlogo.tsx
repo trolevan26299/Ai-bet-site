@@ -14,7 +14,7 @@ const TeamLogo = ({ teamName, typeError }: { teamName: string; typeError: string
   });
 
   const formatTeamName = teamName.replace(/\s+/g, "_");
-  const myImage = cld.image(`/team_logo_aib/${formatTeamName}`);
+  const myImage = cld.image(`/team_logo_aib/${formatTeamName}aaa`);
 
   const handleError = () => {
     setImgError(true);
