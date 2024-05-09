@@ -238,6 +238,7 @@ const HistoryWinLoss = () => {
                   onSelect={setSelectedDate}
                   numberOfMonths={1}
                   locale={locale}
+                  weekStartsOn={1}
                 />
                 <div className="flex flex-row justify-end items-center mr-7 gap-7 pb-2 text-sm">
                   <PopoverRD.Close>
