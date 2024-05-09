@@ -1,11 +1,11 @@
 import React from "react";
 
 export const UseLockBodyScroll = (lock: boolean) => {
-  React.useEffect(() => {
-    if (lock) {
-      document.body.classList.add("body-lock");
-    } else {
-      document.body.classList.remove("body-lock");
-    }
-  }, [lock]);
+  const originalStyle = window.getComputedStyle(document.body).overflow; // Get the current overflow style
+  if (lock) {
+    return (document.body.style.overflow = "hidden");
+  }
+  return () => {
+    document.body.style.overflow = originalStyle; // Restore the original overflow style
+  };
 };

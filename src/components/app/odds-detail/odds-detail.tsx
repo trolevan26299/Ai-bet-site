@@ -186,6 +186,7 @@ function RenderAccordion({
       onClose={() => {
         setSelectedTeam(null);
         setValueSelectNew(undefined);
+        UseLockBodyScroll(false);
       }}
     >
       <Accordion type="multiple" value={openItems} onValueChange={onValueChange} className="w-full">
