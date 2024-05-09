@@ -21,9 +21,9 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      // style={{
-      //   minHeight: "calc(100% + 50px)",
-      // }}
+      style={{
+        minHeight: "calc(100% + 50px)",
+      }}
     >
       <body className={inter.className}>
         <TelegramProvider>
