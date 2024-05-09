@@ -9,7 +9,7 @@ const TeamLogo = ({ teamName, typeError }: { teamName: string; typeError: string
 
   const cld = new Cloudinary({
     cloud: {
-      cloudName: "dpibv0xwr",
+      cloudName: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
     },
   });
 
