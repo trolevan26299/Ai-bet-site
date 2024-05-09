@@ -21,7 +21,7 @@ const TeamLogo = ({ teamName, typeError }) => {
   return (
     <Image
       alt="team home Logo"
-      cloudName={NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}
+      cloudName="dwvxkqm99"
       publicId={`team_logos/${teamName}`}
       width="48"
       height="48"
