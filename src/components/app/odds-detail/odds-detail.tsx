@@ -21,7 +21,15 @@ import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { isIOS } from "react-device-detect";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../../ui/accordion";
-import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 
 export default function OddsDetail({
   odds,
@@ -331,7 +339,7 @@ function RenderAccordion({
                 Xác nhận
               </Button>
 
-              <DrawerClose>
+              <DialogClose>
                 <Button
                   className="w-full rounded-full text-text-light font-medium no-underline mb-2 bg-backgroundColor-main"
                   style={{
@@ -340,7 +348,7 @@ function RenderAccordion({
                 >
                   Hủy
                 </Button>
-              </DrawerClose>
+              </DialogClose>
             </DialogFooter>
           </DialogContent>
         </Accordion>
