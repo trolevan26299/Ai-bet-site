@@ -5,6 +5,7 @@ import "./globals.css";
 import "@radix-ui/themes/styles.css";
 import { MotionLazy } from "@/components/animate/motion-lazy";
 import { TelegramProvider } from "@/context/telegram.provider";
+import { Drawer } from "@/components/ui/drawer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -26,11 +27,13 @@ export default function RootLayout({
       }}
     >
       <body className={inter.className}>
-        <TelegramProvider>
-          <Theme>
-            <MotionLazy>{children}</MotionLazy>
-          </Theme>
-        </TelegramProvider>
+        <Drawer>
+          <TelegramProvider>
+            <Theme>
+              <MotionLazy>{children}</MotionLazy>
+            </Theme>
+          </TelegramProvider>
+        </Drawer>
       </body>
     </html>
   );
