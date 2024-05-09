@@ -13,13 +13,12 @@ const TeamLogo = ({ teamName, typeError }: { teamName: string; typeError: string
     },
   });
 
-  const myImage = cld.image("team_logo_aib");
+  const formatTeamName = teamName.replace(/\s+/g, "_");
+  const myImage = cld.image(`/team_logo_aib/${formatTeamName}`);
 
   const handleError = () => {
     setImgError(true);
   };
-
-  const formatTeamName = teamName.replace(/\s+/g, "_");
 
   if (imgError && typeError === "home") {
     return <Icon icon="ion:shirt" style={{ color: "#1669d4" }} width={48} height={48} />;
@@ -28,16 +27,7 @@ const TeamLogo = ({ teamName, typeError }: { teamName: string; typeError: string
     return <Icon icon="ion:shirt" style={{ color: "#d9dd0e" }} width={48} height={48} />;
   }
 
-  return (
-    <AdvancedImage
-      alt="team home Logo"
-      cldImg={myImage}
-      publicId={formatTeamName}
-      width="48"
-      height="48"
-      onError={handleError}
-    />
-  );
+  return <AdvancedImage alt="team home Logo" cldImg={myImage} width="48" height="48" onError={handleError} />;
 };
 
 export default TeamLogo;
