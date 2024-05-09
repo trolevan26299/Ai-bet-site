@@ -1,10 +1,19 @@
 /* eslint-disable jsx-a11y/alt-text */
 import React, { useState } from "react";
-import { Image } from "cloudinary-react";
+import { AdvancedImage } from "@cloudinary/react";
+import { Cloudinary } from "@cloudinary/url-gen";
 import { Icon } from "@iconify/react";
 
-const TeamLogo = ({ teamName, typeError }) => {
+const TeamLogo = (teamName: string, typeError: string) => {
   const [imgError, setImgError] = useState(false);
+
+  const cld = new Cloudinary({
+    cloud: {
+      cloudName: "dpibv0xwr",
+    },
+  });
+
+  const myImage = cld.image("team_logo_aib");
 
   const handleError = () => {
     setImgError(true);
@@ -20,10 +29,10 @@ const TeamLogo = ({ teamName, typeError }) => {
   }
 
   return (
-    <Image
+    <AdvancedImage
       alt="team home Logo"
-      cloudName="dpibv0xwr"
-      publicId={`team_logo_aib/${formatTeamName}`}
+      cldImg={myImage}
+      publicId={formatTeamName}
       width="48"
       height="48"
       onError={handleError}
