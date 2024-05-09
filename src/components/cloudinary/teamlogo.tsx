@@ -4,7 +4,7 @@ import { AdvancedImage } from "@cloudinary/react";
 import { Cloudinary } from "@cloudinary/url-gen";
 import { Icon } from "@iconify/react";
 
-const TeamLogo = (teamName: string, typeError: string) => {
+const TeamLogo = ({ teamName, typeError }: { teamName: string; typeError: string }) => {
   const [imgError, setImgError] = useState(false);
 
   const cld = new Cloudinary({
