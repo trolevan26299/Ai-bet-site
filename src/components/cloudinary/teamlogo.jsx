@@ -2,7 +2,6 @@
 import React, { useState } from "react";
 import { Image } from "cloudinary-react";
 import { Icon } from "@iconify/react";
-import { NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME } from "@/config-global";
 
 const TeamLogo = ({ teamName, typeError }) => {
   const [imgError, setImgError] = useState(false);
