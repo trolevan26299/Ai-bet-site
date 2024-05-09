@@ -21,7 +21,7 @@ export const locale: any = {
   FormatLong: {
     date: () => "dd/mm/yyyy",
   },
-  options: {
-    weekStartsOn: 1,
-  },
+  // options: {
+  //   weekStartsOn: 1,
+  // },
 };
