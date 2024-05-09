@@ -20,12 +20,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      style={{
-        minHeight: "calc(100% + 40px)",
-      }}
-    >
+    <html lang="en">
       <body className={inter.className}>
         <Drawer>
           <TelegramProvider>
