@@ -5,8 +5,6 @@
 import { IMatchData } from "@/types/odds.types";
 import { convertToGMT7 } from "@/utils/time";
 import { Icon } from "@iconify/react";
-import Image from "next/image";
-import { useState } from "react";
 import TeamLogo from "../../cloudinary/teamlogo";
 
 export default function ScreenInfoMatch({ dataScreenInfo }: { dataScreenInfo: IMatchData[] }) {
@@ -20,24 +18,7 @@ export default function ScreenInfoMatch({ dataScreenInfo }: { dataScreenInfo: IM
           <p className="pl-1 text-sm text-[#fafafa] font-[600]">{dataScreenInfo[0]?.league_name}</p>
         </div>
         <div className={`flex flex-col items-start col-span-3  ${dataScreenInfo[0]?.liveStatus ? "mt-7" : "mt-4"}`}>
-          {dataScreenInfo.length > 0 && (
-            // <>
-            //   {imageErrorHome ? (
-            //     <Icon icon="ion:shirt" style={{ color: "#1669d4" }} width={48} height={48} />
-            //   ) : (
-            // <Image
-            //   src={`/assets/team_logo/${dataScreenInfo[0].league_name.replace(/\s+/g, "").toLowerCase()}/${
-            //     dataScreenInfo[0].team[0]
-            //   }.png`}
-            //   alt="team home Logo"
-            //   width={48}
-            //   height={48}
-            //   onError={() => setImageErrorHome(true)}
-            // />
-            <TeamLogo teamName={dataScreenInfo[0].team[0]} typeError="home" />
-            //   )}
-            // </>
-          )}
+          {dataScreenInfo.length > 0 && <TeamLogo teamName={dataScreenInfo[0].team[0]} typeError="home" />}
         </div>
 
         {dataScreenInfo[0]?.liveStatus ? (
@@ -92,31 +73,7 @@ export default function ScreenInfoMatch({ dataScreenInfo }: { dataScreenInfo: IM
         )}
 
         <div className={`flex flex-col items-end col-span-3  ${dataScreenInfo[0]?.liveStatus ? "mt-7" : "mt-4"}`}>
-          {dataScreenInfo.length > 0 && (
-            // <>
-            //   {imageErrorAway ? (
-            //     <Icon
-            //       className="flex flex-row justify-start"
-            //       icon="ion:shirt"
-            //       style={{ color: "#d9dd0e" }}
-            //       width={48}
-            //       height={48}
-            //     />
-            //   ) : (
-            // <Image
-            //   src={`/assets/team_logo/${dataScreenInfo[0].league_name.replace(/\s+/g, "").toLowerCase()}/${
-            //     dataScreenInfo[0].team[1]
-            //   }.png`}
-            //   alt="team home Logo"
-            //   className="flex flex-row justify-start"
-            //   width={48}
-            //   height={48}
-            //   onError={() => setImageErrorAway(true)}
-            // />
-            <TeamLogo teamName={dataScreenInfo[0].team[1]} typeError="away" />
-            //   )}
-            // </>
-          )}
+          {dataScreenInfo.length > 0 && <TeamLogo teamName={dataScreenInfo[0].team[1]} typeError="away" />}
         </div>
         <div className="flex flex-row justify-between col-span-12 mt-[-25px]">
           <span className="text-[#fff] py-3 text-sm font-[600] ml-0 w-[48%] flex-wrap">{dataScreenInfo[0]?.home}</span>

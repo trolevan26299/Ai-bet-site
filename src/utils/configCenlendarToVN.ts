@@ -12,7 +12,7 @@ const months = [
   "Tháng 11",
   "Tháng 12",
 ];
-const days = ["CN", "T2", "T3", "T4", "T5", "T6", "T7"];
+const days = ["T2", "T3", "T4", "T5", "T6", "T7", "CN"];
 export const locale: any = {
   localize: {
     day: (n: any) => days[n],
@@ -20,5 +20,8 @@ export const locale: any = {
   },
   FormatLong: {
     date: () => "dd/mm/yyyy",
+  },
+  options: {
+    weekStartsOn: 1,
   },
 };
