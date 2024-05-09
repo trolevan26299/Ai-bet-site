@@ -61,7 +61,6 @@ export default function MatchView() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  console.log("odds:", odds);
   useEffect(() => {
     async function fetchAndUpdateOdds() {
       const newData = await axios.post("/api/odds", payload);
