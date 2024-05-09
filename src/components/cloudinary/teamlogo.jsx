@@ -10,6 +10,8 @@ const TeamLogo = ({ teamName, typeError }) => {
     setImgError(true);
   };
 
+  const formatTeamName = teamName.replace(/\s+/g, "_");
+
   if (imgError && typeError === "home") {
     return <Icon icon="ion:shirt" style={{ color: "#1669d4" }} width={48} height={48} />;
   }
@@ -21,7 +23,7 @@ const TeamLogo = ({ teamName, typeError }) => {
     <Image
       alt="team home Logo"
       cloudName="dwvxkqm99"
-      publicId={`team_logos/${teamName}`}
+      publicId={`team_logos/${formatTeamName}`}
       width="48"
       height="48"
       onError={handleError}
