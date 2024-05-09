@@ -23,7 +23,7 @@ export default function RootLayout({
     <html
       lang="en"
       style={{
-        minHeight: "calc(100% + 45px)",
+        minHeight: "calc(100% + 40px)",
       }}
     >
       <body className={inter.className}>
