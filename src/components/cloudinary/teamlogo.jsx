@@ -22,8 +22,8 @@ const TeamLogo = ({ teamName, typeError }) => {
   return (
     <Image
       alt="team home Logo"
-      cloudName="dwvxkqm99"
-      publicId={`team_logos/${formatTeamName}`}
+      cloudName="dpibv0xwr"
+      publicId={`team_logo_aib/${formatTeamName}`}
       width="48"
       height="48"
       onError={handleError}
