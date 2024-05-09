@@ -20,6 +20,7 @@ import { m } from "framer-motion";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../../ui/accordion";
+import { UseLockBodyScroll } from "@/hook/useLockScroll";
 
 export default function OddsDetail({
   odds,
@@ -145,6 +146,7 @@ function RenderAccordion({
   };
 
   const handleSelectTeam = (statusKey: string, team: IOdds, oddsName: string) => {
+    UseLockBodyScroll(true);
     setSelectedTeam(team);
     setValueSelectNew(undefined);
     const keyArray = statusKey.split("-")?.map(Number);
