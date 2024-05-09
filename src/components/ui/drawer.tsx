@@ -24,22 +24,44 @@ const DrawerOverlay = React.forwardRef<
 ));
 DrawerOverlay.displayName = DrawerPrimitive.Overlay.displayName;
 
+const useLockBodyScroll = () => {
+  React.useEffect(() => {
+    // Lưu lại giá trị cuộn hiện tại
+    const originalStyle = window.getComputedStyle(document.body).overflow; // Get the current overflow style
+
+    // Khóa cuộn
+    document.body.style.overflow = "hidden";
+
+    // Khôi phục khi component unmount
+    return () => {
+      document.body.style.overflow = originalStyle; // Restore the original overflow style
+    };
+  }, []); // Chỉ chạy một lần khi component mount
+};
+
 const DrawerContent = React.forwardRef<
   React.ElementRef<typeof DrawerPrimitive.Content>,
   React.ComponentPropsWithoutRef<typeof DrawerPrimitive.Content>
->(({ className, children, ...props }, ref) => (
-  <DrawerPortal>
-    <DrawerOverlay />
-    <DrawerPrimitive.Content
-      ref={ref}
-      className={cn("fixed inset-x-0 bottom-0 z-50 mt-24 flex h-auto flex-col rounded-t-3xl  bg-background", className)}
-      {...props}
-    >
-      <div className="mx-auto mt-4 h-1 w-[100px] rounded-full bg-muted" />
-      {children}
-    </DrawerPrimitive.Content>
-  </DrawerPortal>
-));
+>(({ className, children, ...props }, ref) => {
+  useLockBodyScroll();
+
+  return (
+    <DrawerPortal>
+      <DrawerOverlay />
+      <DrawerPrimitive.Content
+        ref={ref}
+        className={cn(
+          "fixed inset-x-0 bottom-0 z-50 mt-24 flex h-auto flex-col rounded-t-3xl  bg-background",
+          className
+        )}
+        {...props}
+      >
+        <div className="mx-auto mt-4 h-1 w-[100px] rounded-full bg-muted" />
+        {children}
+      </DrawerPrimitive.Content>
+    </DrawerPortal>
+  );
+});
 DrawerContent.displayName = "DrawerContent";
 
 const DrawerHeader = ({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) => (
