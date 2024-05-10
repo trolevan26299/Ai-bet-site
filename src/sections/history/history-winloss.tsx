@@ -52,10 +52,8 @@ const HistoryWinLoss = () => {
   }, [firstLoadDay]);
 
   useEffect(() => {
-    if (selectTime && date) {
-      setSelectedDate(
-        currentHour < 11 ? { from: addDays(date.from as any, -1), to: addDays(date?.to as any, -1) } : date
-      );
+    if (selectTime) {
+      setSelectedDate(date);
     }
   }, [date]);
   // tab onclick time
@@ -124,10 +122,7 @@ const HistoryWinLoss = () => {
   const totalWinLoss = historyWinLose.reduce((total, item) => total + (item?.winLoss || 0), 0);
 
   const setRange = (days: number) => {
-    const from =
-      days === 14 || days === 30
-        ? addDays(getCurrentUtcTimeUTCMinus4(), -(days - 1))
-        : addDays(getCurrentUtcTimeUTCMinus4(), -days);
+    const from = addDays(getCurrentUtcTimeUTCMinus4(), -days);
     const to = getCurrentUtcTimeUTCMinus4();
     setDate({ from, to });
   };
@@ -142,9 +137,9 @@ const HistoryWinLoss = () => {
     } else {
       setTabs(days.toString());
       if (days === 0) {
-        setDate({ from: currentHour >= 11 ? currentDate : addDays(currentDate, 1) });
+        setDate({ from: currentDate });
       } else if (days === 1) {
-        const from = startOfDay(currentDate);
+        const from = startOfDay(addDays(currentDate, -1));
         setDate({ from });
       } else if (days === 7) {
         const from = startOfWeek(currentDate, { weekStartsOn: 1 });
@@ -170,19 +165,19 @@ const HistoryWinLoss = () => {
     }
   };
 
-  // useEffect(() => {
-  //   if (telegram?.user?.id) {
-  //     fetchBetHistory(telegram?.user?.id);
-  //     telegram.webApp?.expand();
-  //   }
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [telegram?.user?.id, date]);
   useEffect(() => {
-    fetchBetHistory(6359530967);
-    telegram.webApp?.expand();
-
+    if (telegram?.user?.id) {
+      fetchBetHistory(telegram?.user?.id);
+      telegram.webApp?.expand();
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [date]);
+  }, [telegram?.user?.id, date]);
+  // useEffect(() => {
+  //   fetchBetHistory(6359530967);
+  //   telegram.webApp?.expand();
+
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [date]);
 
   return (
     <>
