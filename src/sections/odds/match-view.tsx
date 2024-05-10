@@ -44,6 +44,7 @@ export default function MatchView() {
       setLoading(true);
       try {
         const res = await axios.post("/api/odds", payload);
+        console.log("res:", res);
         const transformedData = transformData(res.data, lineParam ?? "3");
         setDataScreenInfo(res.data);
         setOdds(transformedData as unknown as IOddsDetail[]);
