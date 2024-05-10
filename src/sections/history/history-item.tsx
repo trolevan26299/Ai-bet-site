@@ -12,7 +12,7 @@ const HistoryItem = ({ dataDetail, type }: { dataDetail: IHistoryBet; type?: str
       <div className="flex flex-row items-center justify-between  pb-1" style={{ borderBottom: "1px solid #223a76" }}>
         <div className="tracking-wide">
           <p className="text-sm text-text-main">ID:{dataDetail.betId} </p>
-          <span className="text-xs text-[rgba(235,235,245,0.6)] ">{utcToUtc7Format(dataDetail.placedAt)}</span>
+          <span className="text-xs text-[rgba(235,235,245,0.6)] ">{utcToUtc7Format(dataDetail.placedAt)} (UTC+7)</span>
         </div>
         <div
           className={`rounded-full min-w-28 px-2 ${getBackgroundByBetStatus(
