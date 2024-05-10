@@ -52,8 +52,10 @@ const HistoryWinLoss = () => {
   }, [firstLoadDay]);
 
   useEffect(() => {
-    if (selectTime) {
-      setSelectedDate(date);
+    if (selectTime && date) {
+      setSelectedDate(
+        currentHour < 11 ? { from: addDays(date.from as any, -1), to: addDays(date?.to as any, -1) } : date
+      );
     }
   }, [date]);
   // tab onclick time
