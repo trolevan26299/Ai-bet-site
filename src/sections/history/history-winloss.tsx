@@ -124,7 +124,7 @@ const HistoryWinLoss = () => {
   const setRange = (days: number) => {
     const from =
       days === 14 || days === 30
-        ? addDays(getCurrentUtcTimeUTCMinus4(), -(days + 1))
+        ? addDays(getCurrentUtcTimeUTCMinus4(), -(days - 1))
         : addDays(getCurrentUtcTimeUTCMinus4(), -days);
     const to = getCurrentUtcTimeUTCMinus4();
     setDate({ from, to });
