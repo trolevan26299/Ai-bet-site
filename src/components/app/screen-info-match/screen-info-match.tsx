@@ -6,6 +6,7 @@ import { IMatchData } from "@/types/odds.types";
 import { convertToGMT7 } from "@/utils/time";
 import { Icon } from "@iconify/react";
 import TeamLogo from "../../cloudinary/teamlogo";
+import { formatLiveScope } from "@/utils/formatLiveScope";
 
 export default function ScreenInfoMatch({ dataScreenInfo }: { dataScreenInfo: IMatchData[] }) {
   return (
@@ -26,13 +27,7 @@ export default function ScreenInfoMatch({ dataScreenInfo }: { dataScreenInfo: IM
             <div className="flex flex-row items-center gap-1 pr-1">
               <Icon icon="fluent:live-20-filled" width={25} height={23} color="rgba(255,69,58,1)" />
               <p className="font-[600] text-sm text-[rgba(255,230,101,1)] ">
-                {`${dataScreenInfo[0].liveMinute}  ${
-                  dataScreenInfo[0].liveScope === "first half"
-                    ? "Hiệp 1"
-                    : dataScreenInfo[0].liveScope === "half time"
-                    ? "Nghỉ giữa hiệp"
-                    : "Hiệp 2"
-                }`}
+                {`${dataScreenInfo[0].liveMinute || ""}  ${formatLiveScope(dataScreenInfo[0].liveState) || ""}`}
               </p>
             </div>
             <div className="flex justify-center items-center pt-3">

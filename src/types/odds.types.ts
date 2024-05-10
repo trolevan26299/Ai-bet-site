@@ -41,6 +41,7 @@ export type IMatchData = {
   awayRedCards?: number;
   homeRedCards?: number;
   bets: IBet;
+  liveState: number;
 };
 
 export type IOdds = {
