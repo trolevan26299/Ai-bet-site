@@ -122,7 +122,10 @@ const HistoryWinLoss = () => {
   const totalWinLoss = historyWinLose.reduce((total, item) => total + (item?.winLoss || 0), 0);
 
   const setRange = (days: number) => {
-    const from = addDays(getCurrentUtcTimeUTCMinus4(), -days);
+    const from =
+      days === 14 || days === 30
+        ? addDays(getCurrentUtcTimeUTCMinus4(), -(days + 1))
+        : addDays(getCurrentUtcTimeUTCMinus4(), -days);
     const to = getCurrentUtcTimeUTCMinus4();
     setDate({ from, to });
   };
