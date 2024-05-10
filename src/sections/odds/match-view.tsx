@@ -44,8 +44,11 @@ export default function MatchView() {
       setLoading(true);
       try {
         const res = await axios.post("/api/odds", payload);
-        console.log("res:", res);
-        if (res.data.message === "Invalid match!" || res.data.message === "Request or user not found!") {
+        if (
+          res.data.message === "Invalid match!" ||
+          res.data.message === "Invalid league!" ||
+          res.data.message === "Request or user not found!"
+        ) {
           setEndBet(true);
         } else {
           const transformedData = transformData(res.data, lineParam ?? "3");
@@ -56,8 +59,8 @@ export default function MatchView() {
         telegram.webApp?.expand();
         console.log("res:", res);
       } catch (error: any) {
-        setEndBet(true);
         console.log("error:", error);
+        setEndBet(true);
       } finally {
         setLoading(false);
       }
