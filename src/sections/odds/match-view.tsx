@@ -44,16 +44,17 @@ export default function MatchView() {
       setLoading(true);
       try {
         const res = await axios.post("/api/odds", payload);
-        console.log("res:", res);
-        const transformedData = transformData(res.data, lineParam ?? "3");
-        setDataScreenInfo(res.data);
-        setOdds(transformedData as unknown as IOddsDetail[]);
-        setLatestOdds(transformedData as unknown as IOddsDetail[]);
-        telegram.webApp?.expand();
-      } catch (error: any) {
-        if (error.message === "Invalid match!" || error.message === "Request or user not found!") {
+        if (res.data.message === "Invalid match!" || res.data.message === "Request or user not found!") {
           setEndBet(true);
+        } else {
+          const transformedData = transformData(res.data, lineParam ?? "3");
+          setDataScreenInfo(res.data);
+          setOdds(transformedData as unknown as IOddsDetail[]);
+          setLatestOdds(transformedData as unknown as IOddsDetail[]);
         }
+        telegram.webApp?.expand();
+        console.log("res:", res);
+      } catch (error: any) {
         console.log("error:", error);
       } finally {
         setLoading(false);
