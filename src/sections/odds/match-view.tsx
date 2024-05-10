@@ -55,6 +55,7 @@ export default function MatchView() {
         telegram.webApp?.expand();
         console.log("res:", res);
       } catch (error: any) {
+        setEndBet(true);
         console.log("error:", error);
       } finally {
         setLoading(false);
@@ -93,6 +94,7 @@ export default function MatchView() {
         setLatestOdds(transformedData as unknown as IOddsDetail[]);
         setOddsStatus(newOddsStatus);
       } else {
+        setEndBet(true);
         console.log("No new data received or data fetch failed");
       }
     }
