@@ -137,9 +137,9 @@ const HistoryWinLoss = () => {
     } else {
       setTabs(days.toString());
       if (days === 0) {
-        setDate({ from: currentDate });
+        setDate({ from: currentHour >= 11 ? currentDate : addDays(currentDate, 1) });
       } else if (days === 1) {
-        const from = startOfDay(addDays(currentDate, -1));
+        const from = startOfDay(currentDate);
         setDate({ from });
       } else if (days === 7) {
         const from = startOfWeek(currentDate, { weekStartsOn: 1 });
