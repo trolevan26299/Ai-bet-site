@@ -327,6 +327,16 @@ function RenderAccordion({
               </div>
             </div>
             <DialogFooter>
+              <DialogClose>
+                <Button
+                  className="w-full rounded-full text-text-light font-medium no-underline mb-2 bg-backgroundColor-main"
+                  style={{
+                    border: "solid 1px #41576f",
+                  }}
+                >
+                  Hủy
+                </Button>
+              </DialogClose>
               <Button
                 disabled={disableBtn}
                 className="h-11 rounded-full font-medium text-text-light"
@@ -338,17 +348,6 @@ function RenderAccordion({
                 {disableBtn && <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />}
                 Xác nhận
               </Button>
-
-              <DialogClose>
-                <Button
-                  className="w-full rounded-full text-text-light font-medium no-underline mb-2 bg-backgroundColor-main"
-                  style={{
-                    border: "solid 1px #41576f",
-                  }}
-                >
-                  Hủy
-                </Button>
-              </DialogClose>
             </DialogFooter>
           </DialogContent>
         </Accordion>
