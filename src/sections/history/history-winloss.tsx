@@ -131,6 +131,7 @@ const HistoryWinLoss = () => {
     setSelectTime(true);
     setFirstLoadDay(false);
     const currentDate = getCurrentUtcTimeUTCMinus4();
+    console.log("currentDate", currentDate);
     if (days !== 0 && days !== 7 && days !== -7 && days !== 1) {
       setTabs(days.toString());
       setRange(days);
