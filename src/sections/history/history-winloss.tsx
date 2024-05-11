@@ -220,10 +220,7 @@ const HistoryWinLoss = () => {
                         {format(date.from, "dd/MM/y")} - {format(selectTime ? date.to : subDays(date.to, 1), "dd/MM/y")}
                       </>
                     ) : (
-                      format(
-                        currentHour >= 11 || (tab === undefined && !toDateParam) ? date.from : subDays(date.from, 1),
-                        "dd/MM/y"
-                      )
+                      format(date.from, "dd/MM/y")
                     )
                   ) : (
                     <span>Vui lòng chọn ngày</span>
