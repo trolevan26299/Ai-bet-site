@@ -55,9 +55,9 @@ export const formatRangeTime = (dateTime: Date, type: string, typeSelectTime: nu
   // Lấy giờ hiện tại
   const currentHour = new Date().getHours();
   // Nếu giờ hiện tại chưa qua 11 giờ trưa, giảm ngày đi 1
-  if (currentHour < 11 && (typeSelectTime === 0 || typeSelectTime === 1)) {
-    dateTime = addDays(dateTime, -1);
-  }
+  // if (currentHour < 11 && (typeSelectTime === 0 || typeSelectTime === 1)) {
+  //   dateTime = addDays(dateTime, -1);
+  // }
 
   // Kiểm tra nếu type là 'today', thêm 1 ngày vào dateTime
   const newDate = type === "today" ? addDays(dateTime, 1) : dateTime;
