@@ -156,9 +156,8 @@ const HistoryWinLoss = () => {
 
   const handleSaveDateCalendar = () => {
     if (selectedDate?.from) {
-      const newFromDate = currentHour < 11 ? addDays(selectedDate?.from, 1) : selectedDate?.from;
-      const newToDate =
-        currentHour < 11 ? (selectedDate?.to ? addDays(selectedDate.to, 1) : undefined) : selectedDate.to;
+      const newFromDate = selectedDate?.from;
+      const newToDate = selectedDate.to;
       setDate({ from: newFromDate, to: newToDate });
       setTabs(undefined);
       setSelectTime(true);
