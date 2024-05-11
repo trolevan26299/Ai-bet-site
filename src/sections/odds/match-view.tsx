@@ -44,6 +44,7 @@ export default function MatchView() {
       setLoading(true);
       try {
         const res = await axios.post("/api/odds", payload);
+        console.log("res:", res);
         if (
           res.data.message === "Invalid match!" ||
           res.data.message === "Invalid league!" ||
