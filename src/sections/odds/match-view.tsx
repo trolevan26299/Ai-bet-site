@@ -58,7 +58,6 @@ export default function MatchView() {
           setLatestOdds(transformedData as unknown as IOddsDetail[]);
         }
         telegram.webApp?.expand();
-        console.log("res:", res);
       } catch (error: any) {
         console.log("error:", error);
         setEndBet(true);
