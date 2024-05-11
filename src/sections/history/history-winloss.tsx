@@ -40,8 +40,6 @@ const HistoryWinLoss = () => {
         }
   );
 
-  console.log("date:", date);
-
   // giờ hiện tại,tại máy người dùng
   const currentDate = new Date();
   const currentHour = currentDate.getHours();
