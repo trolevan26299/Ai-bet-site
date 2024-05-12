@@ -99,7 +99,7 @@ export default function MatchView() {
         setOddsStatus(newOddsStatus);
       } else {
         setEndBet(true);
-        console.log("No new data received or data fetch failed");
+        console.log("No new data received or data fetch failed!");
       }
     }
 
