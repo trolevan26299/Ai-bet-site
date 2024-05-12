@@ -78,7 +78,7 @@ export default function MatchView() {
         if (newData && newData.data.length > 0) {
           const transformedData = transformData(newData.data, lineParam ?? "3");
           console.log("latestOdds:", latestOdds);
-          setOdds(latestOdds);
+          setOdds(latestOdds.length > 0 ? latestOdds : (transformedData as unknown as IOddsDetail[]));
           setDataScreenInfo(newData.data);
           setLatestOdds(transformedData as unknown as IOddsDetail[]);
 
@@ -105,6 +105,7 @@ export default function MatchView() {
             setEndBet(false);
           }
         } else {
+          setLatestOdds([]);
           setEndBet(true);
           console.log("No new data received or data fetch failed!");
         }
