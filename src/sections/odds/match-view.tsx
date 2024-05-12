@@ -8,6 +8,7 @@ import MainLayout from "@/layouts/main/layout";
 import { IMatchData, IOddsDetail, OddsStatusType } from "@/types/odds.types";
 import { transformData } from "@/utils/transformDataOdds";
 import axios from "axios";
+import { set } from "date-fns";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -72,41 +73,50 @@ export default function MatchView() {
 
   useEffect(() => {
     async function fetchAndUpdateOdds() {
-      const newData = await axios.post("/api/odds", payload);
-      const newOddsStatus: OddsStatusType = {};
-      latestOdds?.forEach((latestOdd, index) => {
-        latestOdd.detail?.forEach((latestDetail, detailIndex) => {
-          latestDetail?.forEach((latestOddDetail, oddDetailIndex) => {
-            const key = `${index}-${detailIndex}-${oddDetailIndex}`;
-            const oldValue = odds[index]?.detail[detailIndex][oddDetailIndex]?.value;
-            const newValue = latestOddDetail.value;
-            if (newValue > oldValue) {
-              newOddsStatus[key] = "green";
-            } else if (newValue < oldValue) {
-              newOddsStatus[key] = "red";
-            } else {
-              newOddsStatus[key] = "none";
-            }
-          });
-        });
-      });
+      try {
+        const newData = await axios.post("/api/odds", payload);
+        if (newData && newData.data.length > 0) {
+          const transformedData = transformData(newData.data, lineParam ?? "3");
+          setOdds(latestOdds);
+          setDataScreenInfo(newData.data);
+          setLatestOdds(transformedData as unknown as IOddsDetail[]);
 
-      if (newData && newData.data.length > 0) {
-        const transformedData = transformData(newData.data, lineParam ?? "3");
-        setOdds(latestOdds);
-        setDataScreenInfo(newData.data);
-        setLatestOdds(transformedData as unknown as IOddsDetail[]);
-        setOddsStatus(newOddsStatus);
-      } else {
+          const newOddsStatus: OddsStatusType = {};
+          latestOdds?.forEach((latestOdd, index) => {
+            latestOdd.detail?.forEach((latestDetail, detailIndex) => {
+              latestDetail?.forEach((latestOddDetail, oddDetailIndex) => {
+                const key = `${index}-${detailIndex}-${oddDetailIndex}`;
+                const oldValue = odds[index]?.detail[detailIndex][oddDetailIndex]?.value;
+                const newValue = latestOddDetail.value;
+                if (newValue > oldValue) {
+                  newOddsStatus[key] = "green";
+                } else if (newValue < oldValue) {
+                  newOddsStatus[key] = "red";
+                } else {
+                  newOddsStatus[key] = "none";
+                }
+              });
+            });
+          });
+
+          setOddsStatus(newOddsStatus);
+          if (endBet) {
+            setEndBet(false);
+          }
+        } else {
+          setEndBet(true);
+          console.log("No new data received or data fetch failed!");
+        }
+      } catch (error) {
         setEndBet(true);
-        console.log("No new data received or data fetch failed!");
+        console.error("Error fetching data:", error);
       }
     }
 
     const intervalId = setInterval(fetchAndUpdateOdds, 10000);
     return () => clearInterval(intervalId);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [latestOdds]);
+  }, [latestOdds, endBet]);
   return (
     <MainLayout>
       {loading ? (
