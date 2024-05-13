@@ -8,7 +8,6 @@ import MainLayout from "@/layouts/main/layout";
 import { IMatchData, IOddsDetail, OddsStatusType } from "@/types/odds.types";
 import { transformData } from "@/utils/transformDataOdds";
 import axios from "axios";
-import { set } from "date-fns";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
