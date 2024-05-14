@@ -48,7 +48,8 @@ export default function MatchView() {
         if (
           res.data.message === "Invalid match!" ||
           res.data.message === "Invalid league!" ||
-          res.data.message === "Request or user not found!"
+          res.data.message === "Request or user not found!" ||
+          res.data.length === 0
         ) {
           setEndBet(true);
         } else {
