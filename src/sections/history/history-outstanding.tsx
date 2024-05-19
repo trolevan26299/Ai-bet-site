@@ -41,7 +41,7 @@ const HistoryOutstanding = () => {
         method: "GET",
         user_id,
       });
-      console.log("response-", response);
+      console.log("response", response);
       setLoading(false);
       if (!response.data || response.data.error) {
         throw new Error("Request failed");
