@@ -65,21 +65,21 @@ const HistoryItem = ({ dataDetail, type }: { dataDetail: IHistoryBet; type?: str
           </div>
           <div className=" mt-3">
             <div className="flex flex-grow items-start justify-start">
-              <p className="text-text-noActive text-sm w-[94px]">Cược :</p>
+              <p className="text-text-noActive text-sm w-[90px]">Cược :</p>
               <p className="text-text-main text-sm font-semibold">{formatNumberAndFloor(stake)}</p>
             </div>
             <div className="flex flex-grow items-start justify-start">
-              <p className="text-text-noActive text-sm w-[94px]">Mạo hiểm :</p>
+              <p className="text-text-noActive text-sm w-[90px]">Mạo hiểm :</p>
               <p className="text-text-main text-sm font-semibold">{formatNumber(dataDetail.risk)}</p>
             </div>
             {type ? (
               <div className="flex flex-grow items-start justify-start">
-                <p className="text-text-noActive text-sm w-[94px]">Thắng :</p>
+                <p className="text-text-noActive text-sm w-[90px]">Thắng :</p>
                 <p className="text-text-main text-sm font-semibold">{formatNumber(dataDetail.win)}</p>
               </div>
             ) : (
               <div className="flex flex-grow items-start justify-start">
-                <p className="text-text-noActive text-sm w-[94px]">Thắng/Thua :</p>
+                <p className="text-text-noActive text-sm w-[90px]">Thắng/Thua :</p>
                 <p
                   className={`text-sm font-semibold ${
                     dataDetail && dataDetail.winLoss !== undefined
@@ -98,7 +98,7 @@ const HistoryItem = ({ dataDetail, type }: { dataDetail: IHistoryBet; type?: str
 
             {!type && (
               <div className="flex flex-grow items-start justify-start">
-                <p className="text-text-noActive text-sm w-[94px]">Hoa hồng :</p>
+                <p className="text-text-noActive text-sm w-[90px]">Hoa hồng :</p>
                 <p className="text-text-main text-sm font-semibold">{formatNumber(dataDetail.customerCommission)}</p>
               </div>
             )}
