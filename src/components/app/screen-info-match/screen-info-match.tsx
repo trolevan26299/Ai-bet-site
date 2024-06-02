@@ -9,6 +9,7 @@ import TeamLogo from "../../cloudinary/teamlogo";
 import { formatLiveScope } from "@/utils/formatLiveScope";
 
 export default function ScreenInfoMatch({ dataScreenInfo }: { dataScreenInfo: IMatchData[] }) {
+  console.log("122132131231");
   return (
     <div className="relative pb-2 min-h-[200px]">
       <img src="/assets/bg_team.jpg" alt="Stadium" className="w-full h-auto" />
