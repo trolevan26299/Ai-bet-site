@@ -35,7 +35,7 @@ export default function ScreenInfoMatch({ dataScreenInfo }: { dataScreenInfo: IM
               <div className="flex flex-row justify-center gap-1 items-center w-[40px] text-white font-bold mr-2">
                 {dataScreenInfo[0]?.homeRedCards && dataScreenInfo[0].homeRedCards !== 0 && (
                   <>
-                    <p>{dataScreenInfo[0]?.homeRedCards}</p>
+                    {/* <p>{dataScreenInfo[0]?.homeRedCards}</p> */}
                     <div className="bg-red-600 w-2 h-3" />
                   </>
                 )}
@@ -57,7 +57,7 @@ export default function ScreenInfoMatch({ dataScreenInfo }: { dataScreenInfo: IM
                 {dataScreenInfo[0]?.awayRedCards && dataScreenInfo[0].awayRedCards !== 0 && (
                   <>
                     <div className="bg-red-600 w-2 h-3" />
-                    <p>{dataScreenInfo[0]?.awayRedCards}</p>
+                    {/* <p>{dataScreenInfo[0]?.awayRedCards}</p> */}
                   </>
                 )}
               </div>
