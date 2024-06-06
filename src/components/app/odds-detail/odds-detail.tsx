@@ -542,7 +542,7 @@ function RenderAccordion({
                 Xác nhận
               </Button>
 
-              <DrawerClose>
+              <DrawerClose onClick={() => setOpenDrawer(false)}>
                 <Button
                   className="w-full rounded-full text-text-light font-medium no-underline mb-2 bg-backgroundColor-main"
                   style={{
