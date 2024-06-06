@@ -111,13 +111,7 @@ function RenderAccordion({
   const [valueSelectNew, setValueSelectNew] = useState<number | undefined>(undefined);
   const [oddsName, setOddsName] = useState<String>("");
   const [keyItemSelect, setKeyItemSelect] = useState<number[]>([]);
-  const [open, setOpen] = useState<{
-    iphone: boolean;
-    normal: boolean;
-  }>({
-    iphone: false,
-    normal: false,
-  });
+  const [openDrawer, setOpenDrawer] = useState(false);
 
   const telegram = useTelegram();
   const [animationState, setAnimationState] = useState({
@@ -382,9 +376,9 @@ function RenderAccordion({
         onClose={() => {
           setSelectedTeam(null);
           setValueSelectNew(undefined);
-          setOpen({ ...open, normal: false });
+          setOpenDrawer(false);
         }}
-        open={open.normal}
+        open={openDrawer}
       >
         <Accordion type="multiple" value={openItems} onValueChange={onValueChange} className="w-full">
           {odds.map((oddsGroup: IOddsDetail, index: number) => (
@@ -392,7 +386,7 @@ function RenderAccordion({
               <AccordionTrigger className="text-base">{oddsGroup?.name_Odds}</AccordionTrigger>
               <AccordionContent>
                 {/* <DrawerTrigger asChild> */}
-                <div className="grid grid-cols-2 gap-[6px]" onClick={() => setOpen({ ...open, normal: true })}>
+                <div className="grid grid-cols-2 gap-[6px]" onClick={() => setOpenDrawer(true)}>
                   {oddsGroup?.detail?.map((match: any, matchIndex: number) => {
                     return match?.map((team: IOdds, teamIndex: number) => {
                       const statusKey = `${index}-${matchIndex}-${teamIndex}`;
