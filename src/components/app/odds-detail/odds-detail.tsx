@@ -246,7 +246,7 @@ function RenderAccordion({
                                 style={{
                                   maskImage: "linear-gradient(90deg, rgba(0, 0, 0, 1) 80%, rgba(0, 0, 0, 0) 100%)",
                                 }}
-                                className={`col-span-9 text-gray-300  text-sm font-medium ${
+                                className={`col-span-9 text-sm font-medium ${
                                   isDisabled ? "text-[rgba(74,86,100,1)]" : "text-[rgba(157,163,177,1)]"
                                 } overflow-hidden whitespace-nowrap`}
                               >
@@ -430,7 +430,7 @@ function RenderAccordion({
                                 style={{
                                   maskImage: "linear-gradient(90deg, rgba(0, 0, 0, 1) 80%, rgba(0, 0, 0, 0) 100%)",
                                 }}
-                                className={`col-span-9 text-gray-300  text-sm font-medium ${
+                                className={`col-span-9 text-sm font-medium ${
                                   isDisabled ? "text-[rgba(74,86,100,1)]" : "text-[rgba(157,163,177,1)]"
                                 } overflow-hidden whitespace-nowrap`}
                               >
