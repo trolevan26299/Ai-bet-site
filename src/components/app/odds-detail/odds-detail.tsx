@@ -382,90 +382,92 @@ function RenderAccordion({
         onClose={() => {
           setSelectedTeam(null);
           setValueSelectNew(undefined);
+          setOpen({ ...open, normal: false });
         }}
+        open={open.normal}
       >
         <Accordion type="multiple" value={openItems} onValueChange={onValueChange} className="w-full">
           {odds.map((oddsGroup: IOddsDetail, index: number) => (
             <AccordionItem value={`item-${index + 1}`} key={index}>
               <AccordionTrigger className="text-base">{oddsGroup?.name_Odds}</AccordionTrigger>
               <AccordionContent>
-                <DrawerTrigger asChild>
-                  <div className="grid grid-cols-2 gap-[6px]">
-                    {oddsGroup?.detail?.map((match: any, matchIndex: number) => {
-                      return match?.map((team: IOdds, teamIndex: number) => {
-                        const statusKey = `${index}-${matchIndex}-${teamIndex}`;
-                        const isDisabled = oddsGroup.status === 2;
-                        return (
-                          <div
-                            className="text-primary-foreground p-2 h-10 text-xs relative bg-[#28374a] rounded-[10px]"
-                            key={teamIndex}
-                            onClick={() => handleSelectTeam(statusKey, team, oddsGroup.name_Odds)}
-                          >
-                            {team.altLineId === 0 && (
-                              <div className="absolute top-[2px] left-[2px]">
-                                <svg
-                                  width="10"
-                                  height="10"
-                                  fill={`${isDisabled ? "rgba(123,105,66,1)" : "#ffc13b"}`}
-                                  viewBox="0 0 24 24"
-                                >
-                                  <polygon points="12 2 15 9 22 9 17 14 19 21 12 17 5 21 7 14 2 9 9 9" />
-                                </svg>
-                              </div>
-                            )}
-                            {animationState.showBlink && (
-                              <>
-                                <m.div
-                                  className="absolute rotate-[45deg] right-0 top-[2px] transform translate-y-1/2 w-0 h-0 border-l-6 border-l-transparent border-r-6 border-r-transparent border-b-[6px] border-b-green-500"
-                                  style={{ display: oddsStatus[statusKey] === "green" ? "block" : "none" }}
-                                  animate={{ opacity: [0, 1, 0], rotate: [35] }}
-                                  transition={{ duration: 0.5, repeat: Infinity }}
-                                ></m.div>
-
-                                <m.div
-                                  className="absolute rotate-[-45deg] right-0 bottom-1 transform translate-y-1/2 w-0 h-0 border-l-6 border-l-transparent border-r-6 border-r-transparent border-t-[6px] border-t-red-500"
-                                  style={{ display: oddsStatus[statusKey] === "red" ? "block" : "none" }}
-                                  animate={{ opacity: [0, 1, 0], rotate: [-45] }}
-                                  transition={{ duration: 0.5, repeat: Infinity }}
-                                ></m.div>
-                              </>
-                            )}
-
-                            <div className="grid grid-cols-12 w-full h-full items-center">
-                              <div
-                                style={{
-                                  maskImage: "linear-gradient(90deg, rgba(0, 0, 0, 1) 80%, rgba(0, 0, 0, 0) 100%)",
-                                }}
-                                className={`col-span-9 text-sm font-medium ${
-                                  isDisabled ? "text-[rgba(74,86,100,1)]" : "text-[rgba(157,163,177,1)]"
-                                } overflow-hidden whitespace-nowrap`}
+                {/* <DrawerTrigger asChild> */}
+                <div className="grid grid-cols-2 gap-[6px]" onClick={() => setOpen({ ...open, normal: true })}>
+                  {oddsGroup?.detail?.map((match: any, matchIndex: number) => {
+                    return match?.map((team: IOdds, teamIndex: number) => {
+                      const statusKey = `${index}-${matchIndex}-${teamIndex}`;
+                      const isDisabled = oddsGroup.status === 2;
+                      return (
+                        <div
+                          className="text-primary-foreground p-2 h-10 text-xs relative bg-[#28374a] rounded-[10px]"
+                          key={teamIndex}
+                          onClick={() => handleSelectTeam(statusKey, team, oddsGroup.name_Odds)}
+                        >
+                          {team.altLineId === 0 && (
+                            <div className="absolute top-[2px] left-[2px]">
+                              <svg
+                                width="10"
+                                height="10"
+                                fill={`${isDisabled ? "rgba(123,105,66,1)" : "#ffc13b"}`}
+                                viewBox="0 0 24 24"
                               >
-                                {`(${team.rate_odds})`} {team.name}
-                              </div>
-                              <div className=" col-span-3 text-end flex items-center justify-end text-sm font-medium text-text-red ">
-                                {team.value && (
-                                  <span
-                                    className={`${
-                                      team.value >= 0
-                                        ? isDisabled
-                                          ? "text-[rgba(46,89,57,1)]"
-                                          : "text-text-green w-12"
-                                        : isDisabled
-                                        ? "text-[rgba(121,61,58,1)]"
-                                        : "text-text-red w-12"
-                                    } `}
-                                  >
-                                    {team.value}
-                                  </span>
-                                )}
-                              </div>
+                                <polygon points="12 2 15 9 22 9 17 14 19 21 12 17 5 21 7 14 2 9 9 9" />
+                              </svg>
+                            </div>
+                          )}
+                          {animationState.showBlink && (
+                            <>
+                              <m.div
+                                className="absolute rotate-[45deg] right-0 top-[2px] transform translate-y-1/2 w-0 h-0 border-l-6 border-l-transparent border-r-6 border-r-transparent border-b-[6px] border-b-green-500"
+                                style={{ display: oddsStatus[statusKey] === "green" ? "block" : "none" }}
+                                animate={{ opacity: [0, 1, 0], rotate: [35] }}
+                                transition={{ duration: 0.5, repeat: Infinity }}
+                              ></m.div>
+
+                              <m.div
+                                className="absolute rotate-[-45deg] right-0 bottom-1 transform translate-y-1/2 w-0 h-0 border-l-6 border-l-transparent border-r-6 border-r-transparent border-t-[6px] border-t-red-500"
+                                style={{ display: oddsStatus[statusKey] === "red" ? "block" : "none" }}
+                                animate={{ opacity: [0, 1, 0], rotate: [-45] }}
+                                transition={{ duration: 0.5, repeat: Infinity }}
+                              ></m.div>
+                            </>
+                          )}
+
+                          <div className="grid grid-cols-12 w-full h-full items-center">
+                            <div
+                              style={{
+                                maskImage: "linear-gradient(90deg, rgba(0, 0, 0, 1) 80%, rgba(0, 0, 0, 0) 100%)",
+                              }}
+                              className={`col-span-9 text-sm font-medium ${
+                                isDisabled ? "text-[rgba(74,86,100,1)]" : "text-[rgba(157,163,177,1)]"
+                              } overflow-hidden whitespace-nowrap`}
+                            >
+                              {`(${team.rate_odds})`} {team.name}
+                            </div>
+                            <div className=" col-span-3 text-end flex items-center justify-end text-sm font-medium text-text-red ">
+                              {team.value && (
+                                <span
+                                  className={`${
+                                    team.value >= 0
+                                      ? isDisabled
+                                        ? "text-[rgba(46,89,57,1)]"
+                                        : "text-text-green w-12"
+                                      : isDisabled
+                                      ? "text-[rgba(121,61,58,1)]"
+                                      : "text-text-red w-12"
+                                  } `}
+                                >
+                                  {team.value}
+                                </span>
+                              )}
                             </div>
                           </div>
-                        );
-                      });
-                    })}
-                  </div>
-                </DrawerTrigger>
+                        </div>
+                      );
+                    });
+                  })}
+                </div>
+                {/* </DrawerTrigger> */}
               </AccordionContent>
             </AccordionItem>
           ))}
