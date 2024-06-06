@@ -386,7 +386,10 @@ function RenderAccordion({
               <AccordionTrigger className="text-base">{oddsGroup?.name_Odds}</AccordionTrigger>
               <AccordionContent>
                 {/* <DrawerTrigger asChild> */}
-                <div className="grid grid-cols-2 gap-[6px]" onClick={() => setOpenDrawer(true)}>
+                <div
+                  className="grid grid-cols-2 gap-[6px]"
+                  onClick={() => oddsGroup.status !== 2 && setOpenDrawer(true)}
+                >
                   {oddsGroup?.detail?.map((match: any, matchIndex: number) => {
                     return match?.map((team: IOdds, teamIndex: number) => {
                       const statusKey = `${index}-${matchIndex}-${teamIndex}`;
