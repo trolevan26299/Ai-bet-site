@@ -203,13 +203,14 @@ function RenderAccordion({
                     {oddsGroup?.detail?.map((match: any, matchIndex: number) => {
                       return match?.map((team: IOdds, teamIndex: number) => {
                         const statusKey = `${index}-${matchIndex}-${teamIndex}`;
-                        console.log("oddsGroup", oddsGroup);
                         const isDisabled = oddsGroup.status === 2;
                         return (
                           <div
                             className="text-primary-foreground p-2 h-10 text-xs relative bg-[#28374a] rounded-[10px]"
                             key={teamIndex}
-                            onClick={() => !isDisabled && handleSelectTeam(statusKey, team, oddsGroup.name_Odds)}
+                            onClick={() =>
+                              isDisabled ? undefined : handleSelectTeam(statusKey, team, oddsGroup.name_Odds)
+                            }
                           >
                             {team.altLineId === 0 && (
                               <div className="absolute top-[2px] left-[2px]">
@@ -393,7 +394,9 @@ function RenderAccordion({
                           <div
                             className="text-primary-foreground p-2 h-10 text-xs relative bg-[#28374a] rounded-[10px]"
                             key={teamIndex}
-                            onClick={() => !isDisabled && handleSelectTeam(statusKey, team, oddsGroup.name_Odds)}
+                            onClick={() =>
+                              isDisabled ? undefined : handleSelectTeam(statusKey, team, oddsGroup.name_Odds)
+                            }
                           >
                             {team.altLineId === 0 && (
                               <div className="absolute top-[2px] left-[2px]">
