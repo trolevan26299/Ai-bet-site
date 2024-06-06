@@ -205,7 +205,7 @@ function RenderAccordion({
             <AccordionItem value={`item-${index + 1}`} key={index}>
               <AccordionTrigger className="text-base">{oddsGroup?.name_Odds}</AccordionTrigger>
               <AccordionContent>
-                <DialogTrigger asChild disabled={oddsGroup.status === 2}>
+                <DialogTrigger asChild>
                   <div className="grid grid-cols-2 gap-[6px]">
                     {oddsGroup?.detail?.map((match: any, matchIndex: number) => {
                       return match?.map((team: IOdds, teamIndex: number) => {
@@ -215,7 +215,7 @@ function RenderAccordion({
                           <div
                             className="text-primary-foreground p-2 h-10 text-xs relative bg-[#28374a] rounded-[10px]"
                             key={teamIndex}
-                            onClick={() => !isDisabled && handleSelectTeam(statusKey, team, oddsGroup.name_Odds)}
+                            onClick={() => handleSelectTeam(statusKey, team, oddsGroup.name_Odds)}
                           >
                             {team.altLineId === 0 && (
                               <div className="absolute top-[2px] left-[2px]">
@@ -382,20 +382,14 @@ function RenderAccordion({
         onClose={() => {
           setSelectedTeam(null);
           setValueSelectNew(undefined);
-          setOpen({ ...open, normal: false });
         }}
-        open={open.normal}
       >
         <Accordion type="multiple" value={openItems} onValueChange={onValueChange} className="w-full">
           {odds.map((oddsGroup: IOddsDetail, index: number) => (
             <AccordionItem value={`item-${index + 1}`} key={index}>
               <AccordionTrigger className="text-base">{oddsGroup?.name_Odds}</AccordionTrigger>
               <AccordionContent>
-                <DrawerTrigger
-                  asChild
-                  disabled={oddsGroup.status === 2}
-                  onClick={() => setOpen({ ...open, normal: true })}
-                >
+                <DrawerTrigger asChild>
                   <div className="grid grid-cols-2 gap-[6px]">
                     {oddsGroup?.detail?.map((match: any, matchIndex: number) => {
                       return match?.map((team: IOdds, teamIndex: number) => {
@@ -405,7 +399,7 @@ function RenderAccordion({
                           <div
                             className="text-primary-foreground p-2 h-10 text-xs relative bg-[#28374a] rounded-[10px]"
                             key={teamIndex}
-                            onClick={() => !isDisabled && handleSelectTeam(statusKey, team, oddsGroup.name_Odds)}
+                            onClick={() => handleSelectTeam(statusKey, team, oddsGroup.name_Odds)}
                           >
                             {team.altLineId === 0 && (
                               <div className="absolute top-[2px] left-[2px]">
