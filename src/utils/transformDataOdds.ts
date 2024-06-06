@@ -40,8 +40,8 @@ export const transformData = (data: IMatchData[], line: string) => {
       const spreadsHiep1 = filterBets(item.bets.spreads, keoChinhHiep1, Number(line), "spreads");
       const totalTaiXiuToanTran = filterBets(item.bets.totals, keoChinhTaiXiuToanTran, Number(line), "totals");
       const totalTaiXiuHiep1 = filterBets(item.bets.totals, keoChinhTaiXiuHiep1, Number(line), "totals");
-      console.log("spreadsToanTran", spreadsToanTran);
-      console.log("spreadsHiep1", spreadsHiep1);
+      console.log("keoChinhToanTran", keoChinhToanTran);
+      console.log("keoChinhHiep1", keoChinhHiep1);
       const result = [];
 
       if (spreadsToanTran && spreadsToanTran.length > 0) {
