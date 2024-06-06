@@ -247,7 +247,7 @@ function RenderAccordion({
                                   maskImage: "linear-gradient(90deg, rgba(0, 0, 0, 1) 80%, rgba(0, 0, 0, 0) 100%)",
                                 }}
                                 className={`col-span-9 text-gray-300  text-sm font-medium ${
-                                  isDisabled ? "text-[rgba(74,86,100,1)]" : "text-text-noActive "
+                                  isDisabled ? "text-[rgba(74,86,100,1)]" : "text-[rgba(157,163,177,1)]"
                                 } overflow-hidden whitespace-nowrap`}
                               >
                                 {`(${team.rate_odds})`} {team.name}
@@ -393,7 +393,7 @@ function RenderAccordion({
                           <div
                             className="text-primary-foreground p-2 h-10 text-xs relative bg-[#28374a] rounded-[10px]"
                             key={teamIndex}
-                            onClick={() => handleSelectTeam(statusKey, team, oddsGroup.name_Odds)}
+                            onClick={() => !isDisabled && handleSelectTeam(statusKey, team, oddsGroup.name_Odds)}
                           >
                             {team.altLineId === 0 && (
                               <div className="absolute top-[2px] left-[2px]">
@@ -431,7 +431,7 @@ function RenderAccordion({
                                   maskImage: "linear-gradient(90deg, rgba(0, 0, 0, 1) 80%, rgba(0, 0, 0, 0) 100%)",
                                 }}
                                 className={`col-span-9 text-gray-300  text-sm font-medium ${
-                                  isDisabled ? "text-[rgba(74,86,100,1)]" : "text-text-noActive "
+                                  isDisabled ? "text-[rgba(74,86,100,1)]" : "text-[rgba(157,163,177,1)]"
                                 } overflow-hidden whitespace-nowrap`}
                               >
                                 {`(${team.rate_odds})`} {team.name}
