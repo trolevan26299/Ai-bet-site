@@ -203,6 +203,7 @@ function RenderAccordion({
                     {oddsGroup?.detail?.map((match: any, matchIndex: number) => {
                       return match?.map((team: IOdds, teamIndex: number) => {
                         const statusKey = `${index}-${matchIndex}-${teamIndex}`;
+                        console.log("oddsGroup", oddsGroup);
                         const isDisabled = oddsGroup.status === 2;
                         return (
                           <div
