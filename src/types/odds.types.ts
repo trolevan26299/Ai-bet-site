@@ -10,6 +10,7 @@ export type IBetDetail = {
   lineId: number;
   eventId: number;
   number: number;
+  status: number;
 };
 
 export type IBet = {
@@ -55,6 +56,7 @@ export type IOdds = {
 };
 export type IOddsDetail = {
   name_Odds: string;
+  status: number;
   detail: IOdds[][];
 };
 

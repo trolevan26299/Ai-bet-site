@@ -203,15 +203,21 @@ function RenderAccordion({
                     {oddsGroup?.detail?.map((match: any, matchIndex: number) => {
                       return match?.map((team: IOdds, teamIndex: number) => {
                         const statusKey = `${index}-${matchIndex}-${teamIndex}`;
+                        const isDisabled = oddsGroup.status === 2;
                         return (
                           <div
                             className="text-primary-foreground p-2 h-10 text-xs relative bg-[#28374a] rounded-[10px]"
                             key={teamIndex}
-                            onClick={() => handleSelectTeam(statusKey, team, oddsGroup.name_Odds)}
+                            onClick={() => !isDisabled && handleSelectTeam(statusKey, team, oddsGroup.name_Odds)}
                           >
                             {team.altLineId === 0 && (
                               <div className="absolute top-[2px] left-[2px]">
-                                <svg width="10" height="10" fill="#ffc13b" viewBox="0 0 24 24">
+                                <svg
+                                  width="10"
+                                  height="10"
+                                  fill={`${isDisabled ? "rgba(123,105,66,1)" : "#ffc13b"}`}
+                                  viewBox="0 0 24 24"
+                                >
                                   <polygon points="12 2 15 9 22 9 17 14 19 21 12 17 5 21 7 14 2 9 9 9" />
                                 </svg>
                               </div>
@@ -239,14 +245,24 @@ function RenderAccordion({
                                 style={{
                                   maskImage: "linear-gradient(90deg, rgba(0, 0, 0, 1) 80%, rgba(0, 0, 0, 0) 100%)",
                                 }}
-                                className="col-span-9 text-gray-300  text-sm font-medium text-text-noActive overflow-hidden whitespace-nowrap"
+                                className={`col-span-9 text-gray-300  text-sm font-medium ${
+                                  isDisabled ? "text-[rgba(74,86,100,1)]" : "text-text-noActive "
+                                } overflow-hidden whitespace-nowrap`}
                               >
                                 {`(${team.rate_odds})`} {team.name}
                               </div>
                               <div className=" col-span-3 text-end flex items-center justify-end text-sm font-medium text-text-red ">
                                 {team.value && (
                                   <span
-                                    className={`${team.value >= 0 ? "text-text-green w-12" : "text-text-red w-12"} `}
+                                    className={`${
+                                      team.value >= 0
+                                        ? isDisabled
+                                          ? "text-[rgba(46,89,57,1)]"
+                                          : "text-text-green w-12"
+                                        : isDisabled
+                                        ? "text-[rgba(121,61,58,1)]"
+                                        : "text-text-red w-12"
+                                    } `}
                                   >
                                     {team.value}
                                   </span>
