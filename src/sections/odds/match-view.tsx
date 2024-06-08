@@ -145,7 +145,7 @@ export default function MatchView() {
               style={{ backgroundColor: "rgba(0, 0, 0, 0.5)", boxShadow: "0 0 10px rgba(0, 0, 0, 0.5)" }}
             >
               <Icon icon="icon-park-solid:attention" className=" w-5" />
-              <p className="text-[12px] w-full ">Hiện tại tất cả các kèo không khả dụng. Vui lòng chọn trận đấu khác</p>
+              <p className="text-[12px] w-full ">Hiện tại tất cả kèo không khả dụng. Vui lòng chọn trận đấu khác</p>
             </div>
           )}
         </div>
