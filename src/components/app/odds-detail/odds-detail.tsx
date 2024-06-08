@@ -378,14 +378,21 @@ function RenderAccordion({
           setValueSelectNew(undefined);
           setOpenDrawer(false);
         }}
-        // open={openDrawer}
+        open={openDrawer}
       >
         <Accordion type="multiple" value={openItems} onValueChange={onValueChange} className="w-full">
           {odds.map((oddsGroup: IOddsDetail, index: number) => (
             <AccordionItem value={`item-${index + 1}`} key={index}>
               <AccordionTrigger className="text-base">{oddsGroup?.name_Odds}</AccordionTrigger>
               <AccordionContent>
-                <DrawerTrigger asChild disabled={true} onTouchCancel={undefined}>
+                <DrawerTrigger
+                  asChild
+                  onClick={() => {
+                    if (oddsGroup.status !== 2) {
+                      setOpenDrawer(true);
+                    }
+                  }}
+                >
                   <div
                     className="grid grid-cols-2 gap-[6px]"
                     onClick={() => oddsGroup.status !== 2 && setOpenDrawer(true)}
