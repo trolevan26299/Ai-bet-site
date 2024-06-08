@@ -2,12 +2,20 @@
 
 import { Button } from "@/components/ui/button";
 import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import {
   Drawer,
   DrawerClose,
   DrawerContent,
   DrawerFooter,
   DrawerHeader,
-  DrawerOverlay,
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer";
@@ -22,15 +30,6 @@ import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { isIOS } from "react-device-detect";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../../ui/accordion";
-import {
-  Dialog,
-  DialogClose,
-  DialogContent,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
 
 export default function OddsDetail({
   odds,
@@ -113,6 +112,7 @@ function RenderAccordion({
   const [oddsName, setOddsName] = useState<String>("");
   const [keyItemSelect, setKeyItemSelect] = useState<number[]>([]);
   const [openDrawer, setOpenDrawer] = useState(false);
+  const [openDialog, setOpenDialog] = useState(false);
 
   const telegram = useTelegram();
   const [animationState, setAnimationState] = useState({
@@ -194,13 +194,20 @@ function RenderAccordion({
 
   if (isIphone) {
     return (
-      <Dialog>
+      <Dialog open={openDialog}>
         <Accordion type="multiple" value={openItems} onValueChange={onValueChange} className="w-full">
           {odds.map((oddsGroup: IOddsDetail, index: number) => (
             <AccordionItem value={`item-${index + 1}`} key={index}>
               <AccordionTrigger className="text-base">{oddsGroup?.name_Odds}</AccordionTrigger>
               <AccordionContent>
-                <DialogTrigger asChild>
+                <DialogTrigger
+                  asChild
+                  onClick={() => {
+                    if (oddsGroup.status !== 2) {
+                      setOpenDialog(true);
+                    }
+                  }}
+                >
                   <div className="grid grid-cols-2 gap-[6px]">
                     {oddsGroup?.detail?.map((match: any, matchIndex: number) => {
                       return match?.map((team: IOdds, teamIndex: number) => {
@@ -345,7 +352,7 @@ function RenderAccordion({
               </div>
             </div>
             <DialogFooter>
-              <DialogClose>
+              <DialogClose onClick={() => setOpenDialog(false)}>
                 <Button
                   className="w-full rounded-full text-text-light font-medium no-underline mb-2 bg-backgroundColor-main"
                   style={{
@@ -476,7 +483,7 @@ function RenderAccordion({
               </AccordionContent>
             </AccordionItem>
           ))}
-          <DrawerContent className="bg-backgroundColor-main  w-full" onClick={() => setOpenDrawer(false)}>
+          <DrawerContent className="bg-backgroundColor-main  w-full">
             <DrawerHeader>
               <DrawerTitle className="text-[20px] text-left text-text-light">Thông tin kèo đã chọn</DrawerTitle>
             </DrawerHeader>
