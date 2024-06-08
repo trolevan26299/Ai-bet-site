@@ -291,6 +291,7 @@ function RenderAccordion({
             <DialogHeader className="flex flex-row justify-between">
               <DialogTitle className="text-[20px] text-left text-text-light">Thông tin kèo đã chọn</DialogTitle>
               <Icon
+                onClick={() => setOpenDialog(false)}
                 icon="iconoir:cancel"
                 className="text-white h-6 w-6 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground"
               />
