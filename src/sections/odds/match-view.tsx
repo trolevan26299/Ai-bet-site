@@ -10,6 +10,7 @@ import { transformData } from "@/utils/transformDataOdds";
 import axios from "axios";
 import { Icon } from "@iconify/react";
 import Image from "next/image";
+import { motion } from "framer-motion";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -139,13 +140,19 @@ export default function MatchView() {
           <ScreenInfoMatch dataScreenInfo={dataScreenInfo} />
           <OddsDetail odds={odds} oddsStatus={oddsStatus} dataScreenInfo={dataScreenInfo} />
           {odds.every((odd) => odd.status === 2) && (
-            <div
+            <motion.div
               className="z-10 text-yellow-400 bottom-0 w-full  text-center fixed m-auto rounded-sm flex items-center flex-row justify-center flex-wrap"
               style={{ backgroundColor: "rgba(0, 0, 0, 0.5)", boxShadow: "0 0 10px rgba(0, 0, 0, 0.5)" }}
+              animate={{ x: [-100, 0, 100, 0], transition: { duration: 5, loop: Infinity } }}
             >
               <Icon icon="icon-park-solid:attention" className=" w-5" />
-              <p className="text-[12px] w-full ">Hiện tại tất cả các kèo không khả dụng. Vui lòng chọn trận đấu khác</p>
-            </div>
+              <motion.p
+                className="text-[12px] w-full "
+                animate={{ x: [-100, 0, 100, 0], transition: { duration: 5, loop: Infinity } }}
+              >
+                Hiện tại tất cả các kèo không khả dụng. Vui lòng chọn trận đấu khác
+              </motion.p>
+            </motion.div>
           )}
         </div>
       )}
