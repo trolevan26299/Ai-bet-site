@@ -139,7 +139,7 @@ export default function MatchView() {
           <ScreenInfoMatch dataScreenInfo={dataScreenInfo} />
           <OddsDetail odds={odds} oddsStatus={oddsStatus} dataScreenInfo={dataScreenInfo} />
           {odds.every((odd) => odd.status === 2) && (
-            <div className="z-10 text-yellow-400 bottom-0 w-[90%] bg-slate-300 text-center fixed">
+            <div className="z-10 text-yellow-400 bottom-0 w-full bg-slate-300 text-center fixed m-auto">
               <Icon icon="icon-park-solid:attention" className=" w-5" />
               <p className="text-[12px] w-full ">Hiện tại tất cả các kèo không khả dụng. Vui lòng chọn trận đấu khác</p>
             </div>
