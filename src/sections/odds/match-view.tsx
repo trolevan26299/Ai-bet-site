@@ -78,7 +78,7 @@ export default function MatchView() {
         const newData = await axios.post("/api/odds", payload);
         if (newData && newData.data.length > 0) {
           const transformedData = transformData(newData.data, lineParam ?? "3");
-          console.log("latestOdds-:", latestOdds);
+          console.log("latestOdds:", latestOdds);
           setOdds(latestOdds.length > 0 ? latestOdds : (transformedData as unknown as IOddsDetail[]));
           setDataScreenInfo(newData.data);
           setLatestOdds(transformedData as unknown as IOddsDetail[]);
