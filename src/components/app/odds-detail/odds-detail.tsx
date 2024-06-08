@@ -290,7 +290,10 @@ function RenderAccordion({
           <DialogContent className="bg-backgroundColor-main  w-full">
             <DialogHeader className="flex flex-row justify-between">
               <DialogTitle className="text-[20px] text-left text-text-light">Thông tin kèo đã chọn</DialogTitle>
-              <Icon icon="iconoir:cancel" className="h-6 w-6" />
+              <Icon
+                icon="iconoir:cancel"
+                className="text-white h-6 w-6 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground"
+              />
             </DialogHeader>
             <div className=" py-4 px-4 mt-[-10px]">
               <div className="col-span-10 text-gray-300  flex flex-row items-center ">
