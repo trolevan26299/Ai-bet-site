@@ -135,11 +135,11 @@ export default function MatchView() {
           </span>
         </div>
       ) : (
-        <div className="p-3 pb-6 h-full relative">
+        <div className="p-3 pb-6 h-full">
           <ScreenInfoMatch dataScreenInfo={dataScreenInfo} />
           <OddsDetail odds={odds} oddsStatus={oddsStatus} dataScreenInfo={dataScreenInfo} />
           {odds.every((odd) => odd.status === 2) && (
-            <div className="absolute z-10 text-yellow-400 bottom-0 w-[90%] bg-slate-300">
+            <div className="z-10 text-yellow-400 bottom-0 w-[90%] bg-slate-300 text-center fixed">
               <Icon icon="icon-park-solid:attention" className=" w-5" />
               <p className="text-[12px] w-full ">Hiện tại tất cả các kèo không khả dụng. Vui lòng chọn trận đấu khác</p>
             </div>
