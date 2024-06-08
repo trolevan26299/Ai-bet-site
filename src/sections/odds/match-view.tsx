@@ -143,13 +143,19 @@ export default function MatchView() {
             <motion.div
               className="z-10 text-yellow-400 bottom-0 w-full  text-center fixed m-auto rounded-sm flex items-center flex-row justify-center flex-wrap"
               style={{ backgroundColor: "rgba(0, 0, 0, 0.5)", boxShadow: "0 0 10px rgba(0, 0, 0, 0.5)" }}
-              animate={{ x: [-100, 0, 100, 0], transition: { duration: 5, loop: Infinity } }}
+              initial={{ x: 300 }}
+              animate={{ x: -1000 }}
+              transition={{
+                x: {
+                  repeat: Infinity,
+                  repeatType: "loop",
+                  duration: 5,
+                  ease: "linear",
+                },
+              }}
             >
               <Icon icon="icon-park-solid:attention" className=" w-5" />
-              <motion.p
-                className="text-[12px] w-full "
-                animate={{ x: [-100, 0, 100, 0], transition: { duration: 5, loop: Infinity } }}
-              >
+              <motion.p className="text-[12px] w-full ">
                 Hiện tại tất cả các kèo không khả dụng. Vui lòng chọn trận đấu khác
               </motion.p>
             </motion.div>
