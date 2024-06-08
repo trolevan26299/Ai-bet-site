@@ -140,7 +140,7 @@ export default function MatchView() {
           <OddsDetail odds={odds} oddsStatus={oddsStatus} dataScreenInfo={dataScreenInfo} />
           {odds.every((odd) => odd.status === 2) && (
             <div
-              className="z-10 text-yellow-400 bottom-0 w-full  text-center fixed m-auto"
+              className="z-10 text-yellow-400 bottom-0 w-full  text-center fixed m-auto rounded-sm flex items-center flex-row justify-center flex-wrap"
               style={{ backgroundColor: "rgba(0, 0, 0, 0.5)", boxShadow: "0 0 10px rgba(0, 0, 0, 0.5)" }}
             >
               <Icon icon="icon-park-solid:attention" className=" w-5" />
