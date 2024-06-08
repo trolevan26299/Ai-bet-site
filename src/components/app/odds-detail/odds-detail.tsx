@@ -374,8 +374,8 @@ function RenderAccordion({
     return (
       <Drawer
         onClose={() => {
-          setSelectedTeam(null);
-          setValueSelectNew(undefined);
+          // setSelectedTeam(null);
+          // setValueSelectNew(undefined);
           setOpenDrawer(false);
         }}
         open={openDrawer}
