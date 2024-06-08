@@ -288,7 +288,7 @@ function RenderAccordion({
             </AccordionItem>
           ))}
           <DialogContent className="bg-backgroundColor-main  w-full">
-            <DialogHeader className="flex flex-row justify-between">
+            <DialogHeader className="flex flex-row justify-between items-start">
               <DialogTitle className="text-[20px] text-left text-text-light">Thông tin kèo đã chọn</DialogTitle>
               <Icon
                 onClick={() => setOpenDialog(false)}
