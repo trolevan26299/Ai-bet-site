@@ -136,19 +136,21 @@ export default function MatchView() {
           </span>
         </div>
       ) : (
-        <div className="p-3 pb-6 h-full">
-          <ScreenInfoMatch dataScreenInfo={dataScreenInfo} />
-          <OddsDetail odds={odds} oddsStatus={oddsStatus} dataScreenInfo={dataScreenInfo} />
+        <>
+          <div className="p-3 pb-6 h-full">
+            <ScreenInfoMatch dataScreenInfo={dataScreenInfo} />
+            <OddsDetail odds={odds} oddsStatus={oddsStatus} dataScreenInfo={dataScreenInfo} />
+          </div>
           {odds.every((odd) => odd.status === 2) && (
             <div
-              className="z-10 text-yellow-400 bottom-0 text-center fixed m-auto rounded-sm flex items-center flex-row justify-center flex-wrap w-[94%]"
+              className="z-10 text-yellow-400 bottom-0 text-center fixed m-auto rounded-sm flex items-center flex-row justify-center flex-wrap w-full"
               style={{ backgroundColor: "rgba(0, 0, 0, 0.5)", boxShadow: "0 0 10px rgba(0, 0, 0, 0.5)" }}
             >
               <Icon icon="icon-park-solid:attention" className=" w-5" />
               <p className="text-[12px] w-full ">Hiện tại tất cả kèo không khả dụng. Vui lòng chọn trận đấu khác</p>
             </div>
           )}
-        </div>
+        </>
       )}
     </MainLayout>
   );
