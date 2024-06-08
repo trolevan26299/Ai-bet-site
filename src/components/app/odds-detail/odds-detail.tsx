@@ -293,7 +293,7 @@ function RenderAccordion({
               <Icon
                 onClick={() => setOpenDialog(false)}
                 icon="iconoir:cancel"
-                className="text-white h-6 w-6 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground"
+                className="text-white h-8 w-8 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground"
               />
             </DialogHeader>
             <div className=" py-4 px-4 mt-[-10px]">
