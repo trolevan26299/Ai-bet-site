@@ -8,6 +8,7 @@ import MainLayout from "@/layouts/main/layout";
 import { IMatchData, IOddsDetail, OddsStatusType } from "@/types/odds.types";
 import { transformData } from "@/utils/transformDataOdds";
 import axios from "axios";
+import { Icon } from "@iconify/react";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -134,9 +135,15 @@ export default function MatchView() {
           </span>
         </div>
       ) : (
-        <div className="p-3 pb-6 ">
+        <div className="p-3 pb-6 h-full relative">
           <ScreenInfoMatch dataScreenInfo={dataScreenInfo} />
           <OddsDetail odds={odds} oddsStatus={oddsStatus} dataScreenInfo={dataScreenInfo} />
+          {odds.every((odd) => odd.status === 2) && (
+            <div className="absolute z-10 text-yellow-400 bottom-0 w-[90%] bg-slate-300">
+              <Icon icon="icon-park-solid:attention" className=" w-5" />
+              <p className="text-[12px] w-full ">Hiện tại tất cả các kèo không khả dụng. Vui lòng chọn trận đấu khác</p>
+            </div>
+          )}
         </div>
       )}
     </MainLayout>
