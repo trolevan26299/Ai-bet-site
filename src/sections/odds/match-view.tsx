@@ -141,27 +141,11 @@ export default function MatchView() {
           <OddsDetail odds={odds} oddsStatus={oddsStatus} dataScreenInfo={dataScreenInfo} />
           {odds.every((odd) => odd.status === 2) && (
             <div
-              className=" w-full fixed m-auto  bottom-0"
+              className="z-10 text-yellow-400 bottom-0 w-full  text-center fixed m-auto rounded-sm flex items-center flex-row justify-center flex-wrap"
               style={{ backgroundColor: "rgba(0, 0, 0, 0.5)", boxShadow: "0 0 10px rgba(0, 0, 0, 0.5)" }}
             >
-              <motion.div
-                className="z-10 text-yellow-400 text-center  rounded-sm flex items-center flex-row justify-center flex-wrap"
-                initial={{ x: 300 }}
-                animate={{ x: -1000 }}
-                transition={{
-                  x: {
-                    repeat: Infinity,
-                    repeatType: "loop",
-                    duration: 10,
-                    ease: "linear",
-                  },
-                }}
-              >
-                <Icon icon="icon-park-solid:attention" className=" w-5" />
-                <motion.p className="text-[12px] w-full ">
-                  Hiện tại tất cả các kèo không khả dụng. Vui lòng chọn trận đấu khác
-                </motion.p>
-              </motion.div>
+              <Icon icon="icon-park-solid:attention" className=" w-5" />
+              <p className="text-[12px] w-full ">Hiện tại tất cả các kèo không khả dụng. Vui lòng chọn trận đấu khác</p>
             </div>
           )}
         </div>
