@@ -288,8 +288,9 @@ function RenderAccordion({
             </AccordionItem>
           ))}
           <DialogContent className="bg-backgroundColor-main  w-full">
-            <DialogHeader>
+            <DialogHeader className="flex flex-row justify-between">
               <DialogTitle className="text-[20px] text-left text-text-light">Thông tin kèo đã chọn</DialogTitle>
+              <Icon icon="iconoir:cancel" className="h-6 w-6" />
             </DialogHeader>
             <div className=" py-4 px-4 mt-[-10px]">
               <div className="col-span-10 text-gray-300  flex flex-row items-center ">
@@ -354,7 +355,7 @@ function RenderAccordion({
             <DialogFooter>
               <DialogClose onClick={() => setOpenDialog(false)}>
                 <Button
-                  className="w-full rounded-full text-text-light font-medium no-underline mb-2 bg-backgroundColor-main"
+                  className="w-full rounded-full text-text-light font-medium no-underline bg-backgroundColor-main"
                   style={{
                     border: "solid 1px #41576f",
                   }}
@@ -364,7 +365,7 @@ function RenderAccordion({
               </DialogClose>
               <Button
                 disabled={disableBtn}
-                className="h-11 rounded-full font-medium text-text-light"
+                className="h-11 rounded-full font-medium text-text-light  mb-2"
                 onClick={handleConfirmBet}
                 style={{
                   backgroundColor: "#006EF8",
