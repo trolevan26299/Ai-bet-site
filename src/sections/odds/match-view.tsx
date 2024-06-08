@@ -141,11 +141,11 @@ export default function MatchView() {
           <OddsDetail odds={odds} oddsStatus={oddsStatus} dataScreenInfo={dataScreenInfo} />
           {odds.every((odd) => odd.status === 2) && (
             <div
-              className=" w-full"
+              className=" w-full fixed m-auto  bottom-0"
               style={{ backgroundColor: "rgba(0, 0, 0, 0.5)", boxShadow: "0 0 10px rgba(0, 0, 0, 0.5)" }}
             >
               <motion.div
-                className="z-10 text-yellow-400 bottom-0 text-center fixed m-auto rounded-sm flex items-center flex-row justify-center flex-wrap"
+                className="z-10 text-yellow-400 text-center  rounded-sm flex items-center flex-row justify-center flex-wrap"
                 initial={{ x: 300 }}
                 animate={{ x: -1000 }}
                 transition={{
