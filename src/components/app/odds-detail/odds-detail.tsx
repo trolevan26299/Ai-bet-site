@@ -289,11 +289,11 @@ function RenderAccordion({
           ))}
           <DialogContent className="bg-backgroundColor-main  w-full">
             <DialogHeader className="flex flex-row justify-between items-center">
-              <DialogTitle className="text-[20px] text-left text-text-light">Thông tin kèo đã chọn</DialogTitle>
+              <DialogTitle className="text-[20px] text-left text-text-light mt-2">Thông tin kèo đã chọn</DialogTitle>
               <Icon
                 onClick={() => setOpenDialog(false)}
                 icon="iconoir:cancel"
-                className="text-white h-8 w-8 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground"
+                className="text-white h-7 w-7 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground"
               />
             </DialogHeader>
             <div className=" py-4 px-4 mt-[-10px]">
