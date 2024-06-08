@@ -9,7 +9,7 @@ export const formatNumber = (num: number) => {
 };
 
 export const formatNumberAndFloor = (num: number) => {
-  const roundedNum = Math.round(num * 100) / 100; // Làm tròn đến 2 chữ số thập phân
+  const roundedNum = Math.floor(num * 100) / 100; // Loại bỏ phần dư sau hai chữ số thập phân mà không làm tròn
 
   if (Math.floor(roundedNum) !== roundedNum) {
     // Check if it's not an integer
