@@ -1,5 +1,5 @@
 import { IHistoryBet } from "@/types/history.type";
-import { formatNumber, formatNumberAndFloor } from "@/utils/formatNumber";
+import { formatNumber, formatNumberAndFloor, formatNumberToFixed2 } from "@/utils/formatNumber";
 import { getBackgroundByBetStatus, getValueByBetStatus } from "@/utils/renderInfoByBetStatus";
 import { utcToUtc7Format, utcToUtc7FormatNoSecond } from "@/utils/time";
 import { Icon } from "@iconify/react";
@@ -66,7 +66,7 @@ const HistoryItem = ({ dataDetail, type }: { dataDetail: IHistoryBet; type?: str
           <div className=" mt-3">
             <div className="flex flex-grow items-start justify-start">
               <p className="text-text-noActive text-sm w-[90px]">Cược :</p>
-              <p className="text-text-main text-sm font-semibold">{formatNumberAndFloor(stake)}</p>
+              <p className="text-text-main text-sm font-semibold">{formatNumberToFixed2(stake)}</p>
             </div>
             <div className="flex flex-grow items-start justify-start">
               <p className="text-text-noActive text-sm w-[90px]">Mạo hiểm :</p>
