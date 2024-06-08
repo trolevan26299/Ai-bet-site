@@ -385,7 +385,7 @@ function RenderAccordion({
             <AccordionItem value={`item-${index + 1}`} key={index}>
               <AccordionTrigger className="text-base">{oddsGroup?.name_Odds}</AccordionTrigger>
               <AccordionContent>
-                <DrawerTrigger asChild disabled>
+                <DrawerTrigger asChild disabled={true} onTouchCancel={undefined}>
                   <div
                     className="grid grid-cols-2 gap-[6px]"
                     onClick={() => oddsGroup.status !== 2 && setOpenDrawer(true)}
