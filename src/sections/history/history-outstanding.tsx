@@ -52,7 +52,7 @@ const HistoryOutstanding = () => {
         : [];
       setHistoryOutStanding(filteredBets);
     } catch (error) {
-      console.error("Error fetching bet history:", error);
+      console.error("Error fetching bet history: ", error);
     } finally {
       setLoading(false);
     }
