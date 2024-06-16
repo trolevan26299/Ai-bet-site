@@ -143,8 +143,8 @@ export default function MatchView() {
           </div>
           {odds.every((odd) => odd.status === 2) && (
             <div
-              className={`z-10 text-yellow-400 bottom-0 text-center fixed m-auto rounded-sm flex items-center flex-row justify-center flex-wrap w-full pt-1 pb-${
-                isIphone ? "3" : "1"
+              className={`z-10 text-yellow-400 bottom-0 text-center fixed m-auto rounded-sm flex items-center flex-row justify-center flex-wrap w-full pt-1 ${
+                isIphone ? "pb-3" : "pb-1"
               } px-2`}
               style={{ backgroundColor: "rgba(0, 0, 0, 0.5)", boxShadow: "0 0 10px rgba(0, 0, 0, 0.5)" }}
             >
