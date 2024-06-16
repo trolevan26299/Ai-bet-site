@@ -15,34 +15,25 @@ const HistoryView = () => {
   const tabParam = searchParams.get("tab") || "";
   const [selectedTab, setSelectedTab] = useState(tabParam === "winlose" ? "2" : "1");
 
-  const handlers = useSwipeable({
-    onSwipedLeft: () => {
-      if (selectedTab === "1") {
-        setSelectedTab("2");
-      }
-    },
-    onSwipedRight: () => {
-      if (selectedTab === "2") {
-        setSelectedTab("1");
-      }
-    },
+  const handleTabChange = (newTab: any) => {
+    setSelectedTab(newTab);
+  };
 
+  const handlers = useSwipeable({
+    onSwipedLeft: () => handleTabChange("2"),
+    onSwipedRight: () => handleTabChange("1"),
     trackTouch: true,
     trackMouse: true,
   });
 
   return (
     <MainLayout>
-      <Tabs defaultValue={tabParam === "winlose" ? "2" : "1"} className="w-full h-[95%]">
+      <Tabs value={selectedTab} onChange={handleTabChange} className="w-full h-[95%]">
         <TabsList className={`tabsList bg-backgroundColor-main ${selectedTab === "1" ? "borderLeft" : "borderRight"}`}>
-          <TabsTriggerHistory
-            value="1"
-            className="flex flex-grow justify-start pl-2"
-            onClick={() => setSelectedTab("1")}
-          >
+          <TabsTriggerHistory value="1" onClick={() => handleTabChange("1")}>
             <Icon icon="mingcute:time-fill" className="mr-1 text-[#f7b502]" /> Cược đang chờ
           </TabsTriggerHistory>
-          <TabsTriggerHistory value="2" className="pr-2" onClick={() => setSelectedTab("2")}>
+          <TabsTriggerHistory value="2" onClick={() => handleTabChange("2")}>
             <Icon icon="lets-icons:flag-finish" className="mr-1 text-[#ff453a]" />
             Cược đã kết thúc
           </TabsTriggerHistory>
@@ -51,7 +42,6 @@ const HistoryView = () => {
           <TabsContent value="1">
             <HistoryOutstanding />
           </TabsContent>
-
           <TabsContent value="2">
             <HistoryWinLoss />
           </TabsContent>
@@ -60,5 +50,3 @@ const HistoryView = () => {
     </MainLayout>
   );
 };
-
-export default HistoryView;
