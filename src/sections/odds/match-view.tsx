@@ -12,10 +12,11 @@ import axios from "axios";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
+import { isIOS } from "react-device-detect";
 
 export default function MatchView() {
   const searchParams = useSearchParams();
-
+  const isIphone = isIOS;
   const [odds, setOdds] = useState<IOddsDetail[]>([]);
   const [latestOdds, setLatestOdds] = useState<IOddsDetail[]>([]);
   const [oddsStatus, setOddsStatus] = useState<OddsStatusType>({});
@@ -142,7 +143,9 @@ export default function MatchView() {
           </div>
           {odds.every((odd) => odd.status === 2) && (
             <div
-              className="z-10 text-yellow-400 bottom-0 text-center fixed m-auto rounded-sm flex items-center flex-row justify-center flex-wrap w-full pt-1 pb-4"
+              className={`z-10 text-yellow-400 bottom-0 text-center fixed m-auto rounded-sm flex items-center flex-row justify-center flex-wrap w-full pt-1 pb-${
+                isIphone ? "3" : "1"
+              } px-2`}
               style={{ backgroundColor: "rgba(0, 0, 0, 0.5)", boxShadow: "0 0 10px rgba(0, 0, 0, 0.5)" }}
             >
               <p className="text-[12px] w-full ">
