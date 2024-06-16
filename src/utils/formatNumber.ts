@@ -1,3 +1,5 @@
+import numeral from "numeral";
+
 export const formatNumber = (num: number) => {
   if (num || num === 0) {
     if (Math.floor(num) !== num) {
@@ -27,3 +29,16 @@ export const formatNumberToFixed2 = (num: number) => {
   }
   return flooredNum.toString(); // Chỉ trả về phần nguyên nếu là số nguyên
 };
+
+type InputValue = string | number | null;
+export function fCurrencyP88(number: InputValue) {
+  const format = number ? numeral(number).format("0,0.00") : "";
+
+  return result(format, ".00");
+}
+
+function result(format: string, key = ".00") {
+  const isInteger = format.includes(key);
+
+  return isInteger ? format.replace(key, "") : format;
+}

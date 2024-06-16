@@ -46,7 +46,7 @@ export const transformData = (data: IMatchData[], line: string) => {
       if (spreadsToanTran && spreadsToanTran.length > 0) {
         result.push({
           name_Odds: "Kèo cược chấp - Toàn trận",
-          status: 2,
+          status: keoChinhToanTran?.status,
           detail: spreadsToanTran.map((spread: IBetDetail) => [
             {
               name: item.home,

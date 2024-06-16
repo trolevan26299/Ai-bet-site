@@ -17,7 +17,7 @@ import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { DateRange } from "react-day-picker";
 import { getCurrentUtcTimeUTCMinus4 } from "../../utils/currentTimeUTC-4";
-import { formatNumber, formatNumberToFixed2 } from "../../utils/formatNumber";
+import { fCurrencyP88, formatNumber, formatNumberToFixed2 } from "../../utils/formatNumber";
 import HistoryItem from "./history-item";
 import "./index.css";
 
@@ -39,10 +39,6 @@ const HistoryWinLoss = () => {
           from: getCurrentUtcTimeUTCMinus4(),
         }
   );
-
-  // giờ hiện tại,tại máy người dùng
-  const currentDate = new Date();
-  const currentHour = currentDate.getHours();
 
   const [selectedDate, setSelectedDate] = useState<DateRange | undefined>(date);
   useEffect(() => {
@@ -172,12 +168,6 @@ const HistoryWinLoss = () => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [telegram?.user?.id, date]);
-  // useEffect(() => {
-  //   fetchBetHistory(6359530967);
-  //   telegram.webApp?.expand();
-
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [date]);
 
   return (
     <>
@@ -257,7 +247,7 @@ const HistoryWinLoss = () => {
             <div className="flex flex-grow justify-between items-center w-full">
               <div className="flex flex-grow items-center justify-start w-1/2">
                 <p className="text-sm font-normal pr-1">Tổng điểm :</p>
-                <p className="text-base font-medium">{formatNumberToFixed2(totalBetMoney)}</p>
+                <p className="text-base font-medium">{fCurrencyP88(20000.35)}</p>
               </div>
               <div className="flex flex-grow items-center justify-end">
                 <p className="text-sm font-normal pr-1">Thắng/Thua :</p>
@@ -266,7 +256,7 @@ const HistoryWinLoss = () => {
                     totalWinLoss > 0 ? "text-[#34c759]" : totalWinLoss < 0 ? "text-[#ff453a]" : "text-[#fff]"
                   }`}
                 >
-                  {formatNumber(totalWinLoss)}
+                  {fCurrencyP88(totalWinLoss)}
                 </p>
               </div>
             </div>

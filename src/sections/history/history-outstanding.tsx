@@ -1,7 +1,7 @@
 import { SplashScreen } from "@/components/loading-screen";
 import { useTelegram } from "@/context/telegram.provider";
 import { IHistoryBet } from "@/types/history.type";
-import { formatNumberAndFloor } from "@/utils/formatNumber";
+import { fCurrencyP88, formatNumberAndFloor } from "@/utils/formatNumber";
 import { formatDateTime } from "@/utils/time";
 import axios from "axios";
 import Image from "next/image";
@@ -84,7 +84,7 @@ const HistoryOutstanding = () => {
             <div className="flex flex-grow items-center text-text-main w-full">
               <div className="flex flex-grow items-center justify-start">
                 <p className="text-sm font-normal pr-1">Tổng điểm :</p>
-                <p className="text-base font-medium">{formatNumberAndFloor(totalBetMoney)}</p>
+                <p className="text-base font-medium">{fCurrencyP88(totalBetMoney)}</p>
               </div>
               <div className="flex flex-grow items-center justify-end">
                 <p className="text-sm font-normal pr-1">Tổng vé :</p>
