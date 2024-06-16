@@ -146,7 +146,7 @@ export default function MatchView() {
               style={{ backgroundColor: "rgba(0, 0, 0, 0.5)", boxShadow: "0 0 10px rgba(0, 0, 0, 0.5)" }}
             >
               <p className="text-[12px] w-full ">
-                ⚠️ Kèo Quý khách chọn hiện không khả dụng. Vui lòng đợi trong giây lát hoặc chọn trận đấu khác.
+                ⚠️ Kèo Quý khách chọn hiện không khả dụng. <br /> Vui lòng đợi trong giây lát hoặc chọn trận đấu khác.
               </p>
             </div>
           )}
