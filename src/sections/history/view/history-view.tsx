@@ -50,3 +50,5 @@ const HistoryView = () => {
     </MainLayout>
   );
 };
+
+export default HistoryView;
