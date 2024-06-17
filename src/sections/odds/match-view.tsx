@@ -128,7 +128,7 @@ export default function MatchView() {
       ) : endBet ? (
         <div className="h-[97vh] w-full flex flex-col justify-center items-center">
           <Image src="/assets/ball.png" alt="no-content" className="w-[165px] h-[170px] mr-5" />
-          <p className="pt-4 text-xl text-slate-500 font-semibold">Đã xảy ra lỗi</p>
+          <p className="pt-4 text-xl text-slate-500 font-semibold">Không tìm thấy thông tin trận đấu</p>
           <p className="pt-2 text-base text-slate-500 font-semibold">Trận đấu có thể không tồn tại hoặc đã kết thúc</p>
           <span className="pt-2 text-sm text-slate-500 font-semibold">
             Vui lòng quay lại Telegram và xem các sự kiện khác
