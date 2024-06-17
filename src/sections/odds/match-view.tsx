@@ -7,7 +7,6 @@ import { useTelegram } from "@/context/telegram.provider";
 import MainLayout from "@/layouts/main/layout";
 import { IMatchData, IOddsDetail, OddsStatusType } from "@/types/odds.types";
 import { transformData } from "@/utils/transformDataOdds";
-import { Icon } from "@iconify/react";
 import axios from "axios";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";

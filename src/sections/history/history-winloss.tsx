@@ -17,7 +17,7 @@ import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { DateRange } from "react-day-picker";
 import { getCurrentUtcTimeUTCMinus4 } from "../../utils/currentTimeUTC-4";
-import { fCurrencyP88, formatNumber, formatNumberToFixed2 } from "../../utils/formatNumber";
+import { fCurrencyP88, formatNumber } from "../../utils/formatNumber";
 import HistoryItem from "./history-item";
 import "./index.css";
 

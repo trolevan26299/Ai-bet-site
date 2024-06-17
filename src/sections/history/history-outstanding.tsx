@@ -1,7 +1,7 @@
 import { SplashScreen } from "@/components/loading-screen";
 import { useTelegram } from "@/context/telegram.provider";
 import { IHistoryBet } from "@/types/history.type";
-import { fCurrencyP88, formatNumberAndFloor } from "@/utils/formatNumber";
+import { fCurrencyP88 } from "@/utils/formatNumber";
 import { formatDateTime } from "@/utils/time";
 import axios from "axios";
 import Image from "next/image";
