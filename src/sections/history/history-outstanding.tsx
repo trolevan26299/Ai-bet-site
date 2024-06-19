@@ -5,13 +5,11 @@ import { fCurrencyP88 } from "@/utils/formatNumber";
 import { formatDateTime } from "@/utils/time";
 import axios from "axios";
 import Image from "next/image";
-import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import HistoryItem from "./history-item";
 
 const HistoryOutstanding = () => {
   const telegram = useTelegram();
-  const searchParams = useSearchParams();
   const [loading, setLoading] = useState(true);
   const [historyOutStanding, setHistoryOutStanding] = useState<IHistoryBet[]>([]);
 
@@ -61,12 +59,6 @@ const HistoryOutstanding = () => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [telegram?.user?.id]);
-  // useEffect(() => {
-  //   fetchBetHistory(6359530967);
-  //   telegram.webApp?.expand();
-
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, []);
 
   return (
     <>
