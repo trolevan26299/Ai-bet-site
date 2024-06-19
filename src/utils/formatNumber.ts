@@ -32,8 +32,7 @@ export const formatNumberToFixed2 = (num: number) => {
 
 type InputValue = string | number | null;
 export function fCurrencyP88(number: InputValue) {
-  const format = number ? numeral(number).format("0,0.00") : "";
-
+  const format = number !== null && number !== undefined ? numeral(number).format("0,0.00") : "";
   return result(format, ".00");
 }
 
