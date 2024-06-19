@@ -1,7 +1,6 @@
 "use client";
 
 import { Tabs, TabsContent, TabsList, TabsTriggerHistory } from "@/components/ui/tabs";
-import { useSwipeable } from "react-swipeable";
 import MainLayout from "@/layouts/main/layout";
 import { Icon } from "@iconify/react";
 import { useState } from "react";
@@ -19,13 +18,6 @@ const HistoryView = () => {
     setSelectedTab(newTab);
   };
 
-  const handlers = useSwipeable({
-    onSwipedLeft: () => handleTabChange("2"),
-    onSwipedRight: () => handleTabChange("1"),
-    trackTouch: true,
-    trackMouse: true,
-  });
-
   return (
     <MainLayout>
       <Tabs value={selectedTab} onChange={handleTabChange} className="w-full h-[95%]">
@@ -38,14 +30,13 @@ const HistoryView = () => {
             Cược đã kết thúc
           </TabsTriggerHistory>
         </TabsList>
-        <div {...handlers}>
-          <TabsContent value="1">
-            <HistoryOutstanding />
-          </TabsContent>
-          <TabsContent value="2">
-            <HistoryWinLoss />
-          </TabsContent>
-        </div>
+
+        <TabsContent value="1">
+          <HistoryOutstanding />
+        </TabsContent>
+        <TabsContent value="2">
+          <HistoryWinLoss />
+        </TabsContent>
       </Tabs>
     </MainLayout>
   );
