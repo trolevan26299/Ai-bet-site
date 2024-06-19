@@ -12,8 +12,6 @@ import HistoryItem from "./history-item";
 const HistoryOutstanding = () => {
   const telegram = useTelegram();
   const searchParams = useSearchParams();
-  const fromDateParam = searchParams.get("from_date");
-  const toDateParam = searchParams.get("to_date");
   const [loading, setLoading] = useState(true);
   const [historyOutStanding, setHistoryOutStanding] = useState<IHistoryBet[]>([]);
 
@@ -31,9 +29,7 @@ const HistoryOutstanding = () => {
 
     const formattedFromDate = formatDateTime(toDate);
     const formattedToDate = formatDateTime(fromDate);
-    const url = `?betList=RUNNING&fromDate=${fromDateParam || formattedFromDate}&toDate=${
-      toDateParam || formattedToDate
-    }`;
+    const url = `?betList=RUNNING&fromDate=${formattedFromDate}&toDate=${formattedToDate}`;
     try {
       setLoading(true);
       const response = await axios.post("api/history", {
