@@ -262,7 +262,7 @@ const HistoryWinLoss = () => {
             </div>
             <div className="flex flex-grow justify-between items-center w-full">
               <div className="flex flex-grow items-center justify-start  w-1/2">
-                -<p className="text-sm font-normal pr-1">Tổng vé :</p>
+                <p className="text-sm font-normal pr-1">Tổng vé :</p>
                 <p className="text-base font-medium">{historyWinLose.length}</p>
               </div>
               <div className="flex flex-grow items-center justify-end">
