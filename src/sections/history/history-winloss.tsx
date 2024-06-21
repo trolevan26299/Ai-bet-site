@@ -270,14 +270,9 @@ const HistoryWinLoss = () => {
                 <p className="text-base font-medium">{formatNumber(totalCommission)}</p>
               </div>
             </div>
-
-            <div className="flex flex-grow items-center justify-end">
-              <p className="text-sm font-normal pr-1">Tổng Thắng/Thua :</p>
-              <p className="text-base font-medium">{formatNumber(totalWinLoss + totalCommission)}</p>
-            </div>
           </div>
 
-          <div className="flex flex-grow items-center justify-end">
+          <div className="flex flex-grow items-center justify-end text-[#fafafa]">
             <p className="text-sm font-normal pr-1">Tổng Thắng/Thua :</p>
             <p className="text-base font-medium">{formatNumber(totalWinLoss + totalCommission)}</p>
           </div>
