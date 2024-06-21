@@ -277,6 +277,11 @@ const HistoryWinLoss = () => {
             </div>
           </div>
 
+          <div className="flex flex-grow items-center justify-end">
+            <p className="text-sm font-normal pr-1">Tổng Thắng/Thua :</p>
+            <p className="text-base font-medium">{formatNumber(totalWinLoss + totalCommission)}</p>
+          </div>
+
           <div className="h-full">
             {historyWinLose.length === 0 ? (
               <div className="h-full  flex flex-col justify-center items-center mt-[30%]">
