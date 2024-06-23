@@ -271,14 +271,16 @@ const HistoryWinLoss = () => {
                     <p className="text-base font-medium">{fCurrencyP88(totalBetMoney)}</p>
                   </div> */}
                 </AccordionTrigger>
-                <AccordionContent className="w-full flex flex-row justify-between items-center">
-                  <div className="flex flex-grow items-center justify-start">
-                    <p className="text-sm font-normal pr-1">Tổng vé :</p>
-                    <p className="text-base font-medium">{historyWinLose.length}</p>
-                  </div>
-                  <div className="flex flex-grow items-center justify-end pr-5">
-                    <p className="text-sm font-normal pr-1">Tổng hoa hồng :</p>
-                    <p className="text-base font-medium">{formatNumber(totalCommission)}</p>
+                <AccordionContent className="w-full flex flex-col justify-between items-center">
+                  <div className="flex flex-grow w-full justify-between">
+                    <div className="flex flex-grow items-center justify-start">
+                      <p className="text-sm font-normal pr-1">Tổng vé :</p>
+                      <p className="text-base font-medium">{historyWinLose.length}</p>
+                    </div>
+                    <div className="flex flex-grow items-center justify-end pr-5">
+                      <p className="text-sm font-normal pr-1">Tổng hoa hồng :</p>
+                      <p className="text-base font-medium">{formatNumber(totalCommission)}</p>
+                    </div>
                   </div>
                 </AccordionContent>
               </AccordionItem>
