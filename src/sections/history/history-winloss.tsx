@@ -252,7 +252,7 @@ const HistoryWinLoss = () => {
             <div className="flex flex-row justify-start items-start text-[#fafafa] pt-7 w-full">
               <AccordionItem value="left" className="w-1/2">
                 <div className="flex flex-col justify-between items-start w-full">
-                  <AccordionTrigger className="pb-0">
+                  <AccordionTrigger className="pb-0 pt-0">
                     <div className="flex flex-grow items-center justify-start w-1/2 pr-[10px]">
                       <p className="text-sm font-normal pr-1">Tổng điểm :</p>
                       <p className="text-base font-medium">{fCurrencyP88(totalBetMoney)}</p>
@@ -275,7 +275,7 @@ const HistoryWinLoss = () => {
 
               <AccordionItem value="right" className="w-1/2">
                 <div className="flex flex-col justify-between items-end w-full">
-                  <AccordionTrigger className="pb-0">
+                  <AccordionTrigger className="pb-0 pt-0">
                     <div className="flex flex-grow items-center justify-start  w-1/2 pr-[10px]">
                       <p className="text-sm font-normal pr-1">Tổng vé :</p>
                       <p className="text-base font-medium">{historyWinLose.length}</p>
@@ -291,10 +291,10 @@ const HistoryWinLoss = () => {
               </AccordionItem>
             </div>
 
-            <div className="flex flex-grow items-center justify-end text-[#fafafa]">
+            {/* <div className="flex flex-grow items-center justify-end text-[#fafafa]">
               <p className="text-sm font-normal pr-1">Tổng Thắng/Thua :</p>
               <p className="text-base font-medium">{formatNumber(totalWinLoss + totalCommission)}</p>
-            </div>
+            </div> */}
           </Accordion>
 
           <div className="h-full">
