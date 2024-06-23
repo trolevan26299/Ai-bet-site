@@ -252,7 +252,7 @@ const HistoryWinLoss = () => {
             <div className="flex flex-row justify-start items-start text-[#fafafa] pt-7 w-full">
               <AccordionItem value="left" className="w-1/2">
                 <div className="flex flex-col justify-between items-start w-full">
-                  <AccordionTrigger>
+                  <AccordionTrigger className="pb-0">
                     <div className="flex flex-grow items-center justify-start w-1/2">
                       <p className="text-sm font-normal pr-1">Tổng điểm :</p>
                       <p className="text-base font-medium">{fCurrencyP88(totalBetMoney)}</p>
@@ -275,7 +275,7 @@ const HistoryWinLoss = () => {
 
               <AccordionItem value="right" className="w-1/2">
                 <div className="flex flex-col justify-between items-end w-full">
-                  <AccordionTrigger>
+                  <AccordionTrigger className="pb-0">
                     <div className="flex flex-grow items-center justify-start  w-1/2">
                       <p className="text-sm font-normal pr-1">Tổng vé :</p>
                       <p className="text-base font-medium">{historyWinLose.length}</p>
