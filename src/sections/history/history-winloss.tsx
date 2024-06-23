@@ -249,7 +249,7 @@ const HistoryWinLoss = () => {
             </p>
           </div>
           <Accordion type="single" collapsible className="w-full">
-            <div className="flex flex-row justify-start items-start text-[#fafafa] w-full">
+            <div className="flex flex-row justify-start items-start text-[#fafafa] w-full pt-8">
               <AccordionItem value="collapsible" className="w-full">
                 <AccordionTrigger className="pb-0 pt-0 flex flex-row justify-between w-full">
                   <div className="flex flex-grow items-center justify-start w-[50%]">
