@@ -260,14 +260,8 @@ const HistoryWinLoss = () => {
                   </AccordionTrigger>
                   <AccordionContent>
                     <div className="flex flex-grow items-center justify-end">
-                      <p className="text-sm font-normal pr-1">Thắng/Thua :</p>
-                      <p
-                        className={`text-base font-medium ${
-                          totalWinLoss > 0 ? "text-[#34c759]" : totalWinLoss < 0 ? "text-[#ff453a]" : "text-[#fff]"
-                        }`}
-                      >
-                        {fCurrencyP88(totalWinLoss)}
-                      </p>
+                      <p className="text-sm font-normal pr-1">Tổng vé :</p>
+                      <p className="text-base font-medium">{historyWinLose.length}</p>
                     </div>
                   </AccordionContent>
                 </div>
@@ -277,8 +271,14 @@ const HistoryWinLoss = () => {
                 <div className="flex flex-col justify-between items-end w-full">
                   <AccordionTrigger className="pb-0 pt-0">
                     <div className="flex flex-grow items-center justify-start  w-1/2 pr-[10px]">
-                      <p className="text-sm font-normal pr-1">Tổng vé :</p>
-                      <p className="text-base font-medium">{historyWinLose.length}</p>
+                      <p className="text-sm font-normal pr-1">Thắng/Thua :</p>
+                      <p
+                        className={`text-base font-medium ${
+                          totalWinLoss > 0 ? "text-[#34c759]" : totalWinLoss < 0 ? "text-[#ff453a]" : "text-[#fff]"
+                        }`}
+                      >
+                        {fCurrencyP88(totalWinLoss)}
+                      </p>
                     </div>
                   </AccordionTrigger>
                   <AccordionContent>
