@@ -41,10 +41,6 @@ const HistoryWinLoss = () => {
         }
   );
 
-  const [openItems, setOpenItems] = useState<string[]>([]);
-  const handleValueChange = (value: string[]) => {
-    setOpenItems(value);
-  };
   const [selectedDate, setSelectedDate] = useState<DateRange | undefined>(date);
   useEffect(() => {
     if (firstLoadDay && toDateParam) {
@@ -250,7 +246,7 @@ const HistoryWinLoss = () => {
           </div>
           <Accordion type="single" className="w-full" collapsible>
             <div className="flex flex-row justify-start items-start text-[#fafafa] pt-7 w-full">
-              <AccordionItem value="left" className="w-[40%]">
+              <AccordionItem value="left">
                 <AccordionTrigger className="pb-0 pt-0 ">
                   <div className="flex flex-row justify-between items-center w-full ">
                     <div className="flex flex-grow items-center justify-start w-[40%]">
