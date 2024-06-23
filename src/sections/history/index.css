@@ -34,10 +34,10 @@
 }
 
 .borderLeft::after {
-  left: 29px;
+  left: 38px;
   background: #60d1ff;
 }
 .borderRight::after {
-  right: 14px;
+  right: 20px;
   background: #60d1ff;
 }
