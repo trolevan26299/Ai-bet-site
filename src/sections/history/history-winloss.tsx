@@ -257,14 +257,28 @@ const HistoryWinLoss = () => {
                     <p className="text-base font-medium">{fCurrencyP88(totalBetMoney)}</p>
                   </div>
                   <div className="flex flex-grow items-center justify-end w-[50%] pr-[10px]">
+                    <p className="text-sm font-normal pr-1">Thắng/Thua :</p>
+                    <p
+                      className={`text-base font-medium ${
+                        totalWinLoss > 0 ? "text-[#34c759]" : totalWinLoss < 0 ? "text-[#ff453a]" : "text-[#fff]"
+                      }`}
+                    >
+                      {fCurrencyP88(totalWinLoss)}
+                    </p>
+                  </div>
+                  {/* <div className="flex flex-grow items-center justify-end w-[50%] pr-[10px]">
                     <p className="text-sm font-normal pr-1">Tổng cược :</p>
                     <p className="text-base font-medium">{fCurrencyP88(totalBetMoney)}</p>
-                  </div>
+                  </div> */}
                 </AccordionTrigger>
-                <AccordionContent>
-                  <div className="flex flex-grow items-center justify-end">
+                <AccordionContent className="w-full flex flex-row justify-between items-center">
+                  <div className="flex flex-grow items-center justify-start">
                     <p className="text-sm font-normal pr-1">Tổng vé :</p>
                     <p className="text-base font-medium">{historyWinLose.length}</p>
+                  </div>
+                  <div className="flex flex-grow items-center justify-end pr-5">
+                    <p className="text-sm font-normal pr-1">Tổng hoa hồng :</p>
+                    <p className="text-base font-medium">{formatNumber(totalCommission)}</p>
                   </div>
                 </AccordionContent>
               </AccordionItem>
