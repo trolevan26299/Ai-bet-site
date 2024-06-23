@@ -20,6 +20,7 @@ import { getCurrentUtcTimeUTCMinus4 } from "../../utils/currentTimeUTC-4";
 import { fCurrencyP88, formatNumber } from "../../utils/formatNumber";
 import HistoryItem from "./history-item";
 import "./index.css";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 
 const HistoryWinLoss = () => {
   const telegram = useTelegram();
@@ -40,6 +41,10 @@ const HistoryWinLoss = () => {
         }
   );
 
+  const [openItems, setOpenItems] = useState<string[]>([]);
+  const handleValueChange = (value: string[]) => {
+    setOpenItems(value);
+  };
   const [selectedDate, setSelectedDate] = useState<DateRange | undefined>(date);
   useEffect(() => {
     if (firstLoadDay && toDateParam) {
@@ -243,39 +248,54 @@ const HistoryWinLoss = () => {
               Bạn chỉ có thể xem dữ liệu từ 30 ngày trước, dựa trên múi giờ GMT-04:00.
             </p>
           </div>
-          <div className="flex flex-col justify-start items-start text-[#fafafa] pt-7">
-            <div className="flex flex-grow justify-between items-center w-full">
-              <div className="flex flex-grow items-center justify-start w-1/2">
-                <p className="text-sm font-normal pr-1">Tổng điểm :</p>
-                <p className="text-base font-medium">{fCurrencyP88(totalBetMoney)}</p>
-              </div>
-              <div className="flex flex-grow items-center justify-end">
-                <p className="text-sm font-normal pr-1">Thắng/Thua :</p>
-                <p
-                  className={`text-base font-medium ${
-                    totalWinLoss > 0 ? "text-[#34c759]" : totalWinLoss < 0 ? "text-[#ff453a]" : "text-[#fff]"
-                  }`}
-                >
-                  {fCurrencyP88(totalWinLoss)}
-                </p>
-              </div>
-            </div>
-            <div className="flex flex-grow justify-between items-center w-full">
-              <div className="flex flex-grow items-center justify-start  w-1/2">
-                <p className="text-sm font-normal pr-1">Tổng vé :</p>
-                <p className="text-base font-medium">{historyWinLose.length}</p>
-              </div>
-              <div className="flex flex-grow items-center justify-end">
-                <p className="text-sm font-normal pr-1">Tổng hoa hồng :</p>
-                <p className="text-base font-medium">{formatNumber(totalCommission)}</p>
-              </div>
-            </div>
-          </div>
+          <Accordion type="multiple" value={openItems} onValueChange={handleValueChange} className="w-full">
+            <div className="flex flex-col justify-start items-start text-[#fafafa] pt-7">
+              <AccordionItem value="left">
+                <div className="flex flex-grow justify-between items-center w-full">
+                  <AccordionTrigger>
+                    <div className="flex flex-grow items-center justify-start w-1/2">
+                      <p className="text-sm font-normal pr-1">Tổng điểm :</p>
+                      <p className="text-base font-medium">{fCurrencyP88(totalBetMoney)}</p>
+                    </div>
+                  </AccordionTrigger>
+                  <AccordionContent>
+                    <div className="flex flex-grow items-center justify-end">
+                      <p className="text-sm font-normal pr-1">Thắng/Thua :</p>
+                      <p
+                        className={`text-base font-medium ${
+                          totalWinLoss > 0 ? "text-[#34c759]" : totalWinLoss < 0 ? "text-[#ff453a]" : "text-[#fff]"
+                        }`}
+                      >
+                        {fCurrencyP88(totalWinLoss)}
+                      </p>
+                    </div>
+                  </AccordionContent>
+                </div>
+              </AccordionItem>
 
-          <div className="flex flex-grow items-center justify-end text-[#fafafa]">
-            <p className="text-sm font-normal pr-1">Tổng Thắng/Thua :</p>
-            <p className="text-base font-medium">{formatNumber(totalWinLoss + totalCommission)}</p>
-          </div>
+              <AccordionItem value="right">
+                <div className="flex flex-grow justify-between items-center w-full">
+                  <AccordionTrigger>
+                    <div className="flex flex-grow items-center justify-start  w-1/2">
+                      <p className="text-sm font-normal pr-1">Tổng vé :</p>
+                      <p className="text-base font-medium">{historyWinLose.length}</p>
+                    </div>
+                  </AccordionTrigger>
+                  <AccordionContent>
+                    <div className="flex flex-grow items-center justify-end">
+                      <p className="text-sm font-normal pr-1">Tổng hoa hồng :</p>
+                      <p className="text-base font-medium">{formatNumber(totalCommission)}</p>
+                    </div>
+                  </AccordionContent>
+                </div>
+              </AccordionItem>
+            </div>
+
+            <div className="flex flex-grow items-center justify-end text-[#fafafa]">
+              <p className="text-sm font-normal pr-1">Tổng Thắng/Thua :</p>
+              <p className="text-base font-medium">{formatNumber(totalWinLoss + totalCommission)}</p>
+            </div>
+          </Accordion>
 
           <div className="h-full">
             {historyWinLose.length === 0 ? (
