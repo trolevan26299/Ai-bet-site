@@ -266,10 +266,6 @@ const HistoryWinLoss = () => {
                       {fCurrencyP88(totalWinLoss)}
                     </p>
                   </div>
-                  {/* <div className="flex flex-grow items-center justify-end w-[50%] pr-[10px]">
-                    <p className="text-sm font-normal pr-1">Tổng cược :</p>
-                    <p className="text-base font-medium">{fCurrencyP88(totalBetMoney)}</p>
-                  </div> */}
                 </AccordionTrigger>
                 <AccordionContent className="w-full flex flex-col justify-between items-center">
                   <div className="flex flex-grow w-full justify-between">
@@ -300,39 +296,7 @@ const HistoryWinLoss = () => {
                   </div>
                 </AccordionContent>
               </AccordionItem>
-              {/* 
-              <AccordionItem value="right" className="w-[60%]">
-                <div className="flex flex-col justify-between items-end w-full">
-                  <AccordionTrigger className="pb-0 pt-0">
-                    <div className="flex flex-grow items-center justify-start  w-1/2 pr-[5px]">
-                      <p className="text-sm font-normal pr-1">Thắng/Thua :</p>
-                      <p
-                        className={`text-base font-medium ${
-                          totalWinLoss > 0 ? "text-[#34c759]" : totalWinLoss < 0 ? "text-[#ff453a]" : "text-[#fff]"
-                        }`}
-                      >
-                        {fCurrencyP88(totalWinLoss)}
-                      </p>
-                    </div>
-                  </AccordionTrigger>
-                  <AccordionContent className="flex flex-col">
-                    <div className="flex flex-grow items-center justify-end pr-5">
-                      <p className="text-sm font-normal pr-1">Tổng hoa hồng :</p>
-                      <p className="text-base font-medium">{formatNumber(totalCommission)}</p>
-                    </div>
-                    <div className="flex flex-grow items-center justify-end pr-5">
-                      <p className="text-sm font-normal pr-1">Tổng Thắng/Thua :</p>
-                      <p className="text-base font-medium">{formatNumber(totalWinLoss + totalCommission)}</p>
-                    </div>
-                  </AccordionContent>
-                </div>
-              </AccordionItem> */}
             </div>
-
-            {/* <div className="flex flex-grow items-center justify-end text-[#fafafa]">
-              <p className="text-sm font-normal pr-1">Tổng Thắng/Thua :</p>
-              <p className="text-base font-medium">{formatNumber(totalWinLoss + totalCommission)}</p>
-            </div> */}
           </Accordion>
 
           <div className="h-full">
