@@ -41,10 +41,6 @@ const HistoryWinLoss = () => {
         }
   );
 
-  const [openItems, setOpenItems] = useState<string[]>([]);
-  const handleValueChange = (value: string[]) => {
-    setOpenItems(value);
-  };
   const [selectedDate, setSelectedDate] = useState<DateRange | undefined>(date);
   useEffect(() => {
     if (firstLoadDay && toDateParam) {
