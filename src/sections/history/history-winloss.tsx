@@ -248,12 +248,16 @@ const HistoryWinLoss = () => {
               Bạn chỉ có thể xem dữ liệu từ 30 ngày trước, dựa trên múi giờ GMT-04:00.
             </p>
           </div>
-          <Accordion type="multiple" value={openItems} onValueChange={handleValueChange} className="w-full">
+          <Accordion type="single" className="w-full">
             <div className="flex flex-row justify-start items-start text-[#fafafa] pt-7 w-full">
-              <AccordionItem value="left" className="w-[40%]">
+              <AccordionItem value="left" className="w-full">
                 <div className="flex flex-col justify-between items-start w-full">
-                  <AccordionTrigger className="pb-0 pt-0">
-                    <div className="flex flex-grow items-center justify-start w-1/2 pr-[px]">
+                  <AccordionTrigger className="pb-0 pt-0 flex flex-row justify-center w-full">
+                    <div className="flex flex-grow items-center justify-start w-[40%]">
+                      <p className="text-sm font-normal pr-1">Tổng cược :</p>
+                      <p className="text-base font-medium">{fCurrencyP88(totalBetMoney)}</p>
+                    </div>
+                    <div className="flex flex-grow items-center justify-start w-[60%] pr-[10px]">
                       <p className="text-sm font-normal pr-1">Tổng cược :</p>
                       <p className="text-base font-medium">{fCurrencyP88(totalBetMoney)}</p>
                     </div>
@@ -266,7 +270,7 @@ const HistoryWinLoss = () => {
                   </AccordionContent>
                 </div>
               </AccordionItem>
-
+              {/* 
               <AccordionItem value="right" className="w-[60%]">
                 <div className="flex flex-col justify-between items-end w-full">
                   <AccordionTrigger className="pb-0 pt-0">
@@ -292,7 +296,7 @@ const HistoryWinLoss = () => {
                     </div>
                   </AccordionContent>
                 </div>
-              </AccordionItem>
+              </AccordionItem> */}
             </div>
 
             {/* <div className="flex flex-grow items-center justify-end text-[#fafafa]">
