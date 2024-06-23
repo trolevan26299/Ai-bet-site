@@ -285,7 +285,17 @@ const HistoryWinLoss = () => {
                   <div className="flex flex-grow w-full justify-end">
                     <div className="flex flex-grow items-center justify-end pr-[26px]">
                       <p className="text-sm font-normal pr-1">Tổng Thắng/Thua :</p>
-                      <p className="text-base font-medium">{formatNumber(totalWinLoss + totalCommission)}</p>
+                      <p
+                        className={`text-base font-medium ${
+                          totalWinLoss + totalCommission > 0
+                            ? "text-[#34c759]"
+                            : totalWinLoss + totalCommission < 0
+                            ? "text-[#ff453a]"
+                            : "text-[#fff]"
+                        }`}
+                      >
+                        {formatNumber(totalWinLoss + totalCommission)}
+                      </p>
                     </div>
                   </div>
                 </AccordionContent>
