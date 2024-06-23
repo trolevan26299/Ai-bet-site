@@ -249,7 +249,7 @@ const HistoryWinLoss = () => {
             </p>
           </div>
           <Accordion type="multiple" value={openItems} onValueChange={handleValueChange} className="w-full">
-            <div className="flex flex-col justify-start items-start text-[#fafafa] pt-7">
+            <div className="flex flex-row justify-start items-start text-[#fafafa] pt-7">
               <AccordionItem value="left">
                 <div className="flex flex-col justify-between items-center w-full">
                   <AccordionTrigger>
