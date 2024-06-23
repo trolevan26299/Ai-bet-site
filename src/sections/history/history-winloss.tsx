@@ -250,10 +250,10 @@ const HistoryWinLoss = () => {
           </div>
           <Accordion type="multiple" value={openItems} onValueChange={handleValueChange} className="w-full">
             <div className="flex flex-row justify-start items-start text-[#fafafa] pt-7 w-full">
-              <AccordionItem value="left" className="w-1/2">
+              <AccordionItem value="left" className="w-[40%]">
                 <div className="flex flex-col justify-between items-start w-full">
                   <AccordionTrigger className="pb-0 pt-0">
-                    <div className="flex flex-grow items-center justify-start w-1/2 pr-[10px]">
+                    <div className="flex flex-grow items-center justify-start w-1/2 pr-[5px]">
                       <p className="text-sm font-normal pr-1">Tổng cược :</p>
                       <p className="text-base font-medium">{fCurrencyP88(totalBetMoney)}</p>
                     </div>
@@ -267,10 +267,10 @@ const HistoryWinLoss = () => {
                 </div>
               </AccordionItem>
 
-              <AccordionItem value="right" className="w-1/2">
+              <AccordionItem value="right" className="w-[60%]">
                 <div className="flex flex-col justify-between items-end w-full">
                   <AccordionTrigger className="pb-0 pt-0">
-                    <div className="flex flex-grow items-center justify-start  w-1/2 pr-[10px]">
+                    <div className="flex flex-grow items-center justify-start  w-1/2 pr-[5px]">
                       <p className="text-sm font-normal pr-1">Thắng/Thua :</p>
                       <p
                         className={`text-base font-medium ${
