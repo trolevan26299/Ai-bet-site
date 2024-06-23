@@ -249,8 +249,8 @@ const HistoryWinLoss = () => {
             </p>
           </div>
           <Accordion type="multiple" value={openItems} onValueChange={handleValueChange} className="w-full">
-            <div className="flex flex-row justify-start items-start text-[#fafafa] pt-7">
-              <AccordionItem value="left">
+            <div className="flex flex-row justify-start items-start text-[#fafafa] pt-7 w-full">
+              <AccordionItem value="left" className="w-1/2">
                 <div className="flex flex-col justify-between items-center w-full">
                   <AccordionTrigger>
                     <div className="flex flex-grow items-center justify-start w-1/2">
@@ -273,7 +273,7 @@ const HistoryWinLoss = () => {
                 </div>
               </AccordionItem>
 
-              <AccordionItem value="right">
+              <AccordionItem value="right" className="w-1/2">
                 <div className="flex flex-col justify-between items-center w-full">
                   <AccordionTrigger>
                     <div className="flex flex-grow items-center justify-start  w-1/2">
