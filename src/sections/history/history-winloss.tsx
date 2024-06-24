@@ -118,7 +118,7 @@ const HistoryWinLoss = () => {
   // tổng thắng thua
   const totalWinLoss = historyWinLose.reduce((total, item) => total + (item?.winLoss || 0), 0);
 
-  const setRange = (days: number, startFromYesterday: boolean = false) => {
+  const setRange = (days: number, startFromYesterday: boolean) => {
     const currentDate = getCurrentUtcTimeUTCMinus4();
     const start = addDays(currentDate, startFromYesterday ? -1 : 0);
     const from = addDays(start, -days);
@@ -133,7 +133,7 @@ const HistoryWinLoss = () => {
     console.log("currentDate", currentDate);
     if (days === 14 || days === 29) {
       setTabs(days.toString());
-      setRange(days);
+      setRange(days, true);
     } else {
       setTabs(days.toString());
       if (days === 0) {
