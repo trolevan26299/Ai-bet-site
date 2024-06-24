@@ -188,7 +188,7 @@ const HistoryWinLoss = () => {
                 { label: "Tuần này", days: 7 },
                 { label: "Tuần trước", days: -7 },
                 { label: "14 Ngày trước", days: 14 },
-                { label: "30 Ngày trước", days: 29 },
+                { label: "30 Ngày trước", days: 30 },
               ].map((item, index) => (
                 <TabsTriggerDate key={index} value={item.days.toString()} onClick={() => handleTabClick(item.days)}>
                   {item.label}
