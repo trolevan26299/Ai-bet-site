@@ -113,14 +113,14 @@ const HistoryWinLoss = () => {
     return total + riskAmount;
   }, 0);
 
-  // tổng hoa hồng aaaa
+  // tổng hoa hồng
   const totalCommission = historyWinLose.reduce((total, item) => total + item.customerCommission, 0);
   // tổng thắng thua
   const totalWinLoss = historyWinLose.reduce((total, item) => total + (item?.winLoss || 0), 0);
 
   const setRange = (days: number, startFromYesterday: boolean) => {
     const currentDate = getCurrentUtcTimeUTCMinus4();
-    const start = addDays(currentDate, startFromYesterday ? (days === 14 ? -1 : -2) : 0);
+    const start = addDays(currentDate, startFromYesterday ? -1 : 0);
     const from = addDays(start, days === 14 ? -13 : -28);
     const to = start;
     setDate({ from, to });
@@ -188,7 +188,7 @@ const HistoryWinLoss = () => {
                 { label: "Tuần này", days: 7 },
                 { label: "Tuần trước", days: -7 },
                 { label: "14 Ngày trước", days: 14 },
-                { label: "30 Ngày trước", days: 30 },
+                { label: "30 Ngày trước", days: 29 },
               ].map((item, index) => (
                 <TabsTriggerDate key={index} value={item.days.toString()} onClick={() => handleTabClick(item.days)}>
                   {item.label}
