@@ -113,7 +113,7 @@ const HistoryWinLoss = () => {
     return total + riskAmount;
   }, 0);
 
-  // tổng hoa hồng
+  // tổng hoa hồng a
   const totalCommission = historyWinLose.reduce((total, item) => total + item.customerCommission, 0);
   // tổng thắng thua
   const totalWinLoss = historyWinLose.reduce((total, item) => total + (item?.winLoss || 0), 0);
