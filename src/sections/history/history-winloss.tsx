@@ -118,9 +118,11 @@ const HistoryWinLoss = () => {
   // tổng thắng thua
   const totalWinLoss = historyWinLose.reduce((total, item) => total + (item?.winLoss || 0), 0);
 
-  const setRange = (days: number) => {
-    const from = addDays(getCurrentUtcTimeUTCMinus4(), -days);
-    const to = getCurrentUtcTimeUTCMinus4();
+  const setRange = (days: number, startFromYesterday: boolean = false) => {
+    const currentDate = getCurrentUtcTimeUTCMinus4();
+    const start = addDays(currentDate, startFromYesterday ? -1 : 0);
+    const from = addDays(start, -days);
+    const to = start;
     setDate({ from, to });
   };
   const handleTabClick = (days: number) => {
@@ -129,7 +131,7 @@ const HistoryWinLoss = () => {
     setFirstLoadDay(false);
     const currentDate = getCurrentUtcTimeUTCMinus4();
     console.log("currentDate", currentDate);
-    if (days !== 0 && days !== 7 && days !== -7 && days !== 1) {
+    if (days === 14 || days === 29) {
       setTabs(days.toString());
       setRange(days);
     } else {
@@ -185,8 +187,8 @@ const HistoryWinLoss = () => {
                 { label: "Hôm qua", days: 1 },
                 { label: "Tuần này", days: 7 },
                 { label: "Tuần trước", days: -7 },
-                { label: "14 Ngày trước", days: 13 },
-                { label: "30 Ngày trước", days: 28 },
+                { label: "14 Ngày trước", days: 14 },
+                { label: "30 Ngày trước", days: 29 },
               ].map((item, index) => (
                 <TabsTriggerDate key={index} value={item.days.toString()} onClick={() => handleTabClick(item.days)}>
                   {item.label}
