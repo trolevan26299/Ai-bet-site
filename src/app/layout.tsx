@@ -5,6 +5,7 @@ import "./globals.css";
 import "@radix-ui/themes/styles.css";
 import { MotionLazy } from "@/components/animate/motion-lazy";
 import { TelegramProvider } from "@/context/telegram.provider";
+import { GoogleAnalytics } from "@next/third-parties/google";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,6 +21,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="vi">
+      <GoogleAnalytics gaId="G-HCDLGP91K6" />
       <body className={inter.className}>
         <TelegramProvider>
           <Theme>
