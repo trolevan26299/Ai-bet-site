@@ -21,7 +21,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="vi">
-      <GoogleAnalytics gaId="G-HCDLGP91K6" />
+      <GoogleAnalytics gaId="G-RJB4BGPJKW" />
       <body className={inter.className}>
         <TelegramProvider>
           <Theme>
