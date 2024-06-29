@@ -141,7 +141,7 @@ export default function MatchView() {
             <div className="w-full">
               <iframe
                 scrolling="no"
-                src="https://start26.sptpub.com/tracker.html?eventId=49012283&sportId=1&lang=vi&liveEvent=true&providers=Betradar"
+                src="https://start26.sptpub.com/tracker.html?eventId=45843693&sportId=1&lang=vi&liveEvent=true&providers=Betradar"
                 allowFullScreen
                 title="rindle"
                 style={{ border: 0, width: "100%", height: "354px" }}
