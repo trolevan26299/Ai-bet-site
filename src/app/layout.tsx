@@ -5,7 +5,6 @@ import "./globals.css";
 import "@radix-ui/themes/styles.css";
 import { MotionLazy } from "@/components/animate/motion-lazy";
 import { TelegramProvider } from "@/context/telegram.provider";
-import { GoogleAnalytics } from "@next/third-parties/google";
 import Script from "next/script";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -22,14 +21,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="vi">
-      <GoogleAnalytics gaId="G-RJB4BGPJKW" />
       <Script src="https://www.googletagmanager.com/gtag/js?id=G-CV4B26T521" strategy="afterInteractive" async></Script>
       <Script id="google-analytics" strategy="afterInteractive">
         {`
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
-          gtag('config', 'G-CV4B26T521');
+          gtag('config', 'G-RJB4BGPJKW');
         `}
       </Script>
       <body className={inter.className}>
