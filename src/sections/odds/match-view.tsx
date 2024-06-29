@@ -11,6 +11,7 @@ import axios from "axios";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
+import "./odds.css";
 import { isIOS } from "react-device-detect";
 
 export default function MatchView() {
