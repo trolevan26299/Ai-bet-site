@@ -144,7 +144,7 @@ export default function MatchView() {
                 src="https://start26.sptpub.com/tracker.html?eventId=49012283&sportId=1&lang=vi&liveEvent=true&providers=Betradar"
                 allowFullScreen
                 title="rindle"
-                style={{ border: 0, width: "100%", height: "200.25px" }}
+                style={{ border: 0, width: "100%", height: "354px" }}
               ></iframe>
             </div>
             <OddsDetail odds={odds} oddsStatus={oddsStatus} dataScreenInfo={dataScreenInfo} />
