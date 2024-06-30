@@ -152,16 +152,16 @@ export default function MatchView() {
         <>
           <div className="p-3 pb-6 h-full">
             <ScreenInfoMatch dataScreenInfo={dataScreenInfo} />
-            <div className="w-full">
-              <iframe
-                scrolling="no"
-                src="https://start26.sptpub.com/tracker.html?eventId=45843693&sportId=1&lang=vi&liveEvent=true&providers=Betradar"
-                allowFullScreen
-                onLoad={handleIframeLoad}
-                title="rindle"
-                style={{ border: 0, width: "100%", height: iframeLoaded ? "auto" : "0px", borderRadius: "5px" }}
-              ></iframe>
-            </div>
+
+            <iframe
+              scrolling="no"
+              src="https://start26.sptpub.com/tracker.html?eventId=45843693&sportId=1&lang=vi&liveEvent=true&providers=Betradar"
+              allowFullScreen
+              onLoad={handleIframeLoad}
+              title="rindle"
+              style={{ border: 0, width: "100%", height: iframeLoaded ? "auto" : "0px", borderRadius: "5px" }}
+            ></iframe>
+
             <OddsDetail odds={odds} oddsStatus={oddsStatus} dataScreenInfo={dataScreenInfo} />
           </div>
           {odds.every((odd) => odd.status === 2) && (
