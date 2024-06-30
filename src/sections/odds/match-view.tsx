@@ -156,17 +156,17 @@ export default function MatchView() {
         <>
           <div className="p-3 pb-6 h-full">
             <ScreenInfoMatch dataScreenInfo={dataScreenInfo} />
-            {iframeRef.current && (
-              <div className="w-full">
-                <iframe
-                  ref={iframeRef}
-                  scrolling="no"
-                  allowFullScreen
-                  title="rindle"
-                  style={{ border: 0, width: "100%", height: "354px", borderRadius: "5px" }}
-                ></iframe>
-              </div>
-            )}
+            {/* {iframeRef.current && ( */}
+            <div className="w-full">
+              <iframe
+                ref={iframeRef}
+                scrolling="no"
+                allowFullScreen
+                title="rindle"
+                style={{ border: 0, width: "100%", height: "354px", borderRadius: "5px" }}
+              ></iframe>
+            </div>
+            {/* )} */}
 
             <OddsDetail odds={odds} oddsStatus={oddsStatus} dataScreenInfo={dataScreenInfo} />
           </div>
