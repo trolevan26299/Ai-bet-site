@@ -159,7 +159,7 @@ export default function MatchView() {
                 allowFullScreen
                 onLoad={handleIframeLoad}
                 title="rindle"
-                style={{ border: 0, width: "100%", height: iframeLoaded ? "354px" : "0px", borderRadius: "5px" }}
+                style={{ border: 0, width: "100%", height: iframeLoaded ? "auto" : "0px", borderRadius: "5px" }}
               ></iframe>
             </div>
             <OddsDetail odds={odds} oddsStatus={oddsStatus} dataScreenInfo={dataScreenInfo} />
