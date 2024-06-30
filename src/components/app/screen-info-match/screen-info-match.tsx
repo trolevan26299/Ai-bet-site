@@ -10,7 +10,7 @@ import { formatLiveScope } from "@/utils/formatLiveScope";
 
 export default function ScreenInfoMatch({ dataScreenInfo }: { dataScreenInfo: IMatchData[] }) {
   return (
-    <div className="relative pb-2 min-h-[160px]">
+    <div className="relative pb-2 min-h-[165px]">
       <img src="/assets/bg_team.jpg" alt="Stadium" className="w-full h-[165px]" />
 
       <div className="absolute inset-0 grid grid-cols-12 items-start justify-center px-4 pt-2">
