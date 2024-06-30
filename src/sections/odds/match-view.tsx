@@ -42,6 +42,7 @@ export default function MatchView() {
     filter_by: "and",
   };
   const handleIframeLoad = () => {
+    console.log("đã load xong");
     setIframeLoaded(true);
   };
 
