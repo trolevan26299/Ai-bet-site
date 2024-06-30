@@ -45,7 +45,9 @@ export default function MatchView() {
     console.log("đã load xong");
     setIframeLoaded(true);
   };
-
+  const isMobileDevice = () => {
+    return /Mobi|Android|iPhone|iPad|iPod/.test(navigator.userAgent);
+  };
   useEffect(() => {
     async function fetchAndSetInitialOdds() {
       setLoading(true);
@@ -159,7 +161,12 @@ export default function MatchView() {
               allowFullScreen
               onLoad={handleIframeLoad}
               title="rindle"
-              style={{ border: 0, width: "100%", height: iframeLoaded ? "auto" : "0px", borderRadius: "5px" }}
+              style={{
+                border: 0,
+                width: "100%",
+                height: iframeLoaded ? (isMobileDevice() ? "354px" : "410px") : "0px",
+                borderRadius: "5px",
+              }}
             ></iframe>
 
             <OddsDetail odds={odds} oddsStatus={oddsStatus} dataScreenInfo={dataScreenInfo} />
