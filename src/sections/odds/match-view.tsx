@@ -10,7 +10,7 @@ import { transformData } from "@/utils/transformDataOdds";
 import axios from "axios";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./odds.css";
 import { isIOS } from "react-device-detect";
 
@@ -25,6 +25,7 @@ export default function MatchView() {
   const [loading, setLoading] = useState(true);
   const [endBet, setEndBet] = useState(false);
   const telegram = useTelegram();
+  const iframeRef = useRef<HTMLIFrameElement>(null);
 
   const matchParam = searchParams.get("match");
   const lineParam = searchParams.get("line");
@@ -127,6 +128,17 @@ export default function MatchView() {
     return () => clearInterval(intervalId);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [latestOdds, endBet]);
+
+  useEffect(() => {
+    if (iframeRef.current) {
+      iframeRef.current.src =
+        "https://start26.sptpub.com/tracker.html?eventId=45843693&sportId=1&lang=vi&liveEvent=true&providers=Betradar";
+      iframeRef.current.addEventListener("load", handleIframeLoad);
+    }
+    return () => {
+      iframeRef.current?.removeEventListener("load", handleIframeLoad);
+    };
+  }, []);
   return (
     <MainLayout>
       {loading ? (
@@ -147,10 +159,9 @@ export default function MatchView() {
             {iframeLoaded && (
               <div className="w-full">
                 <iframe
+                  ref={iframeRef}
                   scrolling="no"
-                  src="https://start26.sptpub.com/tracker.html?eventId=45843693&sportId=1&lang=vi&liveEvent=true&providers=Betradar"
                   allowFullScreen
-                  onLoad={handleIframeLoad}
                   title="rindle"
                   style={{ border: 0, width: "100%", height: "354px", borderRadius: "5px" }}
                 ></iframe>
