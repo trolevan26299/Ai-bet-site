@@ -183,7 +183,9 @@ export default function MatchView() {
 
             <iframe
               scrolling="no"
-              src={`https://start26.sptpub.com/tracker.html?eventId=${tracker_id}&sportId=1&lang=vi&liveEvent=true&providers=Betradar`}
+              src={`https://start26.sptpub.com/tracker.html?eventId=${
+                tracker_id || 45843693
+              }&sportId=1&lang=vi&liveEvent=true&providers=Betradar`}
               allowFullScreen
               title="rindle"
               style={{
