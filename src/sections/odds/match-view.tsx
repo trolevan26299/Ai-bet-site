@@ -164,7 +164,7 @@ export default function MatchView() {
               style={{
                 border: 0,
                 width: "100%",
-                height: iframeLoaded ? (isMobileDevice() ? "410px" : "354px") : "0px",
+                height: iframeLoaded ? (isMobileDevice() ? "425px" : "354px") : "0px",
                 borderRadius: "5px",
               }}
             ></iframe>
