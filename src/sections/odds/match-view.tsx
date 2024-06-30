@@ -24,6 +24,7 @@ export default function MatchView() {
   const [iframeLoaded, setIframeLoaded] = useState(false);
   const [loading, setLoading] = useState(true);
   const [endBet, setEndBet] = useState(false);
+  const [iframeHeight, setIframeHeight] = useState("0px");
   const telegram = useTelegram();
 
   const matchParam = searchParams.get("match");
@@ -131,9 +132,35 @@ export default function MatchView() {
   }, [latestOdds, endBet]);
 
   useEffect(() => {
+    const handleResize = () => {
+      const width = window.innerWidth;
+      if (isMobileDevice()) {
+        if (width > 800) {
+          setIframeHeight("600px");
+        } else if (width > 600) {
+          setIframeHeight("500px");
+        } else if (width > 400) {
+          setIframeHeight("425px");
+        } else {
+          setIframeHeight("354px");
+        }
+      } else {
+        setIframeHeight("354px");
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+    handleResize();
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  useEffect(() => {
     const timer = setTimeout(() => {
       setIframeLoaded(true);
-    }, 3000); // 3 seconds delay
+    }, 5000); // 3 seconds delay
 
     return () => clearTimeout(timer);
   }, []);
@@ -164,7 +191,7 @@ export default function MatchView() {
               style={{
                 border: 0,
                 width: "100%",
-                height: iframeLoaded ? (isMobileDevice() ? "425px" : "354px") : "0px",
+                height: iframeLoaded ? iframeHeight : "0px",
                 borderRadius: "5px",
               }}
             ></iframe>
