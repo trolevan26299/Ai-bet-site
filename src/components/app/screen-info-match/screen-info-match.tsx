@@ -18,7 +18,7 @@ export default function ScreenInfoMatch({ dataScreenInfo }: { dataScreenInfo: IM
           <Icon icon="ph:soccer-ball-fill" width="20" color="#fafafa" />
           <p className="pl-1 text-sm text-[#fafafa] font-[600]">{dataScreenInfo[0]?.league_name}</p>
         </div>
-        <div className={`flex flex-col items-start col-span-3  ${dataScreenInfo[0]?.liveStatus ? "mt-7" : "mt-4"}`}>
+        <div className={`flex flex-col items-start col-span-3 pb-2 ${dataScreenInfo[0]?.liveStatus ? "mt-7" : "mt-4"}`}>
           {dataScreenInfo.length > 0 && <TeamLogo teamName={dataScreenInfo[0].team[0]} typeError="home" />}
         </div>
 
@@ -30,7 +30,7 @@ export default function ScreenInfoMatch({ dataScreenInfo }: { dataScreenInfo: IM
                 {`${dataScreenInfo[0].liveMinute || ""}  ${formatLiveScope(dataScreenInfo[0].liveState) || ""}`}
               </p>
             </div>
-            <div className="flex justify-center items-center pt-3">
+            <div className="flex justify-center items-center pt-2">
               <div className="flex flex-row justify-center gap-1 items-center w-[40px] text-white font-bold mr-2">
                 {dataScreenInfo[0].homeRedCards !== 0 && (
                   <>
@@ -75,7 +75,7 @@ export default function ScreenInfoMatch({ dataScreenInfo }: { dataScreenInfo: IM
           </div>
         )}
 
-        <div className={`flex flex-col items-end col-span-3  ${dataScreenInfo[0]?.liveStatus ? "mt-7" : "mt-4"}`}>
+        <div className={`flex flex-col items-end col-span-3 pb-2 ${dataScreenInfo[0]?.liveStatus ? "mt-7" : "mt-4"}`}>
           {dataScreenInfo.length > 0 && <TeamLogo teamName={dataScreenInfo[0].team[1]} typeError="away" />}
         </div>
         <div className="flex flex-row justify-between col-span-12 mt-[-25px]">
