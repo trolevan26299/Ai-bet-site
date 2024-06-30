@@ -43,10 +43,7 @@ export default function MatchView() {
     game_scope: "",
     filter_by: "and",
   };
-  const handleIframeLoad = () => {
-    console.log("đã load xong");
-    setIframeLoaded(true);
-  };
+
   const isMobileDevice = () => {
     return /Mobi|Android|iPhone|iPad|iPod/.test(navigator.userAgent);
   };
@@ -160,7 +157,7 @@ export default function MatchView() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setIframeLoaded(true);
-    }, 5000); // 3 seconds delay
+    }, 5000); // 5 seconds delay
 
     return () => clearTimeout(timer);
   }, []);
@@ -184,9 +181,8 @@ export default function MatchView() {
 
             <iframe
               scrolling="no"
-              src="https://start26.sptpub.com/tracker.html?eventId=45843693&sportId=1&lang=vi&liveEvent=true&providers=Betradar"
+              src={`https://start26.sptpub.com/tracker.html?eventId=${tracker_id}&sportId=1&lang=vi&liveEvent=true&providers=Betradar`}
               allowFullScreen
-              onLoad={handleIframeLoad}
               title="rindle"
               style={{
                 border: 0,
