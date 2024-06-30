@@ -127,7 +127,6 @@ export default function MatchView() {
     return () => clearInterval(intervalId);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [latestOdds, endBet]);
-
   useEffect(() => {
     const handleResize = () => {
       const width = window.innerWidth;
@@ -142,7 +141,11 @@ export default function MatchView() {
           setIframeHeight("365px");
         }
       } else {
-        setIframeHeight("354px");
+        if (width > 520) {
+          setIframeHeight("465px");
+        } else {
+          setIframeHeight("354px");
+        }
       }
     };
 
