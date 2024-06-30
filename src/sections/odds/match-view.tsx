@@ -21,6 +21,7 @@ export default function MatchView() {
   const [latestOdds, setLatestOdds] = useState<IOddsDetail[]>([]);
   const [oddsStatus, setOddsStatus] = useState<OddsStatusType>({});
   const [dataScreenInfo, setDataScreenInfo] = useState<IMatchData[]>([]);
+  const [iframeLoaded, setIframeLoaded] = useState(false);
   const [loading, setLoading] = useState(true);
   const [endBet, setEndBet] = useState(false);
   const telegram = useTelegram();
@@ -39,6 +40,9 @@ export default function MatchView() {
     game_detail: "",
     game_scope: "",
     filter_by: "and",
+  };
+  const handleIframeLoad = () => {
+    setIframeLoaded(true);
   };
 
   useEffect(() => {
@@ -139,15 +143,18 @@ export default function MatchView() {
         <>
           <div className="p-3 pb-6 h-full">
             <ScreenInfoMatch dataScreenInfo={dataScreenInfo} />
-            <div className="w-full">
-              <iframe
-                scrolling="no"
-                src="https://start26.sptpub.com/tracker.html?eventId=45843693&sportId=1&lang=vi&liveEvent=true&providers=Betradar"
-                allowFullScreen
-                title="rindle"
-                style={{ border: 0, width: "100%", height: "354px" }}
-              ></iframe>
-            </div>
+            {iframeLoaded && (
+              <div className="w-full">
+                <iframe
+                  scrolling="no"
+                  src="https://start26.sptpub.com/tracker.html?eventId=45843693&sportId=1&lang=vi&liveEvent=true&providers=Betradar"
+                  allowFullScreen
+                  onLoad={handleIframeLoad}
+                  title="rindle"
+                  style={{ border: 0, width: "100%", height: "354px", borderRadius: "5px" }}
+                ></iframe>
+              </div>
+            )}
             <OddsDetail odds={odds} oddsStatus={oddsStatus} dataScreenInfo={dataScreenInfo} />
           </div>
           {odds.every((odd) => odd.status === 2) && (
