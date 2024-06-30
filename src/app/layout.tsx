@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/inline-script-id */
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { Theme } from "@radix-ui/themes";
@@ -42,31 +41,6 @@ export default function RootLayout({
             <MotionLazy>{children}</MotionLazy>
           </Theme>
         </TelegramProvider>
-
-        <Script
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `
-    (function(a,b,c,d,e,f,g,h,i){
-        a[e] = a[e] || function() {
-            (a[e].q=a[e].q||[]).push(arguments);
-        };
-        a[e].l=1*new Date();
-        a[e].o=f;
-        g=b.createElement(c);
-        h=b.getElementsByTagName(c)[0];
-        g.async=1;
-        g.src=d;
-        g.setAttribute("n", e);
-        h.parentNode.insertBefore(g, h);
-    })(window, document, "script", "https://widgets.sir.sportradar.com/12423423423/widgetloader", "SIR", {
-        theme: false, // using custom theme
-        language: "vi"
-    });
-    SIR("addWidget", ".sr-widget-1", "match.avgGoalsPerPeriod", {matchId:49012283});
-`,
-          }}
-        ></Script>
       </body>
     </html>
   );
