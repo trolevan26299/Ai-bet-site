@@ -139,8 +139,10 @@ export default function MatchView() {
           setIframeHeight("600px");
         } else if (width > 600) {
           setIframeHeight("500px");
-        } else if (width > 400) {
+        } else if (width > 440) {
           setIframeHeight("425px");
+        } else if (width > 400) {
+          setIframeHeight("390px");
         } else {
           setIframeHeight("365px");
         }
