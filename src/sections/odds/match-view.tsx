@@ -135,9 +135,7 @@ export default function MatchView() {
     const handleResize = () => {
       const width = window.innerWidth;
       if (isMobileDevice()) {
-        if (width > 800) {
-          setIframeHeight("600px");
-        } else if (width > 600) {
+        if (width > 600) {
           setIframeHeight("500px");
         } else if (width > 440) {
           setIframeHeight("425px");
