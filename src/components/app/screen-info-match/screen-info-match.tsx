@@ -41,14 +41,14 @@ export default function ScreenInfoMatch({ dataScreenInfo }: { dataScreenInfo: IM
               </div>
               <div
                 style={{ backgroundColor: "rgba(255,255,255,0.1)", border: "1px solid rgba(255,255,255,0.4)" }}
-                className="h-10 w-11 flex items-center justify-center rounded-[10px]"
+                className="h-8 w-9 flex items-center justify-center rounded-[10px]"
               >
                 <p className="font-[600] text-[20px] text-[#fafafa] ">{dataScreenInfo[0]?.homeScore || 0}</p>
               </div>
               <p className="px-2 font-bold text-lg text-[#fafafa]">:</p>
               <div
                 style={{ backgroundColor: "rgba(255,255,255,0.1)", border: "1px solid rgba(255,255,255,0.4)" }}
-                className="h-10 w-11 flex items-center justify-center rounded-[10px]"
+                className="h-8 w-9 flex items-center justify-center rounded-[10px]"
               >
                 <p className="font-[600] text-[20px] text-[#fafafa] ">{dataScreenInfo[0].awayScore || 0}</p>
               </div>
