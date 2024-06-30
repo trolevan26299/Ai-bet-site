@@ -156,7 +156,7 @@ export default function MatchView() {
         <>
           <div className="p-3 pb-6 h-full">
             <ScreenInfoMatch dataScreenInfo={dataScreenInfo} />
-            {iframeLoaded && (
+            {iframeRef.current && (
               <div className="w-full">
                 <iframe
                   ref={iframeRef}
@@ -167,6 +167,7 @@ export default function MatchView() {
                 ></iframe>
               </div>
             )}
+
             <OddsDetail odds={odds} oddsStatus={oddsStatus} dataScreenInfo={dataScreenInfo} />
           </div>
           {odds.every((odd) => odd.status === 2) && (
