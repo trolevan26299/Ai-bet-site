@@ -11,10 +11,10 @@ import { formatLiveScope } from "@/utils/formatLiveScope";
 export default function ScreenInfoMatch({ dataScreenInfo }: { dataScreenInfo: IMatchData[] }) {
   return (
     <div className="relative pb-2 min-h-[160px]">
-      <img src="/assets/bg_team.jpg" alt="Stadium" className="w-full h-auto" />
+      <img src="/assets/bg_team.jpg" alt="Stadium" className="w-full h-[165px]" />
 
       <div className="absolute inset-0 grid grid-cols-12 items-start justify-center px-4 pt-2">
-        <div className="col-span-12 text-gray-300  flex flex-row items-center pt-1">
+        <div className="col-span-12 text-gray-300  flex flex-row items-center ">
           <Icon icon="ph:soccer-ball-fill" width="20" color="#fafafa" />
           <p className="pl-1 text-sm text-[#fafafa] font-[600]">{dataScreenInfo[0]?.league_name}</p>
         </div>
