@@ -166,6 +166,31 @@ export default function MatchView() {
 
     return () => clearTimeout(timer);
   }, []);
+
+  useEffect(() => {
+    const ensureDocumentIsScrollable = () => {
+      // Set the document height slightly taller than the viewport to ensure it's always scrollable
+      if (document.documentElement.scrollHeight <= window.innerHeight) {
+        document.documentElement.style.height = "calc(100vh + 1px)";
+      }
+    };
+
+    const preventSwipeToClose = () => {
+      // Prevent the mini app from interpreting swipe down as a close gesture
+      const handleTouchMove = (event: any) => {
+        if (window.scrollY === 0) {
+          event.preventDefault();
+          window.scrollTo(0, 1);
+        }
+      };
+
+      document.addEventListener("touchmove", handleTouchMove);
+      return () => document.removeEventListener("touchmove", handleTouchMove);
+    };
+
+    ensureDocumentIsScrollable();
+    preventSwipeToClose();
+  }, []);
   return (
     <MainLayout>
       {loading ? (
