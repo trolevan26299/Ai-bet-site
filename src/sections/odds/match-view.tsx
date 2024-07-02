@@ -67,6 +67,7 @@ export default function MatchView() {
           setLatestOdds(transformedData as unknown as IOddsDetail[]);
         }
         telegram.webApp?.expand();
+        telegram.webApp?.isClosingConfirmationEnabled === true;
       } catch (error: any) {
         console.log("error:", error);
         setEndBet(true);
@@ -122,7 +123,7 @@ export default function MatchView() {
       }
     }
 
-    const intervalId = setInterval(fetchAndUpdateOdds, 10000);
+    const intervalId = setInterval(fetchAndUpdateOdds, 7000);
     return () => clearInterval(intervalId);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [latestOdds, endBet]);
@@ -159,7 +160,7 @@ export default function MatchView() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setIframeLoaded(true);
-    }, 5000); // 5 seconds delay
+    }, 2500); // 1.5 seconds delay
 
     return () => clearTimeout(timer);
   }, []);

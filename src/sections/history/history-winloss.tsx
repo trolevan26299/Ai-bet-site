@@ -168,6 +168,7 @@ const HistoryWinLoss = () => {
     if (telegram?.user?.id) {
       fetchBetHistory(telegram?.user?.id);
       telegram.webApp?.expand();
+      telegram.webApp?.isClosingConfirmationEnabled === true;
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [telegram?.user?.id, date]);
