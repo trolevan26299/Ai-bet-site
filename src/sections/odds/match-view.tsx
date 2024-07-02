@@ -46,6 +46,7 @@ export default function MatchView() {
   const isMobileDevice = () => {
     return /Mobi|Android|iPhone|iPad|iPod/.test(navigator.userAgent);
   };
+
   useEffect(() => {
     async function fetchAndSetInitialOdds() {
       setLoading(true);
@@ -68,6 +69,7 @@ export default function MatchView() {
         }
         telegram.webApp?.expand();
         telegram.webApp?.isClosingConfirmationEnabled === true;
+        telegram.webApp?.onEvent;
       } catch (error: any) {
         console.log("error:", error);
         setEndBet(true);
