@@ -204,15 +204,17 @@ function RenderAccordion({
 
   if (showErrorConfirm) {
     return (
-      <DialogOverlay>
-        <DialogContent>
-          <DialogTitle>Có một giao dịch đang chờ xử lý</DialogTitle>
-          <p>Vui lòng thử lại sau.</p>
-          <DialogFooter>
-            <Button onClick={() => setErrorConfirm(false)}>Đóng</Button>
-          </DialogFooter>
-        </DialogContent>
-      </DialogOverlay>
+      <Dialog open={showErrorConfirm}>
+        <DialogOverlay>
+          <DialogContent>
+            <DialogTitle>Có một giao dịch đang chờ xử lý</DialogTitle>
+            <p>Vui lòng thử lại sau.</p>
+            <DialogFooter>
+              <Button onClick={() => setErrorConfirm(false)}>Đóng</Button>
+            </DialogFooter>
+          </DialogContent>
+        </DialogOverlay>
+      </Dialog>
     );
   }
   if (isIphone) {
