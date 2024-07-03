@@ -2,14 +2,14 @@
 
 import { Button } from "@/components/ui/button";
 import {
-  Dialog,
-  DialogClose,
-  DialogContent,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
+  DialogGame,
+  DialogCloseGame,
+  DialogContentGame,
+  DialogFooterGame,
+  DialogHeaderGame,
+  DialogTitleGame,
+  DialogTriggerGame,
+} from "@/components/ui/dialog-game";
 import {
   Drawer,
   DrawerClose,
@@ -30,7 +30,7 @@ import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { isIOS } from "react-device-detect";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../../ui/accordion";
-import { DialogOverlay, Dialog as DialogRadix, DialogContent as DialogContentRadix } from "@radix-ui/react-dialog";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 
 export default function OddsDetail({
   odds,
@@ -204,28 +204,24 @@ function RenderAccordion({
 
   if (showErrorConfirm) {
     return (
-      <DialogRadix open={showErrorConfirm}>
-        <DialogOverlay>
-          <DialogContentRadix className="w-[80%]">
-            <DialogTitle>Có một giao dịch đang chờ xử lý</DialogTitle>
-            <p>Vui lòng thử lại sau.</p>
-            <DialogFooter>
-              <Button onClick={() => setErrorConfirm(false)}>Đóng</Button>
-            </DialogFooter>
-          </DialogContentRadix>
-        </DialogOverlay>
-      </DialogRadix>
+      <Dialog open={showErrorConfirm}>
+        <DialogContent className="sm:max-w-md text-center rounded-sm">
+          <DialogHeader>
+            <DialogTitle>Hiện có giao dịch khác đang được xử lý. Vui lòng thử lại sau giây lát!</DialogTitle>
+          </DialogHeader>
+        </DialogContent>
+      </Dialog>
     );
   }
   if (isIphone) {
     return (
-      <Dialog open={openDialog}>
+      <DialogGame open={openDialog}>
         <Accordion type="multiple" value={openItems} onValueChange={onValueChange} className="w-full">
           {odds.map((oddsGroup: IOddsDetail, index: number) => (
             <AccordionItem value={`item-${index + 1}`} key={index}>
               <AccordionTrigger className="text-base">{oddsGroup?.name_Odds}</AccordionTrigger>
               <AccordionContent>
-                <DialogTrigger
+                <DialogTriggerGame
                   asChild
                   onClick={() => {
                     if (oddsGroup.status !== 2 && disableOdds !== true) {
@@ -308,19 +304,21 @@ function RenderAccordion({
                       });
                     })}
                   </div>
-                </DialogTrigger>
+                </DialogTriggerGame>
               </AccordionContent>
             </AccordionItem>
           ))}
-          <DialogContent className="bg-backgroundColor-main  w-full">
-            <DialogHeader className="flex flex-row justify-between items-center mt-[-5px]">
-              <DialogTitle className="text-[20px] text-left text-text-light mt-1">Thông tin kèo đã chọn</DialogTitle>
+          <DialogContentGame className="bg-backgroundColor-main  w-full">
+            <DialogHeaderGame className="flex flex-row justify-between items-center mt-[-5px]">
+              <DialogTitleGame className="text-[20px] text-left text-text-light mt-1">
+                Thông tin kèo đã chọn
+              </DialogTitleGame>
               <Icon
                 onClick={() => setOpenDialog(false)}
                 icon="iconoir:cancel"
                 className="text-white h-7 w-7 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground"
               />
-            </DialogHeader>
+            </DialogHeaderGame>
             <div className=" py-4 px-4 mt-[-10px]">
               <div className="col-span-10 text-gray-300  flex flex-row items-center ">
                 <Icon icon="ph:soccer-ball-fill" width="20px" height="20px" />
@@ -381,8 +379,8 @@ function RenderAccordion({
                 </div>
               </div>
             </div>
-            <DialogFooter>
-              <DialogClose onClick={() => setOpenDialog(false)}>
+            <DialogFooterGame>
+              <DialogCloseGame onClick={() => setOpenDialog(false)}>
                 <Button
                   className="w-full rounded-full text-text-light font-medium no-underline bg-backgroundColor-main"
                   style={{
@@ -391,7 +389,7 @@ function RenderAccordion({
                 >
                   Hủy
                 </Button>
-              </DialogClose>
+              </DialogCloseGame>
               <Button
                 disabled={disableBtn}
                 className="h-11 rounded-full font-medium text-text-light  mb-2"
@@ -403,10 +401,10 @@ function RenderAccordion({
                 {disableBtn && <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />}
                 Xác nhận
               </Button>
-            </DialogFooter>
-          </DialogContent>
+            </DialogFooterGame>
+          </DialogContentGame>
         </Accordion>
-      </Dialog>
+      </DialogGame>
     );
   } else {
     return (
