@@ -210,9 +210,9 @@ function RenderAccordion({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [oddsStatus]);
 
-  if (showErrorConfirm) {
+  if (showErrorConfirm === true) {
     return (
-      <Dialog open={showErrorConfirm}>
+      <Dialog open={showErrorConfirm === true}>
         <DialogContent className="sm:max-w-md text-center rounded-sm w-[80%]">
           <DialogHeader>
             <DialogDescription className="pt-5">
