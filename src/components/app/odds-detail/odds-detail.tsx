@@ -213,18 +213,19 @@ function RenderAccordion({
   if (showErrorConfirm) {
     return (
       <Dialog open={showErrorConfirm}>
-        <DialogContent className="sm:max-w-md text-center rounded-sm w-[80%]">
+        <DialogContent
+          onCloseAutoFocus={() => setErrorConfirm(false)}
+          className="sm:max-w-md text-center rounded-sm w-[80%]"
+        >
           <DialogHeader>
             <DialogDescription className="pt-5">
               Hiện có giao dịch khác đang được xử lý. Vui lòng thử lại sau giây lát!
             </DialogDescription>
           </DialogHeader>
           <DialogFooter className="sm:justify-start">
-            <DialogClose asChild>
-              <Button type="button" variant="secondary">
-                Close
-              </Button>
-            </DialogClose>
+            <Button onClick={() => setErrorConfirm(false)} type="button" variant="secondary">
+              Đóng
+            </Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
