@@ -56,14 +56,14 @@ export default function MatchView() {
         const res = await axios.post("/api/odds", payload);
         console.log("response:", res);
         if (
-          res.data.message.answer === "Invalid match!" ||
-          res.data.message.answer === "Invalid league!" ||
-          res.data.message.answer === "Request or user not found!" ||
-          res.data.message.answer === "Event not found!" ||
-          res.data.message.answer === "Game not found!" ||
+          res.data?.message?.answer === "Invalid match!" ||
+          res.data?.message?.answer === "Invalid league!" ||
+          res.data?.message?.answer === "Request or user not found!" ||
+          res.data?.message?.answer === "Event not found!" ||
+          res.data?.message?.answer === "Game not found!" ||
           res.data.length === 0
         ) {
-          if (res.data.message.live_state === null || res.data.message.live_state === "ended") {
+          if (res.data?.message?.live_state === null || res.data?.message?.live_state === "ended") {
             setEndBet(true); // kết thúc trận đấu
           } else {
             setDisableBtn(true); // lỗi mà chưa kết thúc trận đấu
@@ -125,14 +125,14 @@ export default function MatchView() {
             setDisableBtn(false);
           }
         } else if (
-          newData.data.message.answer === "Invalid match!" ||
-          newData.data.message.answer === "Invalid league!" ||
-          newData.data.message.answer === "Request or user not found!" ||
-          newData.data.message.answer === "Event not found!" ||
-          newData.data.message.answer === "Game not found!" ||
+          newData.data?.message?.answer === "Invalid match!" ||
+          newData.data?.message?.answer === "Invalid league!" ||
+          newData.data?.message?.answer === "Request or user not found!" ||
+          newData.data?.message?.answer === "Event not found!" ||
+          newData.data?.message?.answer === "Game not found!" ||
           newData.data.length === 0
         ) {
-          if (newData.data.message.live_state === null || newData.data.message.live_state === "ended") {
+          if (newData.data?.message?.live_state === null || newData.data?.message?.live_state === "ended") {
             setEndBet(true); // kết thúc trận đấu
           } else {
             setDisableBtn(true); // lỗi mà chưa kết thúc trận đấu
