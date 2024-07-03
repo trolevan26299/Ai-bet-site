@@ -212,7 +212,7 @@ function RenderAccordion({
                 <DialogTrigger
                   asChild
                   onClick={() => {
-                    if (oddsGroup.status !== 2 && !disableOdds) {
+                    if (oddsGroup.status !== 2 && disableOdds !== true) {
                       setOpenDialog(true);
                     }
                   }}
@@ -410,7 +410,7 @@ function RenderAccordion({
                 <DrawerTrigger
                   asChild
                   onClick={() => {
-                    if (oddsGroup.status !== 2 && !disableOdds) {
+                    if (oddsGroup.status !== 2 && disableOdds !== true) {
                       setOpenDrawer(true);
                     }
                   }}
