@@ -218,22 +218,7 @@ export default function MatchView() {
         </div>
       ) : haveError ? (
         <div className="h-[97vh] w-full flex flex-col justify-center items-center">
-          {tracker_id ? (
-            <iframe
-              scrolling="no"
-              src={`https://start26.sptpub.com/tracker.html?eventId=${tracker_id}&sportId=1&lang=vi&liveEvent=true&providers=Betradar`}
-              allowFullScreen
-              title="rindle"
-              style={{
-                border: 0,
-                width: "100%",
-                height: iframeLoaded ? iframeHeight : "0px",
-                borderRadius: "5px",
-              }}
-            ></iframe>
-          ) : (
-            <Image src="/assets/error.png" alt="no-content" className="w-[165px] h-[170px] mr-5" />
-          )}
+          <Image src="/assets/error.png" alt="no-content" className="w-[165px] h-[170px] mr-5" />
           <p className="pt-4 text-xl text-slate-500 font-semibold">Đã xảy ra lỗi</p>
           <span className="pt-2 text-sm text-slate-500 font-semibold">
             Vui lòng đợi trong giây lát hoặc chọn sự kiện khác
