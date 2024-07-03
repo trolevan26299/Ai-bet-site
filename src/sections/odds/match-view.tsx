@@ -23,6 +23,8 @@ export default function MatchView() {
   const [iframeLoaded, setIframeLoaded] = useState(false);
   const [loading, setLoading] = useState(true);
   const [endBet, setEndBet] = useState(false);
+  const [disableBtn, setDisableBtn] = useState(false);
+  const [haveError, setHaveError] = useState(false);
   const [iframeHeight, setIframeHeight] = useState("0px");
   const telegram = useTelegram();
 
@@ -54,14 +56,18 @@ export default function MatchView() {
         const res = await axios.post("/api/odds", payload);
         console.log("response:", res);
         if (
-          (res.data.message.answer === "Invalid match!" ||
-            res.data.message.answer === "Invalid league!" ||
-            res.data.message.answer === "Request or user not found!" ||
-            res.data.message.answer === "Event not found!" ||
-            res.data.length === 0) &&
-          (res.data.message.live_state === null || res.data.message.live_state === "ended")
+          res.data.message.answer === "Invalid match!" ||
+          res.data.message.answer === "Invalid league!" ||
+          res.data.message.answer === "Request or user not found!" ||
+          res.data.message.answer === "Event not found!" ||
+          res.data.message.answer === "Game not found!" ||
+          res.data.length === 0
         ) {
-          setEndBet(true);
+          if (res.data.message.live_state === null || res.data.message.live_state === "ended") {
+            setEndBet(true); // kết thúc trận đấu
+          } else {
+            setDisableBtn(true); // lỗi mà chưa kết thúc trận đấu
+          }
         } else {
           const transformedData = transformData(res.data, lineParam ?? "3");
           setDataScreenInfo(res.data);
@@ -72,8 +78,8 @@ export default function MatchView() {
         telegram.webApp?.isClosingConfirmationEnabled === true;
         telegram.webApp?.onEvent;
       } catch (error: any) {
-        console.log("error:", error);
-        setEndBet(true);
+        console.log("Lỗi không xác định:", error);
+        setHaveError(true);
       } finally {
         setLoading(false);
       }
@@ -115,21 +121,33 @@ export default function MatchView() {
           if (endBet) {
             setEndBet(false);
           }
-        } else {
-          setLatestOdds([]);
-          setEndBet(true);
-          console.log("No new data received or data fetch failed!");
+          if (disableBtn) {
+            setDisableBtn(false);
+          }
+        } else if (
+          newData.data.message.answer === "Invalid match!" ||
+          newData.data.message.answer === "Invalid league!" ||
+          newData.data.message.answer === "Request or user not found!" ||
+          newData.data.message.answer === "Event not found!" ||
+          newData.data.message.answer === "Game not found!" ||
+          newData.data.length === 0
+        ) {
+          if (newData.data.message.live_state === null || newData.data.message.live_state === "ended") {
+            setEndBet(true); // kết thúc trận đấu
+          } else {
+            setDisableBtn(true); // lỗi mà chưa kết thúc trận đấu
+          }
         }
       } catch (error) {
-        setEndBet(true);
-        console.error("Error fetching data:", error);
+        setHaveError(true);
+        console.error("Lỗi không xác định:", error);
       }
     }
 
     const intervalId = setInterval(fetchAndUpdateOdds, 7000);
     return () => clearInterval(intervalId);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [latestOdds, endBet]);
+  }, [latestOdds, endBet, disableBtn]);
   useEffect(() => {
     const handleResize = () => {
       const width = window.innerWidth;
@@ -163,7 +181,7 @@ export default function MatchView() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setIframeLoaded(true);
-    }, 2500); // 1.5 seconds delay
+    }, 2000); // 2 seconds delay
 
     return () => clearTimeout(timer);
   }, []);
@@ -174,11 +192,52 @@ export default function MatchView() {
         <SplashScreen />
       ) : endBet ? (
         <div className="h-[97vh] w-full flex flex-col justify-center items-center">
-          <Image src="/assets/ball.png" alt="no-content" className="w-[165px] h-[170px] mr-5" />
-          <p className="pt-4 text-xl text-slate-500 font-semibold">Không tìm thấy thông tin trận đấu</p>
-          <p className="pt-2 text-base text-slate-500 font-semibold">Trận đấu có thể không tồn tại hoặc đã kết thúc</p>
+          {tracker_id ? (
+            <iframe
+              scrolling="no"
+              src={`https://start26.sptpub.com/tracker.html?eventId=${
+                tracker_id || 45843693
+              }&sportId=1&lang=vi&liveEvent=true&providers=Betradar`}
+              allowFullScreen
+              title="rindle"
+              style={{
+                border: 0,
+                width: "100%",
+                height: iframeLoaded ? iframeHeight : "0px",
+                borderRadius: "5px",
+              }}
+            ></iframe>
+          ) : (
+            <Image src="/assets/ball.png" alt="no-content" className="w-[165px] h-[170px] mr-5" />
+          )}
+          <p className="pt-4 text-xl text-slate-500 font-semibold">Trận đấu đã kết thúc</p>
           <span className="pt-2 text-sm text-slate-500 font-semibold">
             Vui lòng quay lại Telegram và xem các sự kiện khác
+          </span>
+        </div>
+      ) : haveError ? (
+        <div className="h-[97vh] w-full flex flex-col justify-center items-center">
+          {tracker_id ? (
+            <iframe
+              scrolling="no"
+              src={`https://start26.sptpub.com/tracker.html?eventId=${
+                tracker_id || 45843693
+              }&sportId=1&lang=vi&liveEvent=true&providers=Betradar`}
+              allowFullScreen
+              title="rindle"
+              style={{
+                border: 0,
+                width: "100%",
+                height: iframeLoaded ? iframeHeight : "0px",
+                borderRadius: "5px",
+              }}
+            ></iframe>
+          ) : (
+            <Image src="/assets/error.png" alt="no-content" className="w-[165px] h-[170px] mr-5" />
+          )}
+          <p className="pt-4 text-xl text-slate-500 font-semibold">Đã xảy ra lỗi</p>
+          <span className="pt-2 text-sm text-slate-500 font-semibold">
+            Vui lòng đợi trong giây lát hoặc chọn sự kiện khác
           </span>
         </div>
       ) : (
@@ -201,7 +260,7 @@ export default function MatchView() {
               }}
             ></iframe>
 
-            <OddsDetail odds={odds} oddsStatus={oddsStatus} dataScreenInfo={dataScreenInfo} />
+            <OddsDetail odds={odds} oddsStatus={oddsStatus} dataScreenInfo={dataScreenInfo} disableBtn={disableBtn} />
           </div>
           {odds.every((odd) => odd.status === 2) && (
             <div
