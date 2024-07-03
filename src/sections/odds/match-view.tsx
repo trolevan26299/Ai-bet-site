@@ -66,7 +66,7 @@ export default function MatchView() {
           if (res.data?.message?.live_state === null || res.data?.message?.live_state === "ended") {
             setEndBet(true); // kết thúc trận đấu
           } else {
-            setDisableBtn(true); // lỗi mà chưa kết thúc trận đấu
+            setHaveError(true); // lỗi mà chưa kết thúc trận đấu trả về màn hình lỗi
           }
         } else {
           const transformedData = transformData(res.data, lineParam ?? "3");
