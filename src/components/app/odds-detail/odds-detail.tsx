@@ -30,7 +30,7 @@ import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { isIOS } from "react-device-detect";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../../ui/accordion";
-import { DialogOverlay } from "@radix-ui/react-dialog";
+import { DialogOverlay, Dialog as DialogRadix, DialogContent as DialogContentRadix } from "@radix-ui/react-dialog";
 
 export default function OddsDetail({
   odds,
@@ -204,17 +204,17 @@ function RenderAccordion({
 
   if (showErrorConfirm) {
     return (
-      <Dialog open={showErrorConfirm}>
+      <DialogRadix open={showErrorConfirm}>
         <DialogOverlay>
-          <DialogContent>
+          <DialogContentRadix>
             <DialogTitle>Có một giao dịch đang chờ xử lý</DialogTitle>
             <p>Vui lòng thử lại sau.</p>
             <DialogFooter>
               <Button onClick={() => setErrorConfirm(false)}>Đóng</Button>
             </DialogFooter>
-          </DialogContent>
+          </DialogContentRadix>
         </DialogOverlay>
-      </Dialog>
+      </DialogRadix>
     );
   }
   if (isIphone) {
