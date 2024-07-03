@@ -417,7 +417,7 @@ function RenderAccordion({
                 >
                   <div
                     className="grid grid-cols-2 gap-[6px]"
-                    onClick={() => oddsGroup.status !== 2 && setOpenDrawer(true)}
+                    onClick={() => oddsGroup.status !== 2 && disableOdds !== true && setOpenDrawer(true)}
                   >
                     {oddsGroup?.detail?.map((match: any, matchIndex: number) => {
                       return match?.map((team: IOdds, teamIndex: number) => {
