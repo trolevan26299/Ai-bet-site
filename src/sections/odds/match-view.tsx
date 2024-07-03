@@ -194,7 +194,7 @@ export default function MatchView() {
       {loading ? (
         <SplashScreen />
       ) : endBet ? (
-        <div className="h-[97vh] w-full flex flex-col justify-center items-center">
+        <div className="h-[97vh] w-[90%] flex flex-col justify-center items-center">
           {tracker_id ? (
             <iframe
               scrolling="no"
@@ -203,7 +203,7 @@ export default function MatchView() {
               title="rindle"
               style={{
                 border: 0,
-                width: "90%",
+                width: "100%",
                 height: iframeLoaded ? iframeHeight : "0px",
                 borderRadius: "5px",
               }}

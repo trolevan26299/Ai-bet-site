@@ -72,7 +72,7 @@ export default function OddsDetail({
             oddsStatus={oddsStatus}
             onValueChange={handleValueChange}
             dataScreenInfo={dataScreenInfo[0]}
-            disableOdds={true}
+            disableOdds={disableBtn}
           />
         </TabsContent>
 
@@ -85,7 +85,7 @@ export default function OddsDetail({
             oddsStatus={oddsStatus}
             onValueChange={handleValueChange}
             dataScreenInfo={dataScreenInfo[0]}
-            disableOdds={true}
+            disableOdds={disableBtn}
           />
         </TabsContent>
 
@@ -98,7 +98,7 @@ export default function OddsDetail({
             oddsStatus={oddsStatus}
             onValueChange={handleValueChange}
             dataScreenInfo={dataScreenInfo[0]}
-            disableOdds={true}
+            disableOdds={disableBtn}
           />
         </TabsContent>
       </Tabs>
@@ -213,10 +213,7 @@ function RenderAccordion({
   if (showErrorConfirm) {
     return (
       <Dialog open={showErrorConfirm}>
-        <DialogContent
-          onCloseAutoFocus={() => setErrorConfirm(false)}
-          className="sm:max-w-md text-center rounded-sm w-[80%]"
-        >
+        <DialogContent className="sm:max-w-md text-center rounded-sm w-[80%]">
           <DialogHeader>
             <DialogDescription className="pt-5">
               Hiện có giao dịch khác đang được xử lý. Vui lòng thử lại sau giây lát!
