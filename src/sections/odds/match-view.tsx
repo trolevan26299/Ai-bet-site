@@ -211,7 +211,7 @@ export default function MatchView() {
           ) : (
             <Image src="/assets/ball.png" alt="no-content" className="w-[165px] h-[170px] mr-5" />
           )}
-          <p className="pt-4 text-xl text-slate-500 font-semibold">Trận đấu đã kết thúc</p>
+          <p className="pt-2 text-xl text-slate-500 font-semibold">Trận đấu đã kết thúc</p>
           <span className="pt-2 text-sm text-slate-500 font-semibold">
             Vui lòng quay lại Telegram và xem các sự kiện khác
           </span>
