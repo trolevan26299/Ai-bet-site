@@ -54,11 +54,12 @@ export default function MatchView() {
         const res = await axios.post("/api/odds", payload);
         console.log("response:", res);
         if (
-          res.data.message === "Invalid match!" ||
-          res.data.message === "Invalid league!" ||
-          res.data.message === "Request or user not found!" ||
-          res.data.message === "Event not found!" ||
-          res.data.length === 0
+          (res.data.message.answer === "Invalid match!" ||
+            res.data.message.answer === "Invalid league!" ||
+            res.data.message.answer === "Request or user not found!" ||
+            res.data.message.answer === "Event not found!" ||
+            res.data.length === 0) &&
+          (res.data.message.live_state === null || res.data.message.live_state === "ended")
         ) {
           setEndBet(true);
         } else {
@@ -167,30 +168,6 @@ export default function MatchView() {
     return () => clearTimeout(timer);
   }, []);
 
-  useEffect(() => {
-    const ensureDocumentIsScrollable = () => {
-      // Set the document height slightly taller than the viewport to ensure it's always scrollable
-      if (document.documentElement.scrollHeight <= window.innerHeight) {
-        document.documentElement.style.height = "calc(100vh + 1px)";
-      }
-    };
-
-    const preventSwipeToClose = () => {
-      // Prevent the mini app from interpreting swipe down as a close gesture
-      const handleTouchMove = (event: any) => {
-        if (window.scrollY === 0) {
-          event.preventDefault();
-          window.scrollTo(0, 1);
-        }
-      };
-
-      document.addEventListener("touchmove", handleTouchMove);
-      return () => document.removeEventListener("touchmove", handleTouchMove);
-    };
-
-    ensureDocumentIsScrollable();
-    preventSwipeToClose();
-  }, []);
   return (
     <MainLayout>
       {loading ? (
