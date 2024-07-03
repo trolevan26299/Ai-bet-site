@@ -129,7 +129,7 @@ function RenderAccordion({
   const [keyItemSelect, setKeyItemSelect] = useState<number[]>([]);
   const [openDrawer, setOpenDrawer] = useState(false);
   const [openDialog, setOpenDialog] = useState(false);
-  const [showErrorConfirm, setErrorConfirm] = useState(true);
+  const [showErrorConfirm, setErrorConfirm] = useState(false);
 
   const telegram = useTelegram();
   const [animationState, setAnimationState] = useState({
