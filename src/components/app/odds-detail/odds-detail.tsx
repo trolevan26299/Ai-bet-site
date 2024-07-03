@@ -30,6 +30,7 @@ import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { isIOS } from "react-device-detect";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../../ui/accordion";
+import { DialogOverlay } from "@radix-ui/react-dialog";
 
 export default function OddsDetail({
   odds,
@@ -120,6 +121,7 @@ function RenderAccordion({
   const [keyItemSelect, setKeyItemSelect] = useState<number[]>([]);
   const [openDrawer, setOpenDrawer] = useState(false);
   const [openDialog, setOpenDialog] = useState(false);
+  const [showErrorConfirm, setErrorConfirm] = useState(false);
 
   const telegram = useTelegram();
   const [animationState, setAnimationState] = useState({
@@ -162,7 +164,7 @@ function RenderAccordion({
       setDisableBtn(true);
       telegram?.webApp?.close();
     } else {
-      console.log("có giao dịch đang xử lý vui lòng thử lại");
+      setErrorConfirm(true);
     }
   };
 
@@ -171,7 +173,6 @@ function RenderAccordion({
     setValueSelectNew(undefined);
     const keyArray = statusKey.split("-")?.map(Number);
     setKeyItemSelect(keyArray);
-    // setStatusKey(statusKey);
     setOddsName(oddsName);
   };
   useEffect(() => {
@@ -201,6 +202,19 @@ function RenderAccordion({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [oddsStatus]);
 
+  if (showErrorConfirm) {
+    return (
+      <DialogOverlay>
+        <DialogContent>
+          <DialogTitle>Có một giao dịch đang chờ xử lý</DialogTitle>
+          <p>Vui lòng thử lại sau.</p>
+          <DialogFooter>
+            <Button onClick={() => setErrorConfirm(false)}>Đóng</Button>
+          </DialogFooter>
+        </DialogContent>
+      </DialogOverlay>
+    );
+  }
   if (isIphone) {
     return (
       <Dialog open={openDialog}>
