@@ -72,7 +72,7 @@ export default function OddsDetail({
             oddsStatus={oddsStatus}
             onValueChange={handleValueChange}
             dataScreenInfo={dataScreenInfo[0]}
-            disableOdds={disableBtn}
+            disableOdds={true}
           />
         </TabsContent>
 
@@ -85,7 +85,7 @@ export default function OddsDetail({
             oddsStatus={oddsStatus}
             onValueChange={handleValueChange}
             dataScreenInfo={dataScreenInfo[0]}
-            disableOdds={disableBtn}
+            disableOdds={true}
           />
         </TabsContent>
 
@@ -98,7 +98,7 @@ export default function OddsDetail({
             oddsStatus={oddsStatus}
             onValueChange={handleValueChange}
             dataScreenInfo={dataScreenInfo[0]}
-            disableOdds={disableBtn}
+            disableOdds={true}
           />
         </TabsContent>
       </Tabs>
