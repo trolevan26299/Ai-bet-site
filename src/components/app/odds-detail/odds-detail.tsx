@@ -129,7 +129,7 @@ function RenderAccordion({
   const [keyItemSelect, setKeyItemSelect] = useState<number[]>([]);
   const [openDrawer, setOpenDrawer] = useState(false);
   const [openDialog, setOpenDialog] = useState(false);
-  const [showErrorConfirm, setErrorConfirm] = useState(true);
+  const [showErrorConfirm, setErrorConfirm] = useState(false);
 
   const telegram = useTelegram();
   const [animationState, setAnimationState] = useState({
@@ -210,9 +210,9 @@ function RenderAccordion({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [oddsStatus]);
 
-  if (showErrorConfirm === true) {
+  if (showErrorConfirm) {
     return (
-      <Dialog open={showErrorConfirm === true}>
+      <Dialog open={showErrorConfirm}>
         <DialogContent className="sm:max-w-md text-center rounded-sm w-[80%]">
           <DialogHeader>
             <DialogDescription className="pt-5">
