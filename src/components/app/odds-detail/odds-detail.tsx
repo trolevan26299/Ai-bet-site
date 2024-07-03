@@ -215,7 +215,7 @@ function RenderAccordion({
       <Dialog open={showErrorConfirm}>
         <DialogContent className="sm:max-w-md text-center rounded-sm w-[80%] bg-backgroundColor-main text-text-main">
           <DialogHeader>
-            <DialogDescription className="pt-5">
+            <DialogDescription className="py-4 text-text-main text-[15px]">
               Hiện có giao dịch khác đang được xử lý. Vui lòng thử lại sau giây lát!
             </DialogDescription>
           </DialogHeader>
