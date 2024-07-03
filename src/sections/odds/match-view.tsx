@@ -203,7 +203,7 @@ export default function MatchView() {
               title="rindle"
               style={{
                 border: 0,
-                width: "100%",
+                width: "90%",
                 height: iframeLoaded ? iframeHeight : "0px",
                 borderRadius: "5px",
               }}
