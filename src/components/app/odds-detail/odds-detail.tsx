@@ -72,7 +72,7 @@ export default function OddsDetail({
             oddsStatus={oddsStatus}
             onValueChange={handleValueChange}
             dataScreenInfo={dataScreenInfo[0]}
-            disableOdds={true}
+            disableOdds={disableBtn}
           />
         </TabsContent>
 
@@ -85,7 +85,7 @@ export default function OddsDetail({
             oddsStatus={oddsStatus}
             onValueChange={handleValueChange}
             dataScreenInfo={dataScreenInfo[0]}
-            disableOdds={true}
+            disableOdds={disableBtn}
           />
         </TabsContent>
 
@@ -98,7 +98,7 @@ export default function OddsDetail({
             oddsStatus={oddsStatus}
             onValueChange={handleValueChange}
             dataScreenInfo={dataScreenInfo[0]}
-            disableOdds={true}
+            disableOdds={disableBtn}
           />
         </TabsContent>
       </Tabs>
@@ -129,7 +129,7 @@ function RenderAccordion({
   const [keyItemSelect, setKeyItemSelect] = useState<number[]>([]);
   const [openDrawer, setOpenDrawer] = useState(false);
   const [openDialog, setOpenDialog] = useState(false);
-  const [showErrorConfirm, setErrorConfirm] = useState(false);
+  const [showErrorConfirm, setErrorConfirm] = useState(true);
 
   const telegram = useTelegram();
   const [animationState, setAnimationState] = useState({
