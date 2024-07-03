@@ -10,7 +10,7 @@ import { transformData } from "@/utils/transformDataOdds";
 import axios from "axios";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { isIOS } from "react-device-detect";
 
 export default function MatchView() {
@@ -76,7 +76,6 @@ export default function MatchView() {
         }
         telegram.webApp?.expand();
         telegram.webApp?.isClosingConfirmationEnabled === true;
-        telegram.webApp?.onEvent;
       } catch (error: any) {
         console.log("Lỗi không xác định:", error);
         setHaveError(true);

@@ -213,7 +213,7 @@ function RenderAccordion({
   if (showErrorConfirm) {
     return (
       <Dialog open={showErrorConfirm}>
-        <DialogContent className="sm:max-w-md text-center rounded-sm w-[80%]">
+        <DialogContent className="sm:max-w-md text-center rounded-sm w-[80%] bg-backgroundColor-main text-text-main">
           <DialogHeader>
             <DialogDescription className="pt-5">
               Hiện có giao dịch khác đang được xử lý. Vui lòng thử lại sau giây lát!
@@ -239,7 +239,7 @@ function RenderAccordion({
                 <DialogTriggerGame
                   asChild
                   onClick={() => {
-                    if (oddsGroup.status !== 2 && disableOdds !== true) {
+                    if (oddsGroup.status !== 2 && !disableOdds) {
                       setOpenDialog(true);
                     }
                   }}
@@ -439,14 +439,14 @@ function RenderAccordion({
                 <DrawerTrigger
                   asChild
                   onClick={() => {
-                    if (oddsGroup.status !== 2 && disableOdds !== true) {
+                    if (oddsGroup.status !== 2 && !disableOdds) {
                       setOpenDrawer(true);
                     }
                   }}
                 >
                   <div
                     className="grid grid-cols-2 gap-[6px]"
-                    onClick={() => oddsGroup.status !== 2 && disableOdds !== true && setOpenDrawer(true)}
+                    onClick={() => oddsGroup.status !== 2 && !disableOdds && setOpenDrawer(true)}
                   >
                     {oddsGroup?.detail?.map((match: any, matchIndex: number) => {
                       return match?.map((team: IOdds, teamIndex: number) => {
