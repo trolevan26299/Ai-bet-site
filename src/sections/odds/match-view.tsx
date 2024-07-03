@@ -61,7 +61,7 @@ export default function MatchView() {
           res.data?.message?.answer === "Request or user not found!" ||
           res.data?.message?.answer === "Event not found!" ||
           res.data?.message?.answer === "Game not found!" ||
-          res.data.length === 0
+          res.data?.length === 0
         ) {
           if (res.data?.message?.live_state === null || res.data?.message?.live_state === "ended") {
             setEndBet(true); // kết thúc trận đấu
@@ -93,7 +93,7 @@ export default function MatchView() {
     async function fetchAndUpdateOdds() {
       try {
         const newData = await axios.post("/api/odds", payload);
-        if (newData && newData.data.length > 0) {
+        if (newData && newData.data?.length > 0) {
           const transformedData = transformData(newData.data, lineParam ?? "3");
           setOdds(latestOdds.length > 0 ? latestOdds : (transformedData as unknown as IOddsDetail[]));
           setDataScreenInfo(newData.data);
@@ -130,7 +130,7 @@ export default function MatchView() {
           newData.data?.message?.answer === "Request or user not found!" ||
           newData.data?.message?.answer === "Event not found!" ||
           newData.data?.message?.answer === "Game not found!" ||
-          newData.data.length === 0
+          newData.data?.length === 0
         ) {
           if (newData.data?.message?.live_state === null || newData.data?.message?.live_state === "ended") {
             setEndBet(true); // kết thúc trận đấu
