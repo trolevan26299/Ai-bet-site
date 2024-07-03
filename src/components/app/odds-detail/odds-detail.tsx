@@ -161,6 +161,8 @@ function RenderAccordion({
     if ("ok" in response.data) {
       setDisableBtn(true);
       telegram?.webApp?.close();
+    } else {
+      console.log("có giao dịch đang xử lý vui lòng thử lại");
     }
   };
 
@@ -432,7 +434,7 @@ function RenderAccordion({
                                 <svg
                                   width="10"
                                   height="10"
-                                  fill={`${isDisabled ? "rgba(123,105,66,1)" : "#ffc13b"}`}
+                                  fill={`${isDisabled || disableOdds ? "rgba(123,105,66,1)" : "#ffc13b"}`}
                                   viewBox="0 0 24 24"
                                 >
                                   <polygon points="12 2 15 9 22 9 17 14 19 21 12 17 5 21 7 14 2 9 9 9" />
@@ -463,7 +465,7 @@ function RenderAccordion({
                                   maskImage: "linear-gradient(90deg, rgba(0, 0, 0, 1) 80%, rgba(0, 0, 0, 0) 100%)",
                                 }}
                                 className={`col-span-9 text-sm font-medium ${
-                                  isDisabled ? "text-[rgba(74,86,100,1)]" : "text-[rgba(157,163,177,1)]"
+                                  isDisabled || disableOdds ? "text-[rgba(74,86,100,1)]" : "text-[rgba(157,163,177,1)]"
                                 } overflow-hidden whitespace-nowrap`}
                               >
                                 {`(${team.rate_odds})`} {team.name}
@@ -473,10 +475,10 @@ function RenderAccordion({
                                   <span
                                     className={`${
                                       team.value >= 0
-                                        ? isDisabled
+                                        ? isDisabled || disableOdds
                                           ? "text-[rgba(46,89,57,1)]"
                                           : "text-text-green w-12"
-                                        : isDisabled
+                                        : isDisabled || disableOdds
                                         ? "text-[rgba(121,61,58,1)]"
                                         : "text-text-red w-12"
                                     } `}
