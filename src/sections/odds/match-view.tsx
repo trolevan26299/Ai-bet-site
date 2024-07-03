@@ -240,19 +240,20 @@ export default function MatchView() {
         <>
           <div className="p-3 pb-6 h-full">
             <ScreenInfoMatch dataScreenInfo={dataScreenInfo} />
-
-            <iframe
-              scrolling="no"
-              src={`https://start26.sptpub.com/tracker.html?eventId=${tracker_id}&sportId=1&lang=vi&liveEvent=true&providers=Betradar`}
-              allowFullScreen
-              title="rindle"
-              style={{
-                border: 0,
-                width: "100%",
-                height: iframeLoaded ? iframeHeight : "0px",
-                borderRadius: "5px",
-              }}
-            ></iframe>
+            {tracker_id && (
+              <iframe
+                scrolling="no"
+                src={`https://start26.sptpub.com/tracker.html?eventId=${tracker_id}&sportId=1&lang=vi&liveEvent=true&providers=Betradar`}
+                allowFullScreen
+                title="rindle"
+                style={{
+                  border: 0,
+                  width: "100%",
+                  height: iframeLoaded ? iframeHeight : "0px",
+                  borderRadius: "5px",
+                }}
+              ></iframe>
+            )}
 
             <OddsDetail odds={odds} oddsStatus={oddsStatus} dataScreenInfo={dataScreenInfo} disableBtn={disableBtn} />
           </div>
