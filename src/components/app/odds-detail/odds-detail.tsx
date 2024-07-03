@@ -212,7 +212,7 @@ function RenderAccordion({
                 <DialogTrigger
                   asChild
                   onClick={() => {
-                    if (oddsGroup.status !== 2) {
+                    if (oddsGroup.status !== 2 || !disableOdds) {
                       setOpenDialog(true);
                     }
                   }}
@@ -226,7 +226,7 @@ function RenderAccordion({
                           <div
                             className="text-primary-foreground p-2 h-10 text-xs relative bg-[#28374a] rounded-[10px]"
                             key={teamIndex}
-                            onClick={() => !disableOdds && handleSelectTeam(statusKey, team, oddsGroup.name_Odds)}
+                            onClick={() => handleSelectTeam(statusKey, team, oddsGroup.name_Odds)}
                           >
                             {team.altLineId === 0 && (
                               <div className="absolute top-[2px] left-[2px]">
@@ -410,7 +410,7 @@ function RenderAccordion({
                 <DrawerTrigger
                   asChild
                   onClick={() => {
-                    if (oddsGroup.status !== 2) {
+                    if (oddsGroup.status !== 2 || !disableOdds) {
                       setOpenDrawer(true);
                     }
                   }}
