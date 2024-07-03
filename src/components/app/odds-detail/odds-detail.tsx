@@ -30,7 +30,15 @@ import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { isIOS } from "react-device-detect";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../../ui/accordion";
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 
 export default function OddsDetail({
   odds,
@@ -205,10 +213,19 @@ function RenderAccordion({
   if (showErrorConfirm) {
     return (
       <Dialog open={showErrorConfirm}>
-        <DialogContent className="sm:max-w-md text-center rounded-sm">
+        <DialogContent className="sm:max-w-md text-center rounded-sm w-[80%]">
           <DialogHeader>
-            <DialogTitle>Hiện có giao dịch khác đang được xử lý. Vui lòng thử lại sau giây lát!</DialogTitle>
+            <DialogDescription>
+              Hiện có giao dịch khác đang được xử lý. Vui lòng thử lại sau giây lát!
+            </DialogDescription>
           </DialogHeader>
+          <DialogFooter className="sm:justify-start">
+            <DialogClose asChild>
+              <Button type="button" variant="secondary">
+                Close
+              </Button>
+            </DialogClose>
+          </DialogFooter>
         </DialogContent>
       </Dialog>
     );
