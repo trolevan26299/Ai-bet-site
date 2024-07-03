@@ -124,6 +124,9 @@ export default function MatchView() {
           if (disableBtn) {
             setDisableBtn(false);
           }
+          if (haveError) {
+            setHaveError(false);
+          }
         } else if (
           newData.data?.message?.answer === "Invalid match!" ||
           newData.data?.message?.answer === "Invalid league!" ||
