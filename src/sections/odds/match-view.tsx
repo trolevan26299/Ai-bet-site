@@ -194,7 +194,7 @@ export default function MatchView() {
       {loading ? (
         <SplashScreen />
       ) : endBet ? (
-        <div className="h-[97vh] w-[90%] flex flex-col justify-center items-center">
+        <div className="h-[97vh] w-[90%] flex flex-col justify-center items-center mx-auto">
           {tracker_id ? (
             <iframe
               scrolling="no"
