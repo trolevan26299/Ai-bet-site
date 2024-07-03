@@ -206,7 +206,7 @@ function RenderAccordion({
     return (
       <DialogRadix open={showErrorConfirm}>
         <DialogOverlay>
-          <DialogContentRadix>
+          <DialogContentRadix className="w-[80%]">
             <DialogTitle>Có một giao dịch đang chờ xử lý</DialogTitle>
             <p>Vui lòng thử lại sau.</p>
             <DialogFooter>
