@@ -70,7 +70,7 @@ export default function MatchView() {
           }
         } else {
           const transformedData = transformData(res.data, lineParam ?? "3");
-          setDataScreenInfo(res.data);
+          setDataScreenInfo(res?.data);
           setOdds(transformedData as unknown as IOddsDetail[]);
           setLatestOdds(transformedData as unknown as IOddsDetail[]);
         }
@@ -93,18 +93,18 @@ export default function MatchView() {
       try {
         const newData = await axios.post("/api/odds", payload);
         if (newData && newData.data?.length > 0) {
-          const transformedData = transformData(newData.data, lineParam ?? "3");
-          setOdds(latestOdds.length > 0 ? latestOdds : (transformedData as unknown as IOddsDetail[]));
-          setDataScreenInfo(newData.data);
+          const transformedData = transformData(newData?.data, lineParam ?? "3");
+          setOdds(latestOdds?.length > 0 ? latestOdds : (transformedData as unknown as IOddsDetail[]));
+          setDataScreenInfo(newData?.data);
           setLatestOdds(transformedData as unknown as IOddsDetail[]);
 
           const newOddsStatus: OddsStatusType = {};
           latestOdds?.forEach((latestOdd, index) => {
-            latestOdd.detail?.forEach((latestDetail, detailIndex) => {
+            latestOdd?.detail?.forEach((latestDetail, detailIndex) => {
               latestDetail?.forEach((latestOddDetail, oddDetailIndex) => {
                 const key = `${index}-${detailIndex}-${oddDetailIndex}`;
                 const oldValue = odds[index]?.detail[detailIndex][oddDetailIndex]?.value;
-                const newValue = latestOddDetail.value;
+                const newValue = latestOddDetail?.value;
                 if (newValue > oldValue) {
                   newOddsStatus[key] = "green";
                 } else if (newValue < oldValue) {
@@ -216,11 +216,26 @@ export default function MatchView() {
           </span>
         </div>
       ) : haveError ? (
-        <div className="h-[97vh] w-full flex flex-col justify-center items-center">
-          <Image src="/assets/error.png" alt="no-content" className="w-[165px] h-[170px] mr-5" />
-          <p className="pt-4 text-xl text-slate-500 font-semibold">Đã xảy ra lỗi</p>
+        <div className="h-[97vh] w-[90%] flex flex-col justify-center items-center mx-auto">
+          {tracker_id ? (
+            <iframe
+              scrolling="no"
+              src={`https://start26.sptpub.com/tracker.html?eventId=${tracker_id}&sportId=1&lang=vi&liveEvent=true&providers=Betradar`}
+              allowFullScreen
+              title="rindle"
+              style={{
+                border: 0,
+                width: "100%",
+                height: iframeLoaded ? iframeHeight : "0px",
+                borderRadius: "5px",
+              }}
+            ></iframe>
+          ) : (
+            <Image src="/assets/ball.png" alt="no-content" className="w-[165px] h-[170px] mr-5" />
+          )}
+          <p className="pt-4 text-xl text-slate-500 font-semibold">Không tìm thấy thông tin trận đấu</p>
           <span className="pt-2 text-sm text-slate-500 font-semibold">
-            Vui lòng đợi trong giây lát hoặc chọn sự kiện khác
+            Trận đấu bị gián đoạn hoặc đã kết thúc. Vui lòng thử lại trong giây lát hoặc chọn trận đấu khác.
           </span>
         </div>
       ) : (

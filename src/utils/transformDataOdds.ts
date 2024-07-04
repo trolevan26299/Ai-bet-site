@@ -3,12 +3,16 @@ import { IBetDetail, IMatchData } from "@/types/odds.types";
 export const transformData = (data: IMatchData[], line: string) => {
   return data
     ?.map((item: IMatchData) => {
-      const keoChinhToanTran = item.bets.spreads.find((bet: IBetDetail) => bet.number === 0 && bet.altLineId === 0);
-      const keoChinhHiep1 = item.bets.spreads.find((bet: IBetDetail) => bet.number === 1 && bet.altLineId === 0);
-      const keoChinhTaiXiuToanTran = item.bets.totals.find(
-        (bet: IBetDetail) => bet.number === 0 && bet.altLineId === 0
+      const keoChinhToanTran = item?.bets?.spreads?.find(
+        (bet: IBetDetail) => bet?.number === 0 && bet?.altLineId === 0
       );
-      const keoChinhTaiXiuHiep1 = item.bets.totals.find((bet: IBetDetail) => bet.number === 1 && bet.altLineId === 0);
+      const keoChinhHiep1 = item?.bets?.spreads?.find((bet: IBetDetail) => bet?.number === 1 && bet?.altLineId === 0);
+      const keoChinhTaiXiuToanTran = item?.bets?.totals.find(
+        (bet: IBetDetail) => bet?.number === 0 && bet?.altLineId === 0
+      );
+      const keoChinhTaiXiuHiep1 = item?.bets?.totals.find(
+        (bet: IBetDetail) => bet?.number === 1 && bet?.altLineId === 0
+      );
 
       // Hàm helper để lấy ra kèo cược dựa vào số lượng hàng yêu cầu
       const filterBets = (
@@ -24,126 +28,128 @@ export const transformData = (data: IMatchData[], line: string) => {
         return bets
           .filter((bet: IBetDetail) => {
             // Xác định kèo dựa trên loại kèo chính
-            const mainValue = betType === "spreads" ? mainBet.hdp : mainBet.points;
-            const betValue = betType === "spreads" ? bet.hdp : bet.points;
+            const mainValue = betType === "spreads" ? mainBet?.hdp : mainBet?.points;
+            const betValue = betType === "spreads" ? bet?.hdp : bet?.points;
 
             return (
-              bet.number === mainBet.number && // Kiểm tra số của kèo
+              bet?.number === mainBet?.number && // Kiểm tra số của kèo
               ((mainValue !== undefined && betValue !== undefined && Math.abs(betValue - mainValue) <= range * 0.25) ||
-                bet.altLineId === 0)
+                bet?.altLineId === 0)
             ); // So sánh khoảng cách và lấy kèo chính
           })
           .slice(0, num); // Giới hạn số lượng kèo trả về
       };
 
-      const spreadsToanTran = filterBets(item.bets.spreads, keoChinhToanTran, Number(line), "spreads");
-      const spreadsHiep1 = filterBets(item.bets.spreads, keoChinhHiep1, Number(line), "spreads");
-      const totalTaiXiuToanTran = filterBets(item.bets.totals, keoChinhTaiXiuToanTran, Number(line), "totals");
-      const totalTaiXiuHiep1 = filterBets(item.bets.totals, keoChinhTaiXiuHiep1, Number(line), "totals");
+      const spreadsToanTran = filterBets(item?.bets?.spreads, keoChinhToanTran, Number(line), "spreads");
+      const spreadsHiep1 = filterBets(item?.bets?.spreads, keoChinhHiep1, Number(line), "spreads");
+      const totalTaiXiuToanTran = filterBets(item?.bets?.totals, keoChinhTaiXiuToanTran, Number(line), "totals");
+      const totalTaiXiuHiep1 = filterBets(item?.bets?.totals, keoChinhTaiXiuHiep1, Number(line), "totals");
 
       const result = [];
 
-      if (spreadsToanTran && spreadsToanTran.length > 0) {
+      if (spreadsToanTran && spreadsToanTran?.length > 0) {
         result.push({
           name_Odds: "Kèo cược chấp - Toàn trận",
           status: keoChinhToanTran?.status,
           detail: spreadsToanTran.map((spread: IBetDetail) => [
             {
-              name: item.home,
-              rate_odds: spread.hdp,
-              value: spread.home,
-              game_orientation: item.home,
-              eventId: spread.eventId,
-              lineId: spread.lineId,
-              altLineId: spread.altLineId,
+              name: item?.home,
+              rate_odds: spread?.hdp,
+              value: spread?.home,
+              game_orientation: item?.home,
+              eventId: spread?.eventId,
+              lineId: spread?.lineId,
+              altLineId: spread?.altLineId,
             },
             {
-              name: item.away,
-              rate_odds: spread.hdp === 0 ? 0 : spread.hdp ?? 0 >= 0 ? -(spread.hdp ?? 0) : Math.abs(spread.hdp ?? 0),
-              value: spread.away,
-              game_orientation: item.away,
-              eventId: spread.eventId,
-              lineId: spread.lineId,
-              altLineId: spread.altLineId,
+              name: item?.away,
+              rate_odds:
+                spread?.hdp === 0 ? 0 : spread?.hdp ?? 0 >= 0 ? -(spread?.hdp ?? 0) : Math.abs(spread?.hdp ?? 0),
+              value: spread?.away,
+              game_orientation: item?.away,
+              eventId: spread?.eventId,
+              lineId: spread?.lineId,
+              altLineId: spread?.altLineId,
             },
           ]),
         });
       }
-      if (spreadsHiep1 && spreadsHiep1.length > 0) {
+      if (spreadsHiep1 && spreadsHiep1?.length > 0) {
         result.push({
           name_Odds: "Kèo cược chấp - Hiệp 1",
           status: keoChinhHiep1?.status,
-          detail: spreadsHiep1.map((spread: IBetDetail) => [
+          detail: spreadsHiep1?.map((spread: IBetDetail) => [
             {
-              name: item.home,
-              rate_odds: spread.hdp,
-              value: spread.home,
-              game_orientation: item.home,
-              eventId: spread.eventId,
-              lineId: spread.lineId,
-              altLineId: spread.altLineId,
+              name: item?.home,
+              rate_odds: spread?.hdp,
+              value: spread?.home,
+              game_orientation: item?.home,
+              eventId: spread?.eventId,
+              lineId: spread?.lineId,
+              altLineId: spread?.altLineId,
             },
             {
-              name: item.away,
-              rate_odds: spread.hdp === 0 ? 0 : spread.hdp ?? 0 >= 0 ? -(spread.hdp ?? 0) : Math.abs(spread.hdp ?? 0),
-              value: spread.away,
-              game_orientation: item.away,
-              eventId: spread.eventId,
-              lineId: spread.lineId,
-              altLineId: spread.altLineId,
+              name: item?.away,
+              rate_odds:
+                spread?.hdp === 0 ? 0 : spread?.hdp ?? 0 >= 0 ? -(spread?.hdp ?? 0) : Math.abs(spread?.hdp ?? 0),
+              value: spread?.away,
+              game_orientation: item?.away,
+              eventId: spread?.eventId,
+              lineId: spread?.lineId,
+              altLineId: spread?.altLineId,
             },
           ]),
         });
       }
 
-      if (totalTaiXiuToanTran && totalTaiXiuToanTran.length > 0) {
+      if (totalTaiXiuToanTran && totalTaiXiuToanTran?.length > 0) {
         result.push({
           name_Odds: "Kèo tài xỉu - Toàn trận",
           status: keoChinhTaiXiuToanTran?.status,
-          detail: totalTaiXiuToanTran.map((total: IBetDetail) => [
+          detail: totalTaiXiuToanTran?.map((total: IBetDetail) => [
             {
               name: "Tài",
-              rate_odds: total.points,
-              value: total.over,
+              rate_odds: total?.points,
+              value: total?.over,
               game_orientation: "over",
-              eventId: total.eventId,
-              lineId: total.lineId,
-              altLineId: total.altLineId,
+              eventId: total?.eventId,
+              lineId: total?.lineId,
+              altLineId: total?.altLineId,
             },
             {
               name: "Xỉu",
-              rate_odds: total.points,
-              value: total.under,
+              rate_odds: total?.points,
+              value: total?.under,
               game_orientation: "under",
-              eventId: total.eventId,
-              lineId: total.lineId,
-              altLineId: total.altLineId,
+              eventId: total?.eventId,
+              lineId: total?.lineId,
+              altLineId: total?.altLineId,
             },
           ]),
         });
       }
-      if (totalTaiXiuHiep1 && totalTaiXiuHiep1.length > 0) {
+      if (totalTaiXiuHiep1 && totalTaiXiuHiep1?.length > 0) {
         result.push({
           name_Odds: "Kèo tài xỉu - Hiệp 1",
           status: keoChinhTaiXiuHiep1?.status,
-          detail: totalTaiXiuHiep1.map((total: IBetDetail) => [
+          detail: totalTaiXiuHiep1?.map((total: IBetDetail) => [
             {
               name: "Tài",
-              rate_odds: total.points,
-              value: total.over,
+              rate_odds: total?.points,
+              value: total?.over,
               game_orientation: "over",
-              eventId: total.eventId,
-              lineId: total.lineId,
-              altLineId: total.altLineId,
+              eventId: total?.eventId,
+              lineId: total?.lineId,
+              altLineId: total?.altLineId,
             },
             {
               name: "Xỉu",
-              rate_odds: total.points,
-              value: total.under,
+              rate_odds: total?.points,
+              value: total?.under,
               game_orientation: "under",
-              eventId: total.eventId,
-              lineId: total.lineId,
-              altLineId: total.altLineId,
+              eventId: total?.eventId,
+              lineId: total?.lineId,
+              altLineId: total?.altLineId,
             },
           ]),
         });
