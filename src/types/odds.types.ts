@@ -16,7 +16,7 @@ export type IBetDetail = {
 export type IBet = {
   spreads: IBetDetail[];
   totals: IBetDetail[];
-  moneylines: IBetDetail[];
+  moneyline: IBetDetail[];
 };
 
 export type IMatchData = {

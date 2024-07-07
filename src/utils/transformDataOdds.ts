@@ -20,7 +20,7 @@ export const transformData = (data: IMatchData[], line: string) => {
       const keoChinhTaiXiu10Pen = item?.bets?.totals?.find(
         (bet: IBetDetail) => bet?.number === 7 && bet?.altLineId === 0
       );
-      const keoChinh1X2Pen = item?.bets?.moneylines?.find(
+      const keoChinh1X2Pen = item?.bets?.moneyline?.find(
         (bet: IBetDetail) => bet?.number === 6 && bet?.altLineId === 0
       );
       // Hàm helper để lấy ra kèo cược dựa vào số lượng hàng yêu cầu
@@ -56,7 +56,7 @@ export const transformData = (data: IMatchData[], line: string) => {
       const totalTaiXiuHiep1 = filterBets(item?.bets?.totals, keoChinhTaiXiuHiep1, Number(line), "totals");
       const totalTaiXiuHiepPhu = filterBets(item?.bets?.totals, keoChinhTaiXiuHiepPhu, Number(line), "totals");
       const totalTaiXiu10Pen = filterBets(item?.bets?.totals, keoChinhTaiXiu10Pen, Number(line), "totals");
-      const moneyLine1x2Pen = filterBets(item?.bets?.moneylines, keoChinh1X2Pen, Number(line), "moneylines");
+      const moneyLine1x2Pen = filterBets(item?.bets?.moneyline, keoChinh1X2Pen, Number(line), "moneylines");
 
       const result = [];
 
