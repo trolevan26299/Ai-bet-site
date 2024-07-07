@@ -1,14 +1,12 @@
 /* eslint-disable @next/next/next-script-for-ga */
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import { Theme } from "@radix-ui/themes";
-import "./globals.css";
-import "@radix-ui/themes/styles.css";
 import { MotionLazy } from "@/components/animate/motion-lazy";
-import { TelegramProvider } from "@/context/telegram.provider";
-import Script from "next/script";
 import { GOOGLE_ANALYTICS_ID, GOOGLE_TAG_MANAGER_ID } from "@/config-global";
-import Head from "next/head";
+import { TelegramProvider } from "@/context/telegram.provider";
+import { Theme } from "@radix-ui/themes";
+import "@radix-ui/themes/styles.css";
+import { Inter } from "next/font/google";
+import Script from "next/script";
+import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
