@@ -219,6 +219,31 @@ export const transformData = (data: IMatchData[], line: string) => {
           ]),
         });
       }
+      if (moneyLine1x2Pen && moneyLine1x2Pen?.length > 0) {
+        result.push({
+          name_Odds: "Kèo 1X2 - Luân lưu",
+          status: keoChinh1X2Pen?.status,
+          detail: moneyLine1x2Pen?.map((spread: IBetDetail) => [
+            {
+              name: item?.home,
+              value: spread?.home,
+              game_orientation: item?.home,
+              eventId: spread?.eventId,
+              lineId: spread?.lineId,
+              altLineId: spread?.altLineId,
+            },
+            {
+              name: item?.away,
+              value: spread?.away,
+              game_orientation: item?.away,
+              eventId: spread?.eventId,
+              lineId: spread?.lineId,
+              altLineId: spread?.altLineId,
+            },
+          ]),
+        });
+      }
+
       if (totalTaiXiu10Pen && totalTaiXiu10Pen?.length > 0) {
         result.push({
           name_Odds: "Kèo tài xỉu - Luân lưu 10 quả",
@@ -241,30 +266,6 @@ export const transformData = (data: IMatchData[], line: string) => {
               eventId: total?.eventId,
               lineId: total?.lineId,
               altLineId: total?.altLineId,
-            },
-          ]),
-        });
-      }
-      if (moneyLine1x2Pen && moneyLine1x2Pen?.length > 0) {
-        result.push({
-          name_Odds: "Kèo 1X2 - Luân lưu",
-          status: keoChinh1X2Pen?.status,
-          detail: moneyLine1x2Pen?.map((spread: IBetDetail) => [
-            {
-              name: item?.home,
-              value: spread?.home,
-              game_orientation: item?.home,
-              eventId: spread?.eventId,
-              lineId: spread?.lineId,
-              altLineId: spread?.altLineId,
-            },
-            {
-              name: item?.away,
-              value: spread?.away,
-              game_orientation: item?.away,
-              eventId: spread?.eventId,
-              lineId: spread?.lineId,
-              altLineId: spread?.altLineId,
             },
           ]),
         });
