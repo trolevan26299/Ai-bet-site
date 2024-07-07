@@ -32,8 +32,16 @@ const HistoryItem = ({ dataDetail, type }: { dataDetail: IHistoryBet; type?: str
             )}
             <p className="text-sm text-text-main font-semibold ">
               {dataDetail.sportId === 29 ? "Bóng đá" : "Game"} / {dataDetail.isLive === "TRUE" ? "Trực tiếp" : ""}{" "}
-              {dataDetail.periodNumber === 0 ? "Toàn trận" : dataDetail.periodNumber === 1 ? "Hiệp 1" : "Hiệp phụ"} -{" "}
-              {dataDetail.betType === "TOTAL_POINTS" ? "Tài xỉu" : "Cược chấp"}
+              {dataDetail.periodNumber === 0
+                ? "Toàn trận"
+                : dataDetail.periodNumber === 1
+                ? "Hiệp 1"
+                : dataDetail.periodNumber === 3
+                ? "Hiệp phụ"
+                : dataDetail.periodNumber === 6
+                ? "Luân lưu"
+                : "Luân lưu 10 quả"}{" "}
+              - {dataDetail.betType === "TOTAL_POINTS" ? "Tài xỉu" : "Cược chấp"}
             </p>
           </div>
         </div>
@@ -42,23 +50,28 @@ const HistoryItem = ({ dataDetail, type }: { dataDetail: IHistoryBet; type?: str
             <p className="text-text-main" style={{ maxWidth: "40%" }}>
               {dataDetail.betType === "SPREAD" ? dataDetail.teamName : dataDetail.side === "OVER" ? "Tài" : "Xỉu"}
             </p>
-            <p
-              className={`${
-                dataDetail.handicap > 0
-                  ? "text-[#34c759]"
-                  : dataDetail.handicap < 0
-                  ? "text-[#ff453a]"
-                  : "text-text-main"
-              }`}
-            >
-              {dataDetail.handicap > 0 ? "+" : ""}
-              {dataDetail.handicap}
-            </p>
-            {dataDetail.team1Score !== undefined && dataDetail.team2Score !== undefined && (
-              <p className="text-text-main">
-                {`[${dataDetail.team1Score?.toString()} - ${dataDetail.team2Score?.toString()}]`}{" "}
+            {dataDetail.periodNumber !== 6 && (
+              <p
+                className={`${
+                  dataDetail.handicap > 0
+                    ? "text-[#34c759]"
+                    : dataDetail.handicap < 0
+                    ? "text-[#ff453a]"
+                    : "text-text-main"
+                }`}
+              >
+                {dataDetail.handicap > 0 ? "+" : ""}
+                {dataDetail.handicap}
               </p>
             )}
+
+            {dataDetail.team1Score !== undefined &&
+              dataDetail.team2Score !== undefined &&
+              dataDetail.periodNumber !== 6 && (
+                <p className="text-text-main">
+                  {`[${dataDetail.team1Score?.toString()} - ${dataDetail.team2Score?.toString()}]`}{" "}
+                </p>
+              )}
             <p className="text-text-main">@</p>
             <p className="text-[#ffe665]">{dataDetail.price}</p>
             <p className="text-[#4181ff] text-xs">{`(${formatBet(dataDetail.oddsFormat)})`}</p>
