@@ -26,6 +26,7 @@ export default function MatchView() {
   const [disableBtn, setDisableBtn] = useState(false);
   const [haveError, setHaveError] = useState(false);
   const [iframeHeight, setIframeHeight] = useState("0px");
+  const [errorCount, setErrorCount] = useState(0);
   const telegram = useTelegram();
 
   const matchParam = searchParams.get("match");
@@ -56,26 +57,26 @@ export default function MatchView() {
         const res = await axios.post("/api/odds", payload);
         console.log("response:", res);
         if (
-          res.data?.message?.answer === "Invalid match!" ||
-          res.data?.message?.answer === "Invalid league!" ||
-          res.data?.message?.answer === "Request or user not found!" ||
-          res.data?.message?.answer === "Event not found!" ||
-          res.data?.message?.answer === "Game not found!" ||
-          res.data?.length === 0
+          res?.data?.message?.answer === "Invalid match!" ||
+          res?.data?.message?.answer === "Invalid league!" ||
+          res?.data?.message?.answer === "Request or user not found!" ||
+          res?.data?.message?.answer === "Event not found!" ||
+          res?.data?.message?.answer === "Game not found!" ||
+          res?.data?.message?.answer?.length === 0
         ) {
-          if (res.data?.message?.live_state === null || res.data?.message?.live_state === "ended") {
+          if (res?.data?.message?.live_state === "ended") {
             setEndBet(true); // kết thúc trận đấu
           } else {
             setHaveError(true); // lỗi mà chưa kết thúc trận đấu trả về màn hình lỗi
           }
         } else {
-          const transformedData = transformData(res.data, lineParam ?? "3");
-          setDataScreenInfo(res?.data);
+          const transformedData = transformData(res?.data?.message?.answer, lineParam ?? "3");
+          setDataScreenInfo(res?.data?.message?.answer);
           setOdds(transformedData as unknown as IOddsDetail[]);
           setLatestOdds(transformedData as unknown as IOddsDetail[]);
         }
-        telegram.webApp?.expand();
-        telegram.webApp?.isClosingConfirmationEnabled === true;
+        telegram?.webApp?.expand();
+        telegram?.webApp?.isClosingConfirmationEnabled === true;
       } catch (error: any) {
         console.log("Lỗi không xác định:", error);
         setHaveError(true);
@@ -92,10 +93,10 @@ export default function MatchView() {
     async function fetchAndUpdateOdds() {
       try {
         const newData = await axios.post("/api/odds", payload);
-        if (newData && newData.data?.length > 0) {
-          const transformedData = transformData(newData?.data, lineParam ?? "3");
+        if (newData && newData?.data?.message?.answer?.length > 0) {
+          const transformedData = transformData(newData?.data?.message?.answer, lineParam ?? "3");
           setOdds(latestOdds?.length > 0 ? latestOdds : (transformedData as unknown as IOddsDetail[]));
-          setDataScreenInfo(newData?.data);
+          setDataScreenInfo(newData?.data?.message?.answer);
           setLatestOdds(transformedData as unknown as IOddsDetail[]);
 
           const newOddsStatus: OddsStatusType = {};
@@ -127,17 +128,22 @@ export default function MatchView() {
             setHaveError(false);
           }
         } else if (
-          newData.data?.message?.answer === "Invalid match!" ||
-          newData.data?.message?.answer === "Invalid league!" ||
-          newData.data?.message?.answer === "Request or user not found!" ||
-          newData.data?.message?.answer === "Event not found!" ||
-          newData.data?.message?.answer === "Game not found!" ||
-          newData.data?.length === 0
+          newData?.data?.message?.answer === "Invalid match!" ||
+          newData?.data?.message?.answer === "Invalid league!" ||
+          newData?.data?.message?.answer === "Request or user not found!" ||
+          newData?.data?.message?.answer === "Event not found!" ||
+          newData?.data?.message?.answer === "Game not found!" ||
+          newData?.data?.message?.answer?.length === 0
         ) {
-          if (newData.data?.message?.live_state === null || newData.data?.message?.live_state === "ended") {
+          if (newData?.data?.message?.live_state === "ended") {
             setEndBet(true); // kết thúc trận đấu
           } else {
-            setDisableBtn(true); // lỗi mà chưa kết thúc trận đấu
+            setErrorCount((prev) => prev + 1);
+            if (errorCount >= 8) {
+              setHaveError(true);
+            } else {
+              setDisableBtn(true); // lỗi mà chưa kết thúc trận đấu
+            }
           }
         }
       } catch (error) {
@@ -149,7 +155,7 @@ export default function MatchView() {
     const intervalId = setInterval(fetchAndUpdateOdds, 7000);
     return () => clearInterval(intervalId);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [latestOdds, endBet, disableBtn]);
+  }, [latestOdds, endBet, disableBtn, haveError, errorCount]);
   useEffect(() => {
     const handleResize = () => {
       const width = window.innerWidth;
@@ -234,7 +240,7 @@ export default function MatchView() {
             <Image src="/assets/ball.png" alt="no-content" className="w-[165px] h-[170px] mr-5" />
           )}
           <p className="pt-4 text-xl text-slate-500 font-semibold">Không tìm thấy thông tin trận đấu</p>
-          <span className="pt-2 text-sm text-slate-500 font-semibold">
+          <span className="pt-2 text-sm text-slate-500 font-semibold text-center">
             Trận đấu bị gián đoạn hoặc đã kết thúc. Vui lòng thử lại trong giây lát hoặc chọn trận đấu khác.
           </span>
         </div>

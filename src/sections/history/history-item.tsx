@@ -32,7 +32,7 @@ const HistoryItem = ({ dataDetail, type }: { dataDetail: IHistoryBet; type?: str
             )}
             <p className="text-sm text-text-main font-semibold ">
               {dataDetail.sportId === 29 ? "Bóng đá" : "Game"} / {dataDetail.isLive === "TRUE" ? "Trực tiếp" : ""}{" "}
-              {dataDetail.periodNumber === 0 ? "Toàn trận" : "Hiệp 1"} -{" "}
+              {dataDetail.periodNumber === 0 ? "Toàn trận" : dataDetail.periodNumber === 1 ? "Hiệp 1" : "Hiệp phụ"} -{" "}
               {dataDetail.betType === "TOTAL_POINTS" ? "Tài xỉu" : "Cược chấp"}
             </p>
           </div>
@@ -122,7 +122,7 @@ const HistoryItem = ({ dataDetail, type }: { dataDetail: IHistoryBet; type?: str
           )}
           {!type && dataDetail.ftTeam1Score !== undefined && dataDetail.ftTeam2Score !== undefined && (
             <span>
-              - Cả trận{" "}
+              - {dataDetail.periodNumber === 3 ? "Hiệp phụ" : "Cả trận"}{" "}
               <span className="text-[#4181ff]">
                 [{dataDetail.ftTeam1Score}-{dataDetail.ftTeam2Score}]
               </span>

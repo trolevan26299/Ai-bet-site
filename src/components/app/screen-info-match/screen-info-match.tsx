@@ -27,7 +27,14 @@ export default function ScreenInfoMatch({ dataScreenInfo }: { dataScreenInfo: IM
             <div className="flex flex-row items-center gap-1 pr-1">
               <Icon icon="fluent:live-20-filled" width={25} height={23} color="rgba(255,69,58,1)" />
               <p className="font-[600] text-sm text-[rgba(255,230,101,1)] ">
-                {`${dataScreenInfo[0].liveMinute || ""}  ${formatLiveScope(dataScreenInfo[0].liveState) || ""}`}
+                {`${
+                  dataScreenInfo[0].liveState !== 2 &&
+                  dataScreenInfo[0].liveState !== 6 &&
+                  !dataScreenInfo[0].liveMinute
+                    ? convertToGMT7(dataScreenInfo[0]?.starts, "time")
+                    : ""
+                }`}
+                {`${dataScreenInfo[0].liveMinute || ""} ${formatLiveScope(dataScreenInfo[0].liveState) || ""}`}
               </p>
             </div>
             <div className="flex justify-center items-center pt-2">

@@ -79,7 +79,10 @@ export default function OddsDetail({
         <TabsContent value="2">
           <RenderAccordion
             odds={odds.filter(
-              (item) => item.name_Odds === "Kèo cược chấp - Toàn trận" || item.name_Odds === "Kèo cược chấp - Hiệp 1"
+              (item) =>
+                item.name_Odds === "Kèo cược chấp - Toàn trận" ||
+                item.name_Odds === "Kèo cược chấp - Hiệp 1" ||
+                item.name_Odds === "Kèo cược chấp - Hiệp phụ"
             )}
             openItems={openItems}
             oddsStatus={oddsStatus}
@@ -92,7 +95,10 @@ export default function OddsDetail({
         <TabsContent value="3">
           <RenderAccordion
             odds={odds.filter(
-              (item) => item.name_Odds === "Kèo tài xỉu - Toàn trận" || item.name_Odds === "Kèo tài xỉu - Hiệp 1"
+              (item) =>
+                item.name_Odds === "Kèo tài xỉu - Toàn trận" ||
+                item.name_Odds === "Kèo tài xỉu - Hiệp 1" ||
+                item.name_Odds === "Kèo tài xỉu - Hiệp phụ"
             )}
             openItems={openItems}
             oddsStatus={oddsStatus}
@@ -151,10 +157,18 @@ function RenderAccordion({
       home: dataScreenInfo.home,
       away: dataScreenInfo.away,
       game_type:
-        oddsName === "Kèo tài xỉu - Toàn trận" || oddsName === "Kèo tài xỉu - Hiệp 1" ? "over under" : "handicap",
+        oddsName === "Kèo tài xỉu - Toàn trận" ||
+        oddsName === "Kèo tài xỉu - Hiệp 1" ||
+        oddsName === "Kèo tài xỉu - Hiệp phụ"
+          ? "over under"
+          : "handicap",
       game_detail: selectedTeam?.rate_odds as number,
       game_scope:
-        oddsName === "Kèo cược chấp - Toàn trận" || oddsName === "Kèo tài xỉu - Toàn trận" ? "full time" : "first half",
+        oddsName === "Kèo cược chấp - Toàn trận" || oddsName === "Kèo tài xỉu - Toàn trận"
+          ? "full time"
+          : oddsName === "Kèo cược chấp - Hiệp 1" || oddsName === "Kèo tài xỉu - Hiệp 1"
+          ? "first half"
+          : "extra time",
       odds: selectedTeam?.value as number,
       game_orientation: selectedTeam?.game_orientation as string,
       eventId: selectedTeam?.eventId as number,

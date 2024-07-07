@@ -7,11 +7,15 @@ export const transformData = (data: IMatchData[], line: string) => {
         (bet: IBetDetail) => bet?.number === 0 && bet?.altLineId === 0
       );
       const keoChinhHiep1 = item?.bets?.spreads?.find((bet: IBetDetail) => bet?.number === 1 && bet?.altLineId === 0);
-      const keoChinhTaiXiuToanTran = item?.bets?.totals.find(
+      const keoChinhTaiXiuToanTran = item?.bets?.totals?.find(
         (bet: IBetDetail) => bet?.number === 0 && bet?.altLineId === 0
       );
-      const keoChinhTaiXiuHiep1 = item?.bets?.totals.find(
+      const keoChinhTaiXiuHiep1 = item?.bets?.totals?.find(
         (bet: IBetDetail) => bet?.number === 1 && bet?.altLineId === 0
+      );
+      const keoChinhHiepPhu = item?.bets?.spreads?.find((bet: IBetDetail) => bet?.number === 3 && bet?.altLineId === 0);
+      const keoChinhTaiXiuHiepPhu = item?.bets?.totals?.find(
+        (bet: IBetDetail) => bet?.number === 3 && bet?.altLineId === 0
       );
 
       // Hàm helper để lấy ra kèo cược dựa vào số lượng hàng yêu cầu
@@ -26,7 +30,7 @@ export const transformData = (data: IMatchData[], line: string) => {
         const range = (num - 1) / 2; // Tính toán khoảng cách từ kèo chính
 
         return bets
-          .filter((bet: IBetDetail) => {
+          ?.filter((bet: IBetDetail) => {
             // Xác định kèo dựa trên loại kèo chính
             const mainValue = betType === "spreads" ? mainBet?.hdp : mainBet?.points;
             const betValue = betType === "spreads" ? bet?.hdp : bet?.points;
@@ -37,13 +41,15 @@ export const transformData = (data: IMatchData[], line: string) => {
                 bet?.altLineId === 0)
             ); // So sánh khoảng cách và lấy kèo chính
           })
-          .slice(0, num); // Giới hạn số lượng kèo trả về
+          ?.slice(0, num); // Giới hạn số lượng kèo trả về
       };
 
       const spreadsToanTran = filterBets(item?.bets?.spreads, keoChinhToanTran, Number(line), "spreads");
       const spreadsHiep1 = filterBets(item?.bets?.spreads, keoChinhHiep1, Number(line), "spreads");
+      const spreadsHiepPhu = filterBets(item?.bets?.spreads, keoChinhHiepPhu, Number(line), "spreads");
       const totalTaiXiuToanTran = filterBets(item?.bets?.totals, keoChinhTaiXiuToanTran, Number(line), "totals");
       const totalTaiXiuHiep1 = filterBets(item?.bets?.totals, keoChinhTaiXiuHiep1, Number(line), "totals");
+      const totalTaiXiuHiepPhu = filterBets(item?.bets?.totals, keoChinhTaiXiuHiepPhu, Number(line), "totals");
 
       const result = [];
 
@@ -51,7 +57,7 @@ export const transformData = (data: IMatchData[], line: string) => {
         result.push({
           name_Odds: "Kèo cược chấp - Toàn trận",
           status: keoChinhToanTran?.status,
-          detail: spreadsToanTran.map((spread: IBetDetail) => [
+          detail: spreadsToanTran?.map((spread: IBetDetail) => [
             {
               name: item?.home,
               rate_odds: spread?.hdp,
@@ -74,8 +80,8 @@ export const transformData = (data: IMatchData[], line: string) => {
           ]),
         });
       }
-      if (spreadsHiep1 && spreadsHiep1?.length > 0) {
-        result.push({
+      if (spreadsHiep1 && spreadsHiep1.length > 0) {
+        result?.push({
           name_Odds: "Kèo cược chấp - Hiệp 1",
           status: keoChinhHiep1?.status,
           detail: spreadsHiep1?.map((spread: IBetDetail) => [
@@ -90,8 +96,34 @@ export const transformData = (data: IMatchData[], line: string) => {
             },
             {
               name: item?.away,
+              rate_odds: spread?.hdp === 0 ? 0 : spread?.hdp ?? 0 >= 0 ? -(spread.hdp ?? 0) : Math.abs(spread.hdp ?? 0),
+              value: spread?.away,
+              game_orientation: item?.away,
+              eventId: spread?.eventId,
+              lineId: spread?.lineId,
+              altLineId: spread?.altLineId,
+            },
+          ]),
+        });
+      }
+      if (spreadsHiepPhu && spreadsHiepPhu?.length > 0) {
+        result.push({
+          name_Odds: "Kèo cược chấp - Hiệp phụ",
+          status: keoChinhHiepPhu?.status,
+          detail: spreadsHiepPhu?.map((spread: IBetDetail) => [
+            {
+              name: item?.home,
+              rate_odds: spread?.hdp,
+              value: spread?.home,
+              game_orientation: item?.home,
+              eventId: spread?.eventId,
+              lineId: spread?.lineId,
+              altLineId: spread?.altLineId,
+            },
+            {
+              name: item?.away,
               rate_odds:
-                spread?.hdp === 0 ? 0 : spread?.hdp ?? 0 >= 0 ? -(spread?.hdp ?? 0) : Math.abs(spread?.hdp ?? 0),
+                spread?.hdp === 0 ? 0 : spread?.hdp ?? 0 >= 0 ? -(spread?.hdp ?? 0) : Math.abs(spread.hdp ?? 0),
               value: spread?.away,
               game_orientation: item?.away,
               eventId: spread?.eventId,
@@ -154,6 +186,33 @@ export const transformData = (data: IMatchData[], line: string) => {
           ]),
         });
       }
+      if (totalTaiXiuHiepPhu && totalTaiXiuHiepPhu?.length > 0) {
+        result.push({
+          name_Odds: "Kèo tài xỉu - Hiệp phụ",
+          status: keoChinhTaiXiuHiepPhu?.status,
+          detail: totalTaiXiuHiepPhu?.map((total: IBetDetail) => [
+            {
+              name: "Tài",
+              rate_odds: total?.points,
+              value: total?.over,
+              game_orientation: "over",
+              eventId: total?.eventId,
+              lineId: total?.lineId,
+              altLineId: total?.altLineId,
+            },
+            {
+              name: "Xỉu",
+              rate_odds: total?.points,
+              value: total?.under,
+              game_orientation: "under",
+              eventId: total?.eventId,
+              lineId: total?.lineId,
+              altLineId: total?.altLineId,
+            },
+          ]),
+        });
+      }
+
       return result;
     })
     .flat();
