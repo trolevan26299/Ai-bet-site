@@ -41,14 +41,23 @@ const HistoryItem = ({ dataDetail, type }: { dataDetail: IHistoryBet; type?: str
                 : dataDetail.periodNumber === 6
                 ? "Luân lưu"
                 : "Luân lưu 10 quả"}{" "}
-              - {dataDetail.betType === "TOTAL_POINTS" ? "Tài xỉu" : "Cược chấp"}
+              -{" "}
+              {dataDetail.betType === "TOTAL_POINTS"
+                ? "Tài xỉu"
+                : dataDetail.betType === "MONEYLINE"
+                ? "Kèo 1X2"
+                : "Cược chấp"}
             </p>
           </div>
         </div>
         <div className="flex flex-col justify-center items-start pl-7">
           <div className="flex flex-row justify-start items-center text-sm gap-1 w-full">
             <p className="text-text-main" style={{ maxWidth: "40%" }}>
-              {dataDetail.betType === "SPREAD" ? dataDetail.teamName : dataDetail.side === "OVER" ? "Tài" : "Xỉu"}
+              {dataDetail.betType === "SPREAD" || dataDetail.betType === "MONEYLINE"
+                ? dataDetail.teamName
+                : dataDetail.side === "OVER"
+                ? "Tài"
+                : "Xỉu"}
             </p>
             {dataDetail.periodNumber !== 6 && (
               <p
