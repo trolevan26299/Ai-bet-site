@@ -16,6 +16,7 @@ export type IBetDetail = {
 export type IBet = {
   spreads: IBetDetail[];
   totals: IBetDetail[];
+  moneylines: IBetDetail[];
 };
 
 export type IMatchData = {
@@ -47,7 +48,7 @@ export type IMatchData = {
 
 export type IOdds = {
   name: string;
-  rate_odds: number;
+  rate_odds?: number;
   value: number;
   game_orientation: string;
   eventId: number;

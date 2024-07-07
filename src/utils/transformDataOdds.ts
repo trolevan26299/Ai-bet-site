@@ -17,13 +17,18 @@ export const transformData = (data: IMatchData[], line: string) => {
       const keoChinhTaiXiuHiepPhu = item?.bets?.totals?.find(
         (bet: IBetDetail) => bet?.number === 3 && bet?.altLineId === 0
       );
-
+      const keoChinhTaiXiu10Pen = item?.bets?.totals?.find(
+        (bet: IBetDetail) => bet?.number === 7 && bet?.altLineId === 0
+      );
+      const keoChinh1X2Pen = item?.bets?.moneylines?.find(
+        (bet: IBetDetail) => bet?.number === 6 && bet?.altLineId === 0
+      );
       // Hàm helper để lấy ra kèo cược dựa vào số lượng hàng yêu cầu
       const filterBets = (
         bets: IBetDetail[],
         mainBet: IBetDetail | undefined,
         num: number,
-        betType: "spreads" | "totals"
+        betType: "spreads" | "totals" | "moneylines"
       ) => {
         if (!mainBet) return []; // Trả về tất cả các kèo nếu num là 0
         if (num === 0) num = 9; // Lấy ra tất cả kèo là 9 maximum
@@ -50,6 +55,8 @@ export const transformData = (data: IMatchData[], line: string) => {
       const totalTaiXiuToanTran = filterBets(item?.bets?.totals, keoChinhTaiXiuToanTran, Number(line), "totals");
       const totalTaiXiuHiep1 = filterBets(item?.bets?.totals, keoChinhTaiXiuHiep1, Number(line), "totals");
       const totalTaiXiuHiepPhu = filterBets(item?.bets?.totals, keoChinhTaiXiuHiepPhu, Number(line), "totals");
+      const totalTaiXiu10Pen = filterBets(item?.bets?.totals, keoChinhTaiXiu10Pen, Number(line), "totals");
+      const moneyLine1x2Pen = filterBets(item?.bets?.moneylines, keoChinh1X2Pen, Number(line), "moneylines");
 
       const result = [];
 
@@ -208,6 +215,56 @@ export const transformData = (data: IMatchData[], line: string) => {
               eventId: total?.eventId,
               lineId: total?.lineId,
               altLineId: total?.altLineId,
+            },
+          ]),
+        });
+      }
+      if (totalTaiXiu10Pen && totalTaiXiu10Pen?.length > 0) {
+        result.push({
+          name_Odds: "Kèo tài xỉu - Luân lưu 10 quả",
+          status: keoChinhTaiXiu10Pen?.status,
+          detail: totalTaiXiu10Pen?.map((total: IBetDetail) => [
+            {
+              name: "Tài",
+              rate_odds: total?.points,
+              value: total?.over,
+              game_orientation: "over",
+              eventId: total?.eventId,
+              lineId: total?.lineId,
+              altLineId: total?.altLineId,
+            },
+            {
+              name: "Xỉu",
+              rate_odds: total?.points,
+              value: total?.under,
+              game_orientation: "under",
+              eventId: total?.eventId,
+              lineId: total?.lineId,
+              altLineId: total?.altLineId,
+            },
+          ]),
+        });
+      }
+      if (moneyLine1x2Pen && moneyLine1x2Pen?.length > 0) {
+        result.push({
+          name_Odds: "Kèo 1X2 - Luân lưu",
+          status: keoChinh1X2Pen?.status,
+          detail: moneyLine1x2Pen?.map((spread: IBetDetail) => [
+            {
+              name: item?.home,
+              value: spread?.home,
+              game_orientation: item?.home,
+              eventId: spread?.eventId,
+              lineId: spread?.lineId,
+              altLineId: spread?.altLineId,
+            },
+            {
+              name: item?.away,
+              value: spread?.away,
+              game_orientation: item?.away,
+              eventId: spread?.eventId,
+              lineId: spread?.lineId,
+              altLineId: spread?.altLineId,
             },
           ]),
         });

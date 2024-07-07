@@ -1,11 +1,12 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader } from "@/components/ui/dialog";
 import {
-  DialogGame,
   DialogCloseGame,
   DialogContentGame,
   DialogFooterGame,
+  DialogGame,
   DialogHeaderGame,
   DialogTitleGame,
   DialogTriggerGame,
@@ -30,15 +31,6 @@ import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { isIOS } from "react-device-detect";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../../ui/accordion";
-import {
-  Dialog,
-  DialogClose,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
 
 export default function OddsDetail({
   odds,
@@ -82,7 +74,8 @@ export default function OddsDetail({
               (item) =>
                 item.name_Odds === "Kèo cược chấp - Toàn trận" ||
                 item.name_Odds === "Kèo cược chấp - Hiệp 1" ||
-                item.name_Odds === "Kèo cược chấp - Hiệp phụ"
+                item.name_Odds === "Kèo cược chấp - Hiệp phụ" ||
+                item.name_Odds === "Kèo 1X2 - Luân lưu"
             )}
             openItems={openItems}
             oddsStatus={oddsStatus}
@@ -98,7 +91,8 @@ export default function OddsDetail({
               (item) =>
                 item.name_Odds === "Kèo tài xỉu - Toàn trận" ||
                 item.name_Odds === "Kèo tài xỉu - Hiệp 1" ||
-                item.name_Odds === "Kèo tài xỉu - Hiệp phụ"
+                item.name_Odds === "Kèo tài xỉu - Hiệp phụ" ||
+                item.name_Odds === "Kèo tài xỉu - Luân lưu 10 quả"
             )}
             openItems={openItems}
             oddsStatus={oddsStatus}
@@ -159,15 +153,22 @@ function RenderAccordion({
       game_type:
         oddsName === "Kèo tài xỉu - Toàn trận" ||
         oddsName === "Kèo tài xỉu - Hiệp 1" ||
-        oddsName === "Kèo tài xỉu - Hiệp phụ"
+        oddsName === "Kèo tài xỉu - Hiệp phụ" ||
+        oddsName === "Kèo tài xỉu - Luân lưu 10 quả"
           ? "over under"
+          : oddsName === "Kèo 1X2 - Luân lưu"
+          ? "moneyline"
           : "handicap",
-      game_detail: selectedTeam?.rate_odds as number,
+      game_detail: (selectedTeam?.rate_odds as number) || undefined,
       game_scope:
         oddsName === "Kèo cược chấp - Toàn trận" || oddsName === "Kèo tài xỉu - Toàn trận"
           ? "full time"
           : oddsName === "Kèo cược chấp - Hiệp 1" || oddsName === "Kèo tài xỉu - Hiệp 1"
           ? "first half"
+          : oddsName === "Kèo 1X2 - Luân lưu"
+          ? "penalty6"
+          : oddsName === "Kèo tài xỉu - Luân lưu 10 quả"
+          ? "penalty7"
           : "extra time",
       odds: selectedTeam?.value as number,
       game_orientation: selectedTeam?.game_orientation as string,
