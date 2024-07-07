@@ -48,6 +48,7 @@ export default function OddsDetail({
     setOpenItems(value);
   };
 
+  console.log("odds", odds);
   return (
     <>
       <Tabs defaultValue="1" className="w-full">
@@ -309,7 +310,7 @@ function RenderAccordion({
                                   isDisabled || disableOdds ? "text-[rgba(74,86,100,1)]" : "text-[rgba(157,163,177,1)]"
                                 } overflow-hidden whitespace-nowrap`}
                               >
-                                {`(${team.rate_odds})`} {team.name}
+                                {team.rate_odds && `(${team.rate_odds})`} {team.name}
                               </div>
                               <div className=" col-span-3 text-end flex items-center justify-end text-sm font-medium text-text-red ">
                                 {team.value && (
@@ -368,10 +369,12 @@ function RenderAccordion({
                   <p className="text-text-noActive w-32">Cược vào :</p>
                   <p className="text-text-light">{selectedTeam?.name}</p>
                 </div>
-                <div className="flex flex-row justify-start gap-2 text-[16px]">
-                  <p className="text-text-noActive w-32">Kèo :</p>
-                  <p className="text-text-light">{selectedTeam?.rate_odds}</p>
-                </div>
+                {selectedTeam?.rate_odds && (
+                  <div className="flex flex-row justify-start gap-2 text-[16px]">
+                    <p className="text-text-noActive w-32">Kèo :</p>
+                    <p className="text-text-light">{selectedTeam?.rate_odds}</p>
+                  </div>
+                )}
                 <div className="flex flex-row justify-start gap-2 text-[16px]">
                   <p className="text-text-noActive w-32">Tỷ lệ cược :</p>
                   <div className="flex flex-row items-center gap-2">
@@ -512,7 +515,7 @@ function RenderAccordion({
                                   isDisabled || disableOdds ? "text-[rgba(74,86,100,1)]" : "text-[rgba(157,163,177,1)]"
                                 } overflow-hidden whitespace-nowrap`}
                               >
-                                {`(${team.rate_odds})`} {team.name}
+                                {team.rate_odds && `(${team.rate_odds})`} {team.name}
                               </div>
                               <div className=" col-span-3 text-end flex items-center justify-end text-sm font-medium text-text-red ">
                                 {team.value && (
@@ -564,10 +567,12 @@ function RenderAccordion({
                   <p className="text-text-noActive w-32">Cược vào :</p>
                   <p className="text-text-light">{selectedTeam?.name}</p>
                 </div>
-                <div className="flex flex-row justify-start gap-2 text-[16px]">
-                  <p className="text-text-noActive w-32">Kèo :</p>
-                  <p className="text-text-light">{selectedTeam?.rate_odds}</p>
-                </div>
+                {selectedTeam?.rate_odds && (
+                  <div className="flex flex-row justify-start gap-2 text-[16px]">
+                    <p className="text-text-noActive w-32">Kèo :</p>
+                    <p className="text-text-light">{selectedTeam?.rate_odds}</p>
+                  </div>
+                )}
                 <div className="flex flex-row justify-start gap-2 text-[16px]">
                   <p className="text-text-noActive w-32">Tỷ lệ cược :</p>
                   <div className="flex flex-row items-center gap-2">
