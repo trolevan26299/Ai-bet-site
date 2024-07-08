@@ -138,6 +138,7 @@ function RenderAccordion({
     showBlink: false,
   });
   const [disableBtn, setDisableBtn] = useState(false);
+
   const handleConfirmBet = async () => {
     setDisableBtn(true);
     const data = {
@@ -176,16 +177,18 @@ function RenderAccordion({
       lineId: selectedTeam?.lineId as number,
       altLineId: selectedTeam?.altLineId as number,
     };
+    console.log("data ------------------:", data);
     const body = {
       request_id: searchParams.get("request_id") || "",
       data: JSON.stringify(data),
     };
     const response = await axios.post("api/game", body);
+    console.log("response:", response);
     setDisableBtn(false);
     console.log("response data:", response.data);
     if ("ok" in response.data) {
       setDisableBtn(true);
-      telegram?.webApp?.close();
+      // telegram?.webApp?.close();
     } else {
       setErrorConfirm(true);
     }
