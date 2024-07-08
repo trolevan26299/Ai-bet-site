@@ -567,7 +567,7 @@ function RenderAccordion({
                   <p className="text-text-noActive w-32">Cược vào :</p>
                   <p className="text-text-light">{selectedTeam?.name}</p>
                 </div>
-                {selectedTeam?.rate_odds && (
+                {selectedTeam?.rate_odds !== null && selectedTeam?.rate_odds !== undefined && (
                   <div className="flex flex-row justify-start gap-2 text-[16px]">
                     <p className="text-text-noActive w-32">Kèo :</p>
                     <p className="text-text-light">{selectedTeam?.rate_odds}</p>
