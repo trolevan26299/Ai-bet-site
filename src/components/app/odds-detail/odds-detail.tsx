@@ -309,10 +309,7 @@ function RenderAccordion({
                                   isDisabled || disableOdds ? "text-[rgba(74,86,100,1)]" : "text-[rgba(157,163,177,1)]"
                                 } overflow-hidden whitespace-nowrap`}
                               >
-                                {selectedTeam?.rate_odds !== null &&
-                                  selectedTeam?.rate_odds !== undefined &&
-                                  `(${team.rate_odds})`}{" "}
-                                {team.name}
+                                {team.rate_odds && `(${team.rate_odds})`} {team.name}
                               </div>
                               <div className=" col-span-3 text-end flex items-center justify-end text-sm font-medium text-text-red ">
                                 {team.value && (
@@ -517,10 +514,7 @@ function RenderAccordion({
                                   isDisabled || disableOdds ? "text-[rgba(74,86,100,1)]" : "text-[rgba(157,163,177,1)]"
                                 } overflow-hidden whitespace-nowrap`}
                               >
-                                {selectedTeam?.rate_odds !== null &&
-                                  selectedTeam?.rate_odds !== undefined &&
-                                  `(${team.rate_odds})`}{" "}
-                                {team.name}
+                                {team.rate_odds && `(${team.rate_odds})`} {team.name}
                               </div>
                               <div className=" col-span-3 text-end flex items-center justify-end text-sm font-medium text-text-red ">
                                 {team.value && (
