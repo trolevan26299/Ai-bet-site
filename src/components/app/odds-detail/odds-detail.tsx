@@ -160,7 +160,7 @@ function RenderAccordion({
           : oddsName === "Kèo 1X2 - Luân lưu"
           ? "moneyline"
           : "handicap",
-      game_detail: (selectedTeam?.rate_odds as number) || undefined,
+      game_detail: oddsName === "Kèo 1X2 - Luân lưu" ? undefined : (selectedTeam?.rate_odds as number),
       game_scope:
         oddsName === "Kèo cược chấp - Toàn trận" || oddsName === "Kèo tài xỉu - Toàn trận"
           ? "full time"
