@@ -34,6 +34,7 @@ export interface IWebApp {
   viewportHeight: number;
   viewportStableHeight: number;
   isClosingConfirmationEnabled: boolean;
+  isVerticalSwipesEnabled: boolean;
   headerColor: string;
   backgroundColor: string;
   BackButton: {
