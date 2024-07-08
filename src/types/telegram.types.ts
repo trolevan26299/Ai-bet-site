@@ -17,6 +17,7 @@ export interface IWebApp {
   };
   close: () => void;
   expand: () => void;
+  disableVerticalSwipes: () => void;
   onEvent: (event: string, callback: (data: any) => void) => void;
   version: string;
   platform: string;

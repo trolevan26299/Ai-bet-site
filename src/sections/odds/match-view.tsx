@@ -76,7 +76,8 @@ export default function MatchView() {
           setLatestOdds(transformedData as unknown as IOddsDetail[]);
         }
         telegram?.webApp?.expand();
-        telegram?.webApp?.isVerticalSwipesEnabled === false;
+        telegram?.webApp?.isVerticalSwipesEnabled === true;
+        telegram?.webApp?.disableVerticalSwipes();
         telegram?.webApp?.isClosingConfirmationEnabled === true;
       } catch (error: any) {
         console.log("Lỗi không xác định:", error);
