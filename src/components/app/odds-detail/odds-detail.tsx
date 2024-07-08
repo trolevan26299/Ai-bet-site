@@ -177,7 +177,6 @@ function RenderAccordion({
       lineId: selectedTeam?.lineId as number,
       altLineId: selectedTeam?.altLineId as number,
     };
-    console.log("data ------------------:", data);
     const body = {
       request_id: searchParams.get("request_id") || "",
       data: JSON.stringify(data),
@@ -188,7 +187,7 @@ function RenderAccordion({
     console.log("response data:", response.data);
     if ("ok" in response.data) {
       setDisableBtn(true);
-      // telegram?.webApp?.close();
+      telegram?.webApp?.close();
     } else {
       setErrorConfirm(true);
     }
