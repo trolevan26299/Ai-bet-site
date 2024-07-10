@@ -33,9 +33,13 @@ const HistoryItem = ({ dataDetail, type }: { dataDetail: IHistoryBet; type?: str
             <p className="text-sm text-text-main font-semibold ">
               {dataDetail.sportId === 29 ? "Bóng đá" : "Game"} / {dataDetail.isLive === "TRUE" ? "Trực tiếp" : ""}{" "}
               {dataDetail.periodNumber === 0
-                ? "Toàn trận"
+                ? dataDetail.resultingUnit === "Corners"
+                  ? "Phạt góc toàn trận"
+                  : "toàn trận"
                 : dataDetail.periodNumber === 1
-                ? "Hiệp 1"
+                ? dataDetail.resultingUnit === "Corners"
+                  ? "Phạt góc hiệp 1"
+                  : "Hiệp 1"
                 : dataDetail.periodNumber === 3
                 ? "Hiệp phụ"
                 : dataDetail.periodNumber === 6

@@ -33,7 +33,6 @@ export default function MatchView() {
   const matchParam = searchParams.get("match");
   const lineParam = searchParams.get("line");
   const tracker_id = searchParams.get("tracker_id");
-  console.log("odds", odds);
   const payload = {
     request_id: searchParams.get("request_id"),
     match: matchParam ? matchParam.split(",") : [],
