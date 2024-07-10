@@ -43,7 +43,7 @@ export default function OddsDetail({
   dataScreenInfo: IMatchData[];
   disableBtn: boolean;
 }) {
-  const [openItems, setOpenItems] = useState(["item-1", "item-2", "item-3", "item-4", "item-5", "item-6"]);
+  const [openItems, setOpenItems] = useState(["item-1", "item-2", "item-3", "item-4", "item-5", "item-6", "item-7"]);
   const handleValueChange = (value: string[]) => {
     setOpenItems(value);
   };
