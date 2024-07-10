@@ -66,28 +66,17 @@ export default function MatchView() {
           axios.post("/api/odds", payload),
           axios.post("/api/odds", cornerPayload),
         ]);
-        const resData = [oddsRes, cornerRes];
+
         let combinedOdds: IOddsDetail[] = [];
-        resData.forEach((res, index) => {
-          if (
-            res?.data?.message?.answer === "Invalid match!" ||
-            res?.data?.message?.answer === "Invalid league!" ||
-            res?.data?.message?.answer === "Request or user not found!" ||
-            res?.data?.message?.answer === "Event not found!" ||
-            res?.data?.message?.answer === "Game not found!" ||
-            res?.data?.message?.answer?.length === 0
-          ) {
-            if (res?.data?.message?.live_state === "ended") {
-              setEndBet(true); // kết thúc trận đấu
-            } else {
-              setHaveError(true); // lỗi mà chưa kết thúc trận đấu trả về màn hình lỗi
-            }
-          } else {
-            const transformedData =
-              index === 0
-                ? transformData(res?.data?.message?.answer, lineParam ?? "3")
-                : transformDataCorner(res?.data?.message?.answer, lineParam ?? "3");
-            setDataScreenInfo((prevData) => [...prevData, ...res?.data?.message?.answer]);
+        let isAnyDataValid = false;
+
+        if (oddsRes?.data?.message?.live_state === "ended" || cornerRes?.data?.message?.live_state === "ended") {
+          setEndBet(true); // kết thúc trận đấu
+        } else {
+          if (oddsRes?.data?.message?.answer?.length > 0) {
+            isAnyDataValid = true;
+            const transformedData = transformData(oddsRes?.data?.message?.answer, lineParam ?? "3");
+            setDataScreenInfo((prevData) => [...prevData, ...oddsRes?.data?.message?.answer]);
             combinedOdds = [
               ...combinedOdds,
               ...(transformedData as IOddsDetail[]).map((item) => ({
@@ -96,15 +85,29 @@ export default function MatchView() {
               })),
             ];
           }
-        });
+
+          if (cornerRes?.data?.message?.answer?.length > 0) {
+            isAnyDataValid = true;
+            const transformedDataCorner = transformDataCorner(cornerRes?.data?.message?.answer, lineParam ?? "3");
+            setDataScreenInfo((prevData) => [...prevData, ...cornerRes?.data?.message?.answer]);
+            combinedOdds = [
+              ...combinedOdds,
+              ...(transformedDataCorner as IOddsDetail[]).map((item) => ({
+                ...item,
+                status: item.status ?? 0,
+              })),
+            ];
+          }
+
+          if (!isAnyDataValid) {
+            setHaveError(true); // lỗi mà chưa kết thúc trận đấu trả về màn hình lỗi
+          }
+        }
 
         setOdds(combinedOdds as unknown as IOddsDetail[]);
         setLatestOdds(combinedOdds as unknown as IOddsDetail[]);
 
         telegram?.webApp?.expand();
-        telegram?.webApp?.isVerticalSwipesEnabled === false;
-        telegram?.webApp?.disableVerticalSwipes();
-        // telegram?.webApp?.isClosingConfirmationEnabled === true;
       } catch (error: any) {
         console.log("Lỗi không xác định:", error);
         setHaveError(true);
