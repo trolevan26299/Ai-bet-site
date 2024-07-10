@@ -149,6 +149,7 @@ function RenderAccordion({
   const modifyValueForCornersTeam = (oddsName: String, value: string) => {
     return oddsName.includes("Kèo góc") ? `${value} (corners)` : value;
   };
+
   const handleConfirmBet = async () => {
     setDisableBtn(true);
     const data = {
@@ -195,6 +196,7 @@ function RenderAccordion({
       lineId: selectedTeam?.lineId as number,
       altLineId: selectedTeam?.altLineId as number,
     };
+    console.log(" data send ====> :", data);
     const body = {
       request_id: searchParams.get("request_id") || "",
       data: JSON.stringify(data),
@@ -202,10 +204,9 @@ function RenderAccordion({
     const response = await axios.post("api/game", body);
     console.log("response:", response);
     setDisableBtn(false);
-    console.log("response data:", response.data);
     if ("ok" in response.data) {
       setDisableBtn(true);
-      telegram?.webApp?.close();
+      // telegram?.webApp?.close();
     } else {
       setErrorConfirm(true);
     }
