@@ -74,6 +74,8 @@ export default function OddsDetail({
               (item) =>
                 item.name_Odds === "Kèo cược chấp - Toàn trận" ||
                 item.name_Odds === "Kèo cược chấp - Hiệp 1" ||
+                item.name_Odds === "Kèo góc cược chấp - Toàn trận" ||
+                item.name_Odds === "Kèo góc cược chấp - Hiệp 1" ||
                 item.name_Odds === "Kèo cược chấp - Hiệp phụ" ||
                 item.name_Odds === "Kèo 1X2 - Luân lưu"
             )}
@@ -91,6 +93,8 @@ export default function OddsDetail({
               (item) =>
                 item.name_Odds === "Kèo tài xỉu - Toàn trận" ||
                 item.name_Odds === "Kèo tài xỉu - Hiệp 1" ||
+                item.name_Odds === "Kèo góc tài xỉu - Toàn trận" ||
+                item.name_Odds === "Kèo góc tài xỉu - Hiệp 1" ||
                 item.name_Odds === "Kèo tài xỉu - Hiệp phụ" ||
                 item.name_Odds === "Kèo tài xỉu - Luân lưu 10 quả"
             )}
