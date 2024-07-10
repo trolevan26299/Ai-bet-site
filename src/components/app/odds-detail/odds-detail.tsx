@@ -28,7 +28,7 @@ import { ReloadIcon } from "@radix-ui/react-icons";
 import axios from "axios";
 import { m } from "framer-motion";
 import { useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { isIOS } from "react-device-detect";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../../ui/accordion";
 
@@ -43,15 +43,37 @@ export default function OddsDetail({
   dataScreenInfo: IMatchData[];
   disableBtn: boolean;
 }) {
+  const tabsListRef = useRef<HTMLDivElement>(null);
+  const handleMouseMove = (e: MouseEvent) => {
+    if (tabsListRef.current) {
+      const target = tabsListRef.current;
+      if (e.buttons === 1) {
+        target.scrollLeft -= e.movementX;
+      }
+    }
+  };
+
   const [openItems, setOpenItems] = useState(["item-1", "item-2", "item-3", "item-4", "item-5", "item-6", "item-7"]);
   const handleValueChange = (value: string[]) => {
     setOpenItems(value);
   };
 
+  useEffect(() => {
+    const target = tabsListRef.current;
+    if (target) {
+      target.addEventListener("mousemove", handleMouseMove);
+      return () => {
+        target.removeEventListener("mousemove", handleMouseMove);
+      };
+    }
+  }, []);
   return (
     <>
       <Tabs defaultValue="1" className="w-full">
-        <TabsList className={`w-full gap-3 justify-between overflow-x-auto whitespace-nowrap`}>
+        <TabsList
+          ref={tabsListRef}
+          className="w-full gap-3 justify-between overflow-x-auto whitespace-nowrap scrollbar-hide"
+        >
           <TabsTrigger value="1">Tất cả </TabsTrigger>
           <TabsTrigger value="2">Cược chấp</TabsTrigger>
           <TabsTrigger value="3">Tài xỉu </TabsTrigger>
