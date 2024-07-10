@@ -51,7 +51,7 @@ export default function OddsDetail({
   return (
     <>
       <Tabs defaultValue="1" className="w-full">
-        <TabsList className={`w-full gap-3 justify-between`}>
+        <TabsList className={`w-full gap-3 justify-between overflow-x-auto whitespace-nowrap`}>
           <TabsTrigger value="1">Tất cả </TabsTrigger>
           <TabsTrigger value="2">Cược chấp</TabsTrigger>
           <TabsTrigger value="3">Tài xỉu </TabsTrigger>
@@ -225,7 +225,7 @@ function RenderAccordion({
     setDisableBtn(false);
     if ("ok" in response.data) {
       setDisableBtn(true);
-      // telegram?.webApp?.close();
+      telegram?.webApp?.close();
     } else {
       setErrorConfirm(true);
     }
