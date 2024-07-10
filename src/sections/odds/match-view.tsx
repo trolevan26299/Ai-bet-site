@@ -161,7 +161,12 @@ export default function MatchView() {
           }
 
           if (!isAnyDataValid) {
-            setHaveError(true); // lỗi mà chưa kết thúc trận đấu trả về màn hình lỗi
+            setErrorCount((prev) => prev + 1);
+            if (errorCount >= 8) {
+              setHaveError(true);
+            } else {
+              setDisableBtn(true); // lỗi mà chưa kết thúc trận đấu
+            }
           }
 
           if (combinedLatestOdds.length > 0) {
