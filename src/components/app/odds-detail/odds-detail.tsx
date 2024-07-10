@@ -150,7 +150,7 @@ function RenderAccordion({
     return oddsName.includes("Kèo góc") ? `${value} (corners)` : value;
   };
   const modifyValueForCornersTeamArray = (oddsName: String, value: string[]) => {
-    return oddsName.includes("Kèo góc") ? [`${value[0]} (corners), ${value[1]} (corners)`] : dataScreenInfo?.team;
+    return oddsName.includes("Kèo góc") ? [`${value[0]} (corners)`, `${value[1]} (corners)`] : dataScreenInfo?.team;
   };
 
   const handleConfirmBet = async () => {
