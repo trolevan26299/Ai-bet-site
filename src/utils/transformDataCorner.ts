@@ -21,9 +21,9 @@ export const transformDataCorner = (data: IMatchData[], line: string) => {
         bets: IBetDetail[],
         mainBet: IBetDetail | undefined,
         num: number,
-        betType: "spreads" | "totals" | "moneylines"
+        betType: "spreads" | "totals"
       ) => {
-        if (!mainBet) return []; // Trả về tất cả các kèo nếu num là 0
+        if (!mainBet) return []; // Trả về tất cả các kèo nếu mainBet không tồn tại
         if (num === 0) num = 9; // Lấy ra tất cả kèo là 9 maximum
         const range = (num - 1) / 2; // Tính toán khoảng cách từ kèo chính
 
