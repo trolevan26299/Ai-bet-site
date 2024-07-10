@@ -80,7 +80,7 @@ export default function MatchView() {
         telegram?.webApp?.disableVerticalSwipes();
         // telegram?.webApp?.isClosingConfirmationEnabled === true;
       } catch (error: any) {
-        console.log("Lỗi không xác định:", error);
+        console.log("Lỗi không xác định-:", error);
         setHaveError(true);
       } finally {
         setLoading(false);
