@@ -6,6 +6,7 @@ import { SplashScreen } from "@/components/loading-screen";
 import { useTelegram } from "@/context/telegram.provider";
 import MainLayout from "@/layouts/main/layout";
 import { IMatchData, IOddsDetail, OddsStatusType } from "@/types/odds.types";
+import { transformDataCorner } from "@/utils/transformDataCorner";
 import { transformData } from "@/utils/transformDataOdds";
 import axios from "axios";
 import Image from "next/image";
@@ -67,7 +68,7 @@ export default function MatchView() {
         ]);
         const resData = [oddsRes, cornerRes];
         let combinedOdds: IOddsDetail[] = [];
-        resData.forEach((res) => {
+        resData.forEach((res, index) => {
           if (
             res?.data?.message?.answer === "Invalid match!" ||
             res?.data?.message?.answer === "Invalid league!" ||
@@ -82,7 +83,10 @@ export default function MatchView() {
               setHaveError(true); // lỗi mà chưa kết thúc trận đấu trả về màn hình lỗi
             }
           } else {
-            const transformedData = transformData(res?.data?.message?.answer, lineParam ?? "3");
+            const transformedData =
+              index === 0
+                ? transformData(res?.data?.message?.answer, lineParam ?? "3")
+                : transformDataCorner(res?.data?.message?.answer, lineParam ?? "3");
             setDataScreenInfo((prevData) => [...prevData, ...res?.data?.message?.answer]);
             combinedOdds = [
               ...combinedOdds,
@@ -102,7 +106,7 @@ export default function MatchView() {
         telegram?.webApp?.disableVerticalSwipes();
         // telegram?.webApp?.isClosingConfirmationEnabled === true;
       } catch (error: any) {
-        console.log("Lỗi không xác định-:", error);
+        console.log("Lỗi không xác định:", error);
         setHaveError(true);
       } finally {
         setLoading(false);
