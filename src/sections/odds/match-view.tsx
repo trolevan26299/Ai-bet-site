@@ -46,35 +46,64 @@ export default function MatchView() {
     filter_by: "and",
   };
 
+  // payload lấy kèo góc
+  const cornerPayload = {
+    ...payload,
+    resulting_unit: "Corners",
+  };
+  // payload lấy kèo thẻ
+  const bookingPayload = {
+    ...payload,
+    resulting_unit: "Bookings",
+  };
+
   const isMobileDevice = () => {
     return /Mobi|Android|iPhone|iPad|iPod/.test(navigator.userAgent);
   };
 
+  // lấy kèo cược chấp ,tài xỉu, hiệp phụ , penalty
   useEffect(() => {
     async function fetchAndSetInitialOdds() {
       setLoading(true);
       try {
-        const res = await axios.post("/api/odds", payload);
-        console.log("response:", res);
-        if (
-          res?.data?.message?.answer === "Invalid match!" ||
-          res?.data?.message?.answer === "Invalid league!" ||
-          res?.data?.message?.answer === "Request or user not found!" ||
-          res?.data?.message?.answer === "Event not found!" ||
-          res?.data?.message?.answer === "Game not found!" ||
-          res?.data?.message?.answer?.length === 0
-        ) {
-          if (res?.data?.message?.live_state === "ended") {
-            setEndBet(true); // kết thúc trận đấu
+        const [oddsRes, cornerRes, bookingRes] = await Promise.all([
+          axios.post("/api/odds", payload),
+          axios.post("/api/odds", cornerPayload),
+          axios.post("/api/odds", bookingPayload),
+        ]);
+        const resData = [oddsRes, cornerRes, bookingRes];
+        console.log("response:", resData);
+        let combinedOdds: IOddsDetail[] = [];
+        resData.forEach((res) => {
+          if (
+            res?.data?.message?.answer === "Invalid match!" ||
+            res?.data?.message?.answer === "Invalid league!" ||
+            res?.data?.message?.answer === "Request or user not found!" ||
+            res?.data?.message?.answer === "Event not found!" ||
+            res?.data?.message?.answer === "Game not found!" ||
+            res?.data?.message?.answer?.length === 0
+          ) {
+            if (res?.data?.message?.live_state === "ended") {
+              setEndBet(true); // kết thúc trận đấu
+            } else {
+              setHaveError(true); // lỗi mà chưa kết thúc trận đấu trả về màn hình lỗi
+            }
           } else {
-            setHaveError(true); // lỗi mà chưa kết thúc trận đấu trả về màn hình lỗi
+            const transformedData = transformData(res?.data?.message?.answer, lineParam ?? "3");
+            setDataScreenInfo((prevData) => [...prevData, ...res?.data?.message?.answer]);
+            combinedOdds = [
+              ...combinedOdds,
+              ...(transformedData as IOddsDetail[]).map((item) => ({
+                ...item,
+                status: item.status ?? 0,
+              })),
+            ];
           }
-        } else {
-          const transformedData = transformData(res?.data?.message?.answer, lineParam ?? "3");
-          setDataScreenInfo(res?.data?.message?.answer);
-          setOdds(transformedData as unknown as IOddsDetail[]);
-          setLatestOdds(transformedData as unknown as IOddsDetail[]);
-        }
+        });
+
+        setOdds(combinedOdds as unknown as IOddsDetail[]);
+        setLatestOdds(combinedOdds as unknown as IOddsDetail[]);
+
         telegram?.webApp?.expand();
         telegram?.webApp?.isVerticalSwipesEnabled === false;
         telegram?.webApp?.disableVerticalSwipes();
