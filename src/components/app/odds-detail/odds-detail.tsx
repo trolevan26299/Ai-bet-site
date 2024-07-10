@@ -159,16 +159,25 @@ function RenderAccordion({
         oddsName === "Kèo tài xỉu - Toàn trận" ||
         oddsName === "Kèo tài xỉu - Hiệp 1" ||
         oddsName === "Kèo tài xỉu - Hiệp phụ" ||
-        oddsName === "Kèo tài xỉu - Luân lưu 10 quả"
+        oddsName === "Kèo tài xỉu - Luân lưu 10 quả" ||
+        oddsName === "Kèo góc tài xỉu - Toàn trận" ||
+        oddsName === "Kèo góc tài xỉu - Toàn trận" ||
+        oddsName === "Kèo góc tài xỉu - Hiệp 1"
           ? "over under"
           : oddsName === "Kèo 1X2 - Luân lưu"
           ? "moneyline"
           : "handicap",
       game_detail: oddsName === "Kèo 1X2 - Luân lưu" ? undefined : (selectedTeam?.rate_odds as number),
       game_scope:
-        oddsName === "Kèo cược chấp - Toàn trận" || oddsName === "Kèo tài xỉu - Toàn trận"
+        oddsName === "Kèo cược chấp - Toàn trận" ||
+        oddsName === "Kèo tài xỉu - Toàn trận" ||
+        oddsName === "Kèo góc cược chấp - Toàn trận" ||
+        oddsName === "Kèo góc tài xỉu - Toàn trận"
           ? "full time"
-          : oddsName === "Kèo cược chấp - Hiệp 1" || oddsName === "Kèo tài xỉu - Hiệp 1"
+          : oddsName === "Kèo cược chấp - Hiệp 1" ||
+            oddsName === "Kèo tài xỉu - Hiệp 1" ||
+            oddsName === "Kèo góc cược chấp - Hiệp 1" ||
+            oddsName === "Kèo góc tài xỉu - Hiệp 1"
           ? "first half"
           : oddsName === "Kèo 1X2 - Luân lưu"
           ? "penalty6"
