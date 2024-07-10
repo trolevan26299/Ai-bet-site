@@ -72,7 +72,7 @@ export default function OddsDetail({
       <Tabs defaultValue="1" className="w-full">
         <TabsList
           ref={tabsListRef}
-          className="w-full gap-3 justify-between overflow-x-auto whitespace-nowrap scrollbar-hide"
+          className="w-full gap-3 justify-between overflow-x-hidden whitespace-nowrap scrollbar-hide h-[40px]"
         >
           <TabsTrigger value="1">Tất cả </TabsTrigger>
           <TabsTrigger value="2">Cược chấp</TabsTrigger>
