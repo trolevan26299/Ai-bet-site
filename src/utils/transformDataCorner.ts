@@ -35,7 +35,7 @@ export const transformDataCorner = (data: IMatchData[], line: string) => {
 
             return (
               bet?.number === mainBet?.number && // Kiểm tra số của kèo
-              ((mainValue !== undefined && betValue !== undefined && Math.abs(betValue - mainValue) <= range * 0.25) ||
+              ((mainValue !== undefined && betValue !== undefined && Math.abs(betValue - mainValue) <= range * 5) ||
                 bet?.altLineId === 0)
             ); // So sánh khoảng cách và lấy kèo chính
           })
