@@ -149,12 +149,15 @@ function RenderAccordion({
   const modifyValueForCornersTeam = (oddsName: String, value: string) => {
     return oddsName.includes("Kèo góc") ? `${value} (corners)` : value;
   };
+  const modifyValueForCornersTeamArray = (oddsName: String, value: string[]) => {
+    return oddsName.includes("Kèo góc") ? [`${value[0]} (corners), ${value[1]} (corners)`] : dataScreenInfo?.team;
+  };
 
   const handleConfirmBet = async () => {
     setDisableBtn(true);
     const data = {
       league_name: modifyValueForCornersLeague(oddsName, dataScreenInfo.league_name),
-      team: dataScreenInfo.team,
+      team: modifyValueForCornersTeamArray(oddsName, dataScreenInfo?.team),
       last_updated_odd: dataScreenInfo.last_updated_odd,
       liveStatus: dataScreenInfo.liveStatus,
       liveMinute: dataScreenInfo.liveMinute,
