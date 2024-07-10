@@ -63,7 +63,7 @@ export default function OddsDetail({
             openItems={openItems}
             oddsStatus={oddsStatus}
             onValueChange={handleValueChange}
-            dataScreenInfo={dataScreenInfo[0]}
+            dataScreenInfo={dataScreenInfo.length > 1 ? dataScreenInfo[1] : dataScreenInfo[0]}
             disableOdds={disableBtn}
           />
         </TabsContent>
@@ -82,7 +82,7 @@ export default function OddsDetail({
             openItems={openItems}
             oddsStatus={oddsStatus}
             onValueChange={handleValueChange}
-            dataScreenInfo={dataScreenInfo[0]}
+            dataScreenInfo={dataScreenInfo.length > 1 ? dataScreenInfo[1] : dataScreenInfo[0]}
             disableOdds={disableBtn}
           />
         </TabsContent>
@@ -101,7 +101,7 @@ export default function OddsDetail({
             openItems={openItems}
             oddsStatus={oddsStatus}
             onValueChange={handleValueChange}
-            dataScreenInfo={dataScreenInfo[0]}
+            dataScreenInfo={dataScreenInfo.length > 1 ? dataScreenInfo[1] : dataScreenInfo[0]}
             disableOdds={disableBtn}
           />
         </TabsContent>
@@ -160,7 +160,6 @@ function RenderAccordion({
         oddsName === "Kèo tài xỉu - Hiệp 1" ||
         oddsName === "Kèo tài xỉu - Hiệp phụ" ||
         oddsName === "Kèo tài xỉu - Luân lưu 10 quả" ||
-        oddsName === "Kèo góc tài xỉu - Toàn trận" ||
         oddsName === "Kèo góc tài xỉu - Toàn trận" ||
         oddsName === "Kèo góc tài xỉu - Hiệp 1"
           ? "over under"
