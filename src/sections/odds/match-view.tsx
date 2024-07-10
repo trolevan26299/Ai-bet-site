@@ -123,57 +123,78 @@ export default function MatchView() {
   useEffect(() => {
     async function fetchAndUpdateOdds() {
       try {
-        const newData = await axios.post("/api/odds", payload);
-        if (newData && newData?.data?.message?.answer?.length > 0) {
-          const transformedData = transformData(newData?.data?.message?.answer, lineParam ?? "3");
-          setOdds(latestOdds?.length > 0 ? latestOdds : (transformedData as unknown as IOddsDetail[]));
-          setDataScreenInfo(newData?.data?.message?.answer);
-          setLatestOdds(transformedData as unknown as IOddsDetail[]);
+        const [newOddsRes, newCornerRes] = await Promise.all([
+          axios.post("/api/odds", payload),
+          axios.post("/api/odds", cornerPayload),
+        ]);
 
-          const newOddsStatus: OddsStatusType = {};
-          latestOdds?.forEach((latestOdd, index) => {
-            latestOdd?.detail?.forEach((latestDetail, detailIndex) => {
-              latestDetail?.forEach((latestOddDetail, oddDetailIndex) => {
-                const key = `${index}-${detailIndex}-${oddDetailIndex}`;
-                const oldValue = odds[index]?.detail[detailIndex][oddDetailIndex]?.value;
-                const newValue = latestOddDetail?.value;
-                if (newValue > oldValue) {
-                  newOddsStatus[key] = "green";
-                } else if (newValue < oldValue) {
-                  newOddsStatus[key] = "red";
-                } else {
-                  newOddsStatus[key] = "none";
-                }
+        let combinedLatestOdds: IOddsDetail[] = [];
+        let isAnyDataValid = false;
+
+        if (newOddsRes?.data?.message?.live_state === "ended" || newCornerRes?.data?.message?.live_state === "ended") {
+          setEndBet(true); // kết thúc trận đấu
+        } else {
+          if (newOddsRes?.data?.message?.answer?.length > 0) {
+            isAnyDataValid = true;
+            const transformedData = transformData(newOddsRes?.data?.message?.answer, lineParam ?? "3");
+            setDataScreenInfo((prevData) => [...prevData, ...newOddsRes?.data?.message?.answer]);
+            combinedLatestOdds = [
+              ...combinedLatestOdds,
+              ...(transformedData as IOddsDetail[]).map((item) => ({
+                ...item,
+                status: item.status ?? 0,
+              })),
+            ];
+          }
+
+          if (newCornerRes?.data?.message?.answer?.length > 0) {
+            isAnyDataValid = true;
+            const transformedDataCorner = transformDataCorner(newCornerRes?.data?.message?.answer, lineParam ?? "3");
+            setDataScreenInfo((prevData) => [...prevData, ...newCornerRes?.data?.message?.answer]);
+            combinedLatestOdds = [
+              ...combinedLatestOdds,
+              ...(transformedDataCorner as IOddsDetail[]).map((item) => ({
+                ...item,
+                status: item.status ?? 0,
+              })),
+            ];
+          }
+
+          if (!isAnyDataValid) {
+            setHaveError(true); // lỗi mà chưa kết thúc trận đấu trả về màn hình lỗi
+          }
+
+          if (combinedLatestOdds.length > 0) {
+            const newOddsStatus: OddsStatusType = {};
+            combinedLatestOdds.forEach((latestOdd, index) => {
+              latestOdd?.detail?.forEach((latestDetail, detailIndex) => {
+                latestDetail?.forEach((latestOddDetail, oddDetailIndex) => {
+                  const key = `${index}-${detailIndex}-${oddDetailIndex}`;
+                  const oldValue = odds[index]?.detail[detailIndex][oddDetailIndex]?.value;
+                  const newValue = latestOddDetail?.value;
+                  if (newValue > oldValue) {
+                    newOddsStatus[key] = "green";
+                  } else if (newValue < oldValue) {
+                    newOddsStatus[key] = "red";
+                  } else {
+                    newOddsStatus[key] = "none";
+                  }
+                });
               });
             });
-          });
 
-          setOddsStatus(newOddsStatus);
-          if (endBet) {
-            setEndBet(false);
-          }
-          if (disableBtn) {
-            setDisableBtn(false);
-          }
-          if (haveError) {
-            setHaveError(false);
-          }
-        } else if (
-          newData?.data?.message?.answer === "Invalid match!" ||
-          newData?.data?.message?.answer === "Invalid league!" ||
-          newData?.data?.message?.answer === "Request or user not found!" ||
-          newData?.data?.message?.answer === "Event not found!" ||
-          newData?.data?.message?.answer === "Game not found!" ||
-          newData?.data?.message?.answer?.length === 0
-        ) {
-          if (newData?.data?.message?.live_state === "ended") {
-            setEndBet(true); // kết thúc trận đấu
-          } else {
-            setErrorCount((prev) => prev + 1);
-            if (errorCount >= 8) {
-              setHaveError(true);
-            } else {
-              setDisableBtn(true); // lỗi mà chưa kết thúc trận đấu
+            setOddsStatus(newOddsStatus);
+            setOdds(latestOdds?.length > 0 ? latestOdds : combinedLatestOdds);
+            setLatestOdds(combinedLatestOdds);
+
+            if (endBet) {
+              setEndBet(false);
+            }
+            if (disableBtn) {
+              setDisableBtn(false);
+            }
+            if (haveError) {
+              setHaveError(false);
             }
           }
         }
