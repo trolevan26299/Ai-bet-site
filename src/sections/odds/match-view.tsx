@@ -32,7 +32,7 @@ export default function MatchView() {
   const matchParam = searchParams.get("match");
   const lineParam = searchParams.get("line");
   const tracker_id = searchParams.get("tracker_id");
-
+  console.log("odds", odds);
   const payload = {
     request_id: searchParams.get("request_id"),
     match: matchParam ? matchParam.split(",") : [],
@@ -51,11 +51,6 @@ export default function MatchView() {
     ...payload,
     resulting_unit: "Corners",
   };
-  // payload lấy kèo thẻ
-  const bookingPayload = {
-    ...payload,
-    resulting_unit: "Bookings",
-  };
 
   const isMobileDevice = () => {
     return /Mobi|Android|iPhone|iPad|iPod/.test(navigator.userAgent);
@@ -66,13 +61,11 @@ export default function MatchView() {
     async function fetchAndSetInitialOdds() {
       setLoading(true);
       try {
-        const [oddsRes, cornerRes, bookingRes] = await Promise.all([
+        const [oddsRes, cornerRes] = await Promise.all([
           axios.post("/api/odds", payload),
           axios.post("/api/odds", cornerPayload),
-          axios.post("/api/odds", bookingPayload),
         ]);
-        const resData = [oddsRes, cornerRes, bookingRes];
-        console.log("response:", resData);
+        const resData = [oddsRes, cornerRes];
         let combinedOdds: IOddsDetail[] = [];
         resData.forEach((res) => {
           if (
