@@ -63,7 +63,7 @@ export default function OddsDetail({
             openItems={openItems}
             oddsStatus={oddsStatus}
             onValueChange={handleValueChange}
-            dataScreenInfo={dataScreenInfo.length > 1 ? dataScreenInfo[1] : dataScreenInfo[0]}
+            dataScreenInfo={dataScreenInfo[0]}
             disableOdds={disableBtn}
           />
         </TabsContent>
@@ -82,7 +82,7 @@ export default function OddsDetail({
             openItems={openItems}
             oddsStatus={oddsStatus}
             onValueChange={handleValueChange}
-            dataScreenInfo={dataScreenInfo.length > 1 ? dataScreenInfo[1] : dataScreenInfo[0]}
+            dataScreenInfo={dataScreenInfo[0]}
             disableOdds={disableBtn}
           />
         </TabsContent>
@@ -101,7 +101,7 @@ export default function OddsDetail({
             openItems={openItems}
             oddsStatus={oddsStatus}
             onValueChange={handleValueChange}
-            dataScreenInfo={dataScreenInfo.length > 1 ? dataScreenInfo[1] : dataScreenInfo[0]}
+            dataScreenInfo={dataScreenInfo[0]}
             disableOdds={disableBtn}
           />
         </TabsContent>
@@ -143,18 +143,24 @@ function RenderAccordion({
   });
   const [disableBtn, setDisableBtn] = useState(false);
 
+  const modifyValueForCornersLeague = (oddsName: String, value: string) => {
+    return oddsName.includes("Kèo góc") ? `${value} Corners` : value;
+  };
+  const modifyValueForCornersTeam = (oddsName: String, value: string) => {
+    return oddsName.includes("Kèo góc") ? `${value} (corners)` : value;
+  };
   const handleConfirmBet = async () => {
     setDisableBtn(true);
     const data = {
-      league_name: dataScreenInfo.league_name,
+      league_name: modifyValueForCornersLeague(oddsName, dataScreenInfo.league_name),
       team: dataScreenInfo.team,
       last_updated_odd: dataScreenInfo.last_updated_odd,
       liveStatus: dataScreenInfo.liveStatus,
       liveMinute: dataScreenInfo.liveMinute,
       liveScope: dataScreenInfo.liveScope,
       starts: dataScreenInfo.starts,
-      home: dataScreenInfo.home,
-      away: dataScreenInfo.away,
+      home: modifyValueForCornersTeam(oddsName, dataScreenInfo.home),
+      away: modifyValueForCornersTeam(oddsName, dataScreenInfo.away),
       game_type:
         oddsName === "Kèo tài xỉu - Toàn trận" ||
         oddsName === "Kèo tài xỉu - Hiệp 1" ||
