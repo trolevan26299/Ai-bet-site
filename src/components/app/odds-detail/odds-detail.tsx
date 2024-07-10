@@ -52,9 +52,10 @@ export default function OddsDetail({
     <>
       <Tabs defaultValue="1" className="w-full">
         <TabsList className={`w-full gap-3 justify-between`}>
-          <TabsTrigger value="1">Tất cả kèo</TabsTrigger>
-          <TabsTrigger value="2">Kèo cược chấp</TabsTrigger>
-          <TabsTrigger value="3">Kèo tài xỉu </TabsTrigger>
+          <TabsTrigger value="1">Tất cả </TabsTrigger>
+          <TabsTrigger value="2">Cược chấp</TabsTrigger>
+          <TabsTrigger value="3">Tài xỉu </TabsTrigger>
+          <TabsTrigger value="4">Phạt góc </TabsTrigger>
         </TabsList>
 
         <TabsContent value="1">
@@ -72,12 +73,12 @@ export default function OddsDetail({
           <RenderAccordion
             odds={odds.filter(
               (item) =>
-                item.name_Odds === "Kèo cược chấp - Toàn trận" ||
-                item.name_Odds === "Kèo cược chấp - Hiệp 1" ||
-                item.name_Odds === "Kèo góc cược chấp - Toàn trận" ||
-                item.name_Odds === "Kèo góc cược chấp - Hiệp 1" ||
-                item.name_Odds === "Kèo cược chấp - Hiệp phụ" ||
-                item.name_Odds === "Kèo 1X2 - Luân lưu"
+                item.name_Odds === "Cược chấp - Toàn trận" ||
+                item.name_Odds === "Cược chấp - Hiệp 1" ||
+                item.name_Odds === "Cược chấp phạt góc - Toàn trận" ||
+                item.name_Odds === "Cược chấp phạt góc - Hiệp 1" ||
+                item.name_Odds === "Cược chấp - Hiệp phụ" ||
+                item.name_Odds === "1X2 - Luân lưu"
             )}
             openItems={openItems}
             oddsStatus={oddsStatus}
@@ -91,12 +92,28 @@ export default function OddsDetail({
           <RenderAccordion
             odds={odds.filter(
               (item) =>
-                item.name_Odds === "Kèo tài xỉu - Toàn trận" ||
-                item.name_Odds === "Kèo tài xỉu - Hiệp 1" ||
-                item.name_Odds === "Kèo góc tài xỉu - Toàn trận" ||
-                item.name_Odds === "Kèo góc tài xỉu - Hiệp 1" ||
-                item.name_Odds === "Kèo tài xỉu - Hiệp phụ" ||
-                item.name_Odds === "Kèo tài xỉu - Luân lưu 10 quả"
+                item.name_Odds === "Tài xỉu - Toàn trận" ||
+                item.name_Odds === "Tài xỉu - Hiệp 1" ||
+                item.name_Odds === "Tài xỉu phạt góc - Toàn trận" ||
+                item.name_Odds === "Tài xỉu phạt góc - Hiệp 1" ||
+                item.name_Odds === "Tài xỉu - Hiệp phụ" ||
+                item.name_Odds === "Tài xỉu - Luân lưu 10 quả"
+            )}
+            openItems={openItems}
+            oddsStatus={oddsStatus}
+            onValueChange={handleValueChange}
+            dataScreenInfo={dataScreenInfo[0]}
+            disableOdds={disableBtn}
+          />
+        </TabsContent>
+        <TabsContent value="4">
+          <RenderAccordion
+            odds={odds.filter(
+              (item) =>
+                item.name_Odds === "Cược chấp phạt góc - Toàn trận" ||
+                item.name_Odds === "Cược chấp phạt góc - Hiệp 1" ||
+                item.name_Odds === "Tài xỉu phạt góc - Toàn trận" ||
+                item.name_Odds === "Tài xỉu phạt góc - Hiệp 1"
             )}
             openItems={openItems}
             oddsStatus={oddsStatus}
@@ -144,13 +161,13 @@ function RenderAccordion({
   const [disableBtn, setDisableBtn] = useState(false);
 
   const modifyValueForCornersLeague = (oddsName: String, value: string) => {
-    return oddsName.includes("Kèo góc") ? `${value} Corners` : value;
+    return oddsName.includes("góc") ? `${value} Corners` : value;
   };
   const modifyValueForCornersTeam = (oddsName: String, value: string) => {
-    return oddsName.includes("Kèo góc") ? `${value} (corners)` : value;
+    return oddsName.includes("góc") ? `${value} (corners)` : value;
   };
   const modifyValueForCornersTeamArray = (oddsName: String, value: string[]) => {
-    return oddsName.includes("Kèo góc") ? [`${value[0]} (corners)`, `${value[1]} (corners)`] : dataScreenInfo?.team;
+    return oddsName.includes("góc") ? [`${value[0]} (corners)`, `${value[1]} (corners)`] : dataScreenInfo?.team;
   };
 
   const handleConfirmBet = async () => {
@@ -166,31 +183,31 @@ function RenderAccordion({
       home: modifyValueForCornersTeam(oddsName, dataScreenInfo.home),
       away: modifyValueForCornersTeam(oddsName, dataScreenInfo.away),
       game_type:
-        oddsName === "Kèo tài xỉu - Toàn trận" ||
-        oddsName === "Kèo tài xỉu - Hiệp 1" ||
-        oddsName === "Kèo tài xỉu - Hiệp phụ" ||
-        oddsName === "Kèo tài xỉu - Luân lưu 10 quả" ||
-        oddsName === "Kèo góc tài xỉu - Toàn trận" ||
-        oddsName === "Kèo góc tài xỉu - Hiệp 1"
+        oddsName === "Tài xỉu - Toàn trận" ||
+        oddsName === "Tài xỉu - Hiệp 1" ||
+        oddsName === "Tài xỉu - Hiệp phụ" ||
+        oddsName === "Tài xỉu - Luân lưu 10 quả" ||
+        oddsName === "Tài xỉu phạt góc - Toàn trận" ||
+        oddsName === "Tài xỉu phạt góc - Hiệp 1"
           ? "over under"
-          : oddsName === "Kèo 1X2 - Luân lưu"
+          : oddsName === "1X2 - Luân lưu"
           ? "moneyline"
           : "handicap",
-      game_detail: oddsName === "Kèo 1X2 - Luân lưu" ? undefined : (selectedTeam?.rate_odds as number),
+      game_detail: oddsName === "1X2 - Luân lưu" ? undefined : (selectedTeam?.rate_odds as number),
       game_scope:
-        oddsName === "Kèo cược chấp - Toàn trận" ||
-        oddsName === "Kèo tài xỉu - Toàn trận" ||
-        oddsName === "Kèo góc cược chấp - Toàn trận" ||
-        oddsName === "Kèo góc tài xỉu - Toàn trận"
+        oddsName === "Cược chấp - Toàn trận" ||
+        oddsName === "Tài xỉu - Toàn trận" ||
+        oddsName === "Cược chấp phạt góc - Toàn trận" ||
+        oddsName === "Tài xỉu phạt góc - Toàn trận"
           ? "full time"
-          : oddsName === "Kèo cược chấp - Hiệp 1" ||
-            oddsName === "Kèo tài xỉu - Hiệp 1" ||
-            oddsName === "Kèo góc cược chấp - Hiệp 1" ||
-            oddsName === "Kèo góc tài xỉu - Hiệp 1"
+          : oddsName === "Cược chấp - Hiệp 1" ||
+            oddsName === "Tài xỉu - Hiệp 1" ||
+            oddsName === "Cược chấp phạt góc - Hiệp 1" ||
+            oddsName === "Tài xỉu phạt góc - Hiệp 1"
           ? "first half"
-          : oddsName === "Kèo 1X2 - Luân lưu"
+          : oddsName === "1X2 - Luân lưu"
           ? "penalty6"
-          : oddsName === "Kèo tài xỉu - Luân lưu 10 quả"
+          : oddsName === "Tài xỉu - Luân lưu 10 quả"
           ? "penalty7"
           : "extra time",
       odds: selectedTeam?.value as number,
@@ -199,7 +216,6 @@ function RenderAccordion({
       lineId: selectedTeam?.lineId as number,
       altLineId: selectedTeam?.altLineId as number,
     };
-    console.log(" data send ====> :", data);
     const body = {
       request_id: searchParams.get("request_id") || "",
       data: JSON.stringify(data),

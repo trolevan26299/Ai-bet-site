@@ -62,7 +62,7 @@ export const transformData = (data: IMatchData[], line: string) => {
 
       if (spreadsToanTran && spreadsToanTran?.length > 0) {
         result.push({
-          name_Odds: "Kèo cược chấp - Toàn trận",
+          name_Odds: "Cược chấp - Toàn trận",
           status: keoChinhToanTran?.status,
           detail: spreadsToanTran?.map((spread: IBetDetail) => [
             {
@@ -89,7 +89,7 @@ export const transformData = (data: IMatchData[], line: string) => {
       }
       if (spreadsHiep1 && spreadsHiep1.length > 0) {
         result?.push({
-          name_Odds: "Kèo cược chấp - Hiệp 1",
+          name_Odds: "Cược chấp - Hiệp 1",
           status: keoChinhHiep1?.status,
           detail: spreadsHiep1?.map((spread: IBetDetail) => [
             {
@@ -115,7 +115,7 @@ export const transformData = (data: IMatchData[], line: string) => {
       }
       if (spreadsHiepPhu && spreadsHiepPhu?.length > 0) {
         result.push({
-          name_Odds: "Kèo cược chấp - Hiệp phụ",
+          name_Odds: "Cược chấp - Hiệp phụ",
           status: keoChinhHiepPhu?.status,
           detail: spreadsHiepPhu?.map((spread: IBetDetail) => [
             {
@@ -143,7 +143,7 @@ export const transformData = (data: IMatchData[], line: string) => {
 
       if (totalTaiXiuToanTran && totalTaiXiuToanTran?.length > 0) {
         result.push({
-          name_Odds: "Kèo tài xỉu - Toàn trận",
+          name_Odds: "Tài xỉu - Toàn trận",
           status: keoChinhTaiXiuToanTran?.status,
           detail: totalTaiXiuToanTran?.map((total: IBetDetail) => [
             {
@@ -169,7 +169,7 @@ export const transformData = (data: IMatchData[], line: string) => {
       }
       if (totalTaiXiuHiep1 && totalTaiXiuHiep1?.length > 0) {
         result.push({
-          name_Odds: "Kèo tài xỉu - Hiệp 1",
+          name_Odds: "Tài xỉu - Hiệp 1",
           status: keoChinhTaiXiuHiep1?.status,
           detail: totalTaiXiuHiep1?.map((total: IBetDetail) => [
             {
@@ -195,7 +195,7 @@ export const transformData = (data: IMatchData[], line: string) => {
       }
       if (totalTaiXiuHiepPhu && totalTaiXiuHiepPhu?.length > 0) {
         result.push({
-          name_Odds: "Kèo tài xỉu - Hiệp phụ",
+          name_Odds: "Tài xỉu - Hiệp phụ",
           status: keoChinhTaiXiuHiepPhu?.status,
           detail: totalTaiXiuHiepPhu?.map((total: IBetDetail) => [
             {
@@ -221,7 +221,7 @@ export const transformData = (data: IMatchData[], line: string) => {
       }
       if (moneyLine1x2Pen && moneyLine1x2Pen?.length > 0) {
         result.push({
-          name_Odds: "Kèo 1X2 - Luân lưu",
+          name_Odds: "1X2 - Luân lưu",
           status: keoChinh1X2Pen?.status,
           detail: moneyLine1x2Pen?.map((spread: IBetDetail) => [
             {
@@ -246,7 +246,7 @@ export const transformData = (data: IMatchData[], line: string) => {
 
       if (totalTaiXiu10Pen && totalTaiXiu10Pen?.length > 0) {
         result.push({
-          name_Odds: "Kèo tài xỉu - Luân lưu 10 quả",
+          name_Odds: "Tài xỉu - Luân lưu 10 quả",
           status: keoChinhTaiXiu10Pen?.status,
           detail: totalTaiXiu10Pen?.map((total: IBetDetail) => [
             {

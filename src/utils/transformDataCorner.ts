@@ -51,7 +51,7 @@ export const transformDataCorner = (data: IMatchData[], line: string) => {
 
       if (gocCuocChapToanTran && gocCuocChapToanTran?.length > 0) {
         result.push({
-          name_Odds: "Kèo góc cược chấp - Toàn trận",
+          name_Odds: "Cược chấp phạt góc - Toàn trận",
           status: gocChinhCuocChapToanTran?.status,
           detail: gocCuocChapToanTran?.map((spread: IBetDetail) => [
             {
@@ -78,7 +78,7 @@ export const transformDataCorner = (data: IMatchData[], line: string) => {
       }
       if (gocCuocChapHiep1 && gocCuocChapHiep1.length > 0) {
         result?.push({
-          name_Odds: "Kèo góc cược chấp - Hiệp 1",
+          name_Odds: "Cược chấp phạt góc - Hiệp 1",
           status: gocChinhCuocChapHiep1?.status,
           detail: gocCuocChapHiep1?.map((spread: IBetDetail) => [
             {
@@ -105,7 +105,7 @@ export const transformDataCorner = (data: IMatchData[], line: string) => {
 
       if (gocTaiXiuToanTran && gocTaiXiuToanTran?.length > 0) {
         result.push({
-          name_Odds: "Kèo góc tài xỉu - Toàn trận",
+          name_Odds: "Tài xỉu phạt góc - Toàn trận",
           status: gocChinhTaiXiuToanTran?.status,
           detail: gocTaiXiuToanTran?.map((total: IBetDetail) => [
             {
@@ -131,7 +131,7 @@ export const transformDataCorner = (data: IMatchData[], line: string) => {
       }
       if (gocTaiXiuHiep1 && gocTaiXiuHiep1?.length > 0) {
         result.push({
-          name_Odds: "Kèo góc tài xỉu - Hiệp 1",
+          name_Odds: "Tài xỉu phạt góc - Hiệp 1",
           status: gocChinhTaiXiuHiep1?.status,
           detail: gocTaiXiuHiep1?.map((total: IBetDetail) => [
             {
