@@ -72,12 +72,20 @@ export default function OddsDetail({
       <Tabs defaultValue="1" className="w-full">
         <TabsList
           ref={tabsListRef}
-          className="w-full gap-3 justify-between overflow-x-hidden whitespace-nowrap scrollbar-hide h-[40px]"
+          className="w-full gap-3 justify-between overflow-x-hidden whitespace-nowrap scrollbar-hide h-[40px] p-0"
         >
-          <TabsTrigger value="1">Tất cả </TabsTrigger>
-          <TabsTrigger value="2">Cược chấp</TabsTrigger>
-          <TabsTrigger value="3">Tài xỉu </TabsTrigger>
-          <TabsTrigger value="4">Phạt góc </TabsTrigger>
+          <TabsTrigger value="1" className="px-[0.7rem]">
+            Tất cả{" "}
+          </TabsTrigger>
+          <TabsTrigger value="2" className="px-[0.7rem]">
+            Cược chấp
+          </TabsTrigger>
+          <TabsTrigger value="3" className="px-[0.7rem]">
+            Tài xỉu{" "}
+          </TabsTrigger>
+          <TabsTrigger value="4" className="px-[0.7rem]">
+            Phạt góc{" "}
+          </TabsTrigger>
         </TabsList>
 
         <TabsContent value="1">
@@ -97,8 +105,6 @@ export default function OddsDetail({
               (item) =>
                 item.name_Odds === "Cược chấp - Toàn trận" ||
                 item.name_Odds === "Cược chấp - Hiệp 1" ||
-                item.name_Odds === "Cược chấp phạt góc - Toàn trận" ||
-                item.name_Odds === "Cược chấp phạt góc - Hiệp 1" ||
                 item.name_Odds === "Cược chấp - Hiệp phụ" ||
                 item.name_Odds === "1X2 - Luân lưu"
             )}
@@ -116,8 +122,6 @@ export default function OddsDetail({
               (item) =>
                 item.name_Odds === "Tài xỉu - Toàn trận" ||
                 item.name_Odds === "Tài xỉu - Hiệp 1" ||
-                item.name_Odds === "Tài xỉu phạt góc - Toàn trận" ||
-                item.name_Odds === "Tài xỉu phạt góc - Hiệp 1" ||
                 item.name_Odds === "Tài xỉu - Hiệp phụ" ||
                 item.name_Odds === "Tài xỉu - Luân lưu 10 quả"
             )}
