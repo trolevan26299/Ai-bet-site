@@ -82,19 +82,21 @@ export default function OddsDetail({
       <Tabs defaultValue="1" className="w-full">
         <TabsList
           ref={tabsListRef}
-          className="w-full gap-3 justify-between overflow-x-hidden whitespace-nowrap scrollbar-hide h-[40px] p-0 scroll-smooth"
+          className={`w-full gap-3 justify-between overflow-x-hidden whitespace-nowrap scrollbar-hide h-[40px] ${
+            oddsCorner.length > 0 ? "p-0" : ""
+          } scroll-smooth`}
         >
-          <TabsTrigger value="1" className="px-[0.7rem]">
+          <TabsTrigger value="1" className={`${oddsCorner.length > 0 ? "px-[0.7rem]" : ""}`}>
             Tất cả{" "}
           </TabsTrigger>
-          <TabsTrigger value="2" className="px-[0.7rem]">
+          <TabsTrigger value="2" className={`${oddsCorner.length > 0 ? "px-[0.7rem]" : ""}`}>
             Cược chấp
           </TabsTrigger>
-          <TabsTrigger value="3" className="px-[0.7rem]">
+          <TabsTrigger value="3" className={`${oddsCorner.length > 0 ? "px-[0.7rem]" : ""}`}>
             Tài xỉu{" "}
           </TabsTrigger>
           {oddsCorner.length > 0 && (
-            <TabsTrigger value="4" className="px-[0.7rem]">
+            <TabsTrigger value="4" className={`${oddsCorner.length > 0 ? "px-[0.7rem]" : ""}`}>
               Phạt góc{" "}
             </TabsTrigger>
           )}
