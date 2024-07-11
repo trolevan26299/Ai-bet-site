@@ -140,7 +140,7 @@ const HistoryItem = ({ dataDetail, type }: { dataDetail: IHistoryBet; type?: str
           {utcToUtc7FormatNoSecond(dataDetail.eventStartTime)}{" "}
           {!type && dataDetail.pTeam1Score !== undefined && dataDetail.pTeam2Score !== undefined && (
             <span>
-              - Hiệp 1{" "}
+              - {dataDetail.periodNumber === 3 ? "Hiệp phụ" : "Hiệp 1"}{" "}
               <span className="text-[#ffe665]">
                 [{dataDetail.pTeam1Score}-{dataDetail.pTeam2Score}]
               </span>
@@ -148,7 +148,7 @@ const HistoryItem = ({ dataDetail, type }: { dataDetail: IHistoryBet; type?: str
           )}
           {!type && dataDetail.ftTeam1Score !== undefined && dataDetail.ftTeam2Score !== undefined && (
             <span>
-              - {dataDetail.periodNumber === 3 ? "Hiệp phụ" : "Cả trận"}{" "}
+              - Cả trận{" "}
               <span className="text-[#4181ff]">
                 [{dataDetail.ftTeam1Score}-{dataDetail.ftTeam2Score}]
               </span>

@@ -5,7 +5,7 @@
 import { IMatchData } from "@/types/odds.types";
 import { convertToGMT7 } from "@/utils/time";
 import { Icon } from "@iconify/react";
-import TeamLogo from "../../cloudinary/teamlogo";
+import TeamLogo from "./../../cloudinary/teamlogo";
 import { formatLiveScope } from "@/utils/formatLiveScope";
 
 export default function ScreenInfoMatch({ dataScreenInfo }: { dataScreenInfo: IMatchData[] }) {
@@ -34,7 +34,15 @@ export default function ScreenInfoMatch({ dataScreenInfo }: { dataScreenInfo: IM
                     ? convertToGMT7(dataScreenInfo[0]?.starts, "time")
                     : ""
                 }`}
-                {`${dataScreenInfo[0].liveMinute || ""} ${formatLiveScope(dataScreenInfo[0].liveState) || ""}`}
+                {`${
+                  dataScreenInfo[0].liveState !== 4 &&
+                  dataScreenInfo[0].liveState !== 6 &&
+                  dataScreenInfo[0].liveState !== 8 &&
+                  dataScreenInfo[0].liveState !== 9 &&
+                  dataScreenInfo[0].liveMinute
+                    ? dataScreenInfo[0].liveMinute
+                    : ""
+                } ${formatLiveScope(dataScreenInfo[0].liveState) || ""}`}
               </p>
             </div>
             <div className="flex justify-center items-center pt-2">
