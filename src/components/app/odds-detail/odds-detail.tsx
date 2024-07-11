@@ -58,6 +58,16 @@ export default function OddsDetail({
     setOpenItems(value);
   };
 
+  const oddsCorner = odds.filter(
+    (item) =>
+      item.name_Odds === "Cược chấp phạt góc - Toàn trận" ||
+      item.name_Odds === "Cược chấp phạt góc - Hiệp 1" ||
+      item.name_Odds === "Tài xỉu phạt góc - Toàn trận" ||
+      item.name_Odds === "Tài xỉu phạt góc - Hiệp 1"
+  );
+
+  console.log("oddsCorner", oddsCorner);
+
   useEffect(() => {
     const target = tabsListRef.current;
     if (target) {
