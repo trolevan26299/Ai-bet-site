@@ -38,12 +38,12 @@ export default function ScreenInfoMatch({ dataScreenInfo }: { dataScreenInfo: IM
               </p>
             </div>
             <div className="flex justify-center items-center pt-2">
-              <div className="flex flex-row justify-center gap-1 items-center w-[40px] text-white font-bold mr-2">
+              <div className="flex flex-row justify-center gap-1 items-center w-[40px] text-white font-bold mr-1">
                 {dataScreenInfo[0].homeRedCards !== 0 && (
                   <>
                     <p>{dataScreenInfo[0]?.homeRedCards}</p>
                     <div className="bg-red-600 w-2 h-3" />
-                    <Icon icon="game-icons:corner-flag" />
+                    <Icon icon="game-icons:corner-flag " width="12px" height="16px" />
                     <p>{dataScreenInfo[1]?.homeScore}</p>
                   </>
                 )}
@@ -61,12 +61,12 @@ export default function ScreenInfoMatch({ dataScreenInfo }: { dataScreenInfo: IM
               >
                 <p className="font-[600] text-[18px] text-[#fafafa] ">{dataScreenInfo[0].awayScore || 0}</p>
               </div>
-              <div className="flex flex-row justify-center gap-1 items-center w-[40px] ml-2 text-white font-bold">
+              <div className="flex flex-row justify-center gap-1 items-center w-[40px] ml-1 text-white font-bold">
                 {dataScreenInfo[0].awayRedCards !== 0 && (
                   <>
                     <div className="bg-red-600 w-2 h-3" />
                     <p>{dataScreenInfo[0]?.awayRedCards}</p>
-                    <Icon icon="game-icons:corner-flag" />
+                    <Icon icon="game-icons:corner-flag " width="12px" height="16px" />
                     <p>{dataScreenInfo[1]?.awayScore}</p>
                   </>
                 )}
