@@ -99,6 +99,7 @@ export default function MatchView() {
           }
 
           if (!oddsDataValid && !cornersDataValid) {
+            console.log("có vào màn hình lỗi ");
             setHaveError(true); // lỗi mà chưa kết thúc trận đấu trả về màn hình lỗi
           }
         }
