@@ -67,8 +67,9 @@ export default function MatchView() {
         ]);
 
         let combinedOdds: IOddsDetail[] = [];
-        let oddsDataValid = oddsRes?.data?.message?.answer?.length > 0;
-        let cornersDataValid = cornerRes?.data?.message?.answer?.length > 0;
+        let oddsDataValid = Array.isArray(oddsRes?.data?.message?.answer) && oddsRes?.data?.message?.answer.length > 0;
+        let cornersDataValid =
+          Array.isArray(cornerRes?.data?.message?.answer) && cornerRes?.data?.message?.answer.length > 0;
 
         if (oddsRes?.data?.message?.live_state === "ended" || cornerRes?.data?.message?.live_state === "ended") {
           setEndBet(true); // kết thúc trận đấu
@@ -127,8 +128,10 @@ export default function MatchView() {
         ]);
 
         let combinedLatestOdds: IOddsDetail[] = [];
-        let oddsDataValid = newOddsRes?.data?.message?.answer?.length > 0;
-        let cornersDataValid = newCornerRes?.data?.message?.answer?.length > 0;
+        let oddsDataValid =
+          Array.isArray(newOddsRes?.data?.message?.answer) && newOddsRes?.data?.message?.answer.length > 0;
+        let cornersDataValid =
+          Array.isArray(newCornerRes?.data?.message?.answer) && newCornerRes?.data?.message?.answer.length > 0;
 
         if (newOddsRes?.data?.message?.live_state === "ended" || newCornerRes?.data?.message?.live_state === "ended") {
           setEndBet(true); // kết thúc trận đấu
