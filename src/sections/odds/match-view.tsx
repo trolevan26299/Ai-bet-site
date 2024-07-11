@@ -75,7 +75,7 @@ export default function MatchView() {
           setEndBet(true); // kết thúc trận đấu
         } else {
           console.log("gọi được api3");
-          if (oddsRes?.data?.message?.answer?.length > 0) {
+          if (oddsDataValid) {
             const transformedData = transformData(oddsRes?.data?.message?.answer, lineParam ?? "3");
             setDataScreenInfo((prevData) => [...prevData, ...oddsRes?.data?.message?.answer]);
             combinedOdds = [
@@ -87,7 +87,7 @@ export default function MatchView() {
             ];
           }
           console.log("gọi được api4");
-          if (cornerRes?.data?.message?.answer?.length > 0) {
+          if (cornersDataValid) {
             console.log("gọi được api5");
             const transformedDataCorner = transformDataCorner(cornerRes?.data?.message?.answer, lineParam ?? "3");
             console.log("gọi được api6");
@@ -140,7 +140,7 @@ export default function MatchView() {
         if (newOddsRes?.data?.message?.live_state === "ended" || newCornerRes?.data?.message?.live_state === "ended") {
           setEndBet(true); // kết thúc trận đấu
         } else {
-          if (newOddsRes?.data?.message?.answer?.length > 0) {
+          if (oddsDataValid) {
             const transformedData = transformData(newOddsRes?.data?.message?.answer, lineParam ?? "3");
             setDataScreenInfo((prevData) => [...prevData, ...newOddsRes?.data?.message?.answer]);
             combinedLatestOdds = [
@@ -152,7 +152,7 @@ export default function MatchView() {
             ];
           }
 
-          if (newCornerRes?.data?.message?.answer?.length > 0) {
+          if (cornersDataValid) {
             const transformedDataCorner = transformDataCorner(newCornerRes?.data?.message?.answer, lineParam ?? "3");
             setDataScreenInfo((prevData) => [...prevData, ...newCornerRes?.data?.message?.answer]);
             combinedLatestOdds = [
