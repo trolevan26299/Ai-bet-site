@@ -93,9 +93,11 @@ export default function OddsDetail({
           <TabsTrigger value="3" className="px-[0.7rem]">
             Tài xỉu{" "}
           </TabsTrigger>
-          <TabsTrigger value="4" className="px-[0.7rem]">
-            Phạt góc{" "}
-          </TabsTrigger>
+          {oddsCorner.length > 0 && (
+            <TabsTrigger value="4" className="px-[0.7rem]">
+              Phạt góc{" "}
+            </TabsTrigger>
+          )}
         </TabsList>
 
         <TabsContent value="1">
