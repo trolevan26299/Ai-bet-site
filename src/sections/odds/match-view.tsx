@@ -67,13 +67,13 @@ export default function MatchView() {
         ]);
 
         let combinedOdds: IOddsDetail[] = [];
-        let isAnyDataValid = false;
+        let oddsDataValid = oddsRes?.data?.message?.answer?.length > 0;
+        let cornersDataValid = cornerRes?.data?.message?.answer?.length > 0;
 
         if (oddsRes?.data?.message?.live_state === "ended" || cornerRes?.data?.message?.live_state === "ended") {
           setEndBet(true); // kết thúc trận đấu
         } else {
           if (oddsRes?.data?.message?.answer?.length > 0) {
-            isAnyDataValid = true;
             const transformedData = transformData(oddsRes?.data?.message?.answer, lineParam ?? "3");
             setDataScreenInfo((prevData) => [...prevData, ...oddsRes?.data?.message?.answer]);
             combinedOdds = [
@@ -86,7 +86,6 @@ export default function MatchView() {
           }
 
           if (cornerRes?.data?.message?.answer?.length > 0) {
-            isAnyDataValid = true;
             const transformedDataCorner = transformDataCorner(cornerRes?.data?.message?.answer, lineParam ?? "3");
             setDataScreenInfo((prevData) => [...prevData, ...cornerRes?.data?.message?.answer]);
             combinedOdds = [
@@ -98,7 +97,7 @@ export default function MatchView() {
             ];
           }
 
-          if (!isAnyDataValid) {
+          if (!oddsDataValid && !cornersDataValid) {
             setHaveError(true); // lỗi mà chưa kết thúc trận đấu trả về màn hình lỗi
           }
         }
@@ -128,13 +127,13 @@ export default function MatchView() {
         ]);
 
         let combinedLatestOdds: IOddsDetail[] = [];
-        let isAnyDataValid = false;
+        let oddsDataValid = newOddsRes?.data?.message?.answer?.length > 0;
+        let cornersDataValid = newCornerRes?.data?.message?.answer?.length > 0;
 
         if (newOddsRes?.data?.message?.live_state === "ended" || newCornerRes?.data?.message?.live_state === "ended") {
           setEndBet(true); // kết thúc trận đấu
         } else {
           if (newOddsRes?.data?.message?.answer?.length > 0) {
-            isAnyDataValid = true;
             const transformedData = transformData(newOddsRes?.data?.message?.answer, lineParam ?? "3");
             setDataScreenInfo((prevData) => [...prevData, ...newOddsRes?.data?.message?.answer]);
             combinedLatestOdds = [
@@ -147,7 +146,6 @@ export default function MatchView() {
           }
 
           if (newCornerRes?.data?.message?.answer?.length > 0) {
-            isAnyDataValid = true;
             const transformedDataCorner = transformDataCorner(newCornerRes?.data?.message?.answer, lineParam ?? "3");
             setDataScreenInfo((prevData) => [...prevData, ...newCornerRes?.data?.message?.answer]);
             combinedLatestOdds = [
@@ -159,7 +157,7 @@ export default function MatchView() {
             ];
           }
 
-          if (!isAnyDataValid) {
+          if (!oddsDataValid && !cornersDataValid) {
             setErrorCount((prev) => prev + 1);
             if (errorCount >= 8) {
               setHaveError(true);
