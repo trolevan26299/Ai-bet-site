@@ -56,7 +56,7 @@ export default function ScreenInfoMatch({ dataScreenInfo }: { dataScreenInfo: IM
                   )}
 
                   <div className="flex flex-row justify-center gap-1 items-center">
-                    <Icon icon="game-icons:corner-flag" width="12px" height="16px" className="text-white" />
+                    <Icon icon="vaadin:corner-lower-left" width="12px" height="16px" className="text-white" />
                     <p className="text-sm">{dataScreenInfo[1]?.homeScore}</p>
                   </div>
                 </div>
@@ -84,7 +84,7 @@ export default function ScreenInfoMatch({ dataScreenInfo }: { dataScreenInfo: IM
                   )}
 
                   <div className="flex flex-row justify-center gap-1 items-center">
-                    <Icon icon="game-icons:corner-flag" width="12px" height="16px" className="text-white" />
+                    <Icon icon="vaadin:corner-lower-left" className="text-white" />
                     <p className="text-sm">{dataScreenInfo[1]?.awayScore}</p>
                   </div>
                 </div>
