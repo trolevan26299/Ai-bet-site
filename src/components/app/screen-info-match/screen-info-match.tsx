@@ -43,6 +43,8 @@ export default function ScreenInfoMatch({ dataScreenInfo }: { dataScreenInfo: IM
                   <>
                     <p>{dataScreenInfo[0]?.homeRedCards}</p>
                     <div className="bg-red-600 w-2 h-3" />
+                    <Icon icon="game-icons:corner-flag" />
+                    <p>{dataScreenInfo[1]?.homeScore}</p>
                   </>
                 )}
               </div>
@@ -64,6 +66,8 @@ export default function ScreenInfoMatch({ dataScreenInfo }: { dataScreenInfo: IM
                   <>
                     <div className="bg-red-600 w-2 h-3" />
                     <p>{dataScreenInfo[0]?.awayRedCards}</p>
+                    <Icon icon="game-icons:corner-flag" />
+                    <p>{dataScreenInfo[1]?.awayScore}</p>
                   </>
                 )}
               </div>
