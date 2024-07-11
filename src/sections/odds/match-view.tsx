@@ -65,15 +65,16 @@ export default function MatchView() {
           axios.post("/api/odds", payload),
           axios.post("/api/odds", cornerPayload),
         ]);
-
+        console.log("gọi được api1");
         let combinedOdds: IOddsDetail[] = [];
         let oddsDataValid = Array.isArray(oddsRes?.data?.message?.answer) && oddsRes?.data?.message?.answer.length > 0;
         let cornersDataValid =
           Array.isArray(cornerRes?.data?.message?.answer) && cornerRes?.data?.message?.answer.length > 0;
-
+        console.log("gọi được api1");
         if (oddsRes?.data?.message?.live_state === "ended" || cornerRes?.data?.message?.live_state === "ended") {
           setEndBet(true); // kết thúc trận đấu
         } else {
+          console.log("gọi được api3");
           if (oddsRes?.data?.message?.answer?.length > 0) {
             const transformedData = transformData(oddsRes?.data?.message?.answer, lineParam ?? "3");
             setDataScreenInfo((prevData) => [...prevData, ...oddsRes?.data?.message?.answer]);
@@ -85,9 +86,11 @@ export default function MatchView() {
               })),
             ];
           }
-
+          console.log("gọi được api4");
           if (cornerRes?.data?.message?.answer?.length > 0) {
+            console.log("gọi được api5");
             const transformedDataCorner = transformDataCorner(cornerRes?.data?.message?.answer, lineParam ?? "3");
+            console.log("gọi được api6");
             setDataScreenInfo((prevData) => [...prevData, ...cornerRes?.data?.message?.answer]);
             combinedOdds = [
               ...combinedOdds,
