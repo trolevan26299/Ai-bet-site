@@ -48,13 +48,13 @@ export default function ScreenInfoMatch({ dataScreenInfo }: { dataScreenInfo: IM
             <div className="flex justify-center items-center pt-2">
               <div className="flex flex-row justify-center gap-1 items-center w-[60px] text-white font-bold mr-1">
                 {dataScreenInfo[0].homeRedCards !== 0 && (
-                  <div className="flex flex-row justify-center gap-1 items-center">
+                  <div className="flex flex-row justify-center gap-[2px] items-center">
                     <div className="bg-red-600 w-2 h-3" />
                     <p className="text-sm">{dataScreenInfo[0]?.homeRedCards}</p>
                   </div>
                 )}
 
-                <div className="flex flex-row justify-center gap-1 items-center">
+                <div className="flex flex-row justify-center gap-[2px] items-center">
                   <Icon icon="vaadin:corner-lower-left" width="10px" height="10px" className="text-white" />
                   <p className="text-sm">{dataScreenInfo[1]?.homeScore}</p>
                 </div>
@@ -74,15 +74,15 @@ export default function ScreenInfoMatch({ dataScreenInfo }: { dataScreenInfo: IM
                 <p className="font-[600] text-[18px] text-[#fafafa] ">{dataScreenInfo[0].awayScore || 0}</p>
               </div>
 
-              <div className="flex flex-row justify-center gap-2 items-center w-[60px] ml-1 text-white font-bold">
+              <div className="flex flex-row justify-center gap-1 items-center w-[60px] ml-1 text-white font-bold">
                 {dataScreenInfo[0].awayRedCards !== 0 && (
-                  <div className="flex flex-row justify-center gap-1 items-center">
+                  <div className="flex flex-row justify-center gap-[2px] items-center">
                     <div className="bg-red-600 w-2 h-3" />
                     <p className="text-sm">{dataScreenInfo[0]?.awayRedCards}</p>
                   </div>
                 )}
 
-                <div className="flex flex-row justify-center gap-1 items-center">
+                <div className="flex flex-row justify-center gap-[2px] items-center">
                   <Icon icon="vaadin:corner-lower-left" width="10px" height="10px" className="text-white" />
                   <p className="text-sm">{dataScreenInfo[1]?.awayScore}</p>
                 </div>
