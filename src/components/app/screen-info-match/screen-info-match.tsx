@@ -49,17 +49,16 @@ export default function ScreenInfoMatch({ dataScreenInfo }: { dataScreenInfo: IM
               {(dataScreenInfo[0].homeRedCards !== 0 || dataScreenInfo[1]?.homeScore !== 0) && (
                 <div className="flex flex-row justify-center gap-1 items-center w-[60px] text-white font-bold mr-1">
                   {dataScreenInfo[0].homeRedCards !== 0 && (
-                    <div className="flex flex-row justify-center gap-1">
+                    <div className="flex flex-row justify-center gap-1 items-center">
                       <div className="bg-red-600 w-2 h-3" />
                       <p className="text-sm">{dataScreenInfo[0]?.homeRedCards}</p>
                     </div>
                   )}
-                  {dataScreenInfo[1]?.homeScore !== 0 && (
-                    <div className="flex flex-row justify-center gap-1">
-                      <Icon icon="game-icons:corner-flag" width="12px" height="16px" className="text-white" />
-                      <p className="text-sm">{dataScreenInfo[1]?.homeScore}</p>
-                    </div>
-                  )}
+
+                  <div className="flex flex-row justify-center gap-1 items-center">
+                    <Icon icon="game-icons:corner-flag" width="12px" height="16px" className="text-white" />
+                    <p className="text-sm">{dataScreenInfo[1]?.homeScore}</p>
+                  </div>
                 </div>
               )}
               <div
@@ -78,17 +77,16 @@ export default function ScreenInfoMatch({ dataScreenInfo }: { dataScreenInfo: IM
               {(dataScreenInfo[0].awayRedCards !== 0 || dataScreenInfo[1]?.awayScore !== 0) && (
                 <div className="flex flex-row justify-center gap-2 items-center w-[60px] ml-1 text-white font-bold">
                   {dataScreenInfo[0].awayRedCards !== 0 && (
-                    <div className="flex flex-row justify-center gap-1">
+                    <div className="flex flex-row justify-center gap-1 items-center">
                       <div className="bg-red-600 w-2 h-3" />
                       <p className="text-sm">{dataScreenInfo[0]?.awayRedCards}</p>
                     </div>
                   )}
-                  {dataScreenInfo[1]?.awayScore !== 0 && (
-                    <div className="flex flex-row justify-center gap-1">
-                      <Icon icon="game-icons:corner-flag" width="12px" height="16px" className="text-white" />
-                      <p className="text-sm">{dataScreenInfo[1]?.awayScore}</p>
-                    </div>
-                  )}
+
+                  <div className="flex flex-row justify-center gap-1 items-center">
+                    <Icon icon="game-icons:corner-flag" width="12px" height="16px" className="text-white" />
+                    <p className="text-sm">{dataScreenInfo[1]?.awayScore}</p>
+                  </div>
                 </div>
               )}
             </div>
