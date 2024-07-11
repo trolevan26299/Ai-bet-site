@@ -142,22 +142,24 @@ export default function OddsDetail({
             disableOdds={disableBtn}
           />
         </TabsContent>
-        <TabsContent value="4">
-          <RenderAccordion
-            odds={odds.filter(
-              (item) =>
-                item.name_Odds === "Cược chấp phạt góc - Toàn trận" ||
-                item.name_Odds === "Cược chấp phạt góc - Hiệp 1" ||
-                item.name_Odds === "Tài xỉu phạt góc - Toàn trận" ||
-                item.name_Odds === "Tài xỉu phạt góc - Hiệp 1"
-            )}
-            openItems={openItems}
-            oddsStatus={oddsStatus}
-            onValueChange={handleValueChange}
-            dataScreenInfo={dataScreenInfo[0]}
-            disableOdds={disableBtn}
-          />
-        </TabsContent>
+        {oddsCorner.length > 0 && (
+          <TabsContent value="4">
+            <RenderAccordion
+              odds={odds.filter(
+                (item) =>
+                  item.name_Odds === "Cược chấp phạt góc - Toàn trận" ||
+                  item.name_Odds === "Cược chấp phạt góc - Hiệp 1" ||
+                  item.name_Odds === "Tài xỉu phạt góc - Toàn trận" ||
+                  item.name_Odds === "Tài xỉu phạt góc - Hiệp 1"
+              )}
+              openItems={openItems}
+              oddsStatus={oddsStatus}
+              onValueChange={handleValueChange}
+              dataScreenInfo={dataScreenInfo[0]}
+              disableOdds={disableBtn}
+            />
+          </TabsContent>
+        )}
       </Tabs>
     </>
   );
