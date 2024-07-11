@@ -46,21 +46,20 @@ export default function ScreenInfoMatch({ dataScreenInfo }: { dataScreenInfo: IM
               </p>
             </div>
             <div className="flex justify-center items-center pt-2">
-              {(dataScreenInfo[0].homeRedCards !== 0 || dataScreenInfo[1]?.homeScore !== 0) && (
-                <div className="flex flex-row justify-center gap-1 items-center w-[60px] text-white font-bold mr-1">
-                  {dataScreenInfo[0].homeRedCards !== 0 && (
-                    <div className="flex flex-row justify-center gap-1 items-center">
-                      <div className="bg-red-600 w-2 h-3" />
-                      <p className="text-sm">{dataScreenInfo[0]?.homeRedCards}</p>
-                    </div>
-                  )}
-
+              <div className="flex flex-row justify-center gap-1 items-center w-[60px] text-white font-bold mr-1">
+                {dataScreenInfo[0].homeRedCards !== 0 && (
                   <div className="flex flex-row justify-center gap-1 items-center">
-                    <Icon icon="vaadin:corner-lower-left" width="12px" height="16px" className="text-white" />
-                    <p className="text-sm">{dataScreenInfo[1]?.homeScore}</p>
+                    <div className="bg-red-600 w-2 h-3" />
+                    <p className="text-sm">{dataScreenInfo[0]?.homeRedCards}</p>
                   </div>
+                )}
+
+                <div className="flex flex-row justify-center gap-1 items-center">
+                  <Icon icon="vaadin:corner-lower-left" width="12px" height="16px" className="text-white" />
+                  <p className="text-sm">{dataScreenInfo[1]?.homeScore}</p>
                 </div>
-              )}
+              </div>
+
               <div
                 style={{ backgroundColor: "rgba(255,255,255,0.1)", border: "1px solid rgba(255,255,255,0.4)" }}
                 className="h-8 w-9 flex items-center justify-center rounded-[8px]"
@@ -74,21 +73,20 @@ export default function ScreenInfoMatch({ dataScreenInfo }: { dataScreenInfo: IM
               >
                 <p className="font-[600] text-[18px] text-[#fafafa] ">{dataScreenInfo[0].awayScore || 0}</p>
               </div>
-              {(dataScreenInfo[0].awayRedCards !== 0 || dataScreenInfo[1]?.awayScore !== 0) && (
-                <div className="flex flex-row justify-center gap-2 items-center w-[60px] ml-1 text-white font-bold">
-                  {dataScreenInfo[0].awayRedCards !== 0 && (
-                    <div className="flex flex-row justify-center gap-1 items-center">
-                      <div className="bg-red-600 w-2 h-3" />
-                      <p className="text-sm">{dataScreenInfo[0]?.awayRedCards}</p>
-                    </div>
-                  )}
 
+              <div className="flex flex-row justify-center gap-2 items-center w-[60px] ml-1 text-white font-bold">
+                {dataScreenInfo[0].awayRedCards !== 0 && (
                   <div className="flex flex-row justify-center gap-1 items-center">
-                    <Icon icon="vaadin:corner-lower-left" className="text-white" />
-                    <p className="text-sm">{dataScreenInfo[1]?.awayScore}</p>
+                    <div className="bg-red-600 w-2 h-3" />
+                    <p className="text-sm">{dataScreenInfo[0]?.awayRedCards}</p>
                   </div>
+                )}
+
+                <div className="flex flex-row justify-center gap-1 items-center">
+                  <Icon icon="vaadin:corner-lower-left" className="text-white" />
+                  <p className="text-sm">{dataScreenInfo[1]?.awayScore}</p>
                 </div>
-              )}
+              </div>
             </div>
           </div>
         ) : (
