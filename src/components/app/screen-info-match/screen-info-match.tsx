@@ -56,7 +56,7 @@ export default function ScreenInfoMatch({ dataScreenInfo }: { dataScreenInfo: IM
                   )}
                   {dataScreenInfo[1]?.homeScore !== 0 && (
                     <div className="flex flex-row justify-center gap-1">
-                      <Icon icon="game-icons:corner-flag" width="12px" height="16px" />
+                      <Icon icon="game-icons:corner-flag" width="12px" height="16px" className="text-white" />
                       <p className="text-sm">{dataScreenInfo[1]?.homeScore}</p>
                     </div>
                   )}
@@ -85,7 +85,7 @@ export default function ScreenInfoMatch({ dataScreenInfo }: { dataScreenInfo: IM
                   )}
                   {dataScreenInfo[1]?.awayScore !== 0 && (
                     <div className="flex flex-row justify-center gap-1">
-                      <Icon icon="game-icons:corner-flag" width="12px" height="16px" />
+                      <Icon icon="game-icons:corner-flag" width="12px" height="16px" className="text-white" />
                       <p className="text-sm">{dataScreenInfo[1]?.awayScore}</p>
                     </div>
                   )}
