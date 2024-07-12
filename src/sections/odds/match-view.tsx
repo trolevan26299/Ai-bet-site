@@ -152,7 +152,7 @@ export default function MatchView() {
             const transformedData = transformData(newOddsRes?.data?.message?.answer, lineParam ?? "3");
             latestDataScreenInfo.push(
               Array.isArray(newOddsRes?.data?.message?.answer) && newOddsRes?.data?.message?.answer.length > 0
-                ? newOddsRes?.data?.message?.answer
+                ? newOddsRes?.data?.message?.answer[0]
                 : []
             );
             // setDataScreenInfo((prevData) => [...prevData, ...newOddsRes?.data?.message?.answer]);
@@ -169,7 +169,7 @@ export default function MatchView() {
             const transformedDataCorner = transformDataCorner(newCornerRes?.data?.message?.answer, lineParam ?? "3");
             latestDataScreenInfo.push(
               Array.isArray(newCornerRes?.data?.message?.answer) && newCornerRes?.data?.message?.answer.length > 0
-                ? newCornerRes?.data?.message?.answer
+                ? newCornerRes?.data?.message?.answer[0]
                 : []
             );
             // setDataScreenInfo((prevData) => [...prevData, ...newCornerRes?.data?.message?.answer]);
