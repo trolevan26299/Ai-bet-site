@@ -6,7 +6,7 @@ import { Theme } from "@radix-ui/themes";
 import "@radix-ui/themes/styles.css";
 import { Inter } from "next/font/google";
 import Script from "next/script";
-import dynamic from "next/dynamic";
+import "@telegram-apps/telegram-ui/dist/styles.css";
 
 import "./globals.css";
 
