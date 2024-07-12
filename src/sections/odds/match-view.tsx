@@ -117,7 +117,7 @@ export default function MatchView() {
 
         telegram?.webApp?.expand();
         closingBehavior.enableConfirmation();
-        swipeBehavior.enableVerticalSwipe();
+        swipeBehavior.disableVerticalSwipe();
       } catch (error: any) {
         console.log("Lỗi không xác định:", error);
         setHaveError(true);
