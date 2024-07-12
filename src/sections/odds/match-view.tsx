@@ -147,9 +147,15 @@ export default function MatchView() {
         if (newOddsRes?.data?.message?.live_state === "ended" || newCornerRes?.data?.message?.live_state === "ended") {
           setEndBet(true); // kết thúc trận đấu
         } else {
+          const latestDataScreenInfo = [];
           if (oddsDataValid) {
             const transformedData = transformData(newOddsRes?.data?.message?.answer, lineParam ?? "3");
-            setDataScreenInfo((prevData) => [...prevData, ...newOddsRes?.data?.message?.answer]);
+            latestDataScreenInfo.push(
+              Array.isArray(newOddsRes?.data?.message?.answer) && newOddsRes?.data?.message?.answer.length > 0
+                ? newOddsRes?.data?.message?.answer
+                : []
+            );
+            // setDataScreenInfo((prevData) => [...prevData, ...newOddsRes?.data?.message?.answer]);
             combinedLatestOdds = [
               ...combinedLatestOdds,
               ...(transformedData as IOddsDetail[]).map((item) => ({
@@ -161,7 +167,12 @@ export default function MatchView() {
 
           if (cornersDataValid) {
             const transformedDataCorner = transformDataCorner(newCornerRes?.data?.message?.answer, lineParam ?? "3");
-            setDataScreenInfo((prevData) => [...prevData, ...newCornerRes?.data?.message?.answer]);
+            latestDataScreenInfo.push(
+              Array.isArray(newCornerRes?.data?.message?.answer) && newCornerRes?.data?.message?.answer.length > 0
+                ? newCornerRes?.data?.message?.answer
+                : []
+            );
+            // setDataScreenInfo((prevData) => [...prevData, ...newCornerRes?.data?.message?.answer]);
             combinedLatestOdds = [
               ...combinedLatestOdds,
               ...(transformedDataCorner as IOddsDetail[]).map((item) => ({
@@ -170,7 +181,7 @@ export default function MatchView() {
               })),
             ];
           }
-
+          setDataScreenInfo(latestDataScreenInfo);
           if (!oddsDataValid && !cornersDataValid) {
             setErrorCount((prev) => prev + 1);
             if (errorCount >= 8) {
