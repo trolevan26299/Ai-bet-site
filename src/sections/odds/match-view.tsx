@@ -29,17 +29,31 @@ export default function MatchView() {
   const [iframeHeight, setIframeHeight] = useState("0px");
   const [errorCount, setErrorCount] = useState(0);
   const telegram = useTelegram();
+  console.log("dataScreenInfo:", dataScreenInfo);
+  console.log("odds:", odds);
+  console.log("latestOdds:", latestOdds);
 
   const matchParam = searchParams.get("match");
   const lineParam = searchParams.get("line");
   const tracker_id = searchParams.get("tracker_id");
+
+  console.log("matchParam:", matchParam);
+
+  const leagueNoCorner = (league?: string) => {
+    return league?.includes(" Corners") ? league?.replace(" Corners", "") : league;
+  };
+  const matchNoCorner = () => {
+    return matchParam?.split(",").map((item) => {
+      return item.includes(" (Corners)") ? item.replace(" (Corners)", "") : item;
+    });
+  };
   const payload = {
     request_id: searchParams.get("request_id"),
-    match: matchParam ? matchParam.split(",") : [],
+    match: matchParam ? matchNoCorner() : [],
     time: searchParams.get("time") || "next_week",
     from_date: searchParams.get("from_date"),
     to_date: searchParams.get("to_date"),
-    league: searchParams.get("league"),
+    league: leagueNoCorner(searchParams.get("league") || ""),
     game_type: "",
     game_detail: "",
     game_scope: "",

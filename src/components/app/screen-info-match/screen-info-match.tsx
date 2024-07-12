@@ -53,11 +53,12 @@ export default function ScreenInfoMatch({ dataScreenInfo }: { dataScreenInfo: IM
                     <p className="text-sm">{dataScreenInfo[0]?.homeRedCards}</p>
                   </div>
                 )}
-
-                <div className="flex flex-row justify-center gap-[2px] items-center">
-                  <Icon icon="vaadin:corner-lower-left" width="10px" height="10px" className="text-white" />
-                  <p className="text-sm">{dataScreenInfo[1]?.homeScore}</p>
-                </div>
+                {dataScreenInfo[1]?.homeScore !== undefined && (
+                  <div className="flex flex-row justify-center gap-[2px] items-center">
+                    <Icon icon="vaadin:corner-lower-left" width="10px" height="10px" className="text-white" />
+                    <p className="text-sm">{dataScreenInfo[1]?.homeScore}</p>
+                  </div>
+                )}
               </div>
 
               <div
@@ -81,11 +82,12 @@ export default function ScreenInfoMatch({ dataScreenInfo }: { dataScreenInfo: IM
                     <p className="text-sm">{dataScreenInfo[0]?.awayRedCards}</p>
                   </div>
                 )}
-
-                <div className="flex flex-row justify-center gap-[2px] items-center">
-                  <Icon icon="vaadin:corner-lower-left" width="10px" height="10px" className="text-white" />
-                  <p className="text-sm">{dataScreenInfo[1]?.awayScore}</p>
-                </div>
+                {dataScreenInfo[1]?.awayScore !== undefined && (
+                  <div className="flex flex-row justify-center gap-[2px] items-center">
+                    <Icon icon="vaadin:corner-lower-left" width="10px" height="10px" className="text-white" />
+                    <p className="text-sm">{dataScreenInfo[1]?.awayScore}</p>
+                  </div>
+                )}
               </div>
             </div>
           </div>
