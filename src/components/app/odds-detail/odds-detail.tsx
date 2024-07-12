@@ -44,6 +44,11 @@ export default function OddsDetail({
   disableBtn: boolean;
 }) {
   const tabsListRef = useRef<HTMLDivElement>(null);
+  const searchParams = useSearchParams();
+  const leagueParam = searchParams.get("league");
+
+  const [defaultTab, setDefaultTab] = useState("1");
+
   const handleMouseMove = (e: MouseEvent) => {
     if (tabsListRef.current) {
       const target = tabsListRef.current;
@@ -77,9 +82,15 @@ export default function OddsDetail({
       };
     }
   }, []);
+
+  useEffect(() => {
+    if (leagueParam?.includes("Corners") && oddsCorner.length > 0) {
+      setDefaultTab("4");
+    }
+  }, [leagueParam, oddsCorner]);
   return (
     <>
-      <Tabs defaultValue="1" className="w-full">
+      <Tabs defaultValue={defaultTab} className="w-full">
         <TabsList
           ref={tabsListRef}
           className={`w-full gap-3 justify-between overflow-x-hidden whitespace-nowrap scrollbar-hide h-[40px] ${
