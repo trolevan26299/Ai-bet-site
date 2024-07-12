@@ -8,6 +8,7 @@ import MainLayout from "@/layouts/main/layout";
 import { IMatchData, IOddsDetail, OddsStatusType } from "@/types/odds.types";
 import { transformDataCorner } from "@/utils/transformDataCorner";
 import { transformData } from "@/utils/transformDataOdds";
+import { initClosingBehavior } from "@telegram-apps/sdk-react";
 import axios from "axios";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
@@ -29,15 +30,11 @@ export default function MatchView() {
   const [iframeHeight, setIframeHeight] = useState("0px");
   const [errorCount, setErrorCount] = useState(0);
   const telegram = useTelegram();
-  console.log("dataScreenInfo:", dataScreenInfo);
-  console.log("odds:", odds);
-  console.log("latestOdds:", latestOdds);
+  const [closingBehavior] = initClosingBehavior();
 
   const matchParam = searchParams.get("match");
   const lineParam = searchParams.get("line");
   const tracker_id = searchParams.get("tracker_id");
-
-  console.log("matchParam:", matchParam);
 
   const leagueNoCorner = (league?: string) => {
     return league?.includes(" Corners") ? league?.replace(" Corners", "") : league;
@@ -118,6 +115,7 @@ export default function MatchView() {
         setLatestOdds(combinedOdds as unknown as IOddsDetail[]);
 
         telegram?.webApp?.expand();
+        closingBehavior.enableConfirmation();
       } catch (error: any) {
         console.log("Lỗi không xác định:", error);
         setHaveError(true);

@@ -6,6 +6,7 @@ import { Theme } from "@radix-ui/themes";
 import "@radix-ui/themes/styles.css";
 import { Inter } from "next/font/google";
 import Script from "next/script";
+import { SDKProvider } from "@telegram-apps/sdk-react";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -43,11 +44,13 @@ export default function RootLayout({
             __html: `<iframe src="https://www.googletagmanager.com/ns.html?id=${GOOGLE_TAG_MANAGER_ID}" height="0" width="0" style="display: none; visibility: hidden;" />`,
           }}
         />
-        <TelegramProvider>
-          <Theme>
-            <MotionLazy>{children}</MotionLazy>
-          </Theme>
-        </TelegramProvider>
+        <SDKProvider acceptCustomStyles debug>
+          <TelegramProvider>
+            <Theme>
+              <MotionLazy>{children}</MotionLazy>
+            </Theme>
+          </TelegramProvider>
+        </SDKProvider>
       </body>
     </html>
   );
