@@ -82,13 +82,13 @@ export default function ScreenInfoMatch({ dataScreenInfo }: { dataScreenInfo: IM
                     <p className="text-sm">{dataScreenInfo[0]?.awayRedCards}</p>
                   </div>
                 )}
-                {dataScreenInfo[1]?.awayScore !== undefined && (
-                  <div className="flex flex-row justify-center gap-[2px] items-center">
-                    {/* <Icon icon="vaadin:corner-lower-left" width="10px" height="10px" className="text-white" /> */}
-                    <img src="/assets/corner.svg" alt="" width="10px" height="10px" />
-                    <p className="text-sm">{dataScreenInfo[1]?.awayScore}</p>
-                  </div>
-                )}
+                {/* {dataScreenInfo[1]?.awayScore !== undefined && ( */}
+                <div className="flex flex-row justify-center gap-[2px] items-center">
+                  {/* <Icon icon="vaadin:corner-lower-left" width="10px" height="10px" className="text-white" /> */}
+                  <img src="/assets/corner.svg" alt="" width="10px" height="10px" />
+                  <p className="text-sm">{dataScreenInfo[1]?.awayScore}</p>
+                </div>
+                {/* )} */}
               </div>
             </div>
           </div>
