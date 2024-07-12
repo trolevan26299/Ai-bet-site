@@ -225,6 +225,9 @@ function RenderAccordion({
   const modifyValueForCornersTeamArray = (oddsName: String, value: string[]) => {
     return oddsName.includes("góc") ? [`${value[0]} (corners)`, `${value[1]} (corners)`] : dataScreenInfo?.team;
   };
+  const handleResultingUnit = (oddsName: String) => {
+    return oddsName.includes("góc") ? "Corners" : "Regular";
+  };
 
   const handleConfirmBet = async () => {
     setDisableBtn(true);
@@ -271,6 +274,7 @@ function RenderAccordion({
       eventId: selectedTeam?.eventId as number,
       lineId: selectedTeam?.lineId as number,
       altLineId: selectedTeam?.altLineId as number,
+      resultingUnit: handleResultingUnit(oddsName),
     };
     const body = {
       request_id: searchParams.get("request_id") || "",
