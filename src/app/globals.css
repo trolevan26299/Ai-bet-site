@@ -15,6 +15,6 @@
       position: fixed;
       width: 100%;
     }
-    @apply bg-background text-foreground;
+    @apply text-foreground;
   }
 }
