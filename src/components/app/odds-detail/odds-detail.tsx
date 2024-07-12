@@ -85,6 +85,7 @@ export default function OddsDetail({
 
   useEffect(() => {
     if (leagueParam?.includes("Corners") && oddsCorner.length > 0) {
+      console.log("có vào đây-------------");
       setDefaultTab("4");
     }
   }, [leagueParam, oddsCorner]);
