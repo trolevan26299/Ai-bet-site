@@ -48,6 +48,7 @@ export default function OddsDetail({
   const leagueParam = searchParams.get("league");
 
   const [defaultTab, setDefaultTab] = useState("1");
+  console.log("defaultTab", defaultTab);
 
   const handleMouseMove = (e: MouseEvent) => {
     if (tabsListRef.current) {
@@ -85,8 +86,9 @@ export default function OddsDetail({
 
   useEffect(() => {
     if (leagueParam?.includes("Corners") && oddsCorner.length > 0) {
-      console.log("có vào đây-------------");
       setDefaultTab("4");
+    } else {
+      setDefaultTab("1");
     }
   }, [leagueParam, oddsCorner]);
   return (
