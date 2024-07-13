@@ -71,11 +71,6 @@
     @apply border-border;
   }
   body {
-    .body-lock {
-      overflow: hidden;
-      position: fixed;
-      width: 100%;
-    }
     @apply bg-background text-foreground;
   }
 }
