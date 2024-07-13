@@ -48,8 +48,6 @@ export default function OddsDetail({
   const leagueParam = searchParams.get("league");
 
   const [defaultTab, setDefaultTab] = useState("1");
-  console.log("defaultTab", defaultTab);
-
   const handleMouseMove = (e: MouseEvent) => {
     if (tabsListRef.current) {
       const target = tabsListRef.current;
@@ -71,8 +69,6 @@ export default function OddsDetail({
       item.name_Odds === "Tài xỉu phạt góc - Toàn trận" ||
       item.name_Odds === "Tài xỉu phạt góc - Hiệp 1"
   );
-
-  console.log("oddsCorner", oddsCorner);
 
   useEffect(() => {
     const target = tabsListRef.current;

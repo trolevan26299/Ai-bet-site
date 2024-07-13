@@ -29,7 +29,6 @@ export default function MatchView() {
   const [iframeHeight, setIframeHeight] = useState("0px");
   const [errorCount, setErrorCount] = useState(0);
   const telegram = useTelegram();
-  console.log("latestOdds", latestOdds);
   const matchParam = searchParams.get("match");
   const lineParam = searchParams.get("line");
   const tracker_id = searchParams.get("tracker_id");
@@ -54,7 +53,8 @@ export default function MatchView() {
     game_scope: "",
     filter_by: "and",
   };
-
+  console.log("odds", odds);
+  console.log("latestOdds", latestOdds);
   // payload lấy kèo góc
   const cornerPayload = {
     ...payload,
