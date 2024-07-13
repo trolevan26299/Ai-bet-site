@@ -134,6 +134,7 @@ export default function MatchView() {
         ]);
 
         let combinedLatestOdds: IOddsDetail[] = [];
+        console.log("combinedLatestOdds:", combinedLatestOdds);
         let oddsDataValid =
           Array.isArray(newOddsRes?.data?.message?.answer) && newOddsRes?.data?.message?.answer.length > 0;
         let cornersDataValid =
