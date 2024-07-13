@@ -86,7 +86,7 @@ export default function MatchView() {
           if (oddsDataValid) {
             const transformedData = transformData(oddsRes?.data?.message?.answer, lineParam ?? "3");
             // setDataScreenInfo((prevData) => [...prevData, ...oddsRes?.data?.message?.answer]);
-            await dataScreenInfoFirst.push(oddsRes?.data?.message?.answer[0] || []);
+            await dataScreenInfoFirst.push(oddsRes?.data?.message?.answer[0] || {});
             combinedOdds = [
               ...combinedOdds,
               ...(transformedData as IOddsDetail[]).map((item) => ({
@@ -98,7 +98,7 @@ export default function MatchView() {
           if (cornersDataValid) {
             const transformedDataCorner = transformDataCorner(cornerRes?.data?.message?.answer, lineParam ?? "3");
             // setDataScreenInfo((prevData) => [...prevData, ...cornerRes?.data?.message?.answer]);
-            await dataScreenInfoFirst.push(cornerRes?.data?.message?.answer[0] || []);
+            await dataScreenInfoFirst.push(cornerRes?.data?.message?.answer[0] || {});
 
             combinedOdds = [
               ...combinedOdds,
@@ -171,7 +171,7 @@ export default function MatchView() {
             latestDataScreenInfo.push(
               Array.isArray(newCornerRes?.data?.message?.answer) && newCornerRes?.data?.message?.answer?.length > 0
                 ? newCornerRes?.data?.message?.answer[0]
-                : []
+                : {}
             );
             // setDataScreenInfo((prevData) => [...prevData, ...newCornerRes?.data?.message?.answer]);
             combinedLatestOdds = [
