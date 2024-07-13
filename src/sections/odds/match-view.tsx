@@ -145,13 +145,9 @@ export default function MatchView() {
           setEndBet(true); // kết thúc trận đấu
         } else {
           const latestDataScreenInfo = [];
-          if (oddsDataValid) {
+          if (oddsDataValid === true) {
             const transformedData = transformData(newOddsRes?.data?.message?.answer, lineParam ?? "3");
-            latestDataScreenInfo.push(
-              Array.isArray(newOddsRes?.data?.message?.answer) && newOddsRes?.data?.message?.answer.length > 0
-                ? newOddsRes?.data?.message?.answer[0]
-                : dataScreenInfo[0]
-            );
+            latestDataScreenInfo.push(newOddsRes?.data?.message?.answer[0]);
 
             combinedLatestOdds = [
               ...combinedLatestOdds,
@@ -162,13 +158,9 @@ export default function MatchView() {
             ];
           }
 
-          if (cornersDataValid) {
+          if (cornersDataValid === true) {
             const transformedDataCorner = transformDataCorner(newCornerRes?.data?.message?.answer, lineParam ?? "3");
-            latestDataScreenInfo.push(
-              Array.isArray(newCornerRes?.data?.message?.answer) && newCornerRes?.data?.message?.answer.length > 0
-                ? newCornerRes?.data?.message?.answer[0]
-                : {}
-            );
+            latestDataScreenInfo.push(newCornerRes?.data?.message?.answer[0]);
 
             combinedLatestOdds = [
               ...combinedLatestOdds,
@@ -178,7 +170,10 @@ export default function MatchView() {
               })),
             ];
           }
-          setDataScreenInfo(latestDataScreenInfo);
+          // Kiểm tra nếu cả hai đều là mảng rỗng thì không cập nhật dataScreenInfo
+          if (latestDataScreenInfo.length > 0) {
+            setDataScreenInfo(latestDataScreenInfo);
+          }
           if ((!oddsDataValid && !cornersDataValid) || !oddsDataValid) {
             setErrorCount((prev) => prev + 1);
             if (errorCount >= 8) {
