@@ -157,13 +157,19 @@ export default function MatchView() {
                 : dataScreenInfo[0]
             );
             // setDataScreenInfo((prevData) => [...prevData, ...newOddsRes?.data?.message?.answer]);
-            combinedLatestOdds = [
-              ...combinedLatestOdds,
+            // combinedLatestOdds = [
+            //   ...combinedLatestOdds,
+            //   ...(transformedData as IOddsDetail[]).map((item) => ({
+            //     ...item,
+            //     status: item.status ?? 0,
+            //   })),
+            // ];
+            combinedLatestOdds.push(
               ...(transformedData as IOddsDetail[]).map((item) => ({
                 ...item,
                 status: item.status ?? 0,
-              })),
-            ];
+              }))
+            );
           }
 
           if (cornersDataValid) {
@@ -174,13 +180,19 @@ export default function MatchView() {
                 : {}
             );
             // setDataScreenInfo((prevData) => [...prevData, ...newCornerRes?.data?.message?.answer]);
-            combinedLatestOdds = [
-              ...combinedLatestOdds,
+            // combinedLatestOdds = [
+            //   ...combinedLatestOdds,
+            //   ...(transformedDataCorner as IOddsDetail[]).map((item) => ({
+            //     ...item,
+            //     status: item.status ?? 0,
+            //   })),
+            // ];
+            combinedLatestOdds.push(
               ...(transformedDataCorner as IOddsDetail[]).map((item) => ({
                 ...item,
                 status: item.status ?? 0,
-              })),
-            ];
+              }))
+            );
           }
           setDataScreenInfo(latestDataScreenInfo);
           if ((!oddsDataValid && !cornersDataValid) || !oddsDataValid) {
@@ -192,9 +204,9 @@ export default function MatchView() {
             }
           }
 
-          if (combinedLatestOdds.length > 0) {
+          if (combinedLatestOdds?.length > 0) {
             const newOddsStatus: OddsStatusType = {};
-            combinedLatestOdds.forEach((latestOdd, index) => {
+            combinedLatestOdds?.forEach((latestOdd, index) => {
               latestOdd?.detail?.forEach((latestDetail, detailIndex) => {
                 latestDetail?.forEach((latestOddDetail, oddDetailIndex) => {
                   const key = `${index}-${detailIndex}-${oddDetailIndex}`;
