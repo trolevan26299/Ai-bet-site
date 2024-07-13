@@ -82,9 +82,11 @@ export default function MatchView() {
         if (oddsRes?.data?.message?.live_state === "ended" || cornerRes?.data?.message?.live_state === "ended") {
           setEndBet(true); // kết thúc trận đấu
         } else {
+          const dataScreenInfoFirst = [];
           if (oddsDataValid) {
             const transformedData = transformData(oddsRes?.data?.message?.answer, lineParam ?? "3");
-            setDataScreenInfo((prevData) => [...prevData, ...oddsRes?.data?.message?.answer]);
+            // setDataScreenInfo((prevData) => [...prevData, ...oddsRes?.data?.message?.answer]);
+            await dataScreenInfoFirst.push(oddsRes?.data?.message?.answer[0] || []);
             combinedOdds = [
               ...combinedOdds,
               ...(transformedData as IOddsDetail[]).map((item) => ({
@@ -95,7 +97,9 @@ export default function MatchView() {
           }
           if (cornersDataValid) {
             const transformedDataCorner = transformDataCorner(cornerRes?.data?.message?.answer, lineParam ?? "3");
-            setDataScreenInfo((prevData) => [...prevData, ...cornerRes?.data?.message?.answer]);
+            // setDataScreenInfo((prevData) => [...prevData, ...cornerRes?.data?.message?.answer]);
+            await dataScreenInfoFirst.push(cornerRes?.data?.message?.answer[0] || []);
+
             combinedOdds = [
               ...combinedOdds,
               ...(transformedDataCorner as IOddsDetail[]).map((item) => ({
