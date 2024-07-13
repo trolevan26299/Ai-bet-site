@@ -156,20 +156,20 @@ export default function MatchView() {
                 ? newOddsRes?.data?.message?.answer[0]
                 : dataScreenInfo[0]
             );
-            // setDataScreenInfo((prevData) => [...prevData, ...newOddsRes?.data?.message?.answer]);
-            // combinedLatestOdds = [
-            //   ...combinedLatestOdds,
-            //   ...(transformedData as IOddsDetail[]).map((item) => ({
-            //     ...item,
-            //     status: item.status ?? 0,
-            //   })),
-            // ];
-            combinedLatestOdds.push(
+            setDataScreenInfo((prevData) => [...prevData, ...newOddsRes?.data?.message?.answer]);
+            combinedLatestOdds = [
+              ...combinedLatestOdds,
               ...(transformedData as IOddsDetail[]).map((item) => ({
                 ...item,
                 status: item.status ?? 0,
-              }))
-            );
+              })),
+            ];
+            // combinedLatestOdds.push(
+            //   ...(transformedData as IOddsDetail[]).map((item) => ({
+            //     ...item,
+            //     status: item.status ?? 0,
+            //   }))
+            // );
           }
 
           if (cornersDataValid) {
@@ -179,20 +179,20 @@ export default function MatchView() {
                 ? newCornerRes?.data?.message?.answer[0]
                 : {}
             );
-            // setDataScreenInfo((prevData) => [...prevData, ...newCornerRes?.data?.message?.answer]);
-            // combinedLatestOdds = [
-            //   ...combinedLatestOdds,
-            //   ...(transformedDataCorner as IOddsDetail[]).map((item) => ({
-            //     ...item,
-            //     status: item.status ?? 0,
-            //   })),
-            // ];
-            combinedLatestOdds.push(
+            setDataScreenInfo((prevData) => [...prevData, ...newCornerRes?.data?.message?.answer]);
+            combinedLatestOdds = [
+              ...combinedLatestOdds,
               ...(transformedDataCorner as IOddsDetail[]).map((item) => ({
                 ...item,
                 status: item.status ?? 0,
-              }))
-            );
+              })),
+            ];
+            // combinedLatestOdds.push(
+            //   ...(transformedDataCorner as IOddsDetail[]).map((item) => ({
+            //     ...item,
+            //     status: item.status ?? 0,
+            //   }))
+            // );
           }
           setDataScreenInfo(latestDataScreenInfo);
           if ((!oddsDataValid && !cornersDataValid) || !oddsDataValid) {
