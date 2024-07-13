@@ -33,7 +33,6 @@ export default function MatchView() {
   const matchParam = searchParams.get("match");
   const lineParam = searchParams.get("line");
   const tracker_id = searchParams.get("tracker_id");
-  console.log("oddStatus", oddsStatus);
 
   const leagueNoCorner = (league?: string) => {
     return league?.includes(" Corners") ? league?.replace(" Corners", "") : league;
@@ -136,16 +135,18 @@ export default function MatchView() {
 
         let combinedLatestOdds: IOddsDetail[] = [];
 
-        let oddsDataValid =
+        const oddsDataValid =
           Array.isArray(newOddsRes?.data?.message?.answer) && newOddsRes?.data?.message?.answer.length > 0;
-        let cornersDataValid =
+        const cornersDataValid =
           Array.isArray(newCornerRes?.data?.message?.answer) && newCornerRes?.data?.message?.answer.length > 0;
-
+        console.log("oddsDataValid:", oddsDataValid);
+        console.log("cornersDataValid:", cornersDataValid);
         if (newOddsRes?.data?.message?.live_state === "ended" || newCornerRes?.data?.message?.live_state === "ended") {
           setEndBet(true); // kết thúc trận đấu
         } else {
           const latestDataScreenInfo = [];
           if (oddsDataValid === true) {
+            console.log("odd hợp lệ ");
             const transformedData = transformData(newOddsRes?.data?.message?.answer, lineParam ?? "3");
             latestDataScreenInfo.push(newOddsRes?.data?.message?.answer[0]);
 
@@ -159,6 +160,7 @@ export default function MatchView() {
           }
 
           if (cornersDataValid === true) {
+            console.log("corner hợp lệ ");
             const transformedDataCorner = transformDataCorner(newCornerRes?.data?.message?.answer, lineParam ?? "3");
             latestDataScreenInfo.push(newCornerRes?.data?.message?.answer[0]);
 
