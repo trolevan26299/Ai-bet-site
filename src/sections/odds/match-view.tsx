@@ -8,7 +8,6 @@ import MainLayout from "@/layouts/main/layout";
 import { IMatchData, IOddsDetail, OddsStatusType } from "@/types/odds.types";
 import { transformDataCorner } from "@/utils/transformDataCorner";
 import { transformData } from "@/utils/transformDataOdds";
-import { initClosingBehavior, initSwipeBehavior } from "@telegram-apps/sdk-react";
 import axios from "axios";
 import Image from "next/image";
 import { useSearchParams } from "next/navigation";
@@ -30,8 +29,7 @@ export default function MatchView() {
   const [iframeHeight, setIframeHeight] = useState("0px");
   const [errorCount, setErrorCount] = useState(0);
   const telegram = useTelegram();
-  const [closingBehavior] = initClosingBehavior();
-  const [swipeBehavior] = initSwipeBehavior();
+
   const matchParam = searchParams.get("match");
   const lineParam = searchParams.get("line");
   const tracker_id = searchParams.get("tracker_id");
@@ -115,8 +113,6 @@ export default function MatchView() {
         setLatestOdds(combinedOdds as unknown as IOddsDetail[]);
 
         telegram?.webApp?.expand();
-        closingBehavior.enableConfirmation();
-        swipeBehavior.disableVerticalSwipe();
       } catch (error: any) {
         console.log("Lỗi không xác định:", error);
         setHaveError(true);
@@ -152,7 +148,7 @@ export default function MatchView() {
             latestDataScreenInfo.push(
               Array.isArray(newOddsRes?.data?.message?.answer) && newOddsRes?.data?.message?.answer.length > 0
                 ? newOddsRes?.data?.message?.answer[0]
-                : []
+                : dataScreenInfo[0]
             );
             // setDataScreenInfo((prevData) => [...prevData, ...newOddsRes?.data?.message?.answer]);
             combinedLatestOdds = [
@@ -181,7 +177,7 @@ export default function MatchView() {
             ];
           }
           setDataScreenInfo(latestDataScreenInfo);
-          if (!oddsDataValid && !cornersDataValid) {
+          if ((!oddsDataValid && !cornersDataValid) || !oddsDataValid) {
             setErrorCount((prev) => prev + 1);
             if (errorCount >= 8) {
               setHaveError(true);
