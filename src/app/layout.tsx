@@ -7,7 +7,6 @@ import "@radix-ui/themes/styles.css";
 import { Inter } from "next/font/google";
 import Script from "next/script";
 import "@telegram-apps/telegram-ui/dist/styles.css";
-import "./_assets/globals.css";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
