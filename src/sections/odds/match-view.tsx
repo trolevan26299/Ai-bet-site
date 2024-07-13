@@ -55,6 +55,7 @@ export default function MatchView() {
   };
   console.log("odds", odds);
   console.log("latestOdds", latestOdds);
+  console.log("dataScreenInfo", dataScreenInfo);
   // payload lấy kèo góc
   const cornerPayload = {
     ...payload,
@@ -138,7 +139,7 @@ export default function MatchView() {
         let oddsDataValid =
           Array.isArray(newOddsRes?.data?.message?.answer) && newOddsRes?.data?.message?.answer.length > 0;
         let cornersDataValid =
-          Array.isArray(newCornerRes?.data?.message?.answer) && newCornerRes?.data?.message?.answer.length > 0;
+          Array.isArray(newCornerRes?.data?.message?.answer) && newCornerRes?.data?.message?.answer?.length > 0;
 
         if (newOddsRes?.data?.message?.live_state === "ended" || newCornerRes?.data?.message?.live_state === "ended") {
           setEndBet(true); // kết thúc trận đấu
@@ -164,7 +165,7 @@ export default function MatchView() {
           if (cornersDataValid) {
             const transformedDataCorner = transformDataCorner(newCornerRes?.data?.message?.answer, lineParam ?? "3");
             latestDataScreenInfo.push(
-              Array.isArray(newCornerRes?.data?.message?.answer) && newCornerRes?.data?.message?.answer.length > 0
+              Array.isArray(newCornerRes?.data?.message?.answer) && newCornerRes?.data?.message?.answer?.length > 0
                 ? newCornerRes?.data?.message?.answer[0]
                 : []
             );
