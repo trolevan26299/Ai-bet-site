@@ -170,7 +170,7 @@ export default function MatchView() {
             latestDataScreenInfo.push(
               Array.isArray(newCornerRes?.data?.message?.answer) && newCornerRes?.data?.message?.answer.length > 0
                 ? newCornerRes?.data?.message?.answer[0]
-                : []
+                : {}
             );
 
             combinedLatestOdds = [
@@ -191,9 +191,9 @@ export default function MatchView() {
             }
           }
 
-          if (combinedLatestOdds.length > 0) {
+          if (combinedLatestOdds?.length > 0) {
             const newOddsStatus: OddsStatusType = {};
-            combinedLatestOdds.forEach((latestOdd, index) => {
+            combinedLatestOdds?.forEach((latestOdd, index) => {
               latestOdd?.detail?.forEach((latestDetail, detailIndex) => {
                 latestDetail?.forEach((latestOddDetail, oddDetailIndex) => {
                   const key = `${index}-${detailIndex}-${oddDetailIndex}`;
