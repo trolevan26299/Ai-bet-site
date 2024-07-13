@@ -187,10 +187,12 @@ export default function MatchView() {
               setDisableBtn(true); // lỗi mà chưa kết thúc trận đấu
             }
           }
+          setOdds(latestOdds?.length > 0 ? latestOdds : combinedLatestOdds);
+          setLatestOdds(combinedLatestOdds);
 
           if (combinedLatestOdds?.length > 0) {
             const newOddsStatus: OddsStatusType = {};
-            combinedLatestOdds?.forEach((latestOdd, index) => {
+            latestOdds?.forEach((latestOdd, index) => {
               latestOdd?.detail?.forEach((latestDetail, detailIndex) => {
                 latestDetail?.forEach((latestOddDetail, oddDetailIndex) => {
                   const key = `${index}-${detailIndex}-${oddDetailIndex}`;
@@ -208,8 +210,6 @@ export default function MatchView() {
             });
 
             setOddsStatus(newOddsStatus);
-            setOdds(latestOdds?.length > 0 ? latestOdds : combinedLatestOdds);
-            setLatestOdds(combinedLatestOdds);
 
             if (endBet) {
               setEndBet(false);
