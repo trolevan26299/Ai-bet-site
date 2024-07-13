@@ -108,7 +108,7 @@ export default function MatchView() {
               })),
             ];
           }
-
+          setDataScreenInfo(dataScreenInfoFirst);
           if (!oddsDataValid && !cornersDataValid) {
             setHaveError(true); // lỗi mà chưa kết thúc trận đấu trả về màn hình lỗi
           }
