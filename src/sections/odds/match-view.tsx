@@ -29,7 +29,7 @@ export default function MatchView() {
   const [iframeHeight, setIframeHeight] = useState("0px");
   const [errorCount, setErrorCount] = useState(0);
   const telegram = useTelegram();
-
+  console.log("latestOdds", latestOdds);
   const matchParam = searchParams.get("match");
   const lineParam = searchParams.get("line");
   const tracker_id = searchParams.get("tracker_id");
@@ -134,7 +134,7 @@ export default function MatchView() {
         ]);
 
         let combinedLatestOdds: IOddsDetail[] = [];
-        console.log("combinedLatestOdds:", combinedLatestOdds);
+
         let oddsDataValid =
           Array.isArray(newOddsRes?.data?.message?.answer) && newOddsRes?.data?.message?.answer.length > 0;
         let cornersDataValid =
