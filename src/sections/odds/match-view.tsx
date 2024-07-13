@@ -33,10 +33,7 @@ export default function MatchView() {
   const matchParam = searchParams.get("match");
   const lineParam = searchParams.get("line");
   const tracker_id = searchParams.get("tracker_id");
-
-  console.log("odds:", odds);
-  console.log("latestOdds:", latestOdds);
-  console.log("dataScreenInfo:", dataScreenInfo);
+  console.log("oddStatus", oddsStatus);
 
   const leagueNoCorner = (league?: string) => {
     return league?.includes(" Corners") ? league?.replace(" Corners", "") : league;
