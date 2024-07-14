@@ -281,7 +281,7 @@ function RenderAccordion({
     setDisableBtn(false);
     if ("ok" in response.data) {
       setDisableBtn(true);
-      telegram?.webApp?.close();
+      // telegram?.webApp?.close();
     } else {
       setErrorConfirm(true);
     }
