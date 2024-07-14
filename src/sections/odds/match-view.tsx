@@ -139,14 +139,11 @@ export default function MatchView() {
           Array.isArray(newOddsRes?.data?.message?.answer) && newOddsRes?.data?.message?.answer.length > 0;
         const cornersDataValid =
           Array.isArray(newCornerRes?.data?.message?.answer) && newCornerRes?.data?.message?.answer.length > 0;
-        console.log("oddsDataValid:", oddsDataValid);
-        console.log("cornersDataValid:", cornersDataValid);
         if (newOddsRes?.data?.message?.live_state === "ended" || newCornerRes?.data?.message?.live_state === "ended") {
           setEndBet(true); // kết thúc trận đấu
         } else {
           const latestDataScreenInfo = [];
           if (oddsDataValid === true) {
-            console.log("odd hợp lệ ");
             const transformedData = transformData(newOddsRes?.data?.message?.answer, lineParam ?? "3");
             latestDataScreenInfo.push(newOddsRes?.data?.message?.answer[0]);
 
@@ -160,7 +157,6 @@ export default function MatchView() {
           }
 
           if (cornersDataValid === true) {
-            console.log("corner hợp lệ ");
             const transformedDataCorner = transformDataCorner(newCornerRes?.data?.message?.answer, lineParam ?? "3");
             latestDataScreenInfo.push(newCornerRes?.data?.message?.answer[0]);
 
