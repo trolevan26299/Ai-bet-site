@@ -20,9 +20,7 @@ export const transformData = (data: IMatchData[], line: string) => {
       const keoChinhTaiXiu10Pen = item?.bets?.totals?.find(
         (bet: IBetDetail) => bet?.number === 7 && bet?.altLineId === 0
       );
-      const keoChinh1X2Pen = item?.bets?.moneyline?.find(
-        (bet: IBetDetail) => bet?.number === 6 && bet?.altLineId === 0
-      );
+      const keoChinh1X2Pen = item?.bets?.moneyline?.find((bet: IBetDetail) => bet?.altLineId === 0);
       // Hàm helper để lấy ra kèo cược dựa vào số lượng hàng yêu cầu
       const filterBets = (
         bets: IBetDetail[],

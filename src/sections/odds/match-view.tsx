@@ -180,8 +180,10 @@ export default function MatchView() {
               setDisableBtn(true); // lỗi mà chưa kết thúc trận đấu
             }
           }
-          setOdds(latestOdds?.length > 0 ? latestOdds : combinedLatestOdds);
-          setLatestOdds(combinedLatestOdds);
+          if (combinedLatestOdds.length > 0) {
+            setOdds(latestOdds?.length > 0 ? latestOdds : combinedLatestOdds);
+            setLatestOdds(combinedLatestOdds);
+          }
 
           if (combinedLatestOdds?.length > 0) {
             const newOddsStatus: OddsStatusType = {};
