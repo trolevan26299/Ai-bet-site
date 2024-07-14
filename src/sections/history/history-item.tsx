@@ -35,7 +35,7 @@ const HistoryItem = ({ dataDetail, type }: { dataDetail: IHistoryBet; type?: str
               {dataDetail.periodNumber === 0
                 ? dataDetail.resultingUnit === "Corners"
                   ? "Phạt góc toàn trận"
-                  : "toàn trận"
+                  : "Toàn trận"
                 : dataDetail.periodNumber === 1
                 ? dataDetail.resultingUnit === "Corners"
                   ? "Phạt góc hiệp 1"
