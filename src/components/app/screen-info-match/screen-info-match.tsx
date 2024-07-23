@@ -5,7 +5,7 @@
 import { IMatchData } from "@/types/odds.types";
 import { convertToGMT7 } from "@/utils/time";
 import { Icon } from "@iconify/react";
-import TeamLogo from "./../../cloudinary/teamlogo";
+import TeamLogo from "../../cloudinary/teamlogo";
 import { formatLiveScope } from "@/utils/formatLiveScope";
 
 export default function ScreenInfoMatch({ dataScreenInfo }: { dataScreenInfo: IMatchData[] }) {
