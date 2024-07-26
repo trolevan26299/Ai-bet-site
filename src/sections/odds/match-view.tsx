@@ -364,9 +364,12 @@ export default function MatchView() {
             style={{ backgroundColor: "rgba(13, 22, 31, 1)", boxShadow: "0 0 10px rgba(0, 0, 0, 0.5)" }}
           >
             {menuNavigation.map((item) => (
-              <div className="flex flex-col justify-center items-center gap-[6.5px]" key={item.id}>
-                <Icon icon={item.icon} className="text-[rgba(159,162,167,1)] w-[21.43px] h-[21.43px]" />
-                <p className="text-[12.86px] font-bold leading-[15.56px] text-[rgba(159,162,167,1)]">{item.name}</p>
+              <div
+                className="flex flex-col justify-center items-center gap-[6.5px] hover:cursor-pointer hover:text-[rgba(121,228,169,1)] text-[rgba(159,162,167,1)]"
+                key={item.id}
+              >
+                <Icon icon={item.icon} className="w-[21.43px] h-[21.43px]" />
+                <p className="text-[12.86px] font-bold leading-[15.56px]">{item.name}</p>
               </div>
             ))}
           </div>
