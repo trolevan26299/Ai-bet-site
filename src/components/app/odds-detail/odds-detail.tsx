@@ -367,7 +367,7 @@ function RenderAccordion({
                             onClick={() => handleSelectTeam(statusKey, team, oddsGroup.name_Odds)}
                           >
                             {team.altLineId === 0 && (
-                              <div className="absolute top-[2px] left-[2px]">
+                              <div className="absolute top-[1px] left-[1px]">
                                 <svg
                                   width="7"
                                   height="7"
