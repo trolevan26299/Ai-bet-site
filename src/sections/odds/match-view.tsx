@@ -365,7 +365,7 @@ export default function MatchView() {
           >
             {menuNavigation.map((item) => (
               <div
-                className="flex flex-col justify-center items-center gap-[6.5px] hover:cursor-pointer  text-[rgba(159,162,167,1)]"
+                className="flex flex-col justify-center items-center gap-[4.5px] hover:cursor-pointer  text-[rgba(159,162,167,1)]"
                 key={item.id}
               >
                 <Icon icon={item.icon} className="w-[21.43px] h-[21.43px] group-hover:text-[rgba(121,228,169,1)]" />
