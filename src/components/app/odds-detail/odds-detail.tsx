@@ -98,14 +98,14 @@ export default function OddsDetail({
       <Tabs defaultValue={defaultTab} key={defaultTab} className="w-full">
         <TabsList
           ref={tabsListRef}
-          className={`w-full gap-3 justify-between overflow-x-hidden whitespace-nowrap scrollbar-hide h-[40px] ${
+          className={`w-full gap-1 justify-between overflow-x-hidden whitespace-nowrap scrollbar-hide h-[40px] ${
             oddsCorner.length > 0 ? "p-0" : ""
           } scroll-smooth`}
         >
           <Icon
             icon={expand ? "tabler:chevrons-up" : "tabler:chevrons-down"}
-            width={18}
-            height={22}
+            width={15}
+            height={18}
             color="rgba(91,99,109,1)"
             className="flex-shrink-0 hover:cursor-pointer"
             onClick={toggleExpand}
