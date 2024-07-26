@@ -89,7 +89,7 @@ export default function OddsDetail({
   }, [leagueParam, oddsCorner]);
   return (
     <>
-      <Tabs defaultValue={defaultTab} key={defaultTab} className="w-full flex flex-row">
+      <Tabs defaultValue={defaultTab} key={defaultTab} className="w-full">
         <TabsList
           ref={tabsListRef}
           className={`w-full gap-3 justify-between overflow-x-hidden whitespace-nowrap scrollbar-hide h-[40px] ${
