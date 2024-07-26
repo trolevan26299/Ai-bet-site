@@ -5,16 +5,26 @@ import ScreenInfoMatch from "@/components/app/screen-info-match/screen-info-matc
 import { SplashScreen } from "@/components/loading-screen";
 import { useTelegram } from "@/context/telegram.provider";
 import MainLayout from "@/layouts/main/layout";
+import { paths } from "@/routes/paths";
 import { IMatchData, IOddsDetail, OddsStatusType } from "@/types/odds.types";
 import { transformDataCorner } from "@/utils/transformDataCorner";
+import { Icon } from "@iconify/react";
 import { transformData } from "@/utils/transformDataOdds";
 import axios from "axios";
 import Image from "next/image";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { isIOS } from "react-device-detect";
 
+const menuNavigation = [
+  { id: "1", name: "Trận đấu", url: paths.odds, icon: "mdi:soccer-field" },
+  { id: "2", name: "Yêu thích", url: paths.favorites, icon: "gravity-ui:star" },
+  { id: "3", name: "Cược của tôi", url: paths.history, icon: "f7:tickets-fill" },
+  { id: "4", name: "Kết quả", url: paths.result, icon: "carbon:result" },
+  { id: "5", name: "Cài đặt", url: paths.settings, icon: "uil:setting" },
+];
 export default function MatchView() {
+  const router = useRouter();
   const searchParams = useSearchParams();
   const isIphone = isIOS;
   const [odds, setOdds] = useState<IOddsDetail[]>([]);
@@ -336,7 +346,7 @@ export default function MatchView() {
 
             <OddsDetail odds={odds} oddsStatus={oddsStatus} dataScreenInfo={dataScreenInfo} disableBtn={disableBtn} />
           </div>
-          {odds.every((odd) => odd.status === 2) && (
+          {/* {odds.every((odd) => odd.status === 2) && (
             <div
               className={`z-10 text-yellow-400 bottom-0 text-center fixed m-auto rounded-sm flex items-center flex-row justify-center flex-wrap w-full pt-1 ${
                 isIphone ? "pb-4" : "pb-1"
@@ -347,7 +357,19 @@ export default function MatchView() {
                 ⚠️ Kèo Quý khách chọn hiện không khả dụng. <br /> Vui lòng đợi trong giây lát hoặc chọn trận đấu khác.
               </p>
             </div>
-          )}
+          )} */}
+
+          <div
+            className={`z-10 bottom-0  fixed m-auto rounded-sm flex items-center flex-row justify-center flex-wrap w-full  px-4 pt-3 pb-4 rounded-tr-[30px] rounded-tl-[30px]`}
+            style={{ backgroundColor: "rgba(13, 22, 31, 1)", boxShadow: "0 0 10px rgba(0, 0, 0, 0.5)" }}
+          >
+            {menuNavigation.map((item) => (
+              <div className="flex flex-col justify-center gap-[6.5px]" key={item.id}>
+                <Icon icon={item.name} className="text-[rgba(159,162,167,1)] w-[21.43px] h-[21.43px] " />
+                <p className="text-[12.86px] font-bold leading-[15.56px] text-[rgba(159,162,167,1)]">{item.name}</p>
+              </div>
+            ))}
+          </div>
         </>
       )}
     </MainLayout>
