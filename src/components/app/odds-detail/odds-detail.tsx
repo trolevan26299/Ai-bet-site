@@ -362,15 +362,15 @@ function RenderAccordion({
                         const isDisabled = oddsGroup.status === 2;
                         return (
                           <div
-                            className="text-primary-foreground p-2 h-[26px] text-xs relative bg-[#28374a] rounded-[10px]"
+                            className="text-primary-foreground px-2 h-[30px] text-xs relative bg-[#28374a] rounded-[10px]"
                             key={teamIndex}
                             onClick={() => handleSelectTeam(statusKey, team, oddsGroup.name_Odds)}
                           >
                             {team.altLineId === 0 && (
                               <div className="absolute top-[2px] left-[2px]">
                                 <svg
-                                  width="10"
-                                  height="10"
+                                  width="7"
+                                  height="7"
                                   fill={`${isDisabled || disableOdds ? "rgba(123,105,66,1)" : "#ffc13b"}`}
                                   viewBox="0 0 24 24"
                                 >
@@ -396,7 +396,7 @@ function RenderAccordion({
                               </>
                             )}
 
-                            <div className="grid grid-cols-12 w-full h-full items-center">
+                            <div className="grid grid-cols-12 w-full h-full items-center mt-[-3px]">
                               <div
                                 style={{
                                   maskImage: "linear-gradient(90deg, rgba(0, 0, 0, 1) 80%, rgba(0, 0, 0, 0) 100%)",
