@@ -345,7 +345,7 @@ function RenderAccordion({
         <Accordion type="multiple" value={openItems} onValueChange={onValueChange} className="w-full">
           {odds.map((oddsGroup: IOddsDetail, index: number) => (
             <AccordionItem value={`item-${index + 1}`} key={index}>
-              <AccordionTrigger className="text-sm font-bold py-[0.5rem] text-[rgba(255,255,255,1)]">
+              <AccordionTrigger className="text-sm font-bold py-[0.6rem] text-[rgba(255,255,255,1)]">
                 {oddsGroup?.name_Odds}
               </AccordionTrigger>
               <AccordionContent>
@@ -549,7 +549,7 @@ function RenderAccordion({
         <Accordion type="multiple" value={openItems} onValueChange={onValueChange} className="w-full">
           {odds.map((oddsGroup: IOddsDetail, index: number) => (
             <AccordionItem value={`item-${index + 1}`} key={index}>
-              <AccordionTrigger className="text-sm font-bold py-[0.5rem] text-[rgba(255,255,255,1)]">
+              <AccordionTrigger className="text-sm font-bold py-[0.6rem] text-[rgba(255,255,255,1)]">
                 {oddsGroup?.name_Odds}
               </AccordionTrigger>
               <AccordionContent>
