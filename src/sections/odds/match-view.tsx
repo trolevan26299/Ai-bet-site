@@ -279,86 +279,94 @@ export default function MatchView() {
     <MainLayout>
       {loading ? (
         <SplashScreen />
-      ) : endBet ? (
-        <div className="h-[97vh] w-[90%] flex flex-col justify-center items-center mx-auto">
-          {tracker_id ? (
-            <iframe
-              scrolling="no"
-              src={`https://start26.sptpub.com/tracker.html?eventId=${tracker_id}&sportId=1&lang=vi&liveEvent=true&providers=Betradar`}
-              allowFullScreen
-              title="rindle"
-              style={{
-                border: 0,
-                width: "100%",
-                height: iframeLoaded ? iframeHeight : "0px",
-                borderRadius: "5px",
-              }}
-            ></iframe>
-          ) : (
-            <Image src="/assets/ball.png" alt="no-content" className="w-[165px] h-[170px] mr-5" />
-          )}
-          <p className="pt-2 text-xl text-slate-500 font-semibold">Trận đấu đã kết thúc</p>
-          <span className="pt-2 text-sm text-slate-500 font-semibold">
-            Vui lòng quay lại Telegram và xem các sự kiện khác
-          </span>
-        </div>
-      ) : haveError ? (
-        <div className="h-[97vh] w-[90%] flex flex-col justify-center items-center mx-auto">
-          {tracker_id ? (
-            <iframe
-              scrolling="no"
-              src={`https://start26.sptpub.com/tracker.html?eventId=${tracker_id}&sportId=1&lang=vi&liveEvent=true&providers=Betradar`}
-              allowFullScreen
-              title="rindle"
-              style={{
-                border: 0,
-                width: "100%",
-                height: iframeLoaded ? iframeHeight : "0px",
-                borderRadius: "5px",
-              }}
-            ></iframe>
-          ) : (
-            <Image src="/assets/ball.png" alt="no-content" className="w-[165px] h-[170px] mr-5" />
-          )}
-          <p className="pt-4 text-xl text-slate-500 font-semibold">Không tìm thấy thông tin trận đấu</p>
-          <span className="pt-2 text-sm text-slate-500 font-semibold text-center">
-            Trận đấu bị gián đoạn hoặc đã kết thúc. Vui lòng thử lại trong giây lát hoặc chọn trận đấu khác.
-          </span>
-        </div>
       ) : (
         <>
-          <div className="p-3 pb-6 h-full">
-            <ScreenInfoMatch dataScreenInfo={dataScreenInfo} />
-            {tracker_id && (
-              <iframe
-                scrolling="no"
-                src={`https://start26.sptpub.com/tracker.html?eventId=${tracker_id}&sportId=1&lang=vi&liveEvent=true&providers=Betradar`}
-                allowFullScreen
-                title="rindle"
-                style={{
-                  border: 0,
-                  width: "100%",
-                  height: iframeLoaded ? iframeHeight : "0px",
-                  borderRadius: "5px",
-                }}
-              ></iframe>
-            )}
-
-            <OddsDetail odds={odds} oddsStatus={oddsStatus} dataScreenInfo={dataScreenInfo} disableBtn={disableBtn} />
-          </div>
-          {/* {odds.every((odd) => odd.status === 2) && (
-            <div
-              className={`z-10 text-yellow-400 bottom-0 text-center fixed m-auto rounded-sm flex items-center flex-row justify-center flex-wrap w-full pt-1 ${
-                isIphone ? "pb-4" : "pb-1"
-              } px-2`}
-              style={{ backgroundColor: "rgba(0, 0, 0, 0.5)", boxShadow: "0 0 10px rgba(0, 0, 0, 0.5)" }}
-            >
-              <p className="text-[13px] w-full">
-                ⚠️ Kèo Quý khách chọn hiện không khả dụng. <br /> Vui lòng đợi trong giây lát hoặc chọn trận đấu khác.
-              </p>
+          {endBet ? (
+            <div className="h-[97vh] w-[90%] flex flex-col justify-center items-center mx-auto">
+              {tracker_id ? (
+                <iframe
+                  scrolling="no"
+                  src={`https://start26.sptpub.com/tracker.html?eventId=${tracker_id}&sportId=1&lang=vi&liveEvent=true&providers=Betradar`}
+                  allowFullScreen
+                  title="rindle"
+                  style={{
+                    border: 0,
+                    width: "100%",
+                    height: iframeLoaded ? iframeHeight : "0px",
+                    borderRadius: "5px",
+                  }}
+                ></iframe>
+              ) : (
+                <Image src="/assets/ball.png" alt="no-content" className="w-[165px] h-[170px] mr-5" />
+              )}
+              <p className="pt-2 text-xl text-slate-500 font-semibold">Trận đấu đã kết thúc</p>
+              <span className="pt-2 text-sm text-slate-500 font-semibold">
+                Vui lòng quay lại Telegram và xem các sự kiện khác
+              </span>
             </div>
-          )} */}
+          ) : haveError ? (
+            <div className="h-[97vh] w-[90%] flex flex-col justify-center items-center mx-auto">
+              {tracker_id ? (
+                <iframe
+                  scrolling="no"
+                  src={`https://start26.sptpub.com/tracker.html?eventId=${tracker_id}&sportId=1&lang=vi&liveEvent=true&providers=Betradar`}
+                  allowFullScreen
+                  title="rindle"
+                  style={{
+                    border: 0,
+                    width: "100%",
+                    height: iframeLoaded ? iframeHeight : "0px",
+                    borderRadius: "5px",
+                  }}
+                ></iframe>
+              ) : (
+                <Image src="/assets/ball.png" alt="no-content" className="w-[165px] h-[170px] mr-5" />
+              )}
+              <p className="pt-4 text-xl text-slate-500 font-semibold">Không tìm thấy thông tin trận đấu</p>
+              <span className="pt-2 text-sm text-slate-500 font-semibold text-center">
+                Trận đấu bị gián đoạn hoặc đã kết thúc. Vui lòng thử lại trong giây lát hoặc chọn trận đấu khác.
+              </span>
+            </div>
+          ) : (
+            <>
+              <div className="p-3 pb-6 h-full">
+                <ScreenInfoMatch dataScreenInfo={dataScreenInfo} />
+                {tracker_id && (
+                  <iframe
+                    scrolling="no"
+                    src={`https://start26.sptpub.com/tracker.html?eventId=${tracker_id}&sportId=1&lang=vi&liveEvent=true&providers=Betradar`}
+                    allowFullScreen
+                    title="rindle"
+                    style={{
+                      border: 0,
+                      width: "100%",
+                      height: iframeLoaded ? iframeHeight : "0px",
+                      borderRadius: "5px",
+                    }}
+                  ></iframe>
+                )}
 
+                <OddsDetail
+                  odds={odds}
+                  oddsStatus={oddsStatus}
+                  dataScreenInfo={dataScreenInfo}
+                  disableBtn={disableBtn}
+                />
+              </div>
+              {/* {odds.every((odd) => odd.status === 2) && (
+      <div
+        className={`z-10 text-yellow-400 bottom-0 text-center fixed m-auto rounded-sm flex items-center flex-row justify-center flex-wrap w-full pt-1 ${
+          isIphone ? "pb-4" : "pb-1"
+        } px-2`}
+        style={{ backgroundColor: "rgba(0, 0, 0, 0.5)", boxShadow: "0 0 10px rgba(0, 0, 0, 0.5)" }}
+      >
+        <p className="text-[13px] w-full">
+          ⚠️ Kèo Quý khách chọn hiện không khả dụng. <br /> Vui lòng đợi trong giây lát hoặc chọn trận đấu khác.
+        </p>
+      </div>
+    )} */}
+            </>
+          )}
           <div
             className={`z-10 bottom-0  fixed m-auto rounded-sm flex items-center flex-row justify-around flex-wrap w-full  px-4 pt-2 pb-3 rounded-tr-[20px] rounded-tl-[20px]`}
             style={{ backgroundColor: "rgba(13, 22, 31, 1)" }}
