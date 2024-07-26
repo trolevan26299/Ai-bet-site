@@ -15,6 +15,7 @@ import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { isIOS } from "react-device-detect";
+import { Button } from "@/components/ui/button";
 
 const menuNavigation = [
   { id: "1", name: "Trận đấu", url: paths.odds, icon: "mdi:soccer-field" },
@@ -332,6 +333,13 @@ export default function MatchView() {
               <>
                 <div className="p-3 pb-6 h-full">
                   <ScreenInfoMatch dataScreenInfo={dataScreenInfo} />
+                  <Button
+                    variant="default"
+                    className="bg-[rgba(30,42,56,1)] w-full flex flex-row justify-center gap-2 rounded-[10px]"
+                  >
+                    <Icon icon="fe:line-chart" width={20} height={10} color="rgba(142,149,156,1)" />
+                    <span className="text-xs font-bold">Theo dõi </span>
+                  </Button>
                   {tracker_id && (
                     <iframe
                       scrolling="no"
@@ -354,18 +362,6 @@ export default function MatchView() {
                     disableBtn={disableBtn}
                   />
                 </div>
-                {/* {odds.every((odd) => odd.status === 2) && (
-      <div
-        className={`z-10 text-yellow-400 bottom-0 text-center fixed m-auto rounded-sm flex items-center flex-row justify-center flex-wrap w-full pt-1 ${
-          isIphone ? "pb-4" : "pb-1"
-        } px-2`}
-        style={{ backgroundColor: "rgba(0, 0, 0, 0.5)", boxShadow: "0 0 10px rgba(0, 0, 0, 0.5)" }}
-      >
-        <p className="text-[13px] w-full">
-          ⚠️ Kèo Quý khách chọn hiện không khả dụng. <br /> Vui lòng đợi trong giây lát hoặc chọn trận đấu khác.
-        </p>
-      </div>
-    )} */}
               </>
             )}
           </>
