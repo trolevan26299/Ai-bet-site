@@ -90,27 +90,35 @@ export default function OddsDetail({
   return (
     <>
       <Tabs defaultValue={defaultTab} key={defaultTab} className="w-full flex flex-row">
-        <Icon icon="tabler:chevrons-down" width={18} height={22} color="rgba(91,99,109,1)" className="w-[10%]" />
         <TabsList
           ref={tabsListRef}
           className={`w-full gap-3 justify-between overflow-x-hidden whitespace-nowrap scrollbar-hide h-[40px] ${
             oddsCorner.length > 0 ? "p-0" : ""
           } scroll-smooth`}
         >
-          <TabsTrigger value="1" className={`${oddsCorner.length > 0 ? "px-[0.7rem]" : ""}`}>
-            Tất cả{" "}
-          </TabsTrigger>
-          <TabsTrigger value="2" className={`${oddsCorner.length > 0 ? "px-[0.7rem]" : ""}`}>
-            Cược chấp
-          </TabsTrigger>
-          <TabsTrigger value="3" className={`${oddsCorner.length > 0 ? "px-[0.7rem]" : ""}`}>
-            Tài xỉu{" "}
-          </TabsTrigger>
-          {oddsCorner.length > 0 && (
-            <TabsTrigger value="4" className={`${oddsCorner.length > 0 ? "px-[0.7rem]" : ""}`}>
-              Phạt góc{" "}
+          <Icon
+            icon="tabler:chevrons-down"
+            width={18}
+            height={22}
+            color="rgba(91,99,109,1)"
+            className="flex-shrink-0"
+          />
+          <div className="flex overflow-x-auto w-full">
+            <TabsTrigger value="1" className="px-[0.7rem]">
+              Tất cả
             </TabsTrigger>
-          )}
+            <TabsTrigger value="2" className="px-[0.7rem]">
+              Cược chấp
+            </TabsTrigger>
+            <TabsTrigger value="3" className="px-[0.7rem]">
+              Tài xỉu
+            </TabsTrigger>
+            {oddsCorner.length > 0 && (
+              <TabsTrigger value="4" className="px-[0.7rem]">
+                Phạt góc
+              </TabsTrigger>
+            )}
+          </div>
         </TabsList>
 
         <TabsContent value="1">
