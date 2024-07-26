@@ -277,7 +277,7 @@ export default function MatchView() {
 
   return (
     <MainLayout>
-      <div style={{ paddingBottom: "70px" }}>
+      <div style={{ paddingBottom: "20px" }}>
         {loading ? (
           <SplashScreen />
         ) : (
