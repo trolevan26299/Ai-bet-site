@@ -95,6 +95,10 @@ export default function OddsDetail({
   }, [leagueParam, oddsCorner]);
   return (
     <>
+      <Button variant="default" className="w-full flex flex-row justify-center gap-2">
+        <Icon icon="fe:line-chart" width={20} height={10} color="rgba(142,149,156,1)" />
+        <span className="text-xs font-bold">Theo dõi </span>
+      </Button>
       <Tabs defaultValue={defaultTab} key={defaultTab} className="w-full">
         <TabsList
           ref={tabsListRef}
