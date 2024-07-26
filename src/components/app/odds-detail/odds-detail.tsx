@@ -364,7 +364,7 @@ function RenderAccordion({
                         const isDisabled = oddsGroup.status === 2;
                         return (
                           <div
-                            className="text-primary-foreground px-2 text-xs relative bg-[rgba(41,53,67,1)] rounded-[10px] h-[30px]"
+                            className="text-primary-foreground px-2 text-xs relative bg-[rgba(41,53,67,1)] rounded-[5px] h-[30px]"
                             key={teamIndex}
                             onClick={() => handleSelectTeam(statusKey, team, oddsGroup.name_Odds)}
                           >
@@ -404,7 +404,7 @@ function RenderAccordion({
                                   maskImage: "linear-gradient(90deg, rgba(0, 0, 0, 1) 80%, rgba(0, 0, 0, 0) 100%)",
                                 }}
                                 className={`col-span-9 text-xs font-medium ${
-                                  isDisabled || disableOdds ? "text-[rgba(74,86,100,1)]" : "text-[rgba(157,163,177,1)]"
+                                  isDisabled || disableOdds ? "text-[rgba(74,86,100,1)]" : "text-[rgba(138,145,159,1)]"
                                 } overflow-hidden whitespace-nowrap`}
                               >
                                 {team.rate_odds !== undefined && `(${team.rate_odds})`} {team.name}
@@ -571,7 +571,7 @@ function RenderAccordion({
                         const isDisabled = oddsGroup.status === 2;
                         return (
                           <div
-                            className="text-primary-foreground px-2 h-[30px] text-xs relative bg-[rgba(41,53,67,1)] rounded-[10px]"
+                            className="text-primary-foreground px-2 h-[30px] text-xs relative bg-[rgba(41,53,67,1)] rounded-[5px]"
                             key={teamIndex}
                             onClick={() => handleSelectTeam(statusKey, team, oddsGroup.name_Odds)}
                           >
@@ -611,7 +611,7 @@ function RenderAccordion({
                                   maskImage: "linear-gradient(90deg, rgba(0, 0, 0, 1) 80%, rgba(0, 0, 0, 0) 100%)",
                                 }}
                                 className={`col-span-9 text-xs font-medium ${
-                                  isDisabled || disableOdds ? "text-[rgba(74,86,100,1)]" : "text-[rgba(157,163,177,1)]"
+                                  isDisabled || disableOdds ? "text-[rgba(74,86,100,1)]" : "text-[rgba(138,145,159,1)]"
                                 } overflow-hidden whitespace-nowrap`}
                               >
                                 {team.rate_odds !== undefined && `(${team.rate_odds})`} {team.name}
