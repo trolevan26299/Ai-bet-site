@@ -360,12 +360,12 @@ export default function MatchView() {
           )} */}
 
           <div
-            className={`z-10 bottom-0  fixed m-auto rounded-sm flex items-center flex-row justify-center flex-wrap w-full  px-4 pt-3 pb-4 rounded-tr-[30px] rounded-tl-[30px]`}
+            className={`z-10 bottom-0  fixed m-auto rounded-sm flex items-center flex-row justify-around flex-wrap w-full  px-4 pt-3 pb-4 rounded-tr-[30px] rounded-tl-[30px]`}
             style={{ backgroundColor: "rgba(13, 22, 31, 1)", boxShadow: "0 0 10px rgba(0, 0, 0, 0.5)" }}
           >
             {menuNavigation.map((item) => (
-              <div className="flex flex-col justify-center gap-[6.5px]" key={item.id}>
-                <Icon icon={item.name} className="text-[rgba(159,162,167,1)] w-[21.43px] h-[21.43px] " />
+              <div className="flex flex-col justify-around gap-[6.5px]" key={item.id}>
+                <Icon icon={item.icon} className="text-[rgba(159,162,167,1)] w-[21.43px] h-[21.43px]" />
                 <p className="text-[12.86px] font-bold leading-[15.56px] text-[rgba(159,162,167,1)]">{item.name}</p>
               </div>
             ))}
