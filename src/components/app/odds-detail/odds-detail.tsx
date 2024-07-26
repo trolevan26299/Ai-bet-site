@@ -396,7 +396,7 @@ function RenderAccordion({
                               </>
                             )}
 
-                            <div className="grid grid-cols-12 w-full h-full items-center mt-[-3px]">
+                            <div className="grid grid-cols-12 w-full h-full items-center ">
                               <div
                                 style={{
                                   maskImage: "linear-gradient(90deg, rgba(0, 0, 0, 1) 80%, rgba(0, 0, 0, 0) 100%)",
@@ -601,18 +601,18 @@ function RenderAccordion({
                               </>
                             )}
 
-                            <div className="grid grid-cols-12 w-full h-full items-center mt-[-3px]">
+                            <div className="grid grid-cols-12 w-full h-full items-center ">
                               <div
                                 style={{
                                   maskImage: "linear-gradient(90deg, rgba(0, 0, 0, 1) 80%, rgba(0, 0, 0, 0) 100%)",
                                 }}
-                                className={`col-span-9 text-sm font-medium ${
+                                className={`col-span-9 text-xs font-medium ${
                                   isDisabled || disableOdds ? "text-[rgba(74,86,100,1)]" : "text-[rgba(157,163,177,1)]"
                                 } overflow-hidden whitespace-nowrap`}
                               >
                                 {team.rate_odds !== undefined && `(${team.rate_odds})`} {team.name}
                               </div>
-                              <div className=" col-span-3 text-end flex items-center justify-end text-sm font-medium text-text-red ">
+                              <div className=" col-span-3 text-end flex items-center justify-end text-xs font-medium text-text-red ">
                                 {team.value && (
                                   <span
                                     className={`${
