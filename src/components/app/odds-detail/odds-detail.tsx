@@ -103,11 +103,11 @@ export default function OddsDetail({
           } scroll-smooth`}
         >
           <Icon
-            icon={expand ? `tabler:chevrons-down` : `tabler:chevrons-up`}
+            icon={expand ? "tabler:chevrons-up" : "tabler:chevrons-down"}
             width={18}
             height={22}
             color="rgba(91,99,109,1)"
-            className="flex-shrink-0 "
+            className="flex-shrink-0 hover:cursor-pointer"
             onClick={toggleExpand}
           />
           <div className="flex overflow-x-auto w-full flex-row justify-around">
