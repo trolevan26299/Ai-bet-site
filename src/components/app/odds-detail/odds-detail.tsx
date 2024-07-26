@@ -48,6 +48,7 @@ export default function OddsDetail({
   const leagueParam = searchParams.get("league");
 
   const [defaultTab, setDefaultTab] = useState("1");
+  const [expand, setExpand] = useState(true);
   const handleMouseMove = (e: MouseEvent) => {
     if (tabsListRef.current) {
       const target = tabsListRef.current;
@@ -57,9 +58,14 @@ export default function OddsDetail({
     }
   };
 
-  const [openItems, setOpenItems] = useState(["item-1", "item-2", "item-3", "item-4", "item-5", "item-6", "item-7"]);
+  const allItems = odds.map((_, index) => `item-${index + 1}`);
+  const [openItems, setOpenItems] = useState(allItems);
   const handleValueChange = (value: string[]) => {
     setOpenItems(value);
+  };
+  const toggleExpand = () => {
+    setExpand(!expand);
+    setOpenItems(expand ? [] : allItems); // Toggle between all items and no items
   };
 
   const oddsCorner = odds.filter(
@@ -97,11 +103,12 @@ export default function OddsDetail({
           } scroll-smooth`}
         >
           <Icon
-            icon="tabler:chevrons-down"
+            icon={expand ? `tabler:chevrons-down` : `tabler:chevrons-up`}
             width={18}
             height={22}
             color="rgba(91,99,109,1)"
-            className="flex-shrink-0"
+            className="flex-shrink-0 "
+            onClick={toggleExpand}
           />
           <div className="flex overflow-x-auto w-full flex-row justify-around">
             <TabsTrigger value="1" className="px-[0.7rem]">
