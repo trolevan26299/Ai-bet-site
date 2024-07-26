@@ -96,6 +96,9 @@ export default function OddsDetail({
             oddsCorner.length > 0 ? "p-0" : ""
           } scroll-smooth`}
         >
+          <TabsTrigger value="0">
+            <Icon icon="fluent:live-20-filled" className="ml-1" width={6} height={7} color="rgba(91,99,109,1)" />
+          </TabsTrigger>
           <TabsTrigger value="1" className={`${oddsCorner.length > 0 ? "px-[0.7rem]" : ""}`}>
             Tất cả{" "}
           </TabsTrigger>
