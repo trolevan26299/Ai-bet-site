@@ -362,8 +362,7 @@ function RenderAccordion({
                         const isDisabled = oddsGroup.status === 2;
                         return (
                           <div
-                            className="text-primary-foreground px-2 text-xs relative bg-[rgba(41,53,67,1)] rounded-[10px]"
-                            style={{ height: "30px !important" }}
+                            className="text-primary-foreground px-2 text-xs relative bg-[rgba(41,53,67,1)] rounded-[10px] h-[30px]"
                             key={teamIndex}
                             onClick={() => handleSelectTeam(statusKey, team, oddsGroup.name_Odds)}
                           >
@@ -568,15 +567,15 @@ function RenderAccordion({
                         const isDisabled = oddsGroup.status === 2;
                         return (
                           <div
-                            className="text-primary-foreground p-2 h-10 text-xs relative bg-[#28374a] rounded-[10px]"
+                            className="text-primary-foreground px-2 h-[30px] text-xs relative bg-[rgba(41,53,67,1)] rounded-[10px]"
                             key={teamIndex}
                             onClick={() => handleSelectTeam(statusKey, team, oddsGroup.name_Odds)}
                           >
                             {team.altLineId === 0 && (
                               <div className="absolute top-[2px] left-[2px]">
                                 <svg
-                                  width="10"
-                                  height="10"
+                                  width="7"
+                                  height="7"
                                   fill={`${isDisabled || disableOdds ? "rgba(123,105,66,1)" : "#ffc13b"}`}
                                   viewBox="0 0 24 24"
                                 >
@@ -587,14 +586,14 @@ function RenderAccordion({
                             {animationState.showBlink && (
                               <>
                                 <m.div
-                                  className="absolute rotate-[45deg] right-0 top-[2px] transform translate-y-1/2 w-0 h-0 border-l-6 border-l-transparent border-r-6 border-r-transparent border-b-[6px] border-b-green-500"
+                                  className="absolute rotate-[45deg] right-0 top-[2px] transform translate-y-1/2 w-0 h-0 border-l-5 border-l-transparent border-r-5 border-r-transparent border-b-[5px] border-b-green-500"
                                   style={{ display: oddsStatus[statusKey] === "green" ? "block" : "none" }}
                                   animate={{ opacity: [0, 1, 0], rotate: [35] }}
                                   transition={{ duration: 0.5, repeat: Infinity }}
                                 ></m.div>
 
                                 <m.div
-                                  className="absolute rotate-[-45deg] right-0 bottom-1 transform translate-y-1/2 w-0 h-0 border-l-6 border-l-transparent border-r-6 border-r-transparent border-t-[6px] border-t-red-500"
+                                  className="absolute rotate-[-45deg] right-0 bottom-1 transform translate-y-1/2 w-0 h-0 border-l-5 border-l-transparent border-r-5 border-r-transparent border-t-[5px] border-t-red-500"
                                   style={{ display: oddsStatus[statusKey] === "red" ? "block" : "none" }}
                                   animate={{ opacity: [0, 1, 0], rotate: [-45] }}
                                   transition={{ duration: 0.5, repeat: Infinity }}
@@ -602,7 +601,7 @@ function RenderAccordion({
                               </>
                             )}
 
-                            <div className="grid grid-cols-12 w-full h-full items-center">
+                            <div className="grid grid-cols-12 w-full h-full items-center mt-[-3px]">
                               <div
                                 style={{
                                   maskImage: "linear-gradient(90deg, rgba(0, 0, 0, 1) 80%, rgba(0, 0, 0, 0) 100%)",
