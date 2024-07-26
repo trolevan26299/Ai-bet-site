@@ -368,8 +368,10 @@ export default function MatchView() {
                 className="flex flex-col justify-center items-center gap-[6.5px] hover:cursor-pointer hover:text-[rgba(121,228,169,1)] text-[rgba(159,162,167,1)]"
                 key={item.id}
               >
-                <Icon icon={item.icon} className="w-[21.43px] h-[21.43px]" />
-                <p className="text-[12.86px] font-bold leading-[15.56px]">{item.name}</p>
+                <Icon icon={item.icon} className="w-[21.43px] h-[21.43px] group-hover:text-[rgba(121,228,169,1)]" />
+                <p className="text-[12.86px] font-bold leading-[15.56px] group-hover:text-[rgba(255,255,255,1)]">
+                  {item.name}
+                </p>
               </div>
             ))}
           </div>
