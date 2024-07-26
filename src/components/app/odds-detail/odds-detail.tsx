@@ -362,7 +362,8 @@ function RenderAccordion({
                         const isDisabled = oddsGroup.status === 2;
                         return (
                           <div
-                            className="text-primary-foreground px-2 h-[30px] text-xs relative bg-[#28374a] rounded-[10px]"
+                            className="text-primary-foreground px-2 text-xs relative bg-[#28374a] rounded-[10px]"
+                            style={{ height: "30px !important" }}
                             key={teamIndex}
                             onClick={() => handleSelectTeam(statusKey, team, oddsGroup.name_Odds)}
                           >
