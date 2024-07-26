@@ -103,7 +103,7 @@ export default function OddsDetail({
             color="rgba(91,99,109,1)"
             className="flex-shrink-0"
           />
-          <div className="flex overflow-x-auto w-full">
+          <div className="flex overflow-x-auto w-full flex-row justify-around">
             <TabsTrigger value="1" className="px-[0.7rem]">
               Tất cả
             </TabsTrigger>
