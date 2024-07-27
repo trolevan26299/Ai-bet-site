@@ -280,21 +280,39 @@ export default function MatchView() {
   return (
     <MainLayout>
       <div style={{ paddingBottom: "50px" }}>
-        <div className="h-[39px] w-full bg-[rgba(30,42,56,1)] flex flex-row justify-between items-center px-4">
-          <Icon icon="weui:back-filled" width={30} height={20} color="rgba(143,149,156,1)" />
+        <div className="h-[39px] w-full bg-[rgba(30,42,56,1)] flex flex-row justify-between items-center px-3">
+          <Icon
+            icon="weui:back-filled"
+            width={30}
+            height={20}
+            color="rgba(143,149,156,1)"
+            className="hover:cursor-pointer"
+          />
           <div className="text-[rgba(255,255,255,1)] flex flex-row justify-center items-center">
             <Image src="/assets/league_logo.png" alt="no-content" className="w-[34px] h-[27.2px]" />
             <p className="text-sm font-bold ">{dataScreenInfo[0]?.league_name}</p>
-            <Icon icon="icon-park-solid:down-one" width={25} height={15} color="rgba(255,255,255,1)" />
+            <Icon
+              icon="icon-park-solid:down-one"
+              width={25}
+              height={15}
+              color="rgba(255,255,255,1)"
+              className="hover:cursor-pointer"
+            />
             <Icon
               icon="material-symbols-light:star-outline"
               width={25}
               height={25}
               color="rgba(170,170,170,1)"
-              className="ml-2"
+              className="ml-[6px] hover:cursor-pointer"
             />
           </div>
-          <Icon icon="hugeicons:list-setting" width={30} height={20} color="rgba(143,149,156,1)" />
+          <Icon
+            icon="hugeicons:list-setting"
+            width={30}
+            height={20}
+            color="rgba(143,149,156,1)"
+            className="hover:cursor-pointer"
+          />
         </div>
         {loading ? (
           <SplashScreen />
