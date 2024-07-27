@@ -321,7 +321,7 @@ export default function MatchView() {
         ) : (
           <>
             {endBet ? (
-              <div className="h-[97vh] w-[90%] flex flex-col justify-center items-center mx-auto">
+              <div className="h-[80vh] w-[90%] flex flex-col justify-center items-center mx-auto">
                 {tracker_id ? (
                   <iframe
                     scrolling="no"
@@ -344,7 +344,7 @@ export default function MatchView() {
                 </span>
               </div>
             ) : haveError ? (
-              <div className="h-[97vh] w-[90%] flex flex-col justify-center items-center mx-auto">
+              <div className="h-[80vh] w-[90%] flex flex-col justify-center items-center mx-auto">
                 {tracker_id ? (
                   <iframe
                     scrolling="no"
