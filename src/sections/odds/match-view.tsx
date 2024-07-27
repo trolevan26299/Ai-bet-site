@@ -280,7 +280,7 @@ export default function MatchView() {
   return (
     <MainLayout>
       <div style={{ paddingBottom: "50px" }}>
-        <div className="h-[39px] bg-[rgba(30,42,56,1 )] flex flex-row justify-between items-center px-4">
+        <div className="h-[39px] w-full bg-[rgba(30,42,56,1 )] flex flex-row justify-between items-center px-4">
           <Icon
             icon="weui:back-filled"
             width={30}
