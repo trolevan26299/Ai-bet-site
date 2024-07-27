@@ -310,8 +310,8 @@ export default function MatchView() {
           </div>
           <Icon
             icon="hugeicons:list-setting"
-            width={35}
-            height={25}
+            width={30}
+            height={23}
             color="rgba(143,149,156,1)"
             className="hover:cursor-pointer"
           />
