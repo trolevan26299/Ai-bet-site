@@ -333,9 +333,9 @@ export default function MatchView() {
               <>
                 <div className="p-3 pb-6 h-full">
                   <ScreenInfoMatch dataScreenInfo={dataScreenInfo} />
-                  <button className="bg-[rgba(30,42,56,1)] w-full flex flex-row justify-center gap-1 rounded-[10px]">
-                    <Icon icon="fe:line-chart" width={20} height={10} color="rgba(142,149,156,1)" />
-                    <span className="text-xs font-bold">Theo dõi </span>
+                  <button className="bg-[rgba(30,42,56,1)] w-full flex flex-row justify-center gap-1 rounded-[7px] h-[30px] items-center">
+                    <Icon icon="fe:line-chart" width={30} height={20} color="rgba(142,149,156,1)" />
+                    <span className="text-[13px] font-bold text-[rgba(142,149,156,1)]">Theo dõi </span>
                   </button>
                   {tracker_id && (
                     <iframe
