@@ -39,11 +39,12 @@ export default function MatchView() {
   const [haveError, setHaveError] = useState(false);
   const [iframeHeight, setIframeHeight] = useState("0px");
   const [errorCount, setErrorCount] = useState(0);
+  const [showTrackingLive, setShowTrackingLive] = useState(true);
   const telegram = useTelegram();
 
   const matchParam = searchParams.get("match");
   const lineParam = searchParams.get("line");
-  const tracker_id = searchParams.get("tracker_id");
+  const tracker_id = searchParams.get("tracker_id") || "48820767";
 
   const leagueNoCorner = (league?: string) => {
     return league?.includes(" Corners") ? league?.replace(" Corners", "") : league;
@@ -333,23 +334,38 @@ export default function MatchView() {
               <>
                 <div className="p-3 pb-6 h-full">
                   <ScreenInfoMatch dataScreenInfo={dataScreenInfo} />
-                  <button className="bg-[rgba(30,42,56,1)] w-full flex flex-row justify-center gap-1 rounded-[7px] h-[30px] items-center">
-                    <Icon icon="fe:line-chart" width={30} height={20} color="rgba(142,149,156,1)" />
-                    <span className="text-[13px] font-bold text-[rgba(142,149,156,1)]">Theo dõi </span>
-                  </button>
                   {tracker_id && (
-                    <iframe
-                      scrolling="no"
-                      src={`https://start26.sptpub.com/tracker.html?eventId=${tracker_id}&sportId=1&lang=vi&liveEvent=true&providers=Betradar`}
-                      allowFullScreen
-                      title="rindle"
-                      style={{
-                        border: 0,
-                        width: "100%",
-                        height: iframeLoaded ? iframeHeight : "0px",
-                        borderRadius: "5px",
-                      }}
-                    ></iframe>
+                    <>
+                      <button className="bg-[rgba(30,42,56,1)] w-full flex flex-row justify-center gap-1 rounded-[7px] h-[30px] items-center">
+                        <Icon
+                          icon="fe:line-chart"
+                          width={30}
+                          height={20}
+                          color={showTrackingLive ? "rgba(237,202,84,1)" : "rgba(142,149,156,1)"}
+                        />
+                        <span
+                          className={`text-[13px] font-bold ${
+                            showTrackingLive ? "text-[rgba(255,255,255,1)]" : "text-[rgba(142,149,156,1)]"
+                          } `}
+                        >
+                          Theo dõi{" "}
+                        </span>
+                      </button>
+                      {showTrackingLive && (
+                        <iframe
+                          scrolling="no"
+                          src={`https://start26.sptpub.com/tracker.html?eventId=${tracker_id}&sportId=1&lang=vi&liveEvent=true&providers=Betradar`}
+                          allowFullScreen
+                          title="rindle"
+                          style={{
+                            border: 0,
+                            width: "100%",
+                            height: iframeLoaded ? iframeHeight : "0px",
+                            borderRadius: "5px",
+                          }}
+                        ></iframe>
+                      )}
+                    </>
                   )}
 
                   <OddsDetail
