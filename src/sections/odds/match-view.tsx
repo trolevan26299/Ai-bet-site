@@ -333,6 +333,21 @@ export default function MatchView() {
             ) : (
               <>
                 <div className="p-3 pb-6 h-full">
+                  <div className="h-[39px] bg-[rgba(30,42,56,1 )] flex flex-row justify-between items-center px-4">
+                    <Icon
+                      icon="weui:back-filled"
+                      width={30}
+                      height={20}
+                      color={showTrackingLive ? "rgba(237,202,84,1)" : "rgba(142,149,156,1)"}
+                    />
+                    <div>nội dung dành cho giải</div>
+                    <Icon
+                      icon="weui:back-filled"
+                      width={30}
+                      height={20}
+                      color={showTrackingLive ? "rgba(237,202,84,1)" : "rgba(142,149,156,1)"}
+                    />
+                  </div>
                   <ScreenInfoMatch dataScreenInfo={dataScreenInfo} />
                   {tracker_id && (
                     <>
