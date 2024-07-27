@@ -361,7 +361,7 @@ export default function MatchView() {
                           allowFullScreen
                           title="rindle"
                           style={{
-                            paddingTop: "5px",
+                            marginTop: "5px",
                             border: 0,
                             width: "100%",
                             height: iframeLoaded ? iframeHeight : "0px",
