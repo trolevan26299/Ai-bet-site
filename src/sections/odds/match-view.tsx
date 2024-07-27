@@ -290,14 +290,16 @@ export default function MatchView() {
           />
           <div className="text-[rgba(255,255,255,1)] flex flex-row justify-center items-center">
             <Image src="/assets/league_logo.png" alt="no-content" className="w-[34px] h-[27.2px]" />
-            <p className="text-sm font-bold ">{dataScreenInfo[0]?.league_name}</p>
-            <Icon
-              icon="icon-park-solid:down-one"
-              width={25}
-              height={15}
-              color="rgba(255,255,255,1)"
-              className="hover:cursor-pointer"
-            />
+            <div className="flex flex-row justify-center items-center">
+              <p className="text-sm font-bold ">{dataScreenInfo[0]?.league_name}</p>
+              <Icon
+                icon="icon-park-solid:down-one"
+                width={25}
+                height={15}
+                color="rgba(255,255,255,1)"
+                className="hover:cursor-pointer"
+              />
+            </div>
             <Icon
               icon="material-symbols-light:star-outline"
               width={25}
@@ -308,8 +310,8 @@ export default function MatchView() {
           </div>
           <Icon
             icon="hugeicons:list-setting"
-            width={30}
-            height={20}
+            width={35}
+            height={25}
             color="rgba(143,149,156,1)"
             className="hover:cursor-pointer"
           />
