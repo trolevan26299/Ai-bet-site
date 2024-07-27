@@ -280,20 +280,10 @@ export default function MatchView() {
   return (
     <MainLayout>
       <div style={{ paddingBottom: "50px" }}>
-        <div className="h-[39px] w-full bg-[rgba(30,42,56,1 )] flex flex-row justify-between items-center px-4">
-          <Icon
-            icon="weui:back-filled"
-            width={30}
-            height={20}
-            color={showTrackingLive ? "rgba(237,202,84,1)" : "rgba(142,149,156,1)"}
-          />
-          <div>nội dung dành cho giải</div>
-          <Icon
-            icon="weui:back-filled"
-            width={30}
-            height={20}
-            color={showTrackingLive ? "rgba(237,202,84,1)" : "rgba(142,149,156,1)"}
-          />
+        <div className="h-[39px] w-full bg-[rgba(30,42,56,1)] flex flex-row justify-between items-center px-4">
+          <Icon icon="weui:back-filled" width={30} height={20} color="rgba(143,149,156,1)" />
+          <div className="text-[rgba(255,255,255,1)]">nội dung dành cho giải</div>
+          <Icon icon="weui:back-filled" width={30} height={20} color="rgba(143,149,156,1)" />
         </div>
         {loading ? (
           <SplashScreen />
