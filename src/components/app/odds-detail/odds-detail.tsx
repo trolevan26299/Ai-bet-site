@@ -65,7 +65,7 @@ export default function OddsDetail({
   };
   const toggleExpand = () => {
     setExpand(!expand);
-    setOpenItems(expand ? [] : allItems); // Toggle between all items and no items
+    setOpenItems(expand ? [] : allItems);
   };
 
   const oddsCorner = odds.filter(
