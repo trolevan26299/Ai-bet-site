@@ -336,7 +336,10 @@ export default function MatchView() {
                   <ScreenInfoMatch dataScreenInfo={dataScreenInfo} />
                   {tracker_id && (
                     <>
-                      <button className="bg-[rgba(30,42,56,1)] w-full flex flex-row justify-center gap-1 rounded-[7px] h-[30px] items-center">
+                      <button
+                        className="bg-[rgba(30,42,56,1)] w-full flex flex-row justify-center gap-1 rounded-[7px] h-[30px] items-center"
+                        onClick={() => setShowTrackingLive(!showTrackingLive)}
+                      >
                         <Icon
                           icon="fe:line-chart"
                           width={30}
@@ -358,6 +361,7 @@ export default function MatchView() {
                           allowFullScreen
                           title="rindle"
                           style={{
+                            paddingTop: "5px",
                             border: 0,
                             width: "100%",
                             height: iframeLoaded ? iframeHeight : "0px",
