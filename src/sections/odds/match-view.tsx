@@ -368,10 +368,10 @@ export default function MatchView() {
               </div>
             ) : (
               <>
-                <div className="p-3 pb-6 h-full">
+                <div className=" pb-6 h-full">
                   <ScreenInfoMatch dataScreenInfo={dataScreenInfo} />
                   {tracker_id && (
-                    <>
+                    <div className="p-3">
                       <button
                         className="bg-[rgba(30,42,56,1)] w-full flex flex-row justify-center gap-1 rounded-[7px] h-[30px] items-center"
                         onClick={() => setShowTrackingLive(!showTrackingLive)}
@@ -405,7 +405,7 @@ export default function MatchView() {
                           }}
                         ></iframe>
                       )}
-                    </>
+                    </div>
                   )}
 
                   <OddsDetail
