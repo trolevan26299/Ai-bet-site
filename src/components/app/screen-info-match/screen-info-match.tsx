@@ -20,6 +20,7 @@ export default function ScreenInfoMatch({ dataScreenInfo }: { dataScreenInfo: IM
         </div> */}
         <div className={`flex flex-col items-start col-span-3 pb-2 ${dataScreenInfo[0]?.liveStatus ? "mt-7" : "mt-4"}`}>
           {dataScreenInfo.length > 0 && <TeamLogo teamName={dataScreenInfo[0].team[0]} typeError="home" />}
+          <span className="text-[#fff] py-3 text-sm font-[600] ml-0 w-[48%] flex-wrap">{dataScreenInfo[0]?.home}</span>
         </div>
 
         {dataScreenInfo[0]?.liveStatus ? (
@@ -106,9 +107,6 @@ export default function ScreenInfoMatch({ dataScreenInfo }: { dataScreenInfo: IM
 
         <div className={`flex flex-col items-end col-span-3 pb-2 ${dataScreenInfo[0]?.liveStatus ? "mt-7" : "mt-4"}`}>
           {dataScreenInfo.length > 0 && <TeamLogo teamName={dataScreenInfo[0].team[1]} typeError="away" />}
-        </div>
-        <div className="flex flex-row justify-between col-span-12 mt-[-25px]">
-          <span className="text-[#fff] py-3 text-sm font-[600] ml-0 w-[48%] flex-wrap">{dataScreenInfo[0]?.home}</span>
           <span className="text-[#fff] py-3 text-sm font-[600] mr-0 w-[48%] flex flex-row justify-end flex-wrap text-right  overflow-hidden text-overflow-ellipsis">
             {dataScreenInfo[0]?.away}
           </span>
