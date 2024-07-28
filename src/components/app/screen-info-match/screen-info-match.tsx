@@ -54,7 +54,7 @@ export default function ScreenInfoMatch({ dataScreenInfo }: { dataScreenInfo: IM
                 } ${formatLiveScope(dataScreenInfo[0].liveState) || ""}`}
               </p>
             </div>
-            <div className="flex justify-center items-center pt-[10px]">
+            <div className="flex justify-center items-center pt-[8px]">
               <div
                 style={{ border: "1px solid rgba(255,255,255,0.4)" }}
                 className="h-[29.6px] w-[28.4px] flex items-center justify-center rounded-[6px]"
