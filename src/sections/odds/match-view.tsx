@@ -280,7 +280,7 @@ export default function MatchView() {
   return (
     <MainLayout>
       <div style={{ paddingBottom: "50px" }}>
-        <div className="h-[39px] w-full bg-[rgba(30,42,56,1)] flex flex-row justify-between items-center px-3">
+        <div className="h-[39px] w-full bg-[rgba(30,42,56,1)] flex flex-row justify-between items-center px-[6px]">
           <Icon
             icon="weui:back-filled"
             width={30}
@@ -288,7 +288,7 @@ export default function MatchView() {
             color="rgba(143,149,156,1)"
             className="hover:cursor-pointer"
           />
-          <div className="text-[rgba(255,255,255,1)] flex flex-row justify-center items-center">
+          <div className="text-[rgba(255,255,255,1)] flex flex-row justify-center items-center pr-[10px]">
             <Image src="/assets/league_logo.png" alt="no-content" className="w-[34px] h-[27.2px]" />
             <div className="flex flex-row justify-center items-center">
               <p className="text-sm font-bold w-[85%] leading-[1.1rem]">{dataScreenInfo[0]?.league_name}</p>
