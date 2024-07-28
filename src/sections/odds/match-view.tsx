@@ -446,7 +446,10 @@ export default function MatchView() {
             ))}
           </div>
         </div>
-        <PopoverContent className="w-[90%] m-auto mt-3  bg-[rgba(41,53,67,1)] rounded-[10px]">
+        <PopoverContent
+          className="w-[90%] m-auto mt-3  bg-[rgba(41,53,67,1)] rounded-[10px]  text-[rgba(255,255,255,1)]"
+          style={{ border: "none" }}
+        >
           <div className="grid gap-4">
             <div className="space-y-2">
               <h4 className="font-medium leading-none">Dimensions</h4>
@@ -460,14 +463,6 @@ export default function MatchView() {
               <div className="grid grid-cols-3 items-center gap-4">
                 <Label htmlFor="maxWidth">Max. width</Label>
                 <Input id="maxWidth" defaultValue="300px" className="col-span-2 h-8" />
-              </div>
-              <div className="grid grid-cols-3 items-center gap-4">
-                <Label htmlFor="height">Height</Label>
-                <Input id="height" defaultValue="25px" className="col-span-2 h-8" />
-              </div>
-              <div className="grid grid-cols-3 items-center gap-4">
-                <Label htmlFor="maxHeight">Max. height</Label>
-                <Input id="maxHeight" defaultValue="none" className="col-span-2 h-8" />
               </div>
             </div>
           </div>
