@@ -391,21 +391,21 @@ export default function MatchView() {
                             Theo dõi{" "}
                           </span>
                         </button>
-                        {showTrackingLive && (
-                          <iframe
-                            scrolling="no"
-                            src={`https://start26.sptpub.com/tracker.html?eventId=${tracker_id}&sportId=1&lang=vi&liveEvent=true&providers=Betradar`}
-                            allowFullScreen
-                            title="rindle"
-                            style={{
-                              marginTop: "5px",
-                              border: 0,
-                              width: "100%",
-                              height: iframeLoaded ? iframeHeight : "0px",
-                              borderRadius: "5px",
-                            }}
-                          ></iframe>
-                        )}
+
+                        <iframe
+                          scrolling="no"
+                          src={`https://start26.sptpub.com/tracker.html?eventId=${tracker_id}&sportId=1&lang=vi&liveEvent=true&providers=Betradar`}
+                          allowFullScreen
+                          title="rindle"
+                          style={{
+                            display: showTrackingLive ? "block" : "none",
+                            marginTop: "5px",
+                            border: 0,
+                            width: "100%",
+                            height: iframeLoaded ? iframeHeight : "0px",
+                            borderRadius: "5px",
+                          }}
+                        ></iframe>
                       </div>
                     )}
 
