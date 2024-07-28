@@ -31,7 +31,7 @@ export default function ScreenInfoMatch({ dataScreenInfo }: { dataScreenInfo: IM
             left: 0,
             width: "100%",
             height: "100%",
-            backgroundColor: "rgba(0, 0, 0, 0.2)", // Điều chỉnh mức độ trong suốt ở đây
+            backgroundColor: "rgba(0, 0, 0, 0.3)", // Điều chỉnh mức độ trong suốt ở đây
             zIndex: 1,
           }}
         ></div>
@@ -41,7 +41,7 @@ export default function ScreenInfoMatch({ dataScreenInfo }: { dataScreenInfo: IM
           <Icon icon="ph:soccer-ball-fill" width="20" color="#fafafa" />
           <p className="pl-1 text-sm text-[#fafafa] font-[600]">{dataScreenInfo[0]?.league_name}</p>
         </div> */}
-        <div className={`flex flex-col items-start col-span-3 pb-2 ${dataScreenInfo[0]?.liveStatus ? "mt-7" : "mt-4"}`}>
+        <div className={`flex flex-col items-start col-span-3 pb-2 ${dataScreenInfo[0]?.liveStatus ? "mt-4" : "mt-4"}`}>
           {dataScreenInfo.length > 0 && <TeamLogo teamName={dataScreenInfo[0].team[0]} typeError="home" />}
         </div>
 
@@ -127,7 +127,7 @@ export default function ScreenInfoMatch({ dataScreenInfo }: { dataScreenInfo: IM
           </div>
         )}
 
-        <div className={`flex flex-col items-end col-span-3 pb-2 ${dataScreenInfo[0]?.liveStatus ? "mt-7" : "mt-4"}`}>
+        <div className={`flex flex-col items-end col-span-3 pb-2 ${dataScreenInfo[0]?.liveStatus ? "mt-4" : "mt-4"}`}>
           {dataScreenInfo.length > 0 && <TeamLogo teamName={dataScreenInfo[0].team[1]} typeError="away" />}
         </div>
         <div className="flex flex-row justify-between col-span-12 mt-[-40px]">
