@@ -18,9 +18,9 @@ export default function ScreenInfoMatch({ dataScreenInfo }: { dataScreenInfo: IM
       //   background: `url('/assets/bg_team.jpg') center center / cover no-repeat`,
       // }}
     >
-      <img src="/assets/bg_team.png" alt="Stadium" className=" absolute w-full h-full z-0" />
+      <img src="/assets/bg_team.png" alt="Stadium" className=" absolute w-full h-full z-0 opacity-[80%]" />
 
-      <div className="absolute inset-0 z-[1px]" style={{ backgroundColor: "rgba(255, 255, 255, 0.7)" }}></div>
+      {/* <div className="absolute inset-0 z-[1px]" style={{ backgroundColor: "rgba(255, 255, 255, 0.7)" }}></div> */}
 
       <div className="absolute inset-0 grid z-[2px] grid-cols-12 items-start justify-center px-4 pt-2">
         {/* <div className="col-span-12 text-gray-300  flex flex-row items-center ">
