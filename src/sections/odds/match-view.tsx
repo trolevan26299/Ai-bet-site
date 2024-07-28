@@ -374,7 +374,9 @@ export default function MatchView() {
                     {tracker_id && (
                       <div className="pt-2">
                         <button
-                          className="bg-[rgba(30,42,56,1)] w-full flex flex-row justify-center gap-1 rounded-[7px] h-[30px] items-center"
+                          className={`bg-[rgba(30,42,56,1)] w-full flex flex-row justify-center gap-1 rounded-[7px] h-[30px] items-center ${
+                            showTrackingLive ? "pb-1" : ""
+                          }`}
                           onClick={() => setShowTrackingLive(!showTrackingLive)}
                         >
                           <Icon
