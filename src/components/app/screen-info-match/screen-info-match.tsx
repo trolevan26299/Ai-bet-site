@@ -18,32 +18,8 @@ export default function ScreenInfoMatch({ dataScreenInfo }: { dataScreenInfo: IM
       //   background: `url('/assets/bg_team.jpg') center center / cover no-repeat`,
       // }}
     >
-      {/* <img src="/assets/bg_team.jpg" alt="Stadium" className="w-full h-full opacity-[20%]" /> */}
-      <div
-        className="absolute inset-0 z-0"
-        style={{
-          width: "100%",
-          height: "100%",
-          minHeight: "116px", // Ensures minimum height of 116px
-          backgroundImage: "url('/assets/bg_team.jpg')",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat", // Ensures the image doesn't repeat
-        }}
-      >
-        {/* Lớp phủ opacity dùng inline style */}
-        <div
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            width: "100%",
-            height: "100%",
-            backgroundColor: "rgba(0, 0, 0, 0.3)", // Điều chỉnh mức độ trong suốt ở đây
-            zIndex: 1,
-          }}
-        ></div>
-      </div>
+      <img src="/assets/bg_team.jpg" alt="Stadium" className=" absolute w-full h-full opacity-[20%]" />
+
       <div className="absolute inset-0 grid grid-cols-12 items-start justify-center px-4 pt-2">
         {/* <div className="col-span-12 text-gray-300  flex flex-row items-center ">
           <Icon icon="ph:soccer-ball-fill" width="20" color="#fafafa" />
@@ -54,7 +30,7 @@ export default function ScreenInfoMatch({ dataScreenInfo }: { dataScreenInfo: IM
         </div>
 
         {dataScreenInfo[0]?.liveStatus ? (
-          <div className="col-span-6 flex flex-col items-center justify-center text-gray-300 mt-1">
+          <div className="col-span-6 flex flex-col items-center justify-center text-gray-300 mt-2">
             <div className="flex flex-row items-center gap-1 pr-1">
               <Icon icon="fluent:live-20-filled" width={25} height={23} color="rgba(255,69,58,1)" />
               <p className="font-[600] text-sm text-[rgba(255,230,101,1)] ">
@@ -123,7 +99,7 @@ export default function ScreenInfoMatch({ dataScreenInfo }: { dataScreenInfo: IM
             </div>
           </div>
         ) : (
-          <div className="col-span-6 flex flex-col items-center justify-center text-gray-300 mt-2 gap-3">
+          <div className="col-span-6 flex flex-col items-center justify-center text-gray-300 mt-4 gap-3">
             {dataScreenInfo[0]?.starts && (
               <span className="text-sm text-[rgba(255,230,101,1)] font-[600]">
                 {convertToGMT7(dataScreenInfo[0]?.starts, "date")}
