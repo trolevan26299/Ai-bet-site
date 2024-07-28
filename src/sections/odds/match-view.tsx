@@ -3,22 +3,22 @@
 import OddsDetail from "@/components/app/odds-detail/odds-detail";
 import ScreenInfoMatch from "@/components/app/screen-info-match/screen-info-match";
 import { SplashScreen } from "@/components/loading-screen";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { useTelegram } from "@/context/telegram.provider";
 import MainLayout from "@/layouts/main/layout";
 import { paths } from "@/routes/paths";
 import { IMatchData, IOddsDetail, OddsStatusType } from "@/types/odds.types";
 import { transformDataCorner } from "@/utils/transformDataCorner";
-import { Icon } from "@iconify/react";
 import { transformData } from "@/utils/transformDataOdds";
+import { Icon } from "@iconify/react";
 import axios from "axios";
 import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { isIOS } from "react-device-detect";
-import { Button } from "@/components/ui/button";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/input";
+import "./index.css";
 
 const menuNavigation = [
   { id: "1", name: "Trận đấu", url: paths.odds, icon: "mdi:soccer-field" },
@@ -446,7 +446,7 @@ export default function MatchView() {
             ))}
           </div>
         </div>
-        <PopoverContent className="w-full" style={{ transform: "translate(-15px ,10px)" }}>
+        <PopoverContent className="w-full">
           <div className="grid gap-4">
             <div className="space-y-2">
               <h4 className="font-medium leading-none">Dimensions</h4>
