@@ -18,7 +18,7 @@ export default function ScreenInfoMatch({ dataScreenInfo }: { dataScreenInfo: IM
       //   background: `url('/assets/bg_team.jpg') center center / cover no-repeat`,
       // }}
     >
-      <img src="/assets/bg_team.png" alt="Stadium" className=" absolute w-full h-full opacity-[50%]" />
+      <img src="/assets/bg_team.png" alt="Stadium" className=" absolute w-full h-full " />
 
       <div className="absolute inset-0 grid grid-cols-12 items-start justify-center px-4 pt-2">
         {/* <div className="col-span-12 text-gray-300  flex flex-row items-center ">
