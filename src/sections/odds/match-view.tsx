@@ -446,7 +446,7 @@ export default function MatchView() {
             ))}
           </div>
         </div>
-        <PopoverContent className="w-[90%] m-auto">
+        <PopoverContent className="w-[90%] m-auto mt-3">
           <div className="grid gap-4">
             <div className="space-y-2">
               <h4 className="font-medium leading-none">Dimensions</h4>
