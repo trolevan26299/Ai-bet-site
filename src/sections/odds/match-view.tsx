@@ -16,6 +16,9 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { isIOS } from "react-device-detect";
 import { Button } from "@/components/ui/button";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
 
 const menuNavigation = [
   { id: "1", name: "Trận đấu", url: paths.odds, icon: "mdi:soccer-field" },
@@ -279,167 +282,197 @@ export default function MatchView() {
 
   return (
     <MainLayout>
-      <div style={{ paddingBottom: "50px" }}>
-        <div className="h-[39px] w-full bg-[rgba(30,42,56,1)] flex flex-row justify-between items-center px-[6px]">
-          <Icon
-            icon="weui:back-filled"
-            width={30}
-            height={20}
-            color="rgba(143,149,156,1)"
-            className="hover:cursor-pointer"
-          />
-          <div className="text-[rgba(255,255,255,1)] flex flex-row justify-center items-center pr-[10px]">
-            <Image src="/assets/league_logo.png" alt="no-content" className="w-[34px] h-[27.2px]" />
-            <div className="flex flex-row justify-center items-center">
-              <p className="text-sm font-bold w-[85%] leading-[1.1rem]">{dataScreenInfo[0]?.league_name}</p>
+      <Popover>
+        <div style={{ paddingBottom: "50px" }}>
+          <div className="h-[39px] w-full bg-[rgba(30,42,56,1)] flex flex-row justify-between items-center px-[6px]">
+            <Icon
+              icon="weui:back-filled"
+              width={30}
+              height={20}
+              color="rgba(143,149,156,1)"
+              className="hover:cursor-pointer"
+            />
+            <div className="text-[rgba(255,255,255,1)] flex flex-row justify-center items-center pr-[10px]">
+              <Image src="/assets/league_logo.png" alt="no-content" className="w-[34px] h-[27.2px]" />
+              <div className="flex flex-row justify-center items-center">
+                <p className="text-sm font-bold w-[85%] leading-[1.1rem]">{dataScreenInfo[0]?.league_name}</p>
+                <Icon
+                  icon="icon-park-solid:down-one"
+                  width={25}
+                  height={15}
+                  color="rgba(255,255,255,1)"
+                  className="hover:cursor-pointer"
+                />
+              </div>
               <Icon
-                icon="icon-park-solid:down-one"
-                width={25}
-                height={15}
-                color="rgba(255,255,255,1)"
-                className="hover:cursor-pointer"
+                icon="material-symbols-light:star-outline"
+                width={30}
+                height={30}
+                color="rgba(170,170,170,1)"
+                className=" hover:cursor-pointer"
               />
             </div>
-            <Icon
-              icon="material-symbols-light:star-outline"
-              width={30}
-              height={30}
-              color="rgba(170,170,170,1)"
-              className=" hover:cursor-pointer"
-            />
+            <PopoverTrigger asChild>
+              <Icon
+                icon="hugeicons:list-setting"
+                width={30}
+                height={23}
+                color="rgba(143,149,156,1)"
+                className="hover:cursor-pointer"
+              />
+            </PopoverTrigger>
           </div>
-          <Icon
-            icon="hugeicons:list-setting"
-            width={30}
-            height={23}
-            color="rgba(143,149,156,1)"
-            className="hover:cursor-pointer"
-          />
-        </div>
-        {loading ? (
-          <SplashScreen />
-        ) : (
-          <>
-            {endBet ? (
-              <div className="h-[80vh] w-[90%] flex flex-col justify-center items-center mx-auto">
-                {tracker_id ? (
-                  <iframe
-                    scrolling="no"
-                    src={`https://start26.sptpub.com/tracker.html?eventId=${tracker_id}&sportId=1&lang=vi&liveEvent=true&providers=Betradar`}
-                    allowFullScreen
-                    title="rindle"
-                    style={{
-                      border: 0,
-                      width: "100%",
-                      height: iframeLoaded ? iframeHeight : "0px",
-                      borderRadius: "5px",
-                    }}
-                  ></iframe>
-                ) : (
-                  <Image src="/assets/ball.png" alt="no-content" className="w-[165px] h-[170px] mr-5" />
-                )}
-                <p className="pt-2 text-xl text-slate-500 font-semibold">Trận đấu đã kết thúc</p>
-                <span className="pt-2 text-sm text-slate-500 font-semibold">
-                  Vui lòng quay lại Telegram và xem các sự kiện khác
-                </span>
-              </div>
-            ) : haveError ? (
-              <div className="h-[80vh] w-[90%] flex flex-col justify-center items-center mx-auto">
-                {tracker_id ? (
-                  <iframe
-                    scrolling="no"
-                    src={`https://start26.sptpub.com/tracker.html?eventId=${tracker_id}&sportId=1&lang=vi&liveEvent=true&providers=Betradar`}
-                    allowFullScreen
-                    title="rindle"
-                    style={{
-                      border: 0,
-                      width: "100%",
-                      height: iframeLoaded ? iframeHeight : "0px",
-                      borderRadius: "5px",
-                    }}
-                  ></iframe>
-                ) : (
-                  <Image src="/assets/ball.png" alt="no-content" className="w-[165px] h-[170px] mr-5" />
-                )}
-                <p className="pt-4 text-xl text-slate-500 font-semibold">Không tìm thấy thông tin trận đấu</p>
-                <span className="pt-2 text-sm text-slate-500 font-semibold text-center">
-                  Trận đấu bị gián đoạn hoặc đã kết thúc. Vui lòng thử lại trong giây lát hoặc chọn trận đấu khác.
-                </span>
-              </div>
-            ) : (
-              <>
-                <div className=" pb-6 h-full">
-                  <ScreenInfoMatch dataScreenInfo={dataScreenInfo} />
-                  <div className="px-3">
-                    {tracker_id && (
-                      <div className="pt-2">
-                        <button
-                          className={`bg-[rgba(30,42,56,1)] w-full flex flex-row justify-center gap-1 rounded-[7px] h-[30px] items-center ${
-                            !showTrackingLive ? "pb-1" : ""
-                          }`}
-                          onClick={() => setShowTrackingLive(!showTrackingLive)}
-                        >
-                          <Icon
-                            icon="fe:line-chart"
-                            width={30}
-                            height={20}
-                            color={showTrackingLive ? "rgba(237,202,84,1)" : "rgba(142,149,156,1)"}
-                          />
-                          <span
-                            className={`text-[13px] font-bold ${
-                              showTrackingLive ? "text-[rgba(255,255,255,1)]" : "text-[rgba(142,149,156,1)]"
-                            } `}
-                          >
-                            Theo dõi{" "}
-                          </span>
-                        </button>
-
-                        <iframe
-                          scrolling="no"
-                          src={`https://start26.sptpub.com/tracker.html?eventId=${tracker_id}&sportId=1&lang=vi&liveEvent=true&providers=Betradar`}
-                          allowFullScreen
-                          title="rindle"
-                          style={{
-                            display: showTrackingLive ? "block" : "none",
-                            marginTop: "5px",
-                            border: 0,
-                            width: "100%",
-                            height: iframeLoaded ? iframeHeight : "0px",
-                            borderRadius: "5px",
-                          }}
-                        ></iframe>
-                      </div>
-                    )}
-
-                    <OddsDetail
-                      odds={odds}
-                      oddsStatus={oddsStatus}
-                      dataScreenInfo={dataScreenInfo}
-                      disableBtn={disableBtn}
-                    />
-                  </div>
+          {loading ? (
+            <SplashScreen />
+          ) : (
+            <>
+              {endBet ? (
+                <div className="h-[80vh] w-[90%] flex flex-col justify-center items-center mx-auto">
+                  {tracker_id ? (
+                    <iframe
+                      scrolling="no"
+                      src={`https://start26.sptpub.com/tracker.html?eventId=${tracker_id}&sportId=1&lang=vi&liveEvent=true&providers=Betradar`}
+                      allowFullScreen
+                      title="rindle"
+                      style={{
+                        border: 0,
+                        width: "100%",
+                        height: iframeLoaded ? iframeHeight : "0px",
+                        borderRadius: "5px",
+                      }}
+                    ></iframe>
+                  ) : (
+                    <Image src="/assets/ball.png" alt="no-content" className="w-[165px] h-[170px] mr-5" />
+                  )}
+                  <p className="pt-2 text-xl text-slate-500 font-semibold">Trận đấu đã kết thúc</p>
+                  <span className="pt-2 text-sm text-slate-500 font-semibold">
+                    Vui lòng quay lại Telegram và xem các sự kiện khác
+                  </span>
                 </div>
-              </>
-            )}
-          </>
-        )}
-        <div
-          className={`z-10 bottom-0  fixed m-auto rounded-sm flex items-center flex-row justify-around flex-wrap w-full  px-4 pt-2 pb-3 rounded-tr-[20px] rounded-tl-[20px]`}
-          style={{ backgroundColor: "rgba(13, 22, 31, 1)" }}
-        >
-          {menuNavigation.map((item) => (
-            <div
-              className="group flex flex-col justify-center items-center gap-[4.5px] hover:cursor-pointer  text-[rgba(159,162,167,1)]"
-              key={item.id}
-            >
-              <Icon icon={item.icon} className="w-[21.43px] h-[21.43px] group-hover:text-[rgba(121,228,169,1)]" />
-              <p className="text-[12.86px] font-bold leading-[15.56px] group-hover:text-[rgba(255,255,255,1)]">
-                {item.name}
-              </p>
-            </div>
-          ))}
+              ) : haveError ? (
+                <div className="h-[80vh] w-[90%] flex flex-col justify-center items-center mx-auto">
+                  {tracker_id ? (
+                    <iframe
+                      scrolling="no"
+                      src={`https://start26.sptpub.com/tracker.html?eventId=${tracker_id}&sportId=1&lang=vi&liveEvent=true&providers=Betradar`}
+                      allowFullScreen
+                      title="rindle"
+                      style={{
+                        border: 0,
+                        width: "100%",
+                        height: iframeLoaded ? iframeHeight : "0px",
+                        borderRadius: "5px",
+                      }}
+                    ></iframe>
+                  ) : (
+                    <Image src="/assets/ball.png" alt="no-content" className="w-[165px] h-[170px] mr-5" />
+                  )}
+                  <p className="pt-4 text-xl text-slate-500 font-semibold">Không tìm thấy thông tin trận đấu</p>
+                  <span className="pt-2 text-sm text-slate-500 font-semibold text-center">
+                    Trận đấu bị gián đoạn hoặc đã kết thúc. Vui lòng thử lại trong giây lát hoặc chọn trận đấu khác.
+                  </span>
+                </div>
+              ) : (
+                <>
+                  <div className=" pb-6 h-full">
+                    <ScreenInfoMatch dataScreenInfo={dataScreenInfo} />
+                    <div className="px-3">
+                      {tracker_id && (
+                        <div className="pt-2">
+                          <button
+                            className={`bg-[rgba(30,42,56,1)] w-full flex flex-row justify-center gap-1 rounded-[7px] h-[30px] items-center ${
+                              !showTrackingLive ? "pb-1" : ""
+                            }`}
+                            onClick={() => setShowTrackingLive(!showTrackingLive)}
+                          >
+                            <Icon
+                              icon="fe:line-chart"
+                              width={30}
+                              height={20}
+                              color={showTrackingLive ? "rgba(237,202,84,1)" : "rgba(142,149,156,1)"}
+                            />
+                            <span
+                              className={`text-[13px] font-bold ${
+                                showTrackingLive ? "text-[rgba(255,255,255,1)]" : "text-[rgba(142,149,156,1)]"
+                              } `}
+                            >
+                              Theo dõi{" "}
+                            </span>
+                          </button>
+
+                          <iframe
+                            scrolling="no"
+                            src={`https://start26.sptpub.com/tracker.html?eventId=${tracker_id}&sportId=1&lang=vi&liveEvent=true&providers=Betradar`}
+                            allowFullScreen
+                            title="rindle"
+                            style={{
+                              display: showTrackingLive ? "block" : "none",
+                              marginTop: "5px",
+                              border: 0,
+                              width: "100%",
+                              height: iframeLoaded ? iframeHeight : "0px",
+                              borderRadius: "5px",
+                            }}
+                          ></iframe>
+                        </div>
+                      )}
+
+                      <OddsDetail
+                        odds={odds}
+                        oddsStatus={oddsStatus}
+                        dataScreenInfo={dataScreenInfo}
+                        disableBtn={disableBtn}
+                      />
+                    </div>
+                  </div>
+                </>
+              )}
+            </>
+          )}
+          <div
+            className={`z-10 bottom-0  fixed m-auto rounded-sm flex items-center flex-row justify-around flex-wrap w-full  px-4 pt-2 pb-3 rounded-tr-[20px] rounded-tl-[20px]`}
+            style={{ backgroundColor: "rgba(13, 22, 31, 1)" }}
+          >
+            {menuNavigation.map((item) => (
+              <div
+                className="group flex flex-col justify-center items-center gap-[4.5px] hover:cursor-pointer  text-[rgba(159,162,167,1)]"
+                key={item.id}
+              >
+                <Icon icon={item.icon} className="w-[21.43px] h-[21.43px] group-hover:text-[rgba(121,228,169,1)]" />
+                <p className="text-[12.86px] font-bold leading-[15.56px] group-hover:text-[rgba(255,255,255,1)]">
+                  {item.name}
+                </p>
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
+        <PopoverContent className="w-80">
+          <div className="grid gap-4">
+            <div className="space-y-2">
+              <h4 className="font-medium leading-none">Dimensions</h4>
+              <p className="text-sm text-muted-foreground">Set the dimensions for the layer.</p>
+            </div>
+            <div className="grid gap-2">
+              <div className="grid grid-cols-3 items-center gap-4">
+                <Label htmlFor="width">Width</Label>
+                <Input id="width" defaultValue="100%" className="col-span-2 h-8" />
+              </div>
+              <div className="grid grid-cols-3 items-center gap-4">
+                <Label htmlFor="maxWidth">Max. width</Label>
+                <Input id="maxWidth" defaultValue="300px" className="col-span-2 h-8" />
+              </div>
+              <div className="grid grid-cols-3 items-center gap-4">
+                <Label htmlFor="height">Height</Label>
+                <Input id="height" defaultValue="25px" className="col-span-2 h-8" />
+              </div>
+              <div className="grid grid-cols-3 items-center gap-4">
+                <Label htmlFor="maxHeight">Max. height</Label>
+                <Input id="maxHeight" defaultValue="none" className="col-span-2 h-8" />
+              </div>
+            </div>
+          </div>
+        </PopoverContent>
+      </Popover>
     </MainLayout>
   );
 }
