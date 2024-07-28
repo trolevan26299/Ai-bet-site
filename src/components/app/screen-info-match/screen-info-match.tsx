@@ -25,7 +25,7 @@ export default function ScreenInfoMatch({ dataScreenInfo }: { dataScreenInfo: IM
           <Icon icon="ph:soccer-ball-fill" width="20" color="#fafafa" />
           <p className="pl-1 text-sm text-[#fafafa] font-[600]">{dataScreenInfo[0]?.league_name}</p>
         </div> */}
-        <div className={`flex flex-col items-start col-span-3 pb-2 ${dataScreenInfo[0]?.liveStatus ? "mt-3" : "mt-3"}`}>
+        <div className={`flex flex-col items-start col-span-3 pb-2 ${dataScreenInfo[0]?.liveStatus ? "mt-4" : "mt-3"}`}>
           {dataScreenInfo.length > 0 && <TeamLogo teamName={dataScreenInfo[0].team[0]} typeError="home" />}
         </div>
 
@@ -76,7 +76,7 @@ export default function ScreenInfoMatch({ dataScreenInfo }: { dataScreenInfo: IM
                   {dataScreenInfo[0]?.homeScore || 0}
                 </p>
               </div>
-              <p className="px-2 font-bold text-lg text-[rgba(239,255,255,0.4)]">:</p>
+              <p className="px-2 font-bold text-lg text-[rgba(239,255,255,0.8)]">:</p>
               <div
                 style={{ border: "1px solid rgba(239,255,255,0.4)" }}
                 className="h-[29.6px] w-[28.4px] flex items-center justify-center rounded-[6px]"
@@ -115,16 +115,16 @@ export default function ScreenInfoMatch({ dataScreenInfo }: { dataScreenInfo: IM
           </div>
         )}
 
-        <div className={`flex flex-col items-end col-span-3 pb-2 ${dataScreenInfo[0]?.liveStatus ? "mt-3" : "mt-3"}`}>
+        <div className={`flex flex-col items-end col-span-3 pb-2 ${dataScreenInfo[0]?.liveStatus ? "mt-4" : "mt-3"}`}>
           {dataScreenInfo.length > 0 && <TeamLogo teamName={dataScreenInfo[0].team[1]} typeError="away" />}
         </div>
-        <div className="flex flex-row justify-between col-span-12 mt-[-30px]">
+        <div className="flex flex-row justify-between col-span-12 mt-[-15px]">
           <span className="text-[#fff] py-3 text-sm font-[600] ml-0 w-[48%] flex-wrap">{dataScreenInfo[0]?.home}</span>
           <span className="text-[#fff] py-3 text-sm font-[600] mr-0 w-[48%] flex flex-row justify-end flex-wrap text-right  overflow-hidden text-overflow-ellipsis">
             {dataScreenInfo[0]?.away}
           </span>
         </div>
-        <div className="flex flex-row justify-between col-span-12 mt-[-30px]">
+        <div className="flex flex-row justify-between col-span-12 ">
           <span className="text-[#fff] py-3 text-sm font-[600] ml-0 w-[48%] flex-wrap">{dataScreenInfo[0]?.home}</span>
           <span className="text-[#fff] py-3 text-sm font-[600] mr-0 w-[48%] flex flex-row justify-end flex-wrap text-right  overflow-hidden text-overflow-ellipsis">
             {dataScreenInfo[0]?.away}
