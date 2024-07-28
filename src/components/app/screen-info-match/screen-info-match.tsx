@@ -32,7 +32,7 @@ export default function ScreenInfoMatch({ dataScreenInfo }: { dataScreenInfo: IM
         </div>
 
         {dataScreenInfo[0]?.liveStatus ? (
-          <div className="col-span-6 flex flex-col items-center justify-center text-gray-300 mt-2">
+          <div className="col-span-6 flex flex-col items-center justify-center text-gray-300 mt-3">
             <div className="flex flex-row items-center gap-1 pr-1">
               <Icon icon="fluent:live-20-filled" width={20} height={18} color="rgba(245,93,62,1)" />
               <p className="font-bold text-xs text-[rgba(39,199,55,1)] ">
@@ -54,7 +54,7 @@ export default function ScreenInfoMatch({ dataScreenInfo }: { dataScreenInfo: IM
                 } ${formatLiveScope(dataScreenInfo[0].liveState) || ""}`}
               </p>
             </div>
-            <div className="flex justify-center items-center pt-2">
+            <div className="flex justify-center items-center pt-[10px]">
               <div
                 style={{ border: "1px solid rgba(255,255,255,0.4)" }}
                 className="h-[29.6px] w-[28.4px] flex items-center justify-center rounded-[6px]"
@@ -91,8 +91,10 @@ export default function ScreenInfoMatch({ dataScreenInfo }: { dataScreenInfo: IM
           {dataScreenInfo.length > 0 && <TeamLogo teamName={dataScreenInfo[0].team[1]} typeError="away" />}
         </div>
         <div className="flex flex-row justify-between col-span-12 mt-[-15px]">
-          <span className="text-[#fff] pt-2 text-sm font-[600] ml-0 w-[48%] flex-wrap">{dataScreenInfo[0]?.home}</span>
-          <span className="text-[#fff] pt-2 text-sm font-[600] mr-0 w-[48%] flex flex-row justify-end flex-wrap text-right  overflow-hidden text-overflow-ellipsis">
+          <span className="text-[#fff] text-sm font-[600] ml-0 w-[48%] flex-wrap leading-[1rem]">
+            {dataScreenInfo[0]?.home}
+          </span>
+          <span className="text-[#fff] text-sm font-[600] mr-0 w-[48%] flex flex-row justify-end flex-wrap text-right  overflow-hidden text-overflow-ellipsis leading-[1rem]">
             {dataScreenInfo[0]?.away}
           </span>
         </div>

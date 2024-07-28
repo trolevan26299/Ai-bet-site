@@ -291,7 +291,7 @@ export default function MatchView() {
           <div className="text-[rgba(255,255,255,1)] flex flex-row justify-center items-center">
             <Image src="/assets/league_logo.png" alt="no-content" className="w-[34px] h-[27.2px]" />
             <div className="flex flex-row justify-center items-center">
-              <p className="text-sm font-bold w-[85%]">{dataScreenInfo[0]?.league_name}</p>
+              <p className="text-sm font-bold w-[85%] leading-[1.1rem]">{dataScreenInfo[0]?.league_name}</p>
               <Icon
                 icon="icon-park-solid:down-one"
                 width={25}
