@@ -11,11 +11,31 @@ import { formatLiveScope } from "@/utils/formatLiveScope";
 export default function ScreenInfoMatch({ dataScreenInfo }: { dataScreenInfo: IMatchData[] }) {
   return (
     <div
-      className="relative pb-2"
-      style={{ minHeight: "116px", background: `url('/assets/bg_team.jpg') center center / cover no-repeat` }}
+      className="relative pb-2 min-h-[116px] w-full overflow-hidden"
+      // style={{
+      //   minHeight: "116px",
+      //   width: "100%",
+      //   background: `url('/assets/bg_team.jpg') center center / cover no-repeat`,
+      // }}
     >
       {/* <img src="/assets/bg_team.jpg" alt="Stadium" className="w-full h-full opacity-[20%]" /> */}
-
+      <div
+        className="absolute inset-0 w-full h-full bg-cover bg-center z-0"
+        style={{ backgroundImage: "url('/assets/bg_team.jpg')" }}
+      >
+        {/* Lớp phủ opacity dùng inline style */}
+        <div
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            backgroundColor: "rgba(0, 0, 0, 0.2)", // Điều chỉnh mức độ trong suốt ở đây
+            zIndex: 1,
+          }}
+        ></div>
+      </div>
       <div className="absolute inset-0 grid grid-cols-12 items-start justify-center px-4 pt-2">
         {/* <div className="col-span-12 text-gray-300  flex flex-row items-center ">
           <Icon icon="ph:soccer-ball-fill" width="20" color="#fafafa" />
@@ -110,7 +130,7 @@ export default function ScreenInfoMatch({ dataScreenInfo }: { dataScreenInfo: IM
         <div className={`flex flex-col items-end col-span-3 pb-2 ${dataScreenInfo[0]?.liveStatus ? "mt-7" : "mt-4"}`}>
           {dataScreenInfo.length > 0 && <TeamLogo teamName={dataScreenInfo[0].team[1]} typeError="away" />}
         </div>
-        <div className="flex flex-row justify-between col-span-12 mt-[-70px]">
+        <div className="flex flex-row justify-between col-span-12 mt-[-40px]">
           <span className="text-[#fff] py-3 text-sm font-[600] ml-0 w-[48%] flex-wrap">{dataScreenInfo[0]?.home}</span>
           <span className="text-[#fff] py-3 text-sm font-[600] mr-0 w-[48%] flex flex-row justify-end flex-wrap text-right  overflow-hidden text-overflow-ellipsis">
             {dataScreenInfo[0]?.away}
