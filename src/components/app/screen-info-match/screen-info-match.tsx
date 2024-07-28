@@ -11,7 +11,7 @@ import { formatLiveScope } from "@/utils/formatLiveScope";
 export default function ScreenInfoMatch({ dataScreenInfo }: { dataScreenInfo: IMatchData[] }) {
   return (
     <div
-      className="relative pb-2 min-h-[116px] w-full overflow-hidden"
+      className="relative pb-2 h-auto w-full overflow-hidden"
       // style={{
       //   minHeight: "116px",
       //   width: "100%",
@@ -20,10 +20,9 @@ export default function ScreenInfoMatch({ dataScreenInfo }: { dataScreenInfo: IM
     >
       {/* <img src="/assets/bg_team.jpg" alt="Stadium" className="w-full h-full opacity-[20%]" /> */}
       <div
-        className="absolute inset-0 z-0"
+        className="absolute inset-0 z-0 h-full"
         style={{
-          width: "100vw",
-          height: "100vh",
+          width: "100%",
           backgroundImage: "url('/assets/bg_team.jpg')",
           backgroundSize: "cover",
           backgroundPosition: "center",
