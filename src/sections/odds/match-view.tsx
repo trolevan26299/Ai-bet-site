@@ -446,7 +446,7 @@ export default function MatchView() {
             ))}
           </div>
         </div>
-        <PopoverContent className="w-full" style={{ transform: "translate(30px ,45px)" }}>
+        <PopoverContent className="w-full" style={{ transform: "translate(-15px ,10px)" }}>
           <div className="grid gap-4">
             <div className="space-y-2">
               <h4 className="font-medium leading-none">Dimensions</h4>
