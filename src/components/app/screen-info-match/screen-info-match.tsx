@@ -20,12 +20,15 @@ export default function ScreenInfoMatch({ dataScreenInfo }: { dataScreenInfo: IM
     >
       {/* <img src="/assets/bg_team.jpg" alt="Stadium" className="w-full h-full opacity-[20%]" /> */}
       <div
-        className="absolute inset-0 z-0 h-full"
+        className="absolute inset-0 z-0"
         style={{
           width: "100%",
+          height: "100%",
+          minHeight: "116px", // Ensures minimum height of 116px
           backgroundImage: "url('/assets/bg_team.jpg')",
           backgroundSize: "cover",
           backgroundPosition: "center",
+          backgroundRepeat: "no-repeat", // Ensures the image doesn't repeat
         }}
       >
         {/* Lớp phủ opacity dùng inline style */}
