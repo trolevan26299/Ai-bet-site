@@ -55,21 +55,6 @@ export default function ScreenInfoMatch({ dataScreenInfo }: { dataScreenInfo: IM
               </p>
             </div>
             <div className="flex justify-center items-center pt-2">
-              <div className="flex flex-row justify-center gap-1 items-center w-[60px] text-white font-bold mr-1">
-                {dataScreenInfo[0].homeRedCards !== 0 && (
-                  <div className="flex flex-row justify-center gap-[2px] items-center">
-                    <div className="bg-red-600 w-2 h-3" />
-                    <p className="text-sm">{dataScreenInfo[0]?.homeRedCards}</p>
-                  </div>
-                )}
-                {dataScreenInfo[1]?.homeScore !== undefined && (
-                  <div className="flex flex-row justify-center gap-[2px] items-center">
-                    <img src="/assets/corner.svg" alt="" width="10px" height="10px" />
-                    <p className="text-sm">{dataScreenInfo[1]?.homeScore}</p>
-                  </div>
-                )}
-              </div>
-
               <div
                 style={{ border: "1px solid rgba(255,255,255,0.4)" }}
                 className="h-[29.6px] w-[28.4px] flex items-center justify-center rounded-[6px]"
@@ -86,21 +71,6 @@ export default function ScreenInfoMatch({ dataScreenInfo }: { dataScreenInfo: IM
                 <p className="font-bold text-[19.2px] text-[rgba(255,255,255,1)] ">
                   {dataScreenInfo[0].awayScore || 0}
                 </p>
-              </div>
-
-              <div className="flex flex-row justify-center gap-1 items-center w-[60px] ml-1 text-white font-bold">
-                {dataScreenInfo[0].awayRedCards !== 0 && (
-                  <div className="flex flex-row justify-center gap-[2px] items-center">
-                    <div className="bg-red-600 w-2 h-3" />
-                    <p className="text-sm">{dataScreenInfo[0]?.awayRedCards}</p>
-                  </div>
-                )}
-                {dataScreenInfo[1]?.awayScore !== undefined && (
-                  <div className="flex flex-row justify-center gap-[2px] items-center">
-                    <img src="/assets/corner.svg" alt="" width="10px" height="10px" />
-                    <p className="text-sm">{dataScreenInfo[1]?.awayScore}</p>
-                  </div>
-                )}
               </div>
             </div>
           </div>
@@ -127,10 +97,34 @@ export default function ScreenInfoMatch({ dataScreenInfo }: { dataScreenInfo: IM
           </span>
         </div>
         <div className="flex flex-row justify-between col-span-12 ">
-          <span className="text-[#fff]  text-sm font-[600] ml-0 w-[48%] flex-wrap">{dataScreenInfo[0]?.home}</span>
-          <span className="text-[#fff] text-sm font-[600] mr-0 w-[48%] flex flex-row justify-end flex-wrap text-right  overflow-hidden text-overflow-ellipsis">
-            {dataScreenInfo[0]?.away}
-          </span>
+          <div className="flex flex-row justify-center gap-1 items-center w-[60px] text-white font-bold mr-1">
+            {dataScreenInfo[0].homeRedCards !== 0 && (
+              <div className="flex flex-row justify-center gap-[2px] items-center">
+                <div className="bg-red-600 w-2 h-3" />
+                <p className="text-sm">{dataScreenInfo[0]?.homeRedCards}</p>
+              </div>
+            )}
+            {dataScreenInfo[1]?.homeScore !== undefined && (
+              <div className="flex flex-row justify-center gap-[2px] items-center">
+                <img src="/assets/corner.svg" alt="" width="10px" height="10px" />
+                <p className="text-sm">{dataScreenInfo[1]?.homeScore}</p>
+              </div>
+            )}
+          </div>
+          <div className="flex flex-row justify-center gap-1 items-center w-[60px] ml-1 text-white font-bold">
+            {dataScreenInfo[0].awayRedCards !== 0 && (
+              <div className="flex flex-row justify-center gap-[2px] items-center">
+                <div className="bg-red-600 w-2 h-3" />
+                <p className="text-sm">{dataScreenInfo[0]?.awayRedCards}</p>
+              </div>
+            )}
+            {dataScreenInfo[1]?.awayScore !== undefined && (
+              <div className="flex flex-row justify-center gap-[2px] items-center">
+                <img src="/assets/corner.svg" alt="" width="10px" height="10px" />
+                <p className="text-sm">{dataScreenInfo[1]?.awayScore}</p>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </div>
