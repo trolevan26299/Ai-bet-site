@@ -32,7 +32,7 @@ export default function ScreenInfoMatch({ dataScreenInfo }: { dataScreenInfo: IM
         {dataScreenInfo[0]?.liveStatus ? (
           <div className="col-span-6 flex flex-col items-center justify-center text-gray-300 mt-2">
             <div className="flex flex-row items-center gap-1 pr-1">
-              <Icon icon="fluent:live-20-filled" width={25} height={23} color="rgba(245,93,62,1)" />
+              <Icon icon="fluent:live-20-filled" width={20} height={18} color="rgba(245,93,62,1)" />
               <p className="font-bold text-xs text-[rgba(39,199,55,1)] ">
                 {`${
                   dataScreenInfo[0].liveState !== 2 &&
@@ -70,18 +70,18 @@ export default function ScreenInfoMatch({ dataScreenInfo }: { dataScreenInfo: IM
 
               <div
                 style={{ border: "1px solid rgba(255,255,255,0.4)" }}
-                className="h-8 w-9 flex items-center justify-center rounded-[8px]"
+                className="h-[25.6px] w-[26.4px] flex items-center justify-center rounded-[8px]"
               >
-                <p className="font-normal text-[19.2px] text-[rgba(255,255,255,1)] ">
+                <p className="font-bold text-[19.2px] text-[rgba(255,255,255,1)] ">
                   {dataScreenInfo[0]?.homeScore || 0}
                 </p>
               </div>
-              <p className="px-2 font-bold text-lg text-[#fafafa]">:</p>
+              <p className="px-2 font-bold text-lg text-[rgba(239,255,255,0.4)]">:</p>
               <div
-                style={{ border: "0.8px solid rgba(239,255,255,0.4)" }}
+                style={{ border: "1px solid rgba(239,255,255,0.4)" }}
                 className="h-[25.6px] w-[26.4px] flex items-center justify-center rounded-[4.8px]"
               >
-                <p className="font-normal text-[19.2px] text-[rgba(255,255,255,1)] ">
+                <p className="font-bold text-[19.2px] text-[rgba(255,255,255,1)] ">
                   {dataScreenInfo[0].awayScore || 0}
                 </p>
               </div>
@@ -118,7 +118,7 @@ export default function ScreenInfoMatch({ dataScreenInfo }: { dataScreenInfo: IM
         <div className={`flex flex-col items-end col-span-3 pb-2 ${dataScreenInfo[0]?.liveStatus ? "mt-3" : "mt-3"}`}>
           {dataScreenInfo.length > 0 && <TeamLogo teamName={dataScreenInfo[0].team[1]} typeError="away" />}
         </div>
-        <div className="flex flex-row justify-between col-span-12 mt-[-40px]">
+        <div className="flex flex-row justify-between col-span-12 mt-[-30px]">
           <span className="text-[#fff] py-3 text-sm font-[600] ml-0 w-[48%] flex-wrap">{dataScreenInfo[0]?.home}</span>
           <span className="text-[#fff] py-3 text-sm font-[600] mr-0 w-[48%] flex flex-row justify-end flex-wrap text-right  overflow-hidden text-overflow-ellipsis">
             {dataScreenInfo[0]?.away}
