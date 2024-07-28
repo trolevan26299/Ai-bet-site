@@ -54,7 +54,7 @@ export default function ScreenInfoMatch({ dataScreenInfo }: { dataScreenInfo: IM
         </div>
 
         {dataScreenInfo[0]?.liveStatus ? (
-          <div className="col-span-6 flex flex-col items-center justify-center text-gray-300 mt-2">
+          <div className="col-span-6 flex flex-col items-center justify-center text-gray-300 mt-1">
             <div className="flex flex-row items-center gap-1 pr-1">
               <Icon icon="fluent:live-20-filled" width={25} height={23} color="rgba(255,69,58,1)" />
               <p className="font-[600] text-sm text-[rgba(255,230,101,1)] ">
@@ -123,7 +123,7 @@ export default function ScreenInfoMatch({ dataScreenInfo }: { dataScreenInfo: IM
             </div>
           </div>
         ) : (
-          <div className="col-span-6 flex flex-col items-center justify-center text-gray-300 mt-4 gap-3">
+          <div className="col-span-6 flex flex-col items-center justify-center text-gray-300 mt-2 gap-3">
             {dataScreenInfo[0]?.starts && (
               <span className="text-sm text-[rgba(255,230,101,1)] font-[600]">
                 {convertToGMT7(dataScreenInfo[0]?.starts, "date")}
