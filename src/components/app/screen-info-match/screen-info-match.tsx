@@ -18,7 +18,7 @@ export default function ScreenInfoMatch({ dataScreenInfo }: { dataScreenInfo: IM
       //   background: `url('/assets/bg_team.jpg') center center / cover no-repeat`,
       // }}
     >
-      <img src="/assets/bg_team.png" alt="Stadium" className=" absolute w-full h-full" style={{ opacity: "70%" }} />
+      <img src="/assets/bg_team.png" alt="Stadium" className=" absolute w-full h-full" style={{ opacity: "90%" }} />
 
       <div className="absolute inset-0 grid grid-cols-12 items-start justify-center px-4 pt-2">
         {/* <div className="col-span-12 text-gray-300  flex flex-row items-center ">
@@ -70,7 +70,7 @@ export default function ScreenInfoMatch({ dataScreenInfo }: { dataScreenInfo: IM
 
               <div
                 style={{ border: "1px solid rgba(255,255,255,0.4)" }}
-                className="h-[29.6px] w-[28.4px] flex items-center justify-center rounded-[8px]"
+                className="h-[29.6px] w-[28.4px] flex items-center justify-center rounded-[6px]"
               >
                 <p className="font-bold text-[19.2px] text-[rgba(255,255,255,1)] ">
                   {dataScreenInfo[0]?.homeScore || 0}
@@ -79,7 +79,7 @@ export default function ScreenInfoMatch({ dataScreenInfo }: { dataScreenInfo: IM
               <p className="px-2 font-bold text-lg text-[rgba(239,255,255,0.4)]">:</p>
               <div
                 style={{ border: "1px solid rgba(239,255,255,0.4)" }}
-                className="h-[29.6px] w-[28.4px] flex items-center justify-center rounded-[4.8px]"
+                className="h-[29.6px] w-[28.4px] flex items-center justify-center rounded-[6px]"
               >
                 <p className="font-bold text-[19.2px] text-[rgba(255,255,255,1)] ">
                   {dataScreenInfo[0].awayScore || 0}
