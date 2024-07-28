@@ -370,50 +370,52 @@ export default function MatchView() {
               <>
                 <div className=" pb-6 h-full">
                   <ScreenInfoMatch dataScreenInfo={dataScreenInfo} />
-                  {tracker_id && (
-                    <div className="p-3">
-                      <button
-                        className="bg-[rgba(30,42,56,1)] w-full flex flex-row justify-center gap-1 rounded-[7px] h-[30px] items-center"
-                        onClick={() => setShowTrackingLive(!showTrackingLive)}
-                      >
-                        <Icon
-                          icon="fe:line-chart"
-                          width={30}
-                          height={20}
-                          color={showTrackingLive ? "rgba(237,202,84,1)" : "rgba(142,149,156,1)"}
-                        />
-                        <span
-                          className={`text-[13px] font-bold ${
-                            showTrackingLive ? "text-[rgba(255,255,255,1)]" : "text-[rgba(142,149,156,1)]"
-                          } `}
+                  <div className="px-3">
+                    {tracker_id && (
+                      <div className="p-3">
+                        <button
+                          className="bg-[rgba(30,42,56,1)] w-full flex flex-row justify-center gap-1 rounded-[7px] h-[30px] items-center"
+                          onClick={() => setShowTrackingLive(!showTrackingLive)}
                         >
-                          Theo dõi{" "}
-                        </span>
-                      </button>
-                      {showTrackingLive && (
-                        <iframe
-                          scrolling="no"
-                          src={`https://start26.sptpub.com/tracker.html?eventId=${tracker_id}&sportId=1&lang=vi&liveEvent=true&providers=Betradar`}
-                          allowFullScreen
-                          title="rindle"
-                          style={{
-                            marginTop: "5px",
-                            border: 0,
-                            width: "100%",
-                            height: iframeLoaded ? iframeHeight : "0px",
-                            borderRadius: "5px",
-                          }}
-                        ></iframe>
-                      )}
-                    </div>
-                  )}
+                          <Icon
+                            icon="fe:line-chart"
+                            width={30}
+                            height={20}
+                            color={showTrackingLive ? "rgba(237,202,84,1)" : "rgba(142,149,156,1)"}
+                          />
+                          <span
+                            className={`text-[13px] font-bold ${
+                              showTrackingLive ? "text-[rgba(255,255,255,1)]" : "text-[rgba(142,149,156,1)]"
+                            } `}
+                          >
+                            Theo dõi{" "}
+                          </span>
+                        </button>
+                        {showTrackingLive && (
+                          <iframe
+                            scrolling="no"
+                            src={`https://start26.sptpub.com/tracker.html?eventId=${tracker_id}&sportId=1&lang=vi&liveEvent=true&providers=Betradar`}
+                            allowFullScreen
+                            title="rindle"
+                            style={{
+                              marginTop: "5px",
+                              border: 0,
+                              width: "100%",
+                              height: iframeLoaded ? iframeHeight : "0px",
+                              borderRadius: "5px",
+                            }}
+                          ></iframe>
+                        )}
+                      </div>
+                    )}
 
-                  <OddsDetail
-                    odds={odds}
-                    oddsStatus={oddsStatus}
-                    dataScreenInfo={dataScreenInfo}
-                    disableBtn={disableBtn}
-                  />
+                    <OddsDetail
+                      odds={odds}
+                      oddsStatus={oddsStatus}
+                      dataScreenInfo={dataScreenInfo}
+                      disableBtn={disableBtn}
+                    />
+                  </div>
                 </div>
               </>
             )}
