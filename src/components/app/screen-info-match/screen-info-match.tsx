@@ -11,7 +11,7 @@ import { formatLiveScope } from "@/utils/formatLiveScope";
 export default function ScreenInfoMatch({ dataScreenInfo }: { dataScreenInfo: IMatchData[] }) {
   return (
     <div
-      className="relative pb-2 min-h-[116px] w-full overflow-hidden"
+      className="relative pb-2 min-h-[116px] w-full overflow-hidden h-full"
       // style={{
       //   minHeight: "116px",
       //   width: "100%",
@@ -22,7 +22,7 @@ export default function ScreenInfoMatch({ dataScreenInfo }: { dataScreenInfo: IM
 
       {/* <div className="absolute inset-0 z-[1px]" style={{ backgroundColor: "rgba(255, 255, 255, 0.7)" }}></div> */}
 
-      <div className="absolute inset-0 grid z-[2px] grid-cols-12 items-start justify-center px-4 pt-2">
+      <div className="absolute inset-0 grid z-[2px] grid-cols-12 items-start justify-center px-4 pt-2 h-full">
         {/* <div className="col-span-12 text-gray-300  flex flex-row items-center ">
           <Icon icon="ph:soccer-ball-fill" width="20" color="#fafafa" />
           <p className="pl-1 text-sm text-[#fafafa] font-[600]">{dataScreenInfo[0]?.league_name}</p>
@@ -97,10 +97,10 @@ export default function ScreenInfoMatch({ dataScreenInfo }: { dataScreenInfo: IM
           </span>
         </div>
         <div className="flex flex-row justify-between col-span-12 ">
-          <div className="flex flex-row justify-center gap-1 items-center w-[60px] text-white font-bold">
+          <div className="flex flex-row justify-center gap-1 items-center w-[60px] text-white font-bold ml-[-5px]">
             {dataScreenInfo[0].homeRedCards !== 0 && (
               <div className="flex flex-row justify-center gap-[2px] items-center">
-                <div className="bg-red-600 w-2 h-3" />
+                <div className="bg-red-600 w-[6px] h-[8px]" />
                 <p className="text-sm">{dataScreenInfo[0]?.homeRedCards}</p>
               </div>
             )}
@@ -111,10 +111,10 @@ export default function ScreenInfoMatch({ dataScreenInfo }: { dataScreenInfo: IM
               </div>
             )}
           </div>
-          <div className="flex flex-row justify-center gap-1 items-center w-[60px]  text-white font-bold">
+          <div className="flex flex-row justify-center gap-1 items-center w-[60px]  text-white font-bold mr-[-5px]">
             {dataScreenInfo[0].awayRedCards !== 0 && (
               <div className="flex flex-row justify-center gap-[2px] items-center">
-                <div className="bg-red-600 w-2 h-3" />
+                <div className="bg-red-600 w-[6px] h-[8px]" />
                 <p className="text-sm">{dataScreenInfo[0]?.awayRedCards}</p>
               </div>
             )}
