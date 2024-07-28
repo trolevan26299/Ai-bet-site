@@ -372,7 +372,7 @@ export default function MatchView() {
                   <ScreenInfoMatch dataScreenInfo={dataScreenInfo} />
                   <div className="px-3">
                     {tracker_id && (
-                      <div>
+                      <div className="pt-2">
                         <button
                           className="bg-[rgba(30,42,56,1)] w-full flex flex-row justify-center gap-1 rounded-[7px] h-[30px] items-center"
                           onClick={() => setShowTrackingLive(!showTrackingLive)}
