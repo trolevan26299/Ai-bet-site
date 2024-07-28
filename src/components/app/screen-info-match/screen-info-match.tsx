@@ -121,14 +121,14 @@ export default function ScreenInfoMatch({ dataScreenInfo }: { dataScreenInfo: IM
           {dataScreenInfo.length > 0 && <TeamLogo teamName={dataScreenInfo[0].team[1]} typeError="away" />}
         </div>
         <div className="flex flex-row justify-between col-span-12 mt-[-15px]">
-          <span className="text-[#fff] py-3 text-sm font-[600] ml-0 w-[48%] flex-wrap">{dataScreenInfo[0]?.home}</span>
-          <span className="text-[#fff] py-3 text-sm font-[600] mr-0 w-[48%] flex flex-row justify-end flex-wrap text-right  overflow-hidden text-overflow-ellipsis">
+          <span className="text-[#fff] pt-2 text-sm font-[600] ml-0 w-[48%] flex-wrap">{dataScreenInfo[0]?.home}</span>
+          <span className="text-[#fff] pt-2 text-sm font-[600] mr-0 w-[48%] flex flex-row justify-end flex-wrap text-right  overflow-hidden text-overflow-ellipsis">
             {dataScreenInfo[0]?.away}
           </span>
         </div>
         <div className="flex flex-row justify-between col-span-12 ">
-          <span className="text-[#fff] py-3 text-sm font-[600] ml-0 w-[48%] flex-wrap">{dataScreenInfo[0]?.home}</span>
-          <span className="text-[#fff] py-3 text-sm font-[600] mr-0 w-[48%] flex flex-row justify-end flex-wrap text-right  overflow-hidden text-overflow-ellipsis">
+          <span className="text-[#fff]  text-sm font-[600] ml-0 w-[48%] flex-wrap">{dataScreenInfo[0]?.home}</span>
+          <span className="text-[#fff] text-sm font-[600] mr-0 w-[48%] flex flex-row justify-end flex-wrap text-right  overflow-hidden text-overflow-ellipsis">
             {dataScreenInfo[0]?.away}
           </span>
         </div>
