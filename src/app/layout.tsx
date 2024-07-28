@@ -38,7 +38,7 @@ export default function RootLayout({
           gtag('config', '${GOOGLE_ANALYTICS_ID}');
         `}
       </Script>
-      <body className={inter.className}>
+      <body className={inter.className} style={{ fontFamily: "Arial, sans-serif" }}>
         <noscript
           dangerouslySetInnerHTML={{
             __html: `<iframe src="https://www.googletagmanager.com/ns.html?id=${GOOGLE_TAG_MANAGER_ID}" height="0" width="0" style="display: none; visibility: hidden;" />`,
