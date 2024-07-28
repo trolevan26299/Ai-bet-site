@@ -11,7 +11,7 @@ import { formatLiveScope } from "@/utils/formatLiveScope";
 export default function ScreenInfoMatch({ dataScreenInfo }: { dataScreenInfo: IMatchData[] }) {
   return (
     <div
-      className="relative pb-2 h-auto w-full overflow-hidden"
+      className="relative pb-2 min-h-[116px] w-full overflow-hidden"
       // style={{
       //   minHeight: "116px",
       //   width: "100%",
