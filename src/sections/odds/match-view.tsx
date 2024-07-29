@@ -302,16 +302,18 @@ export default function MatchView() {
             />
             <div className="text-[rgba(255,255,255,1)] flex flex-row justify-center items-center pr-[10px]">
               <Image src="/assets/league_logo.png" alt="no-content" className="w-[34px] h-[27.2px]" />
-              <div className="flex flex-row justify-center items-center" onClick={() => handlePopoverOpen("league")}>
-                <p className="text-sm font-bold w-[85%] leading-[1.1rem]">{dataScreenInfo[0]?.league_name}</p>
-                <Icon
-                  icon="icon-park-solid:down-one"
-                  width={25}
-                  height={15}
-                  color="rgba(255,255,255,1)"
-                  className="hover:cursor-pointer"
-                />
-              </div>
+              <PopoverTrigger asChild>
+                <div className="flex flex-row justify-center items-center" onClick={() => handlePopoverOpen("league")}>
+                  <p className="text-sm font-bold w-[85%] leading-[1.1rem]">{dataScreenInfo[0]?.league_name}</p>
+                  <Icon
+                    icon="icon-park-solid:down-one"
+                    width={25}
+                    height={15}
+                    color="rgba(255,255,255,1)"
+                    className="hover:cursor-pointer"
+                  />
+                </div>
+              </PopoverTrigger>
               <Icon
                 icon="material-symbols-light:star-outline"
                 width={30}
