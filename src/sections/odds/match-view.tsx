@@ -588,8 +588,11 @@ export default function MatchView() {
             style={{ border: "none" }}
           >
             {leagueExample.map((item) => (
-              <div className="px-2 flex flex-col justify-between bg-[rgba(30,42,56,1)] rounded-[10px]" key={item.id}>
-                <div className="flex flex-row justify-between items-center">
+              <div
+                className="px-2 flex flex-col justify-between bg-[rgba(30,42,56,1)] rounded-[10px] mb-[10px]"
+                key={item.id}
+              >
+                <div className="flex flex-col justify-between items-center">
                   <div className="flex flex-row gap-2 items-center">
                     <Icon icon="fluent:sport-soccer-24-filled" width={20} height={20} color="rgba(170,170,170,1)" />
                     <p className="text-[10px] font-normal text-[rgba(170,170,170,1)]">{item.container}</p>
@@ -610,7 +613,7 @@ export default function MatchView() {
                     <Image src="/assets/bg_team.png" alt="no-content" className="w-[20px] h-[20px]" />
                   </div>
                 </div>
-                <div className="flex flex-row justify-between items-center">
+                <div className="flex flex-col justify-between items-center">
                   <Icon icon="mage:chart-fill" width={20} height={20} color="rgba(170,170,170,1)" />
                   <Icon icon="fluent:live-20-filled" width={20} height={20} color="rgba(245,93,62,1)" />
                   <div
