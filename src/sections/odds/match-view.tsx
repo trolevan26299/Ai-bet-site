@@ -589,13 +589,13 @@ export default function MatchView() {
           >
             {leagueExample.map((item) => (
               <div
-                className="px-2 flex flex-row justify-between bg-[rgba(30,42,56,1)] rounded-[10px] mb-[10px]"
+                className="p-2 flex flex-row justify-between bg-[rgba(30,42,56,1)] rounded-[10px] mb-[10px]"
                 key={item.id}
               >
-                <div className="flex flex-col justify-between items-center">
-                  <div className="flex flex-row gap-2 items-center">
+                <div className="flex flex-col justify-between items-start">
+                  <div className="flex flex-row gap-1 items-center">
                     <Icon icon="fluent:sport-soccer-24-filled" width={20} height={20} color="rgba(170,170,170,1)" />
-                    <p className="text-[10px] font-normal text-[rgba(170,170,170,1)]">{item.container}</p>
+                    <p className="pl-2 text-[10px] font-normal text-[rgba(170,170,170,1)]">{item.container}</p>
                     <Icon icon="ic:outline-arrow-right" width={20} height={20} color="rgba(170,170,170,1)" />
                     <p className="text-[10px] font-normal text-[rgba(170,170,170,1)]">{item.name}</p>
                   </div>
@@ -608,26 +608,34 @@ export default function MatchView() {
                   </p>
                   <div className="flex flex-row justify-start items-center gap-2">
                     <Image src="/assets/bg_team.png" alt="no-content" className="w-[20px] h-[20px]" />
+                    <p className="text-[rgba(251,255,255,1)] text-[14.41px] font-normal">{item.home}</p>
                   </div>
                   <div className="flex flex-row justify-start items-center gap-2">
                     <Image src="/assets/bg_team.png" alt="no-content" className="w-[20px] h-[20px]" />
+                    <p className="text-[rgba(251,255,255,1)] text-[14.41px] font-normal">{item.away}</p>
                   </div>
                 </div>
                 <div className="flex flex-col justify-between items-center">
-                  <Icon icon="mage:chart-fill" width={20} height={20} color="rgba(170,170,170,1)" />
-                  <Icon icon="fluent:live-20-filled" width={20} height={20} color="rgba(245,93,62,1)" />
-                  <div
-                    className="w-[22px] h-[17px] font-bold flex flex-row justify-center items-center text-[rgba(rgba(255,255,255,1))] bg-[rgba(41,53,66,1)] "
-                    style={{ border: "0.68px solid rgba(64,74,86,1)" }}
-                  >
-                    {item.homeScore}
-                  </div>
-                  <div
-                    className="w-[22px] h-[17px] font-bold flex flex-row justify-center items-center text-[rgba(rgba(255,255,255,1))] bg-[rgba(41,53,66,1)] "
-                    style={{ border: "0.68px solid rgba(64,74,86,1)" }}
-                  >
-                    {item.awayScore}
-                  </div>
+                  <Icon icon="mage:chart-fill" width={16} height={16} color="rgba(170,170,170,1)" />
+                  {item.isLive && (
+                    <Icon icon="fluent:live-20-filled" width={16} height={16} color="rgba(245,93,62,1)" />
+                  )}
+                  {item.isLive && (
+                    <div
+                      className="w-[22px] h-[17px] font-bold flex flex-row justify-center items-center text-[rgba(rgba(255,255,255,1))] bg-[rgba(41,53,66,1)] "
+                      style={{ border: "0.68px solid rgba(64,74,86,1)" }}
+                    >
+                      {item.homeScore}
+                    </div>
+                  )}
+                  {item.isLive && (
+                    <div
+                      className="w-[22px] h-[17px] font-bold flex flex-row justify-center items-center text-[rgba(rgba(255,255,255,1))] bg-[rgba(41,53,66,1)] "
+                      style={{ border: "0.68px solid rgba(64,74,86,1)" }}
+                    >
+                      {item.awayScore}
+                    </div>
+                  )}
                 </div>
               </div>
             ))}
