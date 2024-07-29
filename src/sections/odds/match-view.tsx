@@ -455,7 +455,7 @@ export default function MatchView() {
           style={{ border: "none" }}
         >
           <Tabs defaultValue={defaultTabSetting} key={defaultTabSetting} className="w-full">
-            <TabsList className="grid w-full grid-cols-2">
+            <TabsList className="grid w-full grid-cols-2 bg-[rgba(30,42,56,1)]">
               <TabsTrigger value="account">Account</TabsTrigger>
               <TabsTrigger value="password">Password</TabsTrigger>
             </TabsList>
