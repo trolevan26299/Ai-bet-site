@@ -3,9 +3,10 @@
 import OddsDetail from "@/components/app/odds-detail/odds-detail";
 import ScreenInfoMatch from "@/components/app/screen-info-match/screen-info-match";
 import { SplashScreen } from "@/components/loading-screen";
-import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useTelegram } from "@/context/telegram.provider";
 import MainLayout from "@/layouts/main/layout";
 import { paths } from "@/routes/paths";
@@ -19,9 +20,6 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { isIOS } from "react-device-detect";
 import "./index.css";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 
 const menuNavigation = [
   { id: "1", name: "Trận đấu", url: paths.odds, icon: "mdi:soccer-field" },
@@ -30,6 +28,7 @@ const menuNavigation = [
   { id: "4", name: "Kết quả", url: paths.result, icon: "carbon:result" },
   { id: "5", name: "Cài đặt", url: paths.settings, icon: "uil:setting" },
 ];
+
 export default function MatchView() {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -46,7 +45,7 @@ export default function MatchView() {
   const [iframeHeight, setIframeHeight] = useState("0px");
   const [errorCount, setErrorCount] = useState(0);
   const [showTrackingLive, setShowTrackingLive] = useState(true);
-  const [defaultTabSetting, setDefaultTabSetting] = useState("1");
+  const [defaultTabSetting, setDefaultTabSetting] = useState("number_line");
   const telegram = useTelegram();
 
   const matchParam = searchParams.get("match");
@@ -455,14 +454,27 @@ export default function MatchView() {
           style={{ border: "none" }}
         >
           <Tabs defaultValue={defaultTabSetting} key={defaultTabSetting} className="w-full">
-            <TabsList className="grid w-full grid-cols-2 bg-[rgba(30,42,56,1)]">
-              <TabsTrigger value="account">Account</TabsTrigger>
-              <TabsTrigger value="password">Password</TabsTrigger>
+            <TabsList className="grid w-full grid-cols-2 bg-[rgba(30,42,56,1)] rounded-[10px]">
+              <TabsTrigger value="number_line" className="rounded-[10px]">
+                Số lượng kèo
+              </TabsTrigger>
+              <TabsTrigger value="odds_type" className="rounded-[10px]">
+                Tỷ lệ cược
+              </TabsTrigger>
             </TabsList>
-            <TabsContent value="account">
-              <p>nội dung thẻ account</p>
+            <TabsContent value="number_line">
+              <RadioGroup defaultValue="option-one">
+                <div className="flex items-center space-x-2 flex-row justify-around">
+                  <RadioGroupItem value="option-one" id="option-one" />
+                  <Label htmlFor="option-one">Option One</Label>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <RadioGroupItem value="option-two" id="option-two" />
+                  <Label htmlFor="option-two">Option Two</Label>
+                </div>
+              </RadioGroup>
             </TabsContent>
-            <TabsContent value="password">
+            <TabsContent value="odds_type">
               <p>nội dung thẻ password</p>
             </TabsContent>
           </Tabs>

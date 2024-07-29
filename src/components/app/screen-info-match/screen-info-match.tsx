@@ -86,7 +86,7 @@ export default function ScreenInfoMatch({ dataScreenInfo }: { dataScreenInfo: IM
         </div>
         <div className="flex flex-row justify-between col-span-12 ">
           <div className="flex flex-row justify-center gap-1 items-center w-[60px] text-white font-bold ml-[-5px]">
-            {dataScreenInfo[0].homeRedCards !== 0 && (
+            {dataScreenInfo[0].homeRedCards && dataScreenInfo[0].homeRedCards !== 0 && (
               <div className="flex flex-row justify-center gap-[2px] items-center">
                 <div className="bg-red-600 w-[6px] h-[8px]" />
                 <p className="text-sm">{dataScreenInfo[0]?.homeRedCards}</p>
@@ -100,7 +100,7 @@ export default function ScreenInfoMatch({ dataScreenInfo }: { dataScreenInfo: IM
             )}
           </div>
           <div className="flex flex-row justify-center gap-1 items-center w-[60px]  text-white font-bold mr-[-5px]">
-            {dataScreenInfo[0].awayRedCards !== 0 && (
+            {dataScreenInfo[0].awayRedCards && dataScreenInfo[0].awayRedCards !== 0 && (
               <div className="flex flex-row justify-center gap-[2px] items-center">
                 <div className="bg-red-600 w-[6px] h-[8px]" />
                 <p className="text-sm">{dataScreenInfo[0]?.awayRedCards}</p>
