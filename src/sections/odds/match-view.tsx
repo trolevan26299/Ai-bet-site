@@ -18,7 +18,6 @@ import axios from "axios";
 import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import { isIOS } from "react-device-detect";
 import "./index.css";
 
 const menuNavigation = [
@@ -29,11 +28,47 @@ const menuNavigation = [
   { id: "5", name: "Cài đặt", url: paths.settings, icon: "uil:setting" },
 ];
 
-// const leagueExample = [{ id: 1, name: "Premier League", nameParent }];
+const leagueExample = [
+  {
+    id: 1,
+    name: "Euro 2024",
+    container: "Châu Âu",
+    away: "Spain",
+    home: "England",
+    awayScore: 1,
+    homeScore: 2,
+    isLive: true,
+    time: "30'",
+    scope: "1st Half",
+  },
+  {
+    id: 2,
+    name: "Euro 2024",
+    container: "Châu Âu",
+    away: "Spain",
+    home: "England",
+    isLive: false,
+  },
+  {
+    id: 3,
+    name: "Euro 2024",
+    container: "Châu Âu",
+    away: "Spain",
+    home: "England",
+    isLive: false,
+  },
+  {
+    id: 4,
+    name: "Euro 2024",
+    container: "Châu Âu",
+    away: "Spain",
+    home: "England",
+    isLive: false,
+  },
+];
 export default function MatchView() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const isIphone = isIOS;
   const [odds, setOdds] = useState<IOddsDetail[]>([]);
   const [latestOdds, setLatestOdds] = useState<IOddsDetail[]>([]);
   const [oddsStatus, setOddsStatus] = useState<OddsStatusType>({});
@@ -307,11 +342,7 @@ export default function MatchView() {
                 <div
                   className="flex flex-row justify-center items-center hover:cursor-pointer"
                   onClick={() => {
-                    if (typePopover === "league") {
-                      handlePopoverOpen(null);
-                    } else {
-                      handlePopoverOpen("league");
-                    }
+                    handlePopoverOpen("league");
                   }}
                 >
                   <p className="text-sm font-bold w-[85%] leading-[1.1rem]">{dataScreenInfo[0]?.league_name}</p>
