@@ -29,7 +29,7 @@ const menuNavigation = [
   { id: "5", name: "Cài đặt", url: paths.settings, icon: "uil:setting" },
 ];
 
-const leagueExample = [{ id: 1, name: "Premier League", nameParent }];
+// const leagueExample = [{ id: 1, name: "Premier League", nameParent }];
 export default function MatchView() {
   const router = useRouter();
   const searchParams = useSearchParams();
