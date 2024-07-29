@@ -132,6 +132,7 @@ export default function MatchView() {
   const [errorCount, setErrorCount] = useState(0);
   const [showTrackingLive, setShowTrackingLive] = useState(true);
   const [typePopover, setTypePopover] = useState<string | null>(null);
+  const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
 
   const telegram = useTelegram();
 
@@ -145,6 +146,9 @@ export default function MatchView() {
 
   const handlePopoverOpen = (popoverId: string | null) => {
     setTypePopover(popoverId);
+  };
+  const handleDialogOpen = () => {
+    setIsDialogOpen(true);
   };
   const matchNoCorner = () => {
     return matchParam?.split(",").map((item) => {
@@ -376,7 +380,7 @@ export default function MatchView() {
 
   return (
     <MainLayout>
-      <Dialog.Root>
+      <Dialog.Root open={isDialogOpen} onOpenChange={setIsDialogOpen}>
         <Popover>
           <div style={{ paddingBottom: "50px" }}>
             <div className="h-[39px] w-full bg-[rgba(30,42,56,1)] flex flex-row justify-between items-center px-[6px]">
@@ -679,6 +683,7 @@ export default function MatchView() {
                         width={16}
                         height={16}
                         color="rgba(170,170,170,1)"
+                        onClick={handleDialogOpen}
                       />
                     </Dialog.Trigger>
                     {item.isLive && (
