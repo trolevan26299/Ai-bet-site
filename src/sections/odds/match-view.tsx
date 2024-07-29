@@ -465,12 +465,20 @@ export default function MatchView() {
             <TabsContent value="number_line">
               <RadioGroup defaultValue="option-one" className="flex flex-row justify-around">
                 <div className="flex items-center space-x-2 flex-row ">
-                  <RadioGroupItem value="option-one" id="option-one" />
-                  <Label htmlFor="option-one">Option One</Label>
+                  <RadioGroupItem value="option-one" id="option-one" className="text-[rgba(255,255,255,1)]" />
+                  <Label htmlFor="option-one">1 kèo</Label>
                 </div>
                 <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="option-two" id="option-two" />
-                  <Label htmlFor="option-two">Option Two</Label>
+                  <RadioGroupItem value="option-two" id="option-two" className="text-[rgba(255,255,255,1)]" />
+                  <Label htmlFor="option-two">3 kèo</Label>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <RadioGroupItem value="option-two" id="option-two" className="text-[rgba(255,255,255,1)]" />
+                  <Label htmlFor="option-three">5 kèo</Label>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <RadioGroupItem value="option-two" id="option-two" className="text-[rgba(255,255,255,1)]" />
+                  <Label htmlFor="all">Tất cả</Label>
                 </div>
               </RadioGroup>
             </TabsContent>
