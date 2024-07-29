@@ -19,6 +19,9 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { isIOS } from "react-device-detect";
 import "./index.css";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 
 const menuNavigation = [
   { id: "1", name: "Trận đấu", url: paths.odds, icon: "mdi:soccer-field" },
@@ -43,6 +46,7 @@ export default function MatchView() {
   const [iframeHeight, setIframeHeight] = useState("0px");
   const [errorCount, setErrorCount] = useState(0);
   const [showTrackingLive, setShowTrackingLive] = useState(true);
+  const [defaultTabSetting, setDefaultTabSetting] = useState("1");
   const telegram = useTelegram();
 
   const matchParam = searchParams.get("match");
@@ -450,22 +454,33 @@ export default function MatchView() {
           className="w-[90%] m-auto mt-3  bg-[rgba(41,53,67,1)] rounded-[10px]  text-[rgba(255,255,255,1)]"
           style={{ border: "none" }}
         >
-          <div className="grid gap-4">
-            <div className="space-y-2">
-              <h4 className="font-medium leading-none">Dimensions</h4>
-              <p className="text-sm text-muted-foreground">Set the dimensions for the layer.</p>
-            </div>
-            <div className="grid gap-2">
-              <div className="grid grid-cols-3 items-center gap-4">
-                <Label htmlFor="width">Width</Label>
-                <Input id="width" defaultValue="100%" className="col-span-2 h-8" />
-              </div>
-              <div className="grid grid-cols-3 items-center gap-4">
-                <Label htmlFor="maxWidth">Max. width</Label>
-                <Input id="maxWidth" defaultValue="300px" className="col-span-2 h-8" />
-              </div>
-            </div>
-          </div>
+          <Tabs defaultValue={defaultTabSetting} key={defaultTabSetting} className="w-full">
+            <TabsList className="grid w-full grid-cols-2">
+              <TabsTrigger value="account">Account</TabsTrigger>
+              <TabsTrigger value="password">Password</TabsTrigger>
+            </TabsList>
+            <TabsContent value="account">
+              <Card>
+                <CardHeader>
+                  <CardTitle>Account</CardTitle>
+                  <CardDescription>Make changes to your account here. Click save when done.</CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-2">
+                  <div className="space-y-1">
+                    <Label htmlFor="name">Name</Label>
+                    <Input id="name" defaultValue="Pedro Duarte" />
+                  </div>
+                  <div className="space-y-1">
+                    <Label htmlFor="username">Username</Label>
+                    <Input id="username" defaultValue="@peduarte" />
+                  </div>
+                </CardContent>
+                <CardFooter>
+                  <Button>Save changes</Button>
+                </CardFooter>
+              </Card>
+            </TabsContent>
+          </Tabs>
         </PopoverContent>
       </Popover>
     </MainLayout>
