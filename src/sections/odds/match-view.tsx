@@ -681,7 +681,7 @@ export default function MatchView() {
                   )}
                   {item.isLive && (
                     <div
-                      className="w-[22px] h-[17px] font-bold flex flex-row justify-center items-center text-[rgba(rgba(255,255,255,1))] bg-[rgba(41,53,66,1)] "
+                      className="w-[22px] h-[17px] p-[2px] rounded-[5px] font-bold flex flex-row justify-center items-center text-[rgba(rgba(255,255,255,1))] bg-[rgba(41,53,66,1)] "
                       style={{ border: "0.68px solid rgba(64,74,86,1)" }}
                     >
                       {item.homeScore}
@@ -689,7 +689,7 @@ export default function MatchView() {
                   )}
                   {item.isLive && (
                     <div
-                      className="w-[22px] h-[17px] font-bold flex flex-row justify-center items-center text-[rgba(rgba(255,255,255,1))] bg-[rgba(41,53,66,1)] "
+                      className="w-[22px] h-[17px] p-[2px] rounded-[5px] font-bold flex flex-row justify-center items-center text-[rgba(rgba(255,255,255,1))] bg-[rgba(41,53,66,1)] "
                       style={{ border: "0.68px solid rgba(64,74,86,1)" }}
                     >
                       {item.awayScore}
