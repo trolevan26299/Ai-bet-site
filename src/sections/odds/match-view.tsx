@@ -47,6 +47,7 @@ const leagueExample = [
     container: "Châu Âu",
     away: "Spain",
     home: "England",
+    time: "02:00, 15/07",
     isLive: false,
   },
   {
@@ -55,6 +56,7 @@ const leagueExample = [
     container: "Châu Âu",
     away: "Spain",
     home: "England",
+    time: "02:00, 15/07",
     isLive: false,
   },
   {
@@ -63,6 +65,7 @@ const leagueExample = [
     container: "Châu Âu",
     away: "Spain",
     home: "England",
+    time: "02:00, 15/07",
     isLive: false,
   },
 ];
@@ -584,7 +587,47 @@ export default function MatchView() {
             className="w-[95%] m-auto mt-3  bg-[rgba(41,53,67,1)] rounded-[10px]  text-[rgba(255,255,255,1)]"
             style={{ border: "none" }}
           >
-            <p>đây là xem các trận trong giải</p>
+            {leagueExample.map((item) => (
+              <div className="px-2 flex flex-col justify-between bg-[rgba(30,42,56,1)] rounded-[10px]" key={item.id}>
+                <div className="flex flex-row justify-between items-center">
+                  <div className="flex flex-row gap-2 items-center">
+                    <Icon icon="fluent:sport-soccer-24-filled" width={20} height={20} color="rgba(170,170,170,1)" />
+                    <p className="text-[10px] font-normal text-[rgba(170,170,170,1)]">{item.container}</p>
+                    <Icon icon="ic:outline-arrow-right" width={20} height={20} color="rgba(170,170,170,1)" />
+                    <p className="text-[10px] font-normal text-[rgba(170,170,170,1)]">{item.name}</p>
+                  </div>
+                  <p
+                    className={`${
+                      item.isLive ? "text-[rgba(70,230,164,1)]" : "text-[rgba(165,165,165,1)]"
+                    } text-[9px] font-normal`}
+                  >
+                    {item.isLive ? `${item.time} ${item.scope}` : item.time}
+                  </p>
+                  <div className="flex flex-row justify-start items-center gap-2">
+                    <Image src="/assets/bg_team.png" alt="no-content" className="w-[20px] h-[20px]" />
+                  </div>
+                  <div className="flex flex-row justify-start items-center gap-2">
+                    <Image src="/assets/bg_team.png" alt="no-content" className="w-[20px] h-[20px]" />
+                  </div>
+                </div>
+                <div className="flex flex-row justify-between items-center">
+                  <Icon icon="mage:chart-fill" width={20} height={20} color="rgba(170,170,170,1)" />
+                  <Icon icon="fluent:live-20-filled" width={20} height={20} color="rgba(245,93,62,1)" />
+                  <div
+                    className="w-[22px] h-[17px] font-bold flex flex-row justify-center items-center text-[rgba(rgba(255,255,255,1))] bg-[rgba(41,53,66,1)] "
+                    style={{ border: "0.68px solid rgba(64,74,86,1)" }}
+                  >
+                    {item.homeScore}
+                  </div>
+                  <div
+                    className="w-[22px] h-[17px] font-bold flex flex-row justify-center items-center text-[rgba(rgba(255,255,255,1))] bg-[rgba(41,53,66,1)] "
+                    style={{ border: "0.68px solid rgba(64,74,86,1)" }}
+                  >
+                    {item.awayScore}
+                  </div>
+                </div>
+              </div>
+            ))}
           </PopoverContent>
         )}
       </Popover>
