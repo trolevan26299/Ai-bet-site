@@ -19,15 +19,8 @@ import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import "./index.css";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
+import { Dialog } from "@radix-ui/themes";
 
 const menuNavigation = [
   { id: "1", name: "Trận đấu", url: paths.odds, icon: "mdi:soccer-field" },
@@ -383,7 +376,7 @@ export default function MatchView() {
 
   return (
     <MainLayout>
-      <Dialog>
+      <Dialog.Root>
         <Popover>
           <div style={{ paddingBottom: "50px" }}>
             <div className="h-[39px] w-full bg-[rgba(30,42,56,1)] flex flex-row justify-between items-center px-[6px]">
@@ -679,7 +672,7 @@ export default function MatchView() {
                     </div>
                   </div>
                   <div className="flex flex-col justify-between items-center">
-                    <DialogTrigger asChild>
+                    <Dialog.Trigger>
                       <Icon
                         icon="mage:chart-fill"
                         className="hover:cursor-pointer"
@@ -687,7 +680,7 @@ export default function MatchView() {
                         height={16}
                         color="rgba(170,170,170,1)"
                       />
-                    </DialogTrigger>
+                    </Dialog.Trigger>
                     {item.isLive && (
                       <Icon icon="fluent:live-20-filled" width={16} height={16} color="rgba(245,93,62,1)" />
                     )}
@@ -713,27 +706,10 @@ export default function MatchView() {
             </PopoverContent>
           )}
         </Popover>
-        <DialogContent className="sm:max-w-[425px]">
-          <DialogHeader>
-            <DialogTitle>Edit profile</DialogTitle>
-            <DialogDescription>Make changes to your profile here. Click save when re done.</DialogDescription>
-          </DialogHeader>
-          <div className="grid gap-4 py-4">
-            <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="name" className="text-right">
-                Name
-              </Label>
-              <Input id="name" value="Pedro Duarte" className="col-span-3" />
-            </div>
-            <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="username" className="text-right">
-                Username
-              </Label>
-              <Input id="username" value="@peduarte" className="col-span-3" />
-            </div>
-          </div>
-        </DialogContent>
-      </Dialog>
+        <Dialog.Content className="sm:max-w-[425px]">
+          <p>nội dung popup phân tích</p>
+        </Dialog.Content>
+      </Dialog.Root>
     </MainLayout>
   );
 }
