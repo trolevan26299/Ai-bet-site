@@ -45,7 +45,8 @@ export default function MatchView() {
   const [iframeHeight, setIframeHeight] = useState("0px");
   const [errorCount, setErrorCount] = useState(0);
   const [showTrackingLive, setShowTrackingLive] = useState(true);
-  const [defaultTabSetting, setDefaultTabSetting] = useState("number_line");
+  const [typePopover, setTypePopover] = useState<string | null>(null);
+
   const telegram = useTelegram();
 
   const matchParam = searchParams.get("match");
@@ -54,6 +55,10 @@ export default function MatchView() {
 
   const leagueNoCorner = (league?: string) => {
     return league?.includes(" Corners") ? league?.replace(" Corners", "") : league;
+  };
+
+  const handlePopoverOpen = (popoverId: string) => {
+    setTypePopover(popoverId);
   };
   const matchNoCorner = () => {
     return matchParam?.split(",").map((item) => {
@@ -297,7 +302,7 @@ export default function MatchView() {
             />
             <div className="text-[rgba(255,255,255,1)] flex flex-row justify-center items-center pr-[10px]">
               <Image src="/assets/league_logo.png" alt="no-content" className="w-[34px] h-[27.2px]" />
-              <div className="flex flex-row justify-center items-center">
+              <div className="flex flex-row justify-center items-center" onClick={() => handlePopoverOpen("league")}>
                 <p className="text-sm font-bold w-[85%] leading-[1.1rem]">{dataScreenInfo[0]?.league_name}</p>
                 <Icon
                   icon="icon-park-solid:down-one"
@@ -322,6 +327,7 @@ export default function MatchView() {
                 height={23}
                 color="rgba(143,149,156,1)"
                 className="hover:cursor-pointer"
+                onClick={() => handlePopoverOpen("setting")}
               />
             </PopoverTrigger>
           </div>
@@ -449,85 +455,95 @@ export default function MatchView() {
             ))}
           </div>
         </div>
-        <PopoverContent
-          className="w-[90%] m-auto mt-3  bg-[rgba(41,53,67,1)] rounded-[10px]  text-[rgba(255,255,255,1)]"
-          style={{ border: "none" }}
-        >
-          <Tabs defaultValue={defaultTabSetting} key={defaultTabSetting} className="w-full">
-            <TabsList className="grid w-full grid-cols-2 bg-[rgba(30,42,56,1)] rounded-[10px]">
-              <TabsTrigger value="number_line" className="rounded-[10px]">
-                Số lượng kèo
-              </TabsTrigger>
-              <TabsTrigger value="odds_type" className="rounded-[10px]">
-                Tỷ lệ cược
-              </TabsTrigger>
-            </TabsList>
-            <TabsContent value="number_line">
-              <RadioGroup defaultValue="option-one" className="flex flex-row justify-around">
-                <div className="flex items-center space-x-2 flex-row py-3 ">
-                  <RadioGroupItem
-                    value="option-one"
-                    id="option-one"
-                    className="text-[rgba(255,255,255,1)] border-[rgba(255,255,255,1)]"
-                  />
-                  <Label htmlFor="option-one">1 kèo</Label>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <RadioGroupItem
-                    value="option-two"
-                    id="option-two"
-                    className="text-[rgba(255,255,255,1)] border-[rgba(255,255,255,1)]"
-                  />
-                  <Label htmlFor="option-two">3 kèo</Label>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <RadioGroupItem
-                    value="option-three"
-                    id="option-three"
-                    className="text-[rgba(255,255,255,1)] border-[rgba(255,255,255,1)]"
-                  />
-                  <Label htmlFor="option-three">5 kèo</Label>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <RadioGroupItem
-                    value="all"
-                    id="all"
-                    className="text-[rgba(255,255,255,1)] border-[rgba(255,255,255,1)]"
-                  />
-                  <Label htmlFor="all">Tất cả</Label>
-                </div>
-              </RadioGroup>
-            </TabsContent>
-            <TabsContent value="odds_type">
-              <RadioGroup defaultValue="option-one" className="flex flex-row justify-around">
-                <div className="flex items-center space-x-2 flex-row py-3 ">
-                  <RadioGroupItem
-                    value="decimal"
-                    id="decimal"
-                    className="text-[rgba(255,255,255,1)] border-[rgba(255,255,255,1)]"
-                  />
-                  <Label htmlFor="decimal">Decimal</Label>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <RadioGroupItem
-                    value="hongkong"
-                    id="hongkong"
-                    className="text-[rgba(255,255,255,1)] border-[rgba(255,255,255,1)]"
-                  />
-                  <Label htmlFor="hongkong">HongKong</Label>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <RadioGroupItem
-                    value="malaysia"
-                    id="malaysia"
-                    className="text-[rgba(255,255,255,1)] border-[rgba(255,255,255,1)]"
-                  />
-                  <Label htmlFor="malaysia">Malaysia</Label>
-                </div>
-              </RadioGroup>
-            </TabsContent>
-          </Tabs>
-        </PopoverContent>
+        {typePopover === "setting" && (
+          <PopoverContent
+            className="w-[90%] m-auto mt-3  bg-[rgba(41,53,67,1)] rounded-[10px]  text-[rgba(255,255,255,1)]"
+            style={{ border: "none" }}
+          >
+            <Tabs defaultValue="number_line" key="number_line" className="w-full">
+              <TabsList className="grid w-full grid-cols-2 bg-[rgba(30,42,56,1)] rounded-[10px]">
+                <TabsTrigger value="number_line" className="rounded-[10px]">
+                  Số lượng kèo
+                </TabsTrigger>
+                <TabsTrigger value="odds_type" className="rounded-[10px]">
+                  Tỷ lệ cược
+                </TabsTrigger>
+              </TabsList>
+              <TabsContent value="number_line">
+                <RadioGroup defaultValue="option-one" className="flex flex-row justify-around">
+                  <div className="flex items-center space-x-2 flex-row py-3 ">
+                    <RadioGroupItem
+                      value="option-one"
+                      id="option-one"
+                      className="text-[rgba(255,255,255,1)] border-[rgba(255,255,255,1)]"
+                    />
+                    <Label htmlFor="option-one">1 kèo</Label>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <RadioGroupItem
+                      value="option-two"
+                      id="option-two"
+                      className="text-[rgba(255,255,255,1)] border-[rgba(255,255,255,1)]"
+                    />
+                    <Label htmlFor="option-two">3 kèo</Label>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <RadioGroupItem
+                      value="option-three"
+                      id="option-three"
+                      className="text-[rgba(255,255,255,1)] border-[rgba(255,255,255,1)]"
+                    />
+                    <Label htmlFor="option-three">5 kèo</Label>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <RadioGroupItem
+                      value="all"
+                      id="all"
+                      className="text-[rgba(255,255,255,1)] border-[rgba(255,255,255,1)]"
+                    />
+                    <Label htmlFor="all">Tất cả</Label>
+                  </div>
+                </RadioGroup>
+              </TabsContent>
+              <TabsContent value="odds_type">
+                <RadioGroup defaultValue="option-one" className="flex flex-row justify-around">
+                  <div className="flex items-center space-x-2 flex-row py-3 ">
+                    <RadioGroupItem
+                      value="decimal"
+                      id="decimal"
+                      className="text-[rgba(255,255,255,1)] border-[rgba(255,255,255,1)]"
+                    />
+                    <Label htmlFor="decimal">Decimal</Label>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <RadioGroupItem
+                      value="hongkong"
+                      id="hongkong"
+                      className="text-[rgba(255,255,255,1)] border-[rgba(255,255,255,1)]"
+                    />
+                    <Label htmlFor="hongkong">HongKong</Label>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <RadioGroupItem
+                      value="malaysia"
+                      id="malaysia"
+                      className="text-[rgba(255,255,255,1)] border-[rgba(255,255,255,1)]"
+                    />
+                    <Label htmlFor="malaysia">Malaysia</Label>
+                  </div>
+                </RadioGroup>
+              </TabsContent>
+            </Tabs>
+          </PopoverContent>
+        )}
+        {typePopover === "league" && (
+          <PopoverContent
+            className="w-[90%] m-auto mt-3  bg-[rgba(41,53,67,1)] rounded-[10px]  text-[rgba(255,255,255,1)]"
+            style={{ border: "none" }}
+          >
+            <p>đây là xem các trận trong giải</p>
+          </PopoverContent>
+        )}
       </Popover>
     </MainLayout>
   );
