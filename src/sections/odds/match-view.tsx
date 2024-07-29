@@ -29,6 +29,7 @@ const menuNavigation = [
   { id: "5", name: "Cài đặt", url: paths.settings, icon: "uil:setting" },
 ];
 
+const leagueExample = [{ id: 1, name: "Premier League", nameParent }];
 export default function MatchView() {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -57,7 +58,7 @@ export default function MatchView() {
     return league?.includes(" Corners") ? league?.replace(" Corners", "") : league;
   };
 
-  const handlePopoverOpen = (popoverId: string) => {
+  const handlePopoverOpen = (popoverId: string | null) => {
     setTypePopover(popoverId);
   };
   const matchNoCorner = () => {
@@ -305,7 +306,13 @@ export default function MatchView() {
               <PopoverTrigger asChild>
                 <div
                   className="flex flex-row justify-center items-center hover:cursor-pointer"
-                  onClick={() => handlePopoverOpen("league")}
+                  onClick={() => {
+                    if (typePopover === "league") {
+                      handlePopoverOpen(null);
+                    } else {
+                      handlePopoverOpen("league");
+                    }
+                  }}
                 >
                   <p className="text-sm font-bold w-[85%] leading-[1.1rem]">{dataScreenInfo[0]?.league_name}</p>
                   <Icon
@@ -543,7 +550,7 @@ export default function MatchView() {
         )}
         {typePopover === "league" && (
           <PopoverContent
-            className="w-[90%] m-auto mt-3  bg-[rgba(41,53,67,1)] rounded-[10px]  text-[rgba(255,255,255,1)]"
+            className="w-[95%] m-auto mt-3  bg-[rgba(41,53,67,1)] rounded-[10px]  text-[rgba(255,255,255,1)]"
             style={{ border: "none" }}
           >
             <p>đây là xem các trận trong giải</p>
