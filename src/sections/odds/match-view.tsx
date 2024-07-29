@@ -463,8 +463,8 @@ export default function MatchView() {
               </TabsTrigger>
             </TabsList>
             <TabsContent value="number_line">
-              <RadioGroup defaultValue="option-one">
-                <div className="flex items-center space-x-2 flex-row justify-around">
+              <RadioGroup defaultValue="option-one" className="flex flex-row justify-around">
+                <div className="flex items-center space-x-2 flex-row ">
                   <RadioGroupItem value="option-one" id="option-one" />
                   <Label htmlFor="option-one">Option One</Label>
                 </div>
