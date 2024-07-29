@@ -589,7 +589,7 @@ export default function MatchView() {
           >
             {leagueExample.map((item) => (
               <div
-                className="px-2 flex flex-col justify-between bg-[rgba(30,42,56,1)] rounded-[10px] mb-[10px]"
+                className="px-2 flex flex-row justify-between bg-[rgba(30,42,56,1)] rounded-[10px] mb-[10px]"
                 key={item.id}
               >
                 <div className="flex flex-col justify-between items-center">
