@@ -676,16 +676,16 @@ export default function MatchView() {
                     </div>
                   </div>
                   <div className="flex flex-col justify-between items-center">
-                    <Dialog.Trigger>
-                      <Icon
-                        icon="mage:chart-fill"
-                        className="hover:cursor-pointer"
-                        width={16}
-                        height={16}
-                        color="rgba(170,170,170,1)"
-                        onClick={handleDialogOpen}
-                      />
-                    </Dialog.Trigger>
+                    {/* <Dialog.Trigger> */}
+                    <Icon
+                      icon="mage:chart-fill"
+                      className="hover:cursor-pointer"
+                      width={16}
+                      height={16}
+                      color="rgba(170,170,170,1)"
+                      onClick={handleDialogOpen}
+                    />
+                    {/* </Dialog.Trigger> */}
                     {item.isLive && (
                       <Icon icon="fluent:live-20-filled" width={16} height={16} color="rgba(245,93,62,1)" />
                     )}
