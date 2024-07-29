@@ -465,19 +465,35 @@ export default function MatchView() {
             <TabsContent value="number_line">
               <RadioGroup defaultValue="option-one" className="flex flex-row justify-around">
                 <div className="flex items-center space-x-2 flex-row py-3 ">
-                  <RadioGroupItem value="option-one" id="option-one" className="text-[rgba(255,255,255,1)]" />
+                  <RadioGroupItem
+                    value="option-one"
+                    id="option-one"
+                    className="text-[rgba(255,255,255,1)] border-[rgba(255,255,255,1)]"
+                  />
                   <Label htmlFor="option-one">1 kèo</Label>
                 </div>
                 <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="option-two" id="option-two" className="text-[rgba(255,255,255,1)]" />
+                  <RadioGroupItem
+                    value="option-two"
+                    id="option-two"
+                    className="text-[rgba(255,255,255,1)] border-[rgba(255,255,255,1)]"
+                  />
                   <Label htmlFor="option-two">3 kèo</Label>
                 </div>
                 <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="option-three" id="option-three" className="text-[rgba(255,255,255,1)]" />
+                  <RadioGroupItem
+                    value="option-three"
+                    id="option-three"
+                    className="text-[rgba(255,255,255,1)] border-[rgba(255,255,255,1)]"
+                  />
                   <Label htmlFor="option-three">5 kèo</Label>
                 </div>
                 <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="all" id="all" className="text-[rgba(255,255,255,1)]" />
+                  <RadioGroupItem
+                    value="all"
+                    id="all"
+                    className="text-[rgba(255,255,255,1)] border-[rgba(255,255,255,1)]"
+                  />
                   <Label htmlFor="all">Tất cả</Label>
                 </div>
               </RadioGroup>
