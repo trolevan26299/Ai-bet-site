@@ -68,6 +68,51 @@ const leagueExample = [
     time: "02:00, 15/07",
     isLive: false,
   },
+  {
+    id: 5,
+    name: "Euro 2024",
+    container: "Châu Âu",
+    away: "Spain",
+    home: "England",
+    time: "02:00, 15/07",
+    isLive: false,
+  },
+  {
+    id: 6,
+    name: "Euro 2024",
+    container: "Châu Âu",
+    away: "Spain",
+    home: "England",
+    time: "02:00, 15/07",
+    isLive: false,
+  },
+  {
+    id: 7,
+    name: "Euro 2024",
+    container: "Châu Âu",
+    away: "Spain",
+    home: "England",
+    time: "02:00, 15/07",
+    isLive: false,
+  },
+  {
+    id: 8,
+    name: "Euro 2024",
+    container: "Châu Âu",
+    away: "Spain",
+    home: "England",
+    time: "02:00, 15/07",
+    isLive: false,
+  },
+  {
+    id: 9,
+    name: "Euro 2024",
+    container: "Châu Âu",
+    away: "Spain",
+    home: "England",
+    time: "02:00, 15/07",
+    isLive: false,
+  },
 ];
 export default function MatchView() {
   const router = useRouter();
@@ -584,7 +629,7 @@ export default function MatchView() {
         )}
         {typePopover === "league" && (
           <PopoverContent
-            className="w-[95%] m-auto mt-3  bg-[rgba(41,53,67,1)] rounded-[10px]  text-[rgba(255,255,255,1)]"
+            className="w-[95%] m-auto mt-3  bg-[rgba(41,53,67,1)] rounded-[10px]  text-[rgba(255,255,255,1)] h-[90vh] overflow-y-auto"
             style={{ border: "none" }}
           >
             {leagueExample.map((item) => (
@@ -594,7 +639,7 @@ export default function MatchView() {
               >
                 <div className="flex flex-col justify-between items-start">
                   <div className="flex flex-row gap-1 items-center">
-                    <Icon icon="fluent:sport-soccer-24-filled" width={20} height={20} color="rgba(170,170,170,1)" />
+                    <Icon icon="fluent:sport-soccer-24-filled" width={16} height={16} color="rgba(170,170,170,1)" />
                     <p className="pl-2 text-[10px] font-normal text-[rgba(170,170,170,1)]">{item.container}</p>
                     <Icon icon="ic:outline-arrow-right" width={20} height={20} color="rgba(170,170,170,1)" />
                     <p className="text-[10px] font-normal text-[rgba(170,170,170,1)]">{item.name}</p>
@@ -607,16 +652,30 @@ export default function MatchView() {
                     {item.isLive ? `${item.time} ${item.scope}` : item.time}
                   </p>
                   <div className="flex flex-row justify-start items-center gap-2">
-                    <Image src="/assets/bg_team.png" alt="no-content" className="w-[20px] h-[20px]" />
+                    <Image
+                      src="https://w7.pngwing.com/pngs/982/984/png-transparent-red-and-white-flag-flag-of-spain-iberian-peninsula-computer-icons-spanish-free-spain-flag-svg-miscellaneous-english-country-thumbnail.png"
+                      alt="no-content"
+                      className="w-[20px] h-[20px]"
+                    />
                     <p className="text-[rgba(251,255,255,1)] text-[14.41px] font-normal">{item.home}</p>
                   </div>
                   <div className="flex flex-row justify-start items-center gap-2">
-                    <Image src="/assets/bg_team.png" alt="no-content" className="w-[20px] h-[20px]" />
+                    <Image
+                      src="https://upload.wikimedia.org/wikipedia/en/thumb/8/8b/England_national_football_team_crest.svg/1200px-England_national_football_team_crest.svg.png"
+                      alt="no-content"
+                      className="w-[20px] h-[20px]"
+                    />
                     <p className="text-[rgba(251,255,255,1)] text-[14.41px] font-normal">{item.away}</p>
                   </div>
                 </div>
                 <div className="flex flex-col justify-between items-center">
-                  <Icon icon="mage:chart-fill" width={16} height={16} color="rgba(170,170,170,1)" />
+                  <Icon
+                    icon="mage:chart-fill"
+                    className="hover:cursor-pointer"
+                    width={16}
+                    height={16}
+                    color="rgba(170,170,170,1)"
+                  />
                   {item.isLive && (
                     <Icon icon="fluent:live-20-filled" width={16} height={16} color="rgba(245,93,62,1)" />
                   )}
