@@ -2,6 +2,7 @@
 
 import React from "react";
 import { useRouter } from "next/navigation";
+import MainLayout from "@/layouts/main/layout";
 
 const LeagueView = () => {
   const router = useRouter();
@@ -23,11 +24,11 @@ const LeagueView = () => {
   };
 
   return (
-    <div>
+    <MainLayout>
       <button className="bg-slate-400 text-white" onClick={handleNavigate}>
         Đến màn hình chi tiết
       </button>
-    </div>
+    </MainLayout>
   );
 };
 
