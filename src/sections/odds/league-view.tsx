@@ -4,6 +4,7 @@ import React from "react";
 import { useRouter } from "next/navigation";
 import MainLayout from "@/layouts/main/layout";
 import Menu from "@/components/app/menu/menu";
+import { Icon } from "@iconify/react";
 
 const LeagueView = () => {
   const router = useRouter();
@@ -27,10 +28,23 @@ const LeagueView = () => {
   return (
     <MainLayout>
       <div>
-        <div className="search">
-          <button className="bg-slate-400 text-white" onClick={handleNavigate}>
-            Đến màn hình chi tiết
-          </button>
+        <div className="search h-12 flex flex-row w-full justify-center items-center">
+          <div className="w-[15%]"></div>
+          <div className="w-[60%]"></div>
+          <div className="w-[25%] flex flex-row justify-center items-center">
+            <Icon
+              icon="bx:calendar"
+              width={30}
+              height={30}
+              className="hover:cursor-pointertext-[rgba(255,255,255,1)]"
+            />
+            <Icon
+              icon="ic:baseline-search"
+              width={30}
+              height={30}
+              className="hover:cursor-pointertext-[rgba(255,255,255,1)]"
+            />
+          </div>
         </div>
         <div className="league">đây là các thẻ giải</div>
         <div className="detail">nội dung </div>

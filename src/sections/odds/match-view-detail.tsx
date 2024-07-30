@@ -1,5 +1,6 @@
 "use client";
 
+import Menu from "@/components/app/menu/menu";
 import OddsDetail from "@/components/app/odds-detail/odds-detail";
 import ScreenInfoMatch from "@/components/app/screen-info-match/screen-info-match";
 import { SplashScreen } from "@/components/loading-screen";
@@ -9,19 +10,16 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useTelegram } from "@/context/telegram.provider";
 import MainLayout from "@/layouts/main/layout";
-import { paths } from "@/routes/paths";
 import { IMatchData, IOddsDetail, OddsStatusType } from "@/types/odds.types";
 import { transformDataCorner } from "@/utils/transformDataCorner";
 import { transformData } from "@/utils/transformDataOdds";
 import { Icon } from "@iconify/react";
+import { Dialog } from "@radix-ui/themes";
 import axios from "axios";
 import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import "./index.css";
-import { Input } from "@/components/ui/input";
-import { Dialog } from "@radix-ui/themes";
-import Menu from "@/components/app/menu/menu";
 
 const leagueExample = [
   {
