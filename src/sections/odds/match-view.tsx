@@ -635,7 +635,7 @@ export default function MatchView() {
         )}
         {typePopover === "league" && (
           <PopoverContent
-            className="w-[95%] m-auto mt-3  bg-[rgba(41,53,67,1)] rounded-[10px]  text-[rgba(255,255,255,1)] max-h-[80vh] overflow-y-auto"
+            className="w-[95%] m-auto mt-3 z-10  bg-[rgba(41,53,67,1)] rounded-[10px]  text-[rgba(255,255,255,1)] max-h-[80vh] overflow-y-auto"
             style={{ border: "none" }}
           >
             {leagueExample.map((item) => (
@@ -705,7 +705,7 @@ export default function MatchView() {
                         {item.awayScore}
                       </div>
                     )}
-                    <Dialog.Content className="sm:max-w-[425px]">
+                    <Dialog.Content className="sm:max-w-[425px] z-20">
                       <p>nội dung popup phân tích</p>
                     </Dialog.Content>
                   </Dialog.Root>
