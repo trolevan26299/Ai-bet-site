@@ -388,8 +388,7 @@ export default function MatchViewDetail() {
                 icon="weui:back-filled"
                 width={30}
                 height={20}
-                color="rgba(143,149,156,1)"
-                className="hover:cursor-pointer hover:text-[rgba(255,255,255,1)]"
+                className="hover:cursor-pointer text-[rgba(143,149,156,1)] hover:text-[rgba(255,255,255,1)]"
                 onClick={() => router.back()}
               />
               <div className="text-[rgba(255,255,255,1)] flex flex-row justify-center items-center pr-[10px]">
