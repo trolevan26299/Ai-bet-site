@@ -3,6 +3,7 @@
 import React from "react";
 import { useRouter } from "next/navigation";
 import MainLayout from "@/layouts/main/layout";
+import Menu from "@/components/app/menu/menu";
 
 const LeagueView = () => {
   const router = useRouter();
@@ -25,9 +26,16 @@ const LeagueView = () => {
 
   return (
     <MainLayout>
-      <button className="bg-slate-400 text-white" onClick={handleNavigate}>
-        Đến màn hình chi tiết
-      </button>
+      <div>
+        <div className="search">
+          <button className="bg-slate-400 text-white" onClick={handleNavigate}>
+            Đến màn hình chi tiết
+          </button>
+        </div>
+        <div className="league">đây là các thẻ giải</div>
+        <div className="detail">nội dung </div>
+        <Menu />
+      </div>
     </MainLayout>
   );
 };
