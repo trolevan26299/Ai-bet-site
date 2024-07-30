@@ -33,7 +33,7 @@ const LeagueView = () => {
           <div className="w-[15%] px-5">
             <button className="w-[53px] h-[21px] bg-[rgba(255,255,255,1)] text-[rgba(230,58,58,1)] uppercase rounded-[16.83px]">
               Live
-              <Icon icon="pepicons-pop:circle" width={30} height={30} className="text-[rgba(230,58,58,1)]" />
+              <Icon icon="pepicons-pop:circle" width={20} height={20} className="text-[rgba(230,58,58,1)]" />
             </button>
           </div>
           <div className="w-[60%]"></div>
