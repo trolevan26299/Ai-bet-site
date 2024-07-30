@@ -1,8 +1,8 @@
-import { MatchView } from "@/sections/odds";
+import { LeagueView } from "@/sections/odds";
 
 export const metadata = {
-  title: "Betting Screen",
+  title: "League Screen",
 };
-export default function Home() {
-  return <MatchView />;
+export default function LeaguePage() {
+  return <LeagueView />;
 }

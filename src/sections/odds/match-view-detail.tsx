@@ -116,7 +116,7 @@ const leagueExample = [
     isLive: false,
   },
 ];
-export default function MatchView() {
+export default function MatchViewDetail() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [odds, setOdds] = useState<IOddsDetail[]>([]);
