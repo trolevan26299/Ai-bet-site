@@ -42,13 +42,13 @@ const LeagueView = () => {
               icon="bx:calendar"
               width={30}
               height={30}
-              className="hover:cursor-pointertext-[rgba(255,255,255,1)]"
+              className="hover:cursor-pointer text-[rgba(255,255,255,1)]"
             />
             <Icon
               icon="ic:baseline-search"
               width={30}
               height={30}
-              className="hover:cursor-pointertext-[rgba(255,255,255,1)]"
+              className="hover:cursor-pointer text-[rgba(255,255,255,1)]"
             />
           </div>
         </div>
