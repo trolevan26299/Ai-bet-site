@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import MainLayout from "@/layouts/main/layout";
 import Menu from "@/components/app/menu/menu";
 import { Icon } from "@iconify/react";
+import { Button } from "@/components/ui/button";
 
 const LeagueView = () => {
   const router = useRouter();
@@ -28,10 +29,15 @@ const LeagueView = () => {
   return (
     <MainLayout>
       <div>
-        <div className="search h-12 flex flex-row w-full justify-center items-center">
-          <div className="w-[15%]"></div>
+        <div className="search h-12 flex flex-row w-full justify-center items-center bg-[rgba(17,17,17,1)]">
+          <div className="w-[15%]">
+            <Button className="w-[53px] h-[21px] bg-[rgba(255,255,255,1)] text-[rgba(230,58,58,1)] uppercase ">
+              Live
+              <Icon icon="pepicons-pop:circle" width={30} height={30} className="text-[rgba(230,58,58,1)]" />
+            </Button>
+          </div>
           <div className="w-[60%]"></div>
-          <div className="w-[25%] flex flex-row justify-center items-center">
+          <div className="w-[25%] flex flex-row justify-around items-center">
             <Icon
               icon="bx:calendar"
               width={30}
