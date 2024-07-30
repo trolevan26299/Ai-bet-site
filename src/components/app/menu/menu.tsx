@@ -1,8 +1,10 @@
 import { paths } from "@/routes/paths";
 import { Icon } from "@iconify/react";
+import { useRouter } from "next/navigation";
 import React from "react";
 
 const Menu = () => {
+  const router = useRouter();
   const menuNavigation = [
     { id: "1", name: "Trận đấu", url: paths.odds, icon: "mdi:soccer-field" },
     { id: "2", name: "Yêu thích", url: paths.favorites, icon: "gravity-ui:star" },
@@ -20,6 +22,7 @@ const Menu = () => {
         <div
           className="group flex flex-col justify-center items-center gap-[4.5px] hover:cursor-pointer  text-[rgba(159,162,167,1)]"
           key={item.id}
+          onClick={() => router.push(item.url)}
         >
           <Icon icon={item.icon} className="w-[21.43px] h-[21.43px] group-hover:text-[rgba(121,228,169,1)]" />
           <p className="text-[12.86px] font-bold leading-[15.56px] group-hover:text-[rgba(255,255,255,1)]">
