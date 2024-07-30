@@ -380,312 +380,312 @@ export default function MatchView() {
 
   return (
     <MainLayout>
-      <Popover>
-        <div style={{ paddingBottom: "50px" }}>
-          <div className="h-[39px] w-full bg-[rgba(30,42,56,1)] flex flex-row justify-between items-center px-[6px]">
-            <Icon
-              icon="weui:back-filled"
-              width={30}
-              height={20}
-              color="rgba(143,149,156,1)"
-              className="hover:cursor-pointer"
-            />
-            <div className="text-[rgba(255,255,255,1)] flex flex-row justify-center items-center pr-[10px]">
-              <Image src="/assets/league_logo.png" alt="no-content" className="w-[34px] h-[27.2px]" />
-              <PopoverTrigger asChild>
-                <div
-                  className="flex flex-row justify-center items-center hover:cursor-pointer"
-                  onClick={() => {
-                    handlePopoverOpen("league");
-                  }}
-                >
-                  <p className="text-sm font-bold w-[85%] leading-[1.1rem]">{dataScreenInfo[0]?.league_name}</p>
-                  <Icon
-                    icon="icon-park-solid:down-one"
-                    width={25}
-                    height={15}
-                    color="rgba(255,255,255,1)"
-                    className="hover:cursor-pointer"
-                  />
-                </div>
-              </PopoverTrigger>
+      <Dialog.Root>
+        <Popover>
+          <div style={{ paddingBottom: "50px" }}>
+            <div className="h-[39px] w-full bg-[rgba(30,42,56,1)] flex flex-row justify-between items-center px-[6px]">
               <Icon
-                icon="material-symbols-light:star-outline"
+                icon="weui:back-filled"
                 width={30}
-                height={30}
-                color="rgba(170,170,170,1)"
-                className=" hover:cursor-pointer"
-              />
-            </div>
-            <PopoverTrigger asChild>
-              <Icon
-                icon="hugeicons:list-setting"
-                width={30}
-                height={23}
+                height={20}
                 color="rgba(143,149,156,1)"
                 className="hover:cursor-pointer"
-                onClick={() => handlePopoverOpen("setting")}
               />
-            </PopoverTrigger>
-          </div>
-          {loading ? (
-            <SplashScreen />
-          ) : (
-            <>
-              {endBet ? (
-                <div className="h-[80vh] w-[90%] flex flex-col justify-center items-center mx-auto">
-                  {tracker_id ? (
-                    <iframe
-                      scrolling="no"
-                      src={`https://start26.sptpub.com/tracker.html?eventId=${tracker_id}&sportId=1&lang=vi&liveEvent=true&providers=Betradar`}
-                      allowFullScreen
-                      title="rindle"
-                      style={{
-                        border: 0,
-                        width: "100%",
-                        height: iframeLoaded ? iframeHeight : "0px",
-                        borderRadius: "5px",
-                      }}
-                    ></iframe>
-                  ) : (
-                    <Image src="/assets/ball.png" alt="no-content" className="w-[165px] h-[170px] mr-5" />
-                  )}
-                  <p className="pt-2 text-xl text-slate-500 font-semibold">Trận đấu đã kết thúc</p>
-                  <span className="pt-2 text-sm text-slate-500 font-semibold">
-                    Vui lòng quay lại Telegram và xem các sự kiện khác
-                  </span>
-                </div>
-              ) : haveError ? (
-                <div className="h-[80vh] w-[90%] flex flex-col justify-center items-center mx-auto">
-                  {tracker_id ? (
-                    <iframe
-                      scrolling="no"
-                      src={`https://start26.sptpub.com/tracker.html?eventId=${tracker_id}&sportId=1&lang=vi&liveEvent=true&providers=Betradar`}
-                      allowFullScreen
-                      title="rindle"
-                      style={{
-                        border: 0,
-                        width: "100%",
-                        height: iframeLoaded ? iframeHeight : "0px",
-                        borderRadius: "5px",
-                      }}
-                    ></iframe>
-                  ) : (
-                    <Image src="/assets/ball.png" alt="no-content" className="w-[165px] h-[170px] mr-5" />
-                  )}
-                  <p className="pt-4 text-xl text-slate-500 font-semibold">Không tìm thấy thông tin trận đấu</p>
-                  <span className="pt-2 text-sm text-slate-500 font-semibold text-center">
-                    Trận đấu bị gián đoạn hoặc đã kết thúc. Vui lòng thử lại trong giây lát hoặc chọn trận đấu khác.
-                  </span>
-                </div>
-              ) : (
-                <>
-                  <div className=" pb-6 h-full">
-                    <ScreenInfoMatch dataScreenInfo={dataScreenInfo} />
-                    <div className="px-3">
-                      {tracker_id && (
-                        <div className="pt-2">
-                          <button
-                            className={`bg-[rgba(30,42,56,1)] w-full flex flex-row justify-center gap-1 rounded-[7px] h-[30px] items-center ${
-                              !showTrackingLive ? "pb-1" : ""
-                            }`}
-                            onClick={() => setShowTrackingLive(!showTrackingLive)}
-                          >
-                            <Icon
-                              icon="fe:line-chart"
-                              width={30}
-                              height={20}
-                              color={showTrackingLive ? "rgba(237,202,84,1)" : "rgba(142,149,156,1)"}
-                            />
-                            <span
-                              className={`text-[13px] font-bold ${
-                                showTrackingLive ? "text-[rgba(255,255,255,1)]" : "text-[rgba(142,149,156,1)]"
-                              } `}
+              <div className="text-[rgba(255,255,255,1)] flex flex-row justify-center items-center pr-[10px]">
+                <Image src="/assets/league_logo.png" alt="no-content" className="w-[34px] h-[27.2px]" />
+                <PopoverTrigger asChild>
+                  <div
+                    className="flex flex-row justify-center items-center hover:cursor-pointer"
+                    onClick={() => {
+                      handlePopoverOpen("league");
+                    }}
+                  >
+                    <p className="text-sm font-bold w-[85%] leading-[1.1rem]">{dataScreenInfo[0]?.league_name}</p>
+                    <Icon
+                      icon="icon-park-solid:down-one"
+                      width={25}
+                      height={15}
+                      color="rgba(255,255,255,1)"
+                      className="hover:cursor-pointer"
+                    />
+                  </div>
+                </PopoverTrigger>
+                <Icon
+                  icon="material-symbols-light:star-outline"
+                  width={30}
+                  height={30}
+                  color="rgba(170,170,170,1)"
+                  className=" hover:cursor-pointer"
+                />
+              </div>
+              <PopoverTrigger asChild>
+                <Icon
+                  icon="hugeicons:list-setting"
+                  width={30}
+                  height={23}
+                  color="rgba(143,149,156,1)"
+                  className="hover:cursor-pointer"
+                  onClick={() => handlePopoverOpen("setting")}
+                />
+              </PopoverTrigger>
+            </div>
+            {loading ? (
+              <SplashScreen />
+            ) : (
+              <>
+                {endBet ? (
+                  <div className="h-[80vh] w-[90%] flex flex-col justify-center items-center mx-auto">
+                    {tracker_id ? (
+                      <iframe
+                        scrolling="no"
+                        src={`https://start26.sptpub.com/tracker.html?eventId=${tracker_id}&sportId=1&lang=vi&liveEvent=true&providers=Betradar`}
+                        allowFullScreen
+                        title="rindle"
+                        style={{
+                          border: 0,
+                          width: "100%",
+                          height: iframeLoaded ? iframeHeight : "0px",
+                          borderRadius: "5px",
+                        }}
+                      ></iframe>
+                    ) : (
+                      <Image src="/assets/ball.png" alt="no-content" className="w-[165px] h-[170px] mr-5" />
+                    )}
+                    <p className="pt-2 text-xl text-slate-500 font-semibold">Trận đấu đã kết thúc</p>
+                    <span className="pt-2 text-sm text-slate-500 font-semibold">
+                      Vui lòng quay lại Telegram và xem các sự kiện khác
+                    </span>
+                  </div>
+                ) : haveError ? (
+                  <div className="h-[80vh] w-[90%] flex flex-col justify-center items-center mx-auto">
+                    {tracker_id ? (
+                      <iframe
+                        scrolling="no"
+                        src={`https://start26.sptpub.com/tracker.html?eventId=${tracker_id}&sportId=1&lang=vi&liveEvent=true&providers=Betradar`}
+                        allowFullScreen
+                        title="rindle"
+                        style={{
+                          border: 0,
+                          width: "100%",
+                          height: iframeLoaded ? iframeHeight : "0px",
+                          borderRadius: "5px",
+                        }}
+                      ></iframe>
+                    ) : (
+                      <Image src="/assets/ball.png" alt="no-content" className="w-[165px] h-[170px] mr-5" />
+                    )}
+                    <p className="pt-4 text-xl text-slate-500 font-semibold">Không tìm thấy thông tin trận đấu</p>
+                    <span className="pt-2 text-sm text-slate-500 font-semibold text-center">
+                      Trận đấu bị gián đoạn hoặc đã kết thúc. Vui lòng thử lại trong giây lát hoặc chọn trận đấu khác.
+                    </span>
+                  </div>
+                ) : (
+                  <>
+                    <div className=" pb-6 h-full">
+                      <ScreenInfoMatch dataScreenInfo={dataScreenInfo} />
+                      <div className="px-3">
+                        {tracker_id && (
+                          <div className="pt-2">
+                            <button
+                              className={`bg-[rgba(30,42,56,1)] w-full flex flex-row justify-center gap-1 rounded-[7px] h-[30px] items-center ${
+                                !showTrackingLive ? "pb-1" : ""
+                              }`}
+                              onClick={() => setShowTrackingLive(!showTrackingLive)}
                             >
-                              Theo dõi{" "}
-                            </span>
-                          </button>
+                              <Icon
+                                icon="fe:line-chart"
+                                width={30}
+                                height={20}
+                                color={showTrackingLive ? "rgba(237,202,84,1)" : "rgba(142,149,156,1)"}
+                              />
+                              <span
+                                className={`text-[13px] font-bold ${
+                                  showTrackingLive ? "text-[rgba(255,255,255,1)]" : "text-[rgba(142,149,156,1)]"
+                                } `}
+                              >
+                                Theo dõi{" "}
+                              </span>
+                            </button>
 
-                          <iframe
-                            scrolling="no"
-                            src={`https://start26.sptpub.com/tracker.html?eventId=${tracker_id}&sportId=1&lang=vi&liveEvent=true&providers=Betradar`}
-                            allowFullScreen
-                            title="rindle"
-                            style={{
-                              display: showTrackingLive ? "block" : "none",
-                              marginTop: "5px",
-                              border: 0,
-                              width: "100%",
-                              height: iframeLoaded ? iframeHeight : "0px",
-                              borderRadius: "5px",
-                            }}
-                          ></iframe>
-                        </div>
-                      )}
+                            <iframe
+                              scrolling="no"
+                              src={`https://start26.sptpub.com/tracker.html?eventId=${tracker_id}&sportId=1&lang=vi&liveEvent=true&providers=Betradar`}
+                              allowFullScreen
+                              title="rindle"
+                              style={{
+                                display: showTrackingLive ? "block" : "none",
+                                marginTop: "5px",
+                                border: 0,
+                                width: "100%",
+                                height: iframeLoaded ? iframeHeight : "0px",
+                                borderRadius: "5px",
+                              }}
+                            ></iframe>
+                          </div>
+                        )}
 
-                      <OddsDetail
-                        odds={odds}
-                        oddsStatus={oddsStatus}
-                        dataScreenInfo={dataScreenInfo}
-                        disableBtn={disableBtn}
+                        <OddsDetail
+                          odds={odds}
+                          oddsStatus={oddsStatus}
+                          dataScreenInfo={dataScreenInfo}
+                          disableBtn={disableBtn}
+                        />
+                      </div>
+                    </div>
+                  </>
+                )}
+              </>
+            )}
+            <div
+              className={`z-10 bottom-0  fixed m-auto rounded-sm flex items-center flex-row justify-around flex-wrap w-full  px-4 pt-2 pb-3 rounded-tr-[20px] rounded-tl-[20px]`}
+              style={{ backgroundColor: "rgba(13, 22, 31, 1)" }}
+            >
+              {menuNavigation.map((item) => (
+                <div
+                  className="group flex flex-col justify-center items-center gap-[4.5px] hover:cursor-pointer  text-[rgba(159,162,167,1)]"
+                  key={item.id}
+                >
+                  <Icon icon={item.icon} className="w-[21.43px] h-[21.43px] group-hover:text-[rgba(121,228,169,1)]" />
+                  <p className="text-[12.86px] font-bold leading-[15.56px] group-hover:text-[rgba(255,255,255,1)]">
+                    {item.name}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+          {typePopover === "setting" && (
+            <PopoverContent
+              className="w-[90%] m-auto mt-3  bg-[rgba(41,53,67,1)] rounded-[10px]  text-[rgba(255,255,255,1)]"
+              style={{ border: "none" }}
+            >
+              <Tabs defaultValue="number_line" key="number_line" className="w-full">
+                <TabsList className="grid w-full grid-cols-2 bg-[rgba(30,42,56,1)] rounded-[10px]">
+                  <TabsTrigger value="number_line" className="rounded-[10px]">
+                    Số lượng kèo
+                  </TabsTrigger>
+                  <TabsTrigger value="odds_type" className="rounded-[10px]">
+                    Tỷ lệ cược
+                  </TabsTrigger>
+                </TabsList>
+                <TabsContent value="number_line">
+                  <RadioGroup defaultValue="option-one" className="flex flex-row justify-around">
+                    <div className="flex items-center space-x-2 flex-row py-3 ">
+                      <RadioGroupItem
+                        value="option-one"
+                        id="option-one"
+                        className="text-[rgba(255,255,255,1)] border-[rgba(255,255,255,1)]"
                       />
+                      <Label htmlFor="option-one">1 kèo</Label>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <RadioGroupItem
+                        value="option-two"
+                        id="option-two"
+                        className="text-[rgba(255,255,255,1)] border-[rgba(255,255,255,1)]"
+                      />
+                      <Label htmlFor="option-two">3 kèo</Label>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <RadioGroupItem
+                        value="option-three"
+                        id="option-three"
+                        className="text-[rgba(255,255,255,1)] border-[rgba(255,255,255,1)]"
+                      />
+                      <Label htmlFor="option-three">5 kèo</Label>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <RadioGroupItem
+                        value="all"
+                        id="all"
+                        className="text-[rgba(255,255,255,1)] border-[rgba(255,255,255,1)]"
+                      />
+                      <Label htmlFor="all">Tất cả</Label>
+                    </div>
+                  </RadioGroup>
+                </TabsContent>
+                <TabsContent value="odds_type">
+                  <RadioGroup defaultValue="option-one" className="flex flex-row justify-around">
+                    <div className="flex items-center space-x-2 flex-row py-3 ">
+                      <RadioGroupItem
+                        value="decimal"
+                        id="decimal"
+                        className="text-[rgba(255,255,255,1)] border-[rgba(255,255,255,1)]"
+                      />
+                      <Label htmlFor="decimal">Decimal</Label>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <RadioGroupItem
+                        value="hongkong"
+                        id="hongkong"
+                        className="text-[rgba(255,255,255,1)] border-[rgba(255,255,255,1)]"
+                      />
+                      <Label htmlFor="hongkong">HongKong</Label>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <RadioGroupItem
+                        value="malaysia"
+                        id="malaysia"
+                        className="text-[rgba(255,255,255,1)] border-[rgba(255,255,255,1)]"
+                      />
+                      <Label htmlFor="malaysia">Malaysia</Label>
+                    </div>
+                  </RadioGroup>
+                </TabsContent>
+              </Tabs>
+            </PopoverContent>
+          )}
+          {typePopover === "league" && (
+            <PopoverContent
+              className="w-[95%] m-auto mt-3  bg-[rgba(41,53,67,1)] rounded-[10px]  text-[rgba(255,255,255,1)] max-h-[80vh] overflow-y-auto"
+              style={{ border: "none" }}
+            >
+              {leagueExample.map((item) => (
+                <div
+                  className="p-2 flex flex-row justify-between bg-[rgba(30,42,56,1)] rounded-[10px] mb-[10px]"
+                  key={item.id}
+                >
+                  <div className="flex flex-col justify-between items-start">
+                    <div className="flex flex-row gap-1 items-center">
+                      <Icon icon="fluent:sport-soccer-24-filled" width={16} height={16} color="rgba(170,170,170,1)" />
+                      <p className="pl-2 text-[10px] font-normal text-[rgba(170,170,170,1)]">{item.container}</p>
+                      <Icon icon="ic:outline-arrow-right" width={20} height={20} color="rgba(170,170,170,1)" />
+                      <p className="text-[10px] font-normal text-[rgba(170,170,170,1)]">{item.name}</p>
+                    </div>
+                    <p
+                      className={`${
+                        item.isLive ? "text-[rgba(70,230,164,1)]" : "text-[rgba(165,165,165,1)]"
+                      } text-[9px] font-normal`}
+                    >
+                      {item.isLive ? `${item.time} ${item.scope}` : item.time}
+                    </p>
+                    <div className="flex flex-row justify-start items-center gap-2">
+                      <Image
+                        src="https://w7.pngwing.com/pngs/982/984/png-transparent-red-and-white-flag-flag-of-spain-iberian-peninsula-computer-icons-spanish-free-spain-flag-svg-miscellaneous-english-country-thumbnail.png"
+                        alt="no-content"
+                        className="w-[20px] h-[20px]"
+                      />
+                      <p className="text-[rgba(251,255,255,1)] text-[14.41px] font-normal">{item.home}</p>
+                    </div>
+                    <div className="flex flex-row justify-start items-center gap-2">
+                      <Image
+                        src="https://upload.wikimedia.org/wikipedia/en/thumb/8/8b/England_national_football_team_crest.svg/1200px-England_national_football_team_crest.svg.png"
+                        alt="no-content"
+                        className="w-[20px] h-[20px]"
+                      />
+                      <p className="text-[rgba(251,255,255,1)] text-[14.41px] font-normal">{item.away}</p>
                     </div>
                   </div>
-                </>
-              )}
-            </>
-          )}
-          <div
-            className={`z-10 bottom-0  fixed m-auto rounded-sm flex items-center flex-row justify-around flex-wrap w-full  px-4 pt-2 pb-3 rounded-tr-[20px] rounded-tl-[20px]`}
-            style={{ backgroundColor: "rgba(13, 22, 31, 1)" }}
-          >
-            {menuNavigation.map((item) => (
-              <div
-                className="group flex flex-col justify-center items-center gap-[4.5px] hover:cursor-pointer  text-[rgba(159,162,167,1)]"
-                key={item.id}
-              >
-                <Icon icon={item.icon} className="w-[21.43px] h-[21.43px] group-hover:text-[rgba(121,228,169,1)]" />
-                <p className="text-[12.86px] font-bold leading-[15.56px] group-hover:text-[rgba(255,255,255,1)]">
-                  {item.name}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-        {typePopover === "setting" && (
-          <PopoverContent
-            className="w-[90%] m-auto mt-3  bg-[rgba(41,53,67,1)] rounded-[10px]  text-[rgba(255,255,255,1)]"
-            style={{ border: "none" }}
-          >
-            <Tabs defaultValue="number_line" key="number_line" className="w-full">
-              <TabsList className="grid w-full grid-cols-2 bg-[rgba(30,42,56,1)] rounded-[10px]">
-                <TabsTrigger value="number_line" className="rounded-[10px]">
-                  Số lượng kèo
-                </TabsTrigger>
-                <TabsTrigger value="odds_type" className="rounded-[10px]">
-                  Tỷ lệ cược
-                </TabsTrigger>
-              </TabsList>
-              <TabsContent value="number_line">
-                <RadioGroup defaultValue="option-one" className="flex flex-row justify-around">
-                  <div className="flex items-center space-x-2 flex-row py-3 ">
-                    <RadioGroupItem
-                      value="option-one"
-                      id="option-one"
-                      className="text-[rgba(255,255,255,1)] border-[rgba(255,255,255,1)]"
+                  <div className="flex flex-col justify-between items-center">
+                    {/* <Dialog.Trigger> */}
+                    <Icon
+                      icon="mage:chart-fill"
+                      className="hover:cursor-pointer"
+                      width={16}
+                      height={16}
+                      color="rgba(170,170,170,1)"
+                      onClick={handleDialogOpen}
                     />
-                    <Label htmlFor="option-one">1 kèo</Label>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <RadioGroupItem
-                      value="option-two"
-                      id="option-two"
-                      className="text-[rgba(255,255,255,1)] border-[rgba(255,255,255,1)]"
-                    />
-                    <Label htmlFor="option-two">3 kèo</Label>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <RadioGroupItem
-                      value="option-three"
-                      id="option-three"
-                      className="text-[rgba(255,255,255,1)] border-[rgba(255,255,255,1)]"
-                    />
-                    <Label htmlFor="option-three">5 kèo</Label>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <RadioGroupItem
-                      value="all"
-                      id="all"
-                      className="text-[rgba(255,255,255,1)] border-[rgba(255,255,255,1)]"
-                    />
-                    <Label htmlFor="all">Tất cả</Label>
-                  </div>
-                </RadioGroup>
-              </TabsContent>
-              <TabsContent value="odds_type">
-                <RadioGroup defaultValue="option-one" className="flex flex-row justify-around">
-                  <div className="flex items-center space-x-2 flex-row py-3 ">
-                    <RadioGroupItem
-                      value="decimal"
-                      id="decimal"
-                      className="text-[rgba(255,255,255,1)] border-[rgba(255,255,255,1)]"
-                    />
-                    <Label htmlFor="decimal">Decimal</Label>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <RadioGroupItem
-                      value="hongkong"
-                      id="hongkong"
-                      className="text-[rgba(255,255,255,1)] border-[rgba(255,255,255,1)]"
-                    />
-                    <Label htmlFor="hongkong">HongKong</Label>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <RadioGroupItem
-                      value="malaysia"
-                      id="malaysia"
-                      className="text-[rgba(255,255,255,1)] border-[rgba(255,255,255,1)]"
-                    />
-                    <Label htmlFor="malaysia">Malaysia</Label>
-                  </div>
-                </RadioGroup>
-              </TabsContent>
-            </Tabs>
-          </PopoverContent>
-        )}
-        {typePopover === "league" && (
-          <PopoverContent
-            className="w-[95%] m-auto mt-3 z-10  bg-[rgba(41,53,67,1)] rounded-[10px]  text-[rgba(255,255,255,1)] max-h-[80vh] overflow-y-auto"
-            style={{ border: "none" }}
-          >
-            {leagueExample.map((item) => (
-              <div
-                className="p-2 flex flex-row justify-between bg-[rgba(30,42,56,1)] rounded-[10px] mb-[10px]"
-                key={item.id}
-              >
-                <div className="flex flex-col justify-between items-start">
-                  <div className="flex flex-row gap-1 items-center">
-                    <Icon icon="fluent:sport-soccer-24-filled" width={16} height={16} color="rgba(170,170,170,1)" />
-                    <p className="pl-2 text-[10px] font-normal text-[rgba(170,170,170,1)]">{item.container}</p>
-                    <Icon icon="ic:outline-arrow-right" width={20} height={20} color="rgba(170,170,170,1)" />
-                    <p className="text-[10px] font-normal text-[rgba(170,170,170,1)]">{item.name}</p>
-                  </div>
-                  <p
-                    className={`${
-                      item.isLive ? "text-[rgba(70,230,164,1)]" : "text-[rgba(165,165,165,1)]"
-                    } text-[9px] font-normal`}
-                  >
-                    {item.isLive ? `${item.time} ${item.scope}` : item.time}
-                  </p>
-                  <div className="flex flex-row justify-start items-center gap-2">
-                    <Image
-                      src="https://w7.pngwing.com/pngs/982/984/png-transparent-red-and-white-flag-flag-of-spain-iberian-peninsula-computer-icons-spanish-free-spain-flag-svg-miscellaneous-english-country-thumbnail.png"
-                      alt="no-content"
-                      className="w-[20px] h-[20px]"
-                    />
-                    <p className="text-[rgba(251,255,255,1)] text-[14.41px] font-normal">{item.home}</p>
-                  </div>
-                  <div className="flex flex-row justify-start items-center gap-2">
-                    <Image
-                      src="https://upload.wikimedia.org/wikipedia/en/thumb/8/8b/England_national_football_team_crest.svg/1200px-England_national_football_team_crest.svg.png"
-                      alt="no-content"
-                      className="w-[20px] h-[20px]"
-                    />
-                    <p className="text-[rgba(251,255,255,1)] text-[14.41px] font-normal">{item.away}</p>
-                  </div>
-                </div>
-                <div className="flex flex-col justify-between items-center">
-                  <Dialog.Root open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-                    <Dialog.Trigger>
-                      <Icon
-                        icon="mage:chart-fill"
-                        className="hover:cursor-pointer"
-                        width={16}
-                        height={16}
-                        color="rgba(170,170,170,1)"
-                        onClick={handleDialogOpen}
-                      />
-                    </Dialog.Trigger>
+                    {/* </Dialog.Trigger> */}
                     {item.isLive && (
                       <Icon icon="fluent:live-20-filled" width={16} height={16} color="rgba(245,93,62,1)" />
                     )}
@@ -705,16 +705,16 @@ export default function MatchView() {
                         {item.awayScore}
                       </div>
                     )}
-                    <Dialog.Content className="sm:max-w-[425px] z-20">
-                      <p>nội dung popup phân tích</p>
-                    </Dialog.Content>
-                  </Dialog.Root>
+                  </div>
                 </div>
-              </div>
-            ))}
-          </PopoverContent>
-        )}
-      </Popover>
+              ))}
+            </PopoverContent>
+          )}
+        </Popover>
+        <Dialog.Content className="sm:max-w-[425px]">
+          <p>nội dung popup phân tích</p>
+        </Dialog.Content>
+      </Dialog.Root>
     </MainLayout>
   );
 }
