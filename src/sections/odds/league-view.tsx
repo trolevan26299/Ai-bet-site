@@ -24,7 +24,9 @@ const LeagueView = () => {
 
   return (
     <div>
-      <button onClick={handleNavigate}>Đến màn hình chi tiết</button>
+      <button className="bg-slate-400 text-white" onClick={handleNavigate}>
+        Đến màn hình chi tiết
+      </button>
     </div>
   );
 };
