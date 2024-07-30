@@ -389,7 +389,8 @@ export default function MatchViewDetail() {
                 width={30}
                 height={20}
                 color="rgba(143,149,156,1)"
-                className="hover:cursor-pointer"
+                className="hover:cursor-pointer hover:text-[rgba(255,255,255,1)]"
+                onClick={() => router.back()}
               />
               <div className="text-[rgba(255,255,255,1)] flex flex-row justify-center items-center pr-[10px]">
                 <Image src="/assets/league_logo.png" alt="no-content" className="w-[34px] h-[27.2px]" />
