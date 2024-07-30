@@ -31,9 +31,9 @@ const LeagueView = () => {
       <div>
         <div className="search h-12 flex flex-row w-full justify-center items-center bg-[rgba(17,17,17,1)]">
           <div className="w-[15%] px-5">
-            <button className="w-[53px] h-[21px] bg-[rgba(255,255,255,1)] text-[rgba(230,58,58,1)] uppercase rounded-[16.83px] text-[12px] font-bold flex flex-row justify-center">
+            <button className="w-[53px] h-[21px] bg-[rgba(255,255,255,1)] text-[rgba(230,58,58,1)] uppercase rounded-[16.83px] text-[12px] font-bold flex flex-row justify-center items-center">
               Live
-              <Icon icon="pepicons-pop:circle" width={10} height={10} className="text-[rgba(230,58,58,1)]" />
+              <Icon icon="pepicons-pop:circle" width={17} height={17} className="text-[rgba(230,58,58,1)]" />
             </button>
           </div>
           <div className="w-[60%]"></div>
