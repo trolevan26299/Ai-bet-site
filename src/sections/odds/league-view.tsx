@@ -3,6 +3,7 @@
 import Menu from "@/components/app/menu/menu";
 import MainLayout from "@/layouts/main/layout";
 import { getDayOfWeek } from "@/utils/convertDateToDateOfWeek";
+import { getDayAndMonth } from "@/utils/convertToDayAndMonth";
 import { Icon } from "@iconify/react";
 import { getDay } from "date-fns";
 import { useRouter } from "next/navigation";
@@ -50,11 +51,14 @@ const LeagueView = () => {
               <Icon icon="pepicons-pop:circle" width={17} height={17} className="text-[rgba(230,58,58,1)]" />
             </button>
           </div>
-          <div className="w-[60%] flex flex-row justify-center gap-1 items-center">
+          <div className="w-[60%] flex flex-row justify-center gap-1 items-center overflow-x-hidden scrollbar-hide">
             {demoDateSearch.map((date, index) => (
-              <div className="flex flex-col items-center justify-center text-[11px] font-bold gap-1" key={index}>
+              <div
+                className="flex flex-col items-center justify-center text-[11px] font-bold gap-1 text-[rgba(109,109,109,1)]"
+                key={index}
+              >
                 <p>{getDayOfWeek(date)}</p>
-                <p>{date}</p>
+                <p>{getDayAndMonth(date)}</p>
               </div>
             ))}
           </div>
