@@ -143,7 +143,7 @@ const LeagueView = () => {
           <Menu />
         </div>
         <PopoverContent className="p-0 w-full bg-[rgba(40,55,74,1)] " align="center">
-          <Command>
+          {/* <Command>
             <CommandInput placeholder="Search framework..." className="h-9" />
             <CommandEmpty>No framework found.</CommandEmpty>
             <CommandGroup>
@@ -163,7 +163,8 @@ const LeagueView = () => {
                 </CommandItem>
               ))}
             </CommandGroup>
-          </Command>
+          </Command> */}
+          nội dung search
         </PopoverContent>
       </Popover>
     </MainLayout>
