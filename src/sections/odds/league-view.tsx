@@ -230,9 +230,9 @@ const LeagueView = () => {
             </Popover.Root>
           </div>
         </div>
-        <div className="pt-3">
+        <div className="pt-2">
           <div
-            className="flex flex-row justify-center items-center gap-3 overflow-x-auto whitespace-nowrap no-scrollbar"
+            className="flex flex-row justify-center items-center gap-2 overflow-x-auto whitespace-nowrap no-scrollbar px-2 py-1"
             ref={league1ListRef}
           >
             <div className="flex flex-row items-center justify-center gap-1 rounded-[20px] bg-[rgba(41,53,67,1)]">
