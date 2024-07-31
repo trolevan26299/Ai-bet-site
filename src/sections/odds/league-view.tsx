@@ -1,12 +1,26 @@
 "use client";
 
-import React from "react";
-import { useRouter } from "next/navigation";
-import MainLayout from "@/layouts/main/layout";
 import Menu from "@/components/app/menu/menu";
+import MainLayout from "@/layouts/main/layout";
+import { getDayOfWeek } from "@/utils/convertDateToDateOfWeek";
 import { Icon } from "@iconify/react";
-import { Button } from "@/components/ui/button";
+import { getDay } from "date-fns";
+import { useRouter } from "next/navigation";
 
+const demoDateSearch = [
+  "01/08/2024",
+  "02/08/2024",
+  "03/08/2024",
+  "04/08/2024",
+  "05/08/2024",
+  "06/08/2024",
+  "07/08/2024",
+  "08/08/2024",
+  "09/08/2024",
+  "10/08/2024",
+  "11/08/2024",
+  "12/08/2024",
+];
 const LeagueView = () => {
   const router = useRouter();
   const handleNavigate = () => {
@@ -36,18 +50,25 @@ const LeagueView = () => {
               <Icon icon="pepicons-pop:circle" width={17} height={17} className="text-[rgba(230,58,58,1)]" />
             </button>
           </div>
-          <div className="w-[60%]"></div>
+          <div className="w-[60%] flex flex-row justify-center gap-1 items-center">
+            {demoDateSearch.map((date, index) => (
+              <div className="flex flex-col items-center justify-center text-[11px] font-bold gap-1" key={index}>
+                <p>{getDayOfWeek(date)}</p>
+                <p>{date}</p>
+              </div>
+            ))}
+          </div>
           <div className="w-[25%] flex flex-row justify-around items-center">
             <Icon
               icon="bx:calendar"
-              width={30}
-              height={30}
+              width={25}
+              height={25}
               className="hover:cursor-pointer text-[rgba(255,255,255,1)]"
             />
             <Icon
               icon="ic:baseline-search"
-              width={30}
-              height={30}
+              width={25}
+              height={25}
               className="hover:cursor-pointer text-[rgba(255,255,255,1)]"
             />
           </div>
