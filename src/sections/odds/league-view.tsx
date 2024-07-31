@@ -51,7 +51,7 @@ const LeagueView = () => {
               <Icon icon="pepicons-pop:circle" width={17} height={17} className="text-[rgba(230,58,58,1)]" />
             </button>
           </div>
-          <div className="w-[60%] flex flex-row justify-center gap-2 items-center overflow-x-auto scrollbar-hide">
+          <div className="w-[65%] flex flex-row justify-center gap-2 items-center overflow-x-auto scrollbar-hide">
             {demoDateSearch.map((date, index) => (
               <div
                 className="flex flex-col items-center justify-center text-[11px] font-bold gap-1 text-[rgba(109,109,109,1)]"
@@ -62,7 +62,7 @@ const LeagueView = () => {
               </div>
             ))}
           </div>
-          <div className="w-[25%] flex flex-row justify-around items-center">
+          <div className="w-[20%] flex flex-row justify-around items-center">
             <Icon
               icon="bx:calendar"
               width={25}
