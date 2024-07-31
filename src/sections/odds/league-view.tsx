@@ -76,8 +76,8 @@ const LeagueView = () => {
               <Icon icon="pepicons-pop:circle" width={17} height={17} className="text-[rgba(230,58,58,1)]" />
             </button>
           </div>
-          <div className="w-[60%] flex flex-row justify-center gap-2 items-center overflow-x-auto scrollbar-hide">
-            <Slider {...settings}>
+          <Slider {...settings}>
+            <div className="w-[60%] flex flex-row justify-center gap-2 items-center overflow-x-auto scrollbar-hide">
               {demoDateSearch.map((date, index) => (
                 <div
                   className="hover:cursor-pointer hover:text-[rgba(255,255,255,1)] flex flex-col items-center justify-center text-[11px] font-bold gap-1 text-[rgba(109,109,109,1)]"
@@ -87,8 +87,8 @@ const LeagueView = () => {
                   <p>{getDayAndMonth(date)}</p>
                 </div>
               ))}
-            </Slider>
-          </div>
+            </div>
+          </Slider>
           <div className="w-[20%] flex flex-row justify-around items-center">
             <Icon
               icon="bx:calendar"
