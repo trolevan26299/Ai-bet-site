@@ -144,18 +144,20 @@ const LeagueView = () => {
           <div className="detail">nội dung </div>
           <Menu />
         </div>
-        <PopoverContent className="p-0 w-full bg-[rgba(40,55,74,1)] " align="center">
-          <Input type="search" placeholder="Tìm kiếm" />
-          <div className="flex flex-row justify-start items-center border-y-lime-200">
-            <Button variant="secondary" color="">
+        <PopoverContent className="p-2 w-[95%] m-auto bg-[rgba(40,55,74,1)] mt-3 max-h-[80vh]" align="center">
+          <Input type="search" placeholder="Tìm kiếm" className="rounded-none" />
+          <div className="flex flex-row justify-start items-center border-y-lime-200 gap-2 pt-2 ">
+            <Button variant="secondary" color="" size="sm">
               Đội
             </Button>
-            <Button variant="secondary">Giải đấu</Button>
+            <Button variant="secondary" size="sm">
+              Giải đấu
+            </Button>
           </div>
 
-          <div className="justify-start items-center">
+          <div className="justify-start items-center pt-2 text-white overflow-y-auto">
             {frameworks.map((framework, index) => (
-              <div className="" key={index}>
+              <div className="hover:bg-[rgba(255,255,255,1)] hover:text-[#000]" key={index}>
                 {framework.label}
               </div>
             ))}
