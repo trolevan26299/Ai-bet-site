@@ -7,10 +7,13 @@ import MainLayout from "@/layouts/main/layout";
 import { getDayOfWeek } from "@/utils/convertDateToDateOfWeek";
 import { getDayAndMonth } from "@/utils/convertToDayAndMonth";
 import { Icon } from "@iconify/react";
+import * as PopoverRD from "@radix-ui/react-popover";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import "./index.css";
 import { Popover } from "@radix-ui/themes";
+import { Calendar } from "@/components/ui/calendar";
+import { locale } from "@/utils/configCenlendarToVN";
 
 const demoDateSearch = [
   "01/08/2024",
@@ -30,9 +33,7 @@ const demoDateSearch = [
 const LeagueView = () => {
   const router = useRouter();
   const tabsListRef = useRef<HTMLDivElement>(null);
-  // search
-  const [openSearch, setOpenSearch] = useState(false);
-  const [valueSearch, setValueSearch] = useState("");
+
   const frameworks = [
     {
       value: "next.js",
@@ -130,7 +131,37 @@ const LeagueView = () => {
                   width={25}
                   height={25}
                   className="hover:cursor-pointer text-[rgba(255,255,255,1)]"
-                  onClick={() => setOpenCalendar(!openCalendar)}
+                />
+              </Popover.Trigger>
+              <Popover.Content
+                className="py-2 w-[95%] bg-[rgba(40,55,74,1)] mt-4 max-h-[80vh] rounded-sm"
+                align="center"
+              >
+                <Calendar
+                  className="w-full rounded-2xl"
+                  initialFocus
+                  mode="range"
+                  //   defaultMonth={selectedDate?.from}
+                  //   selected={selectedDate}
+                  //   onSelect={setSelectedDate}
+                  numberOfMonths={1}
+                  locale={locale}
+                  weekStartsOn={1}
+                />
+                <div className="flex flex-row justify-end items-center mr-7 gap-7 pb-2 text-sm">
+                  <PopoverRD.Close>
+                    <button className=" text-[#006ef8] font-semibold">Xác nhận</button>
+                  </PopoverRD.Close>
+                </div>
+              </Popover.Content>
+            </Popover.Root>
+            <Popover.Root>
+              <Popover.Trigger>
+                <Icon
+                  icon="ic:baseline-search"
+                  width={25}
+                  height={25}
+                  className="hover:cursor-pointer text-[rgba(255,255,255,1)]"
                 />
               </Popover.Trigger>
               <Popover.Content
@@ -160,33 +191,6 @@ const LeagueView = () => {
                       <p className="pl-2">{framework.label}</p>
                     </div>
                   ))}
-                </div>
-              </Popover.Content>
-            </Popover.Root>
-            <Popover.Root>
-              <Popover.Trigger>
-                <Icon
-                  icon="ic:baseline-search"
-                  width={25}
-                  height={25}
-                  className="hover:cursor-pointer text-[rgba(255,255,255,1)]"
-                  onClick={() => setOpenSearch(!openSearch)}
-                />
-              </Popover.Trigger>
-              <Popover.Content
-                className="py-2 w-[95%] bg-[rgba(40,55,74,1)] mt-4 max-h-[80vh] rounded-sm"
-                align="center"
-              >
-                <div
-                  className="flex flex-row justify-start items-center  gap-2 py-1 mt-2 pl-2"
-                  style={{ borderTop: "1px solid rgba(255,255,255,1)", borderBottom: "1px solid rgba(255,255,255,1)" }}
-                >
-                  <Button variant="secondary" color="" size="sm">
-                    Đội
-                  </Button>
-                  <Button variant="secondary" size="sm">
-                    Giải đấu
-                  </Button>
                 </div>
               </Popover.Content>
             </Popover.Root>
