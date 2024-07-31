@@ -1,20 +1,17 @@
 "use client";
 
 import Menu from "@/components/app/menu/menu";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Popover, PopoverTrigger } from "@/components/ui/popover";
 import MainLayout from "@/layouts/main/layout";
 import { getDayOfWeek } from "@/utils/convertDateToDateOfWeek";
 import { getDayAndMonth } from "@/utils/convertToDayAndMonth";
 import { Icon } from "@iconify/react";
-import { CheckIcon } from "@radix-ui/react-icons";
-import "./index.css";
-import { cn } from "@/lib/utils";
-import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem } from "@/components/ui/command";
-import { Popover, PopoverTrigger } from "@/components/ui/popover";
 import { PopoverContent } from "@radix-ui/react-popover";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
+import "./index.css";
 
 const demoDateSearch = [
   "01/08/2024",
@@ -60,6 +57,10 @@ const LeagueView = () => {
     },
   ];
   // end search
+
+  // calendar
+  const [openCalendar, setOpenCalendar] = useState(false);
+  // end calendar
 
   const handleNavigate = () => {
     const matchId = "1594429137";
@@ -124,18 +125,22 @@ const LeagueView = () => {
             </div>
 
             <div className="w-[18%] flex flex-row justify-around items-center ">
-              <Icon
-                icon="bx:calendar"
-                width={25}
-                height={25}
-                className="hover:cursor-pointer text-[rgba(255,255,255,1)]"
-              />
+              <PopoverTrigger asChild>
+                <Icon
+                  icon="bx:calendar"
+                  width={25}
+                  height={25}
+                  className="hover:cursor-pointer text-[rgba(255,255,255,1)]"
+                  onClick={() => setOpenCalendar(!openCalendar)}
+                />
+              </PopoverTrigger>
               <PopoverTrigger asChild>
                 <Icon
                   icon="ic:baseline-search"
                   width={25}
                   height={25}
                   className="hover:cursor-pointer text-[rgba(255,255,255,1)]"
+                  onClick={() => setOpenSearch(!openSearch)}
                 />
               </PopoverTrigger>
             </div>
@@ -171,6 +176,16 @@ const LeagueView = () => {
                 <p className="pl-2">{framework.label}</p>
               </div>
             ))}
+          </div>
+        </PopoverContent>
+      </Popover>
+      <Popover open={openCalendar} onOpenChange={() => setOpenCalendar(!openCalendar)}>
+        <PopoverContent
+          className="py-2 w-[95%] m-auto bg-[rgba(40,55,74,1)] mt-4 max-h-[80vh] rounded-sm"
+          align="center"
+        >
+          <div className="p-2 text-white">
+            <p>Calendar content goes here...</p>
           </div>
         </PopoverContent>
       </Popover>
