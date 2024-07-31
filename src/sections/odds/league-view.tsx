@@ -89,7 +89,7 @@ const LeagueView = () => {
     <MainLayout>
       <div>
         <div className="search h-12 flex flex-row w-full justify-center items-center bg-[rgba(17,17,17,1)]">
-          <div className="w-[18%] pl-2">
+          <div className="w-[18%] pl-2 flex flex-row justify-center">
             <button className="w-[53px] h-[21px] bg-[rgba(255,255,255,1)] text-[rgba(230,58,58,1)] uppercase rounded-[16.83px] text-[12px] font-bold flex flex-row justify-center items-center">
               Live
               <Icon icon="pepicons-pop:circle" width={17} height={17} className="text-[rgba(230,58,58,1)]" />
@@ -111,7 +111,7 @@ const LeagueView = () => {
             ))}
           </div>
 
-          <div className="w-[20%] flex flex-row justify-around items-center">
+          <div className="w-[18%] flex flex-row justify-center items-center">
             <Icon
               icon="bx:calendar"
               width={25}
