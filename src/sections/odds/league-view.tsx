@@ -151,7 +151,7 @@ const LeagueView = () => {
           <Input
             type="search"
             placeholder="Tìm kiếm"
-            className=" rounded-sm text-[rgba(255,255,255,1)] px-2 pb-[10px]"
+            className=" rounded-sm text-[rgba(255,255,255,1)] px-2 pb-[10px] border-none"
           />
           <div
             className="flex flex-row justify-start items-center  gap-2 py-1 mt-2 pl-2"
