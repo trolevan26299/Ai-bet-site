@@ -145,15 +145,15 @@ const LeagueView = () => {
           <Menu />
         </div>
         <PopoverContent
-          className="p-2 w-[95%] m-auto bg-[rgba(40,55,74,1)] mt-4 max-h-[80vh] rounded-sm"
+          className="py-2 w-[95%] m-auto bg-[rgba(40,55,74,1)] mt-4 max-h-[80vh] rounded-sm"
           align="center"
         >
-          <Input type="search" placeholder="Tìm kiếm" className=" rounded-sm" />
+          <Input type="search" placeholder="Tìm kiếm" className=" rounded-sm text-[rgba(255,255,255,1)] px-2" />
           <div
-            className="flex flex-row justify-start items-center  gap-2 pt-2 "
+            className="flex flex-row justify-start items-center  gap-2 py-1"
             style={{ borderTop: "1px solid rgba(255,255,255,1)", borderBottom: "1px solid rgba(255,255,255,1)" }}
           >
-            <Button variant="secondary" color="" size="sm">
+            <Button variant="secondary" className="pl-2" color="" size="sm">
               Đội
             </Button>
             <Button variant="secondary" size="sm">
@@ -161,7 +161,7 @@ const LeagueView = () => {
             </Button>
           </div>
 
-          <div className="justify-start items-center pt-2 text-white overflow-y-auto">
+          <div className="justify-start items-center pt-2 pl-2 text-white overflow-y-auto">
             {frameworks.map((framework, index) => (
               <div className="hover:bg-[rgba(255,255,255,1)] hover:text-[#000] hover:cursor-pointer" key={index}>
                 {framework.label}
