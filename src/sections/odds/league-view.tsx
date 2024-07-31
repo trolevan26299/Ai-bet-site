@@ -173,16 +173,21 @@ const LeagueView = () => {
                   onClick={() => setOpenSearch(!openSearch)}
                 />
               </Popover.Trigger>
-              {/* <Popover.Content
-                className="py-2 w-[95%] m-auto bg-[rgba(40,55,74,1)] mt-4 max-h-[80vh] rounded-sm"
+              <Popover.Content
+                className="py-2 w-[95%] bg-[rgba(40,55,74,1)] mt-4 max-h-[80vh] rounded-sm"
                 align="center"
               >
-                <div className="p-2 text-white">
-                  <p>Calendar content goes here...</p>
+                <div
+                  className="flex flex-row justify-start items-center  gap-2 py-1 mt-2 pl-2"
+                  style={{ borderTop: "1px solid rgba(255,255,255,1)", borderBottom: "1px solid rgba(255,255,255,1)" }}
+                >
+                  <Button variant="secondary" color="" size="sm">
+                    Đội
+                  </Button>
+                  <Button variant="secondary" size="sm">
+                    Giải đấu
+                  </Button>
                 </div>
-              </Popover.Content> */}
-              <Popover.Content className="w-full">
-                <p className="text-white">text dsadsadsad2 2222</p>
               </Popover.Content>
             </Popover.Root>
           </div>
