@@ -100,55 +100,57 @@ const LeagueView = () => {
   return (
     <MainLayout>
       <Popover open={openSearch} onOpenChange={() => setOpenSearch(!openSearch)}>
-        <div>
-          <div className="search h-12 flex flex-row w-full justify-center items-center bg-[rgba(17,17,17,1)]">
-            <div className="w-[18%] pl-2 flex flex-row justify-center">
-              <button className="w-[53px] h-[21px] bg-[rgba(255,255,255,1)] text-[rgba(230,58,58,1)] uppercase rounded-[16.83px] text-[12px] font-bold flex flex-row justify-center items-center">
-                Live
-                <Icon icon="pepicons-pop:circle" width={17} height={17} className="text-[rgba(230,58,58,1)]" />
-              </button>
-            </div>
+        <PopoverTrigger asChild>
+          <div>
+            <div className="search h-12 flex flex-row w-full justify-center items-center bg-[rgba(17,17,17,1)]">
+              <div className="w-[18%] pl-2 flex flex-row justify-center">
+                <button className="w-[53px] h-[21px] bg-[rgba(255,255,255,1)] text-[rgba(230,58,58,1)] uppercase rounded-[16.83px] text-[12px] font-bold flex flex-row justify-center items-center">
+                  Live
+                  <Icon icon="pepicons-pop:circle" width={17} height={17} className="text-[rgba(230,58,58,1)]" />
+                </button>
+              </div>
 
-            <div
-              className="w-[62%] flex flex-row justify-center gap-4 items-center  overflow-x-auto whitespace-nowrap no-scrollbar"
-              ref={tabsListRef}
-            >
-              {demoDateSearch.map((date, index) => (
-                <div
-                  className="hover:cursor-pointer hover:text-[rgba(255,255,255,1)] flex flex-col items-center justify-center text-[12px] font-bold gap-[2px] text-[rgba(109,109,109,1)]"
-                  key={index}
-                >
-                  <p>{getDayOfWeek(date)}</p>
-                  <p>{getDayAndMonth(date)}</p>
-                </div>
-              ))}
-            </div>
+              <div
+                className="w-[62%] flex flex-row justify-center gap-4 items-center  overflow-x-auto whitespace-nowrap no-scrollbar"
+                ref={tabsListRef}
+              >
+                {demoDateSearch.map((date, index) => (
+                  <div
+                    className="hover:cursor-pointer hover:text-[rgba(255,255,255,1)] flex flex-col items-center justify-center text-[12px] font-bold gap-[2px] text-[rgba(109,109,109,1)]"
+                    key={index}
+                  >
+                    <p>{getDayOfWeek(date)}</p>
+                    <p>{getDayAndMonth(date)}</p>
+                  </div>
+                ))}
+              </div>
 
-            <div className="w-[18%] flex flex-row justify-around items-center ">
-              <PopoverTrigger asChild>
-                <Icon
-                  icon="bx:calendar"
-                  width={25}
-                  height={25}
-                  className="hover:cursor-pointer text-[rgba(255,255,255,1)]"
-                  onClick={() => setOpenCalendar(!openCalendar)}
-                />
-              </PopoverTrigger>
-              <PopoverTrigger asChild>
-                <Icon
-                  icon="ic:baseline-search"
-                  width={25}
-                  height={25}
-                  className="hover:cursor-pointer text-[rgba(255,255,255,1)]"
-                  onClick={() => setOpenSearch(!openSearch)}
-                />
-              </PopoverTrigger>
+              <div className="w-[18%] flex flex-row justify-around items-center ">
+                <PopoverTrigger asChild>
+                  <Icon
+                    icon="bx:calendar"
+                    width={25}
+                    height={25}
+                    className="hover:cursor-pointer text-[rgba(255,255,255,1)]"
+                    onClick={() => setOpenCalendar(!openCalendar)}
+                  />
+                </PopoverTrigger>
+                <PopoverTrigger asChild>
+                  <Icon
+                    icon="ic:baseline-search"
+                    width={25}
+                    height={25}
+                    className="hover:cursor-pointer text-[rgba(255,255,255,1)]"
+                    onClick={() => setOpenSearch(!openSearch)}
+                  />
+                </PopoverTrigger>
+              </div>
             </div>
+            <div className="league">đây là các thẻ giải</div>
+            <div className="detail">nội dung </div>
+            <Menu />
           </div>
-          <div className="league">đây là các thẻ giải</div>
-          <div className="detail">nội dung </div>
-          <Menu />
-        </div>
+        </PopoverTrigger>
         <PopoverContent
           className="py-2 w-[95%] m-auto bg-[rgba(40,55,74,1)] mt-4 max-h-[80vh] rounded-sm"
           align="center"
