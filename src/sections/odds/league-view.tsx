@@ -90,12 +90,6 @@ const LeagueView = () => {
   const league1ListRef = useRef<HTMLDivElement>(null);
   const league2ListRef = useRef<HTMLDivElement>(null);
 
-  // end search
-
-  // calendar
-  const [openCalendar, setOpenCalendar] = useState(false);
-  // end calendar
-
   const handleNavigate = () => {
     const matchId = "1594429137";
     const queryParams = {
@@ -151,7 +145,7 @@ const LeagueView = () => {
   return (
     <MainLayout>
       <div>
-        <div className="search h-12 flex flex-row w-full justify-center items-center bg-[rgba(17,17,17,1)]">
+        <div className="search h-12 flex flex-row w-full justify-start items-center bg-[rgba(17,17,17,1)]">
           <div className="w-[18%] pl-2 flex flex-row justify-center">
             <button className="w-[53px] h-[21px] bg-[rgba(255,255,255,1)] text-[rgba(230,58,58,1)] uppercase rounded-[16.83px] text-[12px] font-bold flex flex-row justify-center items-center">
               Live
