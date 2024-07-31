@@ -145,7 +145,7 @@ const LeagueView = () => {
           <Menu />
         </div>
         <PopoverContent
-          className="p-2 w-[95%] m-auto bg-[rgba(40,55,74,1)] mt-3 max-h-[80vh] rounded-sm"
+          className="p-2 w-[95%] m-auto bg-[rgba(40,55,74,1)] mt-4 max-h-[80vh] rounded-sm"
           align="center"
         >
           <Input type="search" placeholder="Tìm kiếm" className=" rounded-sm" />
