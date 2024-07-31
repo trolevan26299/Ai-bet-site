@@ -121,9 +121,26 @@ const LeagueView = () => {
       }
     }
   };
+  const handleMouseMoveLeague1 = (e: MouseEvent) => {
+    if (league1ListRef.current) {
+      const target = league1ListRef.current;
+      if (e.buttons === 1) {
+        target.scrollLeft -= e.movementX;
+      }
+    }
+  };
 
   useEffect(() => {
     const target = tabsListRef.current;
+    if (target) {
+      target.addEventListener("mousemove", handleMouseMove);
+      return () => {
+        target.removeEventListener("mousemove", handleMouseMove);
+      };
+    }
+  }, []);
+  useEffect(() => {
+    const target = league1ListRef.current;
     if (target) {
       target.addEventListener("mousemove", handleMouseMove);
       return () => {
