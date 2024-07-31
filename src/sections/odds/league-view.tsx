@@ -5,10 +5,8 @@ import MainLayout from "@/layouts/main/layout";
 import { getDayOfWeek } from "@/utils/convertDateToDateOfWeek";
 import { getDayAndMonth } from "@/utils/convertToDayAndMonth";
 import { Icon } from "@iconify/react";
+import "./index.css";
 import { getDay } from "date-fns";
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
 
 import { useRouter } from "next/navigation";
 
@@ -76,19 +74,19 @@ const LeagueView = () => {
               <Icon icon="pepicons-pop:circle" width={17} height={17} className="text-[rgba(230,58,58,1)]" />
             </button>
           </div>
-          <Slider {...settings}>
-            <div className="w-[60%] flex flex-row justify-center gap-2 items-center ">
-              {demoDateSearch.map((date, index) => (
-                <div
-                  className="hover:cursor-pointer hover:text-[rgba(255,255,255,1)] flex flex-col items-center justify-center text-[11px] font-bold gap-1 text-[rgba(109,109,109,1)]"
-                  key={index}
-                >
-                  <p>{getDayOfWeek(date)}</p>
-                  <p>{getDayAndMonth(date)}</p>
-                </div>
-              ))}
-            </div>
-          </Slider>
+
+          <div className="w-[60%] flex flex-row justify-center gap-2 items-center  overflow-x-auto whitespace-nowrap no-scrollbar">
+            {demoDateSearch.map((date, index) => (
+              <div
+                className="hover:cursor-pointer hover:text-[rgba(255,255,255,1)] flex flex-col items-center justify-center text-[11px] font-bold gap-1 text-[rgba(109,109,109,1)]"
+                key={index}
+              >
+                <p>{getDayOfWeek(date)}</p>
+                <p>{getDayAndMonth(date)}</p>
+              </div>
+            ))}
+          </div>
+
           <div className="w-[20%] flex flex-row justify-around items-center">
             <Icon
               icon="bx:calendar"
