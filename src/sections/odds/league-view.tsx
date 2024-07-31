@@ -123,6 +123,14 @@ const LeagueView = () => {
       }
     }
   };
+  const handleMouseMoveLeague2 = (e: MouseEvent) => {
+    if (league2ListRef.current) {
+      const target = league2ListRef.current;
+      if (e.buttons === 1) {
+        target.scrollLeft -= e.movementX;
+      }
+    }
+  };
 
   useEffect(() => {
     const target = tabsListRef.current;
@@ -130,6 +138,15 @@ const LeagueView = () => {
       target.addEventListener("mousemove", handleMouseMove);
       return () => {
         target.removeEventListener("mousemove", handleMouseMove);
+      };
+    }
+  }, []);
+  useEffect(() => {
+    const target = league2ListRef.current;
+    if (target) {
+      target.addEventListener("mousemove", handleMouseMoveLeague2);
+      return () => {
+        target.removeEventListener("mousemove", handleMouseMoveLeague2);
       };
     }
   }, []);
@@ -246,9 +263,6 @@ const LeagueView = () => {
             className="flex flex-row w-full justify-start items-center gap-2 overflow-x-auto whitespace-nowrap no-scrollbar px-2 hover:cursor-pointer"
             ref={league1ListRef}
           >
-            {/* <div className="flex flex-row items-center justify-center gap-1 rounded-[20px] bg-[rgba(41,53,67,1)] h-8 px-[18px]">
-              <p className=" font-bold text-[rgba(255,255,255,1)] text-sm">Tất cả</p>
-            </div> */}
             {tagDemo.slice(0, 4).map((tag, index) => (
               <div
                 className="flex flex-row items-center justify-center gap-1 rounded-[20px] bg-[rgba(41,53,67,1)] h-8 px-[18px]"
@@ -261,11 +275,8 @@ const LeagueView = () => {
           </div>
           <div
             className="flex flex-row w-full justify-start items-center gap-2 overflow-x-auto whitespace-nowrap no-scrollbar px-2 hover:cursor-pointer mt-2"
-            ref={league1ListRef}
+            ref={league2ListRef}
           >
-            {/* <div className="flex flex-row items-center justify-center gap-1 rounded-[20px] bg-[rgba(41,53,67,1)] h-8 px-[18px]">
-              <p className=" font-bold text-[rgba(255,255,255,1)] text-sm">Tất cả</p>
-            </div> */}
             {tagDemo.slice(4).map((tag, index) => (
               <div
                 className="flex flex-row items-center justify-center gap-1 rounded-[20px] bg-[rgba(41,53,67,1)] h-8 px-[18px]"
