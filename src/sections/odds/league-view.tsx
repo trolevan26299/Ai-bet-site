@@ -6,6 +6,10 @@ import { getDayOfWeek } from "@/utils/convertDateToDateOfWeek";
 import { getDayAndMonth } from "@/utils/convertToDayAndMonth";
 import { Icon } from "@iconify/react";
 import { getDay } from "date-fns";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+
 import { useRouter } from "next/navigation";
 
 const demoDateSearch = [
@@ -22,6 +26,27 @@ const demoDateSearch = [
   "11/08/2024",
   "12/08/2024",
 ];
+const settings = {
+  dots: false,
+  infinite: false,
+  speed: 500,
+  slidesToShow: 5,
+  slidesToScroll: 1,
+  responsive: [
+    {
+      breakpoint: 1024,
+      settings: {
+        slidesToShow: 3,
+      },
+    },
+    {
+      breakpoint: 600,
+      settings: {
+        slidesToShow: 2,
+      },
+    },
+  ],
+};
 const LeagueView = () => {
   const router = useRouter();
   const handleNavigate = () => {
@@ -45,22 +70,24 @@ const LeagueView = () => {
     <MainLayout>
       <div>
         <div className="search h-12 flex flex-row w-full justify-center items-center bg-[rgba(17,17,17,1)]">
-          <div className="w-[20%] ">
+          <div className="w-[20%] pl-2">
             <button className="w-[53px] h-[21px] bg-[rgba(255,255,255,1)] text-[rgba(230,58,58,1)] uppercase rounded-[16.83px] text-[12px] font-bold flex flex-row justify-center items-center">
               Live
               <Icon icon="pepicons-pop:circle" width={17} height={17} className="text-[rgba(230,58,58,1)]" />
             </button>
           </div>
           <div className="w-[60%] flex flex-row justify-center gap-2 items-center overflow-x-auto scrollbar-hide">
-            {demoDateSearch.map((date, index) => (
-              <div
-                className="hover:cursor-pointer hover:text-[rgba(255,255,255,1)] flex flex-col items-center justify-center text-[11px] font-bold gap-1 text-[rgba(109,109,109,1)]"
-                key={index}
-              >
-                <p>{getDayOfWeek(date)}</p>
-                <p>{getDayAndMonth(date)}</p>
-              </div>
-            ))}
+            <Slider {...settings}>
+              {demoDateSearch.map((date, index) => (
+                <div
+                  className="hover:cursor-pointer hover:text-[rgba(255,255,255,1)] flex flex-col items-center justify-center text-[11px] font-bold gap-1 text-[rgba(109,109,109,1)]"
+                  key={index}
+                >
+                  <p>{getDayOfWeek(date)}</p>
+                  <p>{getDayAndMonth(date)}</p>
+                </div>
+              ))}
+            </Slider>
           </div>
           <div className="w-[20%] flex flex-row justify-around items-center">
             <Icon
