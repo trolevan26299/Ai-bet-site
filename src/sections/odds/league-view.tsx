@@ -9,6 +9,7 @@ import "./index.css";
 import { getDay } from "date-fns";
 
 import { useRouter } from "next/navigation";
+import { useEffect, useRef } from "react";
 
 const demoDateSearch = [
   "01/08/2024",
@@ -47,6 +48,8 @@ const settings = {
 };
 const LeagueView = () => {
   const router = useRouter();
+  const tabsListRef = useRef<HTMLDivElement>(null);
+
   const handleNavigate = () => {
     const matchId = "1594429137";
     const queryParams = {
@@ -64,6 +67,24 @@ const LeagueView = () => {
     router.push(`/match/${matchId}?${queryString}`);
   };
 
+  const handleMouseMove = (e: MouseEvent) => {
+    if (tabsListRef.current) {
+      const target = tabsListRef.current;
+      if (e.buttons === 1) {
+        target.scrollLeft -= e.movementX;
+      }
+    }
+  };
+
+  useEffect(() => {
+    const target = tabsListRef.current;
+    if (target) {
+      target.addEventListener("mousemove", handleMouseMove);
+      return () => {
+        target.removeEventListener("mousemove", handleMouseMove);
+      };
+    }
+  }, []);
   return (
     <MainLayout>
       <div>
@@ -75,7 +96,10 @@ const LeagueView = () => {
             </button>
           </div>
 
-          <div className="w-[62%] flex flex-row justify-center gap-4 items-center  overflow-x-auto whitespace-nowrap no-scrollbar">
+          <div
+            className="w-[62%] flex flex-row justify-center gap-4 items-center  overflow-x-auto whitespace-nowrap no-scrollbar"
+            ref={tabsListRef}
+          >
             {demoDateSearch.map((date, index) => (
               <div
                 className="hover:cursor-pointer hover:text-[rgba(255,255,255,1)] flex flex-col items-center justify-center text-[12px] font-bold gap-[2px] text-[rgba(109,109,109,1)]"
