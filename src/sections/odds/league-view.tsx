@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 
 import Menu from "@/components/app/menu/menu";
@@ -30,32 +31,65 @@ const demoDateSearch = [
   "12/08/2024",
 ];
 
+const frameworks = [
+  {
+    value: "next.js",
+    label: "Next.js",
+  },
+  {
+    value: "sveltekit",
+    label: "SvelteKit",
+  },
+  {
+    value: "nuxt.js",
+    label: "Nuxt.js",
+  },
+  {
+    value: "remix",
+    label: "Remix",
+  },
+  {
+    value: "astro",
+    label: "Astro",
+  },
+];
+
+const tagDemo = [
+  {
+    name: "Euro 2024",
+    logo: "https://toppng.com/uploads/preview/official-symbol-logo-design-for-euro-2024-germany-european-football-final-11715224051fchzryfqfd.png",
+  },
+  {
+    name: "Copa America 2024",
+    logo: "https://toppng.com/uploads/preview/official-symbol-logo-design-for-euro-2024-germany-european-football-final-11715224051fchzryfqfd.png",
+  },
+  {
+    name: "Cúp C1 Châu Âu",
+    logo: "https://toppng.com/uploads/preview/official-symbol-logo-design-for-euro-2024-germany-european-football-final-11715224051fchzryfqfd.png",
+  },
+  {
+    name: "La Liga",
+    logo: "https://toppng.com/uploads/preview/official-symbol-logo-design-for-euro-2024-germany-european-football-final-11715224051fchzryfqfd.png",
+  },
+  {
+    name: "UEFA Nations League",
+    logo: "https://toppng.com/uploads/preview/official-symbol-logo-design-for-euro-2024-germany-european-football-final-11715224051fchzryfqfd.png",
+  },
+  {
+    name: "Bundesliga",
+    logo: "https://toppng.com/uploads/preview/official-symbol-logo-design-for-euro-2024-germany-european-football-final-11715224051fchzryfqfd.png",
+  },
+  {
+    name: "Seri A",
+    logo: "https://toppng.com/uploads/preview/official-symbol-logo-design-for-euro-2024-germany-european-football-final-11715224051fchzryfqfd.png",
+  },
+];
 const LeagueView = () => {
   const router = useRouter();
   const tabsListRef = useRef<HTMLDivElement>(null);
+  const league1ListRef = useRef<HTMLDivElement>(null);
+  const league2ListRef = useRef<HTMLDivElement>(null);
 
-  const frameworks = [
-    {
-      value: "next.js",
-      label: "Next.js",
-    },
-    {
-      value: "sveltekit",
-      label: "SvelteKit",
-    },
-    {
-      value: "nuxt.js",
-      label: "Nuxt.js",
-    },
-    {
-      value: "remix",
-      label: "Remix",
-    },
-    {
-      value: "astro",
-      label: "Astro",
-    },
-  ];
   // end search
 
   // calendar
@@ -196,7 +230,25 @@ const LeagueView = () => {
             </Popover.Root>
           </div>
         </div>
-        <div className="league">đây là các thẻ giải</div>
+        <div className="pt-3">
+          <div
+            className="flex flex-row justify-center items-center gap-3 overflow-x-auto whitespace-nowrap no-scrollbar"
+            ref={league1ListRef}
+          >
+            <div className="flex flex-row items-center justify-center gap-1 rounded-[20px] bg-[rgba(41,53,67,1)]">
+              <p className=" font-bold text-[rgba(255,255,255,1)] text-sm">Tất cả</p>
+            </div>
+            {tagDemo.map((tag, index) => (
+              <div
+                className="flex flex-row items-center justify-center gap-1 rounded-[20px] bg-[rgba(41,53,67,1)]"
+                key={index}
+              >
+                <img src={tag.logo} alt={tag.name} className="w-[25px] h-[25px] rounded-full" />
+                <p className=" font-bold text-[rgba(255,255,255,1)] text-sm">{tag.name}</p>
+              </div>
+            ))}
+          </div>
+        </div>
         <div className="detail">nội dung </div>
         <Menu />
       </div>
