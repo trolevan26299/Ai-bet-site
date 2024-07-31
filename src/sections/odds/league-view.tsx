@@ -240,7 +240,7 @@ const LeagueView = () => {
             </div>
             {tagDemo.map((tag, index) => (
               <div
-                className="flex flex-row items-center justify-center gap-1 rounded-[20px] bg-[rgba(41,53,67,1)] h-8"
+                className="flex flex-row items-center justify-center gap-1 rounded-[20px] bg-[rgba(41,53,67,1)] h-8 px-[18px]"
                 key={index}
               >
                 <img src={tag.logo} alt={tag.name} className="w-[25px] h-[25px] rounded-full" />
