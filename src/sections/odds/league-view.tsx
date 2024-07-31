@@ -148,12 +148,16 @@ const LeagueView = () => {
           className="py-2 w-[95%] m-auto bg-[rgba(40,55,74,1)] mt-4 max-h-[80vh] rounded-sm"
           align="center"
         >
-          <Input type="search" placeholder="Tìm kiếm" className=" rounded-sm text-[rgba(255,255,255,1)] px-2" />
+          <Input
+            type="search"
+            placeholder="Tìm kiếm"
+            className=" rounded-sm text-[rgba(255,255,255,1)] px-2 pb-[10px]"
+          />
           <div
-            className="flex flex-row justify-start items-center  gap-2 py-1"
+            className="flex flex-row justify-start items-center  gap-2 py-1 mt-2 pl-2"
             style={{ borderTop: "1px solid rgba(255,255,255,1)", borderBottom: "1px solid rgba(255,255,255,1)" }}
           >
-            <Button variant="secondary" className="pl-2" color="" size="sm">
+            <Button variant="secondary" color="" size="sm">
               Đội
             </Button>
             <Button variant="secondary" size="sm">
@@ -164,7 +168,7 @@ const LeagueView = () => {
           <div className="justify-start items-center pt-2 pl-2 text-white overflow-y-auto">
             {frameworks.map((framework, index) => (
               <div className="hover:bg-[rgba(255,255,255,1)] hover:text-[#000] hover:cursor-pointer" key={index}>
-                {framework.label}
+                <p className="pl-2">{framework.label}</p>
               </div>
             ))}
           </div>
