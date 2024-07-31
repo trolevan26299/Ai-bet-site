@@ -125,15 +125,15 @@ const LeagueView = () => {
 
           <div className="w-[18%] flex flex-row justify-around items-center ">
             <Popover open={openCalendar} onOpenChange={() => setOpenSearch(!openCalendar)}>
-              <PopoverTrigger asChild>
-                <Icon
-                  icon="bx:calendar"
-                  width={25}
-                  height={25}
-                  className="hover:cursor-pointer text-[rgba(255,255,255,1)]"
-                  onClick={() => setOpenCalendar(!openCalendar)}
-                />
-              </PopoverTrigger>
+              {/* <PopoverTrigger asChild> */}
+              <Icon
+                icon="bx:calendar"
+                width={25}
+                height={25}
+                className="hover:cursor-pointer text-[rgba(255,255,255,1)]"
+                onClick={() => setOpenCalendar(!openCalendar)}
+              />
+              {/* </PopoverTrigger> */}
               <PopoverContent
                 className="py-2 w-[95%] m-auto bg-[rgba(40,55,74,1)] mt-4 max-h-[80vh] rounded-sm"
                 align="center"
@@ -165,15 +165,15 @@ const LeagueView = () => {
               </PopoverContent>
             </Popover>
             <Popover open={openSearch} onOpenChange={() => setOpenCalendar(!openSearch)}>
-              <PopoverTrigger asChild>
-                <Icon
-                  icon="ic:baseline-search"
-                  width={25}
-                  height={25}
-                  className="hover:cursor-pointer text-[rgba(255,255,255,1)]"
-                  onClick={() => setOpenSearch(!openSearch)}
-                />
-              </PopoverTrigger>
+              {/* <PopoverTrigger asChild> */}
+              <Icon
+                icon="ic:baseline-search"
+                width={25}
+                height={25}
+                className="hover:cursor-pointer text-[rgba(255,255,255,1)]"
+                onClick={() => setOpenSearch(!openSearch)}
+              />
+              {/* </PopoverTrigger> */}
               <PopoverContent
                 className="py-2 w-[95%] m-auto bg-[rgba(40,55,74,1)] mt-4 max-h-[80vh] rounded-sm"
                 align="center"
