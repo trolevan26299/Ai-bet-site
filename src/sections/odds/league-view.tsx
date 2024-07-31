@@ -142,9 +142,9 @@ const LeagueView = () => {
   useEffect(() => {
     const target = league1ListRef.current;
     if (target) {
-      target.addEventListener("mousemove", handleMouseMove);
+      target.addEventListener("mousemove", handleMouseMoveLeague1);
       return () => {
-        target.removeEventListener("mousemove", handleMouseMove);
+        target.removeEventListener("mousemove", handleMouseMoveLeague1);
       };
     }
   }, []);
