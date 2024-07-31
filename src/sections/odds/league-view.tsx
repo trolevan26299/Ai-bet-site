@@ -182,7 +182,7 @@ const LeagueView = () => {
                   <p>Calendar content goes here...</p>
                 </div>
               </Popover.Content> */}
-              <Popover.Content>
+              <Popover.Content className="w-full">
                 <p className="text-white">text dsadsadsad2 2222</p>
               </Popover.Content>
             </Popover.Root>
