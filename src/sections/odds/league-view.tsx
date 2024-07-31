@@ -133,12 +133,11 @@ const LeagueView = () => {
                   onClick={() => setOpenCalendar(!openCalendar)}
                 />
               </Popover.Trigger>
-            </Popover.Root>
-            <Popover.Content
-              className="py-2 w-[95%] m-auto bg-[rgba(40,55,74,1)] mt-4 max-h-[80vh] rounded-sm"
-              align="center"
-            >
-              <Input
+              <Popover.Content
+                className="py-2 w-[95%] m-auto bg-[rgba(40,55,74,1)] mt-4 max-h-[80vh] rounded-sm"
+                align="center"
+              >
+                {/* <Input
                 type="search"
                 placeholder="Tìm kiếm"
                 className=" rounded-sm text-[rgba(255,255,255,1)] px-2 pb-[8px] border-none pl-2"
@@ -161,8 +160,10 @@ const LeagueView = () => {
                     <p className="pl-2">{framework.label}</p>
                   </div>
                 ))}
-              </div>
-            </Popover.Content>
+              </div> */}
+                <p className="text-white">sadsdadsadsa</p>
+              </Popover.Content>
+            </Popover.Root>
             <Popover.Root>
               <Popover.Trigger>
                 <Icon
@@ -173,13 +174,16 @@ const LeagueView = () => {
                   onClick={() => setOpenSearch(!openSearch)}
                 />
               </Popover.Trigger>
-              <Popover.Content
+              {/* <Popover.Content
                 className="py-2 w-[95%] m-auto bg-[rgba(40,55,74,1)] mt-4 max-h-[80vh] rounded-sm"
                 align="center"
               >
                 <div className="p-2 text-white">
                   <p>Calendar content goes here...</p>
                 </div>
+              </Popover.Content> */}
+              <Popover.Content>
+                <p className="text-white">text dsadsadsad2 2222</p>
               </Popover.Content>
             </Popover.Root>
           </div>
