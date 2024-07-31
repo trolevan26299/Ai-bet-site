@@ -143,7 +143,7 @@ const LeagueView = () => {
           <Menu />
         </div>
         <PopoverContent className="p-0 w-full bg-[rgba(40,55,74,1)] " align="center">
-          {/* <Command>
+          <Command>
             <CommandInput placeholder="Search framework..." className="h-9" />
             <CommandEmpty>No framework found.</CommandEmpty>
             <CommandGroup>
@@ -157,13 +157,13 @@ const LeagueView = () => {
                   }}
                 >
                   {framework.label}
-                  <CheckIcon
+                  {/* <CheckIcon
                     className={cn("ml-auto h-4 w-4", valueSearch === framework.value ? "opacity-100" : "opacity-0")}
-                  />
+                  /> */}
                 </CommandItem>
               ))}
             </CommandGroup>
-          </Command> */}
+          </Command>
           nội dung search
         </PopoverContent>
       </Popover>
