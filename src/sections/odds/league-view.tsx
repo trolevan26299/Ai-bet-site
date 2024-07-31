@@ -124,7 +124,7 @@ const LeagueView = () => {
           </div>
 
           <div className="w-[18%] flex flex-row justify-around items-center ">
-            <Popover open={openSearch} onOpenChange={() => setOpenSearch(!openSearch)}>
+            <Popover open={openCalendar} onOpenChange={() => setOpenSearch(!openCalendar)}>
               <PopoverTrigger asChild>
                 <Icon
                   icon="bx:calendar"
@@ -164,7 +164,7 @@ const LeagueView = () => {
                 </div>
               </PopoverContent>
             </Popover>
-            <Popover open={openCalendar} onOpenChange={() => setOpenCalendar(!openCalendar)}>
+            <Popover open={openSearch} onOpenChange={() => setOpenCalendar(!openSearch)}>
               <PopoverTrigger asChild>
                 <Icon
                   icon="ic:baseline-search"
