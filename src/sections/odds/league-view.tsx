@@ -125,24 +125,24 @@ const LeagueView = () => {
             </div>
 
             <div className="w-[18%] flex flex-row justify-around items-center ">
-              <PopoverTrigger asChild>
-                <Icon
-                  icon="bx:calendar"
-                  width={25}
-                  height={25}
-                  className="hover:cursor-pointer text-[rgba(255,255,255,1)]"
-                  onClick={() => setOpenCalendar(!openCalendar)}
-                />
-              </PopoverTrigger>
-              <PopoverTrigger asChild>
-                <Icon
-                  icon="ic:baseline-search"
-                  width={25}
-                  height={25}
-                  className="hover:cursor-pointer text-[rgba(255,255,255,1)]"
-                  onClick={() => setOpenSearch(!openSearch)}
-                />
-              </PopoverTrigger>
+              {/* <PopoverTrigger asChild> */}
+              <Icon
+                icon="bx:calendar"
+                width={25}
+                height={25}
+                className="hover:cursor-pointer text-[rgba(255,255,255,1)]"
+                onClick={() => setOpenCalendar(!openCalendar)}
+              />
+              {/* </PopoverTrigger> */}
+              {/* <PopoverTrigger asChild> */}
+              <Icon
+                icon="ic:baseline-search"
+                width={25}
+                height={25}
+                className="hover:cursor-pointer text-[rgba(255,255,255,1)]"
+                onClick={() => setOpenSearch(!openSearch)}
+              />
+              {/* </PopoverTrigger> */}
             </div>
           </div>
           <div className="league">đây là các thẻ giải</div>
