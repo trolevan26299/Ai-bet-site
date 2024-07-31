@@ -96,7 +96,7 @@ const LeagueView = () => {
   }, []);
   return (
     <MainLayout>
-      <Popover open={openSearch} onOpenChange={setOpenSearch}>
+      <Popover open={openSearch} onOpenChange={() => setOpenSearch(!openSearch)}>
         <div>
           <div className="search h-12 flex flex-row w-full justify-center items-center bg-[rgba(17,17,17,1)]">
             <div className="w-[18%] pl-2 flex flex-row justify-center">
