@@ -97,7 +97,7 @@ const LeagueView = () => {
           </div>
 
           <div
-            className="w-[62%] flex flex-row justify-center gap-4 items-center  overflow-x-auto whitespace-nowrap no-scrollbar"
+            className="w-[64%] flex flex-row justify-center gap-4 items-center  overflow-x-auto whitespace-nowrap no-scrollbar"
             ref={tabsListRef}
           >
             {demoDateSearch.map((date, index) => (
@@ -111,7 +111,7 @@ const LeagueView = () => {
             ))}
           </div>
 
-          <div className="w-[18%] flex flex-row justify-center items-center gap-2">
+          <div className="w-[16%] flex flex-row justify-around items-center gap-2">
             <Icon
               icon="bx:calendar"
               width={25}
