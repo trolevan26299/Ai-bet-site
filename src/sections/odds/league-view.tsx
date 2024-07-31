@@ -13,6 +13,8 @@ import { Popover, PopoverTrigger } from "@/components/ui/popover";
 import { PopoverContent } from "@radix-ui/react-popover";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 
 const demoDateSearch = [
   "01/08/2024",
@@ -143,28 +145,21 @@ const LeagueView = () => {
           <Menu />
         </div>
         <PopoverContent className="p-0 w-full bg-[rgba(40,55,74,1)] " align="center">
-          <Command>
-            <CommandInput placeholder="Search framework..." className="h-9" />
-            <CommandEmpty>No framework found.</CommandEmpty>
-            <CommandGroup>
-              {frameworks.map((framework) => (
-                <CommandItem
-                  key={framework.value}
-                  value={framework.value}
-                  onSelect={(currentValue) => {
-                    setValueSearch(currentValue === valueSearch ? "" : currentValue);
-                    setOpenSearch(false);
-                  }}
-                >
-                  {framework.label}
-                  {/* <CheckIcon
-                    className={cn("ml-auto h-4 w-4", valueSearch === framework.value ? "opacity-100" : "opacity-0")}
-                  /> */}
-                </CommandItem>
-              ))}
-            </CommandGroup>
-          </Command>
-          nội dung search
+          <Input type="search" placeholder="Tìm kiếm" />
+          <div className="flex flex-row justify-start items-center border-y-lime-200">
+            <Button variant="secondary" color="">
+              Đội
+            </Button>
+            <Button variant="secondary">Giải đấu</Button>
+          </div>
+
+          <div className="justify-start items-center">
+            {frameworks.map((framework, index) => (
+              <div className="" key={index}>
+                {framework.label}
+              </div>
+            ))}
+          </div>
         </PopoverContent>
       </Popover>
     </MainLayout>
