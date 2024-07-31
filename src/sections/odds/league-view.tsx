@@ -171,7 +171,7 @@ const LeagueView = () => {
           </div>
 
           <div
-            className="w-[62%] flex flex-row justify-center gap-4 items-center  overflow-x-auto whitespace-nowrap no-scrollbar"
+            className="w-[62%] flex flex-row justify-center gap-4 items-center  overflow-x-auto whitespace-nowrap no-scrollbar hover:cursor-pointer"
             ref={tabsListRef}
           >
             {demoDateSearch.map((date, index) => (
@@ -274,7 +274,7 @@ const LeagueView = () => {
             ))}
           </div>
           <div
-            className="flex flex-row w-full justify-start items-center gap-2 overflow-x-auto whitespace-nowrap no-scrollbar px-2 hover:cursor-pointer mt-2"
+            className="flex flex-row w-full justify-start items-center gap-2 overflow-x-auto whitespace-nowrap no-scrollbar px-2 hover:cursor-pointer mt-1"
             ref={league2ListRef}
           >
             {tagDemo.slice(4).map((tag, index) => (
