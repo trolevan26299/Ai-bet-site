@@ -111,7 +111,7 @@ const LeagueView = () => {
             ))}
           </div>
 
-          <div className="w-[18%] flex flex-row justify-around items-center gap-1">
+          <div className="w-[18%] flex flex-row justify-around items-center ">
             <Icon
               icon="bx:calendar"
               width={25}
