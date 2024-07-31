@@ -29,34 +29,34 @@ const demoDateSearch = [
   "12/08/2024",
 ];
 
-const frameworks = [
-  {
-    value: "next.js",
-    label: "Next.js",
-  },
-  {
-    value: "sveltekit",
-    label: "SvelteKit",
-  },
-  {
-    value: "nuxt.js",
-    label: "Nuxt.js",
-  },
-  {
-    value: "remix",
-    label: "Remix",
-  },
-  {
-    value: "astro",
-    label: "Astro",
-  },
-];
 const LeagueView = () => {
   const router = useRouter();
   const tabsListRef = useRef<HTMLDivElement>(null);
   // search
   const [openSearch, setOpenSearch] = useState(false);
   const [valueSearch, setValueSearch] = useState("");
+  const frameworks = [
+    {
+      value: "next.js",
+      label: "Next.js",
+    },
+    {
+      value: "sveltekit",
+      label: "SvelteKit",
+    },
+    {
+      value: "nuxt.js",
+      label: "Nuxt.js",
+    },
+    {
+      value: "remix",
+      label: "Remix",
+    },
+    {
+      value: "astro",
+      label: "Astro",
+    },
+  ];
   // end search
 
   const handleNavigate = () => {
