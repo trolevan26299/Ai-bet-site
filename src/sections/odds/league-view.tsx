@@ -54,7 +54,7 @@ const LeagueView = () => {
           <div className="w-[60%] flex flex-row justify-center gap-2 items-center overflow-x-auto scrollbar-hide">
             {demoDateSearch.map((date, index) => (
               <div
-                className="flex flex-col items-center justify-center text-[11px] font-bold gap-1 text-[rgba(109,109,109,1)]"
+                className="hover:cursor-pointer hover:text-[rgba(255,255,255,1)] flex flex-col items-center justify-center text-[11px] font-bold gap-1 text-[rgba(109,109,109,1)]"
                 key={index}
               >
                 <p>{getDayOfWeek(date)}</p>
