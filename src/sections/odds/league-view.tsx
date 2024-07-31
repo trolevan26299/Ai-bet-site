@@ -68,17 +68,17 @@ const LeagueView = () => {
     <MainLayout>
       <div>
         <div className="search h-12 flex flex-row w-full justify-center items-center bg-[rgba(17,17,17,1)]">
-          <div className="w-[20%] pl-2">
+          <div className="w-[18%] pl-2">
             <button className="w-[53px] h-[21px] bg-[rgba(255,255,255,1)] text-[rgba(230,58,58,1)] uppercase rounded-[16.83px] text-[12px] font-bold flex flex-row justify-center items-center">
               Live
               <Icon icon="pepicons-pop:circle" width={17} height={17} className="text-[rgba(230,58,58,1)]" />
             </button>
           </div>
 
-          <div className="w-[60%] flex flex-row justify-center gap-2 items-center  overflow-x-auto whitespace-nowrap no-scrollbar">
+          <div className="w-[62%] flex flex-row justify-center gap-2 items-center  overflow-x-auto whitespace-nowrap no-scrollbar">
             {demoDateSearch.map((date, index) => (
               <div
-                className="hover:cursor-pointer hover:text-[rgba(255,255,255,1)] flex flex-col items-center justify-center text-[11px] font-bold gap-1 text-[rgba(109,109,109,1)]"
+                className="hover:cursor-pointer hover:text-[rgba(255,255,255,1)] flex flex-col items-center justify-center text-[12px] font-bold gap-[6px] text-[rgba(109,109,109,1)]"
                 key={index}
               >
                 <p>{getDayOfWeek(date)}</p>
