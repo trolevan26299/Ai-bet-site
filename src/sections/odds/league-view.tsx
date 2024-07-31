@@ -230,17 +230,17 @@ const LeagueView = () => {
             </Popover.Root>
           </div>
         </div>
-        <div className="pt-2">
+        <div className="pt-2 px-2">
           <div
-            className="flex flex-row justify-center items-center gap-2 overflow-x-auto whitespace-nowrap no-scrollbar px-2 py-1"
+            className="flex flex-row justify-center items-center gap-2 overflow-x-auto whitespace-nowrap no-scrollbar py-1"
             ref={league1ListRef}
           >
-            <div className="flex flex-row items-center justify-center gap-1 rounded-[20px] bg-[rgba(41,53,67,1)]">
+            <div className="flex flex-row items-center justify-center gap-1 rounded-[20px] bg-[rgba(41,53,67,1)] h-8">
               <p className=" font-bold text-[rgba(255,255,255,1)] text-sm">Tất cả</p>
             </div>
             {tagDemo.map((tag, index) => (
               <div
-                className="flex flex-row items-center justify-center gap-1 rounded-[20px] bg-[rgba(41,53,67,1)]"
+                className="flex flex-row items-center justify-center gap-1 rounded-[20px] bg-[rgba(41,53,67,1)] h-8"
                 key={index}
               >
                 <img src={tag.logo} alt={tag.name} className="w-[25px] h-[25px] rounded-full" />
