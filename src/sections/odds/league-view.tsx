@@ -75,10 +75,10 @@ const LeagueView = () => {
             </button>
           </div>
 
-          <div className="w-[62%] flex flex-row justify-center gap-2 items-center  overflow-x-auto whitespace-nowrap no-scrollbar">
+          <div className="w-[62%] flex flex-row justify-center gap-4 items-center  overflow-x-auto whitespace-nowrap no-scrollbar">
             {demoDateSearch.map((date, index) => (
               <div
-                className="hover:cursor-pointer hover:text-[rgba(255,255,255,1)] flex flex-col items-center justify-center text-[12px] font-bold gap-[6px] text-[rgba(109,109,109,1)]"
+                className="hover:cursor-pointer hover:text-[rgba(255,255,255,1)] flex flex-col items-center justify-center text-[12px] font-bold gap-[2px] text-[rgba(109,109,109,1)]"
                 key={index}
               >
                 <p>{getDayOfWeek(date)}</p>
