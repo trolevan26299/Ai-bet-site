@@ -5,11 +5,14 @@ import MainLayout from "@/layouts/main/layout";
 import { getDayOfWeek } from "@/utils/convertDateToDateOfWeek";
 import { getDayAndMonth } from "@/utils/convertToDayAndMonth";
 import { Icon } from "@iconify/react";
+import { CheckIcon } from "@radix-ui/react-icons";
 import "./index.css";
-import { getDay } from "date-fns";
-
+import { cn } from "@/lib/utils";
+import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem } from "@/components/ui/command";
+import { Popover, PopoverTrigger } from "@/components/ui/popover";
+import { PopoverContent } from "@radix-ui/react-popover";
 import { useRouter } from "next/navigation";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const demoDateSearch = [
   "01/08/2024",
@@ -25,30 +28,36 @@ const demoDateSearch = [
   "11/08/2024",
   "12/08/2024",
 ];
-const settings = {
-  dots: false,
-  infinite: false,
-  speed: 500,
-  slidesToShow: 5,
-  slidesToScroll: 1,
-  responsive: [
-    {
-      breakpoint: 1024,
-      settings: {
-        slidesToShow: 3,
-      },
-    },
-    {
-      breakpoint: 600,
-      settings: {
-        slidesToShow: 2,
-      },
-    },
-  ],
-};
+
+const frameworks = [
+  {
+    value: "next.js",
+    label: "Next.js",
+  },
+  {
+    value: "sveltekit",
+    label: "SvelteKit",
+  },
+  {
+    value: "nuxt.js",
+    label: "Nuxt.js",
+  },
+  {
+    value: "remix",
+    label: "Remix",
+  },
+  {
+    value: "astro",
+    label: "Astro",
+  },
+];
 const LeagueView = () => {
   const router = useRouter();
   const tabsListRef = useRef<HTMLDivElement>(null);
+  // search
+  const [openSearch, setOpenSearch] = useState(false);
+  const [valueSearch, setValueSearch] = useState("");
+  // end search
 
   const handleNavigate = () => {
     const matchId = "1594429137";
@@ -87,49 +96,76 @@ const LeagueView = () => {
   }, []);
   return (
     <MainLayout>
-      <div>
-        <div className="search h-12 flex flex-row w-full justify-center items-center bg-[rgba(17,17,17,1)]">
-          <div className="w-[18%] pl-2 flex flex-row justify-center">
-            <button className="w-[53px] h-[21px] bg-[rgba(255,255,255,1)] text-[rgba(230,58,58,1)] uppercase rounded-[16.83px] text-[12px] font-bold flex flex-row justify-center items-center">
-              Live
-              <Icon icon="pepicons-pop:circle" width={17} height={17} className="text-[rgba(230,58,58,1)]" />
-            </button>
-          </div>
+      <Popover open={openSearch} onOpenChange={setOpenSearch}>
+        <div>
+          <div className="search h-12 flex flex-row w-full justify-center items-center bg-[rgba(17,17,17,1)]">
+            <div className="w-[18%] pl-2 flex flex-row justify-center">
+              <button className="w-[53px] h-[21px] bg-[rgba(255,255,255,1)] text-[rgba(230,58,58,1)] uppercase rounded-[16.83px] text-[12px] font-bold flex flex-row justify-center items-center">
+                Live
+                <Icon icon="pepicons-pop:circle" width={17} height={17} className="text-[rgba(230,58,58,1)]" />
+              </button>
+            </div>
 
-          <div
-            className="w-[62%] flex flex-row justify-center gap-4 items-center  overflow-x-auto whitespace-nowrap no-scrollbar"
-            ref={tabsListRef}
-          >
-            {demoDateSearch.map((date, index) => (
-              <div
-                className="hover:cursor-pointer hover:text-[rgba(255,255,255,1)] flex flex-col items-center justify-center text-[12px] font-bold gap-[2px] text-[rgba(109,109,109,1)]"
-                key={index}
-              >
-                <p>{getDayOfWeek(date)}</p>
-                <p>{getDayAndMonth(date)}</p>
-              </div>
-            ))}
-          </div>
+            <div
+              className="w-[62%] flex flex-row justify-center gap-4 items-center  overflow-x-auto whitespace-nowrap no-scrollbar"
+              ref={tabsListRef}
+            >
+              {demoDateSearch.map((date, index) => (
+                <div
+                  className="hover:cursor-pointer hover:text-[rgba(255,255,255,1)] flex flex-col items-center justify-center text-[12px] font-bold gap-[2px] text-[rgba(109,109,109,1)]"
+                  key={index}
+                >
+                  <p>{getDayOfWeek(date)}</p>
+                  <p>{getDayAndMonth(date)}</p>
+                </div>
+              ))}
+            </div>
 
-          <div className="w-[18%] flex flex-row justify-around items-center ">
-            <Icon
-              icon="bx:calendar"
-              width={25}
-              height={25}
-              className="hover:cursor-pointer text-[rgba(255,255,255,1)]"
-            />
-            <Icon
-              icon="ic:baseline-search"
-              width={25}
-              height={25}
-              className="hover:cursor-pointer text-[rgba(255,255,255,1)]"
-            />
+            <div className="w-[18%] flex flex-row justify-around items-center ">
+              <Icon
+                icon="bx:calendar"
+                width={25}
+                height={25}
+                className="hover:cursor-pointer text-[rgba(255,255,255,1)]"
+              />
+              <PopoverTrigger asChild>
+                <Icon
+                  icon="ic:baseline-search"
+                  width={25}
+                  height={25}
+                  className="hover:cursor-pointer text-[rgba(255,255,255,1)]"
+                />
+              </PopoverTrigger>
+            </div>
           </div>
+          <div className="league">đây là các thẻ giải</div>
+          <div className="detail">nội dung </div>
+          <Menu />
         </div>
-        <div className="league">đây là các thẻ giải</div>
-        <div className="detail">nội dung </div>
-        <Menu />
-      </div>
+        <PopoverContent className="p-0 w-full bg-[rgba(40,55,74,1)] " align="center">
+          <Command>
+            <CommandInput placeholder="Search framework..." className="h-9" />
+            <CommandEmpty>No framework found.</CommandEmpty>
+            <CommandGroup>
+              {frameworks.map((framework) => (
+                <CommandItem
+                  key={framework.value}
+                  value={framework.value}
+                  onSelect={(currentValue) => {
+                    setValueSearch(currentValue === valueSearch ? "" : currentValue);
+                    setOpenSearch(false);
+                  }}
+                >
+                  {framework.label}
+                  <CheckIcon
+                    className={cn("ml-auto h-4 w-4", valueSearch === framework.value ? "opacity-100" : "opacity-0")}
+                  />
+                </CommandItem>
+              ))}
+            </CommandGroup>
+          </Command>
+        </PopoverContent>
+      </Popover>
     </MainLayout>
   );
 };
