@@ -390,7 +390,7 @@ const LeagueView = () => {
             type="multiple"
             value={openItems}
             onValueChange={handleValueChange}
-            className="w-[94%] mx-2 p-2 bg-[rgba(30,42,56,1)] rounded-[10px]"
+            className="w-[95%] m-auto p-2 bg-[rgba(30,42,56,1)] rounded-[10px]"
           >
             {demoTagAll.map((tag, index) => (
               <AccordionItem key={index} value={tag.name}>
