@@ -410,7 +410,9 @@ const LeagueView = () => {
                   {tag.detail.map((detail, index) => (
                     <div className="flex flex-row items-center justify-between  py-1 hover:cursor-pointer" key={index}>
                       <div className="flex flex-row items-center gap-2 ml-8" key={index}>
-                        <p className="text-[10px] font-bold text-[rgba(137,143,151,1)]">{detail.league}</p>
+                        <p className="text-[10px] font-bold text-[rgba(137,143,151,1)] hover:text-[rgba(255,255,255,1)]">
+                          {detail.league}
+                        </p>
                         <Badge
                           variant="secondary"
                           className="px-[10px] py-[0px] bg-[rgba(53,64,76,1)] text-[10px] font-bold text-white"
