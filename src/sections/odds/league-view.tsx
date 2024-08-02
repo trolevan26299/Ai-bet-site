@@ -363,7 +363,7 @@ const LeagueView = () => {
                 <div className="flex flex-row items-center justify-center gap-1 rounded-[20px] bg-[rgba(41,53,67,1)] h-8 px-[10px]">
                   <p className=" font-bold text-[rgba(255,255,255,1)] text-sm">Tất cả</p>
                   <Badge variant="secondary">151</Badge>
-                  <Icon icon="bx:chevron-down" width={20} height={20} className="text-[rgba(255,255,255,1)]" />
+                  {/* <Icon icon="bx:chevron-down" width={20} height={20} className="text-[rgba(255,255,255,1)]" /> */}
                 </div>
               </DialogTrigger>
               <DialogContent className="h-full">
@@ -450,7 +450,61 @@ const LeagueView = () => {
             ))}
           </div>
         </div>
-        <div className="mb-[30px]   mt-[10px] w-full">nội dung</div>
+        <div className="mb-[30px]   mt-[10px] w-full">
+          <Accordion
+            type="multiple"
+            value={openItems}
+            onValueChange={handleValueChange}
+            className="w-[95%] m-auto p-2 bg-[rgba(30,42,56,1)] rounded-[10px] h-full"
+          >
+            <DialogClose asChild>
+              <div className="flex flex-row justify-end px-2 h-[40px] hover:cursor-pointer">
+                <Icon icon="ic:baseline-close" width={20} height={20} className="text-[rgba(255,255,255,1)]" />
+              </div>
+            </DialogClose>
+
+            {demoTagAll.map((tag, index) => (
+              <AccordionItem key={index} value={tag.name}>
+                <AccordionTrigger className="flex flex-row items-center justify-between px-2 py-1 hover:cursor-pointer">
+                  <div className="flex flex-row items-center gap-2">
+                    <img src={tag.logo} alt={tag.name} className="w-[25px] h-[25px] rounded-full" />
+                    <p className=" font-bold text-[rgba(255,255,255,1)] text-[15px]">{tag.name}</p>
+                    <Badge
+                      variant="secondary"
+                      className="bg-[rgba(53,64,76,1)] text-[13px] font-bold text-white py-[1px]"
+                    >
+                      {tag.detail.length}
+                    </Badge>
+                  </div>
+                </AccordionTrigger>
+                <AccordionContent className="flex flex-col gap-2 px-2 py-1">
+                  {tag.detail.map((detail, index) => (
+                    <div className="flex flex-row items-center justify-between  py-1 hover:cursor-pointer" key={index}>
+                      <div className="flex flex-row items-center gap-2 ml-8" key={index}>
+                        <p className="text-[10px] font-bold text-[rgba(137,143,151,1)] hover:text-[rgba(255,255,255,1)]">
+                          {detail.league}
+                        </p>
+                        <Badge
+                          variant="secondary"
+                          className="px-[10px] py-[0px] bg-[rgba(53,64,76,1)] text-[10px] font-bold text-white"
+                        >
+                          {detail.number_match}
+                        </Badge>
+                      </div>
+                      <Icon
+                        icon="material-symbols-light:star-outline"
+                        width={25}
+                        height={25}
+                        color="rgba(170,170,170,1)"
+                        className=" hover:cursor- mr-[-3px]"
+                      />
+                    </div>
+                  ))}
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+        </div>
         <Menu />
       </div>
     </MainLayout>
