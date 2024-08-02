@@ -457,12 +457,6 @@ const LeagueView = () => {
             onValueChange={handleValueChange}
             className="w-[95%] m-auto p-2 bg-[rgba(30,42,56,1)] rounded-[10px] h-full"
           >
-            <DialogClose asChild>
-              <div className="flex flex-row justify-end px-2 h-[40px] hover:cursor-pointer">
-                <Icon icon="ic:baseline-close" width={20} height={20} className="text-[rgba(255,255,255,1)]" />
-              </div>
-            </DialogClose>
-
             {demoTagAll.map((tag, index) => (
               <AccordionItem key={index} value={tag.name}>
                 <AccordionTrigger className="flex flex-row items-center justify-between px-2 py-1 hover:cursor-pointer">
