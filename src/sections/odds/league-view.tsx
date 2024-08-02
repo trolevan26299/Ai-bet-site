@@ -367,17 +367,19 @@ const LeagueView = () => {
                 </div>
               </DialogTrigger>
               <DialogContent className="h-full">
-                {/* <DialogClose asChild>
-                  <div className="flex flex-row justify-end px-3 h-[20px]">
-                    <Icon icon="ic:baseline-close" width={20} height={20} className="text-[rgba(255,255,255,1)]" />
-                  </div>
-                </DialogClose> */}
                 <Accordion
                   type="multiple"
                   value={openItems}
                   onValueChange={handleValueChange}
                   className="w-[95%] m-auto p-2 bg-[rgba(30,42,56,1)] rounded-[10px] h-full"
                 >
+                  <div className="w-full flex flex-row pr-3">
+                    <DialogClose asChild>
+                      <div className="flex flex-row justify-end px-3 h-[20px]">
+                        <Icon icon="ic:baseline-close" width={20} height={20} className="text-[rgba(255,255,255,1)]" />
+                      </div>
+                    </DialogClose>
+                  </div>
                   {demoTagAll.map((tag, index) => (
                     <AccordionItem key={index} value={tag.name}>
                       <AccordionTrigger className="flex flex-row items-center justify-between px-2 py-1 hover:cursor-pointer">
