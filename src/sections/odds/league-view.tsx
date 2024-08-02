@@ -288,7 +288,7 @@ const LeagueView = () => {
                 />
               </Popover.Trigger>
               <Popover.Content
-                className="py-2 w-[95%] bg-[rgba(40,55,74,1)] mt-4 max-h-[80vh] rounded-sm"
+                className="py-2 w-[95%] bg-[rgba(40,55,74,1)] mt-[14px] max-h-[80vh] rounded-sm"
                 align="center"
               >
                 <Calendar
@@ -319,7 +319,7 @@ const LeagueView = () => {
                 />
               </Popover.Trigger>
               <Popover.Content
-                className="py-2 w-[95%] bg-[rgba(40,55,74,1)] mt-4 max-h-[80vh] rounded-sm"
+                className="py-2 w-[95%] bg-[rgba(40,55,74,1)] mt-[14px] max-h-[80vh] rounded-sm"
                 align="center"
               >
                 <Input
