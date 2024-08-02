@@ -18,6 +18,7 @@ import { locale } from "@/utils/configCalendarToVN";
 import { Badge } from "@/components/ui/badge";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Dialog, DialogClose, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import Image from "next/image";
 
 const demoDateSearch = [
   "01/08/2024",
@@ -167,6 +168,62 @@ const demoTagAll = [
       { league: "Copa America", number_match: 5 },
       { league: "Olympic Nam", number_match: 7 },
       { league: "World Cup", number_match: 32 },
+    ],
+  },
+];
+const demoFavorite = [
+  {
+    name: "Trực tiếp",
+    logo: "fluent:live-24-filled",
+    detail: [
+      {
+        id: 1,
+        name: "Euro 2024",
+        container: "Châu Âu",
+        away: "Spain",
+        home: "England",
+        awayScore: 1,
+        homeScore: 2,
+        isLive: true,
+        time: "30'",
+        scope: "1st Half",
+      },
+      {
+        id: 1,
+        name: "Euro 2024",
+        container: "Châu Âu",
+        away: "Hà Lan",
+        home: "Pháp",
+        awayScore: 1,
+        homeScore: 2,
+        isLive: true,
+        time: "30'",
+        scope: "1st Half",
+      },
+    ],
+  },
+  {
+    name: "Sắp tới",
+    logo: "ant-design:reload-time-outline",
+    detail: [
+      {
+        id: 7,
+        name: "Euro 2024",
+        container: "Châu Âu",
+        away: "Spain",
+        home: "England",
+        time: "02:00, 15/07",
+        isLive: false,
+      },
+      {
+        id: 8,
+        name: "Euro 2024",
+        container: "Châu Âu",
+        away: "Spain",
+        home: "England",
+        time: "02:00, 15/07",
+        isLive: false,
+      },
     ],
   },
 ];
@@ -457,7 +514,7 @@ const LeagueView = () => {
             onValueChange={handleValueChange}
             className="w-[95%] m-auto p-2 bg-[rgba(30,42,56,1)] rounded-[10px] h-full"
           >
-            {demoTagAll.map((tag, index) => (
+            {demoFavorite.map((tag, index) => (
               <AccordionItem key={index} value={tag.name}>
                 <AccordionTrigger className="flex flex-row items-center justify-between px-2 py-1 hover:cursor-pointer">
                   <div className="flex flex-row items-center gap-2">
@@ -472,26 +529,77 @@ const LeagueView = () => {
                   </div>
                 </AccordionTrigger>
                 <AccordionContent className="flex flex-col gap-2 px-2 py-1">
-                  {tag.detail.map((detail, index) => (
-                    <div className="flex flex-row items-center justify-between  py-1 hover:cursor-pointer" key={index}>
-                      <div className="flex flex-row items-center gap-2 ml-8" key={index}>
-                        <p className="text-[10px] font-bold text-[rgba(137,143,151,1)] hover:text-[rgba(255,255,255,1)]">
-                          {detail.league}
-                        </p>
-                        <Badge
-                          variant="secondary"
-                          className="px-[10px] py-[0px] bg-[rgba(53,64,76,1)] text-[10px] font-bold text-white"
+                  {tag.detail.map((item: any, index) => (
+                    <div
+                      className="p-2 flex flex-row justify-between bg-[rgba(30,42,56,1)] rounded-[10px] mb-[10px]"
+                      key={index}
+                    >
+                      <div className="flex flex-col justify-between items-start">
+                        <div className="flex flex-row gap-1 items-center">
+                          <Icon
+                            icon="fluent:sport-soccer-24-filled"
+                            width={16}
+                            height={16}
+                            color="rgba(170,170,170,1)"
+                          />
+                          <p className="pl-2 text-[10px] font-normal text-[rgba(170,170,170,1)]">{item.container}</p>
+                          <Icon icon="ic:outline-arrow-right" width={20} height={20} color="rgba(170,170,170,1)" />
+                          <p className="text-[10px] font-normal text-[rgba(170,170,170,1)]">{item.name}</p>
+                        </div>
+                        <p
+                          className={`${
+                            item.isLive ? "text-[rgba(70,230,164,1)]" : "text-[rgba(165,165,165,1)]"
+                          } text-[9px] font-normal`}
                         >
-                          {detail.number_match}
-                        </Badge>
+                          {item.isLive ? `${item.time} ${item.scope}` : item.time}
+                        </p>
+                        <div className="flex flex-row justify-start items-center gap-2">
+                          <Image
+                            src="https://w7.pngwing.com/pngs/982/984/png-transparent-red-and-white-flag-flag-of-spain-iberian-peninsula-computer-icons-spanish-free-spain-flag-svg-miscellaneous-english-country-thumbnail.png"
+                            alt="no-content"
+                            className="w-[20px] h-[20px]"
+                          />
+                          <p className="text-[rgba(251,255,255,1)] text-[14.41px] font-normal">{item.home}</p>
+                        </div>
+                        <div className="flex flex-row justify-start items-center gap-2">
+                          <Image
+                            src="https://upload.wikimedia.org/wikipedia/en/thumb/8/8b/England_national_football_team_crest.svg/1200px-England_national_football_team_crest.svg.png"
+                            alt="no-content"
+                            className="w-[20px] h-[20px]"
+                          />
+                          <p className="text-[rgba(251,255,255,1)] text-[14.41px] font-normal">{item.away}</p>
+                        </div>
                       </div>
-                      <Icon
-                        icon="material-symbols-light:star-outline"
-                        width={25}
-                        height={25}
-                        color="rgba(170,170,170,1)"
-                        className=" hover:cursor- mr-[-3px]"
-                      />
+                      <div className="flex flex-col justify-between items-center">
+                        {/* <Dialog.Trigger> */}
+                        <Icon
+                          icon="mage:chart-fill"
+                          className="hover:cursor-pointer"
+                          width={16}
+                          height={16}
+                          color="rgba(170,170,170,1)"
+                        />
+                        {/* </Dialog.Trigger> */}
+                        {item.isLive && (
+                          <Icon icon="fluent:live-20-filled" width={16} height={16} color="rgba(245,93,62,1)" />
+                        )}
+                        {item.isLive && (
+                          <div
+                            className="w-[22px] h-[17px] p-[2px] rounded-[5px] font-bold flex flex-row justify-center items-center text-[rgba(rgba(255,255,255,1))] bg-[rgba(41,53,66,1)] "
+                            style={{ border: "0.68px solid rgba(64,74,86,1)" }}
+                          >
+                            {item?.homeScore}
+                          </div>
+                        )}
+                        {item.isLive && (
+                          <div
+                            className="w-[22px] h-[17px] p-[2px] rounded-[5px] font-bold flex flex-row justify-center items-center text-[rgba(rgba(255,255,255,1))] bg-[rgba(41,53,66,1)] "
+                            style={{ border: "0.68px solid rgba(64,74,86,1)" }}
+                          >
+                            {item?.awayScore}
+                          </div>
+                        )}
+                      </div>
                     </div>
                   ))}
                 </AccordionContent>
