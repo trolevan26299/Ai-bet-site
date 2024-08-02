@@ -522,7 +522,7 @@ const LeagueView = () => {
                     <p className=" font-bold text-[rgba(255,255,255,1)] text-[15px]">{tag.name}</p>
                   </div>
                 </AccordionTrigger>
-                <AccordionContent className="flex flex-col gap-2 px-2 py-1">
+                <AccordionContent className="flex flex-col gap-2 px-0 py-1">
                   {tag.detail.map((item: any, index) => (
                     <div
                       className="p-2 flex flex-row justify-between bg-[rgba(30,42,56,1)] rounded-[10px] mb-[10px]"
