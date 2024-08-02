@@ -366,9 +366,9 @@ const LeagueView = () => {
                   <Icon icon="bx:chevron-down" width={20} height={20} className="text-[rgba(255,255,255,1)]" />
                 </div>
               </DialogTrigger>
-              <DialogContent className="h-full">
+              <DialogContent className="h-full h-full">
                 <DialogClose asChild>
-                  <div className="flex flex-row justify-end">
+                  <div className="flex flex-row justify-end px-3 h-[20px]">
                     <Icon icon="ic:baseline-close" width={20} height={20} className="text-[rgba(255,255,255,1)]" />
                   </div>
                 </DialogClose>
@@ -376,7 +376,7 @@ const LeagueView = () => {
                   type="multiple"
                   value={openItems}
                   onValueChange={handleValueChange}
-                  className="w-[95%] m-auto p-2 bg-[rgba(30,42,56,1)] rounded-[10px]"
+                  className="w-[95%] m-auto p-2 bg-[rgba(30,42,56,1)] rounded-[10px] h-[calc(100% - 20px)]"
                 >
                   {demoTagAll.map((tag, index) => (
                     <AccordionItem key={index} value={tag.name}>
