@@ -17,6 +17,7 @@ import { Calendar } from "@/components/ui/calendar";
 import { locale } from "@/utils/configCenlendarToVN";
 import { Badge } from "@/components/ui/badge";
 import { badgeVariants } from "@/components/ui/badge";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 
 const demoDateSearch = [
   "01/08/2024",
@@ -86,12 +87,101 @@ const tagDemo = [
     logo: "https://toppng.com/uploads/preview/official-symbol-logo-design-for-euro-2024-germany-european-football-final-11715224051fchzryfqfd.png",
   },
 ];
+
+const demoTagAll = [
+  {
+    name: "Việt Nam",
+    logo: "https://cdn-icons-png.flaticon.com/512/1828/1828817.png",
+    detail: [
+      { league: "Ha Noi T&T", number_match: 2 },
+      { league: "Hoang Anh Gia Lai", number_match: 5 },
+      { league: "QNK Quảng Nam", number_match: 7 },
+      { league: "SHB Đà Nẵng", number_match: 1 },
+    ],
+  },
+  {
+    name: "Thế Giới",
+    logo: "https://cdn-icons-png.flaticon.com/512/1828/1828817.png",
+    detail: [
+      { league: "EURO 2024", number_match: 24 },
+      { league: "Copa America", number_match: 5 },
+      { league: "Olympic Nam", number_match: 7 },
+      { league: "World Cup", number_match: 32 },
+    ],
+  },
+  {
+    name: "Châu Âu",
+    logo: "https://cdn-icons-png.flaticon.com/512/1828/1828817.png",
+    detail: [
+      { league: "EURO 2024", number_match: 24 },
+      { league: "Copa America", number_match: 5 },
+      { league: "Olympic Nam", number_match: 7 },
+      { league: "World Cup", number_match: 32 },
+    ],
+  },
+  {
+    name: "Nam Mỹ",
+    logo: "https://cdn-icons-png.flaticon.com/512/1828/1828817.png",
+    detail: [
+      { league: "EURO 2024", number_match: 24 },
+      { league: "Copa America", number_match: 5 },
+      { league: "Olympic Nam", number_match: 7 },
+      { league: "World Cup", number_match: 32 },
+    ],
+  },
+  {
+    name: "Châu Á",
+    logo: "https://cdn-icons-png.flaticon.com/512/1828/1828817.png",
+    detail: [
+      { league: "EURO 2024", number_match: 24 },
+      { league: "Copa America", number_match: 5 },
+      { league: "Olympic Nam", number_match: 7 },
+      { league: "World Cup", number_match: 32 },
+    ],
+  },
+  {
+    name: "Anh",
+    logo: "https://cdn-icons-png.flaticon.com/512/1828/1828817.png",
+    detail: [
+      { league: "EURO 2024", number_match: 24 },
+      { league: "Copa America", number_match: 5 },
+      { league: "Olympic Nam", number_match: 7 },
+      { league: "World Cup", number_match: 32 },
+    ],
+  },
+  {
+    name: "Tây Ban Nha",
+    logo: "https://cdn-icons-png.flaticon.com/512/1828/1828817.png",
+    detail: [
+      { league: "EURO 2024", number_match: 24 },
+      { league: "Copa America", number_match: 5 },
+      { league: "Olympic Nam", number_match: 7 },
+      { league: "World Cup", number_match: 32 },
+    ],
+  },
+  {
+    name: "Bồ Đồ Nha",
+    logo: "https://cdn-icons-png.flaticon.com/512/1828/1828817.png",
+    detail: [
+      { league: "EURO 2024", number_match: 24 },
+      { league: "Copa America", number_match: 5 },
+      { league: "Olympic Nam", number_match: 7 },
+      { league: "World Cup", number_match: 32 },
+    ],
+  },
+];
 const LeagueView = () => {
   const router = useRouter();
   const tabsListRef = useRef<HTMLDivElement>(null);
   const league1ListRef = useRef<HTMLDivElement>(null);
   const league2ListRef = useRef<HTMLDivElement>(null);
 
+  const allItems = demoTagAll.map((_, index) => `item-${index + 1}`);
+  const [openItems, setOpenItems] = useState(allItems);
+
+  const handleValueChange = (value: string[]) => {
+    setOpenItems(value);
+  };
   const handleNavigate = () => {
     const matchId = "1594429137";
     const queryParams = {
@@ -295,7 +385,29 @@ const LeagueView = () => {
             ))}
           </div>
         </div>
-        <div className="detail">nội dung </div>
+        <div className="mx-2 rounded-[10px] bg-[rgba(30,42,56,1)]">
+          <Accordion type="multiple" value={openItems} onValueChange={handleValueChange} className="w-full">
+            {demoTagAll.map((tag, index) => (
+              <AccordionItem key={index} value={tag.name}>
+                <AccordionTrigger className="flex flex-row items-center justify-between px-2 py-1 hover:cursor-pointer">
+                  <div className="flex flex-row items-center gap-2">
+                    <img src={tag.logo} alt={tag.name} className="w-[25px] h-[25px] rounded-full" />
+                    <p className=" font-bold text-[rgba(255,255,255,1)] text-sm">{tag.name}</p>
+                  </div>
+                  <Badge variant="secondary">{tag.detail.length}</Badge>
+                </AccordionTrigger>
+                <AccordionContent className="flex flex-col gap-2 px-2 py-1">
+                  {tag.detail.map((detail, index) => (
+                    <div className="flex flex-row items-center justify-between" key={index}>
+                      <p className="text-[rgba(255,255,255,1)]">{detail.league}</p>
+                      <Badge variant="secondary">{detail.number_match}</Badge>
+                    </div>
+                  ))}
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+        </div>
         <Menu />
       </div>
     </MainLayout>
