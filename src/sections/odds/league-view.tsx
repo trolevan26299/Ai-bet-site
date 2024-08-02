@@ -398,10 +398,7 @@ const LeagueView = () => {
                 </AccordionTrigger>
                 <AccordionContent className="flex flex-col gap-2 px-2 py-1">
                   {tag.detail.map((detail, index) => (
-                    <div
-                      className="flex flex-row items-center justify-between px-2 py-1 hover:cursor-pointer"
-                      key={index}
-                    >
+                    <div className="flex flex-row items-center justify-between  py-1 hover:cursor-pointer" key={index}>
                       <div className="flex flex-row items-center gap-2" key={index}>
                         <p className="text-[rgba(255,255,255,1)]">{detail.league}</p>
                         <Badge variant="secondary">{detail.number_match}</Badge>
