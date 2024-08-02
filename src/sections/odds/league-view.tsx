@@ -385,7 +385,7 @@ const LeagueView = () => {
             ))}
           </div>
         </div>
-        <div className="mx-2 rounded-[10px] bg-[rgba(30,42,56,1)]">
+        <div className="mx-5 my-4 rounded-[10px] bg-[rgba(30,42,56,1)] mt-[10px]">
           <Accordion type="multiple" value={openItems} onValueChange={handleValueChange} className="w-full">
             {demoTagAll.map((tag, index) => (
               <AccordionItem key={index} value={tag.name}>
@@ -393,14 +393,26 @@ const LeagueView = () => {
                   <div className="flex flex-row items-center gap-2">
                     <img src={tag.logo} alt={tag.name} className="w-[25px] h-[25px] rounded-full" />
                     <p className=" font-bold text-[rgba(255,255,255,1)] text-sm">{tag.name}</p>
+                    <Badge variant="secondary">{tag.detail.length}</Badge>
                   </div>
-                  <Badge variant="secondary">{tag.detail.length}</Badge>
                 </AccordionTrigger>
                 <AccordionContent className="flex flex-col gap-2 px-2 py-1">
                   {tag.detail.map((detail, index) => (
-                    <div className="flex flex-row items-center justify-between" key={index}>
-                      <p className="text-[rgba(255,255,255,1)]">{detail.league}</p>
-                      <Badge variant="secondary">{detail.number_match}</Badge>
+                    <div
+                      className="flex flex-row items-center justify-between px-2 py-1 hover:cursor-pointer"
+                      key={index}
+                    >
+                      <div className="flex flex-row items-center gap-2" key={index}>
+                        <p className="text-[rgba(255,255,255,1)]">{detail.league}</p>
+                        <Badge variant="secondary">{detail.number_match}</Badge>
+                      </div>
+                      <Icon
+                        icon="material-symbols-light:star-outline"
+                        width={30}
+                        height={30}
+                        color="rgba(170,170,170,1)"
+                        className=" hover:cursor-pointer"
+                      />
                     </div>
                   ))}
                 </AccordionContent>
