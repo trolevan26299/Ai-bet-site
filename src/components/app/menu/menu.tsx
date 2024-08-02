@@ -9,7 +9,7 @@ const Menu = () => {
     { id: "1", name: "Trận đấu", url: paths.odds, icon: "mdi:soccer-field" },
     { id: "2", name: "Yêu thích", url: paths.favorites, icon: "gravity-ui:star" },
     { id: "3", name: "Cược của tôi", url: paths.history, icon: "f7:tickets-fill" },
-    { id: "4", name: "Kết quả", url: paths.result, icon: "carbon:result" },
+    { id: "4", name: "Kết quả ", url: paths.result, icon: "carbon:result" },
     { id: "5", name: "Cài đặt", url: paths.settings, icon: "uil:setting" },
   ];
 
