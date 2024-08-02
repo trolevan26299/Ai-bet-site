@@ -15,6 +15,8 @@ import "./index.css";
 import { Popover } from "@radix-ui/themes";
 import { Calendar } from "@/components/ui/calendar";
 import { locale } from "@/utils/configCenlendarToVN";
+import { Badge } from "@/components/ui/badge";
+import { badgeVariants } from "@/components/ui/badge";
 
 const demoDateSearch = [
   "01/08/2024",
@@ -265,6 +267,8 @@ const LeagueView = () => {
           >
             <div className="flex flex-row items-center justify-center gap-1 rounded-[20px] bg-[rgba(41,53,67,1)] h-8 px-[18px]">
               <p className=" font-bold text-[rgba(255,255,255,1)] text-sm">Tất cả</p>
+              <Badge variant="default">151</Badge>
+              <Icon icon="bx:chevron-down" width={20} height={20} className="text-[rgba(255,255,255,1)]" />
             </div>
             {tagDemo.slice(0, 4).map((tag, index) => (
               <div
