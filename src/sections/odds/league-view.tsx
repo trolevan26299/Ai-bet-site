@@ -518,14 +518,8 @@ const LeagueView = () => {
               <AccordionItem key={index} value={tag.name}>
                 <AccordionTrigger className="flex flex-row items-center justify-between px-2 py-1 hover:cursor-pointer">
                   <div className="flex flex-row items-center gap-2">
-                    <img src={tag.logo} alt={tag.name} className="w-[25px] h-[25px] rounded-full" />
+                    <Icon icon={tag.logo} width={30} height={30} color="rgba(170,170,170,1)" />
                     <p className=" font-bold text-[rgba(255,255,255,1)] text-[15px]">{tag.name}</p>
-                    <Badge
-                      variant="secondary"
-                      className="bg-[rgba(53,64,76,1)] text-[13px] font-bold text-white py-[1px]"
-                    >
-                      {tag.detail.length}
-                    </Badge>
                   </div>
                 </AccordionTrigger>
                 <AccordionContent className="flex flex-col gap-2 px-2 py-1">
