@@ -388,7 +388,6 @@ const LeagueView = () => {
         <div className="mb-[30px]   mt-[10px] w-full">
           <Accordion
             type="multiple"
-            s
             value={openItems}
             onValueChange={handleValueChange}
             className="w-[94%] mx-2 p-2 bg-[rgba(30,42,56,1)] rounded-[10px]"
