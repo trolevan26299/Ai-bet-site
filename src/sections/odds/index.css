@@ -9,3 +9,8 @@ div[data-radix-popper-content-wrapper] {
   -ms-overflow-style: none; /* for Internet Explorer, Edge */
   scrollbar-width: none; /* for Firefox */
 }
+
+div[role="dialog"] {
+  border: none;
+  top: 275px;
+}

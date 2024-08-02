@@ -14,9 +14,8 @@ import { useEffect, useRef, useState } from "react";
 import "./index.css";
 import { Popover } from "@radix-ui/themes";
 import { Calendar } from "@/components/ui/calendar";
-import { locale } from "@/utils/configCenlendarToVN";
+import { locale } from "@/utils/configCalendarToVN";
 import { Badge } from "@/components/ui/badge";
-import { badgeVariants } from "@/components/ui/badge";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 

@@ -5,7 +5,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import { Tabs, TabsList, TabsTriggerDate } from "@/components/ui/tabs";
 import { useTelegram } from "@/context/telegram.provider";
 import { IHistoryBet } from "@/types/history.type";
-import { locale } from "@/utils/configCenlendarToVN";
+import { locale } from "@/utils/configCalendarToVN";
 import { formatRangeTime } from "@/utils/time";
 import { Icon } from "@iconify/react";
 import { CalendarIcon } from "@radix-ui/react-icons";
