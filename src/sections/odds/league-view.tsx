@@ -263,6 +263,9 @@ const LeagueView = () => {
             className="flex flex-row w-full justify-start items-center gap-2 overflow-x-auto whitespace-nowrap no-scrollbar px-2 hover:cursor-pointer"
             ref={league1ListRef}
           >
+            <div className="flex flex-row items-center justify-center gap-1 rounded-[20px] bg-[rgba(41,53,67,1)] h-8 px-[18px]">
+              <p className=" font-bold text-[rgba(255,255,255,1)] text-sm">Tất cả</p>
+            </div>
             {tagDemo.slice(0, 4).map((tag, index) => (
               <div
                 className="flex flex-row items-center justify-center gap-1 rounded-[20px] bg-[rgba(41,53,67,1)] h-8 px-[18px]"
