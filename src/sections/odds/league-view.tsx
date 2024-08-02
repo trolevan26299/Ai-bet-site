@@ -17,7 +17,7 @@ import { Calendar } from "@/components/ui/calendar";
 import { locale } from "@/utils/configCalendarToVN";
 import { Badge } from "@/components/ui/badge";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import { Dialog, DialogClose, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 
 const demoDateSearch = [
   "01/08/2024",
@@ -366,7 +366,12 @@ const LeagueView = () => {
                   <Icon icon="bx:chevron-down" width={20} height={20} className="text-[rgba(255,255,255,1)]" />
                 </div>
               </DialogTrigger>
-              <DialogContent>
+              <DialogContent className="h-full">
+                <DialogClose asChild>
+                  <div className="flex flex-row justify-end">
+                    <Icon icon="ic:baseline-close" width={20} height={20} className="text-[rgba(255,255,255,1)]" />
+                  </div>
+                </DialogClose>
                 <Accordion
                   type="multiple"
                   value={openItems}
