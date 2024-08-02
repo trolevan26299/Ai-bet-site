@@ -398,7 +398,7 @@ const LeagueView = () => {
                   <div className="flex flex-row items-center gap-2">
                     <img src={tag.logo} alt={tag.name} className="w-[25px] h-[25px] rounded-full" />
                     <p className=" font-bold text-[rgba(255,255,255,1)] text-sm">{tag.name}</p>
-                    <Badge variant="secondary" className="bg-[rgba(53,64,76,1)] text-[13px] font-bold">
+                    <Badge variant="secondary" className="bg-[rgba(53,64,76,1)] text-[13px] font-bold text-white">
                       {tag.detail.length}
                     </Badge>
                   </div>
@@ -410,7 +410,7 @@ const LeagueView = () => {
                         <p className="text-[rgba(255,255,255,1)]">{detail.league}</p>
                         <Badge
                           variant="secondary"
-                          className="px-[10px] py-[0px] bg-[rgba(53,64,76,1)] text-[10px] font-bold"
+                          className="px-[10px] py-[0px] bg-[rgba(53,64,76,1)] text-[10px] font-bold text-white"
                         >
                           {detail.number_match}
                         </Badge>
