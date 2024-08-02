@@ -10,7 +10,7 @@ div[data-radix-popper-content-wrapper] {
   scrollbar-width: none; /* for Firefox */
 }
 
-div[role="dialog"] {
+div[id="radix-:r2:"] {
   border: none;
   top: 290px;
   height: 85%;
