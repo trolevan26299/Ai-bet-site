@@ -12,5 +12,8 @@ div[data-radix-popper-content-wrapper] {
 
 div[role="dialog"] {
   border: none;
-  top: 275px;
+  top: 290px;
+  height: 85%;
+  overflow-y: auto;
+  padding: 0;
 }
