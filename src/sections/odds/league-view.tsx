@@ -385,8 +385,13 @@ const LeagueView = () => {
             ))}
           </div>
         </div>
-        <div className="mb-[30px] rounded-[10px] bg-[rgba(30,42,56,1)] mt-[10px] w-full">
-          <Accordion type="multiple" value={openItems} onValueChange={handleValueChange} className="w-[95%] mx-2">
+        <div className="mb-[30px] rounded-[10px]  mt-[10px] w-full">
+          <Accordion
+            type="multiple"
+            value={openItems}
+            onValueChange={handleValueChange}
+            className="w-[95%] mx-2 bg-[rgba(30,42,56,1)]"
+          >
             {demoTagAll.map((tag, index) => (
               <AccordionItem key={index} value={tag.name}>
                 <AccordionTrigger className="flex flex-row items-center justify-between px-2 py-1 hover:cursor-pointer">
@@ -405,8 +410,8 @@ const LeagueView = () => {
                       </div>
                       <Icon
                         icon="material-symbols-light:star-outline"
-                        width={30}
-                        height={30}
+                        width={25}
+                        height={25}
                         color="rgba(170,170,170,1)"
                         className=" hover:cursor- mr-[-3px]"
                       />
