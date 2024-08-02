@@ -406,7 +406,9 @@ const LeagueView = () => {
                     <div className="flex flex-row items-center justify-between  py-1 hover:cursor-pointer" key={index}>
                       <div className="flex flex-row items-center gap-2 ml-8" key={index}>
                         <p className="text-[rgba(255,255,255,1)]">{detail.league}</p>
-                        <Badge variant="secondary">{detail.number_match}</Badge>
+                        <Badge variant="secondary" className="px-[10px] py-[0px]">
+                          {detail.number_match}
+                        </Badge>
                       </div>
                       <Icon
                         icon="material-symbols-light:star-outline"
