@@ -26,7 +26,7 @@ const Menu = () => {
           <div
             className="group flex flex-col justify-center items-center gap-[4.5px] hover:cursor-pointer  text-[rgba(159,162,167,1)]"
             key={item.id}
-            onClick={() => router.push(item.url)}
+            onClick={() => router.replace(item.url)}
           >
             <Icon
               icon={item.icon}

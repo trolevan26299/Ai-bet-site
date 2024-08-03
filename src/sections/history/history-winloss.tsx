@@ -220,7 +220,7 @@ const HistoryWinLoss = () => {
                   <CalendarIcon className="mr-2 h-5 w-5" />
                 </button>
               </PopoverTrigger>
-              <PopoverContent className="p-0 w-full bg-[rgba(40,55,74,1)] " align="center">
+              <PopoverContent className="p-0 w-[90%] bg-[rgba(40,55,74,1)] " align="center">
                 <Calendar
                   className="w-full rounded-2xl"
                   initialFocus
