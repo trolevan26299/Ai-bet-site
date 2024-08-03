@@ -512,11 +512,11 @@ const LeagueView = () => {
             type="multiple"
             value={openItems}
             onValueChange={handleValueChange}
-            className="w-[95%] m-auto p-2 rounded-[10px] h-full"
+            className="w-full m-auto p-2 rounded-[10px] h-full"
           >
             {demoFavorite.map((tag, index) => (
               <AccordionItem key={index} value={tag.name}>
-                <AccordionTrigger className="flex flex-row items-center justify-between   hover:cursor-pointer">
+                <AccordionTrigger className="flex flex-row items-center justify-between hover:cursor-pointer py-1">
                   <div className="flex flex-row items-center gap-2">
                     <Icon
                       icon={tag.logo}
@@ -525,7 +525,7 @@ const LeagueView = () => {
                       color={
                         tag.name === "Trực tiếp"
                           ? "rgba(245,93,62,1)"
-                          : tag.name === "Trực tiếp"
+                          : tag.name === "Sắp tới"
                           ? "rgba(73,166,245,1)"
                           : ""
                       }
@@ -590,7 +590,7 @@ const LeagueView = () => {
                         )}
                         {item.isLive && (
                           <div
-                            className="w-[22px] h-[17px] p-[2px] rounded-[5px] font-bold flex flex-row justify-center items-center text-[rgba(rgba(255,255,255,1))] bg-[rgba(41,53,66,1)] "
+                            className="w-[22px] h-[17px] p-[2px] rounded-[5px] font-bold flex flex-row justify-center items-center text-[rgba(255,255,255,1)] bg-[rgba(41,53,66,1)] "
                             style={{ border: "0.68px solid rgba(64,74,86,1)" }}
                           >
                             {item?.homeScore}
@@ -598,7 +598,7 @@ const LeagueView = () => {
                         )}
                         {item.isLive && (
                           <div
-                            className="w-[22px] h-[17px] p-[2px] rounded-[5px] font-bold flex flex-row justify-center items-center text-[rgba(rgba(255,255,255,1))] bg-[rgba(41,53,66,1)] "
+                            className="w-[22px] h-[17px] p-[2px] rounded-[5px] font-bold flex flex-row justify-center items-center text-[rgba(255,255,255,1)] bg-[rgba(41,53,66,1)] "
                             style={{ border: "0.68px solid rgba(64,74,86,1)" }}
                           >
                             {item?.awayScore}
