@@ -516,17 +516,29 @@ const LeagueView = () => {
           >
             {demoFavorite.map((tag, index) => (
               <AccordionItem key={index} value={tag.name}>
-                <AccordionTrigger className="flex flex-row items-center justify-between px-2 py-1 hover:cursor-pointer">
+                <AccordionTrigger className="flex flex-row items-center justify-between   hover:cursor-pointer">
                   <div className="flex flex-row items-center gap-2">
-                    <Icon icon={tag.logo} width={30} height={30} color="rgba(170,170,170,1)" />
+                    <Icon
+                      icon={tag.logo}
+                      width={25}
+                      height={25}
+                      color={
+                        tag.name === "Trực tiếp"
+                          ? "rgba(245,93,62,1)"
+                          : tag.name === "Trực tiếp"
+                          ? "rgba(73,166,245,1)"
+                          : ""
+                      }
+                    />
                     <p className=" font-bold text-[rgba(255,255,255,1)] text-[15px]">{tag.name}</p>
                   </div>
                 </AccordionTrigger>
-                <AccordionContent className="flex flex-col gap-2 px-0 py-1">
+                <AccordionContent className="flex flex-col gap-2 ">
                   {tag.detail.map((item: any, index) => (
                     <div
                       className="p-2 flex flex-row justify-between bg-[rgba(30,42,56,1)] rounded-[10px] mb-[10px]"
                       key={index}
+                      onClick={() => handleNavigate()}
                     >
                       <div className="flex flex-col justify-between items-start">
                         <div className="flex flex-row gap-1 items-center">
@@ -565,7 +577,6 @@ const LeagueView = () => {
                         </div>
                       </div>
                       <div className="flex flex-col justify-between items-center">
-                        {/* <Dialog.Trigger> */}
                         <Icon
                           icon="mage:chart-fill"
                           className="hover:cursor-pointer"
@@ -573,7 +584,7 @@ const LeagueView = () => {
                           height={16}
                           color="rgba(170,170,170,1)"
                         />
-                        {/* </Dialog.Trigger> */}
+
                         {item.isLive && (
                           <Icon icon="fluent:live-20-filled" width={16} height={16} color="rgba(245,93,62,1)" />
                         )}
