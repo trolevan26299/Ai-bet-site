@@ -187,19 +187,27 @@ export default function MatchViewDetail() {
           request_id: searchParams.get("request_id"),
           league_id: dataScreenInfo[0]?.league_id,
         });
-        console.log("response favorite:", response);
+        if (response.data.oke) {
+          setFavorite(false);
+        }
       } else {
         const response = await axios.post("/api/favorite", {
           request_id: searchParams.get("request_id"),
           league_id: dataScreenInfo[0]?.league_id,
         });
-        console.log("response delete favorite:", response);
+        if (response.data.oke) {
+          setFavorite(true);
+        }
       }
     } catch (error) {
       console.log("error:", error);
     }
   };
 
+  useEffect(() => {
+    setFavorite(dataScreenInfo[0]?.is_favorite);
+  }, [dataScreenInfo]);
+  // get Settings
   useEffect(() => {
     setFavorite(dataScreenInfo[0]?.is_favorite);
   }, [dataScreenInfo]);
@@ -435,14 +443,24 @@ export default function MatchViewDetail() {
                     />
                   </div>
                 </PopoverTrigger>
-                <Icon
-                  onClick={handleAddRemoveFavorite}
-                  icon="material-symbols-light:star-outline"
-                  width={30}
-                  height={30}
-                  color={`${favorite ? "rgba(255,199,0,1)" : "rgba(170,170,170,1)"}`}
-                  className={`hover:cursor-pointer ${favorite ? "text-[rgba(255,199,0,1)]" : ""}`}
-                />
+                {favorite ? (
+                  <Icon
+                    onClick={handleAddRemoveFavorite}
+                    icon="emojione:star"
+                    width={30}
+                    height={30}
+                    className="hover:cursor-pointer"
+                  />
+                ) : (
+                  <Icon
+                    onClick={handleAddRemoveFavorite}
+                    icon="material-symbols-light:star-outline"
+                    width={30}
+                    height={30}
+                    color="#ffce31"
+                    className="hover:cursor-pointer"
+                  />
+                )}
               </div>
               <PopoverTrigger asChild>
                 <Icon

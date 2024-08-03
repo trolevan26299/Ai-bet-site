@@ -26,5 +26,6 @@ export const endpoints = {
   },
   setting: {
     ROOT: "user/setting",
+    get: "user/getSettings",
   },
 };
