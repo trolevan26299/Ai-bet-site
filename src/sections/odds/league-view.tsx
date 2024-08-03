@@ -560,7 +560,7 @@ const LeagueView = () => {
                           {item.isLive ? `${item.time} ${item.scope}` : item.time}
                         </p>
                         <div className="flex flex-row justify-start items-center gap-2">
-                          <Image
+                          <img
                             src="https://w7.pngwing.com/pngs/982/984/png-transparent-red-and-white-flag-flag-of-spain-iberian-peninsula-computer-icons-spanish-free-spain-flag-svg-miscellaneous-english-country-thumbnail.png"
                             alt="no-content"
                             className="w-[20px] h-[20px]"
@@ -568,7 +568,7 @@ const LeagueView = () => {
                           <p className="text-[rgba(251,255,255,1)] text-[14.41px] font-normal">{item.home}</p>
                         </div>
                         <div className="flex flex-row justify-start items-center gap-2">
-                          <Image
+                          <img
                             src="https://upload.wikimedia.org/wikipedia/en/thumb/8/8b/England_national_football_team_crest.svg/1200px-England_national_football_team_crest.svg.png"
                             alt="no-content"
                             className="w-[20px] h-[20px]"
