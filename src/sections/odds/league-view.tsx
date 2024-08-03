@@ -233,7 +233,7 @@ const LeagueView = () => {
   const league1ListRef = useRef<HTMLDivElement>(null);
   const league2ListRef = useRef<HTMLDivElement>(null);
 
-  const allItems = demoTagAll.map((_, index) => `item-${index + 1}`);
+  const allItems = demoTagAll.map((item) => item.name);
   const [openItems, setOpenItems] = useState(allItems);
 
   const handleValueChange = (value: string[]) => {
