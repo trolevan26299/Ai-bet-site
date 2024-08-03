@@ -19,4 +19,9 @@ export const endpoints = {
   game: "bot/game",
   match: "search/match",
   history: "proxy/call_api",
+  favorite: {
+    add: "favorite_leagues/insert_favorite_leagues",
+    delete: "favorite_leagues/delete_favorite_leagues",
+    get: "favorite_leagues/get_leagues_list",
+  },
 };
