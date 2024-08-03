@@ -6,7 +6,7 @@ import React from "react";
 const Menu = () => {
   const router = useRouter();
   const pathName = usePathname();
-  console.log("pathName:", pathName);
+
   const menuNavigation = [
     { id: "1", name: "Trận đấu", url: paths.odds, icon: "mdi:soccer-field" },
     { id: "2", name: "Yêu thích", url: paths.favorites, icon: "gravity-ui:star" },
