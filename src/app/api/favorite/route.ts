@@ -12,11 +12,11 @@ export async function POST(req: Request, res: NextApiResponse) {
     return NextResponse.json({ message: error.message });
   }
 }
-// ADD FAVORITE
+// REMOVE FAVORITE
 export async function PUT(req: Request, res: NextApiResponse) {
   const body = await req.json();
   try {
-    const response = await axiosInstance.post(endpoints.favorite.add, body);
+    const response = await axiosInstance.post(endpoints.favorite.delete, body);
     return NextResponse.json(response.data);
   } catch (error: any) {
     return NextResponse.json({ message: error.message });

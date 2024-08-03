@@ -169,11 +169,19 @@ export default function MatchViewDetail() {
 
   const handleAddRemoveFavorite = async () => {
     try {
-      const response = await axios.post("/api/favorite", {
-        league: payload.league,
-        match: matchParam,
-      });
-      console.log;
+      if (favorite) {
+        const response = await axios.put("/api/favorite", {
+          request_id: searchParams.get("request_id"),
+          league_id: dataScreenInfo[0]?.league_id,
+        });
+        console.log("response favorite:", response);
+      } else {
+        const response = await axios.post("/api/favorite", {
+          request_id: searchParams.get("request_id"),
+          league_id: dataScreenInfo[0]?.league_id,
+        });
+        console.log("response delete favorite:", response);
+      }
     } catch (error) {
       console.log("error:", error);
     }
@@ -415,6 +423,7 @@ export default function MatchViewDetail() {
                   </div>
                 </PopoverTrigger>
                 <Icon
+                  onClick={handleAddRemoveFavorite}
                   icon="material-symbols-light:star-outline"
                   width={30}
                   height={30}
