@@ -441,7 +441,7 @@ export default function MatchViewDetail() {
                   width={30}
                   height={30}
                   color={`${favorite ? "rgba(255,199,0,1)" : "rgba(170,170,170,1)"}`}
-                  className=" hover:cursor-pointer"
+                  className={`hover:cursor-pointer ${favorite ? "text-[rgba(255,199,0,1)]" : ""}`}
                 />
               </div>
               <PopoverTrigger asChild>
