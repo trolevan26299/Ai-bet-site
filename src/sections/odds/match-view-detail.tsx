@@ -20,6 +20,7 @@ import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import "./index.css";
+import { set } from "date-fns";
 
 const leagueExample = [
   {
@@ -124,12 +125,8 @@ export default function MatchViewDetail() {
   const [showTrackingLive, setShowTrackingLive] = useState(true);
   const [typePopover, setTypePopover] = useState<string | null>(null);
   const [favorite, setFavorite] = useState<boolean | null>();
-  const [radioGroupState, setRadioGroupState] = useState({
-    numberLine: "3",
-    oddsType: "decimal",
-  });
-
-  console.log("radioGroupState:", radioGroupState);
+  const [numberLine, setNumberLine] = useState<string>();
+  const [oddsType, setOddsType] = useState<string>();
 
   const telegram = useTelegram();
 
@@ -174,10 +171,11 @@ export default function MatchViewDetail() {
   };
 
   const handleRadioGroupChange = (name: string, value: string) => {
-    setRadioGroupState((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
+    if (name === "numberLine") {
+      setNumberLine(value);
+    } else {
+      setOddsType(value);
+    }
   };
 
   const handleAddRemoveFavorite = async () => {
@@ -198,6 +196,21 @@ export default function MatchViewDetail() {
         if (response.data.oke) {
           setFavorite(true);
         }
+      }
+    } catch (error) {
+      console.log("error:", error);
+    }
+  };
+
+  const handleGetSetting = async () => {
+    try {
+      const response = await axios.post("/api/setting/get", {
+        request_id: searchParams.get("request_id"),
+        key: ["line_number", "odds_format"],
+      });
+      if (response.data) {
+        setNumberLine(response.data.line_number.toString());
+        setOddsType(response.data.odds_format);
       }
     } catch (error) {
       console.log("error:", error);
@@ -406,21 +419,46 @@ export default function MatchViewDetail() {
 
     return () => clearTimeout(timer);
   }, []);
+
   useEffect(() => {
-    const handleGetSetting = async () => {
+    const handleSetNumberLine = async () => {
       try {
-        const response = await axios.post("/api/setting/get", {
+        const reseponse = await axios.post("/api/setting/post", {
           request_id: searchParams.get("request_id"),
-          key: ["line_number", "odds_format"],
+          data: { line_number: Number(numberLine) },
         });
-        console.log("response:", response);
+        if (reseponse.data.oke) {
+          setNumberLine(reseponse?.data?.answer?.data?.line_number?.toString());
+        }
       } catch (error) {
         console.log("error:", error);
       }
     };
+    handleSetNumberLine();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [numberLine]);
+  useEffect(() => {
+    const handleSetNumberLine = async () => {
+      try {
+        const reseponse = await axios.post("/api/setting/post", {
+          request_id: searchParams.get("request_id"),
+          data: { odds_format: oddsType },
+        });
+        if (reseponse.data.oke) {
+          setOddsType(reseponse?.data?.answer?.data?.odds_format);
+        }
+      } catch (error) {
+        console.log("error:", error);
+      }
+    };
+    handleSetNumberLine();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [numberLine]);
+
+  useEffect(() => {
     handleGetSetting();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [radioGroupState]);
+  }, []);
 
   return (
     <MainLayout>
@@ -609,7 +647,7 @@ export default function MatchViewDetail() {
                 </TabsList>
                 <TabsContent value="number_line">
                   <RadioGroup
-                    value={radioGroupState.numberLine}
+                    value={numberLine}
                     onValueChange={(value) => handleRadioGroupChange("numberLine", value)}
                     className="flex flex-row justify-around"
                   >
@@ -649,7 +687,7 @@ export default function MatchViewDetail() {
                 </TabsContent>
                 <TabsContent value="odds_type">
                   <RadioGroup
-                    value={radioGroupState.oddsType}
+                    value={oddsType}
                     onValueChange={(value) => handleRadioGroupChange("oddsType", value)}
                     className="flex flex-row justify-around"
                   >
