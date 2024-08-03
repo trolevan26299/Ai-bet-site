@@ -407,15 +407,18 @@ export default function MatchViewDetail() {
     return () => clearTimeout(timer);
   }, []);
   useEffect(() => {
-    try {
-      const response = axios.post("/api/setting", {
-        request_id: searchParams.get("request_id"),
-        key: ["line_number", "odds_format"],
-      });
-      console.log("response:", response);
-    } catch (error) {
-      console.log("error:", error);
-    }
+    const handleGetSetting = async () => {
+      try {
+        const response = await axios.post("/api/setting", {
+          request_id: searchParams.get("request_id"),
+          key: ["line_number", "odds_format"],
+        });
+        console.log("response:", response);
+      } catch (error) {
+        console.log("error:", error);
+      }
+    };
+    handleGetSetting();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [radioGroupState]);
 
