@@ -19,9 +19,9 @@ import { DateRange } from "react-day-picker";
 import { getCurrentUtcTimeUTCMinus4 } from "../../utils/currentTimeUTC-4";
 import { fCurrencyP88, formatNumber } from "../../utils/formatNumber";
 
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import HistoryItem from "./history-item";
 import "./index.css";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 
 const HistoryWinLoss = () => {
   const telegram = useTelegram();
@@ -220,7 +220,7 @@ const HistoryWinLoss = () => {
                   <CalendarIcon className="mr-2 h-5 w-5" />
                 </button>
               </PopoverTrigger>
-              <PopoverContent className="p-0 w-[90%] bg-[rgba(40,55,74,1)] " align="center">
+              <PopoverContent className="p-0 w-full bg-[rgba(40,55,74,1)] " align="center">
                 <Calendar
                   className="w-full rounded-2xl"
                   initialFocus
