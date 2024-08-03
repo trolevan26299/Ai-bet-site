@@ -457,7 +457,7 @@ export default function MatchViewDetail() {
                     icon="material-symbols-light:star-outline"
                     width={30}
                     height={30}
-                    color="#ffce31"
+                    color="rgba(170,170,170,1)"
                     className="hover:cursor-pointer"
                   />
                 )}
