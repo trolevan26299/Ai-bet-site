@@ -20,18 +20,30 @@ const Menu = () => {
       className={`z-10 bottom-0  fixed m-auto rounded-sm flex items-center flex-row justify-around flex-wrap w-full  px-4 pt-2 pb-3 rounded-tr-[20px] rounded-tl-[20px]`}
       style={{ backgroundColor: "rgba(13, 22, 31, 1)" }}
     >
-      {menuNavigation.map((item) => (
-        <div
-          className="group flex flex-col justify-center items-center gap-[4.5px] hover:cursor-pointer  text-[rgba(159,162,167,1)]"
-          key={item.id}
-          onClick={() => router.push(item.url)}
-        >
-          <Icon icon={item.icon} className="w-[21.43px] h-[21.43px] group-hover:text-[rgba(121,228,169,1)]" />
-          <p className="text-[12.86px] font-bold leading-[15.56px] group-hover:text-[rgba(255,255,255,1)]">
-            {item.name}
-          </p>
-        </div>
-      ))}
+      {menuNavigation.map((item) => {
+        const isActive = pathName === item.url;
+        return (
+          <div
+            className="group flex flex-col justify-center items-center gap-[4.5px] hover:cursor-pointer  text-[rgba(159,162,167,1)]"
+            key={item.id}
+            onClick={() => router.push(item.url)}
+          >
+            <Icon
+              icon={item.icon}
+              className={`w-[21.43px] h-[21.43px] group-hover:text-[rgba(121,228,169,1)] ${
+                isActive ? "text-[rgba(121,228,169,1)]" : "group-hover:text-[rgba(121,228,169,1)]"
+              }`}
+            />
+            <p
+              className={`text-[12.86px] font-bold leading-[15.56px] group-hover:text-[rgba(255,255,255,1)] ${
+                isActive ? "text-[rgba(255,255,255,1)]" : "group-hover:text-[rgba(255,255,255,1)]"
+              }`}
+            >
+              {item.name}
+            </p>
+          </div>
+        );
+      })}
     </div>
   );
 };
