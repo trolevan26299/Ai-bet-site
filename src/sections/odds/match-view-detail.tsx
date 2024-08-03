@@ -123,13 +123,13 @@ export default function MatchViewDetail() {
   const [errorCount, setErrorCount] = useState(0);
   const [showTrackingLive, setShowTrackingLive] = useState(true);
   const [typePopover, setTypePopover] = useState<string | null>(null);
-  const [favorite, setFavorite] = useState<boolean | null>(null);
+  const [favorite, setFavorite] = useState<boolean | null>();
 
   const telegram = useTelegram();
 
   const matchParam = searchParams.get("match");
   const lineParam = searchParams.get("line");
-  const tracker_id = searchParams.get("tracker_id") || "48820767";
+  const tracker_id = searchParams.get("tracker_id");
 
   const leagueNoCorner = (league?: string) => {
     return league?.includes(" Corners") ? league?.replace(" Corners", "") : league;
@@ -167,6 +167,21 @@ export default function MatchViewDetail() {
     return /Mobi|Android|iPhone|iPad|iPod/.test(navigator.userAgent);
   };
 
+  const handleAddRemoveFavorite = async () => {
+    try {
+      const response = await axios.post("/api/favorite", {
+        league: payload.league,
+        match: matchParam,
+      });
+      console.log;
+    } catch (error) {
+      console.log("error:", error);
+    }
+  };
+
+  useEffect(() => {
+    setFavorite(dataScreenInfo[0]?.is_favorite);
+  }, [dataScreenInfo]);
   // lấy kèo cược chấp ,tài xỉu, hiệp phụ , penalty
   useEffect(() => {
     async function fetchAndSetInitialOdds() {
@@ -403,7 +418,7 @@ export default function MatchViewDetail() {
                   icon="material-symbols-light:star-outline"
                   width={30}
                   height={30}
-                  color="rgba(170,170,170,1)"
+                  color={`${favorite ? "rgba(255,199,0,1)" : "rgba(170,170,170,1)"}`}
                   className=" hover:cursor-pointer"
                 />
               </div>
