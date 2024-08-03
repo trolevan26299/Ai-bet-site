@@ -1,12 +1,12 @@
 import { paths } from "@/routes/paths";
 import { Icon } from "@iconify/react";
-import { useParams, useRouter } from "next/navigation";
+import { useParams, useRouter, usePathname } from "next/navigation";
 import React from "react";
 
 const Menu = () => {
   const router = useRouter();
-  const params = useParams();
-  console.log(params);
+  const pathName = usePathname();
+  console.log("pathName:", pathName);
   const menuNavigation = [
     { id: "1", name: "Trận đấu", url: paths.odds, icon: "mdi:soccer-field" },
     { id: "2", name: "Yêu thích", url: paths.favorites, icon: "gravity-ui:star" },
