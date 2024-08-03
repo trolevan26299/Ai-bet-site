@@ -207,10 +207,6 @@ export default function MatchViewDetail() {
   useEffect(() => {
     setFavorite(dataScreenInfo[0]?.is_favorite);
   }, [dataScreenInfo]);
-  // get Settings
-  useEffect(() => {
-    setFavorite(dataScreenInfo[0]?.is_favorite);
-  }, [dataScreenInfo]);
   // lấy kèo cược chấp ,tài xỉu, hiệp phụ , penalty
   useEffect(() => {
     async function fetchAndSetInitialOdds() {
@@ -410,6 +406,18 @@ export default function MatchViewDetail() {
 
     return () => clearTimeout(timer);
   }, []);
+  useEffect(() => {
+    try {
+      const response = axios.post("/api/setting", {
+        request_id: searchParams.get("request_id"),
+        key: ["line_number", "odds_format"],
+      });
+      console.log("response:", response);
+    } catch (error) {
+      console.log("error:", error);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [radioGroupState]);
 
   return (
     <MainLayout>
@@ -644,27 +652,27 @@ export default function MatchViewDetail() {
                   >
                     <div className="flex items-center space-x-2 flex-row py-3 ">
                       <RadioGroupItem
-                        value="decimal"
-                        id="decimal"
+                        value="DECIMAL"
+                        id="DECIMAL"
                         className="text-[rgba(255,255,255,1)] border-[rgba(255,255,255,1)]"
                       />
-                      <Label htmlFor="decimal">Decimal</Label>
+                      <Label htmlFor="DECIMAL">Decimal</Label>
                     </div>
                     <div className="flex items-center space-x-2">
                       <RadioGroupItem
-                        value="hongkong"
-                        id="hongkong"
+                        value="HONGKONG"
+                        id="HONGKONG"
                         className="text-[rgba(255,255,255,1)] border-[rgba(255,255,255,1)]"
                       />
-                      <Label htmlFor="hongkong">HongKong</Label>
+                      <Label htmlFor="HONGKONG">HongKong</Label>
                     </div>
                     <div className="flex items-center space-x-2">
                       <RadioGroupItem
-                        value="malaysia"
-                        id="malaysia"
+                        value="MALAY"
+                        id="MALAY"
                         className="text-[rgba(255,255,255,1)] border-[rgba(255,255,255,1)]"
                       />
-                      <Label htmlFor="malaysia">Malaysia</Label>
+                      <Label htmlFor="MALAY">Malaysia</Label>
                     </div>
                   </RadioGroup>
                 </TabsContent>
