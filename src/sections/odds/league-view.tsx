@@ -583,6 +583,9 @@ const LeagueView = () => {
                           width={16}
                           height={16}
                           color="rgba(170,170,170,1)"
+                          onClick={(e) => {
+                            e.stopPropagation(); // Ngăn chặn lan truyền sự kiện click
+                          }}
                         />
 
                         {item.isLive && (
