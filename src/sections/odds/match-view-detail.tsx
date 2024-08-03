@@ -124,6 +124,12 @@ export default function MatchViewDetail() {
   const [showTrackingLive, setShowTrackingLive] = useState(true);
   const [typePopover, setTypePopover] = useState<string | null>(null);
   const [favorite, setFavorite] = useState<boolean | null>();
+  const [radioGroupState, setRadioGroupState] = useState({
+    numberLine: "3",
+    oddsType: "decimal",
+  });
+
+  console.log("radioGroupState:", radioGroupState);
 
   const telegram = useTelegram();
 
@@ -165,6 +171,13 @@ export default function MatchViewDetail() {
 
   const isMobileDevice = () => {
     return /Mobi|Android|iPhone|iPad|iPod/.test(navigator.userAgent);
+  };
+
+  const handleRadioGroupChange = (name: string, value: string) => {
+    setRadioGroupState((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
   };
 
   const handleAddRemoveFavorite = async () => {
@@ -566,43 +579,51 @@ export default function MatchViewDetail() {
                   </TabsTrigger>
                 </TabsList>
                 <TabsContent value="number_line">
-                  <RadioGroup defaultValue="option-one" className="flex flex-row justify-around">
+                  <RadioGroup
+                    value={radioGroupState.numberLine}
+                    onValueChange={(value) => handleRadioGroupChange("numberLine", value)}
+                    className="flex flex-row justify-around"
+                  >
                     <div className="flex items-center space-x-2 flex-row py-3 ">
                       <RadioGroupItem
-                        value="option-one"
-                        id="option-one"
+                        value="1"
+                        id="1"
                         className="text-[rgba(255,255,255,1)] border-[rgba(255,255,255,1)]"
                       />
-                      <Label htmlFor="option-one">1 kèo</Label>
+                      <Label htmlFor="1">1 kèo</Label>
                     </div>
                     <div className="flex items-center space-x-2">
                       <RadioGroupItem
-                        value="option-two"
-                        id="option-two"
+                        value="3"
+                        id="3"
                         className="text-[rgba(255,255,255,1)] border-[rgba(255,255,255,1)]"
                       />
-                      <Label htmlFor="option-two">3 kèo</Label>
+                      <Label htmlFor="3">3 kèo</Label>
                     </div>
                     <div className="flex items-center space-x-2">
                       <RadioGroupItem
-                        value="option-three"
-                        id="option-three"
+                        value="5"
+                        id="5"
                         className="text-[rgba(255,255,255,1)] border-[rgba(255,255,255,1)]"
                       />
-                      <Label htmlFor="option-three">5 kèo</Label>
+                      <Label htmlFor="5">5 kèo</Label>
                     </div>
                     <div className="flex items-center space-x-2">
                       <RadioGroupItem
-                        value="all"
-                        id="all"
+                        value="0"
+                        id="0"
                         className="text-[rgba(255,255,255,1)] border-[rgba(255,255,255,1)]"
                       />
-                      <Label htmlFor="all">Tất cả</Label>
+                      <Label htmlFor="0">Tất cả</Label>
                     </div>
                   </RadioGroup>
                 </TabsContent>
                 <TabsContent value="odds_type">
-                  <RadioGroup defaultValue="option-one" className="flex flex-row justify-around">
+                  <RadioGroup
+                    value={radioGroupState.oddsType}
+                    onValueChange={(value) => handleRadioGroupChange("oddsType", value)}
+                    className="flex flex-row justify-around"
+                  >
                     <div className="flex items-center space-x-2 flex-row py-3 ">
                       <RadioGroupItem
                         value="decimal"
@@ -674,7 +695,6 @@ export default function MatchViewDetail() {
                     </div>
                   </div>
                   <div className="flex flex-col justify-between items-center">
-                    {/* <Dialog.Trigger> */}
                     <Icon
                       icon="mage:chart-fill"
                       className="hover:cursor-pointer"
@@ -682,7 +702,7 @@ export default function MatchViewDetail() {
                       height={16}
                       color="rgba(170,170,170,1)"
                     />
-                    {/* </Dialog.Trigger> */}
+
                     {item.isLive && (
                       <Icon icon="fluent:live-20-filled" width={16} height={16} color="rgba(245,93,62,1)" />
                     )}
@@ -708,9 +728,6 @@ export default function MatchViewDetail() {
             </PopoverContent>
           )}
         </Popover>
-        <Dialog.Content className="sm:max-w-[425px]">
-          <p>nội dung popup phân tích</p>
-        </Dialog.Content>
       </Dialog.Root>
     </MainLayout>
   );
