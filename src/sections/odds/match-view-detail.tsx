@@ -409,7 +409,7 @@ export default function MatchViewDetail() {
   useEffect(() => {
     const handleGetSetting = async () => {
       try {
-        const response = await axios.post("/api/setting", {
+        const response = await axios.post("/api/setting/get", {
           request_id: searchParams.get("request_id"),
           key: ["line_number", "odds_format"],
         });
