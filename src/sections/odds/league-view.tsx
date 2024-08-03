@@ -512,7 +512,7 @@ const LeagueView = () => {
             type="multiple"
             value={openItems}
             onValueChange={handleValueChange}
-            className="w-full m-auto p-2 rounded-[10px] h-full"
+            className="w-full m-auto p-2 rounded-[10px] h-full mb-[55px]"
           >
             {demoFavorite.map((tag, index) => (
               <AccordionItem key={index} value={tag.name}>
