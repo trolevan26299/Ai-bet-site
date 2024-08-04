@@ -507,7 +507,7 @@ export default function MatchViewDetail() {
               </Popover.Trigger>
 
               <Popover.Content
-                className="w-[95%] m-auto mt-3 min-h-[60vh]  bg-[rgba(41,53,67,1)] rounded-[10px]  text-[rgba(255,255,255,1)] max-h-[80vh] overflow-y-auto"
+                className="w-[95%] m-auto mt-3 h-full   bg-[rgba(41,53,67,1)] rounded-[10px]  text-[rgba(255,255,255,1)] max-h-[80vh] overflow-y-auto"
                 style={{ border: "none" }}
               >
                 {loadingLeaguePopup ? (
