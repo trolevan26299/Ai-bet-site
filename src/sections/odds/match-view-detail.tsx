@@ -219,7 +219,8 @@ export default function MatchViewDetail() {
         data: { line_number: Number(value) },
       });
       if (response.data.ok) {
-        setNumberLine(response.data.answer.data.line_number.toString());
+        window.location.reload();
+        // setNumberLine(response.data.answer.data.line_number.toString());
       }
     } catch (error) {
       console.log("error:", error);
@@ -234,7 +235,8 @@ export default function MatchViewDetail() {
         data: { odds_format: value },
       });
       if (response.data.ok) {
-        setOddsType(response.data.answer.data.odds_format.toUpperCase());
+        window.location.reload();
+        // setOddsType(response.data.answer.data.odds_format.toUpperCase());
       }
     } catch (error) {
       console.log("error:", error);
@@ -407,6 +409,7 @@ export default function MatchViewDetail() {
     return () => clearInterval(intervalId);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [latestOdds, endBet, disableBtn, haveError, errorCount]);
+
   useEffect(() => {
     const handleResize = () => {
       const width = window.innerWidth;
@@ -437,6 +440,7 @@ export default function MatchViewDetail() {
     };
   }, []);
 
+  // load iframe sau 2s để show live tracking
   useEffect(() => {
     const timer = setTimeout(() => {
       setIframeLoaded(true);
@@ -445,6 +449,7 @@ export default function MatchViewDetail() {
     return () => clearTimeout(timer);
   }, []);
 
+  // hàm lấy setting ban đầu
   useEffect(() => {
     handleGetSetting();
     // eslint-disable-next-line react-hooks/exhaustive-deps
