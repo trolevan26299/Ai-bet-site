@@ -445,7 +445,8 @@ export default function MatchViewDetail() {
           data: { odds_format: value },
         });
         if (response.data.oke) {
-          setOddsType(response.data.answer.data.odds_format);
+          console.log("rssssssss:", response);
+          setOddsType(response.data.answer.data.odds_format.toUpperCase());
         }
       } catch (error) {
         console.log("error:", error);
