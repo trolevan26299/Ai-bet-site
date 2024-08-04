@@ -123,7 +123,6 @@ export default function MatchViewDetail() {
   const [iframeHeight, setIframeHeight] = useState("0px");
   const [errorCount, setErrorCount] = useState(0);
   const [showTrackingLive, setShowTrackingLive] = useState(true);
-  const [typePopover, setTypePopover] = useState<string | null>(null);
   const [favorite, setFavorite] = useState<boolean | null>();
   const [numberLine, setNumberLine] = useState<string>();
   const [oddsType, setOddsType] = useState<string>();
@@ -137,10 +136,6 @@ export default function MatchViewDetail() {
 
   const leagueNoCorner = (league?: string) => {
     return league?.includes(" Corners") ? league?.replace(" Corners", "") : league;
-  };
-
-  const handlePopoverOpen = (popoverId: string | null) => {
-    setTypePopover(popoverId);
   };
 
   const matchNoCorner = () => {
@@ -499,12 +494,7 @@ export default function MatchViewDetail() {
             <Image src="/assets/league_logo.png" alt="no-content" className="w-[34px] h-[27.2px]" />
             <Popover.Root onOpenChange={(open) => handleOpenLeague(open)}>
               <Popover.Trigger>
-                <div
-                  className="flex flex-row justify-center items-center hover:cursor-pointer"
-                  onClick={() => {
-                    handlePopoverOpen("league");
-                  }}
-                >
+                <div className="flex flex-row justify-center items-center hover:cursor-pointer">
                   <p className="text-sm font-bold w-[85%] leading-[1.1rem]">{dataScreenInfo[0]?.league_name}</p>
                   <Icon
                     icon="icon-park-solid:down-one"
@@ -520,11 +510,10 @@ export default function MatchViewDetail() {
                 className="w-[95%] m-auto mt-3  bg-[rgba(41,53,67,1)] rounded-[10px]  text-[rgba(255,255,255,1)] max-h-[80vh] overflow-y-auto"
                 style={{ border: "none" }}
               >
-                {
-                  // loadingLeaguePopup ? (
-                  //   <LoadingPopup />
-                  // ) : (
-                  listLeague.map((item: any) => (
+                {loadingLeaguePopup ? (
+                  <LoadingPopup />
+                ) : (
+                  leagueExample.map((item: any) => (
                     <div
                       className="p-2 flex flex-row justify-between bg-[rgba(30,42,56,1)] rounded-[10px] mb-[10px]"
                       key={item.id}
@@ -596,8 +585,7 @@ export default function MatchViewDetail() {
                       </div>
                     </div>
                   ))
-                  // )
-                }
+                )}
               </Popover.Content>
             </Popover.Root>
             {favorite ? (
@@ -627,7 +615,6 @@ export default function MatchViewDetail() {
                 height={23}
                 color="rgba(143,149,156,1)"
                 className="hover:cursor-pointer"
-                onClick={() => handlePopoverOpen("setting")}
               />
             </Popover.Trigger>
 
