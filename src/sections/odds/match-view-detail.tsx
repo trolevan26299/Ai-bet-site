@@ -473,7 +473,7 @@ export default function MatchViewDetail() {
           />
           <div className="text-[rgba(255,255,255,1)] flex flex-row justify-center items-center pr-[10px]">
             <Image src="/assets/league_logo.png" alt="no-content" className="w-[34px] h-[27.2px]" />
-            <Popover.Root>
+            <Popover.Root onOpenChange={(open) => console.log("open=====>:", open)}>
               <Popover.Trigger>
                 <div
                   className="flex flex-row justify-center items-center hover:cursor-pointer"
