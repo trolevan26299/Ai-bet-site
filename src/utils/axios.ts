@@ -25,7 +25,7 @@ export const endpoints = {
     get: "favorite_leagues/get_leagues_list",
   },
   setting: {
-    ROOT: "user/setting",
+    ROOT: "user/settings",
     get: "user/getSettings",
   },
 };
