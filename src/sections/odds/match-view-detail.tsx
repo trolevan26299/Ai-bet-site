@@ -128,7 +128,7 @@ export default function MatchViewDetail() {
   const [oddsType, setOddsType] = useState<string>();
   const [loadingLeaguePopup, setLoadingLeaguePopup] = useState(false);
   const [listLeague, setListLeague] = useState<IMatchData[]>([]);
-
+  console.log("listLeague:", listLeague);
   const telegram = useTelegram();
 
   const matchParam = searchParams.get("match");
@@ -231,7 +231,7 @@ export default function MatchViewDetail() {
         });
         if (response.data.ok) {
           setListLeague(response?.data?.data);
-          // setLoadingLeaguePopup(false);
+          setLoadingLeaguePopup(false);
         }
       }
     } catch (error) {
