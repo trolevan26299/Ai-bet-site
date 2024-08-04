@@ -495,7 +495,7 @@ export default function MatchViewDetail() {
                 </PopoverTrigger>
                 {favorite ? (
                   <Icon
-                    onClick={handleAddRemoveFavorite}
+                    onClick={() => handleAddRemoveFavorite}
                     icon="emojione:star"
                     width={20}
                     height={20}
@@ -503,7 +503,7 @@ export default function MatchViewDetail() {
                   />
                 ) : (
                   <Icon
-                    onClick={handleAddRemoveFavorite}
+                    onClick={() => handleAddRemoveFavorite}
                     icon="material-symbols-light:star-outline"
                     width={30}
                     height={30}
