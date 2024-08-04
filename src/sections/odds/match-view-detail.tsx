@@ -173,7 +173,7 @@ export default function MatchViewDetail() {
   // Hàm thêm và xóa kèo yêu thích
   const handleAddRemoveFavorite = async () => {
     try {
-      if (favorite) {
+      if (favorite === true) {
         setFavorite(false);
         const response = await axios.put("/api/favorite", {
           request_id: searchParams.get("request_id"),
