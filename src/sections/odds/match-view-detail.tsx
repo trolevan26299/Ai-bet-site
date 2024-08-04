@@ -20,7 +20,7 @@ import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 import "./index.css";
-import LoadingPopup from "./loading-popup";
+import LoadingPopup from "../../components/loading-screen/loading-popup";
 
 const leagueExample = [
   {
