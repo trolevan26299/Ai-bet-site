@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 
 import Menu from "@/components/app/menu/menu";
@@ -18,7 +19,7 @@ import { Dialog } from "@radix-ui/themes";
 import axios from "axios";
 import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import "./index.css";
 import { set } from "date-fns";
 
@@ -420,40 +421,38 @@ export default function MatchViewDetail() {
     return () => clearTimeout(timer);
   }, []);
 
-  useEffect(() => {
-    const handleSetNumberLine = async () => {
+  const handleSetNumberLine = useCallback(
+    async (value: string) => {
       try {
-        const reseponse = await axios.post("/api/setting/post", {
+        const response = await axios.post("/api/setting/post", {
           request_id: searchParams.get("request_id"),
-          data: { line_number: Number(numberLine) },
+          data: { line_number: Number(value) },
         });
-        if (reseponse.data.oke) {
-          setNumberLine(reseponse?.data?.answer?.data?.line_number?.toString());
+        if (response.data.oke) {
+          setNumberLine(response.data.answer.data.line_number.toString());
         }
       } catch (error) {
         console.log("error:", error);
       }
-    };
-    handleSetNumberLine();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [numberLine]);
-  useEffect(() => {
-    const handleSetNumberLine = async () => {
+    },
+    [numberLine]
+  );
+  const handleSetOddsType = useCallback(
+    async (value: string) => {
       try {
-        const reseponse = await axios.post("/api/setting/post", {
+        const response = await axios.post("/api/setting/post", {
           request_id: searchParams.get("request_id"),
-          data: { odds_format: oddsType },
+          data: { odds_format: value },
         });
-        if (reseponse.data.oke) {
-          setOddsType(reseponse?.data?.answer?.data?.odds_format);
+        if (response.data.oke) {
+          setOddsType(response.data.answer.data.odds_format);
         }
       } catch (error) {
         console.log("error:", error);
       }
-    };
-    handleSetNumberLine();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [numberLine]);
+    },
+    [searchParams]
+  );
 
   useEffect(() => {
     handleGetSetting();
@@ -648,7 +647,10 @@ export default function MatchViewDetail() {
                 <TabsContent value="number_line">
                   <RadioGroup
                     value={numberLine}
-                    onValueChange={(value) => handleRadioGroupChange("numberLine", value)}
+                    onValueChange={(value) => {
+                      // handleRadioGroupChange("numberLine", value);
+                      handleSetNumberLine(value);
+                    }}
                     className="flex flex-row justify-around"
                   >
                     <div className="flex items-center space-x-2 flex-row py-3 ">
@@ -688,7 +690,10 @@ export default function MatchViewDetail() {
                 <TabsContent value="odds_type">
                   <RadioGroup
                     value={oddsType}
-                    onValueChange={(value) => handleRadioGroupChange("oddsType", value)}
+                    onValueChange={(value) => {
+                      // handleRadioGroupChange("oddsType", value)}
+                      handleSetOddsType(value);
+                    }}
                     className="flex flex-row justify-around"
                   >
                     <div className="flex items-center space-x-2 flex-row py-3 ">
