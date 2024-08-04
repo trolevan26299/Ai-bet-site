@@ -202,7 +202,7 @@ export default function MatchViewDetail() {
         key: ["line_number", "odds_format"],
       });
       if (response.data) {
-        setNumberLine(response.data.line_number.toString());
+        setNumberLine(response.data.line_number.toString() || "3");
         setOddsType(response.data.odds_format);
       }
     } catch (error) {
@@ -264,7 +264,7 @@ export default function MatchViewDetail() {
           setEndBet(true); // kết thúc trận đấu
         } else {
           if (oddsDataValid) {
-            const transformedData = transformData(oddsRes?.data?.message?.answer, numberLine ?? "3");
+            const transformedData = transformData(oddsRes?.data?.message?.answer, numberLine as string);
             setDataScreenInfo((prevData) => [...prevData, ...oddsRes?.data?.message?.answer]);
             combinedOdds = [
               ...combinedOdds,
@@ -275,7 +275,7 @@ export default function MatchViewDetail() {
             ];
           }
           if (cornersDataValid) {
-            const transformedDataCorner = transformDataCorner(cornerRes?.data?.message?.answer, numberLine ?? "3");
+            const transformedDataCorner = transformDataCorner(cornerRes?.data?.message?.answer, numberLine as string);
             setDataScreenInfo((prevData) => [...prevData, ...cornerRes?.data?.message?.answer]);
             combinedOdds = [
               ...combinedOdds,
@@ -326,7 +326,7 @@ export default function MatchViewDetail() {
         } else {
           const latestDataScreenInfo = [];
           if (oddsDataValid === true) {
-            const transformedData = transformData(newOddsRes?.data?.message?.answer, numberLine ?? "3");
+            const transformedData = transformData(newOddsRes?.data?.message?.answer, numberLine as string);
             latestDataScreenInfo.push(newOddsRes?.data?.message?.answer[0]);
 
             combinedLatestOdds = [
@@ -339,7 +339,10 @@ export default function MatchViewDetail() {
           }
 
           if (cornersDataValid === true) {
-            const transformedDataCorner = transformDataCorner(newCornerRes?.data?.message?.answer, numberLine ?? "3");
+            const transformedDataCorner = transformDataCorner(
+              newCornerRes?.data?.message?.answer,
+              numberLine as string
+            );
             latestDataScreenInfo.push(newCornerRes?.data?.message?.answer[0]);
 
             combinedLatestOdds = [
