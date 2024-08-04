@@ -19,7 +19,7 @@ import { Dialog } from "@radix-ui/themes";
 import axios from "axios";
 import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import "./index.css";
 import { set } from "date-fns";
 
@@ -128,7 +128,6 @@ export default function MatchViewDetail() {
   const [favorite, setFavorite] = useState<boolean | null>();
   const [numberLine, setNumberLine] = useState<string>();
   const [oddsType, setOddsType] = useState<string>();
-  const firstRender = useRef(true);
 
   const telegram = useTelegram();
 
@@ -172,28 +171,26 @@ export default function MatchViewDetail() {
   };
 
   // Hàm thêm và xóa kèo yêu thích
-  const handleAddRemoveFavorite = useCallback(async () => {
-    if (firstRender.current) {
-      firstRender.current = false;
-      return;
-    }
+  const handleAddRemoveFavorite = useCallback(async (value: string) => {
     try {
-      const currentFavoriteStatus = favorite;
       const url = "/api/favorite";
-      const method = currentFavoriteStatus ? axios.put : axios.post;
+      const method = favorite ? axios.put : axios.post;
       const response = await method(url, {
         request_id: searchParams.get("request_id"),
         league_id: dataScreenInfo[0]?.league_id,
       });
 
-      if (!response.data.ok) {
-        setFavorite(currentFavoriteStatus);
+      if (response.data.ok) {
+        setFavorite(!favorite);
+      } else {
+        setFavorite(favorite);
       }
     } catch (error) {
       setFavorite(favorite);
       console.log("error:", error);
     }
-  }, [favorite]);
+  }, []);
+
   // Hàm lấy setting bao gồm : số lượng kèo và loại kèo
   const handleGetSetting = async () => {
     try {
@@ -464,11 +461,6 @@ export default function MatchViewDetail() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // Hàm thêm và xóa kèo yêu thích
-  useEffect(() => {
-    handleAddRemoveFavorite();
-  }, [favorite]);
-
   return (
     <MainLayout>
       <Dialog.Root>
@@ -503,7 +495,7 @@ export default function MatchViewDetail() {
                 </PopoverTrigger>
                 {favorite ? (
                   <Icon
-                    onClick={() => setFavorite(!favorite)}
+                    onClick={handleAddRemoveFavorite}
                     icon="emojione:star"
                     width={20}
                     height={20}
@@ -511,7 +503,7 @@ export default function MatchViewDetail() {
                   />
                 ) : (
                   <Icon
-                    onClick={() => setFavorite(!favorite)}
+                    onClick={handleAddRemoveFavorite}
                     icon="material-symbols-light:star-outline"
                     width={30}
                     height={30}
