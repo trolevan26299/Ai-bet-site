@@ -20,6 +20,8 @@ import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 import "./index.css";
+import Loading from "@/app/loading";
+import LoadingPopup from "./loading-popup";
 
 const leagueExample = [
   {
@@ -127,6 +129,7 @@ export default function MatchViewDetail() {
   const [numberLine, setNumberLine] = useState<string>();
   const [oddsType, setOddsType] = useState<string>();
   const [loadingLeaguePopup, setLoadingLeaguePopup] = useState(false);
+  const [listLeague, setListLeague] = useState<IMatchData[]>([]);
 
   const telegram = useTelegram();
 
@@ -232,8 +235,10 @@ export default function MatchViewDetail() {
           request_id: searchParams.get("request_id"),
           is_get_bets: false,
         });
-        setLoadingLeaguePopup(false);
-        console.log("response open popup:", response);
+        if (response.data.ok) {
+          setListLeague(response?.data?.data);
+          setLoadingLeaguePopup(false);
+        }
       }
     } catch (error) {
       setLoadingLeaguePopup(false);
@@ -516,73 +521,82 @@ export default function MatchViewDetail() {
                 className="w-[95%] m-auto mt-3  bg-[rgba(41,53,67,1)] rounded-[10px]  text-[rgba(255,255,255,1)] max-h-[80vh] overflow-y-auto"
                 style={{ border: "none" }}
               >
-                {leagueExample.map((item) => (
-                  <div
-                    className="p-2 flex flex-row justify-between bg-[rgba(30,42,56,1)] rounded-[10px] mb-[10px]"
-                    key={item.id}
-                  >
-                    <div className="flex flex-col justify-between items-start">
-                      <div className="flex flex-row gap-1 items-center">
-                        <Icon icon="fluent:sport-soccer-24-filled" width={16} height={16} color="rgba(170,170,170,1)" />
-                        <p className="pl-2 text-[10px] font-normal text-[rgba(170,170,170,1)]">{item.container}</p>
-                        <Icon icon="ic:outline-arrow-right" width={20} height={20} color="rgba(170,170,170,1)" />
-                        <p className="text-[10px] font-normal text-[rgba(170,170,170,1)]">{item.name}</p>
+                {loadingLeaguePopup ? (
+                  <LoadingPopup />
+                ) : (
+                  listLeague.map((item: any) => (
+                    <div
+                      className="p-2 flex flex-row justify-between bg-[rgba(30,42,56,1)] rounded-[10px] mb-[10px]"
+                      key={item.id}
+                    >
+                      <div className="flex flex-col justify-between items-start">
+                        <div className="flex flex-row gap-1 items-center">
+                          <Icon
+                            icon="fluent:sport-soccer-24-filled"
+                            width={16}
+                            height={16}
+                            color="rgba(170,170,170,1)"
+                          />
+                          <p className="pl-2 text-[10px] font-normal text-[rgba(170,170,170,1)]">{item.container}</p>
+                          <Icon icon="ic:outline-arrow-right" width={20} height={20} color="rgba(170,170,170,1)" />
+                          <p className="text-[10px] font-normal text-[rgba(170,170,170,1)]">{item.name}</p>
+                        </div>
+                        <p
+                          className={`${
+                            item.isLive ? "text-[rgba(70,230,164,1)]" : "text-[rgba(165,165,165,1)]"
+                          } text-[9px] font-normal`}
+                        >
+                          {item.isLive ? `${item.time} ${item.scope}` : item.time}
+                        </p>
+                        <div className="flex flex-row justify-start items-center gap-2">
+                          <Image
+                            src="https://w7.pngwing.com/pngs/982/984/png-transparent-red-and-white-flag-flag-of-spain-iberian-peninsula-computer-icons-spanish-free-spain-flag-svg-miscellaneous-english-country-thumbnail.png"
+                            alt="no-content"
+                            className="w-[20px] h-[20px]"
+                          />
+                          <p className="text-[rgba(251,255,255,1)] text-[14.41px] font-normal">{item.home}</p>
+                        </div>
+                        <div className="flex flex-row justify-start items-center gap-2">
+                          <Image
+                            src="https://upload.wikimedia.org/wikipedia/en/thumb/8/8b/England_national_football_team_crest.svg/1200px-England_national_football_team_crest.svg.png"
+                            alt="no-content"
+                            className="w-[20px] h-[20px]"
+                          />
+                          <p className="text-[rgba(251,255,255,1)] text-[14.41px] font-normal">{item.away}</p>
+                        </div>
                       </div>
-                      <p
-                        className={`${
-                          item.isLive ? "text-[rgba(70,230,164,1)]" : "text-[rgba(165,165,165,1)]"
-                        } text-[9px] font-normal`}
-                      >
-                        {item.isLive ? `${item.time} ${item.scope}` : item.time}
-                      </p>
-                      <div className="flex flex-row justify-start items-center gap-2">
-                        <Image
-                          src="https://w7.pngwing.com/pngs/982/984/png-transparent-red-and-white-flag-flag-of-spain-iberian-peninsula-computer-icons-spanish-free-spain-flag-svg-miscellaneous-english-country-thumbnail.png"
-                          alt="no-content"
-                          className="w-[20px] h-[20px]"
+                      <div className="flex flex-col justify-between items-center">
+                        <Icon
+                          icon="mage:chart-fill"
+                          className="hover:cursor-pointer"
+                          width={16}
+                          height={16}
+                          color="rgba(170,170,170,1)"
                         />
-                        <p className="text-[rgba(251,255,255,1)] text-[14.41px] font-normal">{item.home}</p>
-                      </div>
-                      <div className="flex flex-row justify-start items-center gap-2">
-                        <Image
-                          src="https://upload.wikimedia.org/wikipedia/en/thumb/8/8b/England_national_football_team_crest.svg/1200px-England_national_football_team_crest.svg.png"
-                          alt="no-content"
-                          className="w-[20px] h-[20px]"
-                        />
-                        <p className="text-[rgba(251,255,255,1)] text-[14.41px] font-normal">{item.away}</p>
-                      </div>
-                    </div>
-                    <div className="flex flex-col justify-between items-center">
-                      <Icon
-                        icon="mage:chart-fill"
-                        className="hover:cursor-pointer"
-                        width={16}
-                        height={16}
-                        color="rgba(170,170,170,1)"
-                      />
 
-                      {item.isLive && (
-                        <Icon icon="fluent:live-20-filled" width={16} height={16} color="rgba(245,93,62,1)" />
-                      )}
-                      {item.isLive && (
-                        <div
-                          className="w-[22px] h-[17px] p-[2px] rounded-[5px] font-bold flex flex-row justify-center items-center text-[rgba(rgba(255,255,255,1))] bg-[rgba(41,53,66,1)] "
-                          style={{ border: "0.68px solid rgba(64,74,86,1)" }}
-                        >
-                          {item.homeScore}
-                        </div>
-                      )}
-                      {item.isLive && (
-                        <div
-                          className="w-[22px] h-[17px] p-[2px] rounded-[5px] font-bold flex flex-row justify-center items-center text-[rgba(rgba(255,255,255,1))] bg-[rgba(41,53,66,1)] "
-                          style={{ border: "0.68px solid rgba(64,74,86,1)" }}
-                        >
-                          {item.awayScore}
-                        </div>
-                      )}
+                        {item.isLive && (
+                          <Icon icon="fluent:live-20-filled" width={16} height={16} color="rgba(245,93,62,1)" />
+                        )}
+                        {item.isLive && (
+                          <div
+                            className="w-[22px] h-[17px] p-[2px] rounded-[5px] font-bold flex flex-row justify-center items-center text-[rgba(rgba(255,255,255,1))] bg-[rgba(41,53,66,1)] "
+                            style={{ border: "0.68px solid rgba(64,74,86,1)" }}
+                          >
+                            {item.homeScore}
+                          </div>
+                        )}
+                        {item.isLive && (
+                          <div
+                            className="w-[22px] h-[17px] p-[2px] rounded-[5px] font-bold flex flex-row justify-center items-center text-[rgba(rgba(255,255,255,1))] bg-[rgba(41,53,66,1)] "
+                            style={{ border: "0.68px solid rgba(64,74,86,1)" }}
+                          >
+                            {item.awayScore}
+                          </div>
+                        )}
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  ))
+                )}
               </Popover.Content>
             </Popover.Root>
             {favorite ? (
