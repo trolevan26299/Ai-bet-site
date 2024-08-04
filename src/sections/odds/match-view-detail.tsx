@@ -21,6 +21,7 @@ import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 import "./index.css";
+import { set } from "date-fns";
 
 const leagueExample = [
   {
@@ -219,7 +220,6 @@ export default function MatchViewDetail() {
       });
       if (response.data.ok) {
         window.location.reload();
-        // setNumberLine(response.data.answer.data.line_number.toString());
       }
     } catch (error) {
       console.log("error:", error);
@@ -235,7 +235,6 @@ export default function MatchViewDetail() {
       });
       if (response.data.ok) {
         window.location.reload();
-        // setOddsType(response.data.answer.data.odds_format.toUpperCase());
       }
     } catch (error) {
       console.log("error:", error);
@@ -644,6 +643,7 @@ export default function MatchViewDetail() {
                   <RadioGroup
                     value={numberLine}
                     onValueChange={(value) => {
+                      setNumberLine(value);
                       handleSetNumberLine(value);
                     }}
                     className="flex flex-row justify-around"
@@ -686,6 +686,7 @@ export default function MatchViewDetail() {
                   <RadioGroup
                     value={oddsType}
                     onValueChange={(value) => {
+                      setOddsType(value);
                       handleSetOddsType(value);
                     }}
                     className="flex flex-row justify-around"
