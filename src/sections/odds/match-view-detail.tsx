@@ -491,8 +491,8 @@ export default function MatchViewDetail() {
                   <Icon
                     onClick={handleAddRemoveFavorite}
                     icon="emojione:star"
-                    width={18.9}
-                    height={18}
+                    width={20}
+                    height={20}
                     className="hover:cursor-pointer"
                   />
                 ) : (
