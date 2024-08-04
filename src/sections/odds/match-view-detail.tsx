@@ -126,6 +126,7 @@ export default function MatchViewDetail() {
   const [favorite, setFavorite] = useState<boolean | null>();
   const [numberLine, setNumberLine] = useState<string>();
   const [oddsType, setOddsType] = useState<string>();
+  const [loadingLeaguePopup, setLoadingLeaguePopup] = useState(false);
 
   const telegram = useTelegram();
 
@@ -220,6 +221,25 @@ export default function MatchViewDetail() {
       console.log("error:", error);
     }
   }, []);
+
+  // Hàm mở popover league
+  const handleOpenLeague = async (open: boolean) => {
+    setLoadingLeaguePopup(true);
+    try {
+      if (open) {
+        const response = await axios.post("/api/league/match-in-league", {
+          league: dataScreenInfo[0].league_name,
+          request_id: searchParams.get("request_id"),
+          is_get_bets: false,
+        });
+        setLoadingLeaguePopup(false);
+        console.log("response open popup:", response);
+      }
+    } catch (error) {
+      setLoadingLeaguePopup(false);
+      console.error("error:", error);
+    }
+  };
 
   // Hàm set loại kèo
   const handleSetOddsType = useCallback(async (value: string) => {
@@ -473,7 +493,7 @@ export default function MatchViewDetail() {
           />
           <div className="text-[rgba(255,255,255,1)] flex flex-row justify-center items-center pr-[10px]">
             <Image src="/assets/league_logo.png" alt="no-content" className="w-[34px] h-[27.2px]" />
-            <Popover.Root onOpenChange={(open) => console.log("open=====>:", open)}>
+            <Popover.Root onOpenChange={(open) => handleOpenLeague(open)}>
               <Popover.Trigger>
                 <div
                   className="flex flex-row justify-center items-center hover:cursor-pointer"

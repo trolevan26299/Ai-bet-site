@@ -28,4 +28,7 @@ export const endpoints = {
     ROOT: "user/settings",
     get: "user/getSettings",
   },
+  league: {
+    matchInLeague: "search/match_webbot",
+  },
 };
