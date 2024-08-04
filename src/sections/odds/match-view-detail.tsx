@@ -440,8 +440,8 @@ export default function MatchViewDetail() {
         request_id: searchParams.get("request_id"),
         data: { odds_format: value },
       });
+      console.log("rssssssss:", response);
       if (response.data.oke) {
-        console.log("rssssssss:", response);
         setOddsType(response.data.answer.data.odds_format.toUpperCase());
       }
     } catch (error) {
