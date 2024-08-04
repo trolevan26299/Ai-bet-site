@@ -173,22 +173,30 @@ export default function MatchViewDetail() {
   // Hàm thêm và xóa kèo yêu thích
   const handleAddRemoveFavorite = async () => {
     try {
-      const currentFavoriteStatus = favorite;
-      setFavorite(!favorite);
-      console.log("vào đây");
-      const url = "/api/favorite";
-      const method = currentFavoriteStatus ? axios.put : axios.post;
-      const response = await method(url, {
-        request_id: searchParams.get("request_id"),
-        league_id: dataScreenInfo[0]?.league_id,
-      });
-      console.log("response:", response);
-
-      if (!response.data.ok) {
-        setFavorite(currentFavoriteStatus);
+      if (favorite) {
+        setFavorite(false);
+        const response = await axios.put("/api/favorite", {
+          request_id: searchParams.get("request_id"),
+          league_id: dataScreenInfo[0]?.league_id,
+        });
+        if (response.data.oke) {
+          setFavorite(false);
+        } else {
+          setFavorite(true);
+        }
+      } else {
+        setFavorite(true);
+        const response = await axios.post("/api/favorite", {
+          request_id: searchParams.get("request_id"),
+          league_id: dataScreenInfo[0]?.league_id,
+        });
+        if (response.data.oke) {
+          setFavorite(true);
+        } else {
+          setFavorite(false);
+        }
       }
     } catch (error) {
-      setFavorite(favorite);
       console.log("error:", error);
     }
   };
