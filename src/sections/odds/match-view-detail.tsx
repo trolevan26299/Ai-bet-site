@@ -179,7 +179,7 @@ export default function MatchViewDetail() {
           request_id: searchParams.get("request_id"),
           league_id: dataScreenInfo[0]?.league_id,
         });
-        if (response.data.oke) {
+        if (response.data.ok) {
           setFavorite(false);
         } else {
           setFavorite(true);
@@ -190,7 +190,7 @@ export default function MatchViewDetail() {
           request_id: searchParams.get("request_id"),
           league_id: dataScreenInfo[0]?.league_id,
         });
-        if (response.data.oke) {
+        if (response.data.ok) {
           setFavorite(true);
         } else {
           setFavorite(false);
