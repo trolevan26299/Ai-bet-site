@@ -263,7 +263,7 @@ export default function MatchViewDetail() {
           setEndBet(true); // kết thúc trận đấu
         } else {
           if (oddsDataValid) {
-            const transformedData = transformData(oddsRes?.data?.message?.answer, cornerRes?.data?.line_number || "3");
+            const transformedData = transformData(oddsRes?.data?.message?.answer, oddsRes?.data?.line_number || "3");
             setDataScreenInfo((prevData) => [...prevData, ...oddsRes?.data?.message?.answer]);
             combinedOdds = [
               ...combinedOdds,
