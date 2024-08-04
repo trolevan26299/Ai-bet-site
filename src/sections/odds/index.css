@@ -1,7 +1,7 @@
 div[data-radix-popper-content-wrapper] {
   width: 100%;
   height: 100%;
-  transform: translate(0px 39px);
+  transform: translate(0px 39px) !important;
 }
 .no-scrollbar::-webkit-scrollbar {
   display: none;
