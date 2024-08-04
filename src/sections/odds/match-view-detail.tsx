@@ -174,6 +174,7 @@ export default function MatchViewDetail() {
   const handleAddRemoveFavorite = async () => {
     try {
       if (favorite) {
+        setFavorite(false);
         const response = await axios.put("/api/favorite", {
           request_id: searchParams.get("request_id"),
           league_id: dataScreenInfo[0]?.league_id,
@@ -182,6 +183,7 @@ export default function MatchViewDetail() {
           setFavorite(false);
         }
       } else {
+        setFavorite(true);
         const response = await axios.post("/api/favorite", {
           request_id: searchParams.get("request_id"),
           league_id: dataScreenInfo[0]?.league_id,
