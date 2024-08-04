@@ -520,9 +520,10 @@ export default function MatchViewDetail() {
                 className="w-[95%] m-auto mt-3  bg-[rgba(41,53,67,1)] rounded-[10px]  text-[rgba(255,255,255,1)] max-h-[80vh] overflow-y-auto"
                 style={{ border: "none" }}
               >
-                {loadingLeaguePopup ? (
-                  <LoadingPopup />
-                ) : (
+                {
+                  // loadingLeaguePopup ? (
+                  //   <LoadingPopup />
+                  // ) : (
                   listLeague.map((item: any) => (
                     <div
                       className="p-2 flex flex-row justify-between bg-[rgba(30,42,56,1)] rounded-[10px] mb-[10px]"
@@ -595,7 +596,8 @@ export default function MatchViewDetail() {
                       </div>
                     </div>
                   ))
-                )}
+                  // )
+                }
               </Popover.Content>
             </Popover.Root>
             {favorite ? (
