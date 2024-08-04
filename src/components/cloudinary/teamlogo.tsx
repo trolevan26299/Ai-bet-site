@@ -4,7 +4,7 @@ import { AdvancedImage } from "@cloudinary/react";
 import { Cloudinary } from "@cloudinary/url-gen";
 import { Icon } from "@iconify/react";
 
-const TeamLogo = ({ teamName, typeError }: { teamName: string; typeError: string }) => {
+const TeamLogo = ({ teamName, typeError, typeLogo }: { teamName: string; typeError: string; typeLogo?: string }) => {
   const [imgError, setImgError] = useState(false);
 
   const cld = new Cloudinary({
@@ -21,13 +21,25 @@ const TeamLogo = ({ teamName, typeError }: { teamName: string; typeError: string
   };
 
   if (imgError && typeError === "home") {
-    return <Icon icon="ion:shirt" style={{ color: "#1669d4" }} width={48} height={48} />;
+    return (
+      <Icon icon="ion:shirt" style={{ color: "#1669d4" }} width={typeLogo ? 20 : 48} height={typeLogo ? 20 : 48} />
+    );
   }
   if (imgError && typeError === "away") {
-    return <Icon icon="ion:shirt" style={{ color: "#d9dd0e" }} width={48} height={48} />;
+    return (
+      <Icon icon="ion:shirt" style={{ color: "#d9dd0e" }} width={typeLogo ? 20 : 48} height={typeLogo ? 20 : 48} />
+    );
   }
 
-  return <AdvancedImage alt="team home Logo" cldImg={myImage} width="48" height="48" onError={handleError} />;
+  return (
+    <AdvancedImage
+      alt="team home Logo"
+      cldImg={myImage}
+      width={typeLogo ? "20" : "48"}
+      height={typeLogo ? "20" : "48"}
+      onError={handleError}
+    />
+  );
 };
 
 export default TeamLogo;

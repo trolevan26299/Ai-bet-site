@@ -21,6 +21,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 import "./index.css";
 import LoadingPopup from "../../components/loading-screen/loading-popup";
+import TeamLogo from "@/components/cloudinary/teamlogo";
 
 const leagueExample = [
   {
@@ -128,7 +129,7 @@ export default function MatchViewDetail() {
   const [oddsType, setOddsType] = useState<string>();
   const [loadingLeaguePopup, setLoadingLeaguePopup] = useState(false);
   const [listLeague, setListLeague] = useState<IMatchData[]>([]);
-  console.log("listLeague:", listLeague);
+
   const telegram = useTelegram();
 
   const matchParam = searchParams.get("match");
@@ -513,7 +514,7 @@ export default function MatchViewDetail() {
                 {loadingLeaguePopup ? (
                   <LoadingPopup />
                 ) : (
-                  leagueExample.map((item: any) => (
+                  listLeague.map((item) => (
                     <div
                       className="p-2 flex flex-row justify-between bg-[rgba(30,42,56,1)] rounded-[10px] mb-[10px]"
                       key={item.id}
@@ -526,31 +527,25 @@ export default function MatchViewDetail() {
                             height={16}
                             color="rgba(170,170,170,1)"
                           />
-                          <p className="pl-2 text-[10px] font-normal text-[rgba(170,170,170,1)]">{item.container}</p>
+                          <p className="pl-2 text-[10px] font-normal text-[rgba(170,170,170,1)]">
+                            {item.container.container_vn || item.container.container || item.container.container_en}
+                          </p>
                           <Icon icon="ic:outline-arrow-right" width={20} height={20} color="rgba(170,170,170,1)" />
-                          <p className="text-[10px] font-normal text-[rgba(170,170,170,1)]">{item.name}</p>
+                          <p className="text-[10px] font-normal text-[rgba(170,170,170,1)]">{item.league_name}</p>
                         </div>
                         <p
                           className={`${
-                            item.isLive ? "text-[rgba(70,230,164,1)]" : "text-[rgba(165,165,165,1)]"
+                            item.liveStatus ? "text-[rgba(70,230,164,1)]" : "text-[rgba(165,165,165,1)]"
                           } text-[9px] font-normal`}
                         >
-                          {item.isLive ? `${item.time} ${item.scope}` : item.time}
+                          {item.liveStatus ? `${item.liveMinute} ${item.liveScope}` : item.starts}
                         </p>
                         <div className="flex flex-row justify-start items-center gap-2">
-                          <Image
-                            src="https://w7.pngwing.com/pngs/982/984/png-transparent-red-and-white-flag-flag-of-spain-iberian-peninsula-computer-icons-spanish-free-spain-flag-svg-miscellaneous-english-country-thumbnail.png"
-                            alt="no-content"
-                            className="w-[20px] h-[20px]"
-                          />
+                          <TeamLogo teamName={item.team[0]} typeError="home" typeLogo="mini" />
                           <p className="text-[rgba(251,255,255,1)] text-[14.41px] font-normal">{item.home}</p>
                         </div>
                         <div className="flex flex-row justify-start items-center gap-2">
-                          <Image
-                            src="https://upload.wikimedia.org/wikipedia/en/thumb/8/8b/England_national_football_team_crest.svg/1200px-England_national_football_team_crest.svg.png"
-                            alt="no-content"
-                            className="w-[20px] h-[20px]"
-                          />
+                          <TeamLogo teamName={item.team[1]} typeError="away" typeLogo="mini" />
                           <p className="text-[rgba(251,255,255,1)] text-[14.41px] font-normal">{item.away}</p>
                         </div>
                       </div>
@@ -563,10 +558,10 @@ export default function MatchViewDetail() {
                           color="rgba(170,170,170,1)"
                         />
 
-                        {item.isLive && (
+                        {item.liveStatus && (
                           <Icon icon="fluent:live-20-filled" width={16} height={16} color="rgba(245,93,62,1)" />
                         )}
-                        {item.isLive && (
+                        {item.liveStatus && (
                           <div
                             className="w-[22px] h-[17px] p-[2px] rounded-[5px] font-bold flex flex-row justify-center items-center text-[rgba(rgba(255,255,255,1))] bg-[rgba(41,53,66,1)] "
                             style={{ border: "0.68px solid rgba(64,74,86,1)" }}
@@ -574,7 +569,7 @@ export default function MatchViewDetail() {
                             {item.homeScore}
                           </div>
                         )}
-                        {item.isLive && (
+                        {item.liveStatus && (
                           <div
                             className="w-[22px] h-[17px] p-[2px] rounded-[5px] font-bold flex flex-row justify-center items-center text-[rgba(rgba(255,255,255,1))] bg-[rgba(41,53,66,1)] "
                             style={{ border: "0.68px solid rgba(64,74,86,1)" }}

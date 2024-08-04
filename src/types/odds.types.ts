@@ -20,6 +20,11 @@ export type IBet = {
 };
 
 export type IMatchData = {
+  container: {
+    container: string;
+    container_en: string;
+    container_vn: string;
+  };
   id: number;
   starts: string;
   home: string;
