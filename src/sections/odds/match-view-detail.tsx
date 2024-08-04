@@ -421,39 +421,33 @@ export default function MatchViewDetail() {
     return () => clearTimeout(timer);
   }, []);
 
-  const handleSetNumberLine = useCallback(
-    async (value: string) => {
-      try {
-        const response = await axios.post("/api/setting/post", {
-          request_id: searchParams.get("request_id"),
-          data: { line_number: Number(value) },
-        });
-        if (response.data.oke) {
-          setNumberLine(response.data.answer.data.line_number.toString());
-        }
-      } catch (error) {
-        console.log("error:", error);
+  const handleSetNumberLine = useCallback(async (value: string) => {
+    try {
+      const response = await axios.post("/api/setting/post", {
+        request_id: searchParams.get("request_id"),
+        data: { line_number: Number(value) },
+      });
+      if (response.data.oke) {
+        setNumberLine(response.data.answer.data.line_number.toString());
       }
-    },
-    [numberLine]
-  );
-  const handleSetOddsType = useCallback(
-    async (value: string) => {
-      try {
-        const response = await axios.post("/api/setting/post", {
-          request_id: searchParams.get("request_id"),
-          data: { odds_format: value },
-        });
-        if (response.data.oke) {
-          console.log("rssssssss:", response);
-          setOddsType(response.data.answer.data.odds_format.toUpperCase());
-        }
-      } catch (error) {
-        console.log("error:", error);
+    } catch (error) {
+      console.log("error:", error);
+    }
+  }, []);
+  const handleSetOddsType = useCallback(async (value: string) => {
+    try {
+      const response = await axios.post("/api/setting/post", {
+        request_id: searchParams.get("request_id"),
+        data: { odds_format: value },
+      });
+      if (response.data.oke) {
+        console.log("rssssssss:", response);
+        setOddsType(response.data.answer.data.odds_format.toUpperCase());
       }
-    },
-    [searchParams]
-  );
+    } catch (error) {
+      console.log("error:", error);
+    }
+  }, []);
 
   useEffect(() => {
     handleGetSetting();
