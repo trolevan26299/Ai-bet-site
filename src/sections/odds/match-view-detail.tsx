@@ -131,7 +131,6 @@ export default function MatchViewDetail() {
   const telegram = useTelegram();
 
   const matchParam = searchParams.get("match");
-  const lineParam = searchParams.get("line");
   const tracker_id = searchParams.get("tracker_id");
 
   const leagueNoCorner = (league?: string) => {
@@ -247,6 +246,7 @@ export default function MatchViewDetail() {
   useEffect(() => {
     setFavorite(dataScreenInfo[0]?.is_favorite);
   }, [dataScreenInfo]);
+
   // lấy kèo cược chấp ,tài xỉu, hiệp phụ , penalty
   useEffect(() => {
     async function fetchAndSetInitialOdds() {
@@ -264,7 +264,7 @@ export default function MatchViewDetail() {
           setEndBet(true); // kết thúc trận đấu
         } else {
           if (oddsDataValid) {
-            const transformedData = transformData(oddsRes?.data?.message?.answer, lineParam ?? "3");
+            const transformedData = transformData(oddsRes?.data?.message?.answer, numberLine ?? "3");
             setDataScreenInfo((prevData) => [...prevData, ...oddsRes?.data?.message?.answer]);
             combinedOdds = [
               ...combinedOdds,
@@ -275,7 +275,7 @@ export default function MatchViewDetail() {
             ];
           }
           if (cornersDataValid) {
-            const transformedDataCorner = transformDataCorner(cornerRes?.data?.message?.answer, lineParam ?? "3");
+            const transformedDataCorner = transformDataCorner(cornerRes?.data?.message?.answer, numberLine ?? "3");
             setDataScreenInfo((prevData) => [...prevData, ...cornerRes?.data?.message?.answer]);
             combinedOdds = [
               ...combinedOdds,
@@ -326,7 +326,7 @@ export default function MatchViewDetail() {
         } else {
           const latestDataScreenInfo = [];
           if (oddsDataValid === true) {
-            const transformedData = transformData(newOddsRes?.data?.message?.answer, lineParam ?? "3");
+            const transformedData = transformData(newOddsRes?.data?.message?.answer, numberLine ?? "3");
             latestDataScreenInfo.push(newOddsRes?.data?.message?.answer[0]);
 
             combinedLatestOdds = [
@@ -339,7 +339,7 @@ export default function MatchViewDetail() {
           }
 
           if (cornersDataValid === true) {
-            const transformedDataCorner = transformDataCorner(newCornerRes?.data?.message?.answer, lineParam ?? "3");
+            const transformedDataCorner = transformDataCorner(newCornerRes?.data?.message?.answer, numberLine ?? "3");
             latestDataScreenInfo.push(newCornerRes?.data?.message?.answer[0]);
 
             combinedLatestOdds = [
