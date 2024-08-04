@@ -427,7 +427,7 @@ export default function MatchViewDetail() {
         request_id: searchParams.get("request_id"),
         data: { line_number: Number(value) },
       });
-      if (response.data.oke) {
+      if (response.data.ok) {
         setNumberLine(response.data.answer.data.line_number.toString());
       }
     } catch (error) {
@@ -440,8 +440,7 @@ export default function MatchViewDetail() {
         request_id: searchParams.get("request_id"),
         data: { odds_format: value },
       });
-      console.log("rssssssss:", response);
-      if (response.data.oke) {
+      if (response.data.ok) {
         setOddsType(response.data.answer.data.odds_format.toUpperCase());
       }
     } catch (error) {
