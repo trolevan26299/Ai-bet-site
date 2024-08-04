@@ -511,7 +511,9 @@ export default function MatchViewDetail() {
                 style={{ border: "none" }}
               >
                 {loadingLeaguePopup ? (
-                  <LoadingPopup />
+                  <div className="w-full h-full justify-center items-center">
+                    <LoadingPopup />
+                  </div>
                 ) : (
                   leagueExample.map((item: any) => (
                     <div
