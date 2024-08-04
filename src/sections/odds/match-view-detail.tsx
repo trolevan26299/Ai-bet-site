@@ -6,7 +6,7 @@ import OddsDetail from "@/components/app/odds-detail/odds-detail";
 import ScreenInfoMatch from "@/components/app/screen-info-match/screen-info-match";
 import { SplashScreen } from "@/components/loading-screen";
 import { Label } from "@/components/ui/label";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { Popover } from "@radix-ui/themes";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useTelegram } from "@/context/telegram.provider";
@@ -15,7 +15,7 @@ import { IMatchData, IOddsDetail, OddsStatusType } from "@/types/odds.types";
 import { transformDataCorner } from "@/utils/transformDataCorner";
 import { transformData } from "@/utils/transformDataOdds";
 import { Icon } from "@iconify/react";
-import { Dialog } from "@radix-ui/themes";
+
 import axios from "axios";
 import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -464,177 +464,141 @@ export default function MatchViewDetail() {
 
   return (
     <MainLayout>
-      <Dialog.Root>
-        <Popover>
-          <div style={{ paddingBottom: "50px" }}>
-            <div className="h-[39px] w-full bg-[rgba(30,42,56,1)] flex flex-row justify-between items-center px-[6px]">
-              <Icon
-                icon="weui:back-filled"
-                width={30}
-                height={20}
-                className="hover:cursor-pointer text-[rgba(143,149,156,1)] hover:text-[rgba(255,255,255,1)]"
-                onClick={() => router.back()}
-              />
-              <div className="text-[rgba(255,255,255,1)] flex flex-row justify-center items-center pr-[10px]">
-                <Image src="/assets/league_logo.png" alt="no-content" className="w-[34px] h-[27.2px]" />
-                <PopoverTrigger asChild>
+      <div style={{ paddingBottom: "50px" }}>
+        <div className="h-[39px] w-full bg-[rgba(30,42,56,1)] flex flex-row justify-between items-center px-[6px]">
+          <Icon
+            icon="weui:back-filled"
+            width={30}
+            height={20}
+            className="hover:cursor-pointer text-[rgba(143,149,156,1)] hover:text-[rgba(255,255,255,1)]"
+            onClick={() => router.back()}
+          />
+          <div className="text-[rgba(255,255,255,1)] flex flex-row justify-center items-center pr-[10px]">
+            <Image src="/assets/league_logo.png" alt="no-content" className="w-[34px] h-[27.2px]" />
+            <Popover.Root>
+              <Popover.Trigger>
+                <div
+                  className="flex flex-row justify-center items-center hover:cursor-pointer"
+                  onClick={() => {
+                    handlePopoverOpen("league");
+                  }}
+                >
+                  <p className="text-sm font-bold w-[85%] leading-[1.1rem]">{dataScreenInfo[0]?.league_name}</p>
+                  <Icon
+                    icon="icon-park-solid:down-one"
+                    width={25}
+                    height={15}
+                    color="rgba(255,255,255,1)"
+                    className="hover:cursor-pointer"
+                  />
+                </div>
+              </Popover.Trigger>
+
+              <Popover.Content
+                className="w-[95%] m-auto mt-3  bg-[rgba(41,53,67,1)] rounded-[10px]  text-[rgba(255,255,255,1)] max-h-[80vh] overflow-y-auto"
+                style={{ border: "none" }}
+              >
+                {leagueExample.map((item) => (
                   <div
-                    className="flex flex-row justify-center items-center hover:cursor-pointer"
-                    onClick={() => {
-                      handlePopoverOpen("league");
-                    }}
+                    className="p-2 flex flex-row justify-between bg-[rgba(30,42,56,1)] rounded-[10px] mb-[10px]"
+                    key={item.id}
                   >
-                    <p className="text-sm font-bold w-[85%] leading-[1.1rem]">{dataScreenInfo[0]?.league_name}</p>
-                    <Icon
-                      icon="icon-park-solid:down-one"
-                      width={25}
-                      height={15}
-                      color="rgba(255,255,255,1)"
-                      className="hover:cursor-pointer"
-                    />
-                  </div>
-                </PopoverTrigger>
-                {favorite ? (
-                  <Icon
-                    onClick={handleAddRemoveFavorite}
-                    icon="emojione:star"
-                    width={20}
-                    height={20}
-                    className="hover:cursor-pointer"
-                  />
-                ) : (
-                  <Icon
-                    onClick={handleAddRemoveFavorite}
-                    icon="material-symbols-light:star-outline"
-                    width={30}
-                    height={30}
-                    color="rgba(170,170,170,1)"
-                    className="hover:cursor-pointer"
-                  />
-                )}
-              </div>
-              <PopoverTrigger asChild>
-                <Icon
-                  icon="hugeicons:list-setting"
-                  width={30}
-                  height={23}
-                  color="rgba(143,149,156,1)"
-                  className="hover:cursor-pointer"
-                  onClick={() => handlePopoverOpen("setting")}
-                />
-              </PopoverTrigger>
-            </div>
-            {loading ? (
-              <SplashScreen />
-            ) : (
-              <>
-                {endBet ? (
-                  <div className="h-[80vh] w-[90%] flex flex-col justify-center items-center mx-auto">
-                    {tracker_id ? (
-                      <iframe
-                        scrolling="no"
-                        src={`https://start26.sptpub.com/tracker.html?eventId=${tracker_id}&sportId=1&lang=vi&liveEvent=true&providers=Betradar`}
-                        allowFullScreen
-                        title="rindle"
-                        style={{
-                          border: 0,
-                          width: "100%",
-                          height: iframeLoaded ? iframeHeight : "0px",
-                          borderRadius: "5px",
-                        }}
-                      ></iframe>
-                    ) : (
-                      <Image src="/assets/ball.png" alt="no-content" className="w-[165px] h-[170px] mr-5" />
-                    )}
-                    <p className="pt-2 text-xl text-slate-500 font-semibold">Trận đấu đã kết thúc</p>
-                    <span className="pt-2 text-sm text-slate-500 font-semibold">
-                      Vui lòng quay lại Telegram và xem các sự kiện khác
-                    </span>
-                  </div>
-                ) : haveError ? (
-                  <div className="h-[80vh] w-[90%] flex flex-col justify-center items-center mx-auto">
-                    {tracker_id ? (
-                      <iframe
-                        scrolling="no"
-                        src={`https://start26.sptpub.com/tracker.html?eventId=${tracker_id}&sportId=1&lang=vi&liveEvent=true&providers=Betradar`}
-                        allowFullScreen
-                        title="rindle"
-                        style={{
-                          border: 0,
-                          width: "100%",
-                          height: iframeLoaded ? iframeHeight : "0px",
-                          borderRadius: "5px",
-                        }}
-                      ></iframe>
-                    ) : (
-                      <Image src="/assets/ball.png" alt="no-content" className="w-[165px] h-[170px] mr-5" />
-                    )}
-                    <p className="pt-4 text-xl text-slate-500 font-semibold">Không tìm thấy thông tin trận đấu</p>
-                    <span className="pt-2 text-sm text-slate-500 font-semibold text-center">
-                      Trận đấu bị gián đoạn hoặc đã kết thúc. Vui lòng thử lại trong giây lát hoặc chọn trận đấu khác.
-                    </span>
-                  </div>
-                ) : (
-                  <>
-                    <div className=" pb-6 h-full">
-                      <ScreenInfoMatch dataScreenInfo={dataScreenInfo} />
-                      <div className="px-3">
-                        {tracker_id && (
-                          <div className="pt-2">
-                            <button
-                              className={`bg-[rgba(30,42,56,1)] w-full flex flex-row justify-center gap-1 rounded-[7px] h-[30px] items-center ${
-                                !showTrackingLive ? "pb-1" : ""
-                              }`}
-                              onClick={() => setShowTrackingLive(!showTrackingLive)}
-                            >
-                              <Icon
-                                icon="fe:line-chart"
-                                width={30}
-                                height={20}
-                                color={showTrackingLive ? "rgba(237,202,84,1)" : "rgba(142,149,156,1)"}
-                              />
-                              <span
-                                className={`text-[13px] font-bold ${
-                                  showTrackingLive ? "text-[rgba(255,255,255,1)]" : "text-[rgba(142,149,156,1)]"
-                                } `}
-                              >
-                                Theo dõi{" "}
-                              </span>
-                            </button>
-
-                            <iframe
-                              scrolling="no"
-                              src={`https://start26.sptpub.com/tracker.html?eventId=${tracker_id}&sportId=1&lang=vi&liveEvent=true&providers=Betradar`}
-                              allowFullScreen
-                              title="rindle"
-                              style={{
-                                display: showTrackingLive ? "block" : "none",
-                                marginTop: "5px",
-                                border: 0,
-                                width: "100%",
-                                height: iframeLoaded ? iframeHeight : "0px",
-                                borderRadius: "5px",
-                              }}
-                            ></iframe>
-                          </div>
-                        )}
-
-                        <OddsDetail
-                          odds={odds}
-                          oddsStatus={oddsStatus}
-                          dataScreenInfo={dataScreenInfo}
-                          disableBtn={disableBtn}
+                    <div className="flex flex-col justify-between items-start">
+                      <div className="flex flex-row gap-1 items-center">
+                        <Icon icon="fluent:sport-soccer-24-filled" width={16} height={16} color="rgba(170,170,170,1)" />
+                        <p className="pl-2 text-[10px] font-normal text-[rgba(170,170,170,1)]">{item.container}</p>
+                        <Icon icon="ic:outline-arrow-right" width={20} height={20} color="rgba(170,170,170,1)" />
+                        <p className="text-[10px] font-normal text-[rgba(170,170,170,1)]">{item.name}</p>
+                      </div>
+                      <p
+                        className={`${
+                          item.isLive ? "text-[rgba(70,230,164,1)]" : "text-[rgba(165,165,165,1)]"
+                        } text-[9px] font-normal`}
+                      >
+                        {item.isLive ? `${item.time} ${item.scope}` : item.time}
+                      </p>
+                      <div className="flex flex-row justify-start items-center gap-2">
+                        <Image
+                          src="https://w7.pngwing.com/pngs/982/984/png-transparent-red-and-white-flag-flag-of-spain-iberian-peninsula-computer-icons-spanish-free-spain-flag-svg-miscellaneous-english-country-thumbnail.png"
+                          alt="no-content"
+                          className="w-[20px] h-[20px]"
                         />
+                        <p className="text-[rgba(251,255,255,1)] text-[14.41px] font-normal">{item.home}</p>
+                      </div>
+                      <div className="flex flex-row justify-start items-center gap-2">
+                        <Image
+                          src="https://upload.wikimedia.org/wikipedia/en/thumb/8/8b/England_national_football_team_crest.svg/1200px-England_national_football_team_crest.svg.png"
+                          alt="no-content"
+                          className="w-[20px] h-[20px]"
+                        />
+                        <p className="text-[rgba(251,255,255,1)] text-[14.41px] font-normal">{item.away}</p>
                       </div>
                     </div>
-                  </>
-                )}
-              </>
+                    <div className="flex flex-col justify-between items-center">
+                      <Icon
+                        icon="mage:chart-fill"
+                        className="hover:cursor-pointer"
+                        width={16}
+                        height={16}
+                        color="rgba(170,170,170,1)"
+                      />
+
+                      {item.isLive && (
+                        <Icon icon="fluent:live-20-filled" width={16} height={16} color="rgba(245,93,62,1)" />
+                      )}
+                      {item.isLive && (
+                        <div
+                          className="w-[22px] h-[17px] p-[2px] rounded-[5px] font-bold flex flex-row justify-center items-center text-[rgba(rgba(255,255,255,1))] bg-[rgba(41,53,66,1)] "
+                          style={{ border: "0.68px solid rgba(64,74,86,1)" }}
+                        >
+                          {item.homeScore}
+                        </div>
+                      )}
+                      {item.isLive && (
+                        <div
+                          className="w-[22px] h-[17px] p-[2px] rounded-[5px] font-bold flex flex-row justify-center items-center text-[rgba(rgba(255,255,255,1))] bg-[rgba(41,53,66,1)] "
+                          style={{ border: "0.68px solid rgba(64,74,86,1)" }}
+                        >
+                          {item.awayScore}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                ))}
+              </Popover.Content>
+            </Popover.Root>
+            {favorite ? (
+              <Icon
+                onClick={handleAddRemoveFavorite}
+                icon="emojione:star"
+                width={20}
+                height={20}
+                className="hover:cursor-pointer"
+              />
+            ) : (
+              <Icon
+                onClick={handleAddRemoveFavorite}
+                icon="material-symbols-light:star-outline"
+                width={30}
+                height={30}
+                color="rgba(170,170,170,1)"
+                className="hover:cursor-pointer"
+              />
             )}
-            <Menu />
           </div>
-          {typePopover === "setting" && (
-            <PopoverContent
+          <Popover.Root>
+            <Popover.Trigger>
+              <Icon
+                icon="hugeicons:list-setting"
+                width={30}
+                height={23}
+                color="rgba(143,149,156,1)"
+                className="hover:cursor-pointer"
+                onClick={() => handlePopoverOpen("setting")}
+              />
+            </Popover.Trigger>
+
+            <Popover.Content
               className="w-[90%] m-auto mt-3  bg-[rgba(41,53,67,1)] rounded-[10px]  text-[rgba(255,255,255,1)]"
               style={{ border: "none" }}
             >
@@ -726,84 +690,118 @@ export default function MatchViewDetail() {
                   </RadioGroup>
                 </TabsContent>
               </Tabs>
-            </PopoverContent>
-          )}
-          {typePopover === "league" && (
-            <PopoverContent
-              className="w-[95%] m-auto mt-3  bg-[rgba(41,53,67,1)] rounded-[10px]  text-[rgba(255,255,255,1)] max-h-[80vh] overflow-y-auto"
-              style={{ border: "none" }}
-            >
-              {leagueExample.map((item) => (
-                <div
-                  className="p-2 flex flex-row justify-between bg-[rgba(30,42,56,1)] rounded-[10px] mb-[10px]"
-                  key={item.id}
-                >
-                  <div className="flex flex-col justify-between items-start">
-                    <div className="flex flex-row gap-1 items-center">
-                      <Icon icon="fluent:sport-soccer-24-filled" width={16} height={16} color="rgba(170,170,170,1)" />
-                      <p className="pl-2 text-[10px] font-normal text-[rgba(170,170,170,1)]">{item.container}</p>
-                      <Icon icon="ic:outline-arrow-right" width={20} height={20} color="rgba(170,170,170,1)" />
-                      <p className="text-[10px] font-normal text-[rgba(170,170,170,1)]">{item.name}</p>
-                    </div>
-                    <p
-                      className={`${
-                        item.isLive ? "text-[rgba(70,230,164,1)]" : "text-[rgba(165,165,165,1)]"
-                      } text-[9px] font-normal`}
-                    >
-                      {item.isLive ? `${item.time} ${item.scope}` : item.time}
-                    </p>
-                    <div className="flex flex-row justify-start items-center gap-2">
-                      <Image
-                        src="https://w7.pngwing.com/pngs/982/984/png-transparent-red-and-white-flag-flag-of-spain-iberian-peninsula-computer-icons-spanish-free-spain-flag-svg-miscellaneous-english-country-thumbnail.png"
-                        alt="no-content"
-                        className="w-[20px] h-[20px]"
-                      />
-                      <p className="text-[rgba(251,255,255,1)] text-[14.41px] font-normal">{item.home}</p>
-                    </div>
-                    <div className="flex flex-row justify-start items-center gap-2">
-                      <Image
-                        src="https://upload.wikimedia.org/wikipedia/en/thumb/8/8b/England_national_football_team_crest.svg/1200px-England_national_football_team_crest.svg.png"
-                        alt="no-content"
-                        className="w-[20px] h-[20px]"
-                      />
-                      <p className="text-[rgba(251,255,255,1)] text-[14.41px] font-normal">{item.away}</p>
-                    </div>
-                  </div>
-                  <div className="flex flex-col justify-between items-center">
-                    <Icon
-                      icon="mage:chart-fill"
-                      className="hover:cursor-pointer"
-                      width={16}
-                      height={16}
-                      color="rgba(170,170,170,1)"
-                    />
+            </Popover.Content>
+          </Popover.Root>
+        </div>
+        {loading ? (
+          <SplashScreen />
+        ) : (
+          <>
+            {endBet ? (
+              <div className="h-[80vh] w-[90%] flex flex-col justify-center items-center mx-auto">
+                {tracker_id ? (
+                  <iframe
+                    scrolling="no"
+                    src={`https://start26.sptpub.com/tracker.html?eventId=${tracker_id}&sportId=1&lang=vi&liveEvent=true&providers=Betradar`}
+                    allowFullScreen
+                    title="rindle"
+                    style={{
+                      border: 0,
+                      width: "100%",
+                      height: iframeLoaded ? iframeHeight : "0px",
+                      borderRadius: "5px",
+                    }}
+                  ></iframe>
+                ) : (
+                  <Image src="/assets/ball.png" alt="no-content" className="w-[165px] h-[170px] mr-5" />
+                )}
+                <p className="pt-2 text-xl text-slate-500 font-semibold">Trận đấu đã kết thúc</p>
+                <span className="pt-2 text-sm text-slate-500 font-semibold">
+                  Vui lòng quay lại Telegram và xem các sự kiện khác
+                </span>
+              </div>
+            ) : haveError ? (
+              <div className="h-[80vh] w-[90%] flex flex-col justify-center items-center mx-auto">
+                {tracker_id ? (
+                  <iframe
+                    scrolling="no"
+                    src={`https://start26.sptpub.com/tracker.html?eventId=${tracker_id}&sportId=1&lang=vi&liveEvent=true&providers=Betradar`}
+                    allowFullScreen
+                    title="rindle"
+                    style={{
+                      border: 0,
+                      width: "100%",
+                      height: iframeLoaded ? iframeHeight : "0px",
+                      borderRadius: "5px",
+                    }}
+                  ></iframe>
+                ) : (
+                  <Image src="/assets/ball.png" alt="no-content" className="w-[165px] h-[170px] mr-5" />
+                )}
+                <p className="pt-4 text-xl text-slate-500 font-semibold">Không tìm thấy thông tin trận đấu</p>
+                <span className="pt-2 text-sm text-slate-500 font-semibold text-center">
+                  Trận đấu bị gián đoạn hoặc đã kết thúc. Vui lòng thử lại trong giây lát hoặc chọn trận đấu khác.
+                </span>
+              </div>
+            ) : (
+              <>
+                <div className=" pb-6 h-full">
+                  <ScreenInfoMatch dataScreenInfo={dataScreenInfo} />
+                  <div className="px-3">
+                    {tracker_id && (
+                      <div className="pt-2">
+                        <button
+                          className={`bg-[rgba(30,42,56,1)] w-full flex flex-row justify-center gap-1 rounded-[7px] h-[30px] items-center ${
+                            !showTrackingLive ? "pb-1" : ""
+                          }`}
+                          onClick={() => setShowTrackingLive(!showTrackingLive)}
+                        >
+                          <Icon
+                            icon="fe:line-chart"
+                            width={30}
+                            height={20}
+                            color={showTrackingLive ? "rgba(237,202,84,1)" : "rgba(142,149,156,1)"}
+                          />
+                          <span
+                            className={`text-[13px] font-bold ${
+                              showTrackingLive ? "text-[rgba(255,255,255,1)]" : "text-[rgba(142,149,156,1)]"
+                            } `}
+                          >
+                            Theo dõi{" "}
+                          </span>
+                        </button>
 
-                    {item.isLive && (
-                      <Icon icon="fluent:live-20-filled" width={16} height={16} color="rgba(245,93,62,1)" />
-                    )}
-                    {item.isLive && (
-                      <div
-                        className="w-[22px] h-[17px] p-[2px] rounded-[5px] font-bold flex flex-row justify-center items-center text-[rgba(rgba(255,255,255,1))] bg-[rgba(41,53,66,1)] "
-                        style={{ border: "0.68px solid rgba(64,74,86,1)" }}
-                      >
-                        {item.homeScore}
+                        <iframe
+                          scrolling="no"
+                          src={`https://start26.sptpub.com/tracker.html?eventId=${tracker_id}&sportId=1&lang=vi&liveEvent=true&providers=Betradar`}
+                          allowFullScreen
+                          title="rindle"
+                          style={{
+                            display: showTrackingLive ? "block" : "none",
+                            marginTop: "5px",
+                            border: 0,
+                            width: "100%",
+                            height: iframeLoaded ? iframeHeight : "0px",
+                            borderRadius: "5px",
+                          }}
+                        ></iframe>
                       </div>
                     )}
-                    {item.isLive && (
-                      <div
-                        className="w-[22px] h-[17px] p-[2px] rounded-[5px] font-bold flex flex-row justify-center items-center text-[rgba(rgba(255,255,255,1))] bg-[rgba(41,53,66,1)] "
-                        style={{ border: "0.68px solid rgba(64,74,86,1)" }}
-                      >
-                        {item.awayScore}
-                      </div>
-                    )}
+
+                    <OddsDetail
+                      odds={odds}
+                      oddsStatus={oddsStatus}
+                      dataScreenInfo={dataScreenInfo}
+                      disableBtn={disableBtn}
+                    />
                   </div>
                 </div>
-              ))}
-            </PopoverContent>
-          )}
-        </Popover>
-      </Dialog.Root>
+              </>
+            )}
+          </>
+        )}
+        <Menu />
+      </div>
     </MainLayout>
   );
 }
