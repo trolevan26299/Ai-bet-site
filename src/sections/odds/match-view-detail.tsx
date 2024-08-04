@@ -176,14 +176,14 @@ export default function MatchViewDetail() {
       const currentFavoriteStatus = favorite;
       setFavorite(!favorite);
 
-      const url = currentFavoriteStatus ? "/api/favorite" : "/api/favorite";
+      const url = "/api/favorite";
       const method = currentFavoriteStatus ? axios.put : axios.post;
       const response = await method(url, {
         request_id: searchParams.get("request_id"),
         league_id: dataScreenInfo[0]?.league_id,
       });
 
-      if (!response.data.oke) {
+      if (!response.data.ok) {
         setFavorite(currentFavoriteStatus);
       }
     } catch (error) {
