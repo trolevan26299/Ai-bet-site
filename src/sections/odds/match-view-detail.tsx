@@ -21,7 +21,6 @@ import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 import "./index.css";
-import { set } from "date-fns";
 
 const leagueExample = [
   {
@@ -171,14 +170,7 @@ export default function MatchViewDetail() {
     return /Mobi|Android|iPhone|iPad|iPod/.test(navigator.userAgent);
   };
 
-  const handleRadioGroupChange = (name: string, value: string) => {
-    if (name === "numberLine") {
-      setNumberLine(value);
-    } else {
-      setOddsType(value);
-    }
-  };
-
+  // Hàm thêm và xóa kèo yêu thích
   const handleAddRemoveFavorite = async () => {
     try {
       if (favorite) {
@@ -203,6 +195,7 @@ export default function MatchViewDetail() {
     }
   };
 
+  // Hàm lấy setting bao gồm : số lượng kèo và loại kèo
   const handleGetSetting = async () => {
     try {
       const response = await axios.post("/api/setting/get", {
@@ -218,6 +211,37 @@ export default function MatchViewDetail() {
     }
   };
 
+  // Hàm set số lượng kèo
+  const handleSetNumberLine = useCallback(async (value: string) => {
+    try {
+      const response = await axios.post("/api/setting/post", {
+        request_id: searchParams.get("request_id"),
+        data: { line_number: Number(value) },
+      });
+      if (response.data.ok) {
+        setNumberLine(response.data.answer.data.line_number.toString());
+      }
+    } catch (error) {
+      console.log("error:", error);
+    }
+  }, []);
+
+  // Hàm set loại kèo
+  const handleSetOddsType = useCallback(async (value: string) => {
+    try {
+      const response = await axios.post("/api/setting/post", {
+        request_id: searchParams.get("request_id"),
+        data: { odds_format: value },
+      });
+      if (response.data.ok) {
+        setOddsType(response.data.answer.data.odds_format.toUpperCase());
+      }
+    } catch (error) {
+      console.log("error:", error);
+    }
+  }, []);
+
+  //
   useEffect(() => {
     setFavorite(dataScreenInfo[0]?.is_favorite);
   }, [dataScreenInfo]);
@@ -421,33 +445,6 @@ export default function MatchViewDetail() {
     return () => clearTimeout(timer);
   }, []);
 
-  const handleSetNumberLine = useCallback(async (value: string) => {
-    try {
-      const response = await axios.post("/api/setting/post", {
-        request_id: searchParams.get("request_id"),
-        data: { line_number: Number(value) },
-      });
-      if (response.data.ok) {
-        setNumberLine(response.data.answer.data.line_number.toString());
-      }
-    } catch (error) {
-      console.log("error:", error);
-    }
-  }, []);
-  const handleSetOddsType = useCallback(async (value: string) => {
-    try {
-      const response = await axios.post("/api/setting/post", {
-        request_id: searchParams.get("request_id"),
-        data: { odds_format: value },
-      });
-      if (response.data.ok) {
-        setOddsType(response.data.answer.data.odds_format.toUpperCase());
-      }
-    } catch (error) {
-      console.log("error:", error);
-    }
-  }, []);
-
   useEffect(() => {
     handleGetSetting();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -489,8 +486,8 @@ export default function MatchViewDetail() {
                   <Icon
                     onClick={handleAddRemoveFavorite}
                     icon="emojione:star"
-                    width={30}
-                    height={30}
+                    width={18.9}
+                    height={18}
                     className="hover:cursor-pointer"
                   />
                 ) : (
@@ -642,7 +639,6 @@ export default function MatchViewDetail() {
                   <RadioGroup
                     value={numberLine}
                     onValueChange={(value) => {
-                      // handleRadioGroupChange("numberLine", value);
                       handleSetNumberLine(value);
                     }}
                     className="flex flex-row justify-around"
@@ -685,7 +681,6 @@ export default function MatchViewDetail() {
                   <RadioGroup
                     value={oddsType}
                     onValueChange={(value) => {
-                      // handleRadioGroupChange("oddsType", value)}
                       handleSetOddsType(value);
                     }}
                     className="flex flex-row justify-around"
