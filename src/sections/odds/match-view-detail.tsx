@@ -6,7 +6,6 @@ import OddsDetail from "@/components/app/odds-detail/odds-detail";
 import ScreenInfoMatch from "@/components/app/screen-info-match/screen-info-match";
 import { SplashScreen } from "@/components/loading-screen";
 import { Label } from "@/components/ui/label";
-import { Popover } from "@radix-ui/themes";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useTelegram } from "@/context/telegram.provider";
@@ -15,12 +14,12 @@ import { IMatchData, IOddsDetail, OddsStatusType } from "@/types/odds.types";
 import { transformDataCorner } from "@/utils/transformDataCorner";
 import { transformData } from "@/utils/transformDataOdds";
 import { Icon } from "@iconify/react";
+import { Popover } from "@radix-ui/themes";
 import axios from "axios";
 import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 import "./index.css";
-import Loading from "@/app/loading";
 import LoadingPopup from "./loading-popup";
 
 const leagueExample = [
@@ -227,9 +226,9 @@ export default function MatchViewDetail() {
 
   // Hàm mở popover league
   const handleOpenLeague = async (open: boolean) => {
-    setLoadingLeaguePopup(true);
     try {
       if (open) {
+        setLoadingLeaguePopup(true);
         const response = await axios.post("/api/league/match-in-league", {
           league: dataScreenInfo[0].league_name,
           request_id: searchParams.get("request_id"),
