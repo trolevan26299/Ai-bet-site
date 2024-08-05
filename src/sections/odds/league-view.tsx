@@ -190,7 +190,6 @@ const LeagueView = () => {
         acc[containerName] = {
           name: containerName,
           detail: [],
-          favorite: false,
         };
       }
 
@@ -198,12 +197,17 @@ const LeagueView = () => {
 
       if (existingLeague) {
         existingLeague.number_match += 1;
+        if (curr.is_favorite) {
+          existingLeague.favorite = true;
+        }
       } else {
-        acc[containerName].detail.push({ league: curr.league_name, number_match: 1 });
+        acc[containerName].detail.push({
+          league: curr.league_name,
+          number_match: 1,
+          favorite: curr.is_favorite || false,
+        });
       }
-      if (curr.is_favorite) {
-        acc[containerName].favorite = true;
-      }
+
       return acc;
     }, {});
 
@@ -424,13 +428,22 @@ const LeagueView = () => {
                                     {detail.number_match}
                                   </Badge>
                                 </div>
-                                <Icon
-                                  icon="material-symbols-light:star-outline"
-                                  width={25}
-                                  height={25}
-                                  color="rgba(170,170,170,1)"
-                                  className=" hover:cursor- mr-[-3px]"
-                                />
+                                {detail.favorite ? (
+                                  <Icon
+                                    icon="emojione:star"
+                                    width={20}
+                                    height={20}
+                                    className=" hover:cursor- mr-[-3px]"
+                                  />
+                                ) : (
+                                  <Icon
+                                    icon="material-symbols-light:star-outline"
+                                    width={25}
+                                    height={25}
+                                    color="rgba(170,170,170,1)"
+                                    className=" hover:cursor- mr-[-3px]"
+                                  />
+                                )}
                               </div>
                             ))}
                           </AccordionContent>
