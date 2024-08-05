@@ -269,7 +269,7 @@ const LeagueView = () => {
       if (open) {
         setLoadingPopupAll(true);
         const response = await axios.post("/api/league/match-in-league", {
-          request_id: searchParams.get("request_id"),
+          request_id: requestId,
           is_get_bets: false,
         });
         if (response.data.ok) {
