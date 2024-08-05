@@ -476,7 +476,7 @@ export default function MatchViewDetail() {
                             />
                           </Dialog.Trigger>
                           <Dialog.Content className="bg-[rgba(41,53,67,1)] h-[85vh] p-0">
-                            <div className="h-[20px] w-full flex flex-row justify-end">
+                            <div className="h-[20px] w-full flex flex-row justify-end pb-2">
                               <Dialog.Close>
                                 <Icon
                                   icon="mingcute:close-line"
