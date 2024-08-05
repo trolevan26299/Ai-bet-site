@@ -20,6 +20,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { Dialog, DialogClose, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import Image from "next/image";
 import { LoadingPopup } from "@/components/loading-screen";
+import axios from "axios";
 
 const generateDateList = () => {
   const dates = [];
@@ -235,7 +236,9 @@ const LeagueView = () => {
   const allItems = demoFavorite.map((item) => item.name);
   const [openItems, setOpenItems] = useState(allItems);
   const [loadingPopupAll, setLoadingPopupAll] = useState(false);
+  const [listAllLeague, setListAllLeague] = useState([]);
 
+  console.log("list All League:", listAllLeague);
   const handleValueChange = (value: string[]) => {
     setOpenItems(value);
   };
@@ -243,7 +246,7 @@ const LeagueView = () => {
     const matchId = "1594429137";
     const queryParams = {
       request_id: "adc54fb6-2770-4984-bc50-8a0ebb841dd5",
-      match: "APIA Leichhardt Tigers,West Sydney Wanderers Youth", // Sử dụng chuỗi thay vì mảng
+      match: "APIA Leichhardt Tigers,West Sydney Wanderers Youth",
       time: "today",
       league: "Australia - NPL New South Wales",
       line: "0",
@@ -256,6 +259,27 @@ const LeagueView = () => {
     router.push(`/match/${matchId}?${queryString}`);
   };
 
+  // Hàm mở POPUP tất cả
+  const handleOpenPopupAll = async (open: boolean) => {
+    try {
+      if (open) {
+        setLoadingPopupAll(true);
+        const response = await axios.post("/api/league/match-in-league", {
+          request_id: "adc54fb6-2770-4984-bc50-8a0ebb841dd5",
+          is_get_bets: false,
+        });
+        if (response.data.ok) {
+          setListAllLeague(response?.data?.data);
+          setLoadingPopupAll(false);
+        }
+      }
+    } catch (error) {
+      setLoadingPopupAll(false);
+      console.error("error:", error);
+    }
+  };
+
+  // xử lý cuộn chuột tagsList
   const handleMouseMove = (e: MouseEvent, ref: React.RefObject<HTMLDivElement>) => {
     if (ref.current) {
       const target = ref.current;
@@ -279,6 +303,7 @@ const LeagueView = () => {
       }
     });
   }, []);
+  // END xử lý cuộn chuột tagsList
   return (
     <MainLayout>
       <div>
@@ -387,7 +412,7 @@ const LeagueView = () => {
             className="flex flex-row w-full justify-start items-center gap-2 overflow-x-auto whitespace-nowrap no-scrollbar px-2 hover:cursor-pointer"
             ref={league1ListRef}
           >
-            <Dialog>
+            <Dialog onOpenChange={(open) => handleOpenPopupAll(open)}>
               <DialogTrigger asChild>
                 <div className="flex flex-row items-center justify-center gap-1 rounded-[20px] bg-[rgba(41,53,67,1)] h-8 px-[10px]">
                   <p className=" font-bold text-[rgba(255,255,255,1)] text-sm">Tất cả</p>
