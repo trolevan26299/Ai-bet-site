@@ -2,26 +2,26 @@
 "use client";
 
 import Menu from "@/components/app/menu/menu";
+import { LoadingPopup } from "@/components/loading-screen";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { Calendar } from "@/components/ui/calendar";
+import { Dialog, DialogClose, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import MainLayout from "@/layouts/main/layout";
+import { useGetRequestId } from "@/store/context/requestId.context";
+import { locale } from "@/utils/configCalendarToVN";
 import { getDayOfWeek } from "@/utils/convertDateToDateOfWeek";
 import { getDayAndMonth } from "@/utils/convertToDayAndMonth";
 import { Icon } from "@iconify/react";
 import * as PopoverRD from "@radix-ui/react-popover";
-import { useRouter, useSearchParams } from "next/navigation";
-import { use, useEffect, useRef, useState } from "react";
-import "./index.css";
 import { Popover } from "@radix-ui/themes";
-import { Calendar } from "@/components/ui/calendar";
-import { locale } from "@/utils/configCalendarToVN";
-import { Badge } from "@/components/ui/badge";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { Dialog, DialogClose, DialogContent, DialogTrigger } from "@/components/ui/dialog";
-import Image from "next/image";
-import { LoadingPopup } from "@/components/loading-screen";
 import axios from "axios";
-import { useGetRequestId } from "@/store/context/requestId.context";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { useEffect, useRef, useState } from "react";
+import "./index.css";
 
 const generateDateList = () => {
   const dates = [];
@@ -231,7 +231,6 @@ const demoFavorite = [
 const LeagueView = () => {
   const router = useRouter();
   const { requestId } = useGetRequestId();
-  const searchParams = useSearchParams();
   const tabsListRef = useRef<HTMLDivElement>(null);
   const league1ListRef = useRef<HTMLDivElement>(null);
   const league2ListRef = useRef<HTMLDivElement>(null);
@@ -263,6 +262,33 @@ const LeagueView = () => {
     router.push(`/match/${matchId}?${queryString}`);
   };
 
+  // FORMAT DATA FOR POPUP ALL
+  const processLeagueData = (data: any) => {
+    const groupedData = data.reduce((acc: any, curr: any) => {
+      const containerName = curr.container.container;
+
+      if (!acc[containerName]) {
+        acc[containerName] = {
+          name: containerName,
+          logo: "https://static.vecteezy.com/system/resources/thumbnails/016/328/942/small_2x/vietnam-flat-rounded-flag-icon-with-transparent-background-free-png.png", // You can replace this with the actual logo if available
+          detail: [],
+        };
+      }
+
+      const existingLeague = acc[containerName].detail.find((detail: any) => detail.league === curr.league_name);
+
+      if (existingLeague) {
+        existingLeague.number_match += 1;
+      } else {
+        acc[containerName].detail.push({ league: curr.league_name, number_match: 1 });
+      }
+
+      return acc;
+    }, {});
+
+    return Object.values(groupedData);
+  };
+
   // Hàm mở POPUP tất cả
   const handleOpenPopupAll = async (open: boolean) => {
     try {
@@ -273,7 +299,8 @@ const LeagueView = () => {
           is_get_bets: false,
         });
         if (response.data.ok) {
-          setListAllLeague(response?.data?.data);
+          const processedList = processLeagueData(response.data.data);
+          setListAllLeague(processedList as any);
           setLoadingPopupAll(false);
         }
       }
@@ -308,6 +335,7 @@ const LeagueView = () => {
     });
   }, []);
   // END xử lý cuộn chuột tagsList
+
   return (
     <MainLayout>
       <div>
@@ -421,7 +449,6 @@ const LeagueView = () => {
                 <div className="flex flex-row items-center justify-center gap-1 rounded-[20px] bg-[rgba(41,53,67,1)] h-8 px-[10px]">
                   <p className=" font-bold text-[rgba(255,255,255,1)] text-sm">Tất cả</p>
                   <Badge variant="secondary">151</Badge>
-                  {/* <Icon icon="bx:chevron-down" width={20} height={20} className="text-[rgba(255,255,255,1)]" /> */}
                 </div>
               </DialogTrigger>
               <DialogContent className="h-full">
