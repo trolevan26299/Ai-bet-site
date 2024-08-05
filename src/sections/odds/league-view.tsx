@@ -451,7 +451,7 @@ const LeagueView = () => {
                   <Badge variant="secondary">151</Badge>
                 </div>
               </DialogTrigger>
-              <DialogContent className="h-full">
+              <DialogContent className="h-full border-none">
                 {loadingPopupAll ? (
                   <LoadingPopup />
                 ) : (
