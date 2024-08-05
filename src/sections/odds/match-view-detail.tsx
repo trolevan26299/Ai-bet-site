@@ -482,7 +482,7 @@ export default function MatchViewDetail() {
                                   icon="mingcute:close-line"
                                   width={20}
                                   height={20}
-                                  style={{ color: #fff }}
+                                  style={{ color: " #fff" }}
                                   className="hover:cursor-pointer text-white"
                                 />
                               </Dialog.Close>
