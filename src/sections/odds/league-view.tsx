@@ -431,9 +431,9 @@ const LeagueView = () => {
                                 {detail.favorite ? (
                                   <Icon
                                     icon="emojione:star"
-                                    width={20}
-                                    height={20}
-                                    className=" hover:cursor- mr-[-3px]"
+                                    width={18}
+                                    height={18}
+                                    className=" hover:cursor-pointer "
                                   />
                                 ) : (
                                   <Icon
@@ -441,7 +441,7 @@ const LeagueView = () => {
                                     width={25}
                                     height={25}
                                     color="rgba(170,170,170,1)"
-                                    className=" hover:cursor- mr-[-3px]"
+                                    className=" hover:cursor-pointer mr-[-3px]"
                                   />
                                 )}
                               </div>
