@@ -91,88 +91,6 @@ const tagDemo = [
   },
 ];
 
-const demoTagAll = [
-  {
-    name: "Việt Nam",
-    logo: "https://static.vecteezy.com/system/resources/thumbnails/016/328/942/small_2x/vietnam-flat-rounded-flag-icon-with-transparent-background-free-png.png",
-    detail: [
-      { league: "Ha Noi T&T", number_match: 2 },
-      { league: "Hoang Anh Gia Lai", number_match: 5 },
-      { league: "QNK Quảng Nam", number_match: 7 },
-      { league: "SHB Đà Nẵng", number_match: 1 },
-    ],
-  },
-  {
-    name: "Thế Giới",
-    logo: "https://upload.wikimedia.org/wikipedia/vi/thumb/f/f6/Logo_c%E1%BB%A7a_VFF.svg/2048px-Logo_c%E1%BB%A7a_VFF.svg.png",
-    detail: [
-      { league: "EURO 2024", number_match: 24 },
-      { league: "Copa America", number_match: 5 },
-      { league: "Olympic Nam", number_match: 7 },
-      { league: "World Cup", number_match: 32 },
-    ],
-  },
-  {
-    name: "Châu Âu",
-    logo: "https://static.vecteezy.com/system/resources/thumbnails/016/328/942/small_2x/vietnam-flat-rounded-flag-icon-with-transparent-background-free-png.png",
-    detail: [
-      { league: "EURO 2024", number_match: 24 },
-      { league: "Copa America", number_match: 5 },
-      { league: "Olympic Nam", number_match: 7 },
-      { league: "World Cup", number_match: 32 },
-    ],
-  },
-  {
-    name: "Nam Mỹ",
-    logo: "https://static.vecteezy.com/system/resources/thumbnails/016/328/942/small_2x/vietnam-flat-rounded-flag-icon-with-transparent-background-free-png.png",
-    detail: [
-      { league: "EURO 2024", number_match: 24 },
-      { league: "Copa America", number_match: 5 },
-      { league: "Olympic Nam", number_match: 7 },
-      { league: "World Cup", number_match: 32 },
-    ],
-  },
-  {
-    name: "Châu Á",
-    logo: "https://static.vecteezy.com/system/resources/thumbnails/016/328/942/small_2x/vietnam-flat-rounded-flag-icon-with-transparent-background-free-png.png",
-    detail: [
-      { league: "EURO 2024", number_match: 24 },
-      { league: "Copa America", number_match: 5 },
-      { league: "Olympic Nam", number_match: 7 },
-      { league: "World Cup", number_match: 32 },
-    ],
-  },
-  {
-    name: "Anh",
-    logo: "https://static.vecteezy.com/system/resources/thumbnails/016/328/942/small_2x/vietnam-flat-rounded-flag-icon-with-transparent-background-free-png.png",
-    detail: [
-      { league: "EURO 2024", number_match: 24 },
-      { league: "Copa America", number_match: 5 },
-      { league: "Olympic Nam", number_match: 7 },
-      { league: "World Cup", number_match: 32 },
-    ],
-  },
-  {
-    name: "Tây Ban Nha",
-    logo: "https://static.vecteezy.com/system/resources/thumbnails/016/328/942/small_2x/vietnam-flat-rounded-flag-icon-with-transparent-background-free-png.png",
-    detail: [
-      { league: "EURO 2024", number_match: 24 },
-      { league: "Copa America", number_match: 5 },
-      { league: "Olympic Nam", number_match: 7 },
-      { league: "World Cup", number_match: 32 },
-    ],
-  },
-  {
-    name: "Bồ Đồ Nha",
-    logo: "https://static.vecteezy.com/system/resources/thumbnails/016/328/942/small_2x/vietnam-flat-rounded-flag-icon-with-transparent-background-free-png.png",
-    detail: [
-      { league: "EURO 2024", number_match: 24 },
-      { league: "Copa America", number_match: 5 },
-      { league: "Olympic Nam", number_match: 7 },
-      { league: "World Cup", number_match: 32 },
-    ],
-  },
-];
 const demoFavorite = [
   {
     name: "Trực tiếp",
@@ -265,7 +183,7 @@ const LeagueView = () => {
 
   // FORMAT DATA FOR POPUP ALL
   const processLeagueData = (data: any) => {
-    const groupedData = data.reduce((acc: any, curr: any) => {
+    const groupedData = data?.reduce((acc: any, curr: any) => {
       const containerName = curr.container.container;
 
       if (!acc[containerName]) {
@@ -299,7 +217,7 @@ const LeagueView = () => {
           is_get_bets: false,
         });
         if (response.data.ok) {
-          const processedList = processLeagueData(response.data.data);
+          const processedList = processLeagueData(response?.data?.data);
           setListAllLeague(processedList as any);
           setLoadingPopupAll(false);
         }
