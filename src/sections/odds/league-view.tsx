@@ -160,6 +160,7 @@ const LeagueView = () => {
   const [loadingPopupAll, setLoadingPopupAll] = useState(false);
   const [listAllLeague, setListAllLeague] = useState<ILeague[]>([]);
   const [loadingFavorite, setLoadingFavorite] = useState<number | null>(null);
+  const [leagueTrending, setLeagueTrending] = useState<string[]>();
 
   const handleValueChange = (value: string[]) => {
     setOpenItems(value);
@@ -309,7 +310,9 @@ const LeagueView = () => {
     const getListLeagueTrending = async () => {
       try {
         const response = await axios.post(`/api/league/trending?id=${requestId}`);
-        console.log("response league trending:", response);
+        if (response.data.ok) {
+          setLeagueTrending(response.data.data);
+        }
       } catch (error) {
         console.error("error:", error);
       }
@@ -530,13 +533,17 @@ const LeagueView = () => {
                 )}
               </DialogContent>
             </Dialog>
-            {tagDemo.slice(0, 4).map((tag, index) => (
+            {leagueTrending?.slice(0, 4).map((tag, index) => (
               <div
                 className="flex flex-row items-center justify-center gap-1 rounded-[20px] bg-[rgba(41,53,67,1)] h-8 px-[18px]"
                 key={index}
               >
-                <img src={tag.logo} alt={tag.name} className="w-[25px] h-[25px] rounded-full" />
-                <p className=" font-bold text-[rgba(255,255,255,1)] text-sm">{tag.name}</p>
+                <img
+                  src="https://toppng.com/uploads/preview/official-symbol-logo-design-for-euro-2024-germany-european-football-final-11715224051fchzryfqfd.png"
+                  alt={tag}
+                  className="w-[25px] h-[25px] rounded-full"
+                />
+                <p className=" font-bold text-[rgba(255,255,255,1)] text-sm">{tag}</p>
               </div>
             ))}
           </div>
@@ -544,13 +551,17 @@ const LeagueView = () => {
             className="flex flex-row w-full justify-start items-center gap-2 overflow-x-auto whitespace-nowrap no-scrollbar px-2 hover:cursor-pointer mt-1"
             ref={league2ListRef}
           >
-            {tagDemo.slice(4).map((tag, index) => (
+            {leagueTrending?.slice(4).map((tag, index) => (
               <div
                 className="flex flex-row items-center justify-center gap-1 rounded-[20px] bg-[rgba(41,53,67,1)] h-8 px-[18px]"
                 key={index}
               >
-                <img src={tag.logo} alt={tag.name} className="w-[25px] h-[25px] rounded-full" />
-                <p className=" font-bold text-[rgba(255,255,255,1)] text-sm">{tag.name}</p>
+                <img
+                  src="https://toppng.com/uploads/preview/official-symbol-logo-design-for-euro-2024-germany-european-football-final-11715224051fchzryfqfd.png"
+                  alt={tag}
+                  className="w-[25px] h-[25px] rounded-full"
+                />
+                <p className=" font-bold text-[rgba(255,255,255,1)] text-sm">{tag}</p>
               </div>
             ))}
           </div>
