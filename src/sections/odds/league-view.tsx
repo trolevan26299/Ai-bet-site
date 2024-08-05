@@ -190,6 +190,7 @@ const LeagueView = () => {
         acc[containerName] = {
           name: containerName,
           detail: [],
+          favorite: false,
         };
       }
 
@@ -200,7 +201,9 @@ const LeagueView = () => {
       } else {
         acc[containerName].detail.push({ league: curr.league_name, number_match: 1 });
       }
-
+      if (curr.is_favorite) {
+        acc[containerName].favorite = true;
+      }
       return acc;
     }, {});
 
