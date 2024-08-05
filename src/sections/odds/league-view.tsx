@@ -316,20 +316,21 @@ const LeagueView = () => {
               <Icon icon="pepicons-pop:circle" width={17} height={17} className="text-[rgba(230,58,58,1)]" />
             </button>
           </div>
-
-          <div
-            className="w-[62%] flex flex-row justify-center gap-4 items-center  overflow-x-auto whitespace-nowrap no-scrollbar hover:cursor-pointer"
-            ref={tabsListRef}
-          >
-            {dateSearch.map((date, index) => (
-              <div
-                className="hover:cursor-pointer hover:text-[rgba(255,255,255,1)] flex flex-col items-center justify-center text-[12px] font-bold gap-[2px] text-[rgba(109,109,109,1)]"
-                key={index}
-              >
-                <p>{getDayOfWeek(date)}</p>
-                <p>{getDayAndMonth(date)}</p>
-              </div>
-            ))}
+          <div className="w-[62%]">
+            <div
+              className="w-full flex flex-row justify-start gap-4 items-center  overflow-x-auto whitespace-nowrap no-scrollbar hover:cursor-pointer"
+              ref={tabsListRef}
+            >
+              {dateSearch.map((date, index) => (
+                <div
+                  className="hover:cursor-pointer hover:text-[rgba(255,255,255,1)] flex flex-col items-center justify-center text-[12px] font-bold gap-[2px] text-[rgba(109,109,109,1)]"
+                  key={index}
+                >
+                  <p>{getDayOfWeek(date)}</p>
+                  <p>{getDayAndMonth(date)}</p>
+                </div>
+              ))}
+            </div>
           </div>
 
           <div className="w-[18%] flex flex-row justify-around items-center ">
