@@ -20,20 +20,18 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { Dialog, DialogClose, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import Image from "next/image";
 
-const demoDateSearch = [
-  "01/08/2024",
-  "02/08/2024",
-  "03/08/2024",
-  "04/08/2024",
-  "05/08/2024",
-  "06/08/2024",
-  "07/08/2024",
-  "08/08/2024",
-  "09/08/2024",
-  "10/08/2024",
-  "11/08/2024",
-  "12/08/2024",
-];
+const generateDateList = () => {
+  const dates = [];
+  const today = new Date();
+
+  for (let i = 0; i < 10; i++) {
+    const date = new Date(today);
+    date.setDate(today.getDate() + i);
+    dates.push(date.toLocaleDateString("en-GB")); // Format: "dd/MM/yyyy"
+  }
+
+  return dates;
+};
 
 const frameworks = [
   {
@@ -232,7 +230,7 @@ const LeagueView = () => {
   const tabsListRef = useRef<HTMLDivElement>(null);
   const league1ListRef = useRef<HTMLDivElement>(null);
   const league2ListRef = useRef<HTMLDivElement>(null);
-
+  const dateSearch = generateDateList();
   const allItems = demoFavorite.map((item) => item.name);
   const [openItems, setOpenItems] = useState(allItems);
 
@@ -323,7 +321,7 @@ const LeagueView = () => {
             className="w-[62%] flex flex-row justify-center gap-4 items-center  overflow-x-auto whitespace-nowrap no-scrollbar hover:cursor-pointer"
             ref={tabsListRef}
           >
-            {demoDateSearch.map((date, index) => (
+            {dateSearch.map((date, index) => (
               <div
                 className="hover:cursor-pointer hover:text-[rgba(255,255,255,1)] flex flex-col items-center justify-center text-[12px] font-bold gap-[2px] text-[rgba(109,109,109,1)]"
                 key={index}
