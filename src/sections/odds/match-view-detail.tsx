@@ -475,7 +475,7 @@ export default function MatchViewDetail() {
                               color="rgba(170,170,170,1)"
                             />
                           </Dialog.Trigger>
-                          <Dialog.Content className="bg-[rgba(41,53,67,1)]">
+                          <Dialog.Content className="bg-[rgba(41,53,67,1)] h-[85vh]">
                             <div className="h-[20px] w-full flex flex-row justify-end">
                               <Dialog.Close>
                                 <Icon
