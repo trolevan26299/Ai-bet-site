@@ -14,7 +14,7 @@ import { IMatchData, IOddsDetail, OddsStatusType } from "@/types/odds.types";
 import { transformDataCorner } from "@/utils/transformDataCorner";
 import { transformData } from "@/utils/transformDataOdds";
 import { Icon } from "@iconify/react";
-import { Popover } from "@radix-ui/themes";
+import { Button, Dialog, Flex, Popover } from "@radix-ui/themes";
 import axios from "axios";
 import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -24,92 +24,6 @@ import LoadingPopup from "../../components/loading-screen/loading-popup";
 import TeamLogo from "@/components/cloudinary/teamlogo";
 import { utcToUtc7Format } from "@/utils/time";
 
-const leagueExample = [
-  {
-    id: 1,
-    name: "Euro 2024",
-    container: "Châu Âu",
-    away: "Spain",
-    home: "England",
-    awayScore: 1,
-    homeScore: 2,
-    isLive: true,
-    time: "30'",
-    scope: "1st Half",
-  },
-  {
-    id: 2,
-    name: "Euro 2024",
-    container: "Châu Âu",
-    away: "Spain",
-    home: "England",
-    time: "02:00, 15/07",
-    isLive: false,
-  },
-  {
-    id: 3,
-    name: "Euro 2024",
-    container: "Châu Âu",
-    away: "Spain",
-    home: "England",
-    time: "02:00, 15/07",
-    isLive: false,
-  },
-  {
-    id: 4,
-    name: "Euro 2024",
-    container: "Châu Âu",
-    away: "Spain",
-    home: "England",
-    time: "02:00, 15/07",
-    isLive: false,
-  },
-  {
-    id: 5,
-    name: "Euro 2024",
-    container: "Châu Âu",
-    away: "Spain",
-    home: "England",
-    time: "02:00, 15/07",
-    isLive: false,
-  },
-  {
-    id: 6,
-    name: "Euro 2024",
-    container: "Châu Âu",
-    away: "Spain",
-    home: "England",
-    time: "02:00, 15/07",
-    isLive: false,
-  },
-  {
-    id: 7,
-    name: "Euro 2024",
-    container: "Châu Âu",
-    away: "Spain",
-    home: "England",
-    time: "02:00, 15/07",
-    isLive: false,
-  },
-  {
-    id: 8,
-    name: "Euro 2024",
-    container: "Châu Âu",
-    away: "Spain",
-    home: "England",
-    time: "02:00, 15/07",
-    isLive: false,
-  },
-  {
-    id: 9,
-    name: "Euro 2024",
-    container: "Châu Âu",
-    away: "Spain",
-    home: "England",
-    time: "02:00, 15/07",
-    isLive: false,
-  },
-];
 export default function MatchViewDetail() {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -551,13 +465,28 @@ export default function MatchViewDetail() {
                         </div>
                       </div>
                       <div className="flex flex-col justify-between items-center">
-                        <Icon
-                          icon="mage:chart-fill"
-                          className="hover:cursor-pointer"
-                          width={16}
-                          height={16}
-                          color="rgba(170,170,170,1)"
-                        />
+                        <Dialog.Root>
+                          <Dialog.Trigger>
+                            <Icon
+                              icon="mage:chart-fill"
+                              className="hover:cursor-pointer"
+                              width={16}
+                              height={16}
+                              color="rgba(170,170,170,1)"
+                            />
+                          </Dialog.Trigger>
+                          <Dialog.Content>
+                            <Dialog.Title>Users</Dialog.Title>
+                            <Dialog.Description>The following users have access to this project.</Dialog.Description>
+                            <Flex gap="3" justify="end">
+                              <Dialog.Close>
+                                <Button variant="soft" color="gray">
+                                  Close
+                                </Button>
+                              </Dialog.Close>
+                            </Flex>
+                          </Dialog.Content>
+                        </Dialog.Root>
 
                         {item.liveStatus && (
                           <Icon icon="fluent:live-20-filled" width={16} height={16} color="rgba(245,93,62,1)" />
