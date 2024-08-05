@@ -475,7 +475,7 @@ const LeagueView = () => {
                                     width={25}
                                     height={25}
                                     className=" hover:cursor-pointer"
-                                    style={{ color: #fff }}
+                                    style={{ color: "#fff" }}
                                   />
                                 ) : detail.favorite ? (
                                   <Icon
