@@ -1,5 +1,5 @@
 import { SplashScreen } from "@/components/loading-screen";
-import { useTelegram } from "@/context/telegram.provider";
+import { useTelegram } from "@/store/provider/telegram.provider";
 import { IHistoryBet } from "@/types/history.type";
 import { fCurrencyP88 } from "@/utils/formatNumber";
 import { formatDateTime } from "@/utils/time";

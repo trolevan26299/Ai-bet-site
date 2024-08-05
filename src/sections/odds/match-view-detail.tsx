@@ -4,28 +4,30 @@
 import Menu from "@/components/app/menu/menu";
 import OddsDetail from "@/components/app/odds-detail/odds-detail";
 import ScreenInfoMatch from "@/components/app/screen-info-match/screen-info-match";
+import TeamLogo from "@/components/cloudinary/teamlogo";
 import { SplashScreen } from "@/components/loading-screen";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { useTelegram } from "@/context/telegram.provider";
 import MainLayout from "@/layouts/main/layout";
+import { useTelegram } from "@/store/provider/telegram.provider";
 import { IMatchData, IOddsDetail, OddsStatusType } from "@/types/odds.types";
+import { utcToUtc7Format } from "@/utils/time";
 import { transformDataCorner } from "@/utils/transformDataCorner";
 import { transformData } from "@/utils/transformDataOdds";
 import { Icon } from "@iconify/react";
-import { Button, Dialog, Flex, Popover } from "@radix-ui/themes";
+import { Dialog, Popover } from "@radix-ui/themes";
 import axios from "axios";
 import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
-import "./index.css";
 import LoadingPopup from "../../components/loading-screen/loading-popup";
-import TeamLogo from "@/components/cloudinary/teamlogo";
-import { utcToUtc7Format } from "@/utils/time";
+import "./index.css";
+import { useGetRequestId } from "@/store/context/requestId.context";
 
 export default function MatchViewDetail() {
   const router = useRouter();
+  const { updateRequestId } = useGetRequestId();
   const searchParams = useSearchParams();
   const [odds, setOdds] = useState<IOddsDetail[]>([]);
   const [latestOdds, setLatestOdds] = useState<IOddsDetail[]>([]);
@@ -49,6 +51,7 @@ export default function MatchViewDetail() {
 
   const matchParam = searchParams.get("match");
   const tracker_id = searchParams.get("tracker_id");
+  const requestId = searchParams.get("request_id");
 
   const leagueNoCorner = (league?: string) => {
     return league?.includes(" Corners") ? league?.replace(" Corners", "") : league;
@@ -60,7 +63,7 @@ export default function MatchViewDetail() {
     });
   };
   const payload = {
-    request_id: searchParams.get("request_id"),
+    request_id: requestId,
     match: matchParam ? matchNoCorner() : [],
     time: searchParams.get("time") || "next_week",
     from_date: searchParams.get("from_date"),
@@ -170,12 +173,9 @@ export default function MatchViewDetail() {
       console.log("error:", error);
     }
   }, []);
+  // click to back to list league
   const handleBackClick = () => {
-    // if (window.history.length > 1) {
-    //   router.back();
-    // } else {
     router.push("/match");
-    // }
   };
 
   useEffect(() => {
@@ -401,6 +401,11 @@ export default function MatchViewDetail() {
     handleGetSetting();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+  useEffect(() => {
+    if (requestId) {
+      updateRequestId(requestId);
+    }
+  }, [requestId]);
 
   return (
     <MainLayout>

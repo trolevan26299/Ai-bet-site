@@ -3,7 +3,7 @@ import { SplashScreen } from "@/components/loading-screen";
 import { Calendar } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Tabs, TabsList, TabsTriggerDate } from "@/components/ui/tabs";
-import { useTelegram } from "@/context/telegram.provider";
+import { useTelegram } from "@/store/provider/telegram.provider";
 import { IHistoryBet } from "@/types/history.type";
 import { locale } from "@/utils/configCalendarToVN";
 import { formatRangeTime } from "@/utils/time";

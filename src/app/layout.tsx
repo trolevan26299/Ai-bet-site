@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/next-script-for-ga */
 import { MotionLazy } from "@/components/animate/motion-lazy";
 import { GOOGLE_ANALYTICS_ID, GOOGLE_TAG_MANAGER_ID } from "@/config-global";
-import { TelegramProvider } from "@/context/telegram.provider";
+import { TelegramProvider } from "@/store/provider/telegram.provider";
 import { Theme } from "@radix-ui/themes";
 import "@radix-ui/themes/styles.css";
 import { Inter } from "next/font/google";

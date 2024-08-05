@@ -10,7 +10,7 @@ import { getDayAndMonth } from "@/utils/convertToDayAndMonth";
 import { Icon } from "@iconify/react";
 import * as PopoverRD from "@radix-ui/react-popover";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { use, useEffect, useRef, useState } from "react";
 import "./index.css";
 import { Popover } from "@radix-ui/themes";
 import { Calendar } from "@/components/ui/calendar";
@@ -21,6 +21,7 @@ import { Dialog, DialogClose, DialogContent, DialogTrigger } from "@/components/
 import Image from "next/image";
 import { LoadingPopup } from "@/components/loading-screen";
 import axios from "axios";
+import { useGetRequestId } from "@/store/context/requestId.context";
 
 const generateDateList = () => {
   const dates = [];
@@ -229,6 +230,7 @@ const demoFavorite = [
 ];
 const LeagueView = () => {
   const router = useRouter();
+  const { requestId } = useGetRequestId();
   const searchParams = useSearchParams();
   const tabsListRef = useRef<HTMLDivElement>(null);
   const league1ListRef = useRef<HTMLDivElement>(null);
@@ -239,14 +241,15 @@ const LeagueView = () => {
   const [loadingPopupAll, setLoadingPopupAll] = useState(false);
   const [listAllLeague, setListAllLeague] = useState([]);
 
-  console.log("list All League:", listAllLeague);
+  console.log("listAllLeague:", listAllLeague);
+
   const handleValueChange = (value: string[]) => {
     setOpenItems(value);
   };
   const handleNavigate = () => {
     const matchId = "1594429137";
     const queryParams = {
-      request_id: "adc54fb6-2770-4984-bc50-8a0ebb841dd5",
+      request_id: requestId as string,
       match: "APIA Leichhardt Tigers,West Sydney Wanderers Youth",
       time: "today",
       league: "Australia - NPL New South Wales",

@@ -21,7 +21,7 @@ import {
   DrawerTrigger,
 } from "@/components/ui/drawer";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { useTelegram } from "@/context/telegram.provider";
+import { useTelegram } from "@/store/provider/telegram.provider";
 import { IMatchData, IOdds, IOddsDetail, OddsStatusType } from "@/types/odds.types";
 import { Icon } from "@iconify/react";
 import { ReloadIcon } from "@radix-ui/react-icons";
