@@ -158,7 +158,7 @@ const LeagueView = () => {
   const [openItems, setOpenItems] = useState(allItems);
   const [loadingPopupAll, setLoadingPopupAll] = useState(false);
   const [listAllLeague, setListAllLeague] = useState<ILeague[]>([]);
-  const [loadingFavorite, setLoadingFavorite] = useState(false);
+  const [loadingFavorite, setLoadingFavorite] = useState<number | null>(null);
 
   const handleValueChange = (value: string[]) => {
     setOpenItems(value);
@@ -190,7 +190,7 @@ const LeagueView = () => {
     nowFavorite: boolean;
     container: string;
   }) => {
-    setLoadingFavorite(true);
+    setLoadingFavorite(leagueId);
     try {
       const url = "/api/favorite";
       const method = nowFavorite ? axios.put : axios.post;
@@ -213,10 +213,10 @@ const LeagueView = () => {
             return item;
           });
         });
-        setLoadingFavorite(false);
+        setLoadingFavorite(null);
       }
     } catch (error) {
-      setLoadingFavorite(false);
+      setLoadingFavorite(null);
       console.log("error:", error);
     }
   };
@@ -469,7 +469,7 @@ const LeagueView = () => {
                                     {detail.number_match}
                                   </Badge>
                                 </div>
-                                {loadingFavorite ? (
+                                {loadingFavorite === detail.league_id ? (
                                   <Icon
                                     icon="line-md:loading-alt-loop"
                                     width={25}
