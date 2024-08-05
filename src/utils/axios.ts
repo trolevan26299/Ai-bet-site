@@ -30,5 +30,6 @@ export const endpoints = {
   },
   league: {
     matchInLeague: "search/match_webbot",
+    trending: "search/league_index_core",
   },
 };

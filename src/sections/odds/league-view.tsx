@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @next/next/no-img-element */
 "use client";
 
@@ -303,6 +304,18 @@ const LeagueView = () => {
     });
   }, []);
   // END xử lý cuộn chuột tagsList
+
+  useEffect(() => {
+    const getListLeagueTrending = async () => {
+      try {
+        const response = await axios.post(`/api/league/trending?id=${requestId}`);
+        console.log("response league trending:", response);
+      } catch (error) {
+        console.error("error:", error);
+      }
+    };
+    getListLeagueTrending();
+  }, []);
 
   return (
     <MainLayout>
