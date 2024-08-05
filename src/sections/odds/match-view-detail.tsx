@@ -406,7 +406,7 @@ export default function MatchViewDetail() {
             className="hover:cursor-pointer text-[rgba(143,149,156,1)] hover:text-[rgba(255,255,255,1)]"
             onClick={() => router.back()}
           />
-          <div className="text-[rgba(255,255,255,1)] flex flex-row justify-center items-center ">
+          <div className="text-[rgba(255,255,255,1)] flex flex-row justify-center items-center w-full ">
             <Image src="/assets/league_logo.png" alt="no-content" className="w-[34px] h-[27.2px]" />
             <Popover.Root onOpenChange={(open) => handleOpenLeague(open)}>
               <Popover.Trigger>
