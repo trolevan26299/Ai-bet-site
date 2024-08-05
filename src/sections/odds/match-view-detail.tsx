@@ -476,15 +476,18 @@ export default function MatchViewDetail() {
                             />
                           </Dialog.Trigger>
                           <Dialog.Content>
-                            <Dialog.Title>Users</Dialog.Title>
-                            <Dialog.Description>The following users have access to this project.</Dialog.Description>
-                            <Flex gap="3" justify="end">
-                              <Dialog.Close>
-                                <Button variant="soft" color="gray">
-                                  Close
-                                </Button>
-                              </Dialog.Close>
-                            </Flex>
+                            <iframe
+                              scrolling="no"
+                              src={`https://start26.sptpub.com/statistics.html?statisticsUrl=https://s5.sir.sportradar.com/sp77/vi/1/season/116753/h2h/match/48613129`}
+                              allowFullScreen
+                              title="rindle"
+                              style={{
+                                border: 0,
+                                width: "100%",
+                                height: "100%",
+                                borderRadius: "5px",
+                              }}
+                            ></iframe>
                           </Dialog.Content>
                         </Dialog.Root>
 
