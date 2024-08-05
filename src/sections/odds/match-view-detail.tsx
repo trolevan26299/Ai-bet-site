@@ -495,7 +495,7 @@ export default function MatchViewDetail() {
                               style={{
                                 border: 0,
                                 width: "100%",
-                                height: "100%",
+                                height: "90%",
                                 borderRadius: "5px",
                               }}
                               className="p-0"
