@@ -442,7 +442,7 @@ const LeagueView = () => {
                     className="w-[95%]  m-auto p-2 bg-[rgba(30,42,56,1)] rounded-[10px] h-[85vh]"
                   >
                     <DialogClose asChild>
-                      <div className="flex flex-row justify-end px-2 h-[40px] hover:cursor-pointer">
+                      <div className="flex flex-row justify-end px-2 h-[25px] hover:cursor-pointer">
                         <Icon icon="ic:baseline-close" width={20} height={20} className="text-[rgba(255,255,255,1)]" />
                       </div>
                     </DialogClose>
