@@ -233,6 +233,7 @@ const LeagueView = () => {
   const dateSearch = generateDateList();
   const allItems = demoFavorite.map((item) => item.name);
   const [openItems, setOpenItems] = useState(allItems);
+  const [loadingPopupAll, setLoadingPopupAll] = useState(false);
 
   const handleValueChange = (value: string[]) => {
     setOpenItems(value);
@@ -344,7 +345,7 @@ const LeagueView = () => {
                 />
               </Popover.Trigger>
               <Popover.Content
-                className="py-2 w-[95%] bg-[rgba(40,55,74,1)] mt-[14px] max-h-[80vh] rounded-sm"
+                className="py-2 w-[95%] bg-[rgba(40,55,74,1)] mt-[14px] max-h-[80vh] rounded-sm ml-[10px]"
                 align="center"
               >
                 <Calendar
