@@ -370,7 +370,7 @@ const LeagueView = () => {
                   <p className=" font-bold text-[rgba(255,255,255,1)] text-sm">Tất cả</p>
                 </div>
               </DialogTrigger>
-              <DialogContent className="h-full " style={{ borderWidth: "0px" }}>
+              <DialogContent className="h-full overflow-y-auto " style={{ borderWidth: "0px" }}>
                 {loadingPopupAll ? (
                   <LoadingPopup />
                 ) : (
