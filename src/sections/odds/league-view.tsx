@@ -474,7 +474,7 @@ const LeagueView = () => {
                                     icon="line-md:loading-alt-loop"
                                     width={25}
                                     height={25}
-                                    className=" hover:cursor-pointer"
+                                    className=" hover:cursor-pointer mr-[-3px]"
                                     style={{ color: "#fff" }}
                                   />
                                 ) : detail.favorite ? (
