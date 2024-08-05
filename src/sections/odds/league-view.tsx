@@ -158,6 +158,7 @@ const LeagueView = () => {
   const [openItems, setOpenItems] = useState(allItems);
   const [loadingPopupAll, setLoadingPopupAll] = useState(false);
   const [listAllLeague, setListAllLeague] = useState<ILeague[]>([]);
+  const [loadingFavorite, setLoadingFavorite] = useState(false);
 
   const handleValueChange = (value: string[]) => {
     setOpenItems(value);
@@ -189,6 +190,7 @@ const LeagueView = () => {
     nowFavorite: boolean;
     container: string;
   }) => {
+    setLoadingFavorite(true);
     try {
       const url = "/api/favorite";
       const method = nowFavorite ? axios.put : axios.post;
@@ -211,8 +213,10 @@ const LeagueView = () => {
             return item;
           });
         });
+        setLoadingFavorite(false);
       }
     } catch (error) {
+      setLoadingFavorite(false);
       console.log("error:", error);
     }
   };
@@ -465,7 +469,15 @@ const LeagueView = () => {
                                     {detail.number_match}
                                   </Badge>
                                 </div>
-                                {detail.favorite ? (
+                                {loadingFavorite ? (
+                                  <Icon
+                                    icon="line-md:loading-alt-loop"
+                                    width={25}
+                                    height={25}
+                                    className=" hover:cursor-pointer"
+                                    style={{ color: #fff }}
+                                  />
+                                ) : detail.favorite ? (
                                   <Icon
                                     icon="emojione:star"
                                     width={18}
