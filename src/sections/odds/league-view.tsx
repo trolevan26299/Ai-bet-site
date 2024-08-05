@@ -19,6 +19,7 @@ import { Badge } from "@/components/ui/badge";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Dialog, DialogClose, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import Image from "next/image";
+import { LoadingPopup } from "@/components/loading-screen";
 
 const generateDateList = () => {
   const dates = [];
@@ -255,25 +256,9 @@ const LeagueView = () => {
     router.push(`/match/${matchId}?${queryString}`);
   };
 
-  const handleMouseMove = (e: MouseEvent) => {
-    if (tabsListRef.current) {
-      const target = tabsListRef.current;
-      if (e.buttons === 1) {
-        target.scrollLeft -= e.movementX;
-      }
-    }
-  };
-  const handleMouseMoveLeague1 = (e: MouseEvent) => {
-    if (league1ListRef.current) {
-      const target = league1ListRef.current;
-      if (e.buttons === 1) {
-        target.scrollLeft -= e.movementX;
-      }
-    }
-  };
-  const handleMouseMoveLeague2 = (e: MouseEvent) => {
-    if (league2ListRef.current) {
-      const target = league2ListRef.current;
+  const handleMouseMove = (e: MouseEvent, ref: React.RefObject<HTMLDivElement>) => {
+    if (ref.current) {
+      const target = ref.current;
       if (e.buttons === 1) {
         target.scrollLeft -= e.movementX;
       }
@@ -281,31 +266,18 @@ const LeagueView = () => {
   };
 
   useEffect(() => {
-    const target = tabsListRef.current;
-    if (target) {
-      target.addEventListener("mousemove", handleMouseMove);
-      return () => {
-        target.removeEventListener("mousemove", handleMouseMove);
-      };
-    }
-  }, []);
-  useEffect(() => {
-    const target = league2ListRef.current;
-    if (target) {
-      target.addEventListener("mousemove", handleMouseMoveLeague2);
-      return () => {
-        target.removeEventListener("mousemove", handleMouseMoveLeague2);
-      };
-    }
-  }, []);
-  useEffect(() => {
-    const target = league1ListRef.current;
-    if (target) {
-      target.addEventListener("mousemove", handleMouseMoveLeague1);
-      return () => {
-        target.removeEventListener("mousemove", handleMouseMoveLeague1);
-      };
-    }
+    const refs = [tabsListRef, league1ListRef, league2ListRef];
+
+    refs.forEach((ref) => {
+      const target = ref.current;
+      if (target) {
+        const mouseMoveHandler = (e: MouseEvent) => handleMouseMove(e, ref);
+        target.addEventListener("mousemove", mouseMoveHandler);
+        return () => {
+          target.removeEventListener("mousemove", mouseMoveHandler);
+        };
+      }
+    });
   }, []);
   return (
     <MainLayout>
@@ -424,62 +396,66 @@ const LeagueView = () => {
                 </div>
               </DialogTrigger>
               <DialogContent className="h-full">
-                <Accordion
-                  type="multiple"
-                  value={openItems}
-                  onValueChange={handleValueChange}
-                  className="w-[95%] m-auto p-2 bg-[rgba(30,42,56,1)] rounded-[10px] h-full"
-                >
-                  <DialogClose asChild>
-                    <div className="flex flex-row justify-end px-2 h-[40px] hover:cursor-pointer">
-                      <Icon icon="ic:baseline-close" width={20} height={20} className="text-[rgba(255,255,255,1)]" />
-                    </div>
-                  </DialogClose>
+                {loadingPopupAll ? (
+                  <LoadingPopup />
+                ) : (
+                  <Accordion
+                    type="multiple"
+                    value={openItems}
+                    onValueChange={handleValueChange}
+                    className="w-[95%] m-auto p-2 bg-[rgba(30,42,56,1)] rounded-[10px] h-full"
+                  >
+                    <DialogClose asChild>
+                      <div className="flex flex-row justify-end px-2 h-[40px] hover:cursor-pointer">
+                        <Icon icon="ic:baseline-close" width={20} height={20} className="text-[rgba(255,255,255,1)]" />
+                      </div>
+                    </DialogClose>
 
-                  {demoTagAll.map((tag, index) => (
-                    <AccordionItem key={index} value={tag.name}>
-                      <AccordionTrigger className="flex flex-row items-center justify-between px-2 py-1 hover:cursor-pointer">
-                        <div className="flex flex-row items-center gap-2">
-                          <img src={tag.logo} alt={tag.name} className="w-[25px] h-[25px] rounded-full" />
-                          <p className=" font-bold text-[rgba(255,255,255,1)] text-[15px]">{tag.name}</p>
-                          <Badge
-                            variant="secondary"
-                            className="bg-[rgba(53,64,76,1)] text-[13px] font-bold text-white py-[1px]"
-                          >
-                            {tag.detail.length}
-                          </Badge>
-                        </div>
-                      </AccordionTrigger>
-                      <AccordionContent className="flex flex-col gap-2 px-2 py-1">
-                        {tag.detail.map((detail, index) => (
-                          <div
-                            className="flex flex-row items-center justify-between  py-1 hover:cursor-pointer"
-                            key={index}
-                          >
-                            <div className="flex flex-row items-center gap-2 ml-8" key={index}>
-                              <p className="text-[10px] font-bold text-[rgba(137,143,151,1)] hover:text-[rgba(255,255,255,1)]">
-                                {detail.league}
-                              </p>
-                              <Badge
-                                variant="secondary"
-                                className="px-[10px] py-[0px] bg-[rgba(53,64,76,1)] text-[10px] font-bold text-white"
-                              >
-                                {detail.number_match}
-                              </Badge>
-                            </div>
-                            <Icon
-                              icon="material-symbols-light:star-outline"
-                              width={25}
-                              height={25}
-                              color="rgba(170,170,170,1)"
-                              className=" hover:cursor- mr-[-3px]"
-                            />
+                    {demoTagAll.map((tag, index) => (
+                      <AccordionItem key={index} value={tag.name}>
+                        <AccordionTrigger className="flex flex-row items-center justify-between px-2 py-1 hover:cursor-pointer">
+                          <div className="flex flex-row items-center gap-2">
+                            <img src={tag.logo} alt={tag.name} className="w-[25px] h-[25px] rounded-full" />
+                            <p className=" font-bold text-[rgba(255,255,255,1)] text-[15px]">{tag.name}</p>
+                            <Badge
+                              variant="secondary"
+                              className="bg-[rgba(53,64,76,1)] text-[13px] font-bold text-white py-[1px]"
+                            >
+                              {tag.detail.length}
+                            </Badge>
                           </div>
-                        ))}
-                      </AccordionContent>
-                    </AccordionItem>
-                  ))}
-                </Accordion>
+                        </AccordionTrigger>
+                        <AccordionContent className="flex flex-col gap-2 px-2 py-1">
+                          {tag.detail.map((detail, index) => (
+                            <div
+                              className="flex flex-row items-center justify-between  py-1 hover:cursor-pointer"
+                              key={index}
+                            >
+                              <div className="flex flex-row items-center gap-2 ml-8" key={index}>
+                                <p className="text-[10px] font-bold text-[rgba(137,143,151,1)] hover:text-[rgba(255,255,255,1)]">
+                                  {detail.league}
+                                </p>
+                                <Badge
+                                  variant="secondary"
+                                  className="px-[10px] py-[0px] bg-[rgba(53,64,76,1)] text-[10px] font-bold text-white"
+                                >
+                                  {detail.number_match}
+                                </Badge>
+                              </div>
+                              <Icon
+                                icon="material-symbols-light:star-outline"
+                                width={25}
+                                height={25}
+                                color="rgba(170,170,170,1)"
+                                className=" hover:cursor- mr-[-3px]"
+                              />
+                            </div>
+                          ))}
+                        </AccordionContent>
+                      </AccordionItem>
+                    ))}
+                  </Accordion>
+                )}
               </DialogContent>
             </Dialog>
             {tagDemo.slice(0, 4).map((tag, index) => (
