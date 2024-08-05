@@ -159,8 +159,6 @@ const LeagueView = () => {
   const [loadingPopupAll, setLoadingPopupAll] = useState(false);
   const [listAllLeague, setListAllLeague] = useState<ILeague[]>([]);
 
-  console.log("listAllLeague:", listAllLeague);
-
   const handleValueChange = (value: string[]) => {
     setOpenItems(value);
   };
@@ -179,6 +177,44 @@ const LeagueView = () => {
     };
     const queryString = new URLSearchParams(queryParams).toString();
     router.push(`/match/${matchId}?${queryString}`);
+  };
+
+  // Hàm thêm và xóa kèo yêu thích
+  const handleAddRemoveFavorite = async ({
+    leagueId,
+    nowFavorite,
+    container,
+  }: {
+    leagueId: number;
+    nowFavorite: boolean;
+    container: string;
+  }) => {
+    try {
+      const url = "/api/favorite";
+      const method = nowFavorite ? axios.put : axios.post;
+      const response = await method(url, {
+        request_id: requestId,
+        league_id: leagueId,
+      });
+      if (container && response.data.ok) {
+        setListAllLeague((prevListAllLeague) => {
+          return prevListAllLeague.map((item) => {
+            if (item.name === container) {
+              const updatedDetail = item.detail.map((league) => {
+                if (league.league_id === leagueId) {
+                  return { ...league, favorite: !nowFavorite };
+                }
+                return league;
+              });
+              return { ...item, detail: updatedDetail };
+            }
+            return item;
+          });
+        });
+      }
+    } catch (error) {
+      console.log("error:", error);
+    }
   };
 
   // FORMAT DATA FOR POPUP ALL
@@ -205,6 +241,7 @@ const LeagueView = () => {
           league: curr.league_name,
           number_match: 1,
           favorite: curr.is_favorite || false,
+          league_id: curr.league_id,
         });
       }
 
@@ -433,7 +470,14 @@ const LeagueView = () => {
                                     icon="emojione:star"
                                     width={18}
                                     height={18}
-                                    className=" hover:cursor-pointer "
+                                    className=" hover:cursor-pointer"
+                                    onClick={() =>
+                                      handleAddRemoveFavorite({
+                                        leagueId: detail.league_id,
+                                        nowFavorite: detail.favorite,
+                                        container: tag.name,
+                                      })
+                                    }
                                   />
                                 ) : (
                                   <Icon
@@ -442,6 +486,13 @@ const LeagueView = () => {
                                     height={25}
                                     color="rgba(170,170,170,1)"
                                     className=" hover:cursor-pointer mr-[-3px]"
+                                    onClick={() =>
+                                      handleAddRemoveFavorite({
+                                        leagueId: detail.league_id,
+                                        nowFavorite: detail.favorite,
+                                        container: tag.name,
+                                      })
+                                    }
                                   />
                                 )}
                               </div>
