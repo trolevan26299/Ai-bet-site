@@ -8,6 +8,7 @@ import { Inter } from "next/font/google";
 import Script from "next/script";
 import "@telegram-apps/telegram-ui/dist/styles.css";
 import "./globals.css";
+import { RequestIdProvider } from "@/store/provider/requestId.provider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -45,9 +46,11 @@ export default function RootLayout({
           }}
         />
         <TelegramProvider>
-          <Theme>
-            <MotionLazy>{children}</MotionLazy>
-          </Theme>
+          <RequestIdProvider>
+            <Theme>
+              <MotionLazy>{children}</MotionLazy>
+            </Theme>
+          </RequestIdProvider>
         </TelegramProvider>
       </body>
     </html>
