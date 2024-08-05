@@ -370,7 +370,7 @@ const LeagueView = () => {
                   <p className=" font-bold text-[rgba(255,255,255,1)] text-sm">Tất cả</p>
                 </div>
               </DialogTrigger>
-              <DialogContent className="h-full overflow-y-auto " style={{ borderWidth: "0px" }}>
+              <DialogContent className="h-full " style={{ borderWidth: "0px" }}>
                 {loadingPopupAll ? (
                   <LoadingPopup />
                 ) : (
@@ -385,54 +385,55 @@ const LeagueView = () => {
                         <Icon icon="ic:baseline-close" width={20} height={20} className="text-[rgba(255,255,255,1)]" />
                       </div>
                     </DialogClose>
-
-                    {listAllLeague.map((tag, index) => (
-                      <AccordionItem key={index} value={tag.name}>
-                        <AccordionTrigger className="flex flex-row items-center justify-between px-2 py-1 hover:cursor-pointer">
-                          <div className="flex flex-row items-center gap-2">
-                            <img
-                              src="https://static.vecteezy.com/system/resources/thumbnails/016/328/942/small_2x/vietnam-flat-rounded-flag-icon-with-transparent-background-free-png.png"
-                              alt={tag.name}
-                              className="w-[25px] h-[25px] rounded-full"
-                            />
-                            <p className=" font-bold text-[rgba(255,255,255,1)] text-[15px]">{tag.name}</p>
-                            <Badge
-                              variant="secondary"
-                              className="bg-[rgba(53,64,76,1)] text-[13px] font-bold text-white py-[0px]"
-                            >
-                              {tag.detail.length}
-                            </Badge>
-                          </div>
-                        </AccordionTrigger>
-                        <AccordionContent className="flex flex-col gap-2 px-2 py-1">
-                          {tag.detail.map((detail, index) => (
-                            <div
-                              className="flex flex-row items-center justify-between  py-1 hover:cursor-pointer"
-                              key={index}
-                            >
-                              <div className="flex flex-row items-center gap-2 ml-8" key={index}>
-                                <p className="text-[10px] font-bold text-[rgba(137,143,151,1)] hover:text-[rgba(255,255,255,1)]">
-                                  {detail.league}
-                                </p>
-                                <Badge
-                                  variant="secondary"
-                                  className="px-[10px] py-[0px] bg-[rgba(53,64,76,1)] text-[10px] font-bold text-white"
-                                >
-                                  {detail.number_match}
-                                </Badge>
-                              </div>
-                              <Icon
-                                icon="material-symbols-light:star-outline"
-                                width={25}
-                                height={25}
-                                color="rgba(170,170,170,1)"
-                                className=" hover:cursor- mr-[-3px]"
+                    <div className="h-[90%] overflow-y-auto">
+                      {listAllLeague.map((tag, index) => (
+                        <AccordionItem key={index} value={tag.name}>
+                          <AccordionTrigger className="flex flex-row items-center justify-between px-2 py-1 hover:cursor-pointer">
+                            <div className="flex flex-row items-center gap-2">
+                              <img
+                                src="https://static.vecteezy.com/system/resources/thumbnails/016/328/942/small_2x/vietnam-flat-rounded-flag-icon-with-transparent-background-free-png.png"
+                                alt={tag.name}
+                                className="w-[25px] h-[25px] rounded-full"
                               />
+                              <p className=" font-bold text-[rgba(255,255,255,1)] text-[15px]">{tag.name}</p>
+                              <Badge
+                                variant="secondary"
+                                className="bg-[rgba(53,64,76,1)] text-[13px] font-bold text-white py-[0px]"
+                              >
+                                {tag.detail.length}
+                              </Badge>
                             </div>
-                          ))}
-                        </AccordionContent>
-                      </AccordionItem>
-                    ))}
+                          </AccordionTrigger>
+                          <AccordionContent className="flex flex-col gap-2 px-2 py-1">
+                            {tag.detail.map((detail, index) => (
+                              <div
+                                className="flex flex-row items-center justify-between  py-1 hover:cursor-pointer"
+                                key={index}
+                              >
+                                <div className="flex flex-row items-center gap-2 ml-8" key={index}>
+                                  <p className="text-[10px] font-bold text-[rgba(137,143,151,1)] hover:text-[rgba(255,255,255,1)]">
+                                    {detail.league}
+                                  </p>
+                                  <Badge
+                                    variant="secondary"
+                                    className="px-[10px] py-[0px] bg-[rgba(53,64,76,1)] text-[10px] font-bold text-white"
+                                  >
+                                    {detail.number_match}
+                                  </Badge>
+                                </div>
+                                <Icon
+                                  icon="material-symbols-light:star-outline"
+                                  width={25}
+                                  height={25}
+                                  color="rgba(170,170,170,1)"
+                                  className=" hover:cursor- mr-[-3px]"
+                                />
+                              </div>
+                            ))}
+                          </AccordionContent>
+                        </AccordionItem>
+                      ))}
+                    </div>
                   </Accordion>
                 )}
               </DialogContent>
