@@ -171,11 +171,11 @@ export default function MatchViewDetail() {
     }
   }, []);
   const handleBackClick = () => {
-    if (window.history.length > 1) {
-      router.back();
-    } else {
-      router.push("/match");
-    }
+    // if (window.history.length > 1) {
+    //   router.back();
+    // } else {
+    router.push("/match");
+    // }
   };
 
   useEffect(() => {
