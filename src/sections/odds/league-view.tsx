@@ -398,7 +398,7 @@ const LeagueView = () => {
                             <p className=" font-bold text-[rgba(255,255,255,1)] text-[15px]">{tag.name}</p>
                             <Badge
                               variant="secondary"
-                              className="bg-[rgba(53,64,76,1)] text-[13px] font-bold text-white py-[1px]"
+                              className="bg-[rgba(53,64,76,1)] text-[13px] font-bold text-white py-[0px]"
                             >
                               {tag.detail.length}
                             </Badge>
