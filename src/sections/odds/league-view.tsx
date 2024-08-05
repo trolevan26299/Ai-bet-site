@@ -370,7 +370,7 @@ const LeagueView = () => {
                   <p className=" font-bold text-[rgba(255,255,255,1)] text-sm">Tất cả</p>
                 </div>
               </DialogTrigger>
-              <DialogContent className="h-full " style={{ borderWidth: "0px" }}>
+              <DialogContent className="h-full px-0 " style={{ borderWidth: "0px" }}>
                 {loadingPopupAll ? (
                   <LoadingPopup />
                 ) : (
@@ -378,7 +378,7 @@ const LeagueView = () => {
                     type="multiple"
                     value={openItems}
                     onValueChange={handleValueChange}
-                    className="w-[95%] m-auto p-2 bg-[rgba(30,42,56,1)] rounded-[10px] h-full"
+                    className="w-[95%]  m-auto p-2 bg-[rgba(30,42,56,1)] rounded-[10px] h-[85vh]"
                   >
                     <DialogClose asChild>
                       <div className="flex flex-row justify-end px-2 h-[40px] hover:cursor-pointer">
@@ -398,7 +398,7 @@ const LeagueView = () => {
                               <p className=" font-bold text-[rgba(255,255,255,1)] text-[15px]">{tag.name}</p>
                               <Badge
                                 variant="secondary"
-                                className="bg-[rgba(53,64,76,1)] text-[13px] font-bold text-white py-[0px]"
+                                className="bg-[rgba(53,64,76,1)] text-[12px] font-bold text-white py-[0px]"
                               >
                                 {tag.detail.length}
                               </Badge>
