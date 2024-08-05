@@ -184,7 +184,7 @@ const LeagueView = () => {
   // FORMAT DATA FOR POPUP ALL
   const processLeagueData = (data: any) => {
     const groupedData = data?.reduce((acc: any, curr: any) => {
-      const containerName = curr.container.container;
+      const containerName = curr?.container?.container;
 
       if (!acc[containerName]) {
         acc[containerName] = {
@@ -193,7 +193,7 @@ const LeagueView = () => {
         };
       }
 
-      const existingLeague = acc[containerName].detail.find((detail: any) => detail.league === curr.league_name);
+      const existingLeague = acc[containerName]?.detail.find((detail: any) => detail.league === curr.league_name);
 
       if (existingLeague) {
         existingLeague.number_match += 1;
@@ -217,7 +217,9 @@ const LeagueView = () => {
           is_get_bets: false,
         });
         if (response.data.ok) {
+          console.log("response:", response);
           const processedList = processLeagueData(response?.data?.data);
+          console.log("processedList:", processedList);
           setListAllLeague(processedList as any);
           setLoadingPopupAll(false);
         }
@@ -366,7 +368,6 @@ const LeagueView = () => {
               <DialogTrigger asChild>
                 <div className="flex flex-row items-center justify-center gap-1 rounded-[20px] bg-[rgba(41,53,67,1)] h-8 px-[10px]">
                   <p className=" font-bold text-[rgba(255,255,255,1)] text-sm">Tất cả</p>
-                  <Badge variant="secondary">151</Badge>
                 </div>
               </DialogTrigger>
               <DialogContent className="h-full border-none">
