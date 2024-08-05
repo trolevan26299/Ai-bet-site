@@ -3,7 +3,7 @@
 "use client";
 
 import Menu from "@/components/app/menu/menu";
-import { LoadingPopup } from "@/components/loading-screen";
+import { LoadingPopup, SplashScreen } from "@/components/loading-screen";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -159,6 +159,7 @@ const LeagueView = () => {
   const [openItems, setOpenItems] = useState(allItems);
   const [loadingPopupAll, setLoadingPopupAll] = useState(false);
   const [listAllLeague, setListAllLeague] = useState<ILeague[]>([]);
+  const [loadingScreen, setLoadingScreen] = useState(false);
   const [loadingFavorite, setLoadingFavorite] = useState<number | null>(null);
   const [leagueTrending, setLeagueTrending] = useState<string[]>();
 
@@ -308,12 +309,15 @@ const LeagueView = () => {
 
   useEffect(() => {
     const getListLeagueTrending = async () => {
+      setLoadingScreen(true);
       try {
         const response = await axios.post(`/api/league/trending?id=${requestId}`);
         if (response.data.ok) {
           setLeagueTrending(response.data.data);
+          setLoadingScreen(false);
         }
       } catch (error) {
+        setLoadingScreen(false);
         console.error("error:", error);
       }
     };
@@ -322,360 +326,372 @@ const LeagueView = () => {
 
   return (
     <MainLayout>
-      <div>
-        <div className="search h-12 flex flex-row w-full justify-start items-center bg-[rgba(17,17,17,1)]">
-          <div className="w-[18%] pl-2 flex flex-row justify-center">
-            <button className="w-[53px] h-[21px] bg-[rgba(255,255,255,1)] text-[rgba(230,58,58,1)] uppercase rounded-[16.83px] text-[12px] font-bold flex flex-row justify-center items-center">
-              Live
-              <Icon icon="pepicons-pop:circle" width={17} height={17} className="text-[rgba(230,58,58,1)]" />
-            </button>
+      {loadingScreen ? (
+        <SplashScreen />
+      ) : (
+        <div>
+          <div className="search h-12 flex flex-row w-full justify-start items-center bg-[rgba(17,17,17,1)]">
+            <div className="w-[18%] pl-2 flex flex-row justify-center">
+              <button className="w-[53px] h-[21px] bg-[rgba(255,255,255,1)] text-[rgba(230,58,58,1)] uppercase rounded-[16.83px] text-[12px] font-bold flex flex-row justify-center items-center">
+                Live
+                <Icon icon="pepicons-pop:circle" width={17} height={17} className="text-[rgba(230,58,58,1)]" />
+              </button>
+            </div>
+            <div className="w-[62%]">
+              <div
+                className="w-full flex flex-row justify-start gap-4 items-center  overflow-x-auto whitespace-nowrap no-scrollbar hover:cursor-pointer"
+                ref={tabsListRef}
+              >
+                {dateSearch.map((date, index) => (
+                  <div
+                    className="hover:cursor-pointer hover:text-[rgba(255,255,255,1)] flex flex-col items-center justify-center text-[12px] font-bold gap-[2px] text-[rgba(109,109,109,1)]"
+                    key={index}
+                  >
+                    <p>{getDayOfWeek(date)}</p>
+                    <p>{getDayAndMonth(date)}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="w-[18%] flex flex-row justify-around items-center ">
+              <Popover.Root>
+                <Popover.Trigger>
+                  <Icon
+                    icon="bx:calendar"
+                    width={25}
+                    height={25}
+                    className="hover:cursor-pointer text-[rgba(255,255,255,1)]"
+                  />
+                </Popover.Trigger>
+                <Popover.Content
+                  className="py-2 w-[95%] bg-[rgba(40,55,74,1)] mt-[14px] max-h-[80vh] rounded-sm ml-[10px]"
+                  align="center"
+                >
+                  <Calendar
+                    className="w-full rounded-2xl"
+                    initialFocus
+                    mode="range"
+                    //   defaultMonth={selectedDate?.from}
+                    //   selected={selectedDate}
+                    //   onSelect={setSelectedDate}
+                    numberOfMonths={1}
+                    locale={locale}
+                    weekStartsOn={1}
+                  />
+                  <div className="flex flex-row justify-end items-center mr-7 gap-7 pb-2 text-sm">
+                    <PopoverRD.Close>
+                      <button className=" text-[#006ef8] font-semibold">Xác nhận</button>
+                    </PopoverRD.Close>
+                  </div>
+                </Popover.Content>
+              </Popover.Root>
+              <Popover.Root>
+                <Popover.Trigger>
+                  <Icon
+                    icon="ic:baseline-search"
+                    width={25}
+                    height={25}
+                    className="hover:cursor-pointer text-[rgba(255,255,255,1)]"
+                  />
+                </Popover.Trigger>
+                <Popover.Content
+                  className="py-2 w-[95%] bg-[rgba(40,55,74,1)] mt-[14px] max-h-[80vh] rounded-sm"
+                  align="center"
+                >
+                  <Input
+                    type="search"
+                    placeholder="Tìm kiếm"
+                    className=" rounded-sm text-[rgba(255,255,255,1)] px-2 pb-[8px] border-none pl-2"
+                  />
+                  <div
+                    className="flex flex-row justify-start items-center  gap-2 py-1 mt-2 pl-2"
+                    style={{
+                      borderTop: "1px solid rgba(255,255,255,1)",
+                      borderBottom: "1px solid rgba(255,255,255,1)",
+                    }}
+                  >
+                    <Button variant="secondary" color="" size="sm">
+                      Đội
+                    </Button>
+                    <Button variant="secondary" size="sm">
+                      Giải đấu
+                    </Button>
+                  </div>
+
+                  <div className="justify-start items-center pt-2 pl-2 text-white overflow-y-auto">
+                    {frameworks.map((framework, index) => (
+                      <div
+                        className="hover:bg-[rgba(255,255,255,1)] hover:text-[#000] hover:cursor-pointer"
+                        key={index}
+                      >
+                        <p className="pl-2">{framework.label}</p>
+                      </div>
+                    ))}
+                  </div>
+                </Popover.Content>
+              </Popover.Root>
+            </div>
           </div>
-          <div className="w-[62%]">
+          <div className="pt-2 w-full">
             <div
-              className="w-full flex flex-row justify-start gap-4 items-center  overflow-x-auto whitespace-nowrap no-scrollbar hover:cursor-pointer"
-              ref={tabsListRef}
+              className="flex flex-row w-full justify-start items-center gap-2 overflow-x-auto whitespace-nowrap no-scrollbar px-2 hover:cursor-pointer"
+              ref={league1ListRef}
             >
-              {dateSearch.map((date, index) => (
+              <Dialog onOpenChange={(open) => handleOpenPopupAll(open)}>
+                <DialogTrigger asChild>
+                  <div className="flex flex-row items-center justify-center gap-1 rounded-[20px] bg-[rgba(41,53,67,1)] h-8 px-[10px]">
+                    <p className=" font-bold text-[rgba(255,255,255,1)] text-sm">Tất cả</p>
+                  </div>
+                </DialogTrigger>
+                <DialogContent className="h-full px-0 " style={{ borderWidth: "0px" }}>
+                  {loadingPopupAll ? (
+                    <LoadingPopup />
+                  ) : (
+                    <Accordion
+                      type="multiple"
+                      value={openItems}
+                      onValueChange={handleValueChange}
+                      className="w-[95%]  m-auto p-2 bg-[rgba(30,42,56,1)] rounded-[10px] h-[85vh]"
+                    >
+                      <DialogClose asChild>
+                        <div className="flex flex-row justify-end px-2 h-[25px] hover:cursor-pointer">
+                          <Icon
+                            icon="ic:baseline-close"
+                            width={20}
+                            height={20}
+                            className="text-[rgba(255,255,255,1)]"
+                          />
+                        </div>
+                      </DialogClose>
+                      <div className="h-[93%] overflow-y-auto">
+                        {listAllLeague.map((tag, index) => (
+                          <AccordionItem key={index} value={tag.name}>
+                            <AccordionTrigger className="flex flex-row items-center justify-between px-2 py-1 hover:cursor-pointer">
+                              <div className="flex flex-row items-center gap-2">
+                                <img
+                                  src="https://static.vecteezy.com/system/resources/thumbnails/016/328/942/small_2x/vietnam-flat-rounded-flag-icon-with-transparent-background-free-png.png"
+                                  alt={tag.name}
+                                  className="w-[25px] h-[25px] rounded-full"
+                                />
+                                <p className=" font-bold text-[rgba(255,255,255,1)] text-[15px]">{tag.name}</p>
+                                <Badge
+                                  variant="secondary"
+                                  className="bg-[rgba(53,64,76,1)] text-[12px] font-bold text-white py-[0px]"
+                                >
+                                  {tag.detail.length}
+                                </Badge>
+                              </div>
+                            </AccordionTrigger>
+                            <AccordionContent className="flex flex-col gap-2 px-2 py-1">
+                              {tag.detail.map((detail, index) => (
+                                <div
+                                  className="flex flex-row items-center justify-between  py-1 hover:cursor-pointer"
+                                  key={index}
+                                >
+                                  <div className="flex flex-row items-center gap-2 ml-8" key={index}>
+                                    <p className="text-[10px] font-bold text-[rgba(137,143,151,1)] hover:text-[rgba(255,255,255,1)]">
+                                      {detail.league}
+                                    </p>
+                                    <Badge
+                                      variant="secondary"
+                                      className="px-[10px] py-[0px] bg-[rgba(53,64,76,1)] text-[10px] font-bold text-white"
+                                    >
+                                      {detail.number_match}
+                                    </Badge>
+                                  </div>
+                                  {loadingFavorite === detail.league_id ? (
+                                    <Icon
+                                      icon="line-md:loading-alt-loop"
+                                      width={25}
+                                      height={25}
+                                      className=" hover:cursor-pointer mr-[-3px]"
+                                      style={{ color: "#fff" }}
+                                    />
+                                  ) : detail.favorite ? (
+                                    <Icon
+                                      icon="emojione:star"
+                                      width={18}
+                                      height={18}
+                                      className=" hover:cursor-pointer"
+                                      onClick={() =>
+                                        handleAddRemoveFavorite({
+                                          leagueId: detail.league_id,
+                                          nowFavorite: detail.favorite,
+                                          container: tag.name,
+                                        })
+                                      }
+                                    />
+                                  ) : (
+                                    <Icon
+                                      icon="material-symbols-light:star-outline"
+                                      width={25}
+                                      height={25}
+                                      color="rgba(170,170,170,1)"
+                                      className=" hover:cursor-pointer mr-[-3px]"
+                                      onClick={() =>
+                                        handleAddRemoveFavorite({
+                                          leagueId: detail.league_id,
+                                          nowFavorite: detail.favorite,
+                                          container: tag.name,
+                                        })
+                                      }
+                                    />
+                                  )}
+                                </div>
+                              ))}
+                            </AccordionContent>
+                          </AccordionItem>
+                        ))}
+                      </div>
+                    </Accordion>
+                  )}
+                </DialogContent>
+              </Dialog>
+              {leagueTrending?.slice(0, 4).map((tag, index) => (
                 <div
-                  className="hover:cursor-pointer hover:text-[rgba(255,255,255,1)] flex flex-col items-center justify-center text-[12px] font-bold gap-[2px] text-[rgba(109,109,109,1)]"
+                  className="flex flex-row items-center justify-center gap-1 rounded-[20px] bg-[rgba(41,53,67,1)] h-8 px-[18px]"
                   key={index}
                 >
-                  <p>{getDayOfWeek(date)}</p>
-                  <p>{getDayAndMonth(date)}</p>
+                  <img
+                    src="https://toppng.com/uploads/preview/official-symbol-logo-design-for-euro-2024-germany-european-football-final-11715224051fchzryfqfd.png"
+                    alt={tag}
+                    className="w-[25px] h-[25px] rounded-full"
+                  />
+                  <p className=" font-bold text-[rgba(255,255,255,1)] text-sm">{tag}</p>
+                </div>
+              ))}
+            </div>
+            <div
+              className="flex flex-row w-full justify-start items-center gap-2 overflow-x-auto whitespace-nowrap no-scrollbar px-2 hover:cursor-pointer mt-1"
+              ref={league2ListRef}
+            >
+              {leagueTrending?.slice(4).map((tag, index) => (
+                <div
+                  className="flex flex-row items-center justify-center gap-1 rounded-[20px] bg-[rgba(41,53,67,1)] h-8 px-[18px]"
+                  key={index}
+                >
+                  <img
+                    src="https://toppng.com/uploads/preview/official-symbol-logo-design-for-euro-2024-germany-european-football-final-11715224051fchzryfqfd.png"
+                    alt={tag}
+                    className="w-[25px] h-[25px] rounded-full"
+                  />
+                  <p className=" font-bold text-[rgba(255,255,255,1)] text-sm">{tag}</p>
                 </div>
               ))}
             </div>
           </div>
-
-          <div className="w-[18%] flex flex-row justify-around items-center ">
-            <Popover.Root>
-              <Popover.Trigger>
-                <Icon
-                  icon="bx:calendar"
-                  width={25}
-                  height={25}
-                  className="hover:cursor-pointer text-[rgba(255,255,255,1)]"
-                />
-              </Popover.Trigger>
-              <Popover.Content
-                className="py-2 w-[95%] bg-[rgba(40,55,74,1)] mt-[14px] max-h-[80vh] rounded-sm ml-[10px]"
-                align="center"
-              >
-                <Calendar
-                  className="w-full rounded-2xl"
-                  initialFocus
-                  mode="range"
-                  //   defaultMonth={selectedDate?.from}
-                  //   selected={selectedDate}
-                  //   onSelect={setSelectedDate}
-                  numberOfMonths={1}
-                  locale={locale}
-                  weekStartsOn={1}
-                />
-                <div className="flex flex-row justify-end items-center mr-7 gap-7 pb-2 text-sm">
-                  <PopoverRD.Close>
-                    <button className=" text-[#006ef8] font-semibold">Xác nhận</button>
-                  </PopoverRD.Close>
-                </div>
-              </Popover.Content>
-            </Popover.Root>
-            <Popover.Root>
-              <Popover.Trigger>
-                <Icon
-                  icon="ic:baseline-search"
-                  width={25}
-                  height={25}
-                  className="hover:cursor-pointer text-[rgba(255,255,255,1)]"
-                />
-              </Popover.Trigger>
-              <Popover.Content
-                className="py-2 w-[95%] bg-[rgba(40,55,74,1)] mt-[14px] max-h-[80vh] rounded-sm"
-                align="center"
-              >
-                <Input
-                  type="search"
-                  placeholder="Tìm kiếm"
-                  className=" rounded-sm text-[rgba(255,255,255,1)] px-2 pb-[8px] border-none pl-2"
-                />
-                <div
-                  className="flex flex-row justify-start items-center  gap-2 py-1 mt-2 pl-2"
-                  style={{
-                    borderTop: "1px solid rgba(255,255,255,1)",
-                    borderBottom: "1px solid rgba(255,255,255,1)",
-                  }}
-                >
-                  <Button variant="secondary" color="" size="sm">
-                    Đội
-                  </Button>
-                  <Button variant="secondary" size="sm">
-                    Giải đấu
-                  </Button>
-                </div>
-
-                <div className="justify-start items-center pt-2 pl-2 text-white overflow-y-auto">
-                  {frameworks.map((framework, index) => (
-                    <div className="hover:bg-[rgba(255,255,255,1)] hover:text-[#000] hover:cursor-pointer" key={index}>
-                      <p className="pl-2">{framework.label}</p>
+          <div className="mb-[30px]   mt-[10px] w-full">
+            <Accordion
+              type="multiple"
+              value={openItems}
+              onValueChange={handleValueChange}
+              className="w-full m-auto p-2 rounded-[10px] h-full mb-[55px]"
+            >
+              {demoFavorite.map((tag, index) => (
+                <AccordionItem key={index} value={tag.name}>
+                  <AccordionTrigger className="flex flex-row items-center justify-between hover:cursor-pointer py-1">
+                    <div className="flex flex-row items-center gap-2">
+                      <Icon
+                        icon={tag.logo}
+                        width={25}
+                        height={25}
+                        color={
+                          tag.name === "Trực tiếp"
+                            ? "rgba(245,93,62,1)"
+                            : tag.name === "Sắp tới"
+                            ? "rgba(73,166,245,1)"
+                            : ""
+                        }
+                      />
+                      <p className=" font-bold text-[rgba(255,255,255,1)] text-[15px]">{tag.name}</p>
                     </div>
-                  ))}
-                </div>
-              </Popover.Content>
-            </Popover.Root>
-          </div>
-        </div>
-        <div className="pt-2 w-full">
-          <div
-            className="flex flex-row w-full justify-start items-center gap-2 overflow-x-auto whitespace-nowrap no-scrollbar px-2 hover:cursor-pointer"
-            ref={league1ListRef}
-          >
-            <Dialog onOpenChange={(open) => handleOpenPopupAll(open)}>
-              <DialogTrigger asChild>
-                <div className="flex flex-row items-center justify-center gap-1 rounded-[20px] bg-[rgba(41,53,67,1)] h-8 px-[10px]">
-                  <p className=" font-bold text-[rgba(255,255,255,1)] text-sm">Tất cả</p>
-                </div>
-              </DialogTrigger>
-              <DialogContent className="h-full px-0 " style={{ borderWidth: "0px" }}>
-                {loadingPopupAll ? (
-                  <LoadingPopup />
-                ) : (
-                  <Accordion
-                    type="multiple"
-                    value={openItems}
-                    onValueChange={handleValueChange}
-                    className="w-[95%]  m-auto p-2 bg-[rgba(30,42,56,1)] rounded-[10px] h-[85vh]"
-                  >
-                    <DialogClose asChild>
-                      <div className="flex flex-row justify-end px-2 h-[25px] hover:cursor-pointer">
-                        <Icon icon="ic:baseline-close" width={20} height={20} className="text-[rgba(255,255,255,1)]" />
-                      </div>
-                    </DialogClose>
-                    <div className="h-[93%] overflow-y-auto">
-                      {listAllLeague.map((tag, index) => (
-                        <AccordionItem key={index} value={tag.name}>
-                          <AccordionTrigger className="flex flex-row items-center justify-between px-2 py-1 hover:cursor-pointer">
-                            <div className="flex flex-row items-center gap-2">
-                              <img
-                                src="https://static.vecteezy.com/system/resources/thumbnails/016/328/942/small_2x/vietnam-flat-rounded-flag-icon-with-transparent-background-free-png.png"
-                                alt={tag.name}
-                                className="w-[25px] h-[25px] rounded-full"
-                              />
-                              <p className=" font-bold text-[rgba(255,255,255,1)] text-[15px]">{tag.name}</p>
-                              <Badge
-                                variant="secondary"
-                                className="bg-[rgba(53,64,76,1)] text-[12px] font-bold text-white py-[0px]"
-                              >
-                                {tag.detail.length}
-                              </Badge>
-                            </div>
-                          </AccordionTrigger>
-                          <AccordionContent className="flex flex-col gap-2 px-2 py-1">
-                            {tag.detail.map((detail, index) => (
-                              <div
-                                className="flex flex-row items-center justify-between  py-1 hover:cursor-pointer"
-                                key={index}
-                              >
-                                <div className="flex flex-row items-center gap-2 ml-8" key={index}>
-                                  <p className="text-[10px] font-bold text-[rgba(137,143,151,1)] hover:text-[rgba(255,255,255,1)]">
-                                    {detail.league}
-                                  </p>
-                                  <Badge
-                                    variant="secondary"
-                                    className="px-[10px] py-[0px] bg-[rgba(53,64,76,1)] text-[10px] font-bold text-white"
-                                  >
-                                    {detail.number_match}
-                                  </Badge>
-                                </div>
-                                {loadingFavorite === detail.league_id ? (
-                                  <Icon
-                                    icon="line-md:loading-alt-loop"
-                                    width={25}
-                                    height={25}
-                                    className=" hover:cursor-pointer mr-[-3px]"
-                                    style={{ color: "#fff" }}
-                                  />
-                                ) : detail.favorite ? (
-                                  <Icon
-                                    icon="emojione:star"
-                                    width={18}
-                                    height={18}
-                                    className=" hover:cursor-pointer"
-                                    onClick={() =>
-                                      handleAddRemoveFavorite({
-                                        leagueId: detail.league_id,
-                                        nowFavorite: detail.favorite,
-                                        container: tag.name,
-                                      })
-                                    }
-                                  />
-                                ) : (
-                                  <Icon
-                                    icon="material-symbols-light:star-outline"
-                                    width={25}
-                                    height={25}
-                                    color="rgba(170,170,170,1)"
-                                    className=" hover:cursor-pointer mr-[-3px]"
-                                    onClick={() =>
-                                      handleAddRemoveFavorite({
-                                        leagueId: detail.league_id,
-                                        nowFavorite: detail.favorite,
-                                        container: tag.name,
-                                      })
-                                    }
-                                  />
-                                )}
-                              </div>
-                            ))}
-                          </AccordionContent>
-                        </AccordionItem>
-                      ))}
-                    </div>
-                  </Accordion>
-                )}
-              </DialogContent>
-            </Dialog>
-            {leagueTrending?.slice(0, 4).map((tag, index) => (
-              <div
-                className="flex flex-row items-center justify-center gap-1 rounded-[20px] bg-[rgba(41,53,67,1)] h-8 px-[18px]"
-                key={index}
-              >
-                <img
-                  src="https://toppng.com/uploads/preview/official-symbol-logo-design-for-euro-2024-germany-european-football-final-11715224051fchzryfqfd.png"
-                  alt={tag}
-                  className="w-[25px] h-[25px] rounded-full"
-                />
-                <p className=" font-bold text-[rgba(255,255,255,1)] text-sm">{tag}</p>
-              </div>
-            ))}
-          </div>
-          <div
-            className="flex flex-row w-full justify-start items-center gap-2 overflow-x-auto whitespace-nowrap no-scrollbar px-2 hover:cursor-pointer mt-1"
-            ref={league2ListRef}
-          >
-            {leagueTrending?.slice(4).map((tag, index) => (
-              <div
-                className="flex flex-row items-center justify-center gap-1 rounded-[20px] bg-[rgba(41,53,67,1)] h-8 px-[18px]"
-                key={index}
-              >
-                <img
-                  src="https://toppng.com/uploads/preview/official-symbol-logo-design-for-euro-2024-germany-european-football-final-11715224051fchzryfqfd.png"
-                  alt={tag}
-                  className="w-[25px] h-[25px] rounded-full"
-                />
-                <p className=" font-bold text-[rgba(255,255,255,1)] text-sm">{tag}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-        <div className="mb-[30px]   mt-[10px] w-full">
-          <Accordion
-            type="multiple"
-            value={openItems}
-            onValueChange={handleValueChange}
-            className="w-full m-auto p-2 rounded-[10px] h-full mb-[55px]"
-          >
-            {demoFavorite.map((tag, index) => (
-              <AccordionItem key={index} value={tag.name}>
-                <AccordionTrigger className="flex flex-row items-center justify-between hover:cursor-pointer py-1">
-                  <div className="flex flex-row items-center gap-2">
-                    <Icon
-                      icon={tag.logo}
-                      width={25}
-                      height={25}
-                      color={
-                        tag.name === "Trực tiếp"
-                          ? "rgba(245,93,62,1)"
-                          : tag.name === "Sắp tới"
-                          ? "rgba(73,166,245,1)"
-                          : ""
-                      }
-                    />
-                    <p className=" font-bold text-[rgba(255,255,255,1)] text-[15px]">{tag.name}</p>
-                  </div>
-                </AccordionTrigger>
-                <AccordionContent className="flex flex-col gap-2 ">
-                  {tag.detail.map((item: any, index) => (
-                    <div
-                      className="p-2 flex flex-row justify-between bg-[rgba(30,42,56,1)] rounded-[10px] mb-[10px]"
-                      key={index}
-                      onClick={() => handleNavigate()}
-                    >
-                      <div className="flex flex-col justify-between items-start">
-                        <div className="flex flex-row gap-1 items-center">
+                  </AccordionTrigger>
+                  <AccordionContent className="flex flex-col gap-2 ">
+                    {tag.detail.map((item: any, index) => (
+                      <div
+                        className="p-2 flex flex-row justify-between bg-[rgba(30,42,56,1)] rounded-[10px] mb-[10px]"
+                        key={index}
+                        onClick={() => handleNavigate()}
+                      >
+                        <div className="flex flex-col justify-between items-start">
+                          <div className="flex flex-row gap-1 items-center">
+                            <Icon
+                              icon="fluent:sport-soccer-24-filled"
+                              width={16}
+                              height={16}
+                              color="rgba(170,170,170,1)"
+                            />
+                            <p className="pl-2 text-[10px] font-normal text-[rgba(170,170,170,1)]">{item.container}</p>
+                            <Icon icon="ic:outline-arrow-right" width={20} height={20} color="rgba(170,170,170,1)" />
+                            <p className="text-[10px] font-normal text-[rgba(170,170,170,1)]">{item.name}</p>
+                          </div>
+                          <p
+                            className={`${
+                              item.isLive ? "text-[rgba(70,230,164,1)]" : "text-[rgba(165,165,165,1)]"
+                            } text-[9px] font-normal`}
+                          >
+                            {item.isLive ? `${item.time} ${item.scope}` : item.time}
+                          </p>
+                          <div className="flex flex-row justify-start items-center gap-2">
+                            <Image
+                              src="https://w7.pngwing.com/pngs/982/984/png-transparent-red-and-white-flag-flag-of-spain-iberian-peninsula-computer-icons-spanish-free-spain-flag-svg-miscellaneous-english-country-thumbnail.png"
+                              alt="no-content"
+                              className="w-[20px] h-[20px]"
+                            />
+                            <p className="text-[rgba(251,255,255,1)] text-[14.41px] font-normal">{item.home}</p>
+                          </div>
+                          <div className="flex flex-row justify-start items-center gap-2">
+                            <Image
+                              src="https://upload.wikimedia.org/wikipedia/en/thumb/8/8b/England_national_football_team_crest.svg/1200px-England_national_football_team_crest.svg.png"
+                              alt="no-content"
+                              className="w-[20px] h-[20px]"
+                            />
+                            <p className="text-[rgba(251,255,255,1)] text-[14.41px] font-normal">{item.away}</p>
+                          </div>
+                        </div>
+                        <div className="flex flex-col justify-between items-center">
                           <Icon
-                            icon="fluent:sport-soccer-24-filled"
+                            icon="mage:chart-fill"
+                            className="hover:cursor-pointer"
                             width={16}
                             height={16}
                             color="rgba(170,170,170,1)"
+                            onClick={(e) => {
+                              e.stopPropagation(); // Ngăn chặn lan truyền sự kiện click
+                            }}
                           />
-                          <p className="pl-2 text-[10px] font-normal text-[rgba(170,170,170,1)]">{item.container}</p>
-                          <Icon icon="ic:outline-arrow-right" width={20} height={20} color="rgba(170,170,170,1)" />
-                          <p className="text-[10px] font-normal text-[rgba(170,170,170,1)]">{item.name}</p>
-                        </div>
-                        <p
-                          className={`${
-                            item.isLive ? "text-[rgba(70,230,164,1)]" : "text-[rgba(165,165,165,1)]"
-                          } text-[9px] font-normal`}
-                        >
-                          {item.isLive ? `${item.time} ${item.scope}` : item.time}
-                        </p>
-                        <div className="flex flex-row justify-start items-center gap-2">
-                          <Image
-                            src="https://w7.pngwing.com/pngs/982/984/png-transparent-red-and-white-flag-flag-of-spain-iberian-peninsula-computer-icons-spanish-free-spain-flag-svg-miscellaneous-english-country-thumbnail.png"
-                            alt="no-content"
-                            className="w-[20px] h-[20px]"
-                          />
-                          <p className="text-[rgba(251,255,255,1)] text-[14.41px] font-normal">{item.home}</p>
-                        </div>
-                        <div className="flex flex-row justify-start items-center gap-2">
-                          <Image
-                            src="https://upload.wikimedia.org/wikipedia/en/thumb/8/8b/England_national_football_team_crest.svg/1200px-England_national_football_team_crest.svg.png"
-                            alt="no-content"
-                            className="w-[20px] h-[20px]"
-                          />
-                          <p className="text-[rgba(251,255,255,1)] text-[14.41px] font-normal">{item.away}</p>
-                        </div>
-                      </div>
-                      <div className="flex flex-col justify-between items-center">
-                        <Icon
-                          icon="mage:chart-fill"
-                          className="hover:cursor-pointer"
-                          width={16}
-                          height={16}
-                          color="rgba(170,170,170,1)"
-                          onClick={(e) => {
-                            e.stopPropagation(); // Ngăn chặn lan truyền sự kiện click
-                          }}
-                        />
 
-                        {item.isLive && (
-                          <Icon icon="fluent:live-20-filled" width={16} height={16} color="rgba(245,93,62,1)" />
-                        )}
-                        {item.isLive && (
-                          <div
-                            className="w-[22px] h-[17px] p-[2px] rounded-[5px] font-bold flex flex-row justify-center items-center text-[rgba(255,255,255,1)] bg-[rgba(41,53,66,1)] "
-                            style={{ border: "0.68px solid rgba(64,74,86,1)" }}
-                          >
-                            {item?.homeScore}
-                          </div>
-                        )}
-                        {item.isLive && (
-                          <div
-                            className="w-[22px] h-[17px] p-[2px] rounded-[5px] font-bold flex flex-row justify-center items-center text-[rgba(255,255,255,1)] bg-[rgba(41,53,66,1)] "
-                            style={{ border: "0.68px solid rgba(64,74,86,1)" }}
-                          >
-                            {item?.awayScore}
-                          </div>
-                        )}
+                          {item.isLive && (
+                            <Icon icon="fluent:live-20-filled" width={16} height={16} color="rgba(245,93,62,1)" />
+                          )}
+                          {item.isLive && (
+                            <div
+                              className="w-[22px] h-[17px] p-[2px] rounded-[5px] font-bold flex flex-row justify-center items-center text-[rgba(255,255,255,1)] bg-[rgba(41,53,66,1)] "
+                              style={{ border: "0.68px solid rgba(64,74,86,1)" }}
+                            >
+                              {item?.homeScore}
+                            </div>
+                          )}
+                          {item.isLive && (
+                            <div
+                              className="w-[22px] h-[17px] p-[2px] rounded-[5px] font-bold flex flex-row justify-center items-center text-[rgba(255,255,255,1)] bg-[rgba(41,53,66,1)] "
+                              style={{ border: "0.68px solid rgba(64,74,86,1)" }}
+                            >
+                              {item?.awayScore}
+                            </div>
+                          )}
+                        </div>
                       </div>
-                    </div>
-                  ))}
-                </AccordionContent>
-              </AccordionItem>
-            ))}
-          </Accordion>
+                    ))}
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+          </div>
+          <Menu />
         </div>
-        <Menu />
-      </div>
+      )}
     </MainLayout>
   );
 };
