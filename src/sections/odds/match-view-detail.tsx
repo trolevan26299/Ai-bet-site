@@ -170,6 +170,13 @@ export default function MatchViewDetail() {
       console.log("error:", error);
     }
   }, []);
+  const handleBackClick = () => {
+    if (window.history.length > 1) {
+      router.back();
+    } else {
+      router.push("/match");
+    }
+  };
 
   useEffect(() => {
     setFavorite(dataScreenInfo[0]?.is_favorite);
@@ -404,7 +411,7 @@ export default function MatchViewDetail() {
             width={30}
             height={20}
             className="hover:cursor-pointer text-[rgba(143,149,156,1)] hover:text-[rgba(255,255,255,1)]"
-            onClick={() => router.back()}
+            onClick={handleBackClick}
           />
           <div className="text-[rgba(255,255,255,1)] flex flex-row justify-center items-center w-full ">
             <Image src="/assets/league_logo.png" alt="no-content" className="w-[34px] h-[27.2px]" />
