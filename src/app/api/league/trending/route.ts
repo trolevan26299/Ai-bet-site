@@ -6,7 +6,7 @@ export async function POST(req: Request, res: NextApiResponse) {
   const url = new URL(req.url);
   const requestId = url.searchParams.get("id");
   try {
-    const response = await axiosInstance.get(`${endpoints.league.matchInLeague}/${requestId}`);
+    const response = await axiosInstance.get(`${endpoints.league.trending}/${requestId}`);
     return NextResponse.json(response.data);
   } catch (error: any) {
     return NextResponse.json({ message: error.message });
