@@ -433,7 +433,7 @@ const LeagueView = () => {
                         <Icon icon="ic:baseline-close" width={20} height={20} className="text-[rgba(255,255,255,1)]" />
                       </div>
                     </DialogClose>
-                    <div className="h-[90%] overflow-y-auto">
+                    <div className="h-[93%] overflow-y-auto">
                       {listAllLeague.map((tag, index) => (
                         <AccordionItem key={index} value={tag.name}>
                           <AccordionTrigger className="flex flex-row items-center justify-between px-2 py-1 hover:cursor-pointer">
