@@ -479,9 +479,10 @@ export default function MatchViewDetail() {
                             <div className="h-[20px] w-full flex flex-row justify-end">
                               <Dialog.Close>
                                 <Icon
-                                  icon="fluent:close-20-filled"
+                                  icon="mingcute:close-line"
                                   width={20}
                                   height={20}
+                                  style={{ color: #fff }}
                                   className="hover:cursor-pointer text-white"
                                 />
                               </Dialog.Close>
