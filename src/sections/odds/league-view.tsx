@@ -22,6 +22,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import "./index.css";
+import { ILeague } from "@/types/league.type";
 
 const generateDateList = () => {
   const dates = [];
@@ -238,7 +239,7 @@ const LeagueView = () => {
   const allItems = demoFavorite.map((item) => item.name);
   const [openItems, setOpenItems] = useState(allItems);
   const [loadingPopupAll, setLoadingPopupAll] = useState(false);
-  const [listAllLeague, setListAllLeague] = useState([]);
+  const [listAllLeague, setListAllLeague] = useState<ILeague[]>([]);
 
   console.log("listAllLeague:", listAllLeague);
 
@@ -270,7 +271,6 @@ const LeagueView = () => {
       if (!acc[containerName]) {
         acc[containerName] = {
           name: containerName,
-          logo: "https://static.vecteezy.com/system/resources/thumbnails/016/328/942/small_2x/vietnam-flat-rounded-flag-icon-with-transparent-background-free-png.png", // You can replace this with the actual logo if available
           detail: [],
         };
       }
@@ -467,11 +467,15 @@ const LeagueView = () => {
                       </div>
                     </DialogClose>
 
-                    {demoTagAll.map((tag, index) => (
+                    {listAllLeague.map((tag, index) => (
                       <AccordionItem key={index} value={tag.name}>
                         <AccordionTrigger className="flex flex-row items-center justify-between px-2 py-1 hover:cursor-pointer">
                           <div className="flex flex-row items-center gap-2">
-                            <img src={tag.logo} alt={tag.name} className="w-[25px] h-[25px] rounded-full" />
+                            <img
+                              src="https://static.vecteezy.com/system/resources/thumbnails/016/328/942/small_2x/vietnam-flat-rounded-flag-icon-with-transparent-background-free-png.png"
+                              alt={tag.name}
+                              className="w-[25px] h-[25px] rounded-full"
+                            />
                             <p className=" font-bold text-[rgba(255,255,255,1)] text-[15px]">{tag.name}</p>
                             <Badge
                               variant="secondary"
