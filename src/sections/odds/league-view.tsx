@@ -23,7 +23,7 @@ import * as PopoverRD from "@radix-ui/react-popover";
 import { Popover } from "@radix-ui/themes";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { use, useEffect, useRef, useState } from "react";
 import "./index.css";
 import { IMatchData } from "@/types/odds.types";
 import { set } from "date-fns";
@@ -84,6 +84,7 @@ const LeagueView = () => {
   const [contentTab, setContentTab] = useState<string>("initial");
   const [leagueActive, setLeagueActive] = useState<string | null>(null);
   const [dataMatch, setDataMatch] = useState<IMatchData[]>([]);
+  const [dateActive, setDateActive] = useState<string | null>(null);
 
   console.log("dataMatch:", dataMatch);
   console.log("leagueActive:", leagueActive);
@@ -385,8 +386,21 @@ const LeagueView = () => {
               >
                 {dateSearch.map((date, index) => (
                   <div
-                    className="hover:cursor-pointer hover:text-[rgba(255,255,255,1)] flex flex-col items-center justify-center text-[12px] font-bold gap-[2px] text-[rgba(109,109,109,1)]"
+                    className={`hover:cursor-pointer hover:text-[rgba(255,255,255,1)] ${
+                      dateActive === date ? "text-[rgba(255,255,255,1)]" : "text-[rgba(109,109,109,1)]"
+                    } flex flex-col items-center justify-center text-[12px] font-bold gap-[2px] `}
                     key={index}
+                    onClick={() => {
+                      if (dateActive === date) {
+                        setDateActive(null);
+                        setDataMatch([]);
+                        setContentTab("initial");
+                      } else {
+                        setDateActive(date);
+                        setLeagueActive(null);
+                        setContentTab("time");
+                      }
+                    }}
                   >
                     <p>{getDayOfWeek(date)}</p>
                     <p>{getDayAndMonth(date)}</p>
