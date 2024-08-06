@@ -85,6 +85,7 @@ const LeagueView = () => {
   const [leagueActive, setLeagueActive] = useState<string | null>(null);
   const [dataMatch, setDataMatch] = useState<IMatchData[]>([]);
   const [dateActive, setDateActive] = useState<string | null>(null);
+  const [selectedDate, setSelectedDate] = useState<Date | undefined>(new Date());
 
   console.log("dataMatch:", dataMatch);
   console.log("leagueActive:", leagueActive);
@@ -449,17 +450,29 @@ const LeagueView = () => {
                   <Calendar
                     className="w-full rounded-2xl"
                     initialFocus
-                    mode="range"
-                    //   defaultMonth={selectedDate?.from}
-                    //   selected={selectedDate}
-                    //   onSelect={setSelectedDate}
+                    mode="single"
+                    defaultMonth={selectedDate}
+                    selected={selectedDate}
+                    onSelect={setSelectedDate}
                     numberOfMonths={1}
                     locale={locale}
                     weekStartsOn={1}
                   />
                   <div className="flex flex-row justify-end items-center mr-7 gap-7 pb-2 text-sm">
                     <PopoverRD.Close>
-                      <button className=" text-[#006ef8] font-semibold">Xác nhận</button>
+                      <button
+                        className=" text-[#006ef8] font-semibold"
+                        onClick={() => {
+                          if (selectedDate) {
+                            const formattedDate = selectedDate.toLocaleDateString("en-GB"); // Format: "dd/MM/yyyy"
+                            setDateActive(formattedDate);
+                            setLeagueActive(null);
+                            setContentTab("time");
+                          }
+                        }}
+                      >
+                        Xác nhận
+                      </button>
                     </PopoverRD.Close>
                   </div>
                 </Popover.Content>
