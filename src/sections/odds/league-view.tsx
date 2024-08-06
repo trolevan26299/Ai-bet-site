@@ -846,7 +846,7 @@ const LeagueView = () => {
                               height={16}
                               color="rgba(170,170,170,1)"
                               onClick={(e) => {
-                                e.stopPropagation(); // Ngăn chặn lan truyền sự kiện click
+                                e.stopPropagation(); // Ngăn chặn lan truyền sự kiện click a
                               }}
                             />
 
@@ -884,7 +884,7 @@ const LeagueView = () => {
                   <AccordionItem value={sectionsForLiveAndSoon[0].title}>
                     <AccordionTrigger className="flex flex-row items-center justify-between hover:cursor-pointer py-1">
                       <div className="flex flex-row items-center gap-2">
-                        {/* <Icon icon="fluent:live-24-filled" width={25} height={25} color="rgba(245,93,62,1)" /> */}
+                        {contentTab}
                         <img
                           src="https://toppng.com/uploads/preview/official-symbol-logo-design-for-euro-2024-germany-european-football-final-11715224051fchzryfqfd.png"
                           alt={leagueActive as string}
