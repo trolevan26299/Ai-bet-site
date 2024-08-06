@@ -3,6 +3,7 @@
 "use client";
 
 import Menu from "@/components/app/menu/menu";
+import TeamLogo from "@/components/cloudinary/teamlogo";
 import { LoadingPopup, SplashScreen } from "@/components/loading-screen";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Badge } from "@/components/ui/badge";
@@ -12,21 +13,18 @@ import { Dialog, DialogClose, DialogContent, DialogTrigger } from "@/components/
 import { Input } from "@/components/ui/input";
 import MainLayout from "@/layouts/main/layout";
 import { useGetRequestId } from "@/store/context/requestId.context";
+import { ILeague } from "@/types/league.type";
 import { locale } from "@/utils/configCalendarToVN";
 import { getDayOfWeek } from "@/utils/convertDateToDateOfWeek";
 import { getDayAndMonth } from "@/utils/convertToDayAndMonth";
+import { utcToUtc7Format } from "@/utils/time";
 import { Icon } from "@iconify/react";
 import * as PopoverRD from "@radix-ui/react-popover";
 import { Popover } from "@radix-ui/themes";
 import axios from "axios";
-import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import "./index.css";
-import { ILeague } from "@/types/league.type";
-import TeamLogo from "@/components/cloudinary/teamlogo";
-import { utcToUtc7Format } from "@/utils/time";
-import { formatLiveScope } from "@/utils/formatLiveScope";
 
 const generateDateList = () => {
   const dates = [];
@@ -80,10 +78,7 @@ const LeagueView = () => {
   const [leagueTrending, setLeagueTrending] = useState<string[]>();
   const [liveMatches, setLiveMatches] = useState([]); // những trận đang live
   const [soonMatches, setSoonMatches] = useState([]); // những trận sắp diễn ra
-
-  console.log("Các trận đang live :", liveMatches);
-  console.log("Các trận sắp diễn ra :", soonMatches);
-  console.log("Các giải đấu trending :", leagueTrending);
+  const [contentTab, setContentTab] = useState<string>("initial");
 
   const handleValueChange = (value: string[]) => {
     setOpenItems(value);
@@ -304,8 +299,17 @@ const LeagueView = () => {
       ) : (
         <div>
           <div className="search h-12 flex flex-row w-full justify-start items-center bg-[rgba(17,17,17,1)]">
-            <div className="w-[18%] pl-2 flex flex-row justify-center">
-              <button className="w-[53px] h-[21px] bg-[rgba(255,255,255,1)] text-[rgba(230,58,58,1)] uppercase rounded-[16.83px] text-[12px] font-bold flex flex-row justify-center items-center">
+            <div
+              className="w-[18%] pl-2 flex flex-row justify-center"
+              onClick={() => setContentTab(contentTab === "live" ? "initial" : "live")}
+            >
+              <button
+                className={`w-[53px] h-[21px]   ${
+                  contentTab === "live"
+                    ? "text-[rgba(255,255,255,1)] bg-[rgba(230,58,58,1)]"
+                    : "text-[rgba(230,58,58,1)] bg-[rgba(255,255,255,1)]"
+                }  uppercase rounded-[16.83px] text-[12px] font-bold flex flex-row justify-center items-center`}
+              >
                 Live
                 <Icon icon="pepicons-pop:circle" width={17} height={17} className="text-[rgba(230,58,58,1)]" />
               </button>
