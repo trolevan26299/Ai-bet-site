@@ -26,6 +26,7 @@ import "./index.css";
 import { ILeague } from "@/types/league.type";
 import TeamLogo from "@/components/cloudinary/teamlogo";
 import { utcToUtc7Format } from "@/utils/time";
+import { formatLiveScope } from "@/utils/formatLiveScope";
 
 const generateDateList = () => {
   const dates = [];
@@ -571,7 +572,7 @@ const LeagueView = () => {
                               item.liveStatus ? "text-[rgba(70,230,164,1)]" : "text-[rgba(165,165,165,1)]"
                             } text-[9px] font-normal`}
                           >
-                            {item.liveStatus ? `${item.liveMinute} ${item.liveScope}` : item.time}
+                            {item.liveStatus ? `${item.liveMinute} ${item.liveScope}` : formatLiveScope(item.liveState)}
                           </p>
                           <div className="flex flex-row justify-start items-center gap-2">
                             <TeamLogo teamName={item.team[0]} typeError="home" typeLogo="mini" />
