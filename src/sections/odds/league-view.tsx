@@ -26,6 +26,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import "./index.css";
 import { IMatchData } from "@/types/odds.types";
+import { set } from "date-fns";
 
 const generateDateList = () => {
   const dates = [];
@@ -355,7 +356,11 @@ const LeagueView = () => {
           <div className="search h-12 flex flex-row w-full justify-start items-center bg-[rgba(17,17,17,1)]">
             <div
               className="w-[18%] pl-2 flex flex-row justify-center"
-              onClick={() => setContentTab(contentTab === "live" ? "initial" : "live")}
+              onClick={() => {
+                setContentTab(contentTab === "live" ? "initial" : "live");
+                setLeagueActive(null);
+                setDataMatch([]);
+              }}
             >
               <button
                 className={`w-[53px] h-[21px]   ${
