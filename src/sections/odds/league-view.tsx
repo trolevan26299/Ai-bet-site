@@ -25,6 +25,7 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import "./index.css";
+import { IMatchData } from "@/types/odds.types";
 
 const generateDateList = () => {
   const dates = [];
@@ -81,6 +82,11 @@ const LeagueView = () => {
   const [soonMatches, setSoonMatches] = useState([]); // những trận sắp diễn ra
   const [contentTab, setContentTab] = useState<string>("initial");
   const [leagueActive, setLeagueActive] = useState<string | null>(null);
+  const [dataMatch, setDataMatch] = useState<IMatchData[]>([]);
+
+  console.log("dataMatch:", dataMatch);
+  console.log("leagueActive:", leagueActive);
+  console.log("contentTab:", contentTab);
 
   const handleValueChange = (value: string[]) => {
     setOpenItems(value);
@@ -218,6 +224,24 @@ const LeagueView = () => {
     }
   };
 
+  // hàm get trận theo giải
+  const fetchMatchInLeague = async (type?: string) => {
+    try {
+      if (type === "first") setLoadingContent(true);
+      const response = await axios.post("/api/league/match-in-league", {
+        league: leagueActive,
+        request_id: requestId,
+        is_get_bets: false,
+      });
+      if (response.data.ok) {
+        setDataMatch(response?.data?.data);
+        setLoadingContent(false);
+      }
+    } catch (error) {
+      setLoadingContent(false);
+      console.error("error:", error);
+    }
+  };
   // xử lý cuộn chuột tagsList
   const handleMouseMove = (e: MouseEvent, ref: React.RefObject<HTMLDivElement>) => {
     if (ref.current) {
@@ -275,6 +299,10 @@ const LeagueView = () => {
     } else if (contentTab === "live") {
       fetchLiveMatch("first");
       const intervalId = setInterval(fetchLiveMatch, 20000); // gọi sau mỗi 20s
+      return () => clearInterval(intervalId);
+    } else if (contentTab === "league") {
+      fetchMatchInLeague("first");
+      const intervalId = setInterval(fetchMatchInLeague, 20000); // gọi sau mỗi 20s
       return () => clearInterval(intervalId);
     }
   }, [contentTab]);
@@ -568,6 +596,7 @@ const LeagueView = () => {
                     if (tag === leagueActive) {
                       setContentTab("initial");
                       setLeagueActive(null);
+                      setDataMatch([]);
                     } else {
                       setContentTab("league");
                       setLeagueActive(tag);
@@ -599,6 +628,7 @@ const LeagueView = () => {
                     if (tag === leagueActive) {
                       setContentTab("initial");
                       setLeagueActive(null);
+                      setDataMatch([]);
                     } else {
                       setContentTab("league");
                       setLeagueActive(tag);
@@ -721,103 +751,194 @@ const LeagueView = () => {
                 <div className="w-full h-[50vh] flex flex-row justify-center items-center">
                   <LoadingPopup />
                 </div>
-              ) : sectionsForLiveAndSoon[0].matches.length > 0 ? (
-                <AccordionItem value={sectionsForLiveAndSoon[0].title}>
-                  <AccordionTrigger className="flex flex-row items-center justify-between hover:cursor-pointer py-1">
-                    <div className="flex flex-row items-center gap-2">
-                      <Icon
-                        icon={sectionsForLiveAndSoon[0].icon}
-                        width={25}
-                        height={25}
-                        color={sectionsForLiveAndSoon[0].iconColor}
-                      />
-                      <p className=" font-bold text-[rgba(255,255,255,1)] text-[15px]">
-                        {sectionsForLiveAndSoon[0].title}
-                      </p>
-                    </div>
-                  </AccordionTrigger>
-                  <AccordionContent className="flex flex-col gap-2 ">
-                    {sectionsForLiveAndSoon[0].matches.map((item: any, index) => (
-                      <div
-                        className="p-2 flex flex-row justify-between bg-[rgba(30,42,56,1)] rounded-[10px] mb-[10px]"
-                        key={index}
-                        onClick={() => handleNavigate()}
-                      >
-                        <div className="flex flex-col justify-between items-start">
-                          <div className="flex flex-row gap-1 items-center">
+              ) : contentTab === "live" ? (
+                sectionsForLiveAndSoon[0].matches.length > 0 ? (
+                  <AccordionItem value={sectionsForLiveAndSoon[0].title}>
+                    <AccordionTrigger className="flex flex-row items-center justify-between hover:cursor-pointer py-1">
+                      <div className="flex flex-row items-center gap-2">
+                        <Icon
+                          icon={sectionsForLiveAndSoon[0].icon}
+                          width={25}
+                          height={25}
+                          color={sectionsForLiveAndSoon[0].iconColor}
+                        />
+                        <p className=" font-bold text-[rgba(255,255,255,1)] text-[15px]">
+                          {sectionsForLiveAndSoon[0].title}
+                        </p>
+                      </div>
+                    </AccordionTrigger>
+                    <AccordionContent className="flex flex-col gap-2 ">
+                      {sectionsForLiveAndSoon[0].matches.map((item: any, index) => (
+                        <div
+                          className="p-2 flex flex-row justify-between bg-[rgba(30,42,56,1)] rounded-[10px] mb-[10px]"
+                          key={index}
+                          onClick={() => handleNavigate()}
+                        >
+                          <div className="flex flex-col justify-between items-start">
+                            <div className="flex flex-row gap-1 items-center">
+                              <Icon
+                                icon="fluent:sport-soccer-24-filled"
+                                width={16}
+                                height={16}
+                                color="rgba(170,170,170,1)"
+                              />
+                              <p className="pl-2 text-[10px] font-normal text-[rgba(170,170,170,1)]">
+                                {item.container.container}
+                              </p>
+                              <Icon icon="ic:outline-arrow-right" width={20} height={20} color="rgba(170,170,170,1)" />
+                              <p className="text-[10px] font-normal text-[rgba(170,170,170,1)]">{item.league_name}</p>
+                            </div>
+                            <p
+                              className={`${
+                                item[sectionsForLiveAndSoon[0].statusKey]
+                                  ? "text-[rgba(70,230,164,1)]"
+                                  : "text-[rgba(165,165,165,1)]"
+                              } text-[9px] font-normal`}
+                            >
+                              {item[sectionsForLiveAndSoon[0].statusKey]
+                                ? `${item[sectionsForLiveAndSoon[0].timeKey]} ${
+                                    item[sectionsForLiveAndSoon[0].scopeKey]
+                                  }`
+                                : utcToUtc7Format(item[sectionsForLiveAndSoon[0].timeKey])}
+                            </p>
+                            <div className="flex flex-row justify-start items-center gap-2">
+                              <TeamLogo teamName={item.team[0]} typeError="home" typeLogo="mini" />
+                              <p className="text-[rgba(251,255,255,1)] text-[14.41px] font-normal">{item.home}</p>
+                            </div>
+                            <div className="flex flex-row justify-start items-center gap-2">
+                              <TeamLogo teamName={item.team[1]} typeError="away" typeLogo="mini" />
+                              <p className="text-[rgba(251,255,255,1)] text-[14.41px] font-normal">{item.away}</p>
+                            </div>
+                          </div>
+                          <div className="flex flex-col justify-between items-center">
                             <Icon
-                              icon="fluent:sport-soccer-24-filled"
+                              icon="mage:chart-fill"
+                              className="hover:cursor-pointer"
                               width={16}
                               height={16}
                               color="rgba(170,170,170,1)"
+                              onClick={(e) => {
+                                e.stopPropagation(); // Ngăn chặn lan truyền sự kiện click
+                              }}
                             />
-                            <p className="pl-2 text-[10px] font-normal text-[rgba(170,170,170,1)]">
-                              {item.container.container}
-                            </p>
-                            <Icon icon="ic:outline-arrow-right" width={20} height={20} color="rgba(170,170,170,1)" />
-                            <p className="text-[10px] font-normal text-[rgba(170,170,170,1)]">{item.league_name}</p>
-                          </div>
-                          <p
-                            className={`${
-                              item[sectionsForLiveAndSoon[0].statusKey]
-                                ? "text-[rgba(70,230,164,1)]"
-                                : "text-[rgba(165,165,165,1)]"
-                            } text-[9px] font-normal`}
-                          >
-                            {item[sectionsForLiveAndSoon[0].statusKey]
-                              ? `${item[sectionsForLiveAndSoon[0].timeKey]} ${item[sectionsForLiveAndSoon[0].scopeKey]}`
-                              : utcToUtc7Format(item[sectionsForLiveAndSoon[0].timeKey])}
-                          </p>
-                          <div className="flex flex-row justify-start items-center gap-2">
-                            <TeamLogo teamName={item.team[0]} typeError="home" typeLogo="mini" />
-                            <p className="text-[rgba(251,255,255,1)] text-[14.41px] font-normal">{item.home}</p>
-                          </div>
-                          <div className="flex flex-row justify-start items-center gap-2">
-                            <TeamLogo teamName={item.team[1]} typeError="away" typeLogo="mini" />
-                            <p className="text-[rgba(251,255,255,1)] text-[14.41px] font-normal">{item.away}</p>
-                          </div>
-                        </div>
-                        <div className="flex flex-col justify-between items-center">
-                          <Icon
-                            icon="mage:chart-fill"
-                            className="hover:cursor-pointer"
-                            width={16}
-                            height={16}
-                            color="rgba(170,170,170,1)"
-                            onClick={(e) => {
-                              e.stopPropagation(); // Ngăn chặn lan truyền sự kiện click
-                            }}
-                          />
 
-                          {item[sectionsForLiveAndSoon[0].statusKey] && (
-                            <Icon icon="fluent:live-20-filled" width={16} height={16} color="rgba(245,93,62,1)" />
-                          )}
-                          {item[sectionsForLiveAndSoon[0].statusKey] && (
-                            <div
-                              className="w-[22px] h-[17px] p-[2px] rounded-[5px] font-bold flex flex-row justify-center items-center text-[rgba(255,255,255,1)] bg-[rgba(41,53,66,1)] "
-                              style={{ border: "0.68px solid rgba(64,74,86,1)" }}
-                            >
-                              {item[sectionsForLiveAndSoon[0].scoreKeys[0]]}
-                            </div>
-                          )}
-                          {item[sectionsForLiveAndSoon[0].statusKey] && (
-                            <div
-                              className="w-[22px] h-[17px] p-[2px] rounded-[5px] font-bold flex flex-row justify-center items-center text-[rgba(255,255,255,1)] bg-[rgba(41,53,66,1)] "
-                              style={{ border: "0.68px solid rgba(64,74,86,1)" }}
-                            >
-                              {item[sectionsForLiveAndSoon[0].scoreKeys[1]]}
-                            </div>
-                          )}
+                            {item[sectionsForLiveAndSoon[0].statusKey] && (
+                              <Icon icon="fluent:live-20-filled" width={16} height={16} color="rgba(245,93,62,1)" />
+                            )}
+                            {item[sectionsForLiveAndSoon[0].statusKey] && (
+                              <div
+                                className="w-[22px] h-[17px] p-[2px] rounded-[5px] font-bold flex flex-row justify-center items-center text-[rgba(255,255,255,1)] bg-[rgba(41,53,66,1)] "
+                                style={{ border: "0.68px solid rgba(64,74,86,1)" }}
+                              >
+                                {item[sectionsForLiveAndSoon[0].scoreKeys[0]]}
+                              </div>
+                            )}
+                            {item[sectionsForLiveAndSoon[0].statusKey] && (
+                              <div
+                                className="w-[22px] h-[17px] p-[2px] rounded-[5px] font-bold flex flex-row justify-center items-center text-[rgba(255,255,255,1)] bg-[rgba(41,53,66,1)] "
+                                style={{ border: "0.68px solid rgba(64,74,86,1)" }}
+                              >
+                                {item[sectionsForLiveAndSoon[0].scoreKeys[1]]}
+                              </div>
+                            )}
+                          </div>
                         </div>
+                      ))}
+                    </AccordionContent>
+                  </AccordionItem>
+                ) : (
+                  <div className="flex flex-row justify-center items-center h-[60vh]">
+                    <p className="text-[rgba(255,255,255,1)] text-[15px] font-bold">Không có trận đấu live</p>
+                  </div>
+                )
+              ) : contentTab === "league" || contentTab === "time" ? (
+                dataMatch.length !== 0 ? (
+                  <AccordionItem value={sectionsForLiveAndSoon[0].title}>
+                    <AccordionTrigger className="flex flex-row items-center justify-between hover:cursor-pointer py-1">
+                      <div className="flex flex-row items-center gap-2">
+                        <Icon icon="fluent:live-24-filled" width={25} height={25} color="rgba(245,93,62,1)" />
+                        <p className=" font-bold text-[rgba(255,255,255,1)] text-[15px]">{leagueActive}</p>
                       </div>
-                    ))}
-                  </AccordionContent>
-                </AccordionItem>
-              ) : (
-                <div className="flex flex-row justify-center items-center h-[60vh]">
-                  <p className="text-[rgba(255,255,255,1)] text-[15px] font-bold">Không có trận đấu live</p>
-                </div>
-              )}
+                    </AccordionTrigger>
+                    <AccordionContent className="flex flex-col gap-2 ">
+                      {dataMatch.map((item: any, index) => (
+                        <div
+                          className="p-2 flex flex-row justify-between bg-[rgba(30,42,56,1)] rounded-[10px] mb-[10px]"
+                          key={index}
+                          onClick={() => handleNavigate()}
+                        >
+                          <div className="flex flex-col justify-between items-start">
+                            <div className="flex flex-row gap-1 items-center">
+                              <Icon
+                                icon="fluent:sport-soccer-24-filled"
+                                width={16}
+                                height={16}
+                                color="rgba(170,170,170,1)"
+                              />
+                              <p className="pl-2 text-[10px] font-normal text-[rgba(170,170,170,1)]">
+                                {item.container.container}
+                              </p>
+                              <Icon icon="ic:outline-arrow-right" width={20} height={20} color="rgba(170,170,170,1)" />
+                              <p className="text-[10px] font-normal text-[rgba(170,170,170,1)]">{item.league_name}</p>
+                            </div>
+                            <p
+                              className={`${
+                                item.liveStatus ? "text-[rgba(70,230,164,1)]" : "text-[rgba(165,165,165,1)]"
+                              } text-[9px] font-normal`}
+                            >
+                              {item.liveStatus ? `${item.liveMinute} ${item.liveScope}` : utcToUtc7Format(item.starts)}
+                            </p>
+                            <div className="flex flex-row justify-start items-center gap-2">
+                              <TeamLogo teamName={item.team[0]} typeError="home" typeLogo="mini" />
+                              <p className="text-[rgba(251,255,255,1)] text-[14.41px] font-normal">{item.home}</p>
+                            </div>
+                            <div className="flex flex-row justify-start items-center gap-2">
+                              <TeamLogo teamName={item.team[1]} typeError="away" typeLogo="mini" />
+                              <p className="text-[rgba(251,255,255,1)] text-[14.41px] font-normal">{item.away}</p>
+                            </div>
+                          </div>
+                          <div className="flex flex-col justify-between items-center">
+                            <Icon
+                              icon="mage:chart-fill"
+                              className="hover:cursor-pointer"
+                              width={16}
+                              height={16}
+                              color="rgba(170,170,170,1)"
+                              onClick={(e) => {
+                                e.stopPropagation(); // Ngăn chặn lan truyền sự kiện click
+                              }}
+                            />
+
+                            {item.liveStatus && (
+                              <Icon icon="fluent:live-20-filled" width={16} height={16} color="rgba(245,93,62,1)" />
+                            )}
+                            {item.liveStatus && (
+                              <div
+                                className="w-[22px] h-[17px] p-[2px] rounded-[5px] font-bold flex flex-row justify-center items-center text-[rgba(255,255,255,1)] bg-[rgba(41,53,66,1)] "
+                                style={{ border: "0.68px solid rgba(64,74,86,1)" }}
+                              >
+                                {item.homeScore}
+                              </div>
+                            )}
+                            {item.liveStatus && (
+                              <div
+                                className="w-[22px] h-[17px] p-[2px] rounded-[5px] font-bold flex flex-row justify-center items-center text-[rgba(255,255,255,1)] bg-[rgba(41,53,66,1)] "
+                                style={{ border: "0.68px solid rgba(64,74,86,1)" }}
+                              >
+                                {item.awayScore}
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                      ))}
+                    </AccordionContent>
+                  </AccordionItem>
+                ) : (
+                  <div className="flex flex-row justify-center items-center h-[60vh]">
+                    <p className="text-[rgba(255,255,255,1)] text-[15px] font-bold">Giải này không có trận đấu nào</p>
+                  </div>
+                )
+              ) : null}
             </Accordion>
           </div>
           <Menu />
