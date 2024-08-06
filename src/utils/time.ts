@@ -70,3 +70,9 @@ export const formatRangeTime = (dateTime: Date, type: string, typeSelectTime: nu
 
   return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}Z`;
 };
+
+// Hàm chuyển dd/mm/yyyy sang yyyy-mm-dd
+export const convertDateString = (dateString: string) => {
+  const [day, month, year] = dateString.split("/");
+  return `${year}-${month}-${day}`;
+};

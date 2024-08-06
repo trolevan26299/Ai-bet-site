@@ -17,7 +17,7 @@ import { ILeague } from "@/types/league.type";
 import { locale } from "@/utils/configCalendarToVN";
 import { getDayOfWeek } from "@/utils/convertDateToDateOfWeek";
 import { getDayAndMonth } from "@/utils/convertToDayAndMonth";
-import { utcToUtc7Format } from "@/utils/time";
+import { convertDateString, utcToUtc7Format } from "@/utils/time";
 import { Icon } from "@iconify/react";
 import * as PopoverRD from "@radix-ui/react-popover";
 import { Popover } from "@radix-ui/themes";
@@ -244,6 +244,24 @@ const LeagueView = () => {
       console.error("error:", error);
     }
   };
+  // hàm get trận theo thời gian
+  const fetchMatchByTime = async (type?: string) => {
+    try {
+      if (type === "first") setLoadingContent(true);
+      const response = await axios.post("/api/league/match-in-league", {
+        date: convertDateString(dateActive as string),
+        request_id: requestId,
+        is_get_bets: false,
+      });
+      if (response.data.ok) {
+        setDataMatch(response?.data?.data);
+        setLoadingContent(false);
+      }
+    } catch (error) {
+      setLoadingContent(false);
+      console.error("error:", error);
+    }
+  };
   // xử lý cuộn chuột tagsList
   const handleMouseMove = (e: MouseEvent, ref: React.RefObject<HTMLDivElement>) => {
     if (ref.current) {
@@ -306,8 +324,12 @@ const LeagueView = () => {
       fetchMatchInLeague("first");
       const intervalId = setInterval(fetchMatchInLeague, 20000); // gọi sau mỗi 20s
       return () => clearInterval(intervalId);
+    } else if (contentTab === "time") {
+      fetchMatchByTime("first");
+      const intervalId = setInterval(fetchMatchByTime, 20000); // gọi sau mỗi 20s
+      return () => clearInterval(intervalId);
     }
-  }, [contentTab, leagueActive]);
+  }, [contentTab, leagueActive, dateActive]);
 
   useEffect(() => {
     const refs = [tabsListRef, league1ListRef, league2ListRef];
@@ -884,13 +906,16 @@ const LeagueView = () => {
                   <AccordionItem value={sectionsForLiveAndSoon[0].title}>
                     <AccordionTrigger className="flex flex-row items-center justify-between hover:cursor-pointer py-1">
                       <div className="flex flex-row items-center gap-2">
-                        {contentTab}
-                        <img
-                          src="https://toppng.com/uploads/preview/official-symbol-logo-design-for-euro-2024-germany-european-football-final-11715224051fchzryfqfd.png"
-                          alt={leagueActive as string}
-                          className="w-[25px] h-[25px] rounded-full"
-                        />
-                        <p className=" font-bold text-[rgba(255,255,255,1)] text-[15px]">{leagueActive}</p>
+                        {contentTab === "league" && (
+                          <img
+                            src="https://toppng.com/uploads/preview/official-symbol-logo-design-for-euro-2024-germany-european-football-final-11715224051fchzryfqfd.png"
+                            alt={leagueActive as string}
+                            className="w-[25px] h-[25px] rounded-full"
+                          />
+                        )}
+                        <p className=" font-bold text-[rgba(255,255,255,1)] text-[15px]">
+                          {contentTab === "league" ? leagueActive : dateActive}
+                        </p>
                       </div>
                     </AccordionTrigger>
                     <AccordionContent className="flex flex-col gap-2 ">
