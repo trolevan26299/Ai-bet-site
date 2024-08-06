@@ -252,7 +252,7 @@ const LeagueView = () => {
 
   useEffect(() => {
     fetchInitialData(); // gọi lúc đầu
-    const intervalId = setInterval(fetchMatchesGroup, 7000); // gọi sau mỗi 7s
+    const intervalId = setInterval(fetchMatchesGroup, 20000); // gọi sau mỗi 7s
 
     return () => clearInterval(intervalId);
   }, []);
