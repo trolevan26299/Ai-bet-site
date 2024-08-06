@@ -74,6 +74,7 @@ const LeagueView = () => {
   const [loadingPopupAll, setLoadingPopupAll] = useState(false);
   const [listAllLeague, setListAllLeague] = useState<ILeague[]>([]);
   const [loadingScreen, setLoadingScreen] = useState(false);
+  const [loadingContent, setLoadingContent] = useState(false);
   const [loadingFavorite, setLoadingFavorite] = useState<number | null>(null);
   const [leagueTrending, setLeagueTrending] = useState<string[]>();
   const [liveMatches, setLiveMatches] = useState([]); // những trận đang live
@@ -201,17 +202,17 @@ const LeagueView = () => {
   // hàm get trận live
   const fetchLiveMatch = async (type?: string) => {
     try {
-      if (type === "first") setLoadingScreen(true);
+      if (type === "first") setLoadingContent(true);
       const response = await axios.post("/api/league/math-group", {
         request_id: requestId,
         select: ["live"],
       });
       if (response.data.ok) {
         setLiveMatches(response.data.data.live);
-        setLoadingScreen(false);
+        setLoadingContent(false);
       }
     } catch (error) {
-      setLoadingScreen(false);
+      setLoadingContent(false);
       console.error("Error fetching match data:", error);
     }
   };
@@ -594,208 +595,200 @@ const LeagueView = () => {
               onValueChange={handleValueChange}
               className="w-full m-auto p-2 rounded-[10px] h-full mb-[55px]"
             >
-              {contentTab === "initial"
-                ? sectionsForLiveAndSoon.map(
-                    (section, sectionIndex) =>
-                      section.matches.length > 0 && (
-                        <AccordionItem key={sectionIndex} value={section.title}>
-                          <AccordionTrigger className="flex flex-row items-center justify-between hover:cursor-pointer py-1">
-                            <div className="flex flex-row items-center gap-2">
-                              <Icon icon={section.icon} width={25} height={25} color={section.iconColor} />
-                              <p className=" font-bold text-[rgba(255,255,255,1)] text-[15px]">{section.title}</p>
-                            </div>
-                          </AccordionTrigger>
-                          <AccordionContent className="flex flex-col gap-2 ">
-                            {section.matches.map((item: any, index) => (
-                              <div
-                                className="p-2 flex flex-row justify-between bg-[rgba(30,42,56,1)] rounded-[10px] mb-[10px]"
-                                key={index}
-                                onClick={() => handleNavigate()}
-                              >
-                                <div className="flex flex-col justify-between items-start">
-                                  <div className="flex flex-row gap-1 items-center">
-                                    <Icon
-                                      icon="fluent:sport-soccer-24-filled"
-                                      width={16}
-                                      height={16}
-                                      color="rgba(170,170,170,1)"
-                                    />
-                                    <p className="pl-2 text-[10px] font-normal text-[rgba(170,170,170,1)]">
-                                      {item.container.container}
-                                    </p>
-                                    <Icon
-                                      icon="ic:outline-arrow-right"
-                                      width={20}
-                                      height={20}
-                                      color="rgba(170,170,170,1)"
-                                    />
-                                    <p className="text-[10px] font-normal text-[rgba(170,170,170,1)]">
-                                      {item.league_name}
-                                    </p>
-                                  </div>
-                                  <p
-                                    className={`${
-                                      item[section.statusKey]
-                                        ? "text-[rgba(70,230,164,1)]"
-                                        : "text-[rgba(165,165,165,1)]"
-                                    } text-[9px] font-normal`}
-                                  >
-                                    {item[section.statusKey]
-                                      ? `${item[section.timeKey]} ${item[section.scopeKey]}`
-                                      : utcToUtc7Format(item[section.timeKey])}
-                                  </p>
-                                  <div className="flex flex-row justify-start items-center gap-2">
-                                    <TeamLogo teamName={item.team[0]} typeError="home" typeLogo="mini" />
-                                    <p className="text-[rgba(251,255,255,1)] text-[14.41px] font-normal">{item.home}</p>
-                                  </div>
-                                  <div className="flex flex-row justify-start items-center gap-2">
-                                    <TeamLogo teamName={item.team[1]} typeError="away" typeLogo="mini" />
-                                    <p className="text-[rgba(251,255,255,1)] text-[14.41px] font-normal">{item.away}</p>
-                                  </div>
-                                </div>
-                                <div className="flex flex-col justify-between items-center">
+              {contentTab === "initial" ? (
+                sectionsForLiveAndSoon.map(
+                  (section, sectionIndex) =>
+                    section.matches.length > 0 && (
+                      <AccordionItem key={sectionIndex} value={section.title}>
+                        <AccordionTrigger className="flex flex-row items-center justify-between hover:cursor-pointer py-1">
+                          <div className="flex flex-row items-center gap-2">
+                            <Icon icon={section.icon} width={25} height={25} color={section.iconColor} />
+                            <p className=" font-bold text-[rgba(255,255,255,1)] text-[15px]">{section.title}</p>
+                          </div>
+                        </AccordionTrigger>
+                        <AccordionContent className="flex flex-col gap-2 ">
+                          {section.matches.map((item: any, index) => (
+                            <div
+                              className="p-2 flex flex-row justify-between bg-[rgba(30,42,56,1)] rounded-[10px] mb-[10px]"
+                              key={index}
+                              onClick={() => handleNavigate()}
+                            >
+                              <div className="flex flex-col justify-between items-start">
+                                <div className="flex flex-row gap-1 items-center">
                                   <Icon
-                                    icon="mage:chart-fill"
-                                    className="hover:cursor-pointer"
+                                    icon="fluent:sport-soccer-24-filled"
                                     width={16}
                                     height={16}
                                     color="rgba(170,170,170,1)"
-                                    onClick={(e) => {
-                                      e.stopPropagation(); // Ngăn chặn lan truyền sự kiện click
-                                    }}
                                   />
-
-                                  {item[section.statusKey] && (
-                                    <Icon
-                                      icon="fluent:live-20-filled"
-                                      width={16}
-                                      height={16}
-                                      color="rgba(245,93,62,1)"
-                                    />
-                                  )}
-                                  {item[section.statusKey] && (
-                                    <div
-                                      className="w-[22px] h-[17px] p-[2px] rounded-[5px] font-bold flex flex-row justify-center items-center text-[rgba(255,255,255,1)] bg-[rgba(41,53,66,1)] "
-                                      style={{ border: "0.68px solid rgba(64,74,86,1)" }}
-                                    >
-                                      {item[section.scoreKeys[0]]}
-                                    </div>
-                                  )}
-                                  {item[section.statusKey] && (
-                                    <div
-                                      className="w-[22px] h-[17px] p-[2px] rounded-[5px] font-bold flex flex-row justify-center items-center text-[rgba(255,255,255,1)] bg-[rgba(41,53,66,1)] "
-                                      style={{ border: "0.68px solid rgba(64,74,86,1)" }}
-                                    >
-                                      {item[section.scoreKeys[1]]}
-                                    </div>
-                                  )}
+                                  <p className="pl-2 text-[10px] font-normal text-[rgba(170,170,170,1)]">
+                                    {item.container.container}
+                                  </p>
+                                  <Icon
+                                    icon="ic:outline-arrow-right"
+                                    width={20}
+                                    height={20}
+                                    color="rgba(170,170,170,1)"
+                                  />
+                                  <p className="text-[10px] font-normal text-[rgba(170,170,170,1)]">
+                                    {item.league_name}
+                                  </p>
+                                </div>
+                                <p
+                                  className={`${
+                                    item[section.statusKey] ? "text-[rgba(70,230,164,1)]" : "text-[rgba(165,165,165,1)]"
+                                  } text-[9px] font-normal`}
+                                >
+                                  {item[section.statusKey]
+                                    ? `${item[section.timeKey]} ${item[section.scopeKey]}`
+                                    : utcToUtc7Format(item[section.timeKey])}
+                                </p>
+                                <div className="flex flex-row justify-start items-center gap-2">
+                                  <TeamLogo teamName={item.team[0]} typeError="home" typeLogo="mini" />
+                                  <p className="text-[rgba(251,255,255,1)] text-[14.41px] font-normal">{item.home}</p>
+                                </div>
+                                <div className="flex flex-row justify-start items-center gap-2">
+                                  <TeamLogo teamName={item.team[1]} typeError="away" typeLogo="mini" />
+                                  <p className="text-[rgba(251,255,255,1)] text-[14.41px] font-normal">{item.away}</p>
                                 </div>
                               </div>
-                            ))}
-                          </AccordionContent>
-                        </AccordionItem>
-                      )
-                  )
-                : sectionsForLiveAndSoon[0].matches.length > 0 && (
-                    <AccordionItem value={sectionsForLiveAndSoon[0].title}>
-                      <AccordionTrigger className="flex flex-row items-center justify-between hover:cursor-pointer py-1">
-                        <div className="flex flex-row items-center gap-2">
-                          <Icon
-                            icon={sectionsForLiveAndSoon[0].icon}
-                            width={25}
-                            height={25}
-                            color={sectionsForLiveAndSoon[0].iconColor}
-                          />
-                          <p className=" font-bold text-[rgba(255,255,255,1)] text-[15px]">
-                            {sectionsForLiveAndSoon[0].title}
-                          </p>
-                        </div>
-                      </AccordionTrigger>
-                      <AccordionContent className="flex flex-col gap-2 ">
-                        {sectionsForLiveAndSoon[0].matches.map((item: any, index) => (
-                          <div
-                            className="p-2 flex flex-row justify-between bg-[rgba(30,42,56,1)] rounded-[10px] mb-[10px]"
-                            key={index}
-                            onClick={() => handleNavigate()}
-                          >
-                            <div className="flex flex-col justify-between items-start">
-                              <div className="flex flex-row gap-1 items-center">
+                              <div className="flex flex-col justify-between items-center">
                                 <Icon
-                                  icon="fluent:sport-soccer-24-filled"
+                                  icon="mage:chart-fill"
+                                  className="hover:cursor-pointer"
                                   width={16}
                                   height={16}
                                   color="rgba(170,170,170,1)"
+                                  onClick={(e) => {
+                                    e.stopPropagation(); // Ngăn chặn lan truyền sự kiện click
+                                  }}
                                 />
-                                <p className="pl-2 text-[10px] font-normal text-[rgba(170,170,170,1)]">
-                                  {item.container.container}
-                                </p>
-                                <Icon
-                                  icon="ic:outline-arrow-right"
-                                  width={20}
-                                  height={20}
-                                  color="rgba(170,170,170,1)"
-                                />
-                                <p className="text-[10px] font-normal text-[rgba(170,170,170,1)]">{item.league_name}</p>
-                              </div>
-                              <p
-                                className={`${
-                                  item[sectionsForLiveAndSoon[0].statusKey]
-                                    ? "text-[rgba(70,230,164,1)]"
-                                    : "text-[rgba(165,165,165,1)]"
-                                } text-[9px] font-normal`}
-                              >
-                                {item[sectionsForLiveAndSoon[0].statusKey]
-                                  ? `${item[sectionsForLiveAndSoon[0].timeKey]} ${
-                                      item[sectionsForLiveAndSoon[0].scopeKey]
-                                    }`
-                                  : utcToUtc7Format(item[sectionsForLiveAndSoon[0].timeKey])}
-                              </p>
-                              <div className="flex flex-row justify-start items-center gap-2">
-                                <TeamLogo teamName={item.team[0]} typeError="home" typeLogo="mini" />
-                                <p className="text-[rgba(251,255,255,1)] text-[14.41px] font-normal">{item.home}</p>
-                              </div>
-                              <div className="flex flex-row justify-start items-center gap-2">
-                                <TeamLogo teamName={item.team[1]} typeError="away" typeLogo="mini" />
-                                <p className="text-[rgba(251,255,255,1)] text-[14.41px] font-normal">{item.away}</p>
-                              </div>
-                            </div>
-                            <div className="flex flex-col justify-between items-center">
-                              <Icon
-                                icon="mage:chart-fill"
-                                className="hover:cursor-pointer"
-                                width={16}
-                                height={16}
-                                color="rgba(170,170,170,1)"
-                                onClick={(e) => {
-                                  e.stopPropagation(); // Ngăn chặn lan truyền sự kiện click
-                                }}
-                              />
 
-                              {item[sectionsForLiveAndSoon[0].statusKey] && (
-                                <Icon icon="fluent:live-20-filled" width={16} height={16} color="rgba(245,93,62,1)" />
-                              )}
-                              {item[sectionsForLiveAndSoon[0].statusKey] && (
-                                <div
-                                  className="w-[22px] h-[17px] p-[2px] rounded-[5px] font-bold flex flex-row justify-center items-center text-[rgba(255,255,255,1)] bg-[rgba(41,53,66,1)] "
-                                  style={{ border: "0.68px solid rgba(64,74,86,1)" }}
-                                >
-                                  {item[sectionsForLiveAndSoon[0].scoreKeys[0]]}
-                                </div>
-                              )}
-                              {item[sectionsForLiveAndSoon[0].statusKey] && (
-                                <div
-                                  className="w-[22px] h-[17px] p-[2px] rounded-[5px] font-bold flex flex-row justify-center items-center text-[rgba(255,255,255,1)] bg-[rgba(41,53,66,1)] "
-                                  style={{ border: "0.68px solid rgba(64,74,86,1)" }}
-                                >
-                                  {item[sectionsForLiveAndSoon[0].scoreKeys[1]]}
-                                </div>
-                              )}
+                                {item[section.statusKey] && (
+                                  <Icon icon="fluent:live-20-filled" width={16} height={16} color="rgba(245,93,62,1)" />
+                                )}
+                                {item[section.statusKey] && (
+                                  <div
+                                    className="w-[22px] h-[17px] p-[2px] rounded-[5px] font-bold flex flex-row justify-center items-center text-[rgba(255,255,255,1)] bg-[rgba(41,53,66,1)] "
+                                    style={{ border: "0.68px solid rgba(64,74,86,1)" }}
+                                  >
+                                    {item[section.scoreKeys[0]]}
+                                  </div>
+                                )}
+                                {item[section.statusKey] && (
+                                  <div
+                                    className="w-[22px] h-[17px] p-[2px] rounded-[5px] font-bold flex flex-row justify-center items-center text-[rgba(255,255,255,1)] bg-[rgba(41,53,66,1)] "
+                                    style={{ border: "0.68px solid rgba(64,74,86,1)" }}
+                                  >
+                                    {item[section.scoreKeys[1]]}
+                                  </div>
+                                )}
+                              </div>
                             </div>
+                          ))}
+                        </AccordionContent>
+                      </AccordionItem>
+                    )
+                )
+              ) : loadingContent ? (
+                <LoadingPopup />
+              ) : sectionsForLiveAndSoon[0].matches.length > 0 ? (
+                <AccordionItem value={sectionsForLiveAndSoon[0].title}>
+                  <AccordionTrigger className="flex flex-row items-center justify-between hover:cursor-pointer py-1">
+                    <div className="flex flex-row items-center gap-2">
+                      <Icon
+                        icon={sectionsForLiveAndSoon[0].icon}
+                        width={25}
+                        height={25}
+                        color={sectionsForLiveAndSoon[0].iconColor}
+                      />
+                      <p className=" font-bold text-[rgba(255,255,255,1)] text-[15px]">
+                        {sectionsForLiveAndSoon[0].title}
+                      </p>
+                    </div>
+                  </AccordionTrigger>
+                  <AccordionContent className="flex flex-col gap-2 ">
+                    {sectionsForLiveAndSoon[0].matches.map((item: any, index) => (
+                      <div
+                        className="p-2 flex flex-row justify-between bg-[rgba(30,42,56,1)] rounded-[10px] mb-[10px]"
+                        key={index}
+                        onClick={() => handleNavigate()}
+                      >
+                        <div className="flex flex-col justify-between items-start">
+                          <div className="flex flex-row gap-1 items-center">
+                            <Icon
+                              icon="fluent:sport-soccer-24-filled"
+                              width={16}
+                              height={16}
+                              color="rgba(170,170,170,1)"
+                            />
+                            <p className="pl-2 text-[10px] font-normal text-[rgba(170,170,170,1)]">
+                              {item.container.container}
+                            </p>
+                            <Icon icon="ic:outline-arrow-right" width={20} height={20} color="rgba(170,170,170,1)" />
+                            <p className="text-[10px] font-normal text-[rgba(170,170,170,1)]">{item.league_name}</p>
                           </div>
-                        ))}
-                      </AccordionContent>
-                    </AccordionItem>
-                  )}
+                          <p
+                            className={`${
+                              item[sectionsForLiveAndSoon[0].statusKey]
+                                ? "text-[rgba(70,230,164,1)]"
+                                : "text-[rgba(165,165,165,1)]"
+                            } text-[9px] font-normal`}
+                          >
+                            {item[sectionsForLiveAndSoon[0].statusKey]
+                              ? `${item[sectionsForLiveAndSoon[0].timeKey]} ${item[sectionsForLiveAndSoon[0].scopeKey]}`
+                              : utcToUtc7Format(item[sectionsForLiveAndSoon[0].timeKey])}
+                          </p>
+                          <div className="flex flex-row justify-start items-center gap-2">
+                            <TeamLogo teamName={item.team[0]} typeError="home" typeLogo="mini" />
+                            <p className="text-[rgba(251,255,255,1)] text-[14.41px] font-normal">{item.home}</p>
+                          </div>
+                          <div className="flex flex-row justify-start items-center gap-2">
+                            <TeamLogo teamName={item.team[1]} typeError="away" typeLogo="mini" />
+                            <p className="text-[rgba(251,255,255,1)] text-[14.41px] font-normal">{item.away}</p>
+                          </div>
+                        </div>
+                        <div className="flex flex-col justify-between items-center">
+                          <Icon
+                            icon="mage:chart-fill"
+                            className="hover:cursor-pointer"
+                            width={16}
+                            height={16}
+                            color="rgba(170,170,170,1)"
+                            onClick={(e) => {
+                              e.stopPropagation(); // Ngăn chặn lan truyền sự kiện click
+                            }}
+                          />
+
+                          {item[sectionsForLiveAndSoon[0].statusKey] && (
+                            <Icon icon="fluent:live-20-filled" width={16} height={16} color="rgba(245,93,62,1)" />
+                          )}
+                          {item[sectionsForLiveAndSoon[0].statusKey] && (
+                            <div
+                              className="w-[22px] h-[17px] p-[2px] rounded-[5px] font-bold flex flex-row justify-center items-center text-[rgba(255,255,255,1)] bg-[rgba(41,53,66,1)] "
+                              style={{ border: "0.68px solid rgba(64,74,86,1)" }}
+                            >
+                              {item[sectionsForLiveAndSoon[0].scoreKeys[0]]}
+                            </div>
+                          )}
+                          {item[sectionsForLiveAndSoon[0].statusKey] && (
+                            <div
+                              className="w-[22px] h-[17px] p-[2px] rounded-[5px] font-bold flex flex-row justify-center items-center text-[rgba(255,255,255,1)] bg-[rgba(41,53,66,1)] "
+                              style={{ border: "0.68px solid rgba(64,74,86,1)" }}
+                            >
+                              {item[sectionsForLiveAndSoon[0].scoreKeys[1]]}
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    ))}
+                  </AccordionContent>
+                </AccordionItem>
+              ) : (
+                <div className="flex flex-row justify-center items-center h-[80vh]">
+                  <p className="text-[rgba(255,255,255,1)] text-[15px] font-bold">Không có trận đấu live</p>
+                </div>
+              )}
             </Accordion>
           </div>
           <Menu />
