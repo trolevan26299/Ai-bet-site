@@ -199,16 +199,19 @@ const LeagueView = () => {
   };
 
   // hàm get trận live
-  const fetchLiveMatch = async () => {
+  const fetchLiveMatch = async (type?: string) => {
     try {
+      if (type === "first") setLoadingScreen(true);
       const response = await axios.post("/api/league/math-group", {
         request_id: requestId,
         select: ["live"],
       });
       if (response.data.ok) {
         setLiveMatches(response.data.data.live);
+        setLoadingScreen(false);
       }
     } catch (error) {
+      setLoadingScreen(false);
       console.error("Error fetching match data:", error);
     }
   };
@@ -268,6 +271,7 @@ const LeagueView = () => {
       const intervalId = setInterval(fetchMatchesGroup, 20000); // gọi sau mỗi 20s
       return () => clearInterval(intervalId);
     } else if (contentTab === "live") {
+      fetchLiveMatch("first");
       const intervalId = setInterval(fetchLiveMatch, 20000); // gọi sau mỗi 20s
       return () => clearInterval(intervalId);
     }
