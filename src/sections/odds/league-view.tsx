@@ -61,37 +61,6 @@ const frameworks = [
   },
 ];
 
-const tagDemo = [
-  {
-    name: "Euro 2024",
-    logo: "https://toppng.com/uploads/preview/official-symbol-logo-design-for-euro-2024-germany-european-football-final-11715224051fchzryfqfd.png",
-  },
-  {
-    name: "Copa America 2024",
-    logo: "https://toppng.com/uploads/preview/official-symbol-logo-design-for-euro-2024-germany-european-football-final-11715224051fchzryfqfd.png",
-  },
-  {
-    name: "Cúp C1 Châu Âu",
-    logo: "https://toppng.com/uploads/preview/official-symbol-logo-design-for-euro-2024-germany-european-football-final-11715224051fchzryfqfd.png",
-  },
-  {
-    name: "La Liga",
-    logo: "https://toppng.com/uploads/preview/official-symbol-logo-design-for-euro-2024-germany-european-football-final-11715224051fchzryfqfd.png",
-  },
-  {
-    name: "UEFA Nations League",
-    logo: "https://toppng.com/uploads/preview/official-symbol-logo-design-for-euro-2024-germany-european-football-final-11715224051fchzryfqfd.png",
-  },
-  {
-    name: "Bundesliga",
-    logo: "https://toppng.com/uploads/preview/official-symbol-logo-design-for-euro-2024-germany-european-football-final-11715224051fchzryfqfd.png",
-  },
-  {
-    name: "Seri A",
-    logo: "https://toppng.com/uploads/preview/official-symbol-logo-design-for-euro-2024-germany-european-football-final-11715224051fchzryfqfd.png",
-  },
-];
-
 const demoFavorite = [
   {
     name: "Trực tiếp",
