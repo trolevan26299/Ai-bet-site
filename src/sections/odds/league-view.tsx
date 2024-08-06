@@ -25,6 +25,7 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import "./index.css";
+import { set } from "date-fns";
 
 const generateDateList = () => {
   const dates = [];
@@ -559,6 +560,7 @@ const LeagueView = () => {
                 <div
                   className="flex flex-row items-center justify-center gap-1 rounded-[20px] bg-[rgba(41,53,67,1)] h-8 px-[18px]"
                   key={index}
+                  onClick={() => setContentTab("league")}
                 >
                   <img
                     src="https://toppng.com/uploads/preview/official-symbol-logo-design-for-euro-2024-germany-european-football-final-11715224051fchzryfqfd.png"
@@ -577,6 +579,7 @@ const LeagueView = () => {
                 <div
                   className="flex flex-row items-center justify-center gap-1 rounded-[20px] bg-[rgba(41,53,67,1)] h-8 px-[18px]"
                   key={index}
+                  onClick={() => setContentTab("league")}
                 >
                   <img
                     src="https://toppng.com/uploads/preview/official-symbol-logo-design-for-euro-2024-germany-european-football-final-11715224051fchzryfqfd.png"

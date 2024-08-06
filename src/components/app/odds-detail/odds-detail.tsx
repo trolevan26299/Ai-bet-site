@@ -292,7 +292,7 @@ function RenderAccordion({
       request_id: searchParams.get("request_id") || "",
       data: JSON.stringify(data),
     };
-    const response = await axios.post("api/game", body);
+    const response = await axios.post("/api/game", body);
     console.log("response:", response);
     setDisableBtn(false);
     if ("ok" in response.data) {
