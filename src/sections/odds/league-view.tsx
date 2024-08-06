@@ -246,9 +246,10 @@ const LeagueView = () => {
     setLoadingScreen(false);
   };
 
+  // hàm click
   useEffect(() => {
     fetchInitialData(); // gọi lúc đầu
-    const intervalId = setInterval(fetchMatchesGroup, 20000); // gọi sau mỗi 7s
+    const intervalId = setInterval(fetchMatchesGroup, 20000); // gọi sau mỗi 20s
 
     return () => clearInterval(intervalId);
   }, []);
@@ -311,7 +312,7 @@ const LeagueView = () => {
                 }  uppercase rounded-[16.83px] text-[12px] font-bold flex flex-row justify-center items-center`}
               >
                 Live
-                <Icon icon="pepicons-pop:circle" width={17} height={17} className="text-[rgba(230,58,58,1)]" />
+                <Icon icon="pepicons-pop:circle" width={17} height={17} className={`${contentTab === 'live' ?"rgba(255,255,255,1)" : "text-[rgba(230,58,58,1)]`}"}/>
               </button>
             </div>
             <div className="w-[62%]">
