@@ -269,7 +269,7 @@ const LeagueView = () => {
     }
   };
 
-  // Fetch những giải trending
+  // Fetch những giải trending nhất
   const fetchTrendingLeagues = async () => {
     try {
       const response = await axios.post(`/api/league/trending?id=${requestId}`);
