@@ -787,7 +787,7 @@ const LeagueView = () => {
                   </AccordionContent>
                 </AccordionItem>
               ) : (
-                <div className="flex flex-row justify-center items-center h-[80vh]">
+                <div className="flex flex-row justify-center items-center h-[60vh]">
                   <p className="text-[rgba(255,255,255,1)] text-[15px] font-bold">Không có trận đấu live</p>
                 </div>
               )}
