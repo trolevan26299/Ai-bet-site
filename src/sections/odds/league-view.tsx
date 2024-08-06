@@ -946,7 +946,7 @@ const LeagueView = () => {
                             >
                               {item.liveStatus
                                 ? `${item.liveMinute} ${item.liveScope}`
-                                : convertToGMT7(item.starts, "date")}
+                                : `${convertToGMT7(item.starts, "date")} ${convertToGMT7(item.starts, "time")}`}
                             </p>
                             <div className="flex flex-row justify-start items-center gap-2">
                               <TeamLogo teamName={item.team[0]} typeError="home" typeLogo="mini" />
