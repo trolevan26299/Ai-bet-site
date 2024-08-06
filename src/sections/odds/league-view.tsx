@@ -209,10 +209,10 @@ const LeagueView = () => {
       });
       if (response.data.ok) {
         setLiveMatches(response.data.data.live);
-        setLoadingContent(false);
+        setLoadingContent(true);
       }
     } catch (error) {
-      setLoadingContent(false);
+      setLoadingContent(true);
       console.error("Error fetching match data:", error);
     }
   };
@@ -691,7 +691,9 @@ const LeagueView = () => {
                     )
                 )
               ) : loadingContent ? (
-                <LoadingPopup />
+                <div className="w-full h-full flex flex-row justify-center items-center">
+                  <LoadingPopup />
+                </div>
               ) : sectionsForLiveAndSoon[0].matches.length > 0 ? (
                 <AccordionItem value={sectionsForLiveAndSoon[0].title}>
                   <AccordionTrigger className="flex flex-row items-center justify-between hover:cursor-pointer py-1">
