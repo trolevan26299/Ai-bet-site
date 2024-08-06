@@ -856,7 +856,12 @@ const LeagueView = () => {
                   <AccordionItem value={sectionsForLiveAndSoon[0].title}>
                     <AccordionTrigger className="flex flex-row items-center justify-between hover:cursor-pointer py-1">
                       <div className="flex flex-row items-center gap-2">
-                        <Icon icon="fluent:live-24-filled" width={25} height={25} color="rgba(245,93,62,1)" />
+                        {/* <Icon icon="fluent:live-24-filled" width={25} height={25} color="rgba(245,93,62,1)" /> */}
+                        <img
+                          src="https://toppng.com/uploads/preview/official-symbol-logo-design-for-euro-2024-germany-european-football-final-11715224051fchzryfqfd.png"
+                          alt={leagueActive as string}
+                          className="w-[25px] h-[25px] rounded-full"
+                        />
                         <p className=" font-bold text-[rgba(255,255,255,1)] text-[15px]">{leagueActive}</p>
                       </div>
                     </AccordionTrigger>
