@@ -25,7 +25,6 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import "./index.css";
-import { set } from "date-fns";
 
 const generateDateList = () => {
   const dates = [];
@@ -81,6 +80,7 @@ const LeagueView = () => {
   const [liveMatches, setLiveMatches] = useState([]); // những trận đang live
   const [soonMatches, setSoonMatches] = useState([]); // những trận sắp diễn ra
   const [contentTab, setContentTab] = useState<string>("initial");
+  const [leagueActive, setLeagueActive] = useState<string | null>(null);
 
   const handleValueChange = (value: string[]) => {
     setOpenItems(value);
@@ -558,9 +558,21 @@ const LeagueView = () => {
               </Dialog>
               {leagueTrending?.slice(0, 4).map((tag, index) => (
                 <div
-                  className="flex flex-row items-center justify-center gap-1 rounded-[20px] bg-[rgba(41,53,67,1)] h-8 px-[18px]"
+                  className={`flex flex-row items-center justify-center gap-1 rounded-[20px] ${
+                    leagueActive === tag
+                      ? "bg-[rgba(70,230,164,1)] text-[rgba(46,46,46,1)]"
+                      : "bg-[rgba(41,53,67,1)] text-[rgba(255,255,255,1)]"
+                  } h-8 px-[18px]`}
                   key={index}
-                  onClick={() => setContentTab("league")}
+                  onClick={() => {
+                    if (tag === leagueActive) {
+                      setContentTab("initial");
+                      setLeagueActive(null);
+                    } else {
+                      setContentTab("league");
+                      setLeagueActive(tag);
+                    }
+                  }}
                 >
                   <img
                     src="https://toppng.com/uploads/preview/official-symbol-logo-design-for-euro-2024-germany-european-football-final-11715224051fchzryfqfd.png"
@@ -577,9 +589,21 @@ const LeagueView = () => {
             >
               {leagueTrending?.slice(4).map((tag, index) => (
                 <div
-                  className="flex flex-row items-center justify-center gap-1 rounded-[20px] bg-[rgba(41,53,67,1)] h-8 px-[18px]"
+                  className={`flex flex-row items-center justify-center gap-1 rounded-[20px] ${
+                    leagueActive === tag
+                      ? "bg-[rgba(70,230,164,1)] text-[rgba(46,46,46,1)]"
+                      : "bg-[rgba(41,53,67,1)] text-[rgba(255,255,255,1)]"
+                  }  h-8 px-[18px]`}
                   key={index}
-                  onClick={() => setContentTab("league")}
+                  onClick={() => {
+                    if (tag === leagueActive) {
+                      setContentTab("initial");
+                      setLeagueActive(null);
+                    } else {
+                      setContentTab("league");
+                      setLeagueActive(tag);
+                    }
+                  }}
                 >
                   <img
                     src="https://toppng.com/uploads/preview/official-symbol-logo-design-for-euro-2024-germany-european-football-final-11715224051fchzryfqfd.png"
