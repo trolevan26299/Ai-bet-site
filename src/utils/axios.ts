@@ -29,6 +29,7 @@ export const endpoints = {
     get: "user/getSettings",
   },
   league: {
+    mathGroup: "search/match_group",
     matchInLeague: "search/match_webbot",
     trending: "search/league_index_core",
   },
