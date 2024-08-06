@@ -271,7 +271,7 @@ const LeagueView = () => {
       const intervalId = setInterval(fetchLiveMatch, 20000); // gọi sau mỗi 20s
       return () => clearInterval(intervalId);
     }
-  }, []);
+  }, [contentTab]);
 
   useEffect(() => {
     const refs = [tabsListRef, league1ListRef, league2ListRef];
