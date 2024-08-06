@@ -648,7 +648,9 @@ const LeagueView = () => {
                       setContentTab("initial");
                       setLeagueActive(null);
                       setDataMatch([]);
+                      setDateActive(null);
                     } else {
+                      setDateActive(null);
                       setContentTab("league");
                       setLeagueActive(tag);
                     }
@@ -680,9 +682,11 @@ const LeagueView = () => {
                       setContentTab("initial");
                       setLeagueActive(null);
                       setDataMatch([]);
+                      setDateActive(null);
                     } else {
                       setContentTab("league");
                       setLeagueActive(tag);
+                      setDateActive(null);
                     }
                   }}
                 >
