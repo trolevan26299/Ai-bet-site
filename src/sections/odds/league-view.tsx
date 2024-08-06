@@ -383,6 +383,7 @@ const LeagueView = () => {
                 setContentTab(contentTab === "live" ? "initial" : "live");
                 setLeagueActive(null);
                 setDataMatch([]);
+                setDateActive(null);
               }}
             >
               <button
