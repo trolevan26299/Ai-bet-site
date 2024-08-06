@@ -17,7 +17,7 @@ import { ILeague } from "@/types/league.type";
 import { locale } from "@/utils/configCalendarToVN";
 import { getDayOfWeek } from "@/utils/convertDateToDateOfWeek";
 import { getDayAndMonth } from "@/utils/convertToDayAndMonth";
-import { convertDateString, utcToUtc7Format } from "@/utils/time";
+import { convertDateString, convertToGMT7, utcToUtc7Format } from "@/utils/time";
 import { Icon } from "@iconify/react";
 import * as PopoverRD from "@radix-ui/react-popover";
 import { Popover } from "@radix-ui/themes";
@@ -944,7 +944,9 @@ const LeagueView = () => {
                                 item.liveStatus ? "text-[rgba(70,230,164,1)]" : "text-[rgba(165,165,165,1)]"
                               } text-[9px] font-normal`}
                             >
-                              {item.liveStatus ? `${item.liveMinute} ${item.liveScope}` : utcToUtc7Format(item.starts)}
+                              {item.liveStatus
+                                ? `${item.liveMinute} ${item.liveScope}`
+                                : convertToGMT7(item.starts, "date")}
                             </p>
                             <div className="flex flex-row justify-start items-center gap-2">
                               <TeamLogo teamName={item.team[0]} typeError="home" typeLogo="mini" />
