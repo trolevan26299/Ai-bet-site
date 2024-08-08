@@ -607,14 +607,14 @@ const LeagueView = () => {
                             }
                           >
                             <div className="flex flex-col justify-between items-start">
-                              <div className="flex flex-row gap-1 items-center">
+                              <div className="flex flex-row gap-[2px] items-center">
                                 <Icon
                                   icon="fluent:sport-soccer-24-filled"
                                   width={16}
                                   height={16}
                                   color="rgba(170,170,170,1)"
                                 />
-                                <p className="pl-2 text-[10px] font-normal text-[rgba(170,170,170,1)]">
+                                <p className="pl-1 text-[10px] font-normal text-[rgba(170,170,170,1)]">
                                   {item.container.container}
                                 </p>
                                 <Icon
