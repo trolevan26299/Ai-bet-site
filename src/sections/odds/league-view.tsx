@@ -554,32 +554,36 @@ const LeagueView = () => {
                     </button>
                   </div>
 
-                  <div className="w-full rounded-[5px] bg-[rgba(13,22,31,1)]  max-h-[55vh] min-h-[20vh] overflow-y-auto">
+                  <div className="w-full rounded-[5px] bg-[rgba(13,22,31,1)]  max-h-[55vh] min-h-[20vh] overflow-y-auto p-[9px]">
                     {loadingSearch ? (
-                      <div className="w-full h-full items-center justify-center">
+                      <div className="w-full h-full flex flex-row items-center justify-center">
                         <LoadingPopup />
                       </div>
                     ) : dataSearch.length > 0 ? (
                       typeSearch === "league" ? (
-                        dataSearch.map((item, index) => (
-                          <div key={index} className="p-[9px] h-[35px] w-full flex flex-row justify-between">
-                            <div className="flex flex-row items-center gap-2">
-                              <img
-                                src="https://static.vecteezy.com/system/resources/thumbnails/016/328/942/small_2x/vietnam-flat-rounded-flag-icon-with-transparent-background-free-png.png"
-                                alt="league"
-                                className="w-[25px] h-[25px] rounded-full"
+                        dataSearch
+                          .filter(
+                            (item, index, self) => index === self.findIndex((t) => t.league_name === item.league_name)
+                          )
+                          .map((item, index) => (
+                            <div key={index} className=" h-[35px] w-full flex flex-row justify-between">
+                              <div className="flex flex-row items-center gap-2">
+                                <img
+                                  src="https://static.vecteezy.com/system/resources/thumbnails/016/328/942/small_2x/vietnam-flat-rounded-flag-icon-with-transparent-background-free-png.png"
+                                  alt="league"
+                                  className="w-[25px] h-[25px] rounded-full"
+                                />
+                                <p className=" font-bold text-[rgba(255,255,255,1)] text-[15px]">{item.league_name}</p>
+                              </div>
+                              <Icon
+                                className="mt-[-4px]"
+                                icon="emojione:star"
+                                width={20}
+                                height={20}
+                                color="rgba(138,163,175,1)"
                               />
-                              <p className=" font-bold text-[rgba(255,255,255,1)] text-[15px]">{item.league_name}</p>
                             </div>
-                            <Icon
-                              className="mt-[-4px]"
-                              icon="emojione:star"
-                              width={20}
-                              height={20}
-                              color="rgba(138,163,175,1)"
-                            />
-                          </div>
-                        ))
+                          ))
                       ) : (
                         dataSearch.map((item, index) => (
                           <div
@@ -667,7 +671,7 @@ const LeagueView = () => {
                         ))
                       )
                     ) : (
-                      <div className=" w-full h-full justify-center items-center">
+                      <div className=" w-full h-full flex flex-row justify-center items-center">
                         <p className="text-[rgba(255,255,255,1)] text-[15px] font-bold">Không có dữ liệu </p>
                       </div>
                     )}
