@@ -87,24 +87,29 @@ const LeagueView = () => {
   const [dateActive, setDateActive] = useState<string | null>(null);
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(new Date());
 
-  console.log("dataMatch:", dataMatch);
-  console.log("leagueActive:", leagueActive);
-  console.log("contentTab:", contentTab);
-
   const handleValueChange = (value: string[]) => {
     setOpenItems(value);
   };
-  const handleNavigate = () => {
-    const matchId = "1594429137";
+  const handleNavigate = ({
+    matchId,
+    match,
+    time,
+    league,
+  }: {
+    matchId: string;
+    match: string;
+    time: string;
+    league: string;
+  }) => {
     const queryParams = {
       request_id: requestId as string,
-      match: "APIA Leichhardt Tigers,West Sydney Wanderers Youth",
-      time: "today",
-      league: "Australia - NPL New South Wales",
+      match,
+      time,
+      league,
       line: "0",
       from_date: "",
       to_date: "",
-      match_id: "1594433333",
+      match_id: matchId,
       tracker_id: "",
     };
     const queryString = new URLSearchParams(queryParams).toString();
@@ -736,7 +741,14 @@ const LeagueView = () => {
                             <div
                               className="p-2 flex flex-row justify-between bg-[rgba(30,42,56,1)] rounded-[10px] mb-[10px]"
                               key={index}
-                              onClick={() => handleNavigate()}
+                              onClick={() =>
+                                handleNavigate({
+                                  matchId: item.id,
+                                  match: item.match,
+                                  time: item.time,
+                                  league: item.league_name,
+                                })
+                              }
                             >
                               <div className="flex flex-col justify-between items-start">
                                 <div className="flex flex-row gap-1 items-center">
@@ -840,7 +852,14 @@ const LeagueView = () => {
                         <div
                           className="p-2 flex flex-row justify-between bg-[rgba(30,42,56,1)] rounded-[10px] mb-[10px]"
                           key={index}
-                          onClick={() => handleNavigate()}
+                          onClick={() =>
+                            handleNavigate({
+                              matchId: item.id,
+                              match: item.match,
+                              time: item.time,
+                              league: item.league_name,
+                            })
+                          }
                         >
                           <div className="flex flex-col justify-between items-start">
                             <div className="flex flex-row gap-1 items-center">
@@ -941,7 +960,14 @@ const LeagueView = () => {
                         <div
                           className="p-2 flex flex-row justify-between bg-[rgba(30,42,56,1)] rounded-[10px] mb-[10px]"
                           key={index}
-                          onClick={() => handleNavigate()}
+                          onClick={() =>
+                            handleNavigate({
+                              matchId: item.id,
+                              match: item.match,
+                              time: item.time,
+                              league: item.league_name,
+                            })
+                          }
                         >
                           <div className="flex flex-col justify-between items-start">
                             <div className="flex flex-row gap-1 items-center">
