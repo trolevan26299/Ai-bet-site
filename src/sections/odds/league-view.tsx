@@ -7,7 +7,6 @@ import TeamLogo from "@/components/cloudinary/teamlogo";
 import { LoadingPopup, SplashScreen } from "@/components/loading-screen";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import { Dialog, DialogClose, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
@@ -26,7 +25,6 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import "./index.css";
-import { useGetRequestId } from "@/store/context/requestId.context";
 
 const generateDateList = () => {
   const dates = [];
@@ -40,29 +38,6 @@ const generateDateList = () => {
 
   return dates;
 };
-
-const frameworks = [
-  {
-    value: "next.js",
-    label: "Next.js",
-  },
-  {
-    value: "sveltekit",
-    label: "SvelteKit",
-  },
-  {
-    value: "nuxt.js",
-    label: "Nuxt.js",
-  },
-  {
-    value: "remix",
-    label: "Remix",
-  },
-  {
-    value: "astro",
-    label: "Astro",
-  },
-];
 
 const LeagueView = () => {
   const router = useRouter();
@@ -89,6 +64,8 @@ const LeagueView = () => {
   const [typeSearch, setTypeSearch] = useState("league");
   const [dataSearch, setDataSearch] = useState<IMatchData[]>([]);
   const [keywordSearch, setKeywordSearch] = useState<string>("");
+
+  console.log("dataSearch:", dataSearch);
 
   const handleValueChange = (value: string[]) => {
     setOpenItems(value);
@@ -127,7 +104,7 @@ const LeagueView = () => {
         league_key: typeSearch === "league" ? keywordSearch : undefined,
         team_key: typeSearch === "team" ? keywordSearch : undefined,
       });
-
+      console.log("dataResult Search:", dataResult);
       if (dataResult.data.ok) {
         setDataSearch(dataResult?.data?.data);
       }
