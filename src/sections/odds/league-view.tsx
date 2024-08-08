@@ -744,7 +744,7 @@ const LeagueView = () => {
                               onClick={() =>
                                 handleNavigate({
                                   matchId: item.id,
-                                  match: item.match,
+                                  match: item.team,
                                   time: item.time,
                                   league: item.league_name,
                                 })
@@ -855,7 +855,7 @@ const LeagueView = () => {
                           onClick={() =>
                             handleNavigate({
                               matchId: item.id,
-                              match: item.match,
+                              match: item.team,
                               time: item.time,
                               league: item.league_name,
                             })
@@ -963,7 +963,7 @@ const LeagueView = () => {
                           onClick={() =>
                             handleNavigate({
                               matchId: item.id,
-                              match: item.match,
+                              match: item.team,
                               time: item.time,
                               league: item.league_name,
                             })
