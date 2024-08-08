@@ -24,7 +24,6 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 import LoadingPopup from "../../components/loading-screen/loading-popup";
 import "./index.css";
-import { useGetRequestId } from "@/store/context/requestId.context";
 
 export default function MatchViewDetail() {
   const router = useRouter();
@@ -46,7 +45,6 @@ export default function MatchViewDetail() {
   const [oddsType, setOddsType] = useState<string>();
   const [loadingLeaguePopup, setLoadingLeaguePopup] = useState(false);
   const [listLeague, setListLeague] = useState<IMatchData[]>([]);
-  const { updateRequestId } = useGetRequestId();
 
   const { update: updateLocalStorage } = useLocalStorage("request_id", ""); // update request_id in local storage
 
@@ -434,7 +432,6 @@ export default function MatchViewDetail() {
   useEffect(() => {
     if (requestId) {
       updateLocalStorage("request_id", requestId);
-      updateRequestId(requestId);
     }
   }, [requestId]);
 
