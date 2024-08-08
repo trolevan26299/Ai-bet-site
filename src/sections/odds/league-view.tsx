@@ -659,7 +659,9 @@ const LeagueView = () => {
                         ))
                       )
                     ) : (
-                      <div className="text-[rgba(255,255,255,1)] text-[15px] font-bold">Không có dữ liệu </div>
+                      <div className="text-[rgba(255,255,255,1)] text-[15px] font-bold w-full h-full justify-center items-center">
+                        Không có dữ liệu{" "}
+                      </div>
                     )}
                   </div>
                 </Popover.Content>
