@@ -482,7 +482,15 @@ const LeagueView = () => {
                   </div>
                 </Popover.Content>
               </Popover.Root>
-              <Popover.Root>
+              <Popover.Root
+                onOpenChange={(open) => {
+                  if (!open) {
+                    setDataSearch([]);
+                    setTypeSearch("league");
+                    setKeywordSearch("");
+                  }
+                }}
+              >
                 <Popover.Trigger>
                   <Icon
                     icon="ic:baseline-search"
