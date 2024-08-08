@@ -690,7 +690,9 @@ const LeagueView = () => {
                       )
                     ) : (
                       <div className=" w-full  flex flex-row justify-center items-center h-[20vh]">
-                        <p className="text-[rgba(255,255,255,1)] text-[15px] font-bold">Không có dữ liệu </p>
+                        <p className="text-[rgba(255,255,255,1)] text-[15px] font-bold">
+                          {typeSearch === "league" ? "Không tìm thấy giải đấu" : "Không tìm thấy trận đấu"}{" "}
+                        </p>
                       </div>
                     )}
                   </div>
