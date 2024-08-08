@@ -64,8 +64,7 @@ const LeagueView = () => {
   const [typeSearch, setTypeSearch] = useState("league");
   const [dataSearch, setDataSearch] = useState<IMatchData[]>([]);
   const [keywordSearch, setKeywordSearch] = useState<string>("");
-
-  console.log("dataSearch:", dataSearch);
+  const [loadingSearch, setLoadingSearch] = useState(false);
 
   const handleValueChange = (value: string[]) => {
     setOpenItems(value);
@@ -98,6 +97,7 @@ const LeagueView = () => {
 
   const handleSubmitSearch = async () => {
     try {
+      setLoadingSearch(true);
       const dataResult = await axios.post("/api/league/match-in-league", {
         request_id: localRequestId.request_id,
         is_get_bets: false,
@@ -107,8 +107,10 @@ const LeagueView = () => {
       console.log("dataResult Search:", dataResult);
       if (dataResult.data.ok) {
         setDataSearch(dataResult?.data?.data);
+        setLoadingSearch(false);
       }
     } catch (error) {
+      setLoadingSearch(false);
       console.log("ERROR:", error);
     }
   };
@@ -530,7 +532,10 @@ const LeagueView = () => {
                           ? "text-[rgba(46,46,46,1)] bg-[rgba(70,230,164,1)]"
                           : "text-[rgba(255,255,255,1)] bg-[rgba(41,53,67,1)]"
                       }  font-bold rounded-[20px] p-1`}
-                      onClick={() => setTypeSearch("league")}
+                      onClick={() => {
+                        setDataSearch([]);
+                        setTypeSearch("league");
+                      }}
                     >
                       Giải đấu
                     </button>
@@ -540,14 +545,19 @@ const LeagueView = () => {
                           ? "text-[rgba(46,46,46,1)] bg-[rgba(70,230,164,1)]"
                           : "text-[rgba(255,255,255,1)] bg-[rgba(41,53,67,1)]"
                       }  `}
-                      onClick={() => setTypeSearch("team")}
+                      onClick={() => {
+                        setDataSearch([]);
+                        setTypeSearch("team");
+                      }}
                     >
                       Trận đấu
                     </button>
                   </div>
 
                   <div className="w-full rounded-[5px] bg-[rgba(13,22,31,1)]  max-h-[70vh] min-h-[20vh] overflow-y-auto">
-                    {dataSearch.length > 0 ? (
+                    {loadingSearch ? (
+                      <LoadingPopup />
+                    ) : dataSearch.length > 0 ? (
                       typeSearch === "league" ? (
                         dataSearch.map((item, index) => (
                           <div key={index} className="p-[9px] h-[35px] w-full flex flex-row justify-between">
