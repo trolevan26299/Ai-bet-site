@@ -497,7 +497,7 @@ const LeagueView = () => {
                   className="py-2 w-[95%] bg-[rgba(30,42,56,1)] mt-[14px] max-h-[80vh] rounded-[10px] left-[10px]"
                   align="center"
                 >
-                  <div className="w-full flex items-center justify-between ">
+                  <div className="w-full flex items-center justify-between pb-[10px]">
                     <div className="flex-1 text-center">
                       <p className="text-white text-[16px] font-bold">Tìm kiếm</p>
                     </div>
@@ -519,7 +519,7 @@ const LeagueView = () => {
                       placeholder="Tìm kiếm"
                       className="flex-grow bg-transparent text-[rgba(255,255,255,1)] px-2 py-1 border-none"
                     />
-                    <button className="text-white rounded-[5px] bg-[rgba(70,230,164,1)] text-[12px] font-bold px-2 h-[23px]">
+                    <button className="text-white rounded-[5px] bg-[rgba(70,230,164,1)] text-[12px] font-bold px-2 h-[25px] w-[100px]">
                       Tìm kiếm
                     </button>
                   </div>
