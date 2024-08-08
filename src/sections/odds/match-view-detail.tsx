@@ -24,6 +24,7 @@ import { useCallback, useEffect, useState } from "react";
 import LoadingPopup from "../../components/loading-screen/loading-popup";
 import "./index.css";
 import { useGetRequestId } from "@/store/context/requestId.context";
+import { useLocalStorage } from "@/hooks/use-local-storage";
 
 export default function MatchViewDetail() {
   const router = useRouter();
@@ -46,6 +47,8 @@ export default function MatchViewDetail() {
   const [oddsType, setOddsType] = useState<string>();
   const [loadingLeaguePopup, setLoadingLeaguePopup] = useState(false);
   const [listLeague, setListLeague] = useState<IMatchData[]>([]);
+
+  const { update: updateLocalStorage } = useLocalStorage("request_id", ""); // update request_id in local storage
 
   const telegram = useTelegram();
 
@@ -427,9 +430,10 @@ export default function MatchViewDetail() {
     handleGetSetting();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
   useEffect(() => {
     if (requestId) {
-      updateRequestId(requestId);
+      updateLocalStorage("request_id", requestId);
     }
   }, [requestId]);
 
