@@ -9,6 +9,7 @@ import { SplashScreen } from "@/components/loading-screen";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { useLocalStorage } from "@/hooks/use-local-storage";
 import MainLayout from "@/layouts/main/layout";
 import { useTelegram } from "@/store/provider/telegram.provider";
 import { IMatchData, IOddsDetail, OddsStatusType } from "@/types/odds.types";
@@ -23,12 +24,9 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 import LoadingPopup from "../../components/loading-screen/loading-popup";
 import "./index.css";
-import { useGetRequestId } from "@/store/context/requestId.context";
-import { useLocalStorage } from "@/hooks/use-local-storage";
 
 export default function MatchViewDetail() {
   const router = useRouter();
-  const { updateRequestId } = useGetRequestId();
   const searchParams = useSearchParams();
   const [odds, setOdds] = useState<IOddsDetail[]>([]);
   const [latestOdds, setLatestOdds] = useState<IOddsDetail[]>([]);
