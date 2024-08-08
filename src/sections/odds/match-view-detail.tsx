@@ -85,6 +85,32 @@ export default function MatchViewDetail() {
     return /Mobi|Android|iPhone|iPad|iPod/.test(navigator.userAgent);
   };
 
+  const handleNavigate = ({
+    matchId,
+    match,
+    time,
+    league,
+  }: {
+    matchId: string;
+    match: string;
+    time: string;
+    league: string;
+  }) => {
+    const queryParams = {
+      request_id: requestId as string,
+      match,
+      time,
+      league,
+      line: "0",
+      from_date: "",
+      to_date: "",
+      match_id: matchId,
+      tracker_id: "",
+    };
+    const queryString = new URLSearchParams(queryParams).toString();
+    router.push(`/match/${matchId}?${queryString}`);
+  };
+
   // Hàm thêm và xóa kèo yêu thích
   const handleAddRemoveFavorite = async () => {
     try {
@@ -445,6 +471,14 @@ export default function MatchViewDetail() {
                     <div
                       className="p-2 flex flex-row justify-between bg-[rgba(30,42,56,1)] rounded-[10px] mb-[10px]"
                       key={item.id}
+                      onClick={() =>
+                        handleNavigate({
+                          matchId: item.id.toString(),
+                          match: item.team.toString(),
+                          time: item.time,
+                          league: item.league_name,
+                        })
+                      }
                     >
                       <div className="flex flex-col justify-between items-start">
                         <div className="flex flex-row gap-1 items-center">
