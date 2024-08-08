@@ -546,11 +546,11 @@ const LeagueView = () => {
                     </button>
                   </div>
 
-                  <div className="w-full rounded-[5px] bg-[rgba(13,22,31,1)] flex flex-row items-center justify-center max-h-[70vh] min-h-[20vh] overflow-y-auto">
+                  <div className="w-full rounded-[5px] bg-[rgba(13,22,31,1)]  max-h-[70vh] min-h-[20vh] overflow-y-auto">
                     {dataSearch.length > 0 ? (
                       typeSearch === "league" ? (
                         dataSearch.map((item, index) => (
-                          <div key={index} className="p-[9px] h-[35px] w-full">
+                          <div key={index} className="p-[9px] h-[35px] w-full flex flex-row justify-between">
                             <div className="flex flex-row items-center gap-2">
                               <img
                                 src="https://static.vecteezy.com/system/resources/thumbnails/016/328/942/small_2x/vietnam-flat-rounded-flag-icon-with-transparent-background-free-png.png"
