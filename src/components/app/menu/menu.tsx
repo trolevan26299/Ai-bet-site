@@ -1,7 +1,6 @@
 import { paths } from "@/routes/paths";
 import { Icon } from "@iconify/react";
-import { useParams, useRouter, usePathname } from "next/navigation";
-import React from "react";
+import { usePathname, useRouter } from "next/navigation";
 
 const Menu = () => {
   const router = useRouter();
@@ -15,18 +14,26 @@ const Menu = () => {
     { id: "5", name: "Cài đặt", url: paths.settings, icon: "uil:setting" },
   ];
 
+  const handleNavigation = (url: string) => {
+    if (pathName === url) {
+      window.location.href = url;
+    } else {
+      router.push(url);
+    }
+  };
+
   return (
     <div
-      className={`z-10 bottom-0  fixed m-auto rounded-sm flex items-center flex-row justify-around flex-wrap w-full  px-4 pt-2 pb-3 rounded-tr-[20px] rounded-tl-[20px]`}
+      className={`z-10 bottom-0 fixed m-auto rounded-sm flex items-center flex-row justify-around flex-wrap w-full px-4 pt-2 pb-3 rounded-tr-[20px] rounded-tl-[20px]`}
       style={{ backgroundColor: "rgba(13, 22, 31, 1)" }}
     >
       {menuNavigation.map((item) => {
         const isActive = pathName === item.url;
         return (
           <div
-            className="group flex flex-col justify-center items-center gap-[4.5px] hover:cursor-pointer  text-[rgba(159,162,167,1)]"
+            className="group flex flex-col justify-center items-center gap-[4.5px] hover:cursor-pointer text-[rgba(159,162,167,1)]"
             key={item.id}
-            onClick={() => router.push(item.url)}
+            onClick={() => handleNavigation(item.url)}
           >
             <Icon
               icon={item.icon}

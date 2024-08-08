@@ -86,13 +86,6 @@ const LeagueView = () => {
   const [dataMatch, setDataMatch] = useState<IMatchData[]>([]);
   const [dateActive, setDateActive] = useState<string | null>(null);
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(new Date());
-  const [isRequestIdLoaded, setIsRequestIdLoaded] = useState(false);
-
-  useEffect(() => {
-    if (localRequestId.request_id) {
-      setIsRequestIdLoaded(true);
-    }
-  }, [localRequestId]);
 
   const handleValueChange = (value: string[]) => {
     setOpenItems(value);
