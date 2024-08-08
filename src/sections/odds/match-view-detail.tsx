@@ -630,14 +630,16 @@ export default function MatchViewDetail() {
                     className="flex flex-row justify-around"
                   >
                     {dataSettingNumberLine.map((item) => (
-                      <div className="flex items-center space-x-2 flex-row py-3 " key={item.label}>
-                        <RadioGroupItem
-                          value={item.value}
-                          id={item.value}
-                          className="text-[rgba(255,255,255,1)] border-[rgba(255,255,255,1)]"
-                        />
-                        <Label htmlFor={item.value}>{item.label}</Label>
-                      </div>
+                      <Popover.Close key={item.label}>
+                        <div className="flex items-center space-x-2 flex-row py-3 ">
+                          <RadioGroupItem
+                            value={item.value}
+                            id={item.value}
+                            className="text-[rgba(255,255,255,1)] border-[rgba(255,255,255,1)]"
+                          />
+                          <Label htmlFor={item.value}>{item.label}</Label>
+                        </div>
+                      </Popover.Close>
                     ))}
                   </RadioGroup>
                 </TabsContent>
@@ -651,14 +653,16 @@ export default function MatchViewDetail() {
                     className="flex flex-row justify-around"
                   >
                     {dataSettingTypeOdds.map((item) => (
-                      <div className="flex items-center space-x-2 flex-row py-3" key={item.label}>
-                        <RadioGroupItem
-                          value={item.value}
-                          id={item.value}
-                          className="text-[rgba(255,255,255,1)] border-[rgba(255,255,255,1)]"
-                        />
-                        <Label htmlFor={item.value}>{item.label}</Label>
-                      </div>
+                      <Popover.Close key={item.label}>
+                        <div className="flex items-center space-x-2 flex-row py-3">
+                          <RadioGroupItem
+                            value={item.value}
+                            id={item.value}
+                            className="text-[rgba(255,255,255,1)] border-[rgba(255,255,255,1)]"
+                          />
+                          <Label htmlFor={item.value}>{item.label}</Label>
+                        </div>
+                      </Popover.Close>
                     ))}
                   </RadioGroup>
                 </TabsContent>
