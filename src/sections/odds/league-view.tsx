@@ -69,7 +69,7 @@ const LeagueView = () => {
   const league1ListRef = useRef<HTMLDivElement>(null);
   const league2ListRef = useRef<HTMLDivElement>(null);
   const { state: localRequestId } = useLocalStorage("request_id", { request_id: "" });
-  console.log("localRequestId==================>:", localRequestId);
+  const [isReady, setIsReady] = useState(false);
   const dateSearch = generateDateList();
   const allItems = ["Trực tiếp", "Sắp tới"];
   const [openItems, setOpenItems] = useState(allItems);
@@ -86,6 +86,12 @@ const LeagueView = () => {
   const [dataMatch, setDataMatch] = useState<IMatchData[]>([]);
   const [dateActive, setDateActive] = useState<string | null>(null);
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(new Date());
+
+  useEffect(() => {
+    if (localRequestId.request_id) {
+      setIsReady(true);
+    }
+  }, [localRequestId]);
 
   const handleValueChange = (value: string[]) => {
     setOpenItems(value);
@@ -335,7 +341,7 @@ const LeagueView = () => {
       const intervalId = setInterval(fetchMatchByTime, 20000); // gọi sau mỗi 20s
       return () => clearInterval(intervalId);
     }
-  }, [contentTab, leagueActive, dateActive]);
+  }, [contentTab, leagueActive, dateActive, isReady]);
 
   useEffect(() => {
     const refs = [tabsListRef, league1ListRef, league2ListRef];
