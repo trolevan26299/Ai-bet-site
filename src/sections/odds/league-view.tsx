@@ -69,6 +69,7 @@ const LeagueView = () => {
   const league1ListRef = useRef<HTMLDivElement>(null);
   const league2ListRef = useRef<HTMLDivElement>(null);
   const { state: localRequestId } = useLocalStorage("request_id", { request_id: "" });
+  console.log("localRequestId==================>:", localRequestId);
   const dateSearch = generateDateList();
   const allItems = ["Trực tiếp", "Sắp tới"];
   const [openItems, setOpenItems] = useState(allItems);
