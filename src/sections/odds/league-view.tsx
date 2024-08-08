@@ -494,9 +494,21 @@ const LeagueView = () => {
                   />
                 </Popover.Trigger>
                 <Popover.Content
-                  className="py-2 w-[95%] bg-[rgba(40,55,74,1)] mt-[14px] max-h-[80vh] rounded-sm left-[10px]"
+                  className="py-2 w-[95%] bg-[rgba(30,42,56,1)] mt-[14px] max-h-[80vh] rounded-[10px] left-[10px]"
                   align="center"
                 >
+                  <div className="w-full flex items-center justify-between px-2">
+                    <div className="flex-1 text-center">
+                      <p className="text-white">Tìm kiếm</p>
+                    </div>
+                    <Icon
+                      icon="akar-icons:close"
+                      width={20}
+                      height={20}
+                      className="hover:cursor-pointer"
+                      onClick={() => {}}
+                    />
+                  </div>
                   <Input
                     type="search"
                     placeholder="Tìm kiếm"
