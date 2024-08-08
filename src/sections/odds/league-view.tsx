@@ -550,7 +550,7 @@ const LeagueView = () => {
                     {dataSearch.length > 0 ? (
                       typeSearch === "league" ? (
                         dataSearch.map((item, index) => (
-                          <div key={index} className="p-[9px] h-[35px] w-full flex flex-row justify-between">
+                          <div key={index} className="p-[9px] h-[35px] w-full">
                             <div className="flex flex-row items-center gap-2">
                               <img
                                 src="https://static.vecteezy.com/system/resources/thumbnails/016/328/942/small_2x/vietnam-flat-rounded-flag-icon-with-transparent-background-free-png.png"
