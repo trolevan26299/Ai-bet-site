@@ -574,28 +574,38 @@ const LeagueView = () => {
                             (item, index, self) => index === self.findIndex((t) => t.league_name === item.league_name)
                           )
                           .map((item, index) => (
-                            <div key={index} className=" h-[35px] w-full flex flex-row justify-between">
-                              <div className="flex flex-row items-center gap-2">
-                                <img
-                                  src="https://static.vecteezy.com/system/resources/thumbnails/016/328/942/small_2x/vietnam-flat-rounded-flag-icon-with-transparent-background-free-png.png"
-                                  alt="league"
-                                  className="w-[25px] h-[25px] rounded-full"
+                            <Popover.Close key={index}>
+                              <div
+                                className=" h-[35px] w-full flex flex-row justify-between hover:cursor-pointer"
+                                onClick={() => {
+                                  setLeagueActive(item.league_name);
+                                  setContentTab("league");
+                                }}
+                              >
+                                <div className="flex flex-row items-center gap-2">
+                                  <img
+                                    src="https://static.vecteezy.com/system/resources/thumbnails/016/328/942/small_2x/vietnam-flat-rounded-flag-icon-with-transparent-background-free-png.png"
+                                    alt="league"
+                                    className="w-[25px] h-[25px] rounded-full"
+                                  />
+                                  <p className=" font-bold text-[rgba(255,255,255,1)] text-[15px]">
+                                    {item.league_name}
+                                  </p>
+                                </div>
+                                <Icon
+                                  className="mt-[6px]"
+                                  icon="emojione:star"
+                                  width={20}
+                                  height={20}
+                                  color="rgba(138,163,175,1)"
                                 />
-                                <p className=" font-bold text-[rgba(255,255,255,1)] text-[15px]">{item.league_name}</p>
                               </div>
-                              <Icon
-                                className="mt-[6px]"
-                                icon="emojione:star"
-                                width={20}
-                                height={20}
-                                color="rgba(138,163,175,1)"
-                              />
-                            </div>
+                            </Popover.Close>
                           ))
                       ) : (
                         dataSearch.map((item, index) => (
                           <div
-                            className="p-2 flex flex-row justify-between bg-[rgba(30,42,56,1)] rounded-[10px] mb-[10px]"
+                            className="p-2 flex flex-row justify-between bg-[rgba(30,42,56,1)] rounded-[10px] mb-[10px] cursor-pointer"
                             key={index}
                             onClick={() =>
                               handleNavigate({
