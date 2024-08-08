@@ -554,9 +554,11 @@ const LeagueView = () => {
                     </button>
                   </div>
 
-                  <div className="w-full rounded-[5px] bg-[rgba(13,22,31,1)]  max-h-[70vh] min-h-[20vh] overflow-y-auto">
+                  <div className="w-full rounded-[5px] bg-[rgba(13,22,31,1)]  max-h-[55vh] min-h-[20vh] overflow-y-auto">
                     {loadingSearch ? (
-                      <LoadingPopup />
+                      <div className="w-full h-full items-center justify-center">
+                        <LoadingPopup />
+                      </div>
                     ) : dataSearch.length > 0 ? (
                       typeSearch === "league" ? (
                         dataSearch.map((item, index) => (
@@ -569,7 +571,13 @@ const LeagueView = () => {
                               />
                               <p className=" font-bold text-[rgba(255,255,255,1)] text-[15px]">{item.league_name}</p>
                             </div>
-                            <Icon icon="emojione:star" width={20} height={20} color="rgba(138,163,175,1)" />
+                            <Icon
+                              className="mt-[-4px]"
+                              icon="emojione:star"
+                              width={20}
+                              height={20}
+                              color="rgba(138,163,175,1)"
+                            />
                           </div>
                         ))
                       ) : (
@@ -659,8 +667,8 @@ const LeagueView = () => {
                         ))
                       )
                     ) : (
-                      <div className="text-[rgba(255,255,255,1)] text-[15px] font-bold w-full h-full justify-center items-center">
-                        Không có dữ liệu{" "}
+                      <div className=" w-full h-full justify-center items-center">
+                        <p className="text-[rgba(255,255,255,1)] text-[15px] font-bold">Không có dữ liệu </p>
                       </div>
                     )}
                   </div>
