@@ -88,6 +88,7 @@ const LeagueView = () => {
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(new Date());
   const [typeSearch, setTypeSearch] = useState("league");
   const [dataSearch, setDataSearch] = useState<any[]>([]);
+  const [keywordSearch, setKeywordSearch] = useState<string>("");
 
   const handleValueChange = (value: string[]) => {
     setOpenItems(value);
@@ -118,6 +119,20 @@ const LeagueView = () => {
     router.push(`/match/${matchId}?${queryString}`);
   };
 
+  const handleSubmitSearch = async () => {
+    try {
+      const dataResult = await axios.post("/api/league/match-in-league", {
+        request_id: localRequestId.request_id,
+        is_get_bets: false,
+        league_key: typeSearch === "league" ? keywordSearch : undefined,
+        team_key: typeSearch === "team" ? keywordSearch : undefined,
+      });
+
+      console.log("dataResult search:", dataResult);
+    } catch (error) {
+      console.log("ERROR:", error);
+    }
+  };
   // Hàm thêm và xóa kèo yêu thích
   const handleAddRemoveFavorite = async ({
     leagueId,
@@ -520,8 +535,12 @@ const LeagueView = () => {
                       type="search"
                       placeholder="Tìm kiếm"
                       className="flex-grow bg-transparent text-[rgba(255,255,255,1)] px-2 py-1 border-none"
+                      onChange={(e) => setKeywordSearch(e.target.value)}
                     />
-                    <button className="text-white rounded-[5px] bg-[rgba(70,230,164,1)] text-[12px] font-bold px-2 h-[25px] w-[100px]">
+                    <button
+                      className="text-white rounded-[5px] bg-[rgba(70,230,164,1)] text-[12px] font-bold px-2 h-[25px] w-[100px]"
+                      onClick={() => handleSubmitSearch()}
+                    >
                       Tìm kiếm
                     </button>
                   </div>
@@ -531,7 +550,7 @@ const LeagueView = () => {
                         typeSearch === "league"
                           ? "text-[rgba(46,46,46,1)] bg-[rgba(70,230,164,1)]"
                           : "text-[rgba(255,255,255,1)] bg-[rgba(41,53,67,1)]"
-                      }  font-bold rounded-[20px] p-1 hover:text-[rgba(46,46,46,1)] hover:bg-[rgba(70,230,164,1)] `}
+                      }  font-bold rounded-[20px] p-1`}
                       onClick={() => setTypeSearch("league")}
                     >
                       Giải đấu
@@ -541,7 +560,7 @@ const LeagueView = () => {
                         typeSearch === "team"
                           ? "text-[rgba(46,46,46,1)] bg-[rgba(70,230,164,1)]"
                           : "text-[rgba(255,255,255,1)] bg-[rgba(41,53,67,1)]"
-                      } hover:text-[rgba(46,46,46,1)] hover:bg-[rgba(70,230,164,1)] `}
+                      }  `}
                       onClick={() => setTypeSearch("team")}
                     >
                       Trận đấu
