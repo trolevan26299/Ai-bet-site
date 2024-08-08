@@ -502,9 +502,10 @@ const LeagueView = () => {
                       <p className="text-white">Tìm kiếm</p>
                     </div>
                     <Icon
-                      icon="akar-icons:close"
+                      icon="carbon:close-filled"
                       width={20}
                       height={20}
+                      color="rgba(70,230,164,1)"
                       className="hover:cursor-pointer"
                       onClick={() => {}}
                     />
