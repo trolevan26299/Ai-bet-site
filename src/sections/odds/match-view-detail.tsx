@@ -24,6 +24,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 import LoadingPopup from "../../components/loading-screen/loading-popup";
 import "./index.css";
+import { dataSettingNumberLine, dataSettingTypeOdds } from "@/app/_mock/setting";
 
 export default function MatchViewDetail() {
   const router = useRouter();
@@ -628,38 +629,16 @@ export default function MatchViewDetail() {
                     }}
                     className="flex flex-row justify-around"
                   >
-                    <div className="flex items-center space-x-2 flex-row py-3 ">
-                      <RadioGroupItem
-                        value="1"
-                        id="1"
-                        className="text-[rgba(255,255,255,1)] border-[rgba(255,255,255,1)]"
-                      />
-                      <Label htmlFor="1">1 kèo</Label>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <RadioGroupItem
-                        value="3"
-                        id="3"
-                        className="text-[rgba(255,255,255,1)] border-[rgba(255,255,255,1)]"
-                      />
-                      <Label htmlFor="3">3 kèo</Label>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <RadioGroupItem
-                        value="5"
-                        id="5"
-                        className="text-[rgba(255,255,255,1)] border-[rgba(255,255,255,1)]"
-                      />
-                      <Label htmlFor="5">5 kèo</Label>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <RadioGroupItem
-                        value="0"
-                        id="0"
-                        className="text-[rgba(255,255,255,1)] border-[rgba(255,255,255,1)]"
-                      />
-                      <Label htmlFor="0">Tất cả</Label>
-                    </div>
+                    {dataSettingNumberLine.map((item) => (
+                      <div className="flex items-center space-x-2 flex-row py-3 " key={item.label}>
+                        <RadioGroupItem
+                          value={item.value}
+                          id={item.value}
+                          className="text-[rgba(255,255,255,1)] border-[rgba(255,255,255,1)]"
+                        />
+                        <Label htmlFor={item.value}>{item.label}</Label>
+                      </div>
+                    ))}
                   </RadioGroup>
                 </TabsContent>
                 <TabsContent value="odds_type">
@@ -671,30 +650,16 @@ export default function MatchViewDetail() {
                     }}
                     className="flex flex-row justify-around"
                   >
-                    <div className="flex items-center space-x-2 flex-row py-3 ">
-                      <RadioGroupItem
-                        value="DECIMAL"
-                        id="DECIMAL"
-                        className="text-[rgba(255,255,255,1)] border-[rgba(255,255,255,1)]"
-                      />
-                      <Label htmlFor="DECIMAL">Decimal</Label>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <RadioGroupItem
-                        value="HONGKONG"
-                        id="HONGKONG"
-                        className="text-[rgba(255,255,255,1)] border-[rgba(255,255,255,1)]"
-                      />
-                      <Label htmlFor="HONGKONG">HongKong</Label>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <RadioGroupItem
-                        value="MALAY"
-                        id="MALAY"
-                        className="text-[rgba(255,255,255,1)] border-[rgba(255,255,255,1)]"
-                      />
-                      <Label htmlFor="MALAY">Malaysia</Label>
-                    </div>
+                    {dataSettingTypeOdds.map((item) => (
+                      <div className="flex items-center space-x-2 flex-row py-3" key={item.label}>
+                        <RadioGroupItem
+                          value={item.value}
+                          id={item.value}
+                          className="text-[rgba(255,255,255,1)] border-[rgba(255,255,255,1)]"
+                        />
+                        <Label htmlFor={item.value}>{item.label}</Label>
+                      </div>
+                    ))}
                   </RadioGroup>
                 </TabsContent>
               </Tabs>
