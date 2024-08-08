@@ -26,6 +26,7 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import "./index.css";
+import { useGetRequestId } from "@/store/context/requestId.context";
 
 const generateDateList = () => {
   const dates = [];
@@ -65,11 +66,11 @@ const frameworks = [
 
 const LeagueView = () => {
   const router = useRouter();
+  const { requestId } = useGetRequestId();
   const tabsListRef = useRef<HTMLDivElement>(null);
   const league1ListRef = useRef<HTMLDivElement>(null);
   const league2ListRef = useRef<HTMLDivElement>(null);
   const { state: localRequestId } = useLocalStorage("request_id", { request_id: "" });
-  const [isReady, setIsReady] = useState(false);
   const dateSearch = generateDateList();
   const allItems = ["Trực tiếp", "Sắp tới"];
   const [openItems, setOpenItems] = useState(allItems);
@@ -87,12 +88,6 @@ const LeagueView = () => {
   const [dateActive, setDateActive] = useState<string | null>(null);
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(new Date());
 
-  useEffect(() => {
-    if (localRequestId.request_id) {
-      setIsReady(true);
-    }
-  }, [localRequestId]);
-
   const handleValueChange = (value: string[]) => {
     setOpenItems(value);
   };
@@ -108,7 +103,7 @@ const LeagueView = () => {
     league: string;
   }) => {
     const queryParams = {
-      request_id: localRequestId.request_id as string,
+      request_id: requestId || (localRequestId.request_id as string),
       match,
       time,
       league,
@@ -137,7 +132,7 @@ const LeagueView = () => {
       const url = "/api/favorite";
       const method = nowFavorite ? axios.put : axios.post;
       const response = await method(url, {
-        request_id: localRequestId,
+        request_id: requestId || localRequestId,
         league_id: leagueId,
       });
       if (container && response.data.ok) {
@@ -203,7 +198,7 @@ const LeagueView = () => {
       if (open) {
         setLoadingPopupAll(true);
         const response = await axios.post("/api/league/match-in-league", {
-          request_id: localRequestId,
+          request_id: requestId || localRequestId,
           is_get_bets: false,
         });
         if (response.data.ok) {
@@ -225,7 +220,7 @@ const LeagueView = () => {
     try {
       if (type === "first") setLoadingContent(true);
       const response = await axios.post("/api/league/math-group", {
-        request_id: localRequestId,
+        request_id: requestId || localRequestId,
         select: ["live"],
       });
       if (response.data.ok) {
@@ -244,7 +239,7 @@ const LeagueView = () => {
       if (type === "first") setLoadingContent(true);
       const response = await axios.post("/api/league/match-in-league", {
         league: leagueActive,
-        request_id: localRequestId,
+        request_id: requestId || localRequestId,
         is_get_bets: false,
       });
       if (response.data.ok) {
@@ -262,7 +257,7 @@ const LeagueView = () => {
       if (type === "first") setLoadingContent(true);
       const response = await axios.post("/api/league/match-in-league", {
         date: convertDateString(dateActive as string),
-        request_id: localRequestId,
+        request_id: requestId || localRequestId,
         is_get_bets: false,
       });
       if (response.data.ok) {
@@ -287,7 +282,7 @@ const LeagueView = () => {
   const fetchMatchesGroup = async () => {
     try {
       const response = await axios.post("/api/league/math-group", {
-        request_id: localRequestId,
+        request_id: requestId || localRequestId,
         select: ["live", "soon"],
       });
       if (response.data.ok) {
@@ -302,7 +297,7 @@ const LeagueView = () => {
   // Fetch những giải trending nhất
   const fetchTrendingLeagues = async () => {
     try {
-      const response = await axios.post(`/api/league/trending?id=${localRequestId.request_id}`);
+      const response = await axios.post(`/api/league/trending?id=${requestId || localRequestId.request_id}`);
       if (response.data.ok) {
         setLeagueTrending(response.data.data);
       }
@@ -341,7 +336,7 @@ const LeagueView = () => {
       const intervalId = setInterval(fetchMatchByTime, 20000); // gọi sau mỗi 20s
       return () => clearInterval(intervalId);
     }
-  }, [contentTab, leagueActive, dateActive, isReady]);
+  }, [contentTab, leagueActive, dateActive]);
 
   useEffect(() => {
     const refs = [tabsListRef, league1ListRef, league2ListRef];
