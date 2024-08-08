@@ -556,7 +556,7 @@ const LeagueView = () => {
 
                   <div className="w-full rounded-[5px] bg-[rgba(13,22,31,1)]  max-h-[55vh] min-h-[20vh] overflow-y-auto p-[9px]">
                     {loadingSearch ? (
-                      <div className="w-full h-full flex flex-row items-center justify-center">
+                      <div className="w-full h-[20vh] flex flex-row items-center justify-center">
                         <LoadingPopup />
                       </div>
                     ) : dataSearch.length > 0 ? (
@@ -671,7 +671,7 @@ const LeagueView = () => {
                         ))
                       )
                     ) : (
-                      <div className=" w-full h-full flex flex-row justify-center items-center">
+                      <div className=" w-full  flex flex-row justify-center items-center h-[20vh]">
                         <p className="text-[rgba(255,255,255,1)] text-[15px] font-bold">Không có dữ liệu </p>
                       </div>
                     )}
