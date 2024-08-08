@@ -576,7 +576,7 @@ const LeagueView = () => {
                                 <p className=" font-bold text-[rgba(255,255,255,1)] text-[15px]">{item.league_name}</p>
                               </div>
                               <Icon
-                                className="mt-[-4px]"
+                                className="mt-[6px]"
                                 icon="emojione:star"
                                 width={20}
                                 height={20}
