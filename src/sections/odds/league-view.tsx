@@ -499,7 +499,7 @@ const LeagueView = () => {
                 >
                   <div className="w-full flex items-center justify-between pb-[10px]">
                     <div className="flex-1 text-center">
-                      <p className="text-white text-[16px] font-bold">Tìm kiếm</p>
+                      <p className="text-white text-[16px] font-bold pl-[10px]">Tìm kiếm</p>
                     </div>
                     <Popover.Close>
                       <Icon
