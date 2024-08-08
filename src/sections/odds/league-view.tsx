@@ -527,27 +527,28 @@ const LeagueView = () => {
                   </div>
                   <div className="flex flex-row justify-start items-center  gap-3 py-3 ">
                     <button
-                      className={`text-[14px] w-[20%] h-8 ${
+                      className={`text-[14px] w-[25%] h-8 ${
                         typeSearch === "league"
                           ? "text-[rgba(46,46,46,1)] bg-[rgba(70,230,164,1)]"
                           : "text-[rgba(255,255,255,1)] bg-[rgba(41,53,67,1)]"
-                      }  font-bold rounded-[20px] `}
+                      }  font-bold rounded-[20px] p-1 hover:text-[rgba(46,46,46,1)] hover:bg-[rgba(70,230,164,1)] `}
                       onClick={() => setTypeSearch("league")}
                     >
                       Giải đấu
                     </button>
                     <button
-                      className={`text-[14px] w-[20%] h-8  font-bold rounded-[20px]  ${
+                      className={`text-[14px] w-[25%] h-8  font-bold rounded-[20px] p-1 ${
                         typeSearch === "team"
-                          ? "text-[rgba(255,255,255,1)] bg-[rgba(41,53,67,1)]"
-                          : "text-[rgba(46,46,46,1)] bg-[rgba(70,230,164,1)]"
-                      }`}
+                          ? "text-[rgba(46,46,46,1)] bg-[rgba(70,230,164,1)]"
+                          : "text-[rgba(255,255,255,1)] bg-[rgba(41,53,67,1)]"
+                      } hover:text-[rgba(46,46,46,1)] hover:bg-[rgba(70,230,164,1)] `}
+                      onClick={() => setTypeSearch("team")}
                     >
                       Trận đấu
                     </button>
                   </div>
 
-                  <div className="w-full rounded-[5px] bg-[rgba(13,22,31,1)] flex flex-row items-center justify-center max-h-[70vh] overflow-y-auto">
+                  <div className="w-full rounded-[5px] bg-[rgba(13,22,31,1)] flex flex-row items-center justify-center max-h-[70vh] min-h-[20vh] overflow-y-auto">
                     {dataSearch.length > 0 ? (
                       typeSearch === "league" ? (
                         dataSearch.map((item, index) => (
@@ -567,7 +568,7 @@ const LeagueView = () => {
                         <div>render team</div>
                       )
                     ) : (
-                      <div className="text-[rgba(255,255,255,1)] text-[15px] font-bold">không có dữ liệu </div>
+                      <div className="text-[rgba(255,255,255,1)] text-[15px] font-bold">Không có dữ liệu </div>
                     )}
                   </div>
                 </Popover.Content>
