@@ -183,7 +183,7 @@ const HistoryWinLoss = () => {
       ) : (
         <div className="px-3 mt-[45px] h-full">
           <Tabs defaultValue={tab} value={tab} className="w-full">
-            <TabsList className="scrollable-tabs px-0 w-full rounded-none h-[46px] flex flex-grow justify-between  bg-backgroundColor-main overflow-x-scroll scroll-smooth">
+            <TabsList className="scrollable-tabs px-0 w-full rounded-none h-[46px] flex flex-grow justify-between  bg-[#0c1119] overflow-x-scroll scroll-smooth">
               {[
                 { label: "Hôm nay", days: 0 },
                 { label: "Hôm qua", days: 1 },
@@ -312,7 +312,7 @@ const HistoryWinLoss = () => {
                 <p className="pt-4 text-base text-slate-500 font-semibold">Không có vé cược nào</p>
               </div>
             ) : (
-              <div className="pb-3">
+              <div className="pb-3 mb-[55px]">
                 {historyWinLose.map((item: any) => {
                   return <HistoryItem key={item.betId} dataDetail={item} />;
                 })}
