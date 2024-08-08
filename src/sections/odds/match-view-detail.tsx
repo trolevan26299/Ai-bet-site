@@ -25,6 +25,7 @@ import { useCallback, useEffect, useState } from "react";
 import LoadingPopup from "../../components/loading-screen/loading-popup";
 import "./index.css";
 import { dataSettingNumberLine, dataSettingTypeOdds } from "@/app/_mock/setting";
+import LeagueLogo from "@/components/cloudinary/leaguelogo";
 
 export default function MatchViewDetail() {
   const router = useRouter();
@@ -451,7 +452,7 @@ export default function MatchViewDetail() {
             <Popover.Root onOpenChange={(open) => handleOpenLeague(open)}>
               <Popover.Trigger>
                 <div className="flex flex-row justify-start items-center hover:cursor-pointer">
-                  <Image src="/assets/league_logo.png" alt="no-content" className="w-[34px] h-[27.2px]" />
+                  <LeagueLogo leagueName={dataScreenInfo[0]?.league_name.toString()} />
                   <p className="text-sm font-bold max-w-[85%] leading-[1.1rem]">{dataScreenInfo[0]?.league_name}</p>
                   <Icon
                     icon="icon-park-solid:down-one"

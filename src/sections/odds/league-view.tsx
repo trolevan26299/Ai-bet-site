@@ -25,6 +25,8 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import "./index.css";
+import LeagueLogo from "@/components/cloudinary/leaguelogo";
+import ContainerLogo from "@/components/cloudinary/containerlogo";
 
 const generateDateList = () => {
   const dates = [];
@@ -583,11 +585,7 @@ const LeagueView = () => {
                                 }}
                               >
                                 <div className="flex flex-row items-center gap-2">
-                                  <img
-                                    src="https://static.vecteezy.com/system/resources/thumbnails/016/328/942/small_2x/vietnam-flat-rounded-flag-icon-with-transparent-background-free-png.png"
-                                    alt="league"
-                                    className="w-[25px] h-[25px] rounded-full"
-                                  />
+                                  <LeagueLogo leagueName={item.league_name.toString()} />
                                   <p className=" font-bold text-[rgba(255,255,255,1)] text-[15px]">
                                     {item.league_name}
                                   </p>
@@ -736,11 +734,7 @@ const LeagueView = () => {
                           <AccordionItem key={index} value={tag.name}>
                             <AccordionTrigger className="flex flex-row items-center justify-between px-2 py-1 hover:cursor-pointer">
                               <div className="flex flex-row items-center gap-2">
-                                <img
-                                  src="https://static.vecteezy.com/system/resources/thumbnails/016/328/942/small_2x/vietnam-flat-rounded-flag-icon-with-transparent-background-free-png.png"
-                                  alt={tag.name}
-                                  className="w-[25px] h-[25px] rounded-full"
-                                />
+                                <LeagueLogo leagueName={tag.name.split(" - ")[0].toLowerCase()} />
                                 <p className=" font-bold text-[rgba(255,255,255,1)] text-[15px]">{tag.name}</p>
                                 <Badge
                                   variant="secondary"
@@ -845,11 +839,7 @@ const LeagueView = () => {
                     }
                   }}
                 >
-                  <img
-                    src="https://toppng.com/uploads/preview/official-symbol-logo-design-for-euro-2024-germany-european-football-final-11715224051fchzryfqfd.png"
-                    alt={tag}
-                    className="w-[25px] h-[25px] rounded-full"
-                  />
+                  <LeagueLogo leagueName={tag.split(" - ")[0].toLowerCase()} />
                   <p className=" font-bold text-[rgba(255,255,255,1)] text-sm">{tag}</p>
                 </div>
               ))}
@@ -879,11 +869,7 @@ const LeagueView = () => {
                     }
                   }}
                 >
-                  <img
-                    src="https://toppng.com/uploads/preview/official-symbol-logo-design-for-euro-2024-germany-european-football-final-11715224051fchzryfqfd.png"
-                    alt={tag}
-                    className="w-[25px] h-[25px] rounded-full"
-                  />
+                  <LeagueLogo leagueName={tag.split(" - ")[0].toLowerCase()} />
                   <p className=" font-bold text-[rgba(255,255,255,1)] text-sm">{tag}</p>
                 </div>
               ))}
