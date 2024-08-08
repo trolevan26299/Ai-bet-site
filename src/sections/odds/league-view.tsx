@@ -523,19 +523,13 @@ const LeagueView = () => {
                       Tìm kiếm
                     </button>
                   </div>
-                  <div
-                    className="flex flex-row justify-start items-center  gap-2 py-1 mt-2 pl-2"
-                    style={{
-                      borderTop: "1px solid rgba(255,255,255,1)",
-                      borderBottom: "1px solid rgba(255,255,255,1)",
-                    }}
-                  >
-                    <Button variant="secondary" color="" size="sm">
+                  <div className="flex flex-row justify-start items-center  gap-3 py-3 ">
+                    <button className="text-[14px] w-[20%] h-8 text-[rgba(46,46,46,1)] font-bold rounded-[20px] bg-[rgba(70,230,164,1)]">
                       Đội
-                    </Button>
-                    <Button variant="secondary" size="sm">
-                      Giải đấu
-                    </Button>
+                    </button>
+                    <button className="text-[14px] w-[20%] h-8 text-[rgba(255,255,255,1)] font-bold rounded-[20px] bg-[rgba(41,53,67,1)]">
+                      Đội
+                    </button>
                   </div>
 
                   <div className="justify-start items-center pt-2 pl-2 text-white overflow-y-auto">
