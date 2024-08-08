@@ -86,6 +86,8 @@ const LeagueView = () => {
   const [dataMatch, setDataMatch] = useState<IMatchData[]>([]);
   const [dateActive, setDateActive] = useState<string | null>(null);
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(new Date());
+  const [typeSearch, setTypeSearch] = useState("league");
+  const [dataSearch, setDataSearch] = useState<any[]>([]);
 
   const handleValueChange = (value: string[]) => {
     setOpenItems(value);
@@ -524,23 +526,49 @@ const LeagueView = () => {
                     </button>
                   </div>
                   <div className="flex flex-row justify-start items-center  gap-3 py-3 ">
-                    <button className="text-[14px] w-[20%] h-8 text-[rgba(46,46,46,1)] font-bold rounded-[20px] bg-[rgba(70,230,164,1)]">
-                      Đội
+                    <button
+                      className={`text-[14px] w-[20%] h-8 ${
+                        typeSearch === "league"
+                          ? "text-[rgba(46,46,46,1)] bg-[rgba(70,230,164,1)]"
+                          : "text-[rgba(255,255,255,1)] bg-[rgba(41,53,67,1)]"
+                      }  font-bold rounded-[20px] `}
+                      onClick={() => setTypeSearch("league")}
+                    >
+                      Giải đấu
                     </button>
-                    <button className="text-[14px] w-[20%] h-8 text-[rgba(255,255,255,1)] font-bold rounded-[20px] bg-[rgba(41,53,67,1)]">
-                      Đội
+                    <button
+                      className={`text-[14px] w-[20%] h-8  font-bold rounded-[20px]  ${
+                        typeSearch === "team"
+                          ? "text-[rgba(255,255,255,1)] bg-[rgba(41,53,67,1)]"
+                          : "text-[rgba(46,46,46,1)] bg-[rgba(70,230,164,1)]"
+                      }`}
+                    >
+                      Trận đấu
                     </button>
                   </div>
 
-                  <div className="justify-start items-center pt-2 pl-2 text-white overflow-y-auto">
-                    {frameworks.map((framework, index) => (
-                      <div
-                        className="hover:bg-[rgba(255,255,255,1)] hover:text-[#000] hover:cursor-pointer"
-                        key={index}
-                      >
-                        <p className="pl-2">{framework.label}</p>
-                      </div>
-                    ))}
+                  <div className="w-full rounded-[5px] bg-[rgba(13,22,31,1)] flex flex-row items-center justify-center max-h-[70vh] overflow-y-auto">
+                    {dataSearch.length > 0 ? (
+                      typeSearch === "league" ? (
+                        dataSearch.map((item, index) => (
+                          <div key={index} className="p-[9px] h-[35px] w-full flex flex-row justify-between">
+                            <div className="flex flex-row items-center gap-2">
+                              <img
+                                src="https://static.vecteezy.com/system/resources/thumbnails/016/328/942/small_2x/vietnam-flat-rounded-flag-icon-with-transparent-background-free-png.png"
+                                alt="league"
+                                className="w-[25px] h-[25px] rounded-full"
+                              />
+                              <p className=" font-bold text-[rgba(255,255,255,1)] text-[15px]">EURO</p>
+                            </div>
+                            <Icon icon="emojione:star" width={20} height={20} color="rgba(138,163,175,1)" />
+                          </div>
+                        ))
+                      ) : (
+                        <div>render team</div>
+                      )
+                    ) : (
+                      <div className="text-[rgba(255,255,255,1)] text-[15px] font-bold">không có dữ liệu </div>
+                    )}
                   </div>
                 </Popover.Content>
               </Popover.Root>
