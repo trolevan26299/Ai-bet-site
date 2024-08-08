@@ -87,7 +87,7 @@ const LeagueView = () => {
   const [dateActive, setDateActive] = useState<string | null>(null);
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(new Date());
   const [typeSearch, setTypeSearch] = useState("league");
-  const [dataSearch, setDataSearch] = useState<any[]>([]);
+  const [dataSearch, setDataSearch] = useState<IMatchData[]>([]);
   const [keywordSearch, setKeywordSearch] = useState<string>("");
 
   const handleValueChange = (value: string[]) => {
@@ -128,7 +128,9 @@ const LeagueView = () => {
         team_key: typeSearch === "team" ? keywordSearch : undefined,
       });
 
-      console.log("dataResult search:", dataResult);
+      if (dataResult.data.ok) {
+        setDataSearch(dataResult?.data?.data);
+      }
     } catch (error) {
       console.log("ERROR:", error);
     }
@@ -578,13 +580,96 @@ const LeagueView = () => {
                                 alt="league"
                                 className="w-[25px] h-[25px] rounded-full"
                               />
-                              <p className=" font-bold text-[rgba(255,255,255,1)] text-[15px]">EURO</p>
+                              <p className=" font-bold text-[rgba(255,255,255,1)] text-[15px]">{item.league_name}</p>
                             </div>
                             <Icon icon="emojione:star" width={20} height={20} color="rgba(138,163,175,1)" />
                           </div>
                         ))
                       ) : (
-                        <div>render team</div>
+                        dataSearch.map((item, index) => (
+                          <div
+                            className="p-2 flex flex-row justify-between bg-[rgba(30,42,56,1)] rounded-[10px] mb-[10px]"
+                            key={index}
+                            onClick={() =>
+                              handleNavigate({
+                                matchId: item.id.toString(),
+                                match: item.team.toString(),
+                                time: item.time,
+                                league: item.league_name,
+                              })
+                            }
+                          >
+                            <div className="flex flex-col justify-between items-start">
+                              <div className="flex flex-row gap-1 items-center">
+                                <Icon
+                                  icon="fluent:sport-soccer-24-filled"
+                                  width={16}
+                                  height={16}
+                                  color="rgba(170,170,170,1)"
+                                />
+                                <p className="pl-2 text-[10px] font-normal text-[rgba(170,170,170,1)]">
+                                  {item.container.container}
+                                </p>
+                                <Icon
+                                  icon="ic:outline-arrow-right"
+                                  width={20}
+                                  height={20}
+                                  color="rgba(170,170,170,1)"
+                                />
+                                <p className="text-[10px] font-normal text-[rgba(170,170,170,1)]">{item.league_name}</p>
+                              </div>
+                              <p
+                                className={`${
+                                  item.liveStatus ? "text-[rgba(70,230,164,1)]" : "text-[rgba(165,165,165,1)]"
+                                } text-[9px] font-normal`}
+                              >
+                                {item.liveStatus
+                                  ? `${item.liveMinute} ${item.liveScope}`
+                                  : `${convertToGMT7(item.starts, "date")} ${convertToGMT7(item.starts, "time")}`}
+                              </p>
+                              <div className="flex flex-row justify-start items-center gap-2">
+                                <TeamLogo teamName={item.team[0]} typeError="home" typeLogo="mini" />
+                                <p className="text-[rgba(251,255,255,1)] text-[14.41px] font-normal">{item.home}</p>
+                              </div>
+                              <div className="flex flex-row justify-start items-center gap-2">
+                                <TeamLogo teamName={item.team[1]} typeError="away" typeLogo="mini" />
+                                <p className="text-[rgba(251,255,255,1)] text-[14.41px] font-normal">{item.away}</p>
+                              </div>
+                            </div>
+                            <div className="flex flex-col justify-between items-center">
+                              <Icon
+                                icon="mage:chart-fill"
+                                className="hover:cursor-pointer"
+                                width={16}
+                                height={16}
+                                color="rgba(170,170,170,1)"
+                                onClick={(e) => {
+                                  e.stopPropagation(); // Ngăn chặn lan truyền sự kiện click
+                                }}
+                              />
+
+                              {item.liveStatus && (
+                                <Icon icon="fluent:live-20-filled" width={16} height={16} color="rgba(245,93,62,1)" />
+                              )}
+                              {item.liveStatus && (
+                                <div
+                                  className="w-[22px] h-[17px] p-[2px] rounded-[5px] font-bold flex flex-row justify-center items-center text-[rgba(255,255,255,1)] bg-[rgba(41,53,66,1)] "
+                                  style={{ border: "0.68px solid rgba(64,74,86,1)" }}
+                                >
+                                  {item.homeScore}
+                                </div>
+                              )}
+                              {item.liveStatus && (
+                                <div
+                                  className="w-[22px] h-[17px] p-[2px] rounded-[5px] font-bold flex flex-row justify-center items-center text-[rgba(255,255,255,1)] bg-[rgba(41,53,66,1)] "
+                                  style={{ border: "0.68px solid rgba(64,74,86,1)" }}
+                                >
+                                  {item.awayScore}
+                                </div>
+                              )}
+                            </div>
+                          </div>
+                        ))
                       )
                     ) : (
                       <div className="text-[rgba(255,255,255,1)] text-[15px] font-bold">Không có dữ liệu </div>
