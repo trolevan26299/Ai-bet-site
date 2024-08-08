@@ -8,6 +8,7 @@ import HistoryOutstanding from "../history-outstanding";
 import HistoryWinLoss from "../history-winloss";
 import "../index.css";
 import { useSearchParams } from "next/navigation";
+import Menu from "@/components/app/menu/menu";
 
 const HistoryView = () => {
   const searchParams = useSearchParams();
@@ -38,6 +39,7 @@ const HistoryView = () => {
           <HistoryWinLoss />
         </TabsContent>
       </Tabs>
+      <Menu />
     </MainLayout>
   );
 };
