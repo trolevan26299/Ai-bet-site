@@ -499,7 +499,7 @@ const LeagueView = () => {
                 >
                   <div className="w-full flex items-center justify-between ">
                     <div className="flex-1 text-center">
-                      <p className="text-white">Tìm kiếm</p>
+                      <p className="text-white text-[16px] font-bold">Tìm kiếm</p>
                     </div>
                     <Popover.Close>
                       <Icon
@@ -512,11 +512,17 @@ const LeagueView = () => {
                       />
                     </Popover.Close>
                   </div>
-                  <Input
-                    type="search"
-                    placeholder="Tìm kiếm"
-                    className=" rounded-sm text-[rgba(255,255,255,1)] px-2 pb-[8px] border-none pl-2"
-                  />
+                  <div className="flex items-center bg-[rgba(13,22,31,1)] rounded-sm px-2 h-[39px]">
+                    <Icon icon="akar-icons:search" width={20} height={20} color="rgba(138,163,175,1)" />
+                    <Input
+                      type="search"
+                      placeholder="Tìm kiếm"
+                      className="flex-grow bg-transparent text-[rgba(255,255,255,1)] px-2 py-1 border-none"
+                    />
+                    <button className="text-white rounded-[5px] bg-[rgba(70,230,164,1)] text-[12px] font-bold px-2 h-[23px]">
+                      Tìm kiếm
+                    </button>
+                  </div>
                   <div
                     className="flex flex-row justify-start items-center  gap-2 py-1 mt-2 pl-2"
                     style={{
