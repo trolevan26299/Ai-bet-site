@@ -839,7 +839,7 @@ const LeagueView = () => {
                     }
                   }}
                 >
-                  <LeagueLogo leagueName={tag.split(" - ")[0].toLowerCase()} />
+                  <LeagueLogo leagueName={tag.toLowerCase()} />
                   <p className=" font-bold text-[rgba(255,255,255,1)] text-sm">{tag}</p>
                 </div>
               ))}
@@ -869,7 +869,7 @@ const LeagueView = () => {
                     }
                   }}
                 >
-                  <LeagueLogo leagueName={tag.split(" - ")[0].toLowerCase()} />
+                  <LeagueLogo leagueName={tag.toLowerCase()} />
                   <p className=" font-bold text-[rgba(255,255,255,1)] text-sm">{tag}</p>
                 </div>
               ))}
