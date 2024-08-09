@@ -14,7 +14,7 @@ const ContainerLogo = ({ containerName }: { containerName: string }) => {
   });
 
   const formatTeamName = containerName?.replace(/\s+/g, "_");
-  const myImage = cld.image(`/container_logo_aib/${formatTeamName}`);
+  const myImage = cld.image(`container_logo_aib/${formatTeamName}`);
 
   const handleError = () => {
     setImgError(true);
