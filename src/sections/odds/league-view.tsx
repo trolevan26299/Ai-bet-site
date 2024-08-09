@@ -1100,12 +1100,8 @@ const LeagueView = () => {
                   <AccordionItem value={sectionsForLiveAndSoon[0].title}>
                     <AccordionTrigger className="flex flex-row items-center justify-between hover:cursor-pointer py-1">
                       <div className="flex flex-row items-center gap-2">
-                        {contentTab === "league" && (
-                          <img
-                            src="https://toppng.com/uploads/preview/official-symbol-logo-design-for-euro-2024-germany-european-football-final-11715224051fchzryfqfd.png"
-                            alt={leagueActive as string}
-                            className="w-[25px] h-[25px] rounded-full"
-                          />
+                        {contentTab === "league" && leagueActive && (
+                          <LeagueLogo leagueName={leagueActive?.toLowerCase()} />
                         )}
                         <p className=" font-bold text-[rgba(255,255,255,1)] text-[15px]">
                           {contentTab === "league" ? leagueActive : dateActive}
