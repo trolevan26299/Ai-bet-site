@@ -22,11 +22,20 @@ const LeagueLogo = ({ leagueName }: { leagueName: string }) => {
 
   if (imgError) {
     return (
-      <Icon icon="arcticons:monster-super-league" style={{ color: "rgba(255,255,255,1)" }} width={20} height={20} />
+      <Icon icon="arcticons:monster-super-league" style={{ color: "rgba(255,255,255,1)" }} width={18} height={18} />
     );
   }
 
-  return <AdvancedImage alt="team home Logo" cldImg={myImage} width="20" height="20" onError={handleError} />;
+  return (
+    <AdvancedImage
+      alt="league home Logo"
+      cldImg={myImage}
+      width="20"
+      height="20"
+      onError={handleError}
+      style={{ borderRadius: "50%" }}
+    />
+  );
 };
 
 export default LeagueLogo;

@@ -734,7 +734,7 @@ const LeagueView = () => {
                           <AccordionItem key={index} value={tag.name}>
                             <AccordionTrigger className="flex flex-row items-center justify-between px-2 py-1 hover:cursor-pointer">
                               <div className="flex flex-row items-center gap-2">
-                                <LeagueLogo leagueName={tag.name.split(" - ")[0].toLowerCase()} />
+                                <ContainerLogo containerName={tag.name.toLowerCase()} />
                                 <p className=" font-bold text-[rgba(255,255,255,1)] text-[15px]">{tag.name}</p>
                                 <Badge
                                   variant="secondary"
