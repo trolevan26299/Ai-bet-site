@@ -452,7 +452,10 @@ export default function MatchViewDetail() {
             <Popover.Root onOpenChange={(open) => handleOpenLeague(open)}>
               <Popover.Trigger>
                 <div className="flex flex-row justify-start items-center hover:cursor-pointer">
-                  <LeagueLogo leagueName={dataScreenInfo[0]?.league_name?.toLowerCase()} />
+                  {dataScreenInfo[0]?.league_name && (
+                    <LeagueLogo leagueName={dataScreenInfo[0]?.league_name?.toLowerCase()} />
+                  )}
+
                   <p className="text-sm font-bold max-w-[85%] leading-[1.1rem] pl-1">
                     {dataScreenInfo[0]?.league_name}
                   </p>
