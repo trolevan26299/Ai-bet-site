@@ -585,7 +585,7 @@ const LeagueView = () => {
                                 }}
                               >
                                 <div className="flex flex-row items-center gap-2">
-                                  <LeagueLogo leagueName={item.league_name.toString()} />
+                                  <LeagueLogo leagueName={item.league_name.toLowerCase()} />
                                   <p className=" font-bold text-[rgba(255,255,255,1)] text-[15px]">
                                     {item.league_name}
                                   </p>
