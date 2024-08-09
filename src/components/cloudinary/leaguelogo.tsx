@@ -13,7 +13,7 @@ const LeagueLogo = ({ leagueName }: { leagueName: string }) => {
     },
   });
 
-  const formatTeamName = leagueName.replace(/\s+/g, "_");
+  const formatTeamName = leagueName?.replace(/\s+/g, "_");
   const myImage = cld.image(`/league_logo_aib/${formatTeamName}`);
 
   const handleError = () => {

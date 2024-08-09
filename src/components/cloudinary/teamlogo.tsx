@@ -13,7 +13,7 @@ const TeamLogo = ({ teamName, typeError, typeLogo }: { teamName: string; typeErr
     },
   });
 
-  const formatTeamName = teamName.replace(/\s+/g, "_");
+  const formatTeamName = teamName?.replace(/\s+/g, "_");
   const myImage = cld.image(`/team_logo_aib/${formatTeamName}`);
 
   const handleError = () => {

@@ -62,7 +62,7 @@ export default function MatchViewDetail() {
 
   const matchNoCorner = () => {
     return matchParam?.split(",").map((item) => {
-      return item.includes(" (Corners)") ? item.replace(" (Corners)", "") : item;
+      return item?.includes(" (Corners)") ? item?.replace(" (Corners)", "") : item;
     });
   };
   const payload = {
