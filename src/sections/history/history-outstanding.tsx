@@ -22,28 +22,50 @@ const HistoryOutstanding = () => {
     const currentDate = new Date();
     const utcCurrentDate = new Date(currentDate.getTime() - currentDate.getTimezoneOffset() * 60000); // Chuyển về UTC0
 
-    const fromDate = new Date(utcCurrentDate.getTime() - 7 * 60 * 60 * 1000); // Trừ đi 7 giờ
-    const toDate = new Date(fromDate.getTime() - 29 * 24 * 60 * 60 * 1000); // Lùi lại 29 ngày
+    // Khoảng thời gian hiện tại (30 ngày)
+    const fromDate1 = new Date(utcCurrentDate.getTime() - 7 * 60 * 60 * 1000);
+    const toDate1 = new Date(fromDate1.getTime() - 29 * 24 * 60 * 60 * 1000);
 
-    const formattedFromDate = formatDateTime(toDate);
-    const formattedToDate = formatDateTime(fromDate);
-    const url = `?betList=RUNNING&fromDate=${formattedFromDate}&toDate=${formattedToDate}`;
+    // Khoảng thời gian 30 ngày trước (60-90 ngày trước)
+    const fromDate2 = new Date(toDate1.getTime() - 1); // Bắt đầu từ ngày cuối của khoảng thời gian trước
+    const toDate2 = new Date(fromDate2.getTime() - 29 * 24 * 60 * 60 * 1000);
+
+    // Khoảng thời gian 30 ngày sau (0-30 ngày sau)
+    const fromDate3 = new Date(fromDate1.getTime() + 30 * 24 * 60 * 60 * 1000);
+    const toDate3 = new Date(fromDate3.getTime() + 29 * 24 * 60 * 60 * 1000);
+
+    const formattedFromDate1 = formatDateTime(toDate1);
+    const formattedToDate1 = formatDateTime(fromDate1);
+
+    const formattedFromDate2 = formatDateTime(toDate2);
+    const formattedToDate2 = formatDateTime(fromDate2);
+
+    const formattedFromDate3 = formatDateTime(fromDate3);
+    const formattedToDate3 = formatDateTime(toDate3);
+
+    const urls = [
+      `?betList=RUNNING&fromDate=${formattedFromDate1}&toDate=${formattedToDate1}`,
+      `?betList=RUNNING&fromDate=${formattedFromDate2}&toDate=${formattedToDate2}`,
+      `?betList=RUNNING&fromDate=${formattedFromDate3}&toDate=${formattedToDate3}`,
+    ];
+
     try {
       setLoading(true);
-      const response = await axios.post("api/history", {
-        url,
-        method: "GET",
-        user_id,
+
+      const requests = urls.map((url) => axios.post("api/history", { url, method: "GET", user_id }));
+
+      const responses = await Promise.all(requests);
+
+      const allBets = responses.flatMap((response) => {
+        if (!response.data || response.data.error) {
+          throw new Error("Request failed");
+        }
+        return response.data.straightBets || [];
       });
-      console.log("response", response);
-      setLoading(false);
-      if (!response.data || response.data.error) {
-        throw new Error("Request failed");
-      }
-      // Lọc ra các vé cược không có betStatus là "NOT_ACCEPTED"
-      const filteredBets = response.data.straightBets
-        ? response.data.straightBets.filter((bet: any) => bet.betStatus !== "PENDING_ACCEPTANCE")
-        : [];
+
+      // Lọc ra các vé cược không có betStatus là "PENDING_ACCEPTANCE"
+      const filteredBets = allBets.filter((bet: any) => bet.betStatus !== "PENDING_ACCEPTANCE");
+
       setHistoryOutStanding(filteredBets);
     } catch (error) {
       console.error("Error fetching bet history: ", error);
